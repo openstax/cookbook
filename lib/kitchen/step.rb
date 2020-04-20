@@ -1,21 +1,23 @@
 module Kitchen
   class Step
 
+    include Kitchen::Generators
+
     def initialize(node:)
       @node = node
     end
 
-    def each(selector, &block)
-      Steps::Each.new(node: node!, selector: selector, &block).do_it
+    def each(*selector_or_xpath_args, &block)
+      Steps::Each.new(node: node!, selector_or_xpath_args: selector_or_xpath_args, &block).do_it
     end
 
-    def first(selector, &block)
-      Steps::First.new(node: node!, selector: selector,
+    def first(*selector_or_xpath_args, &block)
+      Steps::First.new(node: node!, selector_or_xpath_args: selector_or_xpath_args,
                        raise_if_missing: false, &block).do_it
     end
 
-    def first!(selector, &block)
-      Steps::First.new(node: node!, selector: selector,
+    def first!(*selector_or_xpath_args, &block)
+      Steps::First.new(node: node!, selector_or_xpath_args: selector_or_xpath_args,
                        raise_if_missing: true, &block).do_it
     end
 
@@ -24,7 +26,9 @@ module Kitchen
     end
 
     def copy(to: :default, &block)
-      Steps::Copy.new(node: node!, to: to, &block).do_it
+      block_given? ?
+        Steps::Copy.new(node: node!, to: to, &block).do_it :
+        Steps::Copy.new(node: node!, to: to).do_it
     end
 
     def paste(from: :default)
@@ -37,6 +41,14 @@ module Kitchen
 
     def append_child(child:)
       Steps::AppendChild.new(node: node!, child: child).do_it
+    end
+
+    alias_method :original_sub_header, :sub_header
+
+    def sub_header(attributes: {}, content: "")
+      original_sub_header(node: node!, attributes: attributes) do
+        block_given? ? yield : content
+      end
     end
 
     protected

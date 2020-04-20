@@ -4,13 +4,27 @@ require "bundler/setup"
 require "byebug"
 require "kitchen"
 
-recipe_02 = Kitchen::Recipe.new do
+recipe_03 = Kitchen::Recipe.new do
+
+  # Querying is namespace aware, so a CSS selector for the metadata div is not
+  # sufficient and errors out:
+  #
+  # first!("div[data-type='metadata']") { copy to: :metadata }
+  #
+  # Use this xpath selector instead:
+  first!("//ns:div[@data-type='metadata']", ns: "http://www.w3.org/1999/xhtml") do
+    copy to: :metadata do
+      # could do something here with the copy if desired
+    end
+  end
 
   each("div[data-type='chapter']") do
     each("div.review-questions") do
+      first("h3") { trash }
       cut to: :review_questions
     end
     each("div.critical-thinking") do
+      first("h3") { trash }
       cut to: :critical_thinking
     end
 
@@ -24,6 +38,7 @@ recipe_02 = Kitchen::Recipe.new do
         <div class="review-questions-container">
           #{paste(from: :review_questions)}
         </div>
+        #{paste(from: :metadata)}
       </div>
     HTML
   end
@@ -31,7 +46,7 @@ recipe_02 = Kitchen::Recipe.new do
 end
 
 Kitchen::Oven.bake(
-  input_file: File.expand_path("02-create-content-raw.html", __dir__),
-  recipes: recipe_02,
-  output_file: File.expand_path("02-create-content-baked.html", __dir__)
+  input_file: File.expand_path("03-passes-raw.html", __dir__),
+  recipes: recipe_03,
+  output_file: File.expand_path("03-passes-baked.html", __dir__)
 )

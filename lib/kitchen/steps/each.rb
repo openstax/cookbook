@@ -1,15 +1,18 @@
 module Kitchen::Steps
   class Each < Kitchen::Step
-    def initialize(node:, selector:, &block)
+
+    attr_reader :selector_or_xpath_args
+
+    def initialize(node:, selector_or_xpath_args:, &block)
       raise "An `each` command must be given a block" if !block_given?
 
       super(node: node)
-      @selector = selector
+      @selector_or_xpath_args = selector_or_xpath_args
       @block = block
     end
 
     def do_it
-      node!.css(Kitchen::Selector.expand(@selector)).each do |inner_node|
+      node!.search(*selector_or_xpath_args).each do |inner_node|
         Basic.new(node: inner_node, &@block).do_it
       end
     end
