@@ -47,6 +47,10 @@ module Kitchen
       Steps::AppendChild.new(node: node!, child: child).do_it
     end
 
+    def replace_children(with:)
+      Steps::ReplaceChildren.new(node: node!, with: with).do_it
+    end
+
     def count(name)
       Kitchen::Counter.increment(name)
     end
@@ -61,6 +65,22 @@ module Kitchen
 
     def set_name(name)
       node!.name = name
+    end
+
+    def get_attribute(name)
+      node![name]
+    end
+
+    def content(*selector_or_xpath_args)
+      node!.search(*selector_or_xpath_args).children.to_s
+    end
+
+    def children(*selector_or_xpath_args)
+      node!.search(*selector_or_xpath_args).children
+    end
+
+    def pantry
+      Pantry.instance
     end
 
     alias_method :original_sub_header, :sub_header
