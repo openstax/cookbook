@@ -33,5 +33,5 @@ end
 Kitchen::Oven.bake(
   input_file: File.expand_path("02-create-content-raw.html", __dir__),
   recipes: recipe_02,
-  output_file: File.expand_path("02-create-content-baked.html", __dir__)
+  output_file: File.expand_path("outputs/02-create-content-baked.html", __dir__)
 )

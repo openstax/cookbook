@@ -13,3 +13,4 @@
 .byebug_history
 bin/scratch
 **/*baked.html
+tutorial/outputs/*.html
