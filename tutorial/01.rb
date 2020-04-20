@@ -7,8 +7,8 @@ require "kitchen"
 recipe_01 = Kitchen::Recipe.new do
 
   each("div[data-type=chapter]") do
-    each("div.will-move") do |node| # make node implied?
-      node.name = "section"
+    each("div.will-move") do
+      set_name "section"
       cut
     end
 

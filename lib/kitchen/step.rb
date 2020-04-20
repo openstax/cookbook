@@ -59,6 +59,10 @@ module Kitchen
       Kitchen::Counter.read(name)
     end
 
+    def set_name(name)
+      node!.name = name
+    end
+
     alias_method :original_sub_header, :sub_header
 
     def sub_header(attributes: {}, content: "")

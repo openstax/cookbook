@@ -42,7 +42,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 * https://github.com/tmuxinator/tmuxinator
 * nokogiri-diff
 * In debugger, update the diff on each step, if nothing changed, keep diff target from what did last change
-* rubocop
+* rubocop (and see if it will help catch bad parens, missing parts of do..end etc)
 * Travis
 * document with Yard and then access documentation when printing errors (https://stackoverflow.com/a/25947541)
 * Think up and handle a bunch more recipe errors, test they all raise some kind of `RecipeError`.
