@@ -40,6 +40,10 @@ module Kitchen
         Kitchen::Debug.print_recipe_error(error: ee,
                                           source_location: source_location)
         exit(1)
+      rescue Nokogiri::CSS::SyntaxError => ee
+        Kitchen::Debug.print_recipe_error(error: ee,
+                                          source_location: source_location)
+        exit(1)
       end
     end
 

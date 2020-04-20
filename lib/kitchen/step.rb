@@ -39,8 +39,24 @@ module Kitchen
       node!.remove
     end
 
+    def prepend_child(child:)
+      Steps::PrependChild.new(node: node!, child: child).do_it
+    end
+
     def append_child(child:)
       Steps::AppendChild.new(node: node!, child: child).do_it
+    end
+
+    def count(name)
+      Kitchen::Counter.increment(name)
+    end
+
+    def reset_count(name)
+      Kitchen::Counter.reset(name)
+    end
+
+    def get_count(name)
+      Kitchen::Counter.read(name)
     end
 
     alias_method :original_sub_header, :sub_header
