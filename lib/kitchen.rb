@@ -6,6 +6,7 @@ module Kitchen
 end
 
 require "kitchen/errors"
+require "kitchen/debug/document_cursor"
 require "kitchen/debug/print_recipe_error"
 require "kitchen/generators/container"
 require "kitchen/generators/sub_header"

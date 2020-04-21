@@ -35,6 +35,10 @@ module Kitchen
       Kitchen::Clipboard.named(from).paste
     end
 
+    def clipboard(name)
+      Kitchen::Clipboard.named(name)
+    end
+
     def trash
       node!.remove
     end
@@ -79,6 +83,10 @@ module Kitchen
       node!.search(*selector_or_xpath_args).children
     end
 
+    def contains?(*selector_or_xpath_args)
+      !node!.at(*selector_or_xpath_args).nil?
+    end
+
     def pantry
       Pantry.instance
     end
@@ -90,8 +98,6 @@ module Kitchen
         block_given? ? yield : content
       end
     end
-
-    protected
 
     attr_reader :node
 

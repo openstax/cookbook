@@ -13,6 +13,7 @@ module Kitchen::Steps
 
     def do_it
       node!.search(*selector_or_xpath_args).each do |inner_node|
+        Kitchen::Debug::DocumentCursor.current_node = inner_node
         Basic.new(node: inner_node, &@block).do_it
       end
     end

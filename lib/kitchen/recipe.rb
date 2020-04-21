@@ -28,6 +28,15 @@ module Kitchen
         else
           raise
         end
+      rescue NoMethodError => ee
+        if if_any_stack_file_matches_source_location?(ee)
+          debugger
+          Kitchen::Debug.print_recipe_error(error: ee,
+                                            source_location: source_location)
+          exit(1)
+        else
+          raise
+        end
       rescue NameError => ee
         if if_stack_starts_with_source_location?(ee)
           Kitchen::Debug.print_recipe_error(error: ee,

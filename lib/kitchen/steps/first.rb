@@ -23,6 +23,7 @@ module Kitchen::Steps
                 "Could not find first element matching '#{selector_or_xpath_args}'"
         end
       else
+        Kitchen::Debug::DocumentCursor.current_node = inner_node
         Basic.new(node: first_node, &@block).do_it
       end
     end

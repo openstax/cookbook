@@ -33,6 +33,17 @@ module Kitchen
           print_file_line(line_number, Rainbow(line.chomp).red)
         end
       end
+
+      puts "\n"
+
+      current_node = Kitchen::Debug::DocumentCursor.current_node
+
+      if current_node
+        puts "\n"
+        puts "Encountered on line #{Rainbow(current_node.line).red} in the input document on element:"
+        puts current_node.dup.tap{|node| node.inner_html="..." if node.inner_html != ""}.to_s
+        puts "\n"
+      end
     end
 
     protected

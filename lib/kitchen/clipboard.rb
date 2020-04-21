@@ -23,5 +23,12 @@ module Kitchen
       @items.map(&:to_s).join("")
     end
 
+    # TODO include Enumerable
+    def each(&block)
+      @items.each do |item|
+        Kitchen::Steps::Basic.new(node: item, &block).do_it
+      end
+    end
+
   end
 end

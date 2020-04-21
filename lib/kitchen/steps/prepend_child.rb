@@ -11,7 +11,11 @@ module Kitchen::Steps
                                     "first!('body') { prepend_child ... }"
       end
 
-      node!.children.first.add_previous_sibling(@child)
+      if node!.children.empty?
+        node!.children = @child.to_s
+      else
+        node!.children.first.add_previous_sibling(@child)
+      end
     end
   end
 end
