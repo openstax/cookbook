@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  app:
+    image: "openstax/kitchen"
+    build: .
+    volumes:
+      - .:/code
+    networks:
+      - openstax
+networks:
+  openstax:
+    name: openstax

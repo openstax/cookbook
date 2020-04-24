@@ -215,6 +215,17 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Documentation is handled via YARD.  The [Solargraph gem](https://solargraph.org/guides/getting-started) can be used in popular editors for code completion.
 
+
+### VSCode
+
+1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser
+2. It'll open VSCode and bring you to an extension install screen, click "Install"
+3. Click the remote button now in the bottom left hand corner.
+4. Click "Remote-Containers: Open Folder in Container"
+5. Select the cloned kitchen folder.
+
+This (assuming you have Docker installed) will launch a docker container for Kitchen, install Ruby and needed libraries, and then let you edit the code running in that container through VSCode.  Solargraph will work (code completion and inline documentation).
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/openstax/kitchen. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/openstax/kitchen/blob/master/CODE_OF_CONDUCT.md).
@@ -237,6 +248,10 @@ The gem is available as open source under the terms of the [MIT License](https:/
 * https://github.com/castwide/solargraph/issues/211
 * https://github.com/castwide/vscode-solargraph/issues/7
 * https://solargraph.org/guides/yard
+* https://code.visualstudio.com/docs/remote/containers
+* https://stelligent.com/2020/04/10/development-acceleration-through-vs-code-remote-containers-setting-up-a-foundational-configuration/
+* https://code.visualstudio.com/docs/remote/containers#_attaching-to-running-containers
+* https://code.visualstudio.com/docs/remote/containers#_attached-container-config-reference
 
 ## Code of Conduct
 

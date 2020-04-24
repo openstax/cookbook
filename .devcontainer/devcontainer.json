@@ -1,0 +1,19 @@
+{
+ "name": "Kitchen Dev",
+ "dockerComposeFile": ["../docker-compose.yml"],
+ "service": "app",
+ "workspaceFolder": "/code",
+ "shutdownAction": "stopCompose",
+ "extensions": [
+   "castwide.solargraph",
+ ],
+ "settings": {
+   "[ruby]": {
+     "editor.insertSpaces": true,
+     "editor.tabSize": 2
+   },
+   "solargraph.commandPath": "/usr/local/bundle/bin/solargraph",
+   "solargraph.bundlerPath": "/usr/local/bin/bundle",
+ },
+ "postCreateCommand": "bundle install"
+}
