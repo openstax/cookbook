@@ -7,53 +7,45 @@ require "kitchen"
 # Skipping stuff from previous tutorials, also skipped moving practice b/c that is
 # not numbering
 
-recipe_04 = Kitchen::Recipe.new do
+recipe_04 = Kitchen::Recipe.new do |doc|
 
-  each("div[data-type='chapter']") do
-    count :chapter
-    reset_count :page
+  doc.each("div[data-type='chapter']") do |chapter|
+    doc.counter(:chapter).inc
+    doc.counter(:page).reset
 
-    first!("h1[data-type='document-title']") do
-      prepend_child child: <<~HTML
-        <span class="os-number">#{get_count(:chapter)}</span>
-      HTML
-    end
-
-    each("div[data-type='page']") do
-      count :page
-
-      first!("h2[data-type='document-title']") do
-        prepend_child child: <<~HTML
-          <span class="os-number">#{get_count(:chapter)}.#{get_count(:page)}</span>
-        HTML
-      end
-    end
-  end
-
-  each(".exercise") do
-    count :exercise
-
-    prepend_child child: <<~HTML
-      <span class="os-number">#{get_count(:exercise)}</span>
+    chapter.first!("h1[data-type='document-title']").prepend child: <<~HTML
+      <span class="os-number">#{doc.counter(:chapter).get}</span>
     HTML
 
-    first(".solution") do
-      prepend_child child: <<~HTML
-        <span class="os-number">#{get_count(:exercise)}</span>
-      HTML
+    chapter.each("div[data-type='page']") do |page|
+      doc.counter(:page).inc
 
-      cut to: :solutions
+      page.first!("h2[data-type='document-title']").prepend child: <<~HTML
+        <span class="os-number">#{doc.counter(:chapter).get}.#{doc.counter(:page).get}</span>
+      HTML
     end
   end
 
-  first!("body") do
-    append_child child: <<~HTML
-      <div class="eob">
-        <h1>End of Book Solutions</h1>
-        #{paste(from: :solutions)}
-      </div>
+  doc.each(".exercise") do |exercise|
+    doc.counter(:exercise).inc
+
+    exercise.prepend child: <<~HTML
+      <span class="os-number">#{doc.counter(:exercise).get}</span>
     HTML
+
+    exercise.first(".solution")
+            &.cut(to: :solutions)
+            &.prepend child: <<~HTML
+              <span class="os-number">#{doc.counter(:exercise).get}</span>
+            HTML
   end
+
+  doc.first!("body").append child: <<~HTML
+    <div class="eob">
+      <h1>End of Book Solutions</h1>
+      #{doc.clipboard(name: :solutions).paste}
+    </div>
+  HTML
 
 end
 

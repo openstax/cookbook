@@ -4,11 +4,11 @@ require "bundler/setup"
 require "byebug"
 require "kitchen"
 
-recipe_06 = Kitchen::Recipe.new do
+recipe_06 = Kitchen::Recipe.new do |doc|
 
-  each(".note") do
-    append_child child: <<~HTML
-      <div>#{content(".title")}</div>
+  doc.each(".note") do |note|
+    note.append child: <<~HTML
+      <div>#{note.content(".title")}</div>
     HTML
   end
 

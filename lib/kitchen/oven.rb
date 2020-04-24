@@ -11,7 +11,7 @@ module Kitchen
       end
 
       [recipes].flatten.each do |recipe|
-        recipe.node = doc
+        recipe.document = doc
         recipe.bake
       end
       profile.baked!

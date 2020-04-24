@@ -4,7 +4,7 @@ require "bundler/setup"
 require "byebug"
 require "kitchen"
 
-recipe_03 = Kitchen::Recipe.new do
+recipe_03 = Kitchen::Recipe.new do |doc|
 
   # Querying is namespace aware, so a CSS selector for the metadata div is not
   # sufficient and errors out:
@@ -12,33 +12,31 @@ recipe_03 = Kitchen::Recipe.new do
   # first!("div[data-type='metadata']") { copy to: :metadata }
   #
   # Use this xpath selector instead:
-  first!("//ns:div[@data-type='metadata']", ns: "http://www.w3.org/1999/xhtml") do
-    copy to: :metadata do
-      # could do something here with the copy if desired
-    end
-  end
+  doc.first!("//ns:div[@data-type='metadata']",
+             ns: "http://www.w3.org/1999/xhtml").copy to: :metadata
 
-  each("div[data-type='chapter']") do
-    each("div.review-questions") do
-      first("h3") { trash }
-      cut to: :review_questions
+  doc.each("div[data-type='chapter']") do |chapter|
+    chapter.each("div.review-questions") do |elem|
+      elem.first("h3").trash
+      elem.cut to: :review_questions
     end
-    each("div.critical-thinking") do
-      first("h3") { trash }
-      cut to: :critical_thinking
+    chapter.each("div.critical-thinking") do |elem|
+      elem.first("h3").trash
+      elem.cut to: :critical_thinking
     end
 
-    append_child child: <<~HTML
+    chapter.append child: <<~HTML
       <div class="eoc">
-        #{ sub_header(attributes: {data_type: 'document-title'},
-                      content: "End of Chapter Stuff") }
+        #{ doc.create_element(chapter.sub_header_name,
+                              "End of Chapter Stuff",
+                              "data-type" => 'document-title') }
         <div class="critical-thinking-container">
-          #{paste(from: :critical_thinking)}
+          #{doc.clipboard(name: :critical_thinking).paste}
         </div>
         <div class="review-questions-container">
-          #{paste(from: :review_questions)}
+          #{doc.clipboard(name: :review_questions).paste}
         </div>
-        #{paste(from: :metadata)}
+        #{doc.clipboard(name: :metadata).paste}
       </div>
     HTML
   end
