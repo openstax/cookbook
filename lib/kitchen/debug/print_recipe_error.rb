@@ -5,7 +5,7 @@ module Kitchen
 
     CONTEXT_LINES = 2
 
-    def self.print_recipe_error(error:, source_location:)
+    def self.print_recipe_error(error:, source_location:, document:)
       error_location = error.backtrace.detect do |entry|
         entry.start_with?(source_location)
       end
@@ -36,10 +36,11 @@ module Kitchen
 
       puts "\n"
 
-      current_node = Kitchen::Debug::DocumentCursor.current_node
+      print_specific_help_line(error)
+
+      current_node = document.location&.raw
 
       if current_node
-        puts "\n"
         puts "Encountered on line #{Rainbow(current_node.line).red} in the input document on element:"
         puts current_node.dup.tap{|node| node.inner_html="..." if node.inner_html != ""}.to_s
         puts "\n"
@@ -50,6 +51,22 @@ module Kitchen
 
     def self.print_file_line(line_number, line)
       puts "#{"%5s" % line_number}| #{line}"
+    end
+
+    def self.print_specific_help_line(error)
+      help_line = case error.message
+      when /undefined method .each/
+        "`each` needs to be called on a document or element object"
+      when /undefined method .first/
+        "`first` needs to be called on a document or element object"
+      else
+        nil
+      end
+
+      if !help_line.nil?
+        puts help_line
+        puts "\n"
+      end
     end
 
   end

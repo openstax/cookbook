@@ -4,25 +4,22 @@ require "bundler/setup"
 require "byebug"
 require "kitchen"
 
-recipe_02 = Kitchen::Recipe.new do
+recipe_02 = Kitchen::Recipe.new do |doc|
 
-  each("div[data-type='chapter']") do
-    each("div.review-questions") do
-      cut to: :review_questions
-    end
-    each("div.critical-thinking") do
-      cut to: :critical_thinking
-    end
+  doc.each("div[data-type='chapter']") do |elem|
+    elem.each("div.review-questions")  {|rq| rq.cut to: :review_questions  }
+    elem.each("div.critical-thinking") {|ct| ct.cut to: :critical_thinking }
 
-    append_child child: <<~HTML
+    elem.append child: <<~HTML
       <div class="eoc">
-        #{ sub_header(attributes: {data_type: 'document-title'},
-                      content: "End of Chapter Stuff") }
+        #{ doc.create_element(elem.sub_header_name,
+                              "End of Chapter Stuff",
+                              "data-type" => 'document-title') }
         <div class="critical-thinking-container">
-          #{paste(from: :critical_thinking)}
+          #{doc.clipboard(name: :critical_thinking).paste}
         </div>
         <div class="review-questions-container">
-          #{paste(from: :review_questions)}
+          #{doc.clipboard(name: :review_questions).paste}
         </div>
       </div>
     HTML

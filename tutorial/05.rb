@@ -4,32 +4,32 @@ require "bundler/setup"
 require "byebug"
 require "kitchen"
 
-recipe_05 = Kitchen::Recipe.new do
+recipe_05 = Kitchen::Recipe.new do |doc|
 
-  each("table") do
-    count :table
-    caption = "Table #{get_count(:table)}"
+  doc.each("table") do |table|
+    doc.counter(:table).inc
+    caption = "Table #{doc.counter(:table).get}"
 
-    prepend_child child: <<~HTML
+    table.prepend child: <<~HTML
       <caption>#{caption}</caption>
     HTML
 
-    pantry.store caption, label: get_attribute("id")
+    doc.pantry.store caption, label: table["id"]
   end
 
-  each("figure") do
-    count :figure
-    caption = "Figure #{get_count(:figure)}"
+  doc.each("figure") do |figure|
+    doc.counter(:figure).inc
+    caption = "Figure #{doc.counter(:figure).get}"
 
-    prepend_child child: <<~HTML
+    figure.prepend child: <<~HTML
       <caption>#{caption}</caption>
     HTML
 
-    pantry.store caption, label: get_attribute("id")
+    doc.pantry.store caption, label: figure["id"]
   end
 
-  each("a.needs-label") do
-    replace_children with: pantry.get(get_attribute("href")[1..-1])
+  doc.each("a.needs-label") do |anchor|
+    anchor.replace_children with: doc.pantry.get(anchor["href"][1..-1])
   end
 
 end

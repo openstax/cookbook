@@ -4,18 +4,19 @@ require "bundler/setup"
 require "byebug"
 require "kitchen"
 
-recipe_01 = Kitchen::Recipe.new do
+recipe_01 = Kitchen::Recipe.new do |doc|
 
-  each("div[data-type=chapter]") do
-    each("div.will-move") do
-      set_name "section"
-      cut
+  doc.each("div[data-type=chapter]") do |elem|
+    doc.counter(:chapter).inc
+    elem.each("div.will-move") do |elem|
+      elem.name = "section"
+      elem.cut
     end
 
-    append_child child: <<~HTML
+    elem.append child: <<~HTML
       <div class='eoc'>
         <div class='os-title'>End of Chapter Collations</div>
-        #{paste}
+        #{doc.clipboard.paste}
       </div>
     HTML
   end

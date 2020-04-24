@@ -1,45 +1,33 @@
 module Kitchen
   class Counter # hehe
 
-    attr_reader :count
-
     def initialize
       reset
     end
 
-    def increment
-      @count += 1
+    # Increase the value of the counter
+    #
+    # @param by [Integer] the amount to increase by
+    #
+    def increment(by: 1)
+      @value += by
     end
 
-    def self.increment(name)
-      (@has_been_incremented ||= {})[name.to_sym] = true
-      instance!(name).increment
+    # (see #increment)
+    alias_method :inc, :increment
+
+    # Returns the value of the counter
+    #
+    # @return [Integer]
+    def get
+      @value
     end
 
-    def reset
-      @count = 0
-    end
-
-    def self.reset(name)
-      instance!(name).reset
-    end
-
-    def self.read(name)
-      if !has_been_incremented?(name)
-        raise RecipeError, "Counter named '#{name}' cannot be read until started with `count :#{name}`"
-      end
-
-      instance!(name).count
-    end
-
-    protected
-
-    def self.instance!(name)
-      (@instances ||= {})[name.to_sym] ||= new
-    end
-
-    def self.has_been_incremented?(name)
-      (@has_been_incremented ||= {})[name.to_sym]
+    # Reset the value of the counter
+    #
+    # @param to [Integer] the value to reset to
+    def reset(to: 0)
+      @value = to
     end
 
   end

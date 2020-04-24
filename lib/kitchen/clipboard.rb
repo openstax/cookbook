@@ -1,11 +1,11 @@
 module Kitchen
+  # A place to store lists of things during recipe work.  Essentially a
+  # slightly fancy array.
+  #
   class Clipboard
+    include Enumerable
 
     attr_reader :items
-
-    def self.named(name)
-      (@instances ||= {})[name.to_sym] ||= new
-    end
 
     def initialize
       clear
@@ -23,12 +23,10 @@ module Kitchen
       @items.map(&:to_s).join("")
     end
 
-    # TODO include Enumerable
     def each(&block)
       @items.each do |item|
-        Kitchen::Steps::Basic.new(node: item, &block).do_it
+        block.call(item)
       end
     end
-
   end
 end
