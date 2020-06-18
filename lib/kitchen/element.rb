@@ -3,6 +3,7 @@ require 'forwardable'
 module Kitchen
   class Element
     extend Forwardable
+    # include Enumerable
 
     attr_reader :document
 
@@ -18,12 +19,16 @@ module Kitchen
     #   Add a class to the element
     # @!method remove_class
     #   Remove a class from the element
-    def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class
+    def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class, :text, :wrap, :children, :to_html
 
     def initialize(node:, document:)
       raise "node cannot be nil" if node.nil?
       @node = node
       @document = document
+    end
+
+    def has_class?(klass)
+      (self[:class] || "").include?(klass)
     end
 
     # Iterates over all children of this element that match the provided
@@ -43,6 +48,43 @@ module Kitchen
       end
     end
 
+    def elements(*selector_or_xpath_args)
+      ElementEnumerator.new do |block|
+        node.search(*selector_or_xpath_args).each do |inner_node|
+          Kitchen::Element.new(node: inner_node, document: document).tap do |element|
+            document.location = element
+            block.yield(element)
+          end
+        end
+      end
+    end
+
+
+    #   if block_given?
+    #     each_enumerator
+    #     node.search(*selector_or_xpath_args).each do |inner_node|
+    #       Kitchen::Element.new(node: inner_node, document: document).tap do |element|
+    #         document.location = element
+    #         # yield element
+    #         block.call(element)
+    #       end
+    #     end
+    #   else
+    #     to_enum(:each)
+    #   end
+    # end
+
+    # def each_enumerator(*selector_or_xpath_args)
+    #   Enumerator.new do |block|
+    #     node.search(*selector_or_xpath_args).each do |inner_node|
+    #       Kitchen::Element.new(node: inner_node, document: document).tap do |element|
+    #         document.location = element
+    #         block.yield(element)
+    #       end
+    #     end
+    #   end
+    # end
+
     # Yields and returns the first child element that matches the provided
     # selector or XPath arguments.
     #
@@ -58,6 +100,8 @@ module Kitchen
         yield element if block_given?
       end
     end
+
+    alias_method :at, :first
 
     # Yields and returns the first child element that matches the provided
     # selector or XPath arguments.
@@ -80,8 +124,20 @@ module Kitchen
     #
     def cut(to: :default)
       node.remove
-      document.clipboard(name: to).add(node)
+      clipboard(to).add(node)
       self
+    end
+
+    def clipboard(name_or_object)
+      case name_or_object
+      when Symbol
+        document.clipboard(name: name_or_object)
+      when Clipboard
+        name_or_object
+      else
+        raise ArgumentError, "The provided argument (#{name_or_object}) is not "
+                             "a clipboard name or a clipboard"
+      end
     end
 
     # Makes a copy of the element and places it on the specified clipboard; if a
@@ -93,7 +149,7 @@ module Kitchen
     def copy(to: :default)
       the_copy = node.clone
       yield the_copy if block_given?
-      document.clipboard(name: to).add(the_copy)
+      clipboard(to).add(the_copy)
       self
     end
 

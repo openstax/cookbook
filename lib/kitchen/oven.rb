@@ -7,7 +7,7 @@ module Kitchen
 
       doc = File.open(input_file) do |f|
         profile.opened!
-        Nokogiri::XML(f).tap { profile.parsed! }
+        Nokogiri::XML(f){|config| config.noblanks}.tap { profile.parsed! }
       end
 
       [recipes].flatten.each do |recipe|
@@ -16,7 +16,9 @@ module Kitchen
       end
       profile.baked!
 
-      File.open(output_file, "w") {|f| f.write doc.to_xhtml(indent:2)}
+      File.open(output_file, "w") do |f|
+        f.write doc.to_xhtml(indent:2)
+      end
       profile.written!
 
       profile

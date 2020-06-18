@@ -14,12 +14,53 @@ module Kitchen
       # can we make each_chapter a mixin to both this class and UnitElement?
       raise(Kitchen::RecipeError, "An `each_page` command must be given a block") if !block_given?
 
-      document.counter(PageElement::COUNTER_NAME).reset
+      document.counter(PageElement::COUNTER_NAME).reset # TODO make this local to this instance (and do the with_count thing)
 
       each("div[data-type='page']") do |element|
         page = PageElement.new(element: element, chapter: self)
         document.counter(PageElement::COUNTER_NAME).increment
         yield page
+      end
+    end
+
+    def each_page_with_count
+      # can we make each_chapter a mixin to both this class and UnitElement?
+      raise(Kitchen::RecipeError, "An `each_page` command must be given a block") if !block_given?
+
+      document.counter(PageElement::COUNTER_NAME).reset # TODO make this local to this instance (and do the with_count thing)
+
+      each("div[data-type='page']") do |element|
+        page = PageElement.new(element: element, chapter: self)
+        document.counter(PageElement::COUNTER_NAME).increment
+        yield page, document.counter(PageElement::COUNTER_NAME).get
+      end
+    end
+
+    def introduction_page
+      element = first("div[data-type='page'].introduction")
+      PageElement.new(element: element, chapter: self)
+    end
+
+    def each_figure_with_count
+      # can we make each_chapter a mixin to both this class and UnitElement?
+      raise(Kitchen::RecipeError, "An `each_figure` command must be given a block") if !block_given?
+
+      document.counter(:chapter_figure).reset
+
+      each("figure") do |element|
+        figure = FigureElement.new(element: element, chapter: self)
+        document.counter(:chapter_figure).increment
+        yield figure, document.counter(:chapter_figure).get
+      end
+
+    end
+
+    def pages
+      Enumerator.new do |block|
+        each("div[data-type='page']") do |element|
+          page = PageElement.new(element: element, chapter: self) # TODO store page on nokogiri element and reuse?
+          block.yield(page)
+        end
       end
     end
 
