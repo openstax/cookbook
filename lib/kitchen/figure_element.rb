@@ -5,7 +5,7 @@ module Kitchen
 
     def initialize(element:, chapter:)
       @chapter = chapter
-      super(node: element.raw, document: element.document)
+      super(node: element.raw, number: element.number, document: element.document)
     end
 
     def caption

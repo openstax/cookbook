@@ -108,6 +108,36 @@ module Kitchen
       end
     end
 
+    def pages
+      Enumerator.new do |block| # PageEnumerator < ElementEnumerator ?
+        each("div[data-type='page']") do |element|
+          page = PageElement.new(element: element, chapter: self)
+          block.yield(page)
+        end
+      end
+    end
+
+    # Can these methods move to Element (may not apply but who cares)
+
+    def pages
+      PageElementEnumerator.within(element: self)
+    end
+
+    def chapters
+      ChapterElementEnumerator.within(element: self)
+    end
+
+    def terms
+      TermElementEnumerator.within(element: self)
+    end
+
+    def ancestors
+      {}
+    end
+
+    def short_type
+      :book
+    end
 
   end
 end

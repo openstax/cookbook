@@ -1,11 +1,11 @@
 module Kitchen
   class TermElement < Element
 
-    attr_reader :page
+    attr_accessor :page, :chapter, :unit, :book
 
-    def initialize(element:, page:)
-      @page = page
-      super(node: element.raw, document: element.document)
+    def initialize(element:)
+      # @page = page
+      super(node: element.raw, document: element.document, short_type: :term)
     end
 
   end

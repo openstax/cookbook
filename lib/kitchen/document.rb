@@ -17,7 +17,7 @@ module Kitchen
     def each(*selector_or_xpath_args)
       raise(Kitchen::RecipeError, "An `each` command must be given a block") if !block_given?
 
-      nokogiri_document.search(*selector_or_xpath_args).each do |inner_node|
+      nokogiri_document.search(*selector_or_xpath_args).each.with_index do |inner_node, index|
         Kitchen::Element.new(node: inner_node, document: self).tap do |element|
           self.location = element
           yield element

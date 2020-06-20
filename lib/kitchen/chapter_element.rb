@@ -1,13 +1,13 @@
 module Kitchen
   class ChapterElement < Element
 
-    attr_reader :unit
+    attr_accessor :unit, :book
 
     COUNTER_NAME = :chapter
 
     def initialize(element:, unit: nil)
       @unit = unit
-      super(node: element.raw, document: element.document)
+      super(node: element.raw, document: element.document, short_type: :chapter)
     end
 
     def each_page
@@ -55,13 +55,18 @@ module Kitchen
 
     end
 
+    # def pages
+    #   Enumerator.new do |block|
+    #     each("div[data-type='page']") do |element|
+    #       page = PageElement.new(element: element, chapter: self) # TODO store page on nokogiri element and reuse?
+    #       block.yield(page)
+    #     end
+    #   end
+    # end
+
     def pages
-      Enumerator.new do |block|
-        each("div[data-type='page']") do |element|
-          page = PageElement.new(element: element, chapter: self) # TODO store page on nokogiri element and reuse?
-          block.yield(page)
-        end
-      end
+      PageElementEnumerator.within(element: self)
+      # ChapterElementEnumerator.new([self], :each).pages
     end
 
     def title_header_number

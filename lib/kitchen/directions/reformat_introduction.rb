@@ -3,15 +3,13 @@ module Directions
   # TODO? module ReformatIntroduction; def v1(chapter)
 
   def self.reformat_introduction(chapter)
-    chapter_count = "NOTREAL" # TODO fake
-
-    outline_items_html = chapter.pages.map.with_index do |page, index|
+    outline_items_html = chapter.pages.map do |page|
       next if page.is_introduction?
 
       <<~HTML
         <div class="os-chapter-objective">
           <a class="os-chapter-objective" href="##{page.title[:id]}">
-            <span class="os-number">#{chapter_count}.#{index}</span>
+            <span class="os-number">#{chapter.number}.#{page.number}</span>
             <span class="os-divider"> </span>
             <span data-type="" itemprop="" class="os-text">#{page.title.children[0].text}</span>
           </a>

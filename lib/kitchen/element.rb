@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'securerandom'
 
 module Kitchen
   class Element
@@ -6,6 +7,7 @@ module Kitchen
     # include Enumerable
 
     attr_reader :document
+    attr_reader :short_type
 
     # @!method name
     #   Get the element name (the tag)
@@ -21,14 +23,64 @@ module Kitchen
     #   Remove a class from the element
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class, :text, :wrap, :children, :to_html
 
-    def initialize(node:, document:)
+    def initialize(node:, number: nil, document:, short_type: nil)
       raise "node cannot be nil" if node.nil?
       @node = node
+      @number = number
       @document = document
+      @ancestors = HashWithIndifferentAccess.new
+      @short_type = short_type || "unnamed_type_#{SecureRandom.hex(4)}"
+      @counts_in = {}
     end
 
     def has_class?(klass)
       (self[:class] || "").include?(klass)
+    end
+
+    def number
+      @number || raise("This element has no number because it wasn't created as part of a multi-element search")
+    end
+
+    def id
+      self[:id]
+    end
+
+    def ancestor(type)
+      @ancestors[type.to_sym]&.element_or_document || raise("No ancestor of type '#{type}'")
+    end
+
+    def ancestors
+      @ancestors
+    end
+
+    # def set_ancestors(ancestors)
+    #   # not copying contents, just getting our own hash
+    #   @ancestors = HashWithIndifferentAccess.new(ancestors)
+    # end
+
+    def add_ancestors(*args)
+      args.each do |arg|
+        case arg
+        when Hash
+          add_ancestors(*arg.values)
+        when Ancestor
+          add_ancestor(arg)
+        when Element, Document
+          add_ancestor(Ancestor.new(arg))
+        else
+          raise "Unsupported ancestor type `#{arg.class}`"
+        end
+      end
+    end
+
+    def add_ancestor(ancestor)
+      # TODO freak out if already have an ancestor of this type
+      @ancestors[ancestor.type] = ancestor
+      @counts_in[ancestor.type] = ancestor.increment_descendant_count(short_type)
+    end
+
+    def count_in(ancestor_type)
+      @counts_in[ancestor_type] || raise("No ancestor of type '#{ancestor_type}'")
     end
 
     # Iterates over all children of this element that match the provided
@@ -50,8 +102,8 @@ module Kitchen
 
     def elements(*selector_or_xpath_args)
       ElementEnumerator.new do |block|
-        node.search(*selector_or_xpath_args).each do |inner_node|
-          Kitchen::Element.new(node: inner_node, document: document).tap do |element|
+        node.search(*selector_or_xpath_args).each.with_index do |inner_node, index|
+          Kitchen::Element.new(node: inner_node, number: index+1, document: document).tap do |element|
             document.location = element
             block.yield(element)
           end

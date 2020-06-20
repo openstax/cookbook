@@ -45,6 +45,10 @@ module Kitchen
         puts current_node.dup.tap{|node| node.inner_html="..." if node.inner_html != ""}.to_s
         puts "\n"
       end
+
+      if ENV['VERBOSE']
+        puts error.backtrace
+      end
     end
 
     protected

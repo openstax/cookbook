@@ -1,12 +1,18 @@
 require "kitchen/version"
 
 require "nokogiri"
+require "active_support/all"
 
 module Kitchen
 end
 
 require "kitchen/errors"
+require "kitchen/iteration_history"
+require "kitchen/ancestor"
 require "kitchen/element_enumerator"
+require "kitchen/page_element_enumerator"
+require "kitchen/term_element_enumerator"
+require "kitchen/chapter_element_enumerator"
 require "kitchen/document"
 require "kitchen/element"
 require "kitchen/debug/print_recipe_error"
@@ -22,3 +28,4 @@ require "kitchen/page_element"
 require "kitchen/term_element"
 require "kitchen/figure_element"
 require "kitchen/directions/reformat_introduction"
+require "kitchen/patches"

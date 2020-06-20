@@ -1,13 +1,15 @@
 module Kitchen
   class PageElement < Element
 
-    attr_reader :chapter
+    attr_accessor :chapter, :unit, :book
 
     COUNTER_NAME = :page
 
-    def initialize(element:, chapter:)
-      @chapter = chapter
-      super(node: element.raw, document: element.document)
+    # TODO maybe can just be "type" instead of "short_type"
+
+    def initialize(element:)
+      # @chapter = chapter
+      super(node: element.raw, document: element.document, short_type: :page)
     end
 
     def title
@@ -28,6 +30,10 @@ module Kitchen
         term = TermElement.new(element: element, page: self)
         yield term
       end
+    end
+
+    def terms
+      PageElementEnumerator.new([self], :each).terms
     end
 
     def is_introduction?
