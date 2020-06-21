@@ -119,7 +119,7 @@ RSpec.describe "nested enumerators" do
             counts.push(page.count_in(:chapter))
             counts.push(page.count_in(:book))
           end
-debugger
+# debugger
           chapter.pages.each do |page|
             # Don't want these counts to be doubled
             counts.push(page.count_in(:chapter))

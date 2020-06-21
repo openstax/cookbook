@@ -30,7 +30,8 @@ module Kitchen
       @document = document
       @ancestors = HashWithIndifferentAccess.new
       @short_type = short_type || "unnamed_type_#{SecureRandom.hex(4)}"
-      @counts_in = {}
+      @counts_in = HashWithIndifferentAccess.new
+      @css_or_xpath_that_has_been_counted = {}
     end
 
     def has_class?(klass)
@@ -51,6 +52,14 @@ module Kitchen
 
     def ancestors
       @ancestors
+    end
+
+    def cloned_ancestors
+      copy = HashWithIndifferentAccess.new
+      @ancestors.each_pair do |name, ancestor|
+        copy[name] = ancestor.clone
+      end
+      copy
     end
 
     # def set_ancestors(ancestors)
@@ -76,12 +85,28 @@ module Kitchen
     def add_ancestor(ancestor)
       # TODO freak out if already have an ancestor of this type
       @ancestors[ancestor.type] = ancestor
-      @counts_in[ancestor.type] = ancestor.increment_descendant_count(short_type)
+      # @counts_in[ancestor.type] = ancestor.increment_descendant_count(short_type)
+    end
+
+    def count_as_descendant
+      @ancestors.each_pair do |type, ancestor|
+        @counts_in[type] = ancestor.increment_descendant_count(short_type)
+      end
     end
 
     def count_in(ancestor_type)
+      # debugger
       @counts_in[ancestor_type] || raise("No ancestor of type '#{ancestor_type}'")
     end
+
+    def mark_counted(css_or_xpath:, num_sub_elements:)
+      @css_or_xpath_that_has_been_counted[css_or_xpath] = num_sub_elements
+    end
+
+    def number_of_subelements_already_counted(css_or_xpath)
+      @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
+    end
+
 
     # Iterates over all children of this element that match the provided
     # selector or XPath arguments.

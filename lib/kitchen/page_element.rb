@@ -5,6 +5,10 @@ module Kitchen
 
     COUNTER_NAME = :page
 
+    def self.short_type
+      :page
+    end
+
     # TODO maybe can just be "type" instead of "short_type"
 
     def initialize(element:)

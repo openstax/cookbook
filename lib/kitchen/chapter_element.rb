@@ -5,6 +5,10 @@ module Kitchen
 
     COUNTER_NAME = :chapter
 
+    def self.short_type
+      :chapter
+    end
+
     def initialize(element:, unit: nil)
       @unit = unit
       super(node: element.raw, document: element.document, short_type: :chapter)

@@ -26,6 +26,7 @@ module Kitchen
       super(nokogiri_document: document.is_a?(Document) ? document.raw : document)
 
       @has_units = !first("div[data-type='unit']").nil?
+      @css_or_xpath_that_has_been_counted = {}
     end
 
     def has_units?
@@ -133,6 +134,18 @@ module Kitchen
 
     def ancestors
       {}
+    end
+
+    def cloned_ancestors
+      {}
+    end
+
+    def mark_counted(css_or_xpath)
+      @css_or_xpath_that_has_been_counted[css_or_xpath] = true
+    end
+
+    def number_of_subelements_already_counted(css_or_xpath)
+      @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
     end
 
     def short_type
