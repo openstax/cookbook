@@ -7,7 +7,6 @@ module Kitchen
 end
 
 require "kitchen/errors"
-require "kitchen/iteration_history"
 require "kitchen/ancestor"
 require "kitchen/element_enumerator"
 require "kitchen/page_element_enumerator"

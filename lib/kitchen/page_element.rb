@@ -37,7 +37,7 @@ module Kitchen
     end
 
     def terms
-      PageElementEnumerator.new([self], :each).terms
+      TermElementEnumerator.within(element: self)
     end
 
     def is_introduction?

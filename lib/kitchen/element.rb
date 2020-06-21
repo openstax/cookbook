@@ -21,12 +21,12 @@ module Kitchen
     #   Add a class to the element
     # @!method remove_class
     #   Remove a class from the element
-    def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class, :text, :wrap, :children, :to_html
+    def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
+                           :text, :wrap, :children, :to_html
 
-    def initialize(node:, number: nil, document:, short_type: nil)
+    def initialize(node:, document:, short_type: nil)
       raise "node cannot be nil" if node.nil?
       @node = node
-      @number = number
       @document = document
       @ancestors = HashWithIndifferentAccess.new
       @short_type = short_type || "unnamed_type_#{SecureRandom.hex(4)}"
@@ -36,10 +36,6 @@ module Kitchen
 
     def has_class?(klass)
       (self[:class] || "").include?(klass)
-    end
-
-    def number
-      @number || raise("This element has no number because it wasn't created as part of a multi-element search")
     end
 
     def id
@@ -62,11 +58,6 @@ module Kitchen
       copy
     end
 
-    # def set_ancestors(ancestors)
-    #   # not copying contents, just getting our own hash
-    #   @ancestors = HashWithIndifferentAccess.new(ancestors)
-    # end
-
     def add_ancestors(*args)
       args.each do |arg|
         case arg
@@ -85,7 +76,6 @@ module Kitchen
     def add_ancestor(ancestor)
       # TODO freak out if already have an ancestor of this type
       @ancestors[ancestor.type] = ancestor
-      # @counts_in[ancestor.type] = ancestor.increment_descendant_count(short_type)
     end
 
     def count_as_descendant
@@ -95,15 +85,18 @@ module Kitchen
     end
 
     def count_in(ancestor_type)
-      # debugger
       @counts_in[ancestor_type] || raise("No ancestor of type '#{ancestor_type}'")
     end
 
-    def mark_counted(css_or_xpath:, num_sub_elements:)
-      @css_or_xpath_that_has_been_counted[css_or_xpath] = num_sub_elements
+    def remember_that_sub_elements_are_already_counted(css_or_xpath:, count:)
+      @css_or_xpath_that_has_been_counted[css_or_xpath] = count
     end
 
-    def number_of_subelements_already_counted(css_or_xpath)
+    def have_sub_elements_already_been_counted?(css_or_xpath)
+      number_of_sub_elements_already_counted(css_or_xpath) != 0
+    end
+
+    def number_of_sub_elements_already_counted(css_or_xpath)
       @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
     end
 
@@ -127,40 +120,14 @@ module Kitchen
 
     def elements(*selector_or_xpath_args)
       ElementEnumerator.new do |block|
-        node.search(*selector_or_xpath_args).each.with_index do |inner_node, index|
-          Kitchen::Element.new(node: inner_node, number: index+1, document: document).tap do |element|
+        node.search(*selector_or_xpath_args).each do |inner_node|
+          Kitchen::Element.new(node: inner_node, document: document).tap do |element|
             document.location = element
             block.yield(element)
           end
         end
       end
     end
-
-
-    #   if block_given?
-    #     each_enumerator
-    #     node.search(*selector_or_xpath_args).each do |inner_node|
-    #       Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-    #         document.location = element
-    #         # yield element
-    #         block.call(element)
-    #       end
-    #     end
-    #   else
-    #     to_enum(:each)
-    #   end
-    # end
-
-    # def each_enumerator(*selector_or_xpath_args)
-    #   Enumerator.new do |block|
-    #     node.search(*selector_or_xpath_args).each do |inner_node|
-    #       Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-    #         document.location = element
-    #         block.yield(element)
-    #       end
-    #     end
-    #   end
-    # end
 
     # Yields and returns the first child element that matches the provided
     # selector or XPath arguments.

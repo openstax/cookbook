@@ -140,11 +140,15 @@ module Kitchen
       {}
     end
 
-    def mark_counted(css_or_xpath)
-      @css_or_xpath_that_has_been_counted[css_or_xpath] = true
+    def remember_that_sub_elements_are_already_counted(css_or_xpath:, count:)
+      @css_or_xpath_that_has_been_counted[css_or_xpath] = count
     end
 
-    def number_of_subelements_already_counted(css_or_xpath)
+    def have_sub_elements_already_been_counted?(css_or_xpath)
+      number_of_sub_elements_already_counted(css_or_xpath) != 0
+    end
+
+    def number_of_sub_elements_already_counted(css_or_xpath)
       @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
     end
 
