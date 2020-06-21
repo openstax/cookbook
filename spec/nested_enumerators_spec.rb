@@ -99,7 +99,12 @@ RSpec.describe "nested enumerators" do
 
     context "enumerators broken up with individual element access" do
       it "can access ancestors all the way up the ancestry" do
-        fail
+        book_1.chapters.each do |chapter|
+          chapter.pages.each do |page|
+            expect(page.ancestor(:chapter).id).to eq chapter.id
+            expect(page.ancestor(:book).class).to eq Kitchen::BookDocument
+          end
+        end
       end
 
       it "counts correctly with single use of individual elements" do
