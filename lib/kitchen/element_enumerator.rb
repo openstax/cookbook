@@ -22,6 +22,7 @@ module Kitchen
       ElementEnumeratorFactory.within(new_enumerator_class: self,
                                       element_or_document: element_or_document,
                                       css_or_xpath: css_or_xpath,
+                                      default_css_or_xpath: "*",
                                       sub_element_class: Element)
     end
 

@@ -6,12 +6,10 @@ module Kitchen
     end
 
     def self.within(element_or_document:, css_or_xpath: nil)
-      css_or_xpath ||= "$"
-      css_or_xpath.gsub!(/\$/, "div[data-type='page']") # TODO element.document.selectors.page
-
       ElementEnumeratorFactory.within(new_enumerator_class: self,
                                       element_or_document: element_or_document,
                                       css_or_xpath: css_or_xpath,
+                                      default_css_or_xpath: "div[data-type='page']", # TODO element.document.selectors.page
                                       sub_element_class: PageElement)
     end
 

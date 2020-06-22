@@ -59,18 +59,9 @@ module Kitchen
 
     end
 
-    # def pages
-    #   Enumerator.new do |block|
-    #     each("div[data-type='page']") do |element|
-    #       page = PageElement.new(element: element, chapter: self) # TODO store page on nokogiri element and reuse?
-    #       block.yield(page)
-    #     end
-    #   end
-    # end
-
-    def pages
-      PageElementEnumerator.within(element_or_document: self)
-    end
+    # @!method pages
+    #   Returns a pages enumerator
+    def_delegators :as_enumerator, :pages
 
     def title_header_number
       unit.nil? ? 1 : 2
@@ -86,6 +77,14 @@ module Kitchen
 
     def counter_names
       [unit&.counter_names, COUNTER_NAME].flatten.compact
+    end
+
+    protected
+
+    def as_enumerator
+      ChapterElementEnumerator.new do |block|
+        block.yield(self)
+      end
     end
 
   end

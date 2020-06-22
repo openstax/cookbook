@@ -1,7 +1,12 @@
 module Kitchen
   class ElementEnumeratorFactory
 
-    def self.within(new_enumerator_class:, element_or_document:, css_or_xpath:, sub_element_class:)
+    def self.within(new_enumerator_class:, element_or_document:,
+                    css_or_xpath:, default_css_or_xpath:, sub_element_class:)
+      # Apply the default css if needed
+      css_or_xpath ||= "$"
+      [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, default_css_or_xpath) }
+
       new_enumerator_class.new do |block|
         grand_ancestors = element_or_document.ancestors
 
