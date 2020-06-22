@@ -15,6 +15,8 @@ module Kitchen
     # @yieldparam [Element] the matched XML element
     #
     def each(*selector_or_xpath_args)
+      selector_or_xpath_args = [selector_or_xpath_args].flatten
+
       raise(Kitchen::RecipeError, "An `each` command must be given a block") if !block_given?
 
       nokogiri_document.search(*selector_or_xpath_args).each.with_index do |inner_node, index|
@@ -23,6 +25,11 @@ module Kitchen
           yield element
         end
       end
+    end
+
+    # TODO sometimes we let this be an array, other times we don't
+    def elements(*selector_or_xpath_args)
+      ElementEnumerator.within(element_or_document: self, css_or_xpath: selector_or_xpath_args)
     end
 
     # Yields and returns the first child element that matches the provided

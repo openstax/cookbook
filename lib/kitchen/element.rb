@@ -42,6 +42,10 @@ module Kitchen
       self[:id]
     end
 
+    def id=(value)
+      self[:id] = value
+    end
+
     def ancestor(type)
       @ancestors[type.to_sym]&.element_or_document || raise("No ancestor of type '#{type}'")
     end
@@ -108,6 +112,8 @@ module Kitchen
     # @yieldparam [Element] the matched XML element
     #
     def each(*selector_or_xpath_args)
+      selector_or_xpath_args = [selector_or_xpath_args].flatten
+
       raise(Kitchen::RecipeError, "An `each` command must be given a block") if !block_given?
 
       node.search(*selector_or_xpath_args).each do |inner_node|

@@ -1,16 +1,19 @@
 module Kitchen
   class TermElementEnumerator < ElementEnumerator
 
-    def self.within(element:)
-      ElementEnumerator.within(enumerator_class: self,
-                               element: element,
-                               css_or_xpath: "span[data-type='term']",
-                               sub_element_wrapper_class: TermElement)
+    def self.within(element_or_document:, css_or_xpath: nil)
+      css_or_xpath ||= "$"
+      css_or_xpath.gsub!(/\$/, "span[data-type='term']") # TODO element.document.selectors.term
+
+      ElementEnumeratorFactory.within(new_enumerator_class: self,
+                                      element_or_document: element_or_document,
+                                      css_or_xpath: css_or_xpath,
+                                      sub_element_class: TermElement)
     end
 
     def self.chained_to_enumerator(other_enumerator)
-      ElementEnumerator.chained_to_enumerator(enumerator_class: self,
-                                              chained_to: other_enumerator)
+      ElementEnumeratorFactory.chained_to_other(new_enumerator_class: self,
+                                                other_enumerator: other_enumerator)
     end
 
   end

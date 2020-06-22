@@ -22,15 +22,6 @@ module Kitchen
       @descendant_counts[descendant_type.to_sym] || 0
     end
 
-    # def reset_descendant_counts_except(types)
-    #   debugger
-    #   types = types.map(&:to_sym)
-    #   keys_to_reset = @descendant_counts.keys - types
-    #   keys_to_reset.each do |key|
-    #     @descendant_counts.delete(key)
-    #   end
-    # end
-
     def clone
       Ancestor.new(element_or_document)
     end

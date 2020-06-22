@@ -69,8 +69,7 @@ module Kitchen
     # end
 
     def pages
-      PageElementEnumerator.within(element: self)
-      # ChapterElementEnumerator.new([self], :each).pages
+      PageElementEnumerator.within(element_or_document: self)
     end
 
     def title_header_number

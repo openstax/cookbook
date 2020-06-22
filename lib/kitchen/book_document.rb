@@ -109,27 +109,18 @@ module Kitchen
       end
     end
 
-    def pages
-      Enumerator.new do |block| # PageEnumerator < ElementEnumerator ?
-        each("div[data-type='page']") do |element|
-          page = PageElement.new(element: element, chapter: self)
-          block.yield(page)
-        end
-      end
-    end
+    # TODO Can these methods move to Element (may not apply but who cares)
 
-    # Can these methods move to Element (may not apply but who cares)
-
-    def pages
-      PageElementEnumerator.within(element: self)
+    def pages(css_or_xpath=nil)
+      PageElementEnumerator.within(element_or_document: self, css_or_xpath: css_or_xpath)
     end
 
     def chapters
-      ChapterElementEnumerator.within(element: self)
+      ChapterElementEnumerator.within(element_or_document: self)
     end
 
     def terms
-      TermElementEnumerator.within(element: self)
+      TermElementEnumerator.within(element_or_document: self)
     end
 
     def ancestors

@@ -9,6 +9,7 @@ end
 require "kitchen/errors"
 require "kitchen/ancestor"
 require "kitchen/element_enumerator"
+require "kitchen/element_enumerator_factory"
 require "kitchen/page_element_enumerator"
 require "kitchen/term_element_enumerator"
 require "kitchen/chapter_element_enumerator"
