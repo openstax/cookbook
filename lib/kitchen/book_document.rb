@@ -1,7 +1,7 @@
 module Kitchen
   class BookDocument < Document
 
-    TERM_COUNTER_NAME = :book_term_counter
+    # TERM_COUNTER_NAME = :book_term_counter
 
     # TODO store default selectors here and provide a method for overriding them
     # wonder if we should just write it out so YARD works
@@ -25,47 +25,42 @@ module Kitchen
 
       super(nokogiri_document: document.is_a?(Document) ? document.raw : document)
 
-      @has_units = !first("div[data-type='unit']").nil?
-      @css_or_xpath_that_has_been_counted = {}
+      # @css_or_xpath_that_has_been_counted = {}
     end
 
     def book
-      BookElement.new(element: first!("html"))
+      BookElement.new(element: search("html").first!)
     end
 
-    def has_units?
-      @has_units
-    end
+    # # Iterates over all children in the book.  Also increments a `:chapter` counter,
+    # # resetting it at the start of the iteration.
+    # #
+    # # @yieldparam [Element] the matched XML element
+    # #
+    # def each_chapter # TODO provide as `each_chapter_with_count`
 
-    # Iterates over all children in the book.  Also increments a `:chapter` counter,
-    # resetting it at the start of the iteration.
-    #
-    # @yieldparam [Element] the matched XML element
-    #
-    def each_chapter # TODO provide as `each_chapter_with_count`
+    #   # can we make each_chapter a mixin to both this class and UnitElement?
+    #   raise(Kitchen::RecipeError, "An `each_chapter` command must be given a block") if !block_given?
 
-      # can we make each_chapter a mixin to both this class and UnitElement?
-      raise(Kitchen::RecipeError, "An `each_chapter` command must be given a block") if !block_given?
+    #   counter(ChapterElement::COUNTER_NAME).reset
 
-      counter(ChapterElement::COUNTER_NAME).reset
+    #   each("div[data-type='chapter']") do |element|
+    #     chapter = ChapterElement.new(element: element)
+    #     counter(ChapterElement::COUNTER_NAME).increment
+    #     yield chapter, counter(ChapterElement::COUNTER_NAME).get
+    #   end
+    # end
 
-      each("div[data-type='chapter']") do |element|
-        chapter = ChapterElement.new(element: element)
-        counter(ChapterElement::COUNTER_NAME).increment
-        yield chapter, counter(ChapterElement::COUNTER_NAME).get
-      end
-    end
+    # def each_unit
+    #   # ...
+    # end
 
-    def each_unit
-      # ...
-    end
-
-    def number_html(counter_names)
-      counts = counter_names.map { |counter_name| counter(counter_name).get }
-      <<~HTML
-        <span class="os-number">#{counts.join(".")}</span>
-      HTML
-    end
+    # def number_html(counter_names)
+    #   counts = counter_names.map { |counter_name| counter(counter_name).get }
+    #   <<~HTML
+    #     <span class="os-number">#{counts.join(".")}</span>
+    #   HTML
+    # end
 
     # def title
     #   first("div[data-type='document-title']")
@@ -73,41 +68,37 @@ module Kitchen
 
     # TODO Can these methods move to Element (may not apply but who cares)
 
-    def pages(css_or_xpath=nil)
-      PageElementEnumerator.within(element_or_document: self, css_or_xpath: css_or_xpath)
-    end
+    # def pages(css_or_xpath=nil)
+    #   PageElementEnumerator.within(element_or_document: self, css_or_xpath: css_or_xpath)
+    # end
 
-    def chapters
-      ChapterElementEnumerator.within(element_or_document: self)
-    end
+    # def chapters
+    #   ChapterElementEnumerator.within(element_or_document: self)
+    # end
 
-    def terms
-      TermElementEnumerator.within(element_or_document: self)
-    end
+    # def terms
+    #   TermElementEnumerator.within(element_or_document: self)
+    # end
 
-    def ancestors
-      {}
-    end
+    # def ancestors
+    #   {}
+    # end
 
-    def cloned_ancestors
-      {}
-    end
+    # def remember_that_sub_elements_are_already_counted(css_or_xpath:, count:)
+    #   @css_or_xpath_that_has_been_counted[css_or_xpath] = count
+    # end
 
-    def remember_that_sub_elements_are_already_counted(css_or_xpath:, count:)
-      @css_or_xpath_that_has_been_counted[css_or_xpath] = count
-    end
+    # def have_sub_elements_already_been_counted?(css_or_xpath)
+    #   number_of_sub_elements_already_counted(css_or_xpath) != 0
+    # end
 
-    def have_sub_elements_already_been_counted?(css_or_xpath)
-      number_of_sub_elements_already_counted(css_or_xpath) != 0
-    end
+    # def number_of_sub_elements_already_counted(css_or_xpath)
+    #   @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
+    # end
 
-    def number_of_sub_elements_already_counted(css_or_xpath)
-      @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
-    end
-
-    def short_type
-      :book
-    end
+    # def short_type
+    #   :book
+    # end
 
   end
 end

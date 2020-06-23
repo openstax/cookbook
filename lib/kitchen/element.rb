@@ -53,14 +53,6 @@ module Kitchen
       @ancestors
     end
 
-    def cloned_ancestors
-      copy = HashWithIndifferentAccess.new
-      @ancestors.each_pair do |name, ancestor|
-        copy[name] = ancestor.clone
-      end
-      copy
-    end
-
     def add_ancestors(*args)
       args.each do |arg|
         case arg
@@ -111,19 +103,23 @@ module Kitchen
     # @yieldparam [Element] the matched XML element
     #
     def each(*selector_or_xpath_args)
-      selector_or_xpath_args = [selector_or_xpath_args].flatten
+      # selector_or_xpath_args = [selector_or_xpath_args].flatten
 
       raise(Kitchen::RecipeError, "An `each` command must be given a block") if !block_given?
 
-      node.search(*selector_or_xpath_args).each do |inner_node|
-        Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-          document.location = element
-          yield element
-        end
-      end
+      search(*selector_or_xpath_args).each{|element| yield element}
+
+      # node.search(*selector_or_xpath_args).each do |inner_node|
+      #   Kitchen::Element.new(node: inner_node, document: document).tap do |element|
+      #     document.location = element
+      #     yield element
+      #   end
+      # end
     end
 
-    def elements(*selector_or_xpath_args)
+    def search(*selector_or_xpath_args)
+      selector_or_xpath_args = [selector_or_xpath_args].flatten
+
       ElementEnumerator.new do |block|
         node.search(*selector_or_xpath_args).each do |inner_node|
           Kitchen::Element.new(node: inner_node, document: document).tap do |element|
@@ -134,6 +130,17 @@ module Kitchen
       end
     end
 
+    # def elements(*selector_or_xpath_args)
+    #   ElementEnumerator.new do |block|
+    #     node.search(*selector_or_xpath_args).each do |inner_node|
+    #       Kitchen::Element.new(node: inner_node, document: document).tap do |element|
+    #         document.location = element
+    #         block.yield(element)
+    #       end
+    #     end
+    #   end
+    # end
+
     # Yields and returns the first child element that matches the provided
     # selector or XPath arguments.
     #
@@ -142,29 +149,30 @@ module Kitchen
     # @return [Element, nil] the matched XML element or nil if no match found
     #
     def first(*selector_or_xpath_args)
-      inner_node = node.search(*selector_or_xpath_args).first
-      return nil if inner_node.nil?
-      Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-        document.location = element
-        yield element if block_given?
-      end
+      search(*selector_or_xpath_args).first
+      # inner_node = node.search(*selector_or_xpath_args).first
+      # return nil if inner_node.nil?
+      # Kitchen::Element.new(node: inner_node, document: document).tap do |element|
+      #   document.location = element
+      #   yield element if block_given?
+      # end
     end
 
-    alias_method :at, :first
+    # alias_method :at, :first
 
-    # Yields and returns the first child element that matches the provided
-    # selector or XPath arguments.
-    #
-    # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
-    # @yieldparam [Element] the matched XML element
-    # @raise [ElementNotFoundError] if no matching element is found
-    # @return [Element] the matched XML element
-    #
-    def first!(*selector_or_xpath_args)
-      first(*selector_or_xpath_args) { yield if block_given? } ||
-        raise(Kitchen::ElementNotFoundError,
-              "Could not find first element matching '#{selector_or_xpath_args}'")
-    end
+    # # Yields and returns the first child element that matches the provided
+    # # selector or XPath arguments.
+    # #
+    # # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
+    # # @yieldparam [Element] the matched XML element
+    # # @raise [ElementNotFoundError] if no matching element is found
+    # # @return [Element] the matched XML element
+    # #
+    # def first!(*selector_or_xpath_args)
+    #   first(*selector_or_xpath_args) { yield if block_given? } ||
+    #     raise(Kitchen::ElementNotFoundError,
+    #           "Could not find first element matching '#{selector_or_xpath_args}'")
+    # end
 
     # Removes the element from its parent and places it on the specified clipboard
     #
@@ -316,7 +324,7 @@ module Kitchen
 
     # @!method pages
     #   Returns a pages enumerator
-    def_delegators :as_enumerator, :pages, :chapters, :terms, :figures
+    def_delegators :as_enumerator, :elements, :pages, :chapters, :terms, :figures
 
     protected
 

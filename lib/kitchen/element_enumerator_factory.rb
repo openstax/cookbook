@@ -25,7 +25,8 @@ module Kitchen
         parent_ancestor = Ancestor.new(element_or_document)
         num_sub_elements = 0
 
-        element_or_document.each(css_or_xpath) do |sub_element|
+        element_or_document.search(css_or_xpath).each do |sub_element|
+          # TODO pretty sure this just happend in the .search call above
           sub_element.document.location = sub_element
 
           sub_element = sub_element.is_a?(sub_element_class) ? sub_element : sub_element_class.new(element: sub_element)

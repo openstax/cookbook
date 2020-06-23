@@ -29,6 +29,11 @@ module Kitchen
                                                 css_or_xpath: css_or_xpath)
     end
 
+    def first!
+      # TODO would be cool to record the CSS in the enumerator constructor so can say "no first blah" here
+      first || raise(RecipeError, "Could not return a first result")
+    end
+
     # TODO add (to: nil) argument so can specify a clipboard name
     def cut
       clipboard = Clipboard.new

@@ -2,9 +2,9 @@ require 'spec_helper'
 
 RSpec.describe "nested enumerators" do
 
-  let(:source_1) do
-    <<~HTML
-      <div class="book">
+  let(:book_1) do
+    book_containing(
+      <<~HTML
         <div data-type="page" id="p1">
           <span data-type="term" id="p1t1">sharks</span>
         </div>
@@ -23,11 +23,9 @@ RSpec.describe "nested enumerators" do
             <span data-type="term" id="c2p2t1">lasers</span>
           </div>
         </div>
-      </div>
-    HTML
+      HTML
+    )
   end
-
-  let(:book_1) { Kitchen::BookDocument.new(document: Nokogiri::XML(source_1)) }
 
   # TODO see if we do any weird iteration in tutorials
 
@@ -102,7 +100,7 @@ RSpec.describe "nested enumerators" do
         book_1.chapters.each do |chapter|
           chapter.pages.each do |page|
             expect(page.ancestor(:chapter).id).to eq chapter.id
-            expect(page.ancestor(:book).class).to eq Kitchen::BookDocument
+            expect(page.ancestor(:book).name).to eq "html"
           end
         end
       end
