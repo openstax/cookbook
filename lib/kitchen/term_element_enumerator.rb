@@ -9,10 +9,10 @@ module Kitchen
                                       sub_element_class: TermElement)
     end
 
-    def self.chained_to_enumerator(other_enumerator)
-      ElementEnumeratorFactory.chained_to_other(new_enumerator_class: self,
-                                                other_enumerator: other_enumerator)
-    end
+    # def self.chained_to_enumerator(other_enumerator)
+    #   ElementEnumeratorFactory.chained_to_other(new_enumerator_class: self,
+    #                                             other_enumerator: other_enumerator)
+    # end
 
   end
 end

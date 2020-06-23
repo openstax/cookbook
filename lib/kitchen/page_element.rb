@@ -44,5 +44,11 @@ module Kitchen
       has_class?("introduction")
     end
 
+    protected
+
+    def as_enumerator
+      PageElementEnumerator.new {|block| block.yield(self)}
+    end
+
   end
 end

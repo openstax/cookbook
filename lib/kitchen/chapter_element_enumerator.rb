@@ -1,9 +1,9 @@
 module Kitchen
   class ChapterElementEnumerator < ElementEnumerator
 
-    def pages
-      PageElementEnumerator.chained_to_enumerator(self)
-    end
+    # def pages
+    #   PageElementEnumerator.chained_to_enumerator(self)
+    # end
 
     def self.within(element_or_document:, css_or_xpath: nil)
       ElementEnumeratorFactory.within(new_enumerator_class: self,
@@ -13,10 +13,10 @@ module Kitchen
                                       sub_element_class: ChapterElement)
     end
 
-    def self.chained_to_enumerator(other_enumerator)
-      ElementEnumeratorFactory.chained_to_other(new_enumerator_class: self,
-                                                other_enumerator: other_enumerator)
-    end
+    # def self.chained_to_enumerator(other_enumerator)
+    #   ElementEnumeratorFactory.chained_to_other(new_enumerator_class: self,
+    #                                             other_enumerator: other_enumerator)
+    # end
 
   end
 end

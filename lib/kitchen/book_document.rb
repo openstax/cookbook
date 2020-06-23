@@ -29,6 +29,10 @@ module Kitchen
       @css_or_xpath_that_has_been_counted = {}
     end
 
+    def book
+      BookElement.new(element: first!("html"))
+    end
+
     def has_units?
       @has_units
     end

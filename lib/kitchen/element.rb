@@ -310,9 +310,22 @@ module Kitchen
       node.to_s
     end
 
+    # Convenience method for when an element is cut it can then be pasted like a clipboard is
+    def paste
+      to_s
+    end
+
+    # @!method pages
+    #   Returns a pages enumerator
+    def_delegators :as_enumerator, :pages, :chapters, :terms, :figures
+
     protected
 
     attr_reader :node
+
+    def as_enumerator
+      ElementEnumerator.new {|block| block.yield(self)}
+    end
 
   end
 end
