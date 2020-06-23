@@ -1,8 +1,6 @@
 module Kitchen
   class PageElement < Element
 
-    attr_accessor :chapter, :unit, :book
-
     COUNTER_NAME = :page
 
     def self.short_type
@@ -12,7 +10,6 @@ module Kitchen
     # TODO maybe can just be "type" instead of "short_type"
 
     def initialize(element:)
-      # @chapter = chapter
       super(node: element.raw, document: element.document, short_type: :page)
     end
 
@@ -27,13 +24,6 @@ module Kitchen
 
     def counter_names
       [chapter&.counter_names, COUNTER_NAME].flatten.compact
-    end
-
-    def each_term
-      each("span[data-type='term']") do |element|
-        term = TermElement.new(element: element, page: self)
-        yield term
-      end
     end
 
     def terms

@@ -9,11 +9,5 @@ module Kitchen
                                       sub_element_class: PageElement)
     end
 
-    # def self.chained_to_enumerator(other_enumerator, css_or_xpath: nil)
-    #   ElementEnumeratorFactory.chained_to_other(new_enumerator_class: self,
-    #                                             other_enumerator: other_enumerator,
-    #                                             css_or_xpath: css_or_xpath)
-    # end
-
   end
 end

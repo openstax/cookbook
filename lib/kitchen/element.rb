@@ -4,7 +4,6 @@ require 'securerandom'
 module Kitchen
   class Element
     extend Forwardable
-    # include Enumerable
 
     attr_reader :document
     attr_reader :short_type
