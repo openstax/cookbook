@@ -68,18 +68,6 @@ module Kitchen
 
     # TODO Can these methods move to Element (may not apply but who cares)
 
-    # def pages(css_or_xpath=nil)
-    #   PageElementEnumerator.within(element_or_document: self, css_or_xpath: css_or_xpath)
-    # end
-
-    # def chapters
-    #   ChapterElementEnumerator.within(element_or_document: self)
-    # end
-
-    # def terms
-    #   TermElementEnumerator.within(element_or_document: self)
-    # end
-
     # def ancestors
     #   {}
     # end

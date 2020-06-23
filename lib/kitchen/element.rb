@@ -46,7 +46,7 @@ module Kitchen
     end
 
     def ancestor(type)
-      @ancestors[type.to_sym]&.element_or_document || raise("No ancestor of type '#{type}'")
+      @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'")
     end
 
     def ancestors
@@ -158,7 +158,11 @@ module Kitchen
       # end
     end
 
-    # alias_method :at, :first
+    def first!(*selector_or_xpath_args)
+      search(*selector_or_xpath_args).first!
+    end
+
+    alias_method :at, :first
 
     # # Yields and returns the first child element that matches the provided
     # # selector or XPath arguments.

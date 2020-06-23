@@ -2,11 +2,11 @@ module Kitchen
   class Ancestor
 
     attr_accessor :type
-    attr_accessor :element_or_document
+    attr_accessor :element
 
-    def initialize(element_or_document)
-      @element_or_document = element_or_document
-      @type = element_or_document.short_type
+    def initialize(element)
+      @element = element
+      @type = element.short_type
       @descendant_counts = {}
     end
 
@@ -23,7 +23,7 @@ module Kitchen
     end
 
     def clone
-      Ancestor.new(element_or_document)
+      Ancestor.new(element)
     end
 
   end

@@ -47,9 +47,9 @@ module Kitchen
       to_a[index]
     end
 
-    def self.within(element_or_document:, css_or_xpath:)
+    def self.within(element:, css_or_xpath:)
       ElementEnumeratorFactory.within(new_enumerator_class: self,
-                                      element_or_document: element_or_document,
+                                      element: element,
                                       css_or_xpath: css_or_xpath,
                                       default_css_or_xpath: "*",
                                       sub_element_class: Element)

@@ -27,11 +27,6 @@ module Kitchen
     #   end
     # end
 
-    # # TODO sometimes we let this be an array, other times we don't
-    # def elements(*selector_or_xpath_args)
-    #   ElementEnumerator.within(element_or_document: self, css_or_xpath: selector_or_xpath_args)
-    # end
-
     # Returns an enumerator that iterates over all children of this document
     # that match the provided selector or XPath arguments.
     #
