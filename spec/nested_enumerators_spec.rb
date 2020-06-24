@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe "nested enumerators" do
 
   let(:book_1) do
-    book_containing(
+    book_containing(html:
       <<~HTML
         <div data-type="page" id="p1">
           <span data-type="term" id="p1t1">sharks</span>

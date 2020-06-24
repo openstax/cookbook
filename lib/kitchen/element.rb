@@ -21,7 +21,8 @@ module Kitchen
     # @!method remove_class
     #   Remove a class from the element
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
-                           :text, :wrap, :children, :to_html, :remove_attribute
+                           :text, :wrap, :children, :to_html, :remove_attribute,
+                           :classes
 
     def initialize(node:, document:, short_type: nil)
       raise "node cannot be nil" if node.nil?

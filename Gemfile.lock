@@ -3,6 +3,7 @@ PATH
   specs:
     kitchen (0.1.0)
       activesupport
+      i18n
       nokogiri
       rainbow
 

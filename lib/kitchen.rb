@@ -20,6 +20,7 @@ require "kitchen/element"
 require "kitchen/debug/print_recipe_error"
 require "kitchen/generators/container"
 require "kitchen/recipe"
+require "kitchen/book_recipe"
 require "kitchen/oven"
 require "kitchen/clipboard"
 require "kitchen/pantry"
@@ -37,3 +38,6 @@ require "kitchen/directions/move_title_text_into_span"
 require "kitchen/directions/process_figure"
 require "kitchen/directions/process_notes"
 require "kitchen/patches"
+require 'byebug'
+
+I18n.load_path << Dir[File.expand_path(__dir__ + "/locales") + "/*.yml"]

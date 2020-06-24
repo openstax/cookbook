@@ -75,8 +75,8 @@ def normalized_xml_doc(xml_thing_with_to_s)
   end
 end
 
-def book_containing(html)
-  Kitchen::BookDocument.new(document: Nokogiri::XML(
+def book_containing(short_name: :not_set, html:)
+  Kitchen::BookDocument.new(short_name: short_name, document: Nokogiri::XML(
     <<~HTML
       <html>
         <body>
@@ -95,4 +95,14 @@ def one_chapter_with_one_page_containing(html)
       </div>
     </div>
   HTML
+end
+
+def stub_locales(hash)
+  I18n.config.available_locales = [:test, :en]
+  allow_any_instance_of(I18n::Config).to receive(:backend).and_return(
+    I18n::Backend::Simple.new.tap do |backend|
+      backend.store_translations 'test', hash
+    end
+  )
+  allow_any_instance_of(I18n::Config).to receive(:locale).and_return(:test)
 end

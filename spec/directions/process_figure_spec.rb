@@ -6,7 +6,7 @@ RSpec.describe Kitchen::Directions::ProcessFigure do
   let(:figure_caption) { "<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>" }
 
   let(:book_1) do
-    book_containing(
+    book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
           <figure id="someId" class="#{figure_classes}">

@@ -1,6 +1,8 @@
 module Kitchen
   class BookDocument < Document
 
+    attr_reader :short_name
+
     # TERM_COUNTER_NAME = :book_term_counter
 
     # TODO store default selectors here and provide a method for overriding them
@@ -20,11 +22,12 @@ module Kitchen
       end
     end
 
-    def initialize(document:, numbering_style: "1.1.1")
+    def initialize(document:, short_name: :not_set, numbering_style: "1.1.1")
       @numbering_style = numbering_style # not used yet
 
       super(nokogiri_document: document.is_a?(Document) ? document.raw : document)
 
+      @short_name = short_name
       # @css_or_xpath_that_has_been_counted = {}
     end
 

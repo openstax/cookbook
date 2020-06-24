@@ -47,7 +47,10 @@ module Kitchen
       end
 
       if ENV['VERBOSE']
+        puts "Full backtrace:\n"
         puts error.backtrace
+      else
+        puts "Full backtrace suppressed (enable by setting the VERBOSE environment variable to something)"
       end
     end
 
