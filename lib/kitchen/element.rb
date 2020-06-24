@@ -21,7 +21,7 @@ module Kitchen
     # @!method remove_class
     #   Remove a class from the element
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
-                           :text, :wrap, :children, :to_html
+                           :text, :wrap, :children, :to_html, :remove_attribute
 
     def initialize(node:, document:, short_type: nil)
       raise "node cannot be nil" if node.nil?
@@ -149,7 +149,9 @@ module Kitchen
     # @return [Element, nil] the matched XML element or nil if no match found
     #
     def first(*selector_or_xpath_args)
-      search(*selector_or_xpath_args).first
+      search(*selector_or_xpath_args).first.tap do |element|
+        yield(element) if block_given?
+      end
       # inner_node = node.search(*selector_or_xpath_args).first
       # return nil if inner_node.nil?
       # Kitchen::Element.new(node: inner_node, document: document).tap do |element|
@@ -159,7 +161,9 @@ module Kitchen
     end
 
     def first!(*selector_or_xpath_args)
-      search(*selector_or_xpath_args).first!
+      search(*selector_or_xpath_args).first!.tap do |element|
+        yield(element) if block_given?
+      end
     end
 
     alias_method :at, :first
@@ -328,7 +332,7 @@ module Kitchen
 
     # @!method pages
     #   Returns a pages enumerator
-    def_delegators :as_enumerator, :elements, :pages, :chapters, :terms, :figures
+    def_delegators :as_enumerator, :elements, :pages, :chapters, :terms, :figures, :notes
 
     protected
 
@@ -336,6 +340,19 @@ module Kitchen
 
     def as_enumerator
       ElementEnumerator.new {|block| block.yield(self)}
+    end
+
+    # TODO put this in a module that can be included here and in ElementEnumerator
+    def block_error_if(block_given)
+      calling_method = begin
+        this_method_location_index = caller_locations.find_index do |location|
+          location.label == "block_error_if"
+        end
+
+        caller_locations[(this_method_location_index || -1) + 1].label
+      end
+
+      raise(RecipeError, "The `#{calling_method}` method does not take a block argument") if block_given
     end
 
   end

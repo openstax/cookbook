@@ -216,6 +216,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Documentation is handled via YARD.  The [Solargraph gem](https://solargraph.org/guides/getting-started) can be used in popular editors for code completion.
 
 
+### Specs
+
+* TODO: talk about match_html vs match_html_strict
+
 ### VSCode
 
 1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser

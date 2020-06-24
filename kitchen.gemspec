@@ -33,4 +33,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'yard'
+  spec.add_development_dependency 'nokogiri-diff'
+  spec.add_development_dependency 'rainbow'
 end

@@ -10,11 +10,19 @@ module Kitchen
     end
 
     def get(label)
-      @hash[label.to_sym] || raise(RecipeError, "There is no pantry item labeled '#{label}'")
+      @hash[label.to_sym]
+    end
+
+    def get!(label)
+      get(label) || raise(RecipeError, "There is no pantry item labeled '#{label}'")
     end
 
     def each(&block)
       @hash.each{|k,v| block.call(k,v)}
+    end
+
+    def size
+      @hash.keys.size
     end
 
     protected

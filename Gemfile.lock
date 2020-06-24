@@ -24,6 +24,9 @@ GEM
     minitest (5.14.1)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
+    nokogiri-diff (0.2.0)
+      nokogiri (~> 1.5)
+      tdiff (~> 0.3, >= 0.3.2)
     rainbow (3.0.0)
     rake (12.3.3)
     rspec (3.9.0)
@@ -39,6 +42,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    tdiff (0.3.4)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
@@ -51,6 +55,8 @@ PLATFORMS
 DEPENDENCIES
   byebug
   kitchen!
+  nokogiri-diff
+  rainbow
   rake (~> 12.0)
   rspec (~> 3.0)
   yard

@@ -13,8 +13,13 @@ module Kitchen
       chain_to(enumerator_class: ChapterElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
+    # use block_error_if
     def figures(css_or_xpath=nil, &block)
       chain_to(enumerator_class: FigureElementEnumerator, css_or_xpath: css_or_xpath, &block)
+    end
+
+    def notes(css_or_xpath=nil, &block)
+      chain_to(enumerator_class: NoteElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def elements(*selector_or_xpath_args, &block)
