@@ -2,6 +2,7 @@ en:
   figure: Figure
   table: Table
   appendix: Appendix
+  example: Example
   notes:
     link-to-learning: Link to Learning
     chemistry:
