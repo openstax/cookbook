@@ -333,7 +333,7 @@ module Kitchen
 
     # @!method pages
     #   Returns a pages enumerator
-    def_delegators :as_enumerator, :elements, :pages, :chapters, :terms, :figures, :notes
+    def_delegators :as_enumerator, :elements, :pages, :chapters, :terms, :figures, :notes, :tables
 
     protected
 

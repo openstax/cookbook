@@ -22,6 +22,10 @@ module Kitchen
       chain_to(enumerator_class: NoteElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
+    def tables(css_or_xpath=nil, &block)
+      chain_to(enumerator_class: TableElementEnumerator, css_or_xpath: css_or_xpath, &block)
+    end
+
     def elements(*selector_or_xpath_args, &block)
       chain_to(enumerator_class: self.class, css_or_xpath: selector_or_xpath_args, &block)
     end

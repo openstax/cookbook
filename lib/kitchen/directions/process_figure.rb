@@ -3,7 +3,7 @@ module Kitchen
     module ProcessFigure
 
       def self.v1(figure:, number:)
-        figure.wrap(%Q(<div class="os-figure#{' has-splash' if figure.has_class?('splash')}"))
+        figure.wrap(%Q(<div class="os-figure#{' has-splash' if figure.has_class?('splash')}">))
 
         figure.document.pantry(name: :link_text).store "Figure #{number}", label: figure.id
 
