@@ -41,6 +41,7 @@ require "kitchen/directions/process_figure"
 require "kitchen/directions/process_notes"
 require "kitchen/directions/process_numbered_table"
 require "kitchen/directions/process_unnumbered_tables"
+require "kitchen/directions/bake_appendix"
 require "kitchen/patches"
 
 
