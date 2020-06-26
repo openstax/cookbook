@@ -3,6 +3,7 @@ module Kitchen
     module BakeChapterGlossary
 
       def self.v1(chapter:, metadata_source:)
+        # TODO put the _copy_1 suffix on ID logic into `copy` as an option?
         metadata_elements = metadata_source.elements(%w(.authors .publishers .print-style
                                                         .permissions [data-type='subject'])).copy
 

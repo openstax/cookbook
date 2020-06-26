@@ -217,7 +217,7 @@ module Kitchen
     #   are converted to symbols.
     #
     def copy(to: :default)
-      the_copy = node.clone
+      the_copy = clone
       yield the_copy if block_given?
       clipboard(to).add(the_copy)
       self
@@ -285,6 +285,8 @@ module Kitchen
       self
     end
 
+    # TODO methods like replace_children that take string, either forbid or handle Element/Node args
+
     # Get the content of children matching the provided selector.  Mostly
     # useful when there is one child with text you want to extract.
     #
@@ -339,13 +341,20 @@ module Kitchen
       to_s
     end
 
+    # TODO implement in child classes
+    def clone
+      super.tap do |element|
+        element.node = node.dup
+      end
+    end
+
     # @!method pages
     #   Returns a pages enumerator
     def_delegators :as_enumerator, :elements, :pages, :chapters, :terms, :figures, :notes, :tables, :examples
 
     protected
 
-    attr_reader :node
+    attr_accessor :node
 
     def as_enumerator
       ElementEnumerator.new {|block| block.yield(self)}

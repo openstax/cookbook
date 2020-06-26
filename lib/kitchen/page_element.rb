@@ -38,6 +38,9 @@ module Kitchen
       first!("div[data-type='metadata']")
     end
 
+    def summary
+      first!("section.summary")
+    end
 
     protected
 
