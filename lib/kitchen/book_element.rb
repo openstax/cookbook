@@ -9,6 +9,10 @@ module Kitchen
       super(node: element.raw, document: element.document, short_type: self.class.short_type)
     end
 
+    def metadata
+      first!("div[data-type='metadata']")
+    end
+
     protected
 
     def as_enumerator

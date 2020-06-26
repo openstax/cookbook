@@ -3,7 +3,11 @@ en:
   table: Table
   appendix: Appendix
   example: Example
+  key_terms: Key Terms
   notes:
     link-to-learning: Link to Learning
+    sciences-interconnect: How Sciences Interconnect
     chemistry:
       link-to-learning: Link to Learning
+      everyday-life: Chemistry in Everyday Life
+      chemist-portrait: Portrait of a Chemist

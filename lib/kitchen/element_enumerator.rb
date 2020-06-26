@@ -56,6 +56,18 @@ module Kitchen
       clipboard
     end
 
+    def copy
+      Clipboard.new.tap do |clipboard|
+        self.each do |element|
+          element.copy(to: clipboard)
+        end
+      end
+    end
+
+    def trash
+      self.each(&:trash)
+    end
+
     def [](index)
       to_a[index]
     end

@@ -34,6 +34,11 @@ module Kitchen
       has_class?("introduction")
     end
 
+    def metadata
+      first!("div[data-type='metadata']")
+    end
+
+
     protected
 
     def as_enumerator

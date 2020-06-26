@@ -31,6 +31,10 @@ module Kitchen
       [unit&.counter_names, COUNTER_NAME].flatten.compact
     end
 
+    def glossaries
+      elements("div[data-type='glossary']")
+    end
+
     protected
 
     def as_enumerator

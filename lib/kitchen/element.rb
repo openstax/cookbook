@@ -8,6 +8,10 @@ module Kitchen
     attr_reader :document
     attr_reader :short_type
 
+    def self.short_type
+      :element
+    end
+
     # @!method name
     #   Get the element name (the tag)
     # @!method name=
@@ -190,7 +194,7 @@ module Kitchen
     #
     def cut(to: :default)
       node.remove
-      clipboard(to).add(node)
+      clipboard(to).add(self)
       self
     end
 
@@ -328,6 +332,10 @@ module Kitchen
 
     # Convenience method for when an element is cut it can then be pasted like a clipboard is
     def paste
+      to_s
+    end
+
+    def inspect
       to_s
     end
 

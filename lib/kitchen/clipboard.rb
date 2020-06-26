@@ -28,5 +28,9 @@ module Kitchen
         block.call(item)
       end
     end
+
+    def sort_by!(&block)
+      @items.sort_by!(&block)
+    end
   end
 end
