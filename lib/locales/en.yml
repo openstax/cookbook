@@ -5,6 +5,7 @@ en:
   example: Example
   key_terms: Key Terms
   summary: Summary
+  exercises: Exercises # TODO we probably want more specific keys here like eoc_exercises_title
   notes:
     link-to-learning: Link to Learning
     sciences-interconnect: How Sciences Interconnect

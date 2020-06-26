@@ -42,6 +42,10 @@ module Kitchen
       first!("section.summary")
     end
 
+    def exercises
+      first!("section.exercises")
+    end
+
     protected
 
     def as_enumerator

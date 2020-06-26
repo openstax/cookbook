@@ -72,6 +72,10 @@ module Kitchen
       to_a[index]
     end
 
+    def to_s
+      self.map(&:to_s).join("")
+    end
+
     def self.within(element:, css_or_xpath:)
       ElementEnumeratorFactory.within(new_enumerator_class: self,
                                       element: element,
