@@ -25,6 +25,9 @@ module Kitchen
         parent_ancestor = Ancestor.new(element)
         num_sub_elements = 0
 
+        # TODO there's a confusing overlap between this code and element.search, like
+        # anyone who uses element.search we want ancestry stuff there but it isn't happening
+        # there
         element.search(css_or_xpath).each do |sub_element|
           # TODO pretty sure this just happend in the .search call above
           sub_element.document.location = sub_element

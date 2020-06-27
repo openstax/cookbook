@@ -165,6 +165,8 @@ module Kitchen
       # end
     end
 
+    # TODO first and first! should record ancestry (make this a spec)
+
     def first!(*selector_or_xpath_args)
       search(*selector_or_xpath_args).first!.tap do |element|
         yield(element) if block_given?

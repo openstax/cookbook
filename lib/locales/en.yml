@@ -6,6 +6,7 @@ en:
   key_terms: Key Terms
   summary: Summary
   exercises: Exercises # TODO we probably want more specific keys here like eoc_exercises_title
+  eoc_answer_key_title: Answer Key
   notes:
     link-to-learning: Link to Learning
     sciences-interconnect: How Sciences Interconnect
