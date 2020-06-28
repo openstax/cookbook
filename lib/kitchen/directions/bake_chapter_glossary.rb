@@ -4,10 +4,10 @@ module Kitchen
 
       def self.v1(chapter:, metadata_source:)
         # TODO put the _copy_1 suffix on ID logic into `copy` as an option?
-        metadata_elements = metadata_source.elements(%w(.authors .publishers .print-style
-                                                        .permissions [data-type='subject'])).copy
+        metadata_elements = metadata_source.search(%w(.authors .publishers .print-style
+                                                      .permissions [data-type='subject'])).copy
 
-        definitions = chapter.glossaries.elements("dl").cut
+        definitions = chapter.glossaries.search("dl").cut
         definitions.sort_by!{|definition| definition.first("dt").text.downcase}
 
         chapter.glossaries.trash

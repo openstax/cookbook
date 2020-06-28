@@ -101,6 +101,7 @@ module Kitchen
     end
 
 
+    # TODO get rid of this `.each` - make users say `.search(blah).each`
     # Iterates over all children of this element that match the provided
     # selector or XPath arguments.
     #
@@ -114,37 +115,17 @@ module Kitchen
 
       search(*selector_or_xpath_args).each{|element| yield element}
 
-      # node.search(*selector_or_xpath_args).each do |inner_node|
-      #   Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-      #     document.location = element
-      #     yield element
-      #   end
-      # end
     end
 
     def search(*selector_or_xpath_args)
-      selector_or_xpath_args = [selector_or_xpath_args].flatten
-
-      ElementEnumerator.new do |block|
-        node.search(*selector_or_xpath_args).each do |inner_node|
-          Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-            document.location = element
-            block.yield(element)
-          end
-        end
-      end
+      # TODO error if block given?
+      ElementEnumeratorFactory.within(
+        new_enumerator_class: ElementEnumerator,
+        element: self,
+        css_or_xpath: nil,
+        default_css_or_xpath: selector_or_xpath_args,
+      )
     end
-
-    # def elements(*selector_or_xpath_args)
-    #   ElementEnumerator.new do |block|
-    #     node.search(*selector_or_xpath_args).each do |inner_node|
-    #       Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-    #         document.location = element
-    #         block.yield(element)
-    #       end
-    #     end
-    #   end
-    # end
 
     # Yields and returns the first child element that matches the provided
     # selector or XPath arguments.
@@ -157,23 +138,9 @@ module Kitchen
       search(*selector_or_xpath_args).first.tap do |element|
         yield(element) if block_given?
       end
-      # inner_node = node.search(*selector_or_xpath_args).first
-      # return nil if inner_node.nil?
-      # Kitchen::Element.new(node: inner_node, document: document).tap do |element|
-      #   document.location = element
-      #   yield element if block_given?
-      # end
     end
 
     # TODO first and first! should record ancestry (make this a spec)
-
-    def first!(*selector_or_xpath_args)
-      search(*selector_or_xpath_args).first!.tap do |element|
-        yield(element) if block_given?
-      end
-    end
-
-    alias_method :at, :first
 
     # # Yields and returns the first child element that matches the provided
     # # selector or XPath arguments.
@@ -183,11 +150,13 @@ module Kitchen
     # # @raise [ElementNotFoundError] if no matching element is found
     # # @return [Element] the matched XML element
     # #
-    # def first!(*selector_or_xpath_args)
-    #   first(*selector_or_xpath_args) { yield if block_given? } ||
-    #     raise(Kitchen::ElementNotFoundError,
-    #           "Could not find first element matching '#{selector_or_xpath_args}'")
-    # end
+    def first!(*selector_or_xpath_args)
+      search(*selector_or_xpath_args).first!.tap do |element|
+        yield(element) if block_given?
+      end
+    end
+
+    alias_method :at, :first
 
     # Removes the element from its parent and places it on the specified clipboard
     #
@@ -231,6 +200,8 @@ module Kitchen
       node.remove
       self
     end
+
+    # TODO make it clear if all of these methods take Element, Node, or String
 
     # If child argument given, prepends it before the element's current children.
     # If sibling is given, prepends it as a sibling to this element.
@@ -352,7 +323,7 @@ module Kitchen
 
     # @!method pages
     #   Returns a pages enumerator
-    def_delegators :as_enumerator, :elements, :pages, :chapters, :terms, :figures, :notes, :tables, :examples
+    def_delegators :as_enumerator, :pages, :chapters, :terms, :figures, :notes, :tables, :examples
 
     protected
 

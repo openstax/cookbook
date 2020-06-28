@@ -5,9 +5,9 @@ module Kitchen
       def self.v1(book:)
         # TODO put the _copy_1 suffix on ID logic into `copy` as an option?
         # have document keep a list of IDs and how many copies have been made
-        metadata_elements = book.metadata.elements(%w(.authors .publishers .print-style
-                                                      .permissions [data-type='subject'])).copy
-
+        metadata_elements = book.metadata.search(%w(.authors .publishers .print-style
+                                                    .permissions [data-type='subject'])).copy
+        # debugger
         solutions_clipboards = []
 
         book.chapters.each do |chapter|
@@ -29,10 +29,10 @@ module Kitchen
                 </a>
               HTML
             )
-debugger
-            exercise_section.elements("[data-type='exercise']").each do |exercise|
+
+            exercise_section.search("[data-type='exercise']").each do |exercise|
               bake_exercise_in_place(exercise: exercise)
-              exercise.first("[data-type='solution']").cut(to: solution_clipboard)
+              exercise.first("[data-type='solution']")&.cut(to: solution_clipboard)
             end
 
             exercise_section.cut(to: exercise_clipboard)
@@ -79,8 +79,11 @@ debugger
             <h1 data-type="document-title" id="composite-chapter-1">
               <span class="os-text">#{I18n.t(:eoc_answer_key_title)}</span>
             </h1>
-            #{metadata(title: "Answer Key")}
-            #{soltuions}
+            <div data-type="metadata" style="display: none;">
+              <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_answer_key_title)}</h1>
+              #{metadata_elements.paste}
+            </div>
+            #{solutions.join("\n")}
           </div>
           HTML
         )

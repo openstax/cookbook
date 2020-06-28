@@ -12,9 +12,8 @@ module Kitchen
       :note
     end
 
-    # TODO allow specifying element or node and document
-    def initialize(element:)
-      super(node: element.raw, document: element.document, short_type: self.class.short_type)
+    def initialize(node:, document: nil)
+      super(node: node, document: document, short_type: self.class.short_type)
     end
 
     def title

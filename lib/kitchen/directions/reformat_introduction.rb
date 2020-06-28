@@ -27,7 +27,7 @@ module Kitchen
       title.name = "h2"
       Directions.move_title_text_into_span(title)
 
-      intro_content = introduction_page.elements("> :not([data-type='metadata']):not(.has-splash)").cut
+      intro_content = introduction_page.search("> :not([data-type='metadata']):not(.has-splash)").cut
 
       introduction_page.append(child:
         <<~HTML

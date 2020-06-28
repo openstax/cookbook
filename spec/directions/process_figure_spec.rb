@@ -28,7 +28,7 @@ RSpec.describe Kitchen::Directions::ProcessFigure do
 
       described_class.v1(figure: book_1_figure, number: "1.2")
 
-      expect(book_1.elements(".os-figure").first).to match_html(
+      expect(book_1.search(".os-figure").first).to match_html(
         <<~HTML
           <div class="os-figure">
             <figure id="someId" class="">
@@ -53,7 +53,7 @@ RSpec.describe Kitchen::Directions::ProcessFigure do
 
       it "works without a caption" do
         described_class.v1(figure: book_1_figure, number: "1.2")
-        expect(book_1.elements(".os-caption").first).to be nil
+        expect(book_1.search(".os-caption").first).to be nil
       end
     end
 
@@ -62,14 +62,14 @@ RSpec.describe Kitchen::Directions::ProcessFigure do
 
       it "gets a 'has-splash' class" do
         described_class.v1(figure: book_1_figure, number: "1.2")
-        expect(book_1.elements(".os-figure").first.has_class?("has-splash")).to be true
+        expect(book_1.search(".os-figure").first.has_class?("has-splash")).to be true
       end
     end
 
     context "figure does not have splash class" do
       it "does not get a 'has-splash' class" do
         described_class.v1(figure: book_1_figure, number: "1.2")
-        expect(book_1.elements(".os-figure").first.has_class?("has-splash")).to be false
+        expect(book_1.search(".os-figure").first.has_class?("has-splash")).to be false
       end
     end
   end

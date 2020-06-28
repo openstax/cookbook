@@ -32,7 +32,7 @@ module Kitchen
     end
 
     def book
-      BookElement.new(element: search("html").first!)
+      BookElement.new(node: nokogiri_document.search("html").first, document: self)
     end
 
     # # Iterates over all children in the book.  Also increments a `:chapter` counter,

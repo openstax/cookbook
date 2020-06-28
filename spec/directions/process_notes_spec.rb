@@ -59,7 +59,7 @@ RSpec.describe Kitchen::Directions::ProcessNotes do
       it "works" do
         described_class.v1(book: book)
 
-        expect(book.elements("[data-type='note']").first).to match_html(
+        expect(book.search("[data-type='note']").first).to match_html(
           <<~HTML
             <div data-type="note" id="noteId">
               <h3 class="os-title" data-type="title">
@@ -80,7 +80,7 @@ RSpec.describe Kitchen::Directions::ProcessNotes do
       it "works" do
         described_class.v1(book: book)
 
-        expect(book.elements("[data-type='note']").first).to match_html(
+        expect(book.search("[data-type='note']").first).to match_html(
           <<~HTML
             <div data-type="note" id="noteId" class="chemistry link-to-learning">
               <h3 class="os-title" data-type="title">
@@ -101,7 +101,7 @@ RSpec.describe Kitchen::Directions::ProcessNotes do
       it "works" do
         described_class.v1(book: book)
 
-        expect(book.elements("[data-type='note']").first).to match_html(
+        expect(book.search("[data-type='note']").first).to match_html(
           <<~HTML
             <div data-type="note" id="noteId" class="everyday-life">
               <h3 class="os-title" data-type="title">

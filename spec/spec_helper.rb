@@ -42,7 +42,8 @@ RSpec::Matchers.define :match_html do |expected|
     diff_lines = @actual.diff(@expected).map do |change,node|
       reduced_node = node.dup
       reduced_node.children = "..."
-      "#{change} #{reduced_node.to_html}".ljust(30) if !change.blank?
+      # debugger if !change.blank?
+      "#{change} #{reduced_node.to_xhtml}".ljust(30) if !change.blank?
     end.compact
 
     <<~MSG
@@ -72,7 +73,7 @@ def normalized_xml_doc(xml_thing_with_to_s)
     end.to_xhtml(indent: 2)
   ) do |config|
     config.noblanks
-  end
+  end.tap(&:remove_namespaces!)
 end
 
 def book_containing(short_name: :not_set, html:)

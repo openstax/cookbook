@@ -30,9 +30,10 @@ module Kitchen
       chain_to(enumerator_class: ExampleElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
-    def elements(*selector_or_xpath_args, &block)
-      chain_to(enumerator_class: ElementEnumerator, css_or_xpath: selector_or_xpath_args, &block)
-    end
+    # def elements(*selector_or_xpath_args, &block)
+    #   debugger
+    #   chain_to(enumerator_class: ElementEnumerator, css_or_xpath: selector_or_xpath_args, &block)
+    # end
 
     def chain_to(enumerator_class:, css_or_xpath: nil, &block)
       raise(RecipeError, "Did you forget a `.each` call on this enumerator?") if block_given?

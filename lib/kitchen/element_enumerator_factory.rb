@@ -1,11 +1,14 @@
 module Kitchen
   class ElementEnumeratorFactory
 
+    # TODO ambiguity with css_or_xpath and selector_or_xpath_args being an array or not, causing errors
+
     def self.within(new_enumerator_class:, element:,
-                    css_or_xpath:, default_css_or_xpath:, sub_element_class:)
+                    css_or_xpath:, default_css_or_xpath:, sub_element_class: Element)
       # Apply the default css if needed
       css_or_xpath ||= "$"
-      [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, default_css_or_xpath) }
+      [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, [default_css_or_xpath].flatten.join(", ")) }
+      [css_or_xpath].flatten! if css_or_xpath.is_a?(Array)
 
       new_enumerator_class.new do |block|
         grand_ancestors = element.ancestors
@@ -28,11 +31,12 @@ module Kitchen
         # TODO there's a confusing overlap between this code and element.search, like
         # anyone who uses element.search we want ancestry stuff there but it isn't happening
         # there
-        element.search(css_or_xpath).each do |sub_element|
+        element.raw.search(*css_or_xpath).each do |sub_node|
+          sub_element = sub_element_class.new(node: sub_node, document: element.document)
           # TODO pretty sure this just happend in the .search call above
           sub_element.document.location = sub_element
 
-          sub_element = sub_element.is_a?(sub_element_class) ? sub_element : sub_element_class.new(element: sub_element)
+
           num_sub_elements += 1
 
           sub_element.add_ancestors(grand_ancestors, parent_ancestor)

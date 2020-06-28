@@ -1,6 +1,7 @@
 module Kitchen
   class PageElement < Element
 
+    # TODO kill counter names?
     COUNTER_NAME = :page
 
     def self.short_type
@@ -9,8 +10,8 @@ module Kitchen
 
     # TODO maybe can just be "type" instead of "short_type"
 
-    def initialize(element:)
-      super(node: element.raw, document: element.document, short_type: :page)
+    def initialize(node:, document: nil)
+      super(node: node, document: document, short_type: self.class.short_type)
     end
 
     def title
@@ -44,6 +45,10 @@ module Kitchen
 
     def exercises
       first!("section.exercises")
+    end
+
+    def exercises_section
+      elements("")
     end
 
     protected
