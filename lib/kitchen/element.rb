@@ -169,37 +169,27 @@ module Kitchen
 
     # Removes the element from its parent and places it on the specified clipboard
     #
-    # @param to [Symbol, String] the name of the clipboard to cut to. String values
-    #   are converted to symbols.
+    # @param to [Symbol, String, Clipboard, nil] the name of the clipboard (or a Clipboard
+    #   object) to cut to. String values are converted to symbols. If not provided, the
+    #   element is not placed on a clipboard.
+    # @return [Element] the cut element
     #
-    def cut(to: :default)
+    def cut(to: nil)
       node.remove
-      clipboard(to).add(self)
+      clipboard(to).add(self) if to.present?
       self
     end
 
-    def clipboard(name_or_object)
-      case name_or_object
-      when Symbol
-        document.clipboard(name: name_or_object)
-      when Clipboard
-        name_or_object
-      else
-        raise ArgumentError, "The provided argument (#{name_or_object}) is not "
-                             "a clipboard name or a clipboard"
-      end
-    end
-
-    # Makes a copy of the element and places it on the specified clipboard; if a
-    # block is given, runs the block on the copy.
+    # Makes a copy of the element and places it on the specified clipboard.
     #
-    # @param to [Symbol, String] the name of the clipboard to cut to.  String values
-    #   are converted to symbols.
+    # @param to [Symbol, String, Clipboard, nil] the name of the clipboard (or a Clipboard
+    #   object) to cut to.  String values are converted to symbols.  If not provided, the
+    #   copy is not placed on a clipboard.
+    # @return [Element] the copied element
     #
-    def copy(to: :default)
+    def copy(to: nil)
       the_copy = clone
-      yield the_copy if block_given?
-      clipboard(to).add(the_copy)
+      clipboard(to).add(the_copy) if to.present?
       self
     end
 
@@ -208,6 +198,10 @@ module Kitchen
     def trash
       node.remove
       self
+    end
+
+    def parent
+      self.class.new(node: raw.parent, document: document)
     end
 
     # TODO make it clear if all of these methods take Element, Node, or String
@@ -341,6 +335,18 @@ module Kitchen
 
     def as_enumerator
       ElementEnumerator.new {|block| block.yield(self)}
+    end
+
+    def clipboard(name_or_object)
+      case name_or_object
+      when Symbol
+        document.clipboard(name: name_or_object)
+      when Clipboard
+        name_or_object
+      else
+        raise ArgumentError, "The provided argument (#{name_or_object}) is not "
+                             "a clipboard name or a clipboard"
+      end
     end
 
     # TODO put this in a module that can be included here and in ElementEnumerator

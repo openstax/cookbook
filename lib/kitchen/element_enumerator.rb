@@ -34,11 +34,6 @@ module Kitchen
       chain_to(enumerator_class: ElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
-    # def elements(*selector_or_xpath_args, &block)
-    #   debugger
-    #   chain_to(enumerator_class: ElementEnumerator, css_or_xpath: selector_or_xpath_args, &block)
-    # end
-
     def chain_to(enumerator_class:, css_or_xpath: nil, &block)
       raise(RecipeError, "Did you forget a `.each` call on this enumerator?") if block_given?
 
@@ -52,21 +47,34 @@ module Kitchen
       first || raise(RecipeError, "Could not return a first result")
     end
 
-    # TODO add (to: nil) argument so can specify a clipboard name
-    def cut
-      clipboard = Clipboard.new
+    # Removes enumerated elements from their parent and places them on the specified clipboard
+    #
+    # @param to [Symbol, String, Clipboard, nil] the name of the clipboard (or a Clipboard
+    #   object) to cut to. String values are converted to symbols. If not provided, the
+    #   elements are placed on a new clipboard.
+    # @return [Clipboard] the clipboard
+    #
+    def cut(to: nil)
+      to ||= Clipboard.new
       self.each do |element|
-        element.cut(to: clipboard)
+        element.cut(to: to)
       end
-      clipboard
+      to
     end
 
-    def copy
-      Clipboard.new.tap do |clipboard|
-        self.each do |element|
-          element.copy(to: clipboard)
-        end
+    # Makes a copy of the enumerated elements and places them on the specified clipboard.
+    #
+    # @param to [Symbol, String, Clipboard, nil] the name of the clipboard (or a Clipboard
+    #   object) to copy to.  String values are converted to symbols.  If not provided, the
+    #   copies are placed on a new clipboard.
+    # @return [Clipboard] the clipboard
+    #
+    def copy(to: nil)
+      to ||= Clipboard.new
+      self.each do |element|
+        element.copy(to: to)
       end
+      to
     end
 
     def trash

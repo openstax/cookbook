@@ -98,6 +98,24 @@ def one_chapter_with_one_page_containing(html)
   HTML
 end
 
+def new_element(html)
+  nokogiri_document = Nokogiri::XML(
+    <<~HTML
+      <html>
+        <body>
+          #{html}
+        </body>
+      </html>
+    HTML
+  )
+
+  children = nokogiri_document.search("body").first.element_children
+  raise("new_element must only make one top-level element") if children.many?
+  node = children.first
+
+  Kitchen::Element.new(node: node, document: nokogiri_document)
+end
+
 def stub_locales(hash)
   I18n.config.available_locales = [:test, :en]
   allow_any_instance_of(I18n::Config).to receive(:backend).and_return(
