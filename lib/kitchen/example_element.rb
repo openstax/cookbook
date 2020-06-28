@@ -10,7 +10,7 @@ module Kitchen
     end
 
     def titles
-      elements("span[data-type='title']")
+      search("span[data-type='title']")
     end
 
     protected

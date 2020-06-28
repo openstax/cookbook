@@ -30,6 +30,10 @@ module Kitchen
       chain_to(enumerator_class: ExampleElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
+    def search(css_or_xpath=nil, &block)
+      chain_to(enumerator_class: ElementEnumerator, css_or_xpath: css_or_xpath, &block)
+    end
+
     # def elements(*selector_or_xpath_args, &block)
     #   debugger
     #   chain_to(enumerator_class: ElementEnumerator, css_or_xpath: selector_or_xpath_args, &block)

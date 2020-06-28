@@ -31,7 +31,16 @@ module Kitchen
     def initialize(node:, document:, short_type: nil)
       raise "node cannot be nil" if node.nil?
       @node = node
-      @document = document
+      @document =
+        case document
+        when Kitchen::Document
+          document
+        when Nokogiri::XML::Document
+          Kitchen::Document.new(nokogiri_document: document)
+        else
+          raise(ArgumentError, "`document` is not a known document type")
+        end
+
       @ancestors = HashWithIndifferentAccess.new
       @short_type = short_type || "unnamed_type_#{SecureRandom.hex(4)}"
       @counts_in = HashWithIndifferentAccess.new

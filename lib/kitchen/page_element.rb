@@ -48,7 +48,7 @@ module Kitchen
     end
 
     def exercises_section
-      elements("")
+      search("")
     end
 
     protected

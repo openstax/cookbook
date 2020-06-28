@@ -32,7 +32,15 @@ module Kitchen
         # anyone who uses element.search we want ancestry stuff there but it isn't happening
         # there
         element.raw.search(*css_or_xpath).each do |sub_node|
-          sub_element = sub_element_class.new(node: sub_node, document: element.document)
+          # All elements except for `Element` have a built-in `short_type`; for Element,
+          # define a dynamic short type based on the search css/xpath.
+          sub_element =
+            sub_element_class == Element ?
+              sub_element_class.new(node: sub_node, document: element.document,
+                                    short_type: [css_or_xpath].flatten.join(",")) :
+              sub_element_class.new(node: sub_node, document: element.document)
+
+
           # TODO pretty sure this just happend in the .search call above
           sub_element.document.location = sub_element
 

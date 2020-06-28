@@ -19,8 +19,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
             <span data-type="binding" data-value="translucent"></span>
           </div>
           <h1 data-type="document-title">Chapter 1 Title</h1>
-          <div data-type="page" id="m68760" class="introduction" data-cnxml-to-html-ver="1.7.3">
-          </div>
+          <div data-type="page" id="m68760" class="introduction" data-cnxml-to-html-ver="1.7.3"></div>
           <div data-type="page" id="m68761" data-cnxml-to-html-ver="1.7.3">
             #{metadata(title: "Page 1 Title")}
             <div data-type="document-title" id="auto_m68761_72010">Page 1 Title</div>
@@ -74,7 +73,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
     )
   end
 
-  xit "works" do
+  it "works" do
     described_class.v1(book: book_1)
 
     expect(book_1.to_s).to match_html(
@@ -88,8 +87,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
               <span data-type="binding" data-value="translucent"></span>
             </div>
             <h1 data-type="document-title">Chapter 1 Title</h1>
-            <div data-type="page" id="m68760" class="introduction" data-cnxml-to-html-ver="1.7.3">
-            </div>
+            <div data-type="page" id="m68760" class="introduction" data-cnxml-to-html-ver="1.7.3"></div>
             <div data-type="page" id="m68761" data-cnxml-to-html-ver="1.7.3">
               #{metadata(title: "Page 1 Title")}
               <div data-type="document-title" id="auto_m68761_72010">Page 1 Title</div>
@@ -224,7 +222,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
         HTML
       end
 
-      xit "works" do
+      it "works" do
         described_class.bake_exercise_in_place(exercise: exercise)
 
         expect(exercise).to match_html(
@@ -253,7 +251,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
     context "without a solution" do
       let(:solution) { "" }
 
-      xit "works" do
+      it "works" do
         described_class.bake_exercise_in_place(exercise: exercise)
 
         expect(exercise).to match_html(

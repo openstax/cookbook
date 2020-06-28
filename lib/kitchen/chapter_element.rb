@@ -32,7 +32,7 @@ module Kitchen
     end
 
     def glossaries
-      elements("div[data-type='glossary']")
+      search("div[data-type='glossary']")
     end
 
     protected

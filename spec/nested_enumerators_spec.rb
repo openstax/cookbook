@@ -45,6 +45,10 @@ RSpec.describe "nested enumerators" do
     it "records counts within ancestors" do
       expect(book_1.terms.map{|t| t.count_in(:book)}).to eq [1,2,3,4,5]
     end
+
+    it "records counts for abitrary searches" do
+      expect(book_1.search("span").map{|t| t.count_in(:book)}).to eq [1,2,3,4,5]
+    end
   end
 
   context "multi-level iteration" do
