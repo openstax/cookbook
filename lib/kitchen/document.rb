@@ -6,6 +6,8 @@ module Kitchen
     def initialize(nokogiri_document:)
       @nokogiri_document = nokogiri_document
       @location = nil
+      @next_paste_count_for_id = {}
+      @id_copy_suffix = "_copy_"
     end
 
     # Returns an enumerator that iterates over all children of this document
@@ -78,6 +80,26 @@ module Kitchen
       )
     end
 
+    def record_id_copied(id)
+      return if id.blank?
+      @next_paste_count_for_id[id] ||= 1
+    end
+
+    def modified_id_to_paste(original_id)
+      return nil if original_id.nil?
+      return "" if original_id.blank?
+
+      count = next_count_for_pasted_id(original_id)
+
+      # A count of 0 means the element was cut and this is the first paste, do not
+      # modify the ID; otherwise, use the uniquified ID.
+      if count == 0
+        original_id
+      else
+        "#{original_id}#{@id_copy_suffix}#{count}"
+      end
+    end
+
     # Returns the underlying Nokogiri Document object
     #
     # @return [Nokogiri::XML::Document]
@@ -86,6 +108,13 @@ module Kitchen
     end
 
     protected
+
+    def next_count_for_pasted_id(id)
+      return if id.blank?
+      (@next_paste_count_for_id[id] ||= 0).tap do
+        @next_paste_count_for_id[id] += 1
+      end
+    end
 
     attr_reader :nokogiri_document
 

@@ -85,49 +85,92 @@ RSpec.describe Kitchen::Element do
     )
   end
 
-  context "#cut" do
+  context "#cut and #paste" do
     before { @parent = element_1.parent }
 
-    it "can cut to a named clipboard" do
-      element_1.cut(to: :something)
-      expect(@parent.to_s).not_to match(/divId/)
-      expect(element_1.document.clipboard(name: :something).paste).to match(/divId/)
+    context "using clipboards" do
+      it "can cut to a named clipboard" do
+        element_1.cut(to: :something)
+        expect(@parent.to_s).not_to match(/divId/)
+        expect(element_1.document.clipboard(name: :something).first.id).to eq "divId"
+      end
+
+      it "can cut to an existing clipboard" do
+        clipboard = Kitchen::Clipboard.new
+        element_1.cut(to: clipboard)
+        expect(@parent.to_s).not_to match(/divId/)
+        expect(clipboard.first.id).to eq "divId"
+      end
+
+      it "uses same ID on first paste and unique IDs on second and third paste" do
+        clipboard = Kitchen::Clipboard.new
+        element_1.cut(to: clipboard)
+        expect(clipboard.paste).to match(/divId"/)
+        expect(clipboard.paste).to match(/divId_copy_1"/)
+        expect(clipboard.paste).to match(/divId_copy_2"/)
+      end
     end
 
-    it "can cut to a new clipboard" do
-      clipboard = element_1.cut
-      expect(@parent.to_s).not_to match(/divId/)
-      expect(clipboard.paste).to match(/divId/)
-    end
+    context "without clipboards" do
+      it "can cut avoiding clipboards" do
+        the_cut_element = element_1.cut
+        expect(@parent.to_s).not_to match(/divId/)
+        expect(the_cut_element.id).to eq "divId"
+      end
 
-    it "can cut to an existing clipboard" do
-      clipboard = Kitchen::Clipboard.new
-      element_1.cut(to: clipboard)
-      expect(@parent.to_s).not_to match(/divId/)
-      expect(clipboard.paste).to match(/divId/)
+      it "uses same ID on first paste and unique IDs on second and third paste" do
+        the_cut_element = element_1.cut
+        expect(the_cut_element.paste).to match(/divId"/)
+        expect(the_cut_element.paste).to match(/divId_copy_1"/)
+        expect(the_cut_element.paste).to match(/divId_copy_2"/)
+      end
     end
   end
 
-  context "#copy" do
+  context "#copy and #paste" do
     before { @parent = element_1.parent }
 
-    it "can copy to a named clipboard" do
-      element_1.copy(to: :something)
-      expect(@parent.to_s).to match(/divId/)
-      expect(element_1.document.clipboard(name: :something).paste).to match(/divId/)
+    context "using clipboards" do
+      it "can copy to a named clipboard" do
+        element_1.copy(to: :something)
+        expect(@parent.to_s).to match(/divId/)
+        expect(element_1.document.clipboard(name: :something).first.id).to eq "divId"
+      end
+
+      it "can copy to an existing clipboard" do
+        clipboard = Kitchen::Clipboard.new
+        element_1.copy(to: clipboard)
+        expect(@parent.to_s).to match(/divId/)
+        expect(clipboard.first.id).to eq "divId"
+      end
+
+      it "uses unique IDs all pastes" do
+        clipboard = Kitchen::Clipboard.new
+        element_1.copy(to: clipboard)
+        expect(clipboard.paste).to match(/divId_copy_1"/)
+        expect(clipboard.paste).to match(/divId_copy_2"/)
+      end
     end
 
-    it "can copy to a new clipboard" do
-      clipboard = element_1.copy
-      expect(@parent.to_s).to match(/divId/)
-      expect(clipboard.paste).to match(/divId/)
-    end
+    context "without clipboards" do
+      it "can copy" do
+        the_copied_element = element_1.copy
+        expect(@parent.to_s).to match(/divId/)
+        expect(the_copied_element.id).to eq "divId"
+      end
 
-    it "can copy to an existing clipboard" do
-      clipboard = Kitchen::Clipboard.new
-      element_1.copy(to: clipboard)
-      expect(@parent.to_s).to match(/divId/)
-      expect(clipboard.paste).to match(/divId/)
+      it "uses unique IDs all pastes" do
+        the_copied_element = element_1.copy
+        expect(the_copied_element.paste).to match(/divId_copy_1"/)
+        expect(the_copied_element.paste).to match(/divId_copy_2"/)
+      end
+
+      it "keeps using unique IDs even if copied multiple times" do
+        the_copied_element = element_1.copy
+        expect(the_copied_element.paste).to match(/divId_copy_1"/)
+        the_copied_element = element_1.copy
+        expect(the_copied_element.paste).to match(/divId_copy_2"/)
+      end
     end
   end
 

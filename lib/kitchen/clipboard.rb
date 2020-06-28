@@ -20,7 +20,7 @@ module Kitchen
     end
 
     def paste
-      @items.map(&:to_s).join("")
+      @items.map(&:paste).join("")
     end
 
     def each(&block)

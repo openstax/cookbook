@@ -189,8 +189,25 @@ module Kitchen
     #
     def copy(to: nil)
       the_copy = clone
+
+      the_copy.raw.traverse do |node|
+        next if node.text? || node.document?
+        document.record_id_copied(node[:id])
+      end
+
       clipboard(to).add(the_copy) if to.present?
       self
+    end
+
+    # When an element is cut or copied, use this method to get the element's content;
+    # keeps IDs unique
+    def paste
+      temp_copy = clone
+      temp_copy.raw.traverse do |node|
+        next if node.text? || node.document?
+        node[:id] = document.modified_id_to_paste(node[:id]) unless node[:id].blank?
+      end
+      temp_copy.to_s
     end
 
     # Delete the element
@@ -307,11 +324,6 @@ module Kitchen
 
     def to_s
       node.to_s
-    end
-
-    # Convenience method for when an element is cut it can then be pasted like a clipboard is
-    def paste
-      to_s
     end
 
     def inspect

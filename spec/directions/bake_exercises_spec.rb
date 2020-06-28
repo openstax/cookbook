@@ -100,7 +100,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
               <h2 data-type="document-title">
                 <span class="os-text">Exercises</span>
               </h2>
-              #{metadata(title: "Exercises")}
+              #{metadata(title: "Exercises", id_suffix: "_copy_1")}
               <section data-depth="1" id="auto_m68761_fs-idp29893056" class="exercises">
                 <a href="#auto_m68761_72010">
                   <h3 data-type="document-title" id="auto_m68761_72010">Page 1 Title</h3>
@@ -162,12 +162,12 @@ RSpec.describe Kitchen::Directions::BakeExercises do
             <h1 data-type="document-title" id="composite-chapter-1">
               <span class="os-text">Answer Key</span>
             </h1>
-            #{metadata(title: "Answer Key")}
+            #{metadata(title: "Answer Key", id_suffix: "_copy_3")}
             <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution1">
               <h2 data-type="document-title">
                 <span class="os-text">1</span>
               </h2>
-              #{metadata(title: "1")}
+              #{metadata(title: "1", id_suffix: "_copy_2")}
               <div data-type="solution" id="auto_m68761_fs-idp113763312-solution">
                 <a class="os-number" href="#auto_m68761_fs-idp113763312">1</a>
                 <span class="os-divider">. </span>
