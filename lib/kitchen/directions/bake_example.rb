@@ -21,6 +21,8 @@ module Kitchen
           HTML
         )
 
+        example.document.pantry(name: :link_text).store "Example #{number}", label: example.id
+
         example.titles.each {|title| title.name = "h4"}
       end
 

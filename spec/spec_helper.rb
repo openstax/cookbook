@@ -76,7 +76,6 @@ def normalized_xml_doc(xml_thing_with_to_s)
   end.tap(&:remove_namespaces!)
 end
 
-# TODO rename book_doc_containing
 def book_containing(short_name: :not_set, html:)
   Kitchen::BookDocument.new(short_name: short_name, document: Nokogiri::XML(
     <<~HTML

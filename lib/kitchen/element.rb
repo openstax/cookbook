@@ -285,6 +285,7 @@ module Kitchen
     # @return [Boolean]
     #
     def contains?(*selector_or_xpath_args)
+      # TODO search(*selector_or_xpath_args).any?
       !node.at(*selector_or_xpath_args).nil?
     end
 
