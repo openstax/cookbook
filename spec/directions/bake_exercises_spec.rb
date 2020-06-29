@@ -76,7 +76,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
   it "works" do
     described_class.v1(book: book_1)
 
-    expect(book_1.to_s).to match_html_better(
+    expect(book_1.to_s).to match_normalized_html(
       <<~HTML
       <html>
         <body>
@@ -225,7 +225,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
       it "works" do
         described_class.bake_exercise_in_place(exercise: exercise)
 
-        expect(exercise).to match_html(
+        expect(exercise).to match_html_nodes(
           <<~HTML
             <div data-type="exercise" id="exerciseId" class="os-hasSolution">
               <div data-type="problem" id="problemId">
@@ -254,7 +254,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
       it "works" do
         described_class.bake_exercise_in_place(exercise: exercise)
 
-        expect(exercise).to match_html(
+        expect(exercise).to match_html_nodes(
           <<~HTML
             <div data-type="exercise" id="exerciseId">
               <div data-type="problem" id="problemId">

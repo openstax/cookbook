@@ -28,7 +28,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
       described_class.v1(figure: book_1_figure, number: "1.2")
 
-      expect(book_1.search(".os-figure").first).to match_html(
+      expect(book_1.search(".os-figure").first).to match_html_nodes(
         <<~HTML
           <div class="os-figure">
             <figure id="someId" class="">

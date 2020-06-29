@@ -218,7 +218,7 @@ Documentation is handled via YARD.  The [Solargraph gem](https://solargraph.org/
 
 ### Specs
 
-* TODO: talk about match_html vs match_html_strict
+* TODO: talk about match_html_nodes vs match_html_strict
 
 ### VSCode
 
