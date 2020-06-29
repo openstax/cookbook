@@ -35,6 +35,10 @@ module Kitchen
       search("div[data-type='glossary']")
     end
 
+    def key_equations
+      search("section.key-equations")
+    end
+
     protected
 
     def as_enumerator

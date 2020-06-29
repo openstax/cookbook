@@ -49,6 +49,7 @@ require "kitchen/directions/bake_math_in_paragraph"
 require "kitchen/directions/bake_chapter_glossary"
 require "kitchen/directions/bake_chapter_summary"
 require "kitchen/directions/bake_chapter_exercises"
+require "kitchen/directions/bake_chapter_key_equations"
 require "kitchen/directions/bake_exercises"
 require "kitchen/patches"
 

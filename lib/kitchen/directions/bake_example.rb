@@ -13,7 +13,7 @@ module Kitchen
 
         example.prepend(child:
           <<~HTML
-           <h3 class="os-title">
+            <h3 class="os-title">
               <span class="os-title-label">#{I18n.t(:example)} </span>
               <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
