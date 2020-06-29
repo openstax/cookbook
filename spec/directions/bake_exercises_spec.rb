@@ -151,7 +151,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
                     <a class="os-number" href="#auto_m68764_fs-idm82765632-solution">5</a>
                     <span class="os-divider">. </span>
                     <div class="os-problem-container ">
-                      <p id="auto_m68764_fs-idm164104512">Problem 5</span></p>
+                      <p id="auto_m68764_fs-idm164104512">Problem 5</p>
                     </div>
                   </div>
                 </div>
