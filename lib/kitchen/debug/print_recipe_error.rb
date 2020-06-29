@@ -7,7 +7,7 @@ module Kitchen
 
     def self.print_recipe_error(error:, source_location:, document:)
       error_location = error.backtrace.detect do |entry|
-        entry.start_with?(source_location)
+        entry.start_with?(source_location) || entry.match?(/kitchen\/lib\/kitchen\/directions/)
       end
 
       error_filename, error_line_number = error_location.match(/(.*):(\d+):/)[1..2]
@@ -48,7 +48,7 @@ module Kitchen
 
       if ENV['VERBOSE']
         puts "Full backtrace:\n"
-        puts error.backtrace
+        puts error.backtrace.map{|line| Rainbow(line).blue}
       else
         puts "Full backtrace suppressed (enable by setting the VERBOSE environment variable to something)"
       end
@@ -61,19 +61,19 @@ module Kitchen
     end
 
     def self.print_specific_help_line(error)
-      help_line = case error.message
-      when /undefined method .each/
-        "`each` needs to be called on a document or element object"
-      when /undefined method .first/
-        "`first` needs to be called on a document or element object"
-      else
-        nil
-      end
+      # No specific help lines at the moment, an example is shown for the future
 
-      if !help_line.nil?
-        puts help_line
-        puts "\n"
-      end
+      # help_line = case error.message
+      # when /some string in error/
+      #   "`foo` needs to be called on a Bar object"
+      # else
+      #   nil
+      # end
+
+      # if !help_line.nil?
+      #   puts help_line
+      #   puts "\n"
+      # end
     end
 
   end

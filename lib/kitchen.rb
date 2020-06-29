@@ -6,6 +6,16 @@ require "active_support/all"
 module Kitchen
 end
 
+def file_glob(relative_folder_and_extension)
+  Dir[File.expand_path(__dir__ + "/" + relative_folder_and_extension)]
+end
+
+def require_all(relative_folder, file_matcher="*.rb")
+  file_glob(relative_folder + "/#{file_matcher}").each{|f| require f}
+end
+
+require_all("kitchen/mixins")
+
 require "kitchen/errors"
 require "kitchen/ancestor"
 require "kitchen/element_enumerator"
@@ -36,22 +46,8 @@ require "kitchen/figure_element"
 require "kitchen/table_element"
 require "kitchen/note_element"
 require "kitchen/note_element_enumerator"
-require "kitchen/directions/reformat_introduction"
-require "kitchen/directions/move_title_text_into_span"
-require "kitchen/directions/bake_figure"
-require "kitchen/directions/bake_notes"
-require "kitchen/directions/bake_numbered_table"
-require "kitchen/directions/bake_unnumbered_tables"
-require "kitchen/directions/bake_appendix"
-require "kitchen/directions/bake_example"
-require "kitchen/directions/bake_math_in_paragraph"
-require "kitchen/directions/bake_chapter_glossary"
-require "kitchen/directions/bake_chapter_summary"
-require "kitchen/directions/bake_chapter_key_equations"
-require "kitchen/directions/bake_exercises"
-require "kitchen/directions/bake_index"
-require "kitchen/directions/bake_toc"
 require "kitchen/patches"
 
+require_all("kitchen/directions")
 
-I18n.load_path << Dir[File.expand_path(__dir__ + "/locales") + "/*.yml"]
+I18n.load_path << file_glob("/locales/*.yml")

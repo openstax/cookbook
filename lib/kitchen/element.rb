@@ -4,6 +4,7 @@ require 'securerandom'
 module Kitchen
   class Element
     extend Forwardable
+    include Mixins::BlockErrorIf
 
     attr_reader :document
     attr_reader :short_type
@@ -108,23 +109,6 @@ module Kitchen
 
     def number_of_sub_elements_already_counted(css_or_xpath)
       @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
-    end
-
-
-    # TODO get rid of this `.each` - make users say `.search(blah).each`
-    # Iterates over all children of this element that match the provided
-    # selector or XPath arguments.
-    #
-    # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
-    # @yieldparam [Element] the matched XML element
-    #
-    def each(*selector_or_xpath_args)
-      # selector_or_xpath_args = [selector_or_xpath_args].flatten
-
-      raise(Kitchen::RecipeError, "An `each` command must be given a block") if !block_given?
-
-      search(*selector_or_xpath_args).each{|element| yield element}
-
     end
 
     def search(*selector_or_xpath_args)
@@ -339,14 +323,6 @@ module Kitchen
       remove_default_namespaces_if_clone(node.to_xhtml)
     end
 
-    def remove_default_namespaces_if_clone(string)
-      if is_a_clone
-        string.gsub("xmlns:default=\"http://www.w3.org/1999/xhtml\"","").gsub("default:","")
-      else
-        string
-      end
-    end
-
     def clone
       super.tap do |element|
         # When we call dup, the dup gets a bunch of default namespace stuff that
@@ -398,17 +374,12 @@ module Kitchen
       end
     end
 
-    # TODO put this in a module that can be included here and in ElementEnumerator
-    def block_error_if(block_given)
-      calling_method = begin
-        this_method_location_index = caller_locations.find_index do |location|
-          location.label == "block_error_if"
-        end
-
-        caller_locations[(this_method_location_index || -1) + 1].label
+    def remove_default_namespaces_if_clone(string)
+      if is_a_clone
+        string.gsub("xmlns:default=\"http://www.w3.org/1999/xhtml\"","").gsub("default:","")
+      else
+        string
       end
-
-      raise(RecipeError, "The `#{calling_method}` method does not take a block argument") if block_given
     end
 
   end

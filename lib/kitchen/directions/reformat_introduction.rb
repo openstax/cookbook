@@ -20,8 +20,8 @@ module Kitchen
 
       introduction_page = chapter.introduction_page # chapter.pages("$.introduction").first
 
-      introduction_page.each("div[data-type='description']", &:trash)
-      introduction_page.each("div[data-type='abstract']", &:trash)
+      introduction_page.search("div[data-type='description']").trash
+      introduction_page.search("div[data-type='abstract']").trash
 
       title = introduction_page.title.cut
       title.name = "h2"
