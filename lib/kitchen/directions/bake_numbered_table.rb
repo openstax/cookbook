@@ -1,6 +1,6 @@
 module Kitchen
   module Directions
-    module ProcessNumberedTable
+    module BakeNumberedTable
 
       def self.v1(table:, number:)
         table.wrap(%Q(<div class="os-table">))

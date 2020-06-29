@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::ProcessFigure do
+RSpec.describe Kitchen::Directions::BakeFigure do
 
   let(:figure_classes) { '' }
   let(:figure_caption) { "<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>" }

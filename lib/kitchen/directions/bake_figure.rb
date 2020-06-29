@@ -1,6 +1,6 @@
 module Kitchen
   module Directions
-    module ProcessFigure
+    module BakeFigure
 
       def self.v1(figure:, number:)
         figure.wrap(%Q(<div class="os-figure#{' has-splash' if figure.has_class?('splash')}">))

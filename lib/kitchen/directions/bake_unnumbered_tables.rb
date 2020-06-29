@@ -1,8 +1,6 @@
 module Kitchen
   module Directions
-    module ProcessUnnumberedTables
-
-      # TODO "Bake" may be better than "Process" in all of these directions
+    module BakeUnnumberedTables
 
       def self.v1(book:)
         book.tables("$.unnumbered").each do |table|

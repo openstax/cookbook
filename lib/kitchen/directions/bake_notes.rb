@@ -1,6 +1,6 @@
 module Kitchen
   module Directions
-    module ProcessNotes
+    module BakeNotes
 
       def self.v1(book:)
         book.notes.each do |note|

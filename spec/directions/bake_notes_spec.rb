@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::ProcessNotes do
+RSpec.describe Kitchen::Directions::BakeNotes do
 
   let(:book_with_titled_note) do
     book_containing(html:
