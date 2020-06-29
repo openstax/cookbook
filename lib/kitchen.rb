@@ -52,6 +52,7 @@ require "kitchen/directions/bake_chapter_exercises"
 require "kitchen/directions/bake_chapter_key_equations"
 require "kitchen/directions/bake_exercises"
 require "kitchen/directions/bake_index"
+require "kitchen/directions/bake_toc"
 require "kitchen/patches"
 
 

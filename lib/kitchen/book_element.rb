@@ -13,6 +13,10 @@ module Kitchen
       first!("div[data-type='metadata']")
     end
 
+    def toc
+      first!("nav#toc")
+    end
+
     protected
 
     def as_enumerator
