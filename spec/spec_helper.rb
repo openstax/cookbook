@@ -28,6 +28,17 @@ RSpec::Matchers.define :match_html_strict do |expected|
   attr_reader :actual, :expected
 end
 
+RSpec::Matchers.define :match_html_better do |expected|
+  match do |actual|
+    @actual = normalized_xml_doc_string(actual)
+    @expected = normalized_xml_doc_string(expected)
+    @actual == @expected
+  end
+
+  diffable
+  attr_reader :actual, :expected
+end
+
 RSpec::Matchers.define :match_html do |expected|
   match do |actual|
     @actual = normalized_xml_doc(actual)
@@ -42,7 +53,6 @@ RSpec::Matchers.define :match_html do |expected|
     diff_lines = @actual.diff(@expected).map do |change,node|
       reduced_node = node.dup
       reduced_node.children = "..."
-      # debugger if !change.blank?
       "#{change} #{reduced_node.to_xhtml}".ljust(30) if !change.blank?
     end.compact
 
@@ -74,6 +84,16 @@ def normalized_xml_doc(xml_thing_with_to_s)
   ) do |config|
     config.noblanks
   end.tap(&:remove_namespaces!)
+end
+
+def normalized_xml_doc_string(xml_thing_with_to_s)
+  doc = Nokogiri::XML(xml_thing_with_to_s.to_s) do |config|
+    config.noblanks
+  end
+
+  doc.alphabetize_attributes!
+
+  doc.to_xhtml(indent: 2)
 end
 
 def book_containing(short_name: :not_set, html:)

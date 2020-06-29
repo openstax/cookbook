@@ -76,7 +76,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
   it "works" do
     described_class.v1(book: book_1)
 
-    expect(book_1.to_s).to match_html(
+    expect(book_1.to_s).to match_html_better(
       <<~HTML
       <html>
         <body>

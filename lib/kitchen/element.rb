@@ -45,6 +45,7 @@ module Kitchen
       @short_type = short_type || "unnamed_type_#{SecureRandom.hex(4)}"
       @counts_in = HashWithIndifferentAccess.new
       @css_or_xpath_that_has_been_counted = {}
+      @is_a_clone = false
     end
 
     def has_class?(klass)
@@ -188,20 +189,20 @@ module Kitchen
     # @return [Element] the copied element
     #
     def copy(to: nil)
+      # See `clone` method for a note about namespaces
       the_copy = clone
-
       the_copy.raw.traverse do |node|
         next if node.text? || node.document?
         document.record_id_copied(node[:id])
       end
-
       clipboard(to).add(the_copy) if to.present?
-      self
+      the_copy
     end
 
     # When an element is cut or copied, use this method to get the element's content;
     # keeps IDs unique
     def paste
+      # See `clone` method for a note about namespaces
       temp_copy = clone
       temp_copy.raw.traverse do |node|
         next if node.text? || node.document?
@@ -322,18 +323,53 @@ module Kitchen
       node
     end
 
-    def to_s
-      node.to_s
-    end
-
     def inspect
       to_s
     end
 
-    # TODO implement in child classes
+    def to_s
+      remove_default_namespaces_if_clone(node.to_s)
+    end
+
+    def to_xml
+      remove_default_namespaces_if_clone(node.to_xml)
+    end
+
+    def to_xhtml
+      remove_default_namespaces_if_clone(node.to_xhtml)
+    end
+
+    def remove_default_namespaces_if_clone(string)
+      if is_a_clone
+        string.gsub("xmlns:default=\"http://www.w3.org/1999/xhtml\"","").gsub("default:","")
+      else
+        string
+      end
+    end
+
     def clone
       super.tap do |element|
+        # When we call dup, the dup gets a bunch of default namespace stuff that
+        # the original doesn't have.  Why? Unclear, but hard to get rid of nicely.
+        # So here we mark that the element is a clone and then all of the `to_s`-like
+        # methods gsub out the default namespace gunk.  Clones are mostly used for
+        # clipboards and are accessed using `paste` methods, so modifying the `to_s`
+        # behavior works for us.  If we end up using `clone` in a way that doesn't
+        # eventually get converted to string, we may have to investigate other
+        # options.
+        #
+        # An alternative is to remove the `xmlns` attribute in the `html` tag before
+        # the input file is parse into a Nokogiri document and then to add it back
+        # in when the baked file is written out.
+        #
+        # Nokogiri::XML::Document.remove_namespaces! is not an option because that blows
+        # away our MathML namespace.
+        #
+        # I may not fully understand why the extra default namespace stuff is happening
+        # FWIW :-)
+        #
         element.node = node.dup
+        element.is_a_clone = true
       end
     end
 
@@ -344,6 +380,7 @@ module Kitchen
     protected
 
     attr_accessor :node
+    attr_accessor :is_a_clone
 
     def as_enumerator
       ElementEnumerator.new {|block| block.yield(self)}

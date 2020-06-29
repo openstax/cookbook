@@ -3,8 +3,6 @@ module Kitchen
     module BakeChapterSummary
 
       def self.v1(chapter:, metadata_source:)
-        # TODO put the _copy_1 suffix on ID logic into `copy` as an option?
-        # have document keep a list of IDs and how many copies have been made
         metadata_elements = metadata_source.search(%w(.authors .publishers .print-style
                                                       .permissions [data-type='subject'])).copy
 
