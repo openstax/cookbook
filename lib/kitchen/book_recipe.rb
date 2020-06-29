@@ -5,7 +5,7 @@ module Kitchen
 
     # Make a new BookRecipe
     #
-    # @yieldparam doc [Document] an object representing an XML document
+    # @yieldparam doc [BookDocument] an object representing an XML document
     #
     def initialize(book_short_name: :not_set, &block)
       @book_short_name = book_short_name

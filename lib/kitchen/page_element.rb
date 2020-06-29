@@ -1,9 +1,6 @@
 module Kitchen
   class PageElement < Element
 
-    # TODO kill counter names?
-    COUNTER_NAME = :page
-
     def self.short_type
       :page
     end
@@ -17,14 +14,6 @@ module Kitchen
     def title
       # first!("h#{chapter.title_header_number + 1}[data-type='document-title']")
       first!(document.page_title_selector)
-    end
-
-    def number_it
-      title.prepend child: document.number_html(counter_names)
-    end
-
-    def counter_names
-      [chapter&.counter_names, COUNTER_NAME].flatten.compact
     end
 
     def terms
