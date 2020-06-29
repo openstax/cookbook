@@ -8,6 +8,7 @@ en:
   exercises: Exercises # TODO we probably want more specific keys here like eoc_exercises_title
   eoc_answer_key_title: Answer Key
   eoc_key_equations: Key Equations
+  eob_index_title: Index
   notes:
     link-to-learning: Link to Learning
     sciences-interconnect: How Sciences Interconnect

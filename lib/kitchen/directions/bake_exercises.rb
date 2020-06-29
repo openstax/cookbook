@@ -71,7 +71,7 @@ module Kitchen
           HTML
         end
 
-        book.append(child:
+        book.first("body").append(child:
           <<~HTML
           <div class="os-eob os-solution-container " data-type="composite-chapter" data-uuid-key=".solution">
             <h1 data-type="document-title" id="composite-chapter-1">
