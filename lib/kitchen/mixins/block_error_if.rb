@@ -2,7 +2,6 @@ module Kitchen
   module Mixins
     module BlockErrorIf
 
-      # TODO put this in a module that can be included here and in ElementEnumerator
       def block_error_if(block_given)
         calling_method = begin
           this_method_location_index = caller_locations.find_index do |location|

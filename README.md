@@ -159,6 +159,11 @@ See if an element contains an element matching a selector:
 my_element.contains?(".title") #=> true or false
 ```
 
+### Directions
+
+[ Recipe fragments.  v1 is used because we expect that other books will need to do things like
+"BakeExamples" but in a different way. ]
+
 ## One-file scripts
 
 Want to make a one-file script to do some baking?  Use the "inline" form of bundler:

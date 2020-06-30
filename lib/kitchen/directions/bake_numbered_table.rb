@@ -17,7 +17,8 @@ module Kitchen
           table.title_row.trash
         end
 
-        table[:summary] = "#{I18n.t(:table)} #{number}" + "  " # TODO extra spaces here probably not meaningful?
+        # TODO extra spaces added here to match legacy implementation, but probably not meaningful?
+        table[:summary] = "#{I18n.t(:table)} #{number}" + "  "
 
         if !table.unnumbered?
           table.append(sibling:

@@ -52,10 +52,6 @@ module Kitchen
           )
         end
 
-        # # TODO v1 should be a different file
-
-        # # TODO every time we paste something that was copied, that is when we need to tack on the ID copy_X
-
         solutions = solutions_clipboards.map.with_index do |solution_clipboard, index|
           <<~HTML
             <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution#{index+1}">

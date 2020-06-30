@@ -27,7 +27,7 @@ RSpec.describe "nested enumerators" do
     )
   end
 
-  # TODO see if we do any weird iteration in tutorials
+  # TODO see if we do any weird iteration in tutorials and spec them here
 
   context "single-level iteration" do
     it "can iterate over chapters" do

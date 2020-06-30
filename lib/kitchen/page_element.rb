@@ -1,8 +1,6 @@
 module Kitchen
   class PageElement < Element
 
-    # TODO maybe can just be "type" instead of "short_type"
-
     def initialize(node:, document: nil)
       super(node: node,
             document: document,

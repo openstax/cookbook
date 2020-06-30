@@ -16,9 +16,6 @@ module Kitchen
 
         num_sub_elements = 0
 
-        # TODO there's a confusing overlap between this code and element.search, like
-        # anyone who uses element.search we want ancestry stuff there but it isn't happening
-        # there
         element.raw.search(*css_or_xpath).each_with_index do |sub_node, index|
           # All elements except for `Element` have a built-in `short_type`; for Element,
           # define a dynamic short type based on the search css/xpath.
