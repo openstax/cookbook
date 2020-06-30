@@ -12,26 +12,14 @@ module Kitchen
 
       new_enumerator_class.new do |block|
         grand_ancestors = element.ancestors
-
-        # If the provided `css_or_xpath` has already been counted, we need to uncount
-        # them on the ancestors so that when they are counted again below, the counts
-        # are correct.
-        if element.have_sub_elements_already_been_counted?(css_or_xpath)
-          grand_ancestors.values.each do |ancestor|
-            ancestor.decrement_descendant_count(
-              sub_element_class.short_type,
-              by: element.number_of_sub_elements_already_counted(css_or_xpath)
-            )
-          end
-        end
-
         parent_ancestor = Ancestor.new(element)
+
         num_sub_elements = 0
 
         # TODO there's a confusing overlap between this code and element.search, like
         # anyone who uses element.search we want ancestry stuff there but it isn't happening
         # there
-        element.raw.search(*css_or_xpath).each do |sub_node|
+        element.raw.search(*css_or_xpath).each_with_index do |sub_node, index|
           # All elements except for `Element` have a built-in `short_type`; for Element,
           # define a dynamic short type based on the search css/xpath.
           sub_element =
@@ -40,10 +28,28 @@ module Kitchen
                                     short_type: [css_or_xpath].flatten.join(",")) :
               sub_element_class.new(node: sub_node, document: element.document)
 
-          sub_element.document.location = sub_element
+
+          # If the provided `css_or_xpath` has already been counted, we need to uncount
+          # them on the ancestors so that when they are counted again below, the counts
+          # are correct.  Only do this on the first loop!
+          if index == 0
+            if element.have_sub_elements_already_been_counted?(css_or_xpath)
+              grand_ancestors.values.each do |ancestor|
+                ancestor.decrement_descendant_count(
+                  sub_element.short_type,
+                  by: element.number_of_sub_elements_already_counted(css_or_xpath)
+                )
+              end
+            end
+          end
+
           sub_element.add_ancestors(grand_ancestors, parent_ancestor)
           sub_element.count_as_descendant
+
           num_sub_elements += 1
+
+          # Mark the location so that if there's an error we can show the developer where.
+          sub_element.document.location = sub_element
 
           block.yield(sub_element)
         end

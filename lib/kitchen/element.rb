@@ -10,10 +10,6 @@ module Kitchen
     attr_reader :short_type
     attr_reader :enumerator_class
 
-    def self.short_type
-      :element
-    end
-
     # @!method name
     #   Get the element name (the tag)
     # @!method name=

@@ -1,15 +1,11 @@
 module Kitchen
   class TableElement < Element
 
-    def self.short_type
-      :table
-    end
-
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
             enumerator_class: TableElementEnumerator,
-            short_type: self.class.short_type)
+            short_type: :table)
     end
 
     def title_row

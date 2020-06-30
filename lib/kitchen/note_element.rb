@@ -8,15 +8,11 @@ module Kitchen
       chemist-portrait
     )
 
-    def self.short_type
-      :note
-    end
-
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
             enumerator_class: NoteElementEnumerator,
-            short_type: self.class.short_type)
+            short_type: :note)
     end
 
     def title

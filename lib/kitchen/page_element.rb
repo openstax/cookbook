@@ -1,17 +1,13 @@
 module Kitchen
   class PageElement < Element
 
-    def self.short_type
-      :page
-    end
-
     # TODO maybe can just be "type" instead of "short_type"
 
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
             enumerator_class: PageElementEnumerator,
-            short_type: self.class.short_type)
+            short_type: :page)
     end
 
     def title

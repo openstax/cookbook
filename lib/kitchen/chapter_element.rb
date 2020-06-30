@@ -1,15 +1,11 @@
 module Kitchen
   class ChapterElement < Element
 
-    def self.short_type
-      :chapter
-    end
-
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
             enumerator_class: ChapterElementEnumerator,
-            short_type: self.class.short_type)
+            short_type: :chapter)
     end
 
     def introduction_page
