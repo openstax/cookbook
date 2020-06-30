@@ -1,6 +1,6 @@
 # Kitchen
 
-...
+[![Build Status](https://travis-ci.org/openstax/kitchen.svg?branch=master)](https://travis-ci.org/openstax/kitchen)
 
 ## Installation
 
