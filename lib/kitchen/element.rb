@@ -8,6 +8,7 @@ module Kitchen
 
     attr_reader :document
     attr_reader :short_type
+    attr_reader :enumerator_class
 
     def self.short_type
       :element
@@ -29,7 +30,7 @@ module Kitchen
                            :text, :wrap, :children, :to_html, :remove_attribute,
                            :classes
 
-    def initialize(node:, document:, short_type: nil)
+    def initialize(node:, document:, enumerator_class: ElementEnumerator, short_type: nil)
       raise "node cannot be nil" if node.nil?
       @node = node
       @document =
@@ -47,6 +48,7 @@ module Kitchen
       @counts_in = HashWithIndifferentAccess.new
       @css_or_xpath_that_has_been_counted = {}
       @is_a_clone = false
+      @enumerator_class = enumerator_class
     end
 
     def has_class?(klass)
@@ -85,7 +87,11 @@ module Kitchen
     end
 
     def add_ancestor(ancestor)
-      # TODO freak out if already have an ancestor of this type
+      if @ancestors[ancestor.type].present?
+        raise "Trying to add an ancestor of type '#{ancestor.type}' but one of that " \
+              "type is already present"
+      end
+
       @ancestors[ancestor.type] = ancestor
     end
 
@@ -112,7 +118,8 @@ module Kitchen
     end
 
     def search(*selector_or_xpath_args)
-      # TODO error if block given?
+      block_error_if(block_given?)
+
       ElementEnumeratorFactory.within(
         new_enumerator_class: ElementEnumerator,
         element: self,
@@ -134,16 +141,14 @@ module Kitchen
       end
     end
 
-    # TODO first and first! should record ancestry (make this a spec)
-
-    # # Yields and returns the first child element that matches the provided
-    # # selector or XPath arguments.
-    # #
-    # # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
-    # # @yieldparam [Element] the matched XML element
-    # # @raise [ElementNotFoundError] if no matching element is found
-    # # @return [Element] the matched XML element
-    # #
+    # Yields and returns the first child element that matches the provided
+    # selector or XPath arguments.
+    #
+    # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
+    # @yieldparam [Element] the matched XML element
+    # @raise [ElementNotFoundError] if no matching element is found
+    # @return [Element] the matched XML element
+    #
     def first!(*selector_or_xpath_args)
       search(*selector_or_xpath_args).first!.tap do |element|
         yield(element) if block_given?
@@ -160,6 +165,8 @@ module Kitchen
     # @return [Element] the cut element
     #
     def cut(to: nil)
+      block_error_if(block_given?)
+
       node.remove
       clipboard(to).add(self) if to.present?
       self
@@ -174,6 +181,8 @@ module Kitchen
     #
     def copy(to: nil)
       # See `clone` method for a note about namespaces
+      block_error_if(block_given?)
+
       the_copy = clone
       the_copy.raw.traverse do |node|
         next if node.text? || node.document?
@@ -187,6 +196,8 @@ module Kitchen
     # keeps IDs unique
     def paste
       # See `clone` method for a note about namespaces
+      block_error_if(block_given?)
+
       temp_copy = clone
       temp_copy.raw.traverse do |node|
         next if node.text? || node.document?
@@ -281,7 +292,6 @@ module Kitchen
     # @return [Boolean]
     #
     def contains?(*selector_or_xpath_args)
-      # TODO search(*selector_or_xpath_args).any?
       !node.at(*selector_or_xpath_args).nil?
     end
 
@@ -353,14 +363,14 @@ module Kitchen
     #   Returns a pages enumerator
     def_delegators :as_enumerator, :pages, :chapters, :terms, :figures, :notes, :tables, :examples
 
+    def as_enumerator
+      self.enumerator_class.new {|block| block.yield(self)}
+    end
+
     protected
 
     attr_accessor :node
     attr_accessor :is_a_clone
-
-    def as_enumerator
-      ElementEnumerator.new {|block| block.yield(self)}
-    end
 
     def clipboard(name_or_object)
       case name_or_object

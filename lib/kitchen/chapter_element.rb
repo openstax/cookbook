@@ -6,7 +6,10 @@ module Kitchen
     end
 
     def initialize(node:, document: nil)
-      super(node: node, document: document, short_type: self.class.short_type)
+      super(node: node,
+            document: document,
+            enumerator_class: ChapterElementEnumerator,
+            short_type: self.class.short_type)
     end
 
     def introduction_page
@@ -19,12 +22,6 @@ module Kitchen
 
     def key_equations
       search("section.key-equations")
-    end
-
-    protected
-
-    def as_enumerator
-      ChapterElementEnumerator.new {|block| block.yield(self)}
     end
 
   end

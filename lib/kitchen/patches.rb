@@ -3,7 +3,7 @@ module Nokogiri
   module XML
     class Document
       def inspect
-        "<hidden for brevity>"
+        "Nokogiri::XML::Document <hidden for brevity>"
       end
 
       def alphabetize_attributes!

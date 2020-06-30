@@ -13,7 +13,10 @@ module Kitchen
     end
 
     def initialize(node:, document: nil)
-      super(node: node, document: document, short_type: self.class.short_type)
+      super(node: node,
+            document: document,
+            enumerator_class: NoteElementEnumerator,
+            short_type: self.class.short_type)
     end
 
     def title
@@ -34,13 +37,6 @@ module Kitchen
       keys = possible_translation_keys & classes
       raise("too many translation keys: #{keys.join(', ')}") if keys.many?
       keys.first
-    end
-
-    protected
-
-    # TODO pass enumerator class to Element constructor and get rid of this in each element
-    def as_enumerator
-      NoteElementEnumerator.new {|block| block.yield(self)}
     end
 
   end

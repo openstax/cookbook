@@ -6,7 +6,10 @@ module Kitchen
     end
 
     def initialize(node:, document: nil)
-      super(node: node, document: document, short_type: self.class.short_type)
+      super(node: node,
+            document: document,
+            enumerator_class: TableElementEnumerator,
+            short_type: self.class.short_type)
     end
 
     def title_row
@@ -23,12 +26,6 @@ module Kitchen
 
     def unnumbered?
       has_class?('unnumbered')
-    end
-
-    protected
-
-    def as_enumerator
-      TableElementEnumerator.new {|block| block.yield(self)}
     end
 
   end

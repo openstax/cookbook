@@ -40,15 +40,10 @@ module Kitchen
                                     short_type: [css_or_xpath].flatten.join(",")) :
               sub_element_class.new(node: sub_node, document: element.document)
 
-
-          # TODO pretty sure this just happend in the .search call above
           sub_element.document.location = sub_element
-
-
-          num_sub_elements += 1
-
           sub_element.add_ancestors(grand_ancestors, parent_ancestor)
           sub_element.count_as_descendant
+          num_sub_elements += 1
 
           block.yield(sub_element)
         end

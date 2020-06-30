@@ -6,7 +6,10 @@ module Kitchen
     end
 
     def initialize(node:, document: nil)
-      super(node: node, document: document, short_type: self.class.short_type)
+      super(node: node,
+            document: document,
+            enumerator_class: BookElementEnumerator,
+            short_type: self.class.short_type)
     end
 
     def metadata
@@ -15,12 +18,6 @@ module Kitchen
 
     def toc
       first!("nav#toc")
-    end
-
-    protected
-
-    def as_enumerator
-      BookElementEnumerator.new {|block| block.yield(self)}
     end
 
   end

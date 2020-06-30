@@ -8,7 +8,10 @@ module Kitchen
     # TODO maybe can just be "type" instead of "short_type"
 
     def initialize(node:, document: nil)
-      super(node: node, document: document, short_type: self.class.short_type)
+      super(node: node,
+            document: document,
+            enumerator_class: PageElementEnumerator,
+            short_type: self.class.short_type)
     end
 
     def title
@@ -38,12 +41,6 @@ module Kitchen
 
     def exercises_section
       search("")
-    end
-
-    protected
-
-    def as_enumerator
-      PageElementEnumerator.new {|block| block.yield(self)}
     end
 
   end

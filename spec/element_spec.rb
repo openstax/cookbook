@@ -6,7 +6,7 @@ RSpec.describe Kitchen::Element do
     new_element(
       <<~HTML
         <div id="divId" class="class1 class2" data-type="a-div">
-          <p id="pId">Hi there</p>
+          <p id="pId"><span>Hi there</span></p>
         </div>
       HTML
     )
@@ -79,7 +79,7 @@ RSpec.describe Kitchen::Element do
     expect(element_1.to_html + "\n").to eq(
       <<~HTML
         <div id="divId" class="class1 class2" data-type="a-div">
-          <p id="pId">Hi there</p>
+          <p id="pId"><span>Hi there</span></p>
         </div>
       HTML
     )
@@ -172,6 +172,14 @@ RSpec.describe Kitchen::Element do
         expect(the_copied_element.paste).to match(/divId_copy_2"/)
       end
     end
+  end
+
+  context "#first" do
+    it "records ancestry" do
+      inner = element_1.search("p").search("span").first
+      expect(inner.ancestor("p").id).to eq "pId"
+    end
+
   end
 
 end

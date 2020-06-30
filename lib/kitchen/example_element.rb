@@ -6,17 +6,14 @@ module Kitchen
     end
 
     def initialize(node:, document: nil)
-      super(node: node, document: document, short_type: self.class.short_type)
+      super(node: node,
+            document: document,
+            enumerator_class: ExampleElementEnumerator,
+            short_type: self.class.short_type)
     end
 
     def titles
       search("span[data-type='title']")
-    end
-
-    protected
-
-    def as_enumerator
-      ExampleElementEnumerator.new {|block| block.yield(self)}
     end
 
   end

@@ -46,5 +46,9 @@ RSpec.describe Kitchen::NoteElement do
     end
   end
 
+  it "can get its own enumerator" do
+    expect(untitled_note.as_enumerator).to be_a Kitchen::NoteElementEnumerator
+  end
+
 
 end
