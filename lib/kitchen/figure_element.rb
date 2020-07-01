@@ -1,5 +1,5 @@
 module Kitchen
-  class FigureElement < Element
+  class FigureElement < ElementBase
 
     def initialize(node:, document: nil)
       super(node: node,

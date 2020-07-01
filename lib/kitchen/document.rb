@@ -21,10 +21,11 @@ module Kitchen
 
       ElementEnumerator.new do |block|
         nokogiri_document.search(*selector_or_xpath_args).each do |inner_node|
-          Kitchen::Element.new(node: inner_node, document: self).tap do |element|
-            self.location = element
-            block.yield(element)
-          end
+          element = Kitchen::Element.new(node: inner_node,
+                                         document: self,
+                                         short_type: Utils.search_path_to_type(selector_or_xpath_args))
+          self.location = element
+          block.yield(element)
         end
       end
     end
@@ -61,6 +62,8 @@ module Kitchen
 
     # Create a new Element
     #
+    # TODO don't know if we need this
+    #
     # @param name [String] the tag name
     # @param args [Array<String, Hash>]
     #
@@ -76,7 +79,8 @@ module Kitchen
     def create_element(name, *args, &block)
       Kitchen::Element.new(
         node: @nokogiri_document.create_element(name, *args, &block),
-        document: self
+        document: self,
+        short_type: "created_element_#{SecureRandom.hex(4)}"
       )
     end
 

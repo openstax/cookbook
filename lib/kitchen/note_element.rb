@@ -1,5 +1,5 @@
 module Kitchen
-  class NoteElement < Element
+  class NoteElement < ElementBase
 
     TITLE_TRANSLATION_KEYS = %w(
       link-to-learning

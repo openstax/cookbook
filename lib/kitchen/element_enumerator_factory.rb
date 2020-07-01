@@ -20,7 +20,7 @@ module Kitchen
           sub_element =
             sub_element_class == Element ?
               sub_element_class.new(node: sub_node, document: element.document,
-                                    short_type: [css_or_xpath].flatten.join(",")) :
+                                    short_type: Utils.search_path_to_type(css_or_xpath)) :
               sub_element_class.new(node: sub_node, document: element.document)
 
 
