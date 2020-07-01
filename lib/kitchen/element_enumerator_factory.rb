@@ -1,8 +1,6 @@
 module Kitchen
   class ElementEnumeratorFactory
 
-    # TODO ambiguity with css_or_xpath and selector_or_xpath_args being an array or not, causing errors
-
     def self.within(new_enumerator_class:, element:,
                     css_or_xpath:, default_css_or_xpath:, sub_element_class: Element)
       # Apply the default css if needed

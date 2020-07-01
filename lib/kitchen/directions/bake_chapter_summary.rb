@@ -28,10 +28,10 @@ module Kitchen
           <<~HTML
             <div class="os-eoc os-summary-container" data-type="composite-page" data-uuid-key=".summary">
               <h2 data-type="document-title">
-                <span class="os-text">#{I18n.t(:summary)}</span>
+                <span class="os-text">#{I18n.t(:eoc_summary_title)}</span>
               </h2>
               <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">#{I18n.t(:summary)}</h1>
+                <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_summary_title)}</h1>
                 #{metadata_elements.paste}
               </div>
               #{summaries.paste}

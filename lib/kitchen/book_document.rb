@@ -3,11 +3,19 @@ module Kitchen
 
     attr_reader :short_name
 
-    # TODO store default selectors here and provide a method for overriding them
-    # wonder if we should just write it out so YARD works
-    # ACTUALLY make a Selectors class that has all of these defined, with defaults
-    # and pass a (modified) instance into this class
-
+    # TODO - An idea started to not have selectors in specific Element classes but
+    # instead to provide them to the Document class when it was constructed.  This
+    # came up because not all books may have the exact same structure and we may
+    # need different selectors in those different cases.  Phil also brought up that
+    # this information can be part of a tagging legend that we use for overall
+    # validation on the document to be baked.  So everyone should put some thought
+    # into how we can combine these strategies to give us flexibility in setting
+    # selectors and reuse information required for validation efforts.
+    #
+    # All we have implemented here is an early attempt in this direction of keeping
+    # the selectors available somewhere else that isn't the specific Element class,
+    # but this isn't good enough.
+    #
     DEFAULT_SELECTORS = {
       page_title_selector: "*[data-type='document-title'][2]"
     }

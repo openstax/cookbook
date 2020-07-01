@@ -4,7 +4,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
 
   before do
     stub_locales({
-      exercises: "Exercises",
+      eoc_exercises_title: "Exercises",
       eoc_answer_key_title: "Answer Key"
     })
   end
