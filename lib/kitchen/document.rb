@@ -6,53 +6,28 @@ module Kitchen
     def initialize(nokogiri_document:)
       @nokogiri_document = nokogiri_document
       @location = nil
+      @next_paste_count_for_id = {}
+      @id_copy_suffix = "_copy_"
     end
 
-    # Iterates over all children of this document that match the provided
-    # selector or XPath arguments.
+    # Returns an enumerator that iterates over all children of this document
+    # that match the provided selector or XPath arguments.
     #
     # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
-    # @yieldparam [Element] the matched XML element
+    # @return [ElementEnumerator]
     #
-    def each(*selector_or_xpath_args)
-      raise(Kitchen::RecipeError, "An `each` command must be given a block") if !block_given?
+    def search(*selector_or_xpath_args)
+      selector_or_xpath_args = [selector_or_xpath_args].flatten
 
-      nokogiri_document.search(*selector_or_xpath_args).each do |inner_node|
-        Kitchen::Element.new(node: inner_node, document: self).tap do |element|
+      ElementEnumerator.new do |block|
+        nokogiri_document.search(*selector_or_xpath_args).each do |inner_node|
+          element = Kitchen::Element.new(node: inner_node,
+                                         document: self,
+                                         short_type: Utils.search_path_to_type(selector_or_xpath_args))
           self.location = element
-          yield element
+          block.yield(element)
         end
       end
-    end
-
-    # Yields and returns the first child element that matches the provided
-    # selector or XPath arguments.
-    #
-    # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
-    # @yieldparam [Element] the matched XML element
-    # @return [Element, nil] the matched XML element or nil if no match found
-    #
-    def first(*selector_or_xpath_args)
-      inner_node = nokogiri_document.search(*selector_or_xpath_args).first
-      return nil if inner_node.nil?
-      Kitchen::Element.new(node: inner_node, document: self).tap do |element|
-        self.location = element
-        yield element if block_given?
-      end
-    end
-
-    # Yields and returns the first child element that matches the provided
-    # selector or XPath arguments.
-    #
-    # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
-    # @yieldparam [Element] the matched XML element
-    # @raise [ElementNotFoundError] if no matching element is found
-    # @return [Element] the matched XML element
-    #
-    def first!(*selector_or_xpath_args)
-      first(*selector_or_xpath_args) { yield if block_given? } ||
-        raise(Kitchen::ElementNotFoundError,
-              "Could not find first element matching '#{selector_or_xpath_args}'")
     end
 
     # Returns the document's clipboard with the given name.
@@ -87,6 +62,8 @@ module Kitchen
 
     # Create a new Element
     #
+    # TODO don't know if we need this
+    #
     # @param name [String] the tag name
     # @param args [Array<String, Hash>]
     #
@@ -102,8 +79,29 @@ module Kitchen
     def create_element(name, *args, &block)
       Kitchen::Element.new(
         node: @nokogiri_document.create_element(name, *args, &block),
-        document: self
+        document: self,
+        short_type: "created_element_#{SecureRandom.hex(4)}"
       )
+    end
+
+    def record_id_copied(id)
+      return if id.blank?
+      @next_paste_count_for_id[id] ||= 1
+    end
+
+    def modified_id_to_paste(original_id)
+      return nil if original_id.nil?
+      return "" if original_id.blank?
+
+      count = next_count_for_pasted_id(original_id)
+
+      # A count of 0 means the element was cut and this is the first paste, do not
+      # modify the ID; otherwise, use the uniquified ID.
+      if count == 0
+        original_id
+      else
+        "#{original_id}#{@id_copy_suffix}#{count}"
+      end
     end
 
     # Returns the underlying Nokogiri Document object
@@ -114,6 +112,13 @@ module Kitchen
     end
 
     protected
+
+    def next_count_for_pasted_id(id)
+      return if id.blank?
+      (@next_paste_count_for_id[id] ||= 0).tap do
+        @next_paste_count_for_id[id] += 1
+      end
+    end
 
     attr_reader :nokogiri_document
 

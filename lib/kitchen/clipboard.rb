@@ -20,13 +20,17 @@ module Kitchen
     end
 
     def paste
-      @items.map(&:to_s).join("")
+      @items.map(&:paste).join("")
     end
 
     def each(&block)
       @items.each do |item|
         block.call(item)
       end
+    end
+
+    def sort_by!(&block)
+      @items.sort_by!(&block)
     end
   end
 end

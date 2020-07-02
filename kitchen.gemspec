@@ -29,7 +29,11 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'nokogiri'
   spec.add_dependency 'rainbow'
+  spec.add_dependency 'activesupport'
+  spec.add_dependency 'i18n'
 
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'yard'
+  spec.add_development_dependency 'nokogiri-diff'
+  spec.add_development_dependency 'rainbow'
 end
