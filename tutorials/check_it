@@ -32,13 +32,13 @@ end
 recipe = instance_variable_get(recipe_variable_name)
 
 Kitchen::Oven.bake(
-  input_file: File.expand_path("#{tutorial_number}/input.xhtml", __dir__),
+  input_file: File.expand_path("#{tutorial_number}/raw.html", __dir__),
   recipes: recipe,
-  output_file: File.expand_path("#{tutorial_number}/actual_output.xhtml", __dir__)
+  output_file: File.expand_path("#{tutorial_number}/actual_baked.html", __dir__)
 )
 
-actual_output_doc = parse_doc("#{tutorial_number}/actual_output.xhtml")
-expected_output_doc = parse_doc("#{tutorial_number}/expected_output.xhtml")
+actual_output_doc = parse_doc("#{tutorial_number}/actual_baked.html")
+expected_output_doc = parse_doc("#{tutorial_number}/expected_baked.html")
 
 differ = RSpec::Support::Differ.new(color: true)
 
