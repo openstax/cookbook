@@ -14,3 +14,6 @@
 bin/scratch
 **/*baked.html
 tutorial/outputs/*.html
+
+tutorials/**/actual_output.xhtml
+tutorials/**/my_recipe.rb

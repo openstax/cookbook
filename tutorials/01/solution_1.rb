@@ -2,6 +2,6 @@
 
   div = doc.search("div").first
   div.name = "h1"
-  div.replace_children(with: "<span>World!</span>")
+  div.search("span").first.replace_children(with: "World!")
 
 end

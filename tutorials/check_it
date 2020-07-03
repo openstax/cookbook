@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "kitchen"
+require "rspec"
+require "byebug"
+require "rainbow"
+
+def parse_doc(filename)
+  Nokogiri::XML(File.open(filename)){|config| config.noblanks}
+end
+
+if ARGV.empty?
+  puts "Usage: check_it tutorial-folder-number [recipe-name]\n" \
+       "  e.g. check_it 02"
+  exit(0)
+end
+
+tutorial_number = ARGV[0]
+
+Dir[File.expand_path(__dir__ + "/#{tutorial_number}/*.rb")].each{|f| require f}
+
+recipe_name = (ARGV[1] || "my_recipe")
+recipe_variable_name = "@#{recipe_name}".to_sym
+
+if !instance_variables.include?(recipe_variable_name)
+  puts Rainbow("There is no recipe named '#{recipe_variable_name}' defined in the " \
+               "tutorials/#{tutorial_number} directory").red
+  exit(1)
+end
+
+recipe = instance_variable_get(recipe_variable_name)
+
+Kitchen::Oven.bake(
+  input_file: File.expand_path("#{tutorial_number}/input.xhtml", __dir__),
+  recipes: recipe,
+  output_file: File.expand_path("#{tutorial_number}/actual_output.xhtml", __dir__)
+)
+
+actual_output_doc = parse_doc("#{tutorial_number}/actual_output.xhtml")
+expected_output_doc = parse_doc("#{tutorial_number}/expected_output.xhtml")
+
+differ = RSpec::Support::Differ.new(color: true)
+
+diff = differ.diff(expected_output_doc.to_xhtml, actual_output_doc.to_xhtml)
+diff.sub!(/\e\[0m\n\e\[0m/, "")
+
+if diff.blank?
+  puts Rainbow("The actual output matches the expected output! Way to go!").green
+else
+  puts Rainbow("The actual output does not match the expected output.").yellow
+  puts Rainbow("-").red + " = actual output"
+  puts Rainbow("+").green + " = expected output"
+  puts "\n"
+  puts diff
+end

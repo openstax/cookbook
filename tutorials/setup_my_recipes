@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "byebug"
+require "rainbow"
+
+Dir.chdir(__dir__)
+tutorial_numbers = Dir.glob("*").select{|f| File.directory?(f) && f.match?(/\d\d/)}
+
+tutorial_numbers.each do |tutorial_number|
+  file_name = File.expand_path("#{tutorial_number}/my_recipe.rb", __dir__)
+  if File.exist?(file_name)
+    puts "Skipped making recipe skeleton; my_recipe.rb exists in tutorials folder '#{tutorial_number}'"
+    next
+  else
+    File.open(file_name, "w") do |f|
+      f.write <<~CONTENTS
+        # This file is IGNORED by Git
+
+        @my_recipe = Kitchen::Recipe.new do |doc|
+
+          # Write you recipe here
+
+        end
+      CONTENTS
+    end
+
+    puts "Generated recipe skeleton (my_recipe.rb) in tutorials folder '#{tutorial_number}'"
+  end
+end
