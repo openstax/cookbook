@@ -27,6 +27,7 @@ module Kitchen
       @items.each do |item|
         block.call(item)
       end
+      self
     end
 
     def sort_by!(&block)
