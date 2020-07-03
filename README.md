@@ -352,7 +352,7 @@ There are some tutorials you can work through in the `tutorials` directory.  Eac
 $> ./setup_my_recipes
 ```
 
-in the `tutorials` directory.  That will make a blank `my_recipe.rb` file in each of the numbered tutorial subdirectories.  This is where you'll do your work.  The first tutorial ("01") asks you to make a recipe that changes
+in the `tutorials` directory.  That will make a blank `my_recipe.rb` file in each of the numbered tutorial subdirectories.  This is where you'll do your work.  The first "Hello world!" tutorial ("00") asks you to make a recipe that changes
 
 ```html
 <div class="hello">
@@ -371,10 +371,10 @@ to
 There's an included script to check to see if your recipe achieves the desired transformation:
 
 ```bash
-$> ./check_it 01
+$> ./check_it 00
 ```
 
-Will check to see if your `tutorials/01/my_recipe.rb` file does what is needed.  If it does, you'll see a "way to go" message.  If it doesn't, you'll see a diff between the expected output and the actual output.  E.g. if you run `./check_it 01` without having done any work yet, you'll see:
+Will check to see if your `tutorials/00/my_recipe.rb` file does what is needed.  If it does, you'll see a "way to go" message.  If it doesn't, you'll see a diff between the expected output and the actual output.  E.g. if you run `./check_it 00` without having done any work yet, you'll see:
 
 ```bash
 The actual output does not match the expected output.
@@ -393,7 +393,7 @@ The actual output does not match the expected output.
 The `check_it` script can also check the solutions.  E.g. if you say
 
 ```bash
-$> ./check_it 01 solution_1
+$> ./check_it 00 solution_1
 ```
 
 you'll see
