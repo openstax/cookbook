@@ -346,7 +346,7 @@ You can also run `bin/console` for an interactive prompt that will allow you to 
 
 ### Tutorials
 
-There are some tutorials you can work through in the `tutorials` directory.  Each tutorial is in a separated numbered subdirectory, e.g. `tutorials/01`.  Each tutorial directory contains an `input.xhtml` file that is your starting point (along with some instructions in comments at the top), an `expected_output.xhtml` file that is what you're trying to get to when your recipe is applied to the input file, as well as some number of solution files (don't look at those unless you get stuck!!).  To get started, run:
+There are some tutorials you can work through in the `tutorials` directory.  Each tutorial is in a separated numbered subdirectory, e.g. `tutorials/01`.  Each tutorial directory contains a `raw.html` file that is your starting point (along with some instructions in comments at the top), an `expected_baked.html` file that is what you're trying to get to when your recipe is applied to the input file, as well as some number of solution files (don't look at those unless you get stuck!!).  To get started, run:
 
 ```bash
 $> ./setup_my_recipes
@@ -402,7 +402,7 @@ you'll see
 The actual output matches the expected output! Way to go!
 ```
 
-There is normally more than one way to achieve the desired output, so feel free to diverge from what is shown in the solution files.  Note that the `my_recipe.rb` files and all `actual_output.xhtml` files are ignored by Git.
+There is normally more than one way to achieve the desired output, so feel free to diverge from what is shown in the solution files.  Note that the `my_recipe.rb` files and all `actual_baked.html` files are ignored by Git.
 
 **Important:** If things aren't working in your tutorial work (or actually in any recipe work), use the `debugger`!  Just add a `debugger` line anywhere in your code to stop execution there so you can poke around.  You can print variables by typing out their name, run methods on objects, say `s` to step into function calls, `n` ("next") to step over function calls, `b 97` to set a new breakpoint at line 97, and `c` to continue to the next debugger statement, breakpoint, or the end of the script.
 
