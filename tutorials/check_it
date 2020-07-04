@@ -14,7 +14,7 @@ def parse_doc_and_prep_for_diff(filename)
   doc = parse_doc(filename)
   string = doc.to_xhtml
   # Get rid of whitespace at the start of lines (remove impact of indentation)
-  string.gsub(/^\W*/,"")
+  string.gsub(/^\s*/,"")
 end
 
 if ARGV.empty?
