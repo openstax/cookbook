@@ -10,6 +10,13 @@ def parse_doc(filename)
   Nokogiri::XML(File.open(filename)){|config| config.noblanks}
 end
 
+def parse_doc_and_prep_for_diff(filename)
+  doc = parse_doc(filename)
+  string = doc.to_xhtml
+  # Get rid of whitespace at the start of lines (remove impact of indentation)
+  string.gsub(/^\W*/,"")
+end
+
 if ARGV.empty?
   puts "Usage: check_it tutorial-folder-number [recipe-name]\n" \
        "  e.g. check_it 02"
@@ -37,12 +44,13 @@ Kitchen::Oven.bake(
   output_file: File.expand_path("#{tutorial_number}/actual_baked.html", __dir__)
 )
 
-actual_output_doc = parse_doc("#{tutorial_number}/actual_baked.html")
-expected_output_doc = parse_doc("#{tutorial_number}/expected_baked.html")
+actual = parse_doc_and_prep_for_diff("#{tutorial_number}/actual_baked.html")
+expected = parse_doc_and_prep_for_diff("#{tutorial_number}/expected_baked.html")
 
 differ = RSpec::Support::Differ.new(color: true)
+diff = differ.diff(expected, actual)
 
-diff = differ.diff(expected_output_doc.to_xhtml, actual_output_doc.to_xhtml)
+# Get rid of some coloring junk at the start
 diff.sub!(/\e\[0m\n\e\[0m/, "")
 
 if diff.blank?

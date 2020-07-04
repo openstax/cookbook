@@ -404,6 +404,8 @@ The actual output matches the expected output! Way to go!
 
 There is normally more than one way to achieve the desired output, so feel free to diverge from what is shown in the solution files.  Note that the `my_recipe.rb` files and all `actual_output.xhtml` files are ignored by Git.
 
+**Important:** If things aren't working in your tutorial work (or actually in any recipe work), use the `debugger`!  Just add a `debugger` line anywhere in your code to stop execution there so you can poke around.  You can print variables by typing out their name, run methods on objects, say `s` to step into function calls, `n` ("next") to step over function calls, `b 97` to set a new breakpoint at line 97, and `c` to continue to the next debugger statement, breakpoint, or the end of the script.
+
 ### Error Messages
 
 Kitchen tries to give helpful error messages instead of huge stack traces, e.g.:
