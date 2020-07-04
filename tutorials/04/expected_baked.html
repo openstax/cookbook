@@ -1,0 +1,36 @@
+<!--
+1. Number each table and figure (e.g. Table 1, Figure 1) in a first child div with class
+   'caption'.
+2. Replace all "[LINK]" text in "a" tags with class "needs-label" with the "Table X" or
+   "Figure X" text from the referred-to table or figure.
+-->
+
+<html>
+  <body>
+    <div class="book">
+      <div class="chapter">
+        <p>Lorem ipsum.</p>
+        <table id="g72s2414"><div class="caption">Table 1</div><th>I am a table. Use your imagination...</th></table>
+        <p>Lorem ipsum.</p>
+        <p>Lorem ipsum.</p>
+        <figure id="m2m4m3ag"><div class="caption">Figure 1</div>I am a figure. Use your imagination...</figure>
+        <p>Lorem ipsum.</p>
+        <p>See this table for info: <a class="needs-label" href="#g72s2414">Table 1</a></p>
+        <p>See this figure for a nice picture: <a class="needs-label" href="#m2m4m3ag">Figure 1</a></p>
+        <p>Lorem ipsum.</p>
+        <table id="45m5nh21"><div class="caption">Table 2</div><th>I am a table. Use your imagination...</th></table>
+        <p>Lorem ipsum.</p>
+        <p>See this table for info: <a class="needs-label" href="#45m5nh21">Table 2</a></p>
+        <p>Lorem ipsum.</p>
+        <figure id="ghtkc34x"><div class="caption">Figure 2</div>I am a figure. Use your imagination...</figure>
+        <p>Lorem ipsum.</p>
+        <figure id="58dcdthw"><div class="caption">Figure 3</div>I am a figure. Use your imagination...</figure>
+        <p>Lorem ipsum.</p>
+        <p>See this figure for a nice picture: <a class="needs-label" href="#58dcdthw">Figure 3</a></p>
+        <p>Lorem ipsum.</p>
+        <p>See this figure for a nice picture: <a class="needs-label" href="#ghtkc34x">Figure 2</a></p>
+        <p>Don't do anything to this link: <a href="#ghtkc34x">Don't change me</a></p>
+      </div>
+    </div>
+  </body>
+</html>
