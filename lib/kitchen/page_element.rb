@@ -9,8 +9,10 @@ module Kitchen
     end
 
     def title
-      # first!("h#{chapter.title_header_number + 1}[data-type='document-title']")
-      first!(document.page_title_selector)
+      # Get the title in the immediate children, not the one in the metadata.  Could use
+      # CSS of ":not([data-type='metadata']) > [data-type='document-title'], [data-type='document-title']"
+      # but xpath is shorter
+      first!("./*[@data-type = 'document-title']")
     end
 
     def terms

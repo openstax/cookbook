@@ -67,6 +67,17 @@ module Kitchen
       self[:id] = value
     end
 
+    # A way to set values and chain them
+    def set(property, value)
+      case property.to_sym
+      when :name
+        self.name = value
+      else
+        self[property.to_sym] = value
+      end
+      self
+    end
+
     def ancestor(type)
       @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'")
     end
