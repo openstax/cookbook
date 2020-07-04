@@ -344,6 +344,68 @@ After checking out the repo, run `bin/setup` to install dependencies.  If you wa
 
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
+### Tutorials
+
+There are some tutorials you can work through in the `tutorials` directory.  Each tutorial is in a separated numbered subdirectory, e.g. `tutorials/01`.  Each tutorial directory contains a `raw.html` file that is your starting point (along with some instructions in comments at the top), an `expected_baked.html` file that is what you're trying to get to when your recipe is applied to the input file, as well as some number of solution files (don't look at those unless you get stuck!!).  To get started, run:
+
+```bash
+$> ./setup_my_recipes
+```
+
+in the `tutorials` directory.  That will make a blank `my_recipe.rb` file in each of the numbered tutorial subdirectories.  This is where you'll do your work.  The first "Hello world!" tutorial ("00") asks you to make a recipe that changes
+
+```html
+<div class="hello">
+  <span>Planet?</span>
+</div>
+```
+
+to
+
+```html
+<h1 class="hello">
+  <span>World!</span>
+</h1>
+```
+
+There's an included script to check to see if your recipe achieves the desired transformation:
+
+```bash
+$> ./check_it 00
+```
+
+Will check to see if your `tutorials/00/my_recipe.rb` file does what is needed.  If it does, you'll see a "way to go" message.  If it doesn't, you'll see a diff between the expected output and the actual output.  E.g. if you run `./check_it 00` without having done any work yet, you'll see:
+
+```bash
+The actual output does not match the expected output.
+- = actual output
++ = expected output
+
+@@ -1,4 +1,4 @@
+-<div class="hello">
+-  <span>Planet?</span>
+-</div>
++<h1 class="hello">
++  <span>World!</span>
++</h1>
+```
+
+The `check_it` script can also check the solutions.  E.g. if you say
+
+```bash
+$> ./check_it 00 solution_1
+```
+
+you'll see
+
+```bash
+The actual output matches the expected output! Way to go!
+```
+
+There is normally more than one way to achieve the desired output, so feel free to diverge from what is shown in the solution files.  Note that the `my_recipe.rb` files and all `actual_baked.html` files are ignored by Git.
+
+**Important:** If things aren't working in your tutorial work (or actually in any recipe work), use the `debugger`!  Just add a `debugger` line anywhere in your code to stop execution there so you can poke around.  You can print variables by typing out their name, run methods on objects, say `s` to step into function calls, `n` ("next") to step over function calls, `b 97` to set a new breakpoint at line 97, and `c` to continue to the next debugger statement, breakpoint, or the end of the script.
+
 ### Error Messages
 
 Kitchen tries to give helpful error messages instead of huge stack traces, e.g.:

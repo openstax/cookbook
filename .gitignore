@@ -12,5 +12,7 @@
 .irb_history
 .byebug_history
 bin/scratch
-**/*baked.html
 tutorial/outputs/*.html
+
+tutorials/**/actual_baked.*html
+tutorials/**/my_recipe.rb

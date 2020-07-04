@@ -1,0 +1,66 @@
+<!--
+1. Move the `will-move` divs to an new container with a class of `eoc` at the end of the chapter
+2. Add a section title with the class "os-title" and the value "End of Chapter Collations"
+3. Change `will-move` divs to sections
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Move-to, creating containers</title>
+  </head>
+  <body>
+    <div data-type="chapter">
+      <h1 data-type="document-title">Chapter Title</h1>
+      <div data-type="page">
+        <h2 data-type="document-title">Page Title</h2>
+        <div class="will-not-move">
+          <h3>I didn't go anywhere</h3>
+          <p>
+            Content will not move <br /> Lorem ipsum.
+          </p>
+        </div>
+
+        <div class="will-not-move">
+          <h3> I'm here to stay.</h3>
+          <p>
+            Content will not move <br /> Lorem ipsum.
+          </p>
+          <p>
+            Content will not move <br /> Lorem ipsum.
+          </p>
+        </div>
+
+         <div class="will-not-move">
+          <h3>Don't make me move!</h3>
+          <p>
+            Content will not move <br /> Lorem ipsum.
+          </p>
+          <p>
+            Lorem ipsum.
+          </p>
+        </div>
+      </div>
+      <div class="eoc">
+        <div class="os-title">End of Chapter Collations</div>
+        <section class="will-move">
+          <h3>I cannot stand still</h3>
+          <p>
+            Content will move <br /> Lorem ipsum.
+          </p>
+          <p>
+            Lorem ipsum.
+          </p>
+        </section>
+        <section class="will-move">
+          <h3>I have to go!</h3>
+          <p>
+            Content will move <br /> Lorem ipsum.
+          </p>
+          <p>
+            Lorem ipsum.
+          </p>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
