@@ -179,7 +179,13 @@ RSpec.describe Kitchen::Element do
       inner = element_1.search("p").search("span").first
       expect(inner.ancestor("p").id).to eq "pId"
     end
+  end
 
+  context "search history" do
+    it "returns search history" do
+      inner = element_1.search("#pId").search("span").first
+      expect(inner.search_history).to eq "#pId span"
+    end
   end
 
 end

@@ -13,6 +13,7 @@ module Kitchen
     attr_reader :document
     attr_reader :short_type
     attr_reader :enumerator_class
+    attr_accessor :css_or_xpath_that_found_me
 
     # @!method name
     #   Get the element name (the tag)
@@ -110,6 +111,10 @@ module Kitchen
       @ancestors[ancestor.type] = ancestor
     end
 
+    def ancestor_elements
+      @ancestors.values.map(&:element)
+    end
+
     def count_as_descendant
       @ancestors.each_pair do |type, ancestor|
         @counts_in[type] = ancestor.increment_descendant_count(short_type)
@@ -130,6 +135,11 @@ module Kitchen
 
     def number_of_sub_elements_already_counted(css_or_xpath)
       @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
+    end
+
+    def search_history
+      history = ancestor_elements.map(&:css_or_xpath_that_found_me) + [css_or_xpath_that_found_me]
+      history.compact.join(" ")
     end
 
     def search(*selector_or_xpath_args)

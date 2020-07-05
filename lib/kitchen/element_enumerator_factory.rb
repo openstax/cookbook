@@ -19,10 +19,11 @@ module Kitchen
           # define a dynamic short type based on the search css/xpath.
           sub_element =
             sub_element_class == Element ?
-              sub_element_class.new(node: sub_node, document: element.document,
+              sub_element_class.new(node: sub_node,
+                                    document: element.document,
                                     short_type: Utils.search_path_to_type(css_or_xpath)) :
-              sub_element_class.new(node: sub_node, document: element.document)
-
+              sub_element_class.new(node: sub_node,
+                                    document: element.document)
 
           # If the provided `css_or_xpath` has already been counted, we need to uncount
           # them on the ancestors so that when they are counted again below, the counts
@@ -38,9 +39,15 @@ module Kitchen
             end
           end
 
+          # Record this sub element's ancestors and increment their descendant counts
           sub_element.add_ancestors(grand_ancestors, parent_ancestor)
           sub_element.count_as_descendant
 
+          # Remember how this sub element was found so can trace search history given
+          # any element.
+          sub_element.css_or_xpath_that_found_me = css_or_xpath
+
+          # Count runs through this loop for below
           num_sub_elements += 1
 
           # Mark the location so that if there's an error we can show the developer where.
