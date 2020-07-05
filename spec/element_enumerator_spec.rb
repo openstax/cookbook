@@ -100,7 +100,15 @@ RSpec.describe Kitchen::ElementEnumerator do
   context "#search_history" do
     it "works" do
       chained_enumerator = element_2_enumerator.search(".foo").search("#pId").search("span")
-      expect(chained_enumerator.search_history.to_s).to eq "? .foo #pId span"
+      expect(chained_enumerator.search_history.to_s).to eq "[?] [.foo] [#pId] [span]"
+    end
+  end
+
+  context "#first!" do
+    it "gives a meaningful error message when it bombs" do
+      expect{
+        element_2_enumerator.search(".foo").search("#blah").first!
+      }.to raise_error(/not return a first result matching #blah inside .*\.foo/)
     end
   end
 

@@ -50,10 +50,9 @@ module Kitchen
       enumerator_class.factory.build_within(self, css_or_xpath: css_or_xpath)
     end
 
-    def first!(missing_message: nil)
-      # debugger
-      # TODO would be cool to record the CSS in the enumerator constructor so can say "no first blah" here
-      first || raise(RecipeError, missing_message || "Could not return a first result")
+    def first!(missing_message: "Could not return a first result")
+      first || raise(RecipeError, "#{missing_message} matching #{search_history.latest} " \
+                                  "inside #{search_history.upstream}")
     end
 
     # Removes enumerated elements from their parent and places them on the specified clipboard
