@@ -15,10 +15,6 @@ module Kitchen
       first!("./*[@data-type = 'document-title']")
     end
 
-    def terms
-      TermElementEnumerator.within(element: self)
-    end
-
     def is_introduction?
       has_class?("introduction")
     end
