@@ -32,7 +32,7 @@ module Kitchen
     protected
 
     def build_within_element(element, css_or_xpath:)
-      enumerator_class.new do |block|
+      enumerator_class.new(css_or_xpath: css_or_xpath) do |block|
         grand_ancestors = element.ancestors
         parent_ancestor = Ancestor.new(element)
 
@@ -89,7 +89,7 @@ module Kitchen
     def build_within_other_enumerator(other_enumerator, css_or_xpath:)
       # Return a new enumerator instance that internally iterates over `other_enumerator`
       # running a new enumerator for each element returned by that other enumerator.
-      enumerator_class.new do |block|
+      enumerator_class.new(css_or_xpath: css_or_xpath, upstream_enumerator: other_enumerator) do |block|
         other_enumerator.each do |element|
           build_within_element(element, css_or_xpath: css_or_xpath).each do |sub_element|
             block.yield(sub_element)

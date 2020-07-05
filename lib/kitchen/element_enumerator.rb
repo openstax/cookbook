@@ -1,47 +1,57 @@
 module Kitchen
   class ElementEnumerator < Enumerator
 
+    def initialize(size=nil, css_or_xpath: nil, upstream_enumerator: nil)
+      @css_or_xpath = css_or_xpath
+      @upstream_enumerator = upstream_enumerator
+      super(size)
+    end
+
+    def search_history
+      (@upstream_enumerator&.search_history || SearchHistory.empty).add(@css_or_xpath)
+    end
+
     def terms(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: TermElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(TermElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def pages(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: PageElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(PageElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def chapters(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: ChapterElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(ChapterElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     # use block_error_if
     def figures(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: FigureElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(FigureElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def notes(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: NoteElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(NoteElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def tables(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: TableElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(TableElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def examples(css_or_xpath=nil, &block)
-      ExampleElementEnumerator.factory.build_within(self, css_or_xpath: css_or_xpath)
-      # chain_to(enumerator_class: ExampleElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(ExampleElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def search(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: ElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(ElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
-    def chain_to(enumerator_class:, css_or_xpath: nil, &block)
+    def chain_to(enumerator_class, css_or_xpath: nil, &block)
       raise(RecipeError, "Did you forget a `.each` call on this enumerator?") if block_given?
 
       enumerator_class.factory.build_within(self, css_or_xpath: css_or_xpath)
     end
 
     def first!(missing_message: nil)
+      # debugger
       # TODO would be cool to record the CSS in the enumerator constructor so can say "no first blah" here
       first || raise(RecipeError, missing_message || "Could not return a first result")
     end
