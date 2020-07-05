@@ -1,12 +1,12 @@
 module Kitchen
   class ExampleElementEnumerator < ElementEnumerator
 
-    def self.within(element:, css_or_xpath: nil)
-      ElementEnumeratorFactory.within(new_enumerator_class: self,
-                                      element: element,
-                                      css_or_xpath: css_or_xpath,
-                                      default_css_or_xpath: "div[data-type='example']",
-                                      sub_element_class: ExampleElement)
+    def self.factory
+      ElementEnumeratorFactory.new(
+        default_css_or_xpath: "div[data-type='example']", # TODO element.document.selectors.example
+        sub_element_class: ExampleElement,
+        enumerator_class: self
+      )
     end
 
   end

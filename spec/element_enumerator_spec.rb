@@ -17,6 +17,22 @@ RSpec.describe Kitchen::ElementEnumerator do
 
   let(:element_1_enumerator) { described_class.new {|block| block.yield(element_1)} }
 
+  let(:element_2) do
+    new_element(
+      <<~HTML
+        <div id="divId">
+          <div class="foo">
+            <p id="pId">
+              <span>Blah</span>
+            </p>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  let(:element_2_enumerator) { described_class.new {|block| block.yield(element_2)} }
+
   it "iterates over one element" do
     expect(element_1_enumerator.map(&:name)).to eq %w(div)
   end
@@ -78,6 +94,21 @@ RSpec.describe Kitchen::ElementEnumerator do
       enumerator.copy(to: clipboard)
       expect(element_1.to_s).to eq original_element_1_string
       expect(clipboard.paste).to match(/id1.*id2[^3]*id4/)
+    end
+  end
+
+  context "#search_history" do
+    it "works" do
+      chained_enumerator = element_2_enumerator.search(".foo").search("#pId").search("span")
+      expect(chained_enumerator.search_history.to_s).to eq "[?] [.foo] [#pId] [span]"
+    end
+  end
+
+  context "#first!" do
+    it "gives a meaningful error message when it bombs" do
+      expect{
+        element_2_enumerator.search(".foo").search("#blah").first!
+      }.to raise_error(/not return a first result matching #blah inside .*\.foo/)
     end
   end
 

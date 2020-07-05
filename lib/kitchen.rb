@@ -19,6 +19,7 @@ require_all("kitchen/mixins")
 require "kitchen/utils"
 require "kitchen/errors"
 require "kitchen/ancestor"
+require "kitchen/search_history"
 require "kitchen/element_enumerator"
 require "kitchen/element_enumerator_factory"
 require "kitchen/page_element_enumerator"

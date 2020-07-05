@@ -1,12 +1,12 @@
 module Kitchen
   class NoteElementEnumerator < ElementEnumerator
 
-    def self.within(element:, css_or_xpath: nil)
-      ElementEnumeratorFactory.within(new_enumerator_class: self,
-                                      element: element,
-                                      css_or_xpath: css_or_xpath,
-                                      default_css_or_xpath: "div[data-type='note']", # TODO element.document.selectors.note
-                                      sub_element_class: NoteElement)
+    def self.factory
+      ElementEnumeratorFactory.new(
+        default_css_or_xpath: "div[data-type='note']", # TODO get from config?
+        sub_element_class: NoteElement,
+        enumerator_class: self
+      )
     end
 
   end
