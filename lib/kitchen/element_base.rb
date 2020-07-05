@@ -145,11 +145,9 @@ module Kitchen
     def search(*selector_or_xpath_args)
       block_error_if(block_given?)
 
-      ElementEnumeratorFactory.within(
-        new_enumerator_class: ElementEnumerator,
+      ElementEnumerator.factory.within(
         element: self,
-        css_or_xpath: nil,
-        default_css_or_xpath: selector_or_xpath_args,
+        css_or_xpath: selector_or_xpath_args,
       )
     end
 

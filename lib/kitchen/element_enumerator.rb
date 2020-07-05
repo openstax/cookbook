@@ -37,14 +37,12 @@ module Kitchen
     def chain_to(enumerator_class:, css_or_xpath: nil, &block)
       raise(RecipeError, "Did you forget a `.each` call on this enumerator?") if block_given?
 
-      ElementEnumeratorFactory.chained_to_other(new_enumerator_class: enumerator_class,
-                                                other_enumerator: self,
-                                                css_or_xpath: css_or_xpath)
+      enumerator_class.factory.chain_to(other_enumerator: self, css_or_xpath: css_or_xpath)
     end
 
-    def first!
+    def first!(missing_message: nil)
       # TODO would be cool to record the CSS in the enumerator constructor so can say "no first blah" here
-      first || raise(RecipeError, "Could not return a first result")
+      first || raise(RecipeError, missing_message || "Could not return a first result")
     end
 
     # Removes enumerated elements from their parent and places them on the specified clipboard
@@ -89,12 +87,11 @@ module Kitchen
       self.map(&:to_s).join("")
     end
 
-    def self.within(element:, css_or_xpath:)
-      ElementEnumeratorFactory.within(new_enumerator_class: self,
-                                      element: element,
-                                      css_or_xpath: css_or_xpath,
-                                      default_css_or_xpath: "*",
-                                      sub_element_class: Element)
+    def self.factory
+      ElementEnumeratorFactory.new(
+        sub_element_class: Element,
+        enumerator_class: self
+      )
     end
 
   end

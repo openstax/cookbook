@@ -1,14 +1,28 @@
 module Kitchen
   class ElementEnumeratorFactory
 
-    def self.within(new_enumerator_class:, element:,
-                    css_or_xpath:, default_css_or_xpath:, sub_element_class: Element)
+    attr_reader :default_css_or_xpath
+    attr_reader :enumerator_class
+    attr_reader :sub_element_class
+
+    def initialize(default_css_or_xpath: nil, sub_element_class:, enumerator_class:)
+      @default_css_or_xpath = default_css_or_xpath
+      @sub_element_class = sub_element_class
+      @enumerator_class = enumerator_class
+    end
+
+    # TODO spec this!
+    def build_css_or_xpath_from(css_or_xpath=nil)
       # Apply the default css if needed
       css_or_xpath ||= "$"
       [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, [default_css_or_xpath].flatten.join(", ")) }
-      [css_or_xpath].flatten! if css_or_xpath.is_a?(Array)
+      [css_or_xpath].flatten
+    end
 
-      new_enumerator_class.new do |block|
+    def within(element:, css_or_xpath: nil)
+      css_or_xpath = build_css_or_xpath_from(css_or_xpath)
+
+      enumerator_class.new do |block|
         grand_ancestors = element.ancestors
         parent_ancestor = Ancestor.new(element)
 
@@ -62,10 +76,13 @@ module Kitchen
       end
     end
 
-    def self.chained_to_other(other_enumerator:, new_enumerator_class:, css_or_xpath: nil)
-      new_enumerator_class.new do |block|
+    def chain_to(other_enumerator:, css_or_xpath: nil)
+      css_or_xpath = build_css_or_xpath_from(css_or_xpath)
+
+      # new_enumerator_class.new(search_history: other_enumerator.search_history + [css_or_xpath]) do |block|
+      enumerator_class.new do |block|
         other_enumerator.each do |element|
-          new_enumerator_class.within(element: element, css_or_xpath: css_or_xpath).each do |sub_element|
+          within(element: element, css_or_xpath: css_or_xpath).each do |sub_element|
             block.yield(sub_element)
           end
         end
