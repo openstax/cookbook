@@ -27,7 +27,8 @@ module Kitchen
     end
 
     def examples(css_or_xpath=nil, &block)
-      chain_to(enumerator_class: ExampleElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      ExampleElementEnumerator.factory.build_within(self, css_or_xpath: css_or_xpath)
+      # chain_to(enumerator_class: ExampleElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
     def search(css_or_xpath=nil, &block)
@@ -37,7 +38,7 @@ module Kitchen
     def chain_to(enumerator_class:, css_or_xpath: nil, &block)
       raise(RecipeError, "Did you forget a `.each` call on this enumerator?") if block_given?
 
-      enumerator_class.factory.chain_to(other_enumerator: self, css_or_xpath: css_or_xpath)
+      enumerator_class.factory.build_within(self, css_or_xpath: css_or_xpath)
     end
 
     def first!(missing_message: nil)

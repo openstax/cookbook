@@ -145,10 +145,7 @@ module Kitchen
     def search(*selector_or_xpath_args)
       block_error_if(block_given?)
 
-      ElementEnumerator.factory.within(
-        element: self,
-        css_or_xpath: selector_or_xpath_args,
-      )
+      ElementEnumerator.factory.build_within(self, css_or_xpath: selector_or_xpath_args)
     end
 
     # Yields and returns the first child element that matches the provided

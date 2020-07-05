@@ -12,16 +12,26 @@ module Kitchen
     end
 
     # TODO spec this!
-    def build_css_or_xpath_from(css_or_xpath=nil)
-      # Apply the default css if needed
+    def apply_default_css_or_xpath_and_normalize(css_or_xpath=nil)
       css_or_xpath ||= "$"
       [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, [default_css_or_xpath].flatten.join(", ")) }
       [css_or_xpath].flatten
     end
 
-    def within(element:, css_or_xpath: nil)
-      css_or_xpath = build_css_or_xpath_from(css_or_xpath)
+    def build_within(enumerator_or_element, css_or_xpath: nil)
+      css_or_xpath = apply_default_css_or_xpath_and_normalize(css_or_xpath)
 
+      case enumerator_or_element
+      when ElementBase
+        build_within_element(enumerator_or_element, css_or_xpath: css_or_xpath)
+      when ElementEnumerator
+        build_within_other_enumerator(enumerator_or_element, css_or_xpath: css_or_xpath)
+      end
+    end
+
+    protected
+
+    def build_within_element(element, css_or_xpath:)
       enumerator_class.new do |block|
         grand_ancestors = element.ancestors
         parent_ancestor = Ancestor.new(element)
@@ -76,13 +86,12 @@ module Kitchen
       end
     end
 
-    def chain_to(other_enumerator:, css_or_xpath: nil)
-      css_or_xpath = build_css_or_xpath_from(css_or_xpath)
-
-      # new_enumerator_class.new(search_history: other_enumerator.search_history + [css_or_xpath]) do |block|
+    def build_within_other_enumerator(other_enumerator, css_or_xpath:)
+      # Return a new enumerator instance that internally iterates over `other_enumerator`
+      # running a new enumerator for each element returned by that other enumerator.
       enumerator_class.new do |block|
         other_enumerator.each do |element|
-          within(element: element, css_or_xpath: css_or_xpath).each do |sub_element|
+          build_within_element(element, css_or_xpath: css_or_xpath).each do |sub_element|
             block.yield(sub_element)
           end
         end
