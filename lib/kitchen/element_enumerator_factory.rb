@@ -24,7 +24,7 @@ module Kitchen
       case enumerator_or_element
       when ElementBase
         build_within_element(enumerator_or_element, css_or_xpath: css_or_xpath)
-      when ElementEnumerator
+      when ElementEnumeratorBase
         build_within_other_enumerator(enumerator_or_element, css_or_xpath: css_or_xpath)
       end
     end

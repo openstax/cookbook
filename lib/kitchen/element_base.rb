@@ -386,7 +386,7 @@ module Kitchen
     def_delegators :as_enumerator, :pages, :chapters, :terms, :figures, :notes, :tables, :examples
 
     def as_enumerator
-      enumerator_class.new {|block| block.yield(self)}
+      enumerator_class.new(css_or_xpath: css_or_xpath_that_found_me) {|block| block.yield(self)}
     end
 
     protected

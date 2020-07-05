@@ -1,5 +1,5 @@
 module Kitchen
-  class TableElementEnumerator < ElementEnumerator
+  class TableElementEnumerator < ElementEnumeratorBase
 
     def self.factory
       ElementEnumeratorFactory.new(
