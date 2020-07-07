@@ -8,5 +8,9 @@ module Kitchen
             short_type: :term)
     end
 
+    def self.is_the_element_class_for?(node)
+      node['data-type'] == "term"
+    end
+
   end
 end

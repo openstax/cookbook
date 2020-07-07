@@ -56,6 +56,11 @@ module Kitchen
       @is_a_clone = false
     end
 
+    def self.is_the_element_class_for?(node)
+      # override this in subclasses
+      false
+    end
+
     def has_class?(klass)
       (self[:class] || "").include?(klass)
     end
@@ -176,6 +181,11 @@ module Kitchen
     end
 
     alias_method :at, :first
+
+    def element_children
+      block_error_if(block_given?)
+      TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: "./*")
+    end
 
     # Removes the element from its parent and places it on the specified clipboard
     #

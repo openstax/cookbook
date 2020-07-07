@@ -35,5 +35,9 @@ module Kitchen
       keys.first
     end
 
+    def self.is_the_element_class_for?(node)
+      node['data-type'] == "note"
+    end
+
   end
 end

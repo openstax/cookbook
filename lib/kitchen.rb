@@ -37,6 +37,7 @@ require_all("kitchen", "*enumerator.rb")
 
 require "kitchen/element_base"
 require_all("kitchen", "*element.rb")
+require "kitchen/element_factory"
 
 require_all("kitchen/directions")
 
