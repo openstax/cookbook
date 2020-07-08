@@ -1,14 +1,25 @@
 module Kitchen
   class Oven
 
-    def self.bake(input_file:, recipes:, output_file:)
+    def self.bake(input_file:,
+                  config_file: nil,
+                  recipes:,
+                  output_file:)
+
       profile = BakeProfile.new
       profile.started!
 
-      doc = File.open(input_file) do |f|
+      nokogiri_doc = File.open(input_file) do |f|
         profile.opened!
         Nokogiri::XML(f).tap { profile.parsed! }
       end
+
+      config = config_file.nil? ? nil : Config.new_from_file(File.open(config_file))
+
+      doc = Kitchen::Document.new(
+        nokogiri_document: nokogiri_doc,
+        config: config
+      )
 
       [recipes].flatten.each do |recipe|
         recipe.document = doc

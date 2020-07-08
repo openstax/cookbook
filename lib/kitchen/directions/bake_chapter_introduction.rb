@@ -17,7 +17,7 @@ module Kitchen
           HTML
         end.join("")
 
-        introduction_page = chapter.introduction_page # chapter.pages("$.introduction").first
+        introduction_page = chapter.introduction_page
 
         introduction_page.search("div[data-type='description']").trash
         introduction_page.search("div[data-type='abstract']").trash
@@ -42,6 +42,13 @@ module Kitchen
             </div>
           HTML
         )
+
+        v1_update_selectors(chapter)
+      end
+
+      def self.v1_update_selectors(something_with_selectors)
+        something_with_selectors.selectors.title_in_introduction_page =
+          ".intro-text > [data-type='document-title']"
       end
 
     end

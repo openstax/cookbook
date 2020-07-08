@@ -9,20 +9,10 @@ module Kitchen
     end
 
     def title
-      # Get the title that isn't in the metadata
-      # first!("./*[@data-type = 'document-title']", ".intro-text > [data-type='document-title']")
-      first("./*[@data-type = 'document-title']")
-
-      # if is_introduction?
-      #   first!(document.introduction_page_selector_for_title)
-      # else
-      #   first!(document.page_selector_for_title)
-      #
-      # After bake introductions, that code should change the introduction selector
-      #
-      # doc.selectors.title_in_page, title_in_introduction_page
-      #
-      # Selectors class should have a bunch of attr_accessors
+      # The selector for intro titles changes during the baking process
+      first!(is_introduction? ?
+               selectors.title_in_introduction_page :
+               selectors.title_in_page)
     end
 
     def is_introduction?

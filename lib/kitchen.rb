@@ -16,10 +16,13 @@ end
 
 require_all("kitchen/mixins")
 
+require_all("kitchen/selectors")
+
 require "kitchen/utils"
 require "kitchen/errors"
 require "kitchen/ancestor"
 require "kitchen/search_history"
+require "kitchen/config"
 require "kitchen/document"
 require "kitchen/book_document"
 require "kitchen/debug/print_recipe_error"

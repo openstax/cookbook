@@ -1,11 +1,19 @@
+require 'forwardable'
+
 module Kitchen
   class Document
+    extend Forwardable
 
     attr_accessor :location
+    attr_reader :config
 
-    def initialize(nokogiri_document:)
+    def_delegators :config, :selectors
+    def_delegators :@nokogiri_document, :to_xhtml, :to_s, :to_xml, :to_html
+
+    def initialize(nokogiri_document:, config: nil)
       @nokogiri_document = nokogiri_document
       @location = nil
+      @config = config || Config.new_default
       @next_paste_count_for_id = {}
       @id_copy_suffix = "_copy_"
     end
