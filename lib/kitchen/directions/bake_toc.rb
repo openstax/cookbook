@@ -3,55 +3,101 @@ module Kitchen
     module BakeToc
 
       def self.v1(book:)
-        li_tags = book.element_children.map do |element|
-          li_for_element(element)
-        end.join("\n")
+        li_tags = book.body.element_children.map do |element|
+          case element
+          when ChapterElement
+            li_for_chapter(element)
+          when PageElement, CompositePageElement
+            li_for_page(element)
+          when CompositeChapterElement
+            li_for_composite_chapter(element)
+          end
+        end.compact.join("\n")
 
-        <<~HTML
-          <nav id="toc">
+        book.first!("nav").replace_children(with: <<~HTML
             <h1 class="os-toc-title">Contents</h1>
             <ol>
               #{li_tags}
             </ol>
-          </nav>
-        HTML
+          HTML
+        )
       end
 
-      def self.li_for_element(element)
-        case element
-        when ChapterElement
-          li_for_chapter(element)
-        end
-      end
-
-      def self.li_for_chapter(chapter)
-        pages = book.element_children
+      def self.li_for_composite_chapter(chapter)
+        pages = chapter.element_children.only(CompositePageElement)
 
         <<~HTML
-          <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
-            <a href="##{element.id}">
-              <span class="os-number"><span class="os-part-text">Chapter </span>1</span>
-              <span class="os-divider"> </span>
-              <span class="os-text" data-type="" itemprop="">#{chapter.title.text}</span>
+          <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+            <a href="##{chapter.title.id}">
+              #{chapter.title.children.to_s}
             </a>
             <ol class="os-chapter">
-              #{lis_for_chapter_pages(chapter.element_children)}
+              #{pages.map{|page| li_for_page(page)}.join("\n")}
             </ol>
           </li>
         HTML
       end
 
-      def self.li_for_chapter_pages(pages)
-        pages.map do |page|
-          page
-          <<~HTML
-            <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="#{page.id}">
-              <a href="##{page.id}">
-                <span class="os-text" data-type="" itemprop="">Introduction</span>
-              </a>
-            </li>
-          HTML
-        end.join("\n")
+      def self.li_for_chapter(chapter)
+        pages = chapter.element_children.only(PageElement, CompositePageElement)
+
+        <<~HTML
+          <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+            <a href="##{chapter.title.id}">
+              <span class="os-number"><span class="os-part-text">Chapter </span>#{chapter.count_in(:book)}</span>
+              <span class="os-divider"> </span>
+              <span class="os-text" data-type="" itemprop="">#{chapter.title.first!(".os-text").text}</span>
+            </a>
+            <ol class="os-chapter">
+              #{pages.map{|page| li_for_page(page)}.join("\n")}
+            </ol>
+          </li>
+        HTML
+      end
+
+      def self.li_for_page(page)
+        li_class =
+          if page.is_a?(PageElement)
+            if page.has_ancestor?(:chapter)
+              "os-toc-chapter-page"
+            elsif page.is_appendix?
+              "os-toc-appendix"
+            elsif page.is_preface?
+              "os-toc-preface"
+            else
+              debugger
+              raise "do not know what TOC class to use for page with classes #{page.classes}"
+            end
+          elsif page.is_a?(CompositePageElement)
+            if page.is_index?
+              "os-toc-index"
+            elsif page.has_ancestor?(:composite_chapter) || page.has_ancestor?(:chapter)
+              "os-toc-chapter-composite-page"
+            else
+              debugger
+              raise "do not know what TOC class to use for page with classes #{page.classes}"
+            end
+          else
+            raise(ArgumentError, "don't know how to put `#{page.class}` into the TOC")
+          end
+
+        title = page.title.copy
+
+        # The part text gets inserted as a child to the number span
+        part_text = title.first(".os-part-text")
+        number = title.first(".os-number")
+        if part_text && number
+          part_text = part_text.cut
+          number.prepend(child: part_text.paste)
+        end
+
+        <<~HTML
+          <li class="#{li_class}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}">
+            <a href="##{page.id}">
+              #{title.element_children.copy.paste}
+            </a>
+          </li>
+        HTML
       end
 
     end

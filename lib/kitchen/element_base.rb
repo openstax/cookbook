@@ -88,6 +88,10 @@ module Kitchen
       @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'")
     end
 
+    def has_ancestor?(type)
+      @ancestors[type.to_sym].present?
+    end
+
     def ancestors
       @ancestors
     end
@@ -182,7 +186,7 @@ module Kitchen
 
     alias_method :at, :first
 
-    def element_children
+    def element_children()
       block_error_if(block_given?)
       TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: "./*")
     end

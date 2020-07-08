@@ -1,11 +1,11 @@
 module Kitchen
-  class ChapterElement < ElementBase
+  class CompositePageElement < ElementBase
 
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
-            enumerator_class: ChapterElementEnumerator,
-            short_type: :chapter)
+            enumerator_class: CompositePageElementEnumerator,
+            short_type: :composite_page)
     end
 
     def title
@@ -15,20 +15,12 @@ module Kitchen
       first!("./*[@data-type = 'document-title']")
     end
 
-    def introduction_page
-      pages('.introduction').first
-    end
-
-    def glossaries
-      search("div[data-type='glossary']")
-    end
-
-    def key_equations
-      search("section.key-equations")
-    end
-
     def self.is_the_element_class_for?(node)
-      node['data-type'] == "chapter"
+      node['data-type'] == "composite-page"
+    end
+
+    def is_index?
+      has_class?("os-index-container")
     end
 
   end

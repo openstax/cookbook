@@ -84,6 +84,14 @@ module Kitchen
       )
     end
 
+    def create_element_from_string(string)
+      Kitchen::Element.new(
+        node: @nokogiri_document.create_element("div"),
+        document: self,
+        short_type: "created_element_#{SecureRandom.hex(4)}"
+      ).element_children.first
+    end
+
     def record_id_copied(id)
       return if id.blank?
       @next_paste_count_for_id[id] ||= 1

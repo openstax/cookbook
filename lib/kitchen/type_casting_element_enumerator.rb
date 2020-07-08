@@ -8,5 +8,16 @@ module Kitchen
       )
     end
 
+    def only(*element_classes)
+      element_classes.flatten!
+
+      TypeCastingElementEnumerator.new do |block|
+        self.each do |element|
+          next unless element_classes.include?(element.class)
+          block.yield(element)
+        end
+      end
+    end
+
   end
 end
