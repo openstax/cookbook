@@ -13,17 +13,22 @@ module Kitchen
           solution_clipboard = Clipboard.new
           solutions_clipboards.push(solution_clipboard)
 
-          chapter.pages.each do |page|
-            next if page.is_introduction?
-
+          chapter.pages("$:not(.introduction)").each do |page|
             exercise_section = page.exercises
             exercise_section.first("h3").trash # get rid of old title
-            exercise_section_title = page.title.clone
+            exercise_section_title = page.title.copy
             exercise_section_title.name = "h3"
+            exercise_section_title.replace_children(with: <<~HTML
+                <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+                <span class="os-divider"> </span>
+                <span class="os-text" data-type="" itemprop="">#{exercise_section_title.children}</span>
+              HTML
+            )
+
             exercise_section.prepend(child:
               <<~HTML
                 <a href="##{page.title.id}">
-                  #{exercise_section_title}
+                  #{exercise_section_title.paste}
                 </a>
               HTML
             )
@@ -52,6 +57,9 @@ module Kitchen
           )
         end
 
+        # Store a paste here to use at end so that uniquifyied IDs match legacy baking
+        eob_metadata = metadata_elements.paste
+
         solutions = solutions_clipboards.map.with_index do |solution_clipboard, index|
           <<~HTML
             <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution#{index+1}">
@@ -75,7 +83,7 @@ module Kitchen
             </h1>
             <div data-type="metadata" style="display: none;">
               <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_answer_key_title)}</h1>
-              #{metadata_elements.paste}
+              #{eob_metadata}
             </div>
             #{solutions.join("\n")}
           </div>

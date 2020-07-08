@@ -7,17 +7,24 @@ module Kitchen
                                                       .permissions [data-type='subject'])).copy
 
         summaries = Clipboard.new
-        chapter.pages.each do |page|
-          next if page.is_introduction?
 
+        # TODO include specific page types somehow without writing it out
+        chapter.pages("$:not(.introduction)").each do |page|
           summary = page.summary
           summary.first("h3").trash # get rid of old title
-          summary_title = page.title.clone
+          summary_title = page.title.copy
           summary_title.name = "h3"
+          summary_title.replace_children(with: <<~HTML
+              <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+              <span class="os-divider"> </span>
+              <span class="os-text" data-type="" itemprop="">#{summary_title.children}</span>
+            HTML
+          )
+
           summary.prepend(child:
             <<~HTML
               <a href="##{page.title.id}">
-                #{summary_title}
+                #{summary_title.paste}
               </a>
             HTML
           )

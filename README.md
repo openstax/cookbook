@@ -510,7 +510,6 @@ like `ChapterElement` and `ChapterElementEnumerator` don't have hardcoded select
 have a nice way to iterate through all pages that may or may not be in chapters with the ability to get the chapter element for those pages in chapters.  Right now we can say `book.search("[data-type='page'], [data-type='chapter'] > [data-type='page']")` which gives us all those pages but doesn't track ancestry or counts well.  Maybe something like `book.either{*|chapters}.pages.each...`
 * Add code coverage tracking
 * Convert all hardcoded inserted words into I18N translations.
-* Redo tutorials for the new way
 * Specs galore :-)
   * `$` search path substitution (making sure not to mess up xpath)
 * Think up and handle a bunch more recipe errors, test they all raise some kind of `RecipeError`.

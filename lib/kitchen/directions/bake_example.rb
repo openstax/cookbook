@@ -2,7 +2,7 @@ module Kitchen
   module Directions
     module BakeExample
 
-      def self.v1(example:, number:)
+      def self.v1(example:, number:, title_tag:)
         example.replace_children(with:
           <<~HTML
             <div class="body">
@@ -13,11 +13,11 @@ module Kitchen
 
         example.prepend(child:
           <<~HTML
-            <h3 class="os-title">
+            <#{title_tag} class="os-title">
               <span class="os-title-label">#{I18n.t(:example)} </span>
               <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
-            </h3>
+            </#{title_tag}>
           HTML
         )
 
