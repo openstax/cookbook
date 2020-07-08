@@ -65,7 +65,6 @@ module Kitchen
             elsif page.is_preface?
               "os-toc-preface"
             else
-              debugger
               raise "do not know what TOC class to use for page with classes #{page.classes}"
             end
           elsif page.is_a?(CompositePageElement)
@@ -74,7 +73,6 @@ module Kitchen
             elsif page.has_ancestor?(:composite_chapter) || page.has_ancestor?(:chapter)
               "os-toc-chapter-composite-page"
             else
-              debugger
               raise "do not know what TOC class to use for page with classes #{page.classes}"
             end
           else
