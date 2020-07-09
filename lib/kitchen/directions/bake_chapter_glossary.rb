@@ -7,7 +7,9 @@ module Kitchen
                                                       .permissions [data-type='subject'])).copy
 
         definitions = chapter.glossaries.search("dl").cut
-        definitions.sort_by!{|definition| definition.first("dt").text.downcase }
+        definitions.sort_by! do |definition|
+          [definition.first("dt").text.downcase, definition.first("dd").text.downcase]
+        end
 
         chapter.glossaries.trash
 
