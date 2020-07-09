@@ -14,14 +14,14 @@ module Kitchen
         example.prepend(child:
           <<~HTML
             <#{title_tag} class="os-title">
-              <span class="os-title-label">#{I18n.t(:example)} </span>
+              <span class="os-title-label">#{I18n.t(:example_label)} </span>
               <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
             </#{title_tag}>
           HTML
         )
 
-        example.document.pantry(name: :link_text).store "Example #{number}", label: example.id
+        example.document.pantry(name: :link_text).store "#{I18n.t(:example_label)} #{number}", label: example.id
 
         example.titles.each {|title| title.name = "h4"}
       end
