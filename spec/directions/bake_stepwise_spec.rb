@@ -42,9 +42,7 @@ RSpec.describe Kitchen::Directions::BakeStepwise do
         <ol class="os-stepwise">
           <li>
             <span class="os-stepwise-token">Step 1. </span>
-            <span class="os-stepwise-content">
-              content3
-            </span>
+            <span class="os-stepwise-content">content3</span>
           </li>
         </ol>
       HTML

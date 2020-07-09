@@ -32,6 +32,14 @@ module Kitchen
       end
     end
 
+    def or_with(other_factory)
+      self.class.new(
+        default_css_or_xpath: default_css_or_xpath + ", " + other_factory.default_css_or_xpath,
+        enumerator_class: TypeCastingElementEnumerator,
+        detect_sub_element_class: true
+      )
+    end
+
     protected
 
     def build_within_element(element, css_or_xpath:)

@@ -70,13 +70,17 @@ module MatchHelpers
   end
 
   def normalized_xml_doc_string(xml_thing_with_to_s)
+    # in case xml_thing_with_to_s is several top level elements, wrap it
+    # in a dummy element and extract it back out below
+
+    xml_thing_with_to_s = "<dummy>#{xml_thing_with_to_s}</dummy>"
     doc = Nokogiri::XML(xml_thing_with_to_s.to_s) do |config|
       config.noblanks
     end
 
     doc.alphabetize_attributes!
 
-    doc.to_xhtml(indent: 2)
+    doc.search("dummy").children.to_xhtml(indent: 2)
   end
 
 end

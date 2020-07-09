@@ -29,7 +29,7 @@ module Kitchen
     #   Remove a class from the element
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
                            :text, :wrap, :children, :to_html, :remove_attribute,
-                           :classes
+                           :classes, :path
 
     def_delegators :document, :config
     def_delegators :config, :selectors
@@ -190,6 +190,17 @@ module Kitchen
     def element_children()
       block_error_if(block_given?)
       TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: "./*")
+    end
+
+    def search_with(*enumerator_classes)
+      block_error_if(block_given?)
+      raise "must supply at least one enumerator class" if enumerator_classes.empty?
+
+      factory = enumerator_classes[0].factory
+      enumerator_classes[1..-1].each do |enumerator_class|
+        factory = factory.or_with(enumerator_class.factory)
+      end
+      factory.build_within(self)
     end
 
     # Removes the element from its parent and places it on the specified clipboard
