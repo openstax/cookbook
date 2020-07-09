@@ -16,6 +16,7 @@ end
 
 require_all("kitchen/mixins")
 
+require "kitchen/selectors/base"
 require_all("kitchen/selectors")
 
 require "kitchen/utils"
