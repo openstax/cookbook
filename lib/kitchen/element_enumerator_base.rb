@@ -52,7 +52,7 @@ module Kitchen
 
     def first!(missing_message: "Could not return a first result")
       first || raise(RecipeError, "#{missing_message} matching #{search_history.latest} " \
-                                  "inside #{search_history.upstream}")
+                                  "inside [#{search_history.upstream}]")
     end
 
     # Removes enumerated elements from their parent and places them on the specified clipboard

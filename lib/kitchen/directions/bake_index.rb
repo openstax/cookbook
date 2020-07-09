@@ -15,15 +15,13 @@ module Kitchen
 
           # Remember it in our index hash
           page_title = term.ancestor(:page).title
-          page_title_with_number = [page_title.first(".os-number")&.text,
-                                    page_title.first(".os-text").text].compact.join(" ")
 
           index[group_by_letter.downcase] ||= []
           index[group_by_letter.downcase].push({
             group_by_letter: group_by_letter,
             term: term.text,
             id: term.id,
-            section: page_title_with_number
+            section: page_title.text.gsub(/\n/,'')
           })
         end
 

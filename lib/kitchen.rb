@@ -16,10 +16,14 @@ end
 
 require_all("kitchen/mixins")
 
+require "kitchen/selectors/base"
+require_all("kitchen/selectors")
+
 require "kitchen/utils"
 require "kitchen/errors"
 require "kitchen/ancestor"
 require "kitchen/search_history"
+require "kitchen/config"
 require "kitchen/document"
 require "kitchen/book_document"
 require "kitchen/debug/print_recipe_error"
@@ -37,6 +41,7 @@ require_all("kitchen", "*enumerator.rb")
 
 require "kitchen/element_base"
 require_all("kitchen", "*element.rb")
+require "kitchen/element_factory"
 
 require_all("kitchen/directions")
 

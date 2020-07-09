@@ -12,5 +12,9 @@ module Kitchen
       first("figcaption")
     end
 
+    def self.is_the_element_class_for?(node)
+      node.name == "figure"
+    end
+
   end
 end

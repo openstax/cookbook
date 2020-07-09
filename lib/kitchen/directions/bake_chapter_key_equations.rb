@@ -22,7 +22,7 @@ module Kitchen
               #{key_equations.paste}
             </div>
           HTML
-        )
+        ) unless key_equations.none?
       end
 
     end

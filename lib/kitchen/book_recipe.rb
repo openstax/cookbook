@@ -17,7 +17,7 @@ module Kitchen
       @document = Kitchen::BookDocument.new(
         document: @document,
         short_name: book_short_name,
-        numbering_style: "1.1"
+        config: @document.config.clone
       )
     end
 

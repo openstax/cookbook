@@ -31,6 +31,9 @@ module Kitchen
                            :text, :wrap, :children, :to_html, :remove_attribute,
                            :classes
 
+    def_delegators :document, :config
+    def_delegators :config, :selectors
+
     def initialize(node:, document:, enumerator_class:, short_type: nil)
       raise(ArgumentError, "node cannot be nil") if node.nil?
       @node = node
@@ -44,8 +47,6 @@ module Kitchen
         case document
         when Kitchen::Document
           document
-        when Nokogiri::XML::Document
-          Kitchen::Document.new(nokogiri_document: document)
         else
           raise(ArgumentError, "`document` is not a known document type")
         end
@@ -54,6 +55,11 @@ module Kitchen
       @counts_in = HashWithIndifferentAccess.new
       @css_or_xpath_that_has_been_counted = {}
       @is_a_clone = false
+    end
+
+    def self.is_the_element_class_for?(node)
+      # override this in subclasses
+      false
     end
 
     def has_class?(klass)
@@ -81,6 +87,10 @@ module Kitchen
 
     def ancestor(type)
       @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'")
+    end
+
+    def has_ancestor?(type)
+      @ancestors[type.to_sym].present?
     end
 
     def ancestors
@@ -176,6 +186,11 @@ module Kitchen
     end
 
     alias_method :at, :first
+
+    def element_children()
+      block_error_if(block_given?)
+      TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: "./*")
+    end
 
     # Removes the element from its parent and places it on the specified clipboard
     #

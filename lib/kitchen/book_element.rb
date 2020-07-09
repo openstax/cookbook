@@ -8,6 +8,10 @@ module Kitchen
             short_type: :book)
     end
 
+    def body
+      first!("body")
+    end
+
     def metadata
       first!("div[data-type='metadata']")
     end

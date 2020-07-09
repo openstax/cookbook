@@ -520,6 +520,8 @@ have a nice way to iterate through all pages that may or may not be in chapters 
 * Change `search` methods (and related) to also take an `as:` argument.  Use this "as" to name the found elements in search histories instead of using a name based on the search CSS.
 * Control I18n language in Oven.
 * Get doc normalization scripts into this repo from testkitchen (for comparing two large baked outputs).
+* Change from ElementBase <- Element to Element <- BasicElement
+* README: element_children, .only, selectors, config files
 
 ## Quirks
 

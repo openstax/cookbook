@@ -28,11 +28,11 @@ module Kitchen
       end
     end
 
-    def initialize(document:, short_name: :not_set, numbering_style: "1.1.1")
-      @numbering_style = numbering_style # not used yet
+    def initialize(document:, short_name: :not_set, config: nil)
       @short_name = short_name
 
-      super(nokogiri_document: document.is_a?(Document) ? document.raw : document)
+      super(nokogiri_document: document.is_a?(Document) ? document.raw : document,
+            config: config)
     end
 
     def book

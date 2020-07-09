@@ -37,7 +37,10 @@ module FactoryHelpers
     raise("new_element must only make one top-level element") if children.many?
     node = children.first
 
-    Kitchen::Element.new(node: node, document: nokogiri_document)
+    Kitchen::Element.new(
+      node: node,
+      document: Kitchen::Document.new(nokogiri_document: nokogiri_document)
+    )
   end
 
 end

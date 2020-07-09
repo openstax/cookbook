@@ -4,11 +4,14 @@ module Kitchen
     attr_reader :default_css_or_xpath
     attr_reader :enumerator_class
     attr_reader :sub_element_class
+    attr_reader :detect_sub_element_class
 
-    def initialize(default_css_or_xpath: nil, sub_element_class:, enumerator_class:)
+    def initialize(default_css_or_xpath: nil, sub_element_class: nil,
+                   enumerator_class:, detect_sub_element_class: false)
       @default_css_or_xpath = default_css_or_xpath
       @sub_element_class = sub_element_class
       @enumerator_class = enumerator_class
+      @detect_sub_element_class = detect_sub_element_class
     end
 
     # TODO spec this!
@@ -39,15 +42,13 @@ module Kitchen
         num_sub_elements = 0
 
         element.raw.search(*css_or_xpath).each_with_index do |sub_node, index|
-          # All elements except for `Element` have a built-in `short_type`; for Element,
-          # define a dynamic short type based on the search css/xpath.
-          sub_element =
-            sub_element_class == Element ?
-              sub_element_class.new(node: sub_node,
-                                    document: element.document,
-                                    short_type: Utils.search_path_to_type(css_or_xpath)) :
-              sub_element_class.new(node: sub_node,
-                                    document: element.document)
+          sub_element = ElementFactory.build_from_node(
+                          node: sub_node,
+                          document: element.document,
+                          element_class: sub_element_class,
+                          default_short_type: Utils.search_path_to_type(css_or_xpath),
+                          detect_element_class: detect_sub_element_class
+                        )
 
           # If the provided `css_or_xpath` has already been counted, we need to uncount
           # them on the ancestors so that when they are counted again below, the counts

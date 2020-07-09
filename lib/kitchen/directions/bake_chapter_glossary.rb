@@ -24,7 +24,7 @@ module Kitchen
               #{definitions.paste}
             </div>
           HTML
-        )
+        ) unless definitions.none?
       end
 
     end

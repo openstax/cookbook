@@ -24,5 +24,9 @@ module Kitchen
       has_class?('unnumbered')
     end
 
+    def self.is_the_element_class_for?(node)
+      node.name == "table"
+    end
+
   end
 end
