@@ -34,6 +34,11 @@ module Kitchen
             )
 
             exercise_section.search("[data-type='exercise']").each do |exercise|
+              exercise.document.pantry(name: :link_text).store(
+                "#{I18n.t(:exercise_label)} #{chapter.count_in(:book)}.#{exercise.count_in(:chapter)}",
+                label: exercise.id
+              )
+
               bake_exercise_in_place(exercise: exercise)
               exercise.first("[data-type='solution']")&.cut(to: solution_clipboard)
             end
