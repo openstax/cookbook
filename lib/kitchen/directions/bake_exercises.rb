@@ -15,7 +15,7 @@ module Kitchen
 
           chapter.pages("$:not(.introduction)").each do |page|
             exercise_section = page.exercises
-            exercise_section.first("h3").trash # get rid of old title
+            exercise_section.first("[data-type='title']")&.trash
             exercise_section_title = page.title.copy
             exercise_section_title.name = "h3"
             exercise_section_title.replace_children(with: <<~HTML
@@ -54,7 +54,7 @@ module Kitchen
                 #{exercise_clipboard.paste}
               </div>
             HTML
-          )
+          ) unless exercise_clipboard.none?
         end
 
         # Store a paste here to use at end so that uniquifyied IDs match legacy baking
@@ -88,7 +88,7 @@ module Kitchen
             #{solutions.join("\n")}
           </div>
           HTML
-        )
+        ) unless solutions.none?
       end
 
       def self.bake_exercise_in_place(exercise:)

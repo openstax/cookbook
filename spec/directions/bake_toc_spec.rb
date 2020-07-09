@@ -81,7 +81,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
       HTML
     ).tap do |book|
       # TOC runs after introduction baking which changes some selectors
-      Kitchen::Directions::BakeChapterIntroduction.v1_update_selectors(book)
+      Kitchen::Directions::BakeChapterIntroductions.v1_update_selectors(book)
     end
   end
 

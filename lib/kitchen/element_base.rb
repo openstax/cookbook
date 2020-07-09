@@ -47,10 +47,7 @@ module Kitchen
         case document
         when Kitchen::Document
           document
-        # when Nokogiri::XML::Document
-        #   Kitchen::Document.new(nokogiri_document: document)
         else
-          debugger
           raise(ArgumentError, "`document` is not a known document type")
         end
 
