@@ -11,6 +11,11 @@ module Kitchen
           # Markup the term
           term.id = "auto_#{term.ancestor(:page).id}_term#{term.count_in(:book)}"
           group_by_letter = term.text[0]
+
+          if !group_by_letter.match? (/\w/)
+            group_by_letter = I18n.t(:eob_index_symbols_group)
+          end
+
           term['group-by'] = group_by_letter
 
           # Remember it in our index hash
