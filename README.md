@@ -522,6 +522,7 @@ have a nice way to iterate through all pages that may or may not be in chapters 
 * Get doc normalization scripts into this repo from testkitchen (for comparing two large baked outputs).
 * Change from ElementBase <- Element to Element <- BasicElement
 * README: element_children, .only, selectors, config files
+* Use ERB for more readable string building?
 
 ## Quirks
 
