@@ -2,7 +2,7 @@ en:
   figure: Figure
   table: Table
   appendix: Appendix
-  example: Example
+  example_label: Example
   exercise_label: Exercise
   stepwise_step_label: Step
   eoc_key_terms_title: Key Terms
