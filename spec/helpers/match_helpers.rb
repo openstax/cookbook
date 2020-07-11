@@ -22,6 +22,19 @@ module MatchHelpers
     attr_reader :actual, :expected
   end
 
+  # Good if there are text elements with whitespace that is not important but
+  # is messing up the spec diff.
+  RSpec::Matchers.define :match_normalized_html_with_stripping do |expected|
+    match do |actual|
+      @actual = normalized_xml_doc_string(actual).split.map(&:strip).join("\n")
+      @expected = normalized_xml_doc_string(expected).split.map(&:strip).join("\n")
+      @actual == @expected
+    end
+
+    diffable
+    attr_reader :actual, :expected
+  end
+
   RSpec::Matchers.define :match_html_nodes do |expected|
     match do |actual|
       @actual = normalized_xml_doc(actual)
