@@ -108,6 +108,13 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
     expect(section.items.map(&:term_text)).to eq %w(Héroult Hu Hückel Hunk)
   end
 
+  it "sorts terms starting with symbols" do
+    section = described_class::IndexSection.new(name: "whatever")
+    section.add_term(text_only_term("Δoct"))
+    section.add_term(text_only_term("π*"))
+    expect(section.items.map(&:term_text)).to eq %w(Δoct π*)
+  end
+
   it "sorts uppercase first for same term" do
     section = described_class::IndexSection.new(name: "whatever")
     section.add_term(text_only_term("hu"))

@@ -31,7 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rainbow'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'i18n'
-  spec.add_dependency 'sort_alphabetical'
 
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'yard'
