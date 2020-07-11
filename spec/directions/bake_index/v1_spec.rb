@@ -115,6 +115,18 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
     expect(section.items.map(&:term_text)).to eq %w(Hu hu)
   end
 
+  it "sorts index items with superscript" do
+    section = described_class::IndexSection.new(name: "whatever")
+    section.add_term(text_only_term("sp hybrid"))
+    section.add_term(text_only_term("sp2 hybrid"))    # sp^2 hybrid
+    section.add_term(text_only_term("sp3 hybrid"))    # sp^3 hybrid
+    section.add_term(text_only_term("sp3d hybrid"))   # (sp^3)(d) hybrid
+    section.add_term(text_only_term("sp3d2 hybrid"))  # (sp^3)(d^2) hybrid
+    expect(section.items.map(&:term_text)).to eq [
+      "sp hybrid", "sp2 hybrid", "sp3 hybrid", "sp3d hybrid", "sp3d2 hybrid"
+    ]
+  end
+
   def text_only_term(text)
     described_class::Term.new(text: text, id: nil, group_by: nil, page_title: nil)
   end

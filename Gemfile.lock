@@ -6,11 +6,12 @@ PATH
       i18n
       nokogiri
       rainbow
+      sort_alphabetical
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.0.3.1)
+    activesupport (6.0.3.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -43,12 +44,15 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    sort_alphabetical (1.1.0)
+      unicode_utils (>= 1.2.2)
     tdiff (0.3.4)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    unicode_utils (1.4.0)
     yard (0.9.24)
-    zeitwerk (2.3.0)
+    zeitwerk (2.3.1)
 
 PLATFORMS
   ruby

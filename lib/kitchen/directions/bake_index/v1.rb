@@ -24,7 +24,13 @@ module Kitchen::Directions::BakeIndex
       def initialize(term_text:)
         @term_text = term_text
         @terms = []
-        @sortable = term_text.to_sort_atoms
+
+        # Sort by transliterated version first to support accent marks,
+        # then by the raw text to support the same text with different capitalization
+        @sortable = [
+          ActiveSupport::Inflector.transliterate(term_text).downcase,
+          term_text
+        ]
       end
 
       def add_term(term)
@@ -32,10 +38,7 @@ module Kitchen::Directions::BakeIndex
       end
 
       def <=>(other)
-        # Use to_sort_atoms patch to handle accent marks
-        (self.sortable <=> other.sortable).tap do |value|
-          return term_text <=> other.term_text if value == 0
-        end
+        self.sortable <=> other.sortable
       end
 
       protected
