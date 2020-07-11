@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeIndex do
+RSpec.describe Kitchen::Directions::BakeIndex::V1 do
 
   before do
     stub_locales({
@@ -32,6 +32,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             <div data-type="document-title"><span>1.1</span> First Page</div>
             <span data-type="term">foo</span>
             <span data-type="term">ΔE</span>
+            <span data-type="term"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
           </div>
         </div>
       HTML
@@ -39,7 +40,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
   end
 
   it "works" do
-    described_class.v1(book: book_1)
+    described_class.new.bake(book: book_1)
 
     expect(book_1.first(".os-index-container").to_s).to match_normalized_html(
       <<~HTML
@@ -66,27 +67,56 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           </div>
           <div class="group-by">
             <span class="group-label">F</span>
-              <div class="os-index-item">
-                <span class="os-term" group-by="F">Foo</span>
-                <a class="os-term-section-link" href="#auto_p1_term2">
-                  <span class="os-term-section">Preface</span>
-                </a>
-              </div>
-              <div class="os-index-item">
-                <span class="os-term" group-by="f">foo</span>
-                <a class="os-term-section-link" href="#auto_p1_term1">
-                  <span class="os-term-section">Preface</span>
-                </a>
-                <span class="os-index-link-separator">, </span>
-                <a class="os-term-section-link" href="#auto_p2_term3">
-                  <span class="os-term-section">1.1 First Page</span>
-                </a>
-              </div>
+            <div class="os-index-item">
+              <span class="os-term" group-by="F">Foo</span>
+              <a class="os-term-section-link" href="#auto_p1_term2">
+                <span class="os-term-section">Preface</span>
+              </a>
+            </div>
+            <div class="os-index-item">
+              <span class="os-term" group-by="f">foo</span>
+              <a class="os-term-section-link" href="#auto_p1_term1">
+                <span class="os-term-section">Preface</span>
+              </a>
+              <span class="os-index-link-separator">, </span>
+              <a class="os-term-section-link" href="#auto_p2_term3">
+                <span class="os-term-section">1.1 First Page</span>
+              </a>
+            </div>
+          </div>
+          <div class="group-by">
+            <span class="group-label">S</span>
+            <div class="os-index-item">
+              <span class="os-term" group-by="s">sp3d2 orbitals</span>
+              <a class="os-term-section-link" href="#auto_p2_term5">
+                <span class="os-term-section">1.1 First Page</span>
+              </a>
             </div>
           </div>
         </div>
       HTML
     )
+  end
+
+  it "sorts terms with accent marks" do
+    section = described_class::IndexSection.new(name: "whatever")
+    section.add_term(text_only_term("Hu"))
+    section.add_term(text_only_term("Hückel"))
+    section.add_term(text_only_term("Héroult"))
+    section.add_term(text_only_term("Hunk"))
+
+    expect(section.items.map(&:term_text)).to eq %w(Héroult Hu Hückel Hunk)
+  end
+
+  it "sorts uppercase first for same term" do
+    section = described_class::IndexSection.new(name: "whatever")
+    section.add_term(text_only_term("hu"))
+    section.add_term(text_only_term("Hu"))
+    expect(section.items.map(&:term_text)).to eq %w(Hu hu)
+  end
+
+  def text_only_term(text)
+    described_class::Term.new(text: text, id: nil, group_by: nil, page_title: nil)
   end
 
 end

@@ -4,16 +4,18 @@ require "nokogiri"
 require "active_support/all"
 
 module Kitchen
+  module Directions; end
 end
 
 def file_glob(relative_folder_and_extension)
   Dir[File.expand_path(__dir__ + "/" + relative_folder_and_extension)]
 end
 
-def require_all(relative_folder, file_matcher="*.rb")
+def require_all(relative_folder, file_matcher="**/*.rb")
   file_glob(relative_folder + "/#{file_matcher}").each{|f| require f}
 end
 
+require_all("kitchen/patches")
 require_all("kitchen/mixins")
 
 require "kitchen/selectors/base"
@@ -33,7 +35,6 @@ require "kitchen/oven"
 require "kitchen/clipboard"
 require "kitchen/pantry"
 require "kitchen/counter"
-require "kitchen/patches"
 
 require "kitchen/element_enumerator_base"
 require "kitchen/element_enumerator_factory"
@@ -42,6 +43,7 @@ require_all("kitchen", "*enumerator.rb")
 require "kitchen/element_base"
 require_all("kitchen", "*element.rb")
 require "kitchen/element_factory"
+
 
 require_all("kitchen/directions")
 
