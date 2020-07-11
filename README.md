@@ -1,6 +1,7 @@
 # Kitchen
 
 [![Build Status](https://travis-ci.org/openstax/kitchen.svg?branch=master)](https://travis-ci.org/openstax/kitchen)
+[![Coverage Status](https://img.shields.io/codecov/c/github/openstax/kitchen.svg)](https://codecov.io/gh/openstax/kitchen)
 
 Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`
 

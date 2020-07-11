@@ -1,6 +1,9 @@
 require "bundler/setup"
 require "kitchen"
 
+require 'simplecov'
+SimpleCov.start
+
 require "byebug"
 require "nokogiri/diff"
 require "rainbow"
