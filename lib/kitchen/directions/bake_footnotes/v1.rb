@@ -19,17 +19,19 @@ module Kitchen::Directions::BakeFootnotes
       footnote_number = 0
       aside_id_to_footnote_number = {}
 
-      container.search("aside").each do |aside|
+      container.search("a[role='doc-noteref']").each do |anchor|
         footnote_number += 1
-        aside_id_to_footnote_number[aside.id] = footnote_number
+        anchor.replace_children(with: footnote_number.to_s)
+        aside_id = anchor[:href][1..-1]
+        aside_id_to_footnote_number[aside_id] = footnote_number
+      end
+
+
+      container.search("aside").each do |aside|
+        footnote_number = aside_id_to_footnote_number[aside.id]
         aside.prepend(child: "<div class='footnote-number'>#{footnote_number}</div>")
       end
 
-      container.search("a[role='doc-noteref']").each do |anchor|
-        anchor.replace_children(with:
-          aside_id_to_footnote_number[anchor[:href][1..-1]].to_s
-        )
-      end
     end
 
   end
