@@ -25,6 +25,10 @@ RSpec.describe Kitchen::Directions::BakeFootnotes::V1 do
             <aside id="aside5" type="footnote">Footnote content 5</aside>
           </div>
         </div>
+        <div data-type="page">
+          <p><a href="#aside6" role="doc-noteref">[footnote]</a> Blah.</p>
+          <aside id="aside6" type="footnote">Footnote content 6</aside>
+        </div>
       HTML
     )
   end
@@ -53,6 +57,10 @@ RSpec.describe Kitchen::Directions::BakeFootnotes::V1 do
             <p><a href="#aside5" role="doc-noteref">4</a> Blah.</p>
             <aside id="aside5" type="footnote"><div class="footnote-number">4</div>Footnote content 5</aside>
           </div>
+        </div>
+        <div data-type="page">
+          <p><a href="#aside6" role="doc-noteref">1</a> Blah.</p>
+          <aside id="aside6" type="footnote"><div class="footnote-number">1</div>Footnote content 6</aside>
         </div>
       HTML
     )

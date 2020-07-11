@@ -2,23 +2,33 @@ module Kitchen::Directions::BakeFootnotes
   class V1
 
     def bake(book:)
-      counts_in_parent = Hash.new(0)
+      # Footnotes are numbered either within their top-level pages (preface,
+      # appendices, etc) or within chapters. Tackle each case separately
 
-      book.search_with(Kitchen::PageElementEnumerator,
-                       Kitchen::CompositePageElementEnumerator).each do |page|
-        aside_id_to_footnote_number = {}
+      book.body.element_children.only(Kitchen::PageElement,
+                                      Kitchen::CompositePageElement).each do |page|
+        bake_footnotes_within(page)
+      end
 
-        page.search("aside").each do |aside|
-          footnote_number = counts_in_parent[page.parent.path] += 1
-          aside_id_to_footnote_number[aside.id] = footnote_number
-          aside.prepend(child: "<div class='footnote-number'>#{footnote_number}</div>")
-        end
+      book.chapters.each do |chapter|
+        bake_footnotes_within(chapter)
+      end
+    end
 
-        page.search("a[role='doc-noteref']").each do |anchor|
-          anchor.replace_children(with:
-            aside_id_to_footnote_number[anchor[:href][1..-1]].to_s
-          )
-        end
+    def bake_footnotes_within(container)
+      footnote_number = 0
+      aside_id_to_footnote_number = {}
+
+      container.search("aside").each do |aside|
+        footnote_number += 1
+        aside_id_to_footnote_number[aside.id] = footnote_number
+        aside.prepend(child: "<div class='footnote-number'>#{footnote_number}</div>")
+      end
+
+      container.search("a[role='doc-noteref']").each do |anchor|
+        anchor.replace_children(with:
+          aside_id_to_footnote_number[anchor[:href][1..-1]].to_s
+        )
       end
     end
 
