@@ -9,9 +9,6 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
     })
   end
 
-  # TODO test that...
-  # 1) one term in two places creates one entry in the index
-
   let(:book_1) do
     book_containing(html:
       <<~HTML

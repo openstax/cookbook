@@ -3,8 +3,6 @@ module Kitchen::Directions::BakeIndex
 
     # TODO
     # 1) If have "Temperature" and "temperature", use lowercase
-    # 2) Sort "Hückel" after "Hu" and before "Hund" (e.g.)
-    # 3) Move into a V1 class
 
     class Term
       attr_reader :text, :id, :group_by, :page_title
