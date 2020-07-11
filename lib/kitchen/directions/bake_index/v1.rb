@@ -1,9 +1,6 @@
 module Kitchen::Directions::BakeIndex
   class V1
 
-    # TODO
-    # 1) If have "Temperature" and "temperature", use lowercase
-
     class Term
       attr_reader :text, :id, :group_by, :page_title
 
@@ -33,6 +30,10 @@ module Kitchen::Directions::BakeIndex
 
       def add_term(term)
         @terms.push(term)
+      end
+
+      def uncapitalize_term_text!
+        @term_text = @term_text.uncapitalize
       end
 
       def <=>(other)
@@ -71,7 +72,10 @@ module Kitchen::Directions::BakeIndex
 
       def item_for(term)
         @items_by_term_text[term.text] ||= begin
-          IndexItem.new(term_text: term.text).tap do |item|
+          different_caps_item = @items_by_term_text[term.text.uncapitalize]
+          different_caps_item&.uncapitalize_term_text!
+
+          (different_caps_item || IndexItem.new(term_text: term.text)).tap do |item|
             @items.add(item)
           end
         end

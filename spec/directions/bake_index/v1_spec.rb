@@ -9,6 +9,8 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
     })
   end
 
+  let(:a_section) { described_class::IndexSection.new(name: "whatever") }
+
   let(:book_1) do
     book_containing(html:
       <<~HTML
@@ -65,14 +67,12 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
           <div class="group-by">
             <span class="group-label">F</span>
             <div class="os-index-item">
-              <span class="os-term" group-by="F">Foo</span>
-              <a class="os-term-section-link" href="#auto_p1_term2">
-                <span class="os-term-section">Preface</span>
-              </a>
-            </div>
-            <div class="os-index-item">
               <span class="os-term" group-by="f">foo</span>
               <a class="os-term-section-link" href="#auto_p1_term1">
+                <span class="os-term-section">Preface</span>
+              </a>
+              <span class="os-index-link-separator">, </span>
+              <a class="os-term-section-link" href="#auto_p1_term2">
                 <span class="os-term-section">Preface</span>
               </a>
               <span class="os-index-link-separator">, </span>
@@ -96,39 +96,36 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
   end
 
   it "sorts terms with accent marks" do
-    section = described_class::IndexSection.new(name: "whatever")
-    section.add_term(text_only_term("Hu"))
-    section.add_term(text_only_term("Hückel"))
-    section.add_term(text_only_term("Héroult"))
-    section.add_term(text_only_term("Hunk"))
+    a_section.add_term(text_only_term("Hu"))
+    a_section.add_term(text_only_term("Hückel"))
+    a_section.add_term(text_only_term("Héroult"))
+    a_section.add_term(text_only_term("Hunk"))
 
-    expect(section.items.map(&:term_text)).to eq %w(Héroult Hu Hückel Hunk)
+    expect(a_section.items.map(&:term_text)).to eq %w(Héroult Hu Hückel Hunk)
   end
 
   it "sorts terms starting with symbols" do
-    section = described_class::IndexSection.new(name: "whatever")
-    section.add_term(text_only_term("Δoct"))
-    section.add_term(text_only_term("π*"))
-    expect(section.items.map(&:term_text)).to eq %w(Δoct π*)
-  end
-
-  it "sorts uppercase first for same term" do
-    section = described_class::IndexSection.new(name: "whatever")
-    section.add_term(text_only_term("hu"))
-    section.add_term(text_only_term("Hu"))
-    expect(section.items.map(&:term_text)).to eq %w(Hu hu)
+    a_section.add_term(text_only_term("Δoct"))
+    a_section.add_term(text_only_term("π*"))
+    expect(a_section.items.map(&:term_text)).to eq %w(Δoct π*)
   end
 
   it "sorts index items with superscript" do
-    section = described_class::IndexSection.new(name: "whatever")
-    section.add_term(text_only_term("sp hybrid"))
-    section.add_term(text_only_term("sp2 hybrid"))    # sp^2 hybrid
-    section.add_term(text_only_term("sp3 hybrid"))    # sp^3 hybrid
-    section.add_term(text_only_term("sp3d hybrid"))   # (sp^3)(d) hybrid
-    section.add_term(text_only_term("sp3d2 hybrid"))  # (sp^3)(d^2) hybrid
-    expect(section.items.map(&:term_text)).to eq [
+    a_section.add_term(text_only_term("sp hybrid"))
+    a_section.add_term(text_only_term("sp2 hybrid"))    # sp^2 hybrid
+    a_section.add_term(text_only_term("sp3 hybrid"))    # sp^3 hybrid
+    a_section.add_term(text_only_term("sp3d hybrid"))   # (sp^3)(d) hybrid
+    a_section.add_term(text_only_term("sp3d2 hybrid"))  # (sp^3)(d^2) hybrid
+    expect(a_section.items.map(&:term_text)).to eq [
       "sp hybrid", "sp2 hybrid", "sp3 hybrid", "sp3d hybrid", "sp3d2 hybrid"
     ]
+  end
+
+  it "collapses the same term with different capitalization into one item with lowercase" do
+    a_section.add_term(text_only_term("temperature"))
+    a_section.add_term(text_only_term("Temperature"))
+    expect(a_section.items.count).to eq 1
+    expect(a_section.items.first.term_text).to eq "temperature"
   end
 
   def text_only_term(text)
