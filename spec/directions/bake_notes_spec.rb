@@ -7,8 +7,7 @@ RSpec.describe Kitchen::Directions::BakeNotes do
       one_chapter_with_one_page_containing(
         <<~HTML
           <div data-type="note" id="noteId">
-            <div data-type="title" id="titleId"><em>Answer:</em></div>
-            <p id="pId">Blah</p>
+            <div data-type="title" id="titleId"><em>Answer:</em></div>Foo<p id="pId">Blah</p>
           </div>
         HTML
       )
@@ -59,14 +58,14 @@ RSpec.describe Kitchen::Directions::BakeNotes do
       it "works" do
         described_class.v1(book: book)
 
-        expect(book.search("[data-type='note']").first).to match_html_nodes(
+        expect(book.search("[data-type='note']").first).to match_normalized_html_with_stripping(
           <<~HTML
             <div data-type="note" id="noteId">
               <h3 class="os-title" data-type="title">
                 <span data-type="" id="titleId" class="os-title-label"><em>Answer:</em></span>
               </h3>
               <div class="os-note-body">
-                <p id="pId">Blah</p>
+                Foo<p id="pId">Blah</p>
               </div>
             </div>
           HTML
