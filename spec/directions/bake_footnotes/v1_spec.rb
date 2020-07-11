@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeFootnotes do
+RSpec.describe Kitchen::Directions::BakeFootnotes::V1 do
 
   let(:book_1) do
     book_containing(html:
@@ -25,12 +25,16 @@ RSpec.describe Kitchen::Directions::BakeFootnotes do
             <aside id="aside5" type="footnote">Footnote content 5</aside>
           </div>
         </div>
+        <div data-type="page">
+          <p><a href="#aside6" role="doc-noteref">[footnote]</a> Blah.</p>
+          <aside id="aside6" type="footnote">Footnote content 6</aside>
+        </div>
       HTML
     )
   end
 
   it "works" do
-    described_class.v1(book: book_1)
+    described_class.new.bake(book: book_1)
 
     expect(book_1.body.children.to_s).to match_normalized_html(
       <<~HTML
@@ -53,6 +57,10 @@ RSpec.describe Kitchen::Directions::BakeFootnotes do
             <p><a href="#aside5" role="doc-noteref">4</a> Blah.</p>
             <aside id="aside5" type="footnote"><div class="footnote-number">4</div>Footnote content 5</aside>
           </div>
+        </div>
+        <div data-type="page">
+          <p><a href="#aside6" role="doc-noteref">1</a> Blah.</p>
+          <aside id="aside6" type="footnote"><div class="footnote-number">1</div>Footnote content 6</aside>
         </div>
       HTML
     )
