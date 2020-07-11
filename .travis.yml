@@ -2,6 +2,9 @@
 if: type = pull_request OR branch = master
 language: ruby
 cache: bundler
+env:
+  global:
+  - ENABLE_CODECOV=1
 rvm:
   - 2.6.6
 before_install: gem install bundler -v 2.1.4

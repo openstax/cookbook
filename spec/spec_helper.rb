@@ -4,6 +4,11 @@ require "kitchen"
 require 'simplecov'
 SimpleCov.start
 
+if ENV['ENABLE_CODECOV']
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
 require "byebug"
 require "nokogiri/diff"
 require "rainbow"
