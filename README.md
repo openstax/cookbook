@@ -497,6 +497,12 @@ This (assuming you have Docker installed) will launch a docker container for Kit
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/openstax/kitchen. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/openstax/kitchen/blob/master/CODE_OF_CONDUCT.md).
 
+## Tools
+
+Helpful scripts in the `bin` directory:
+
+* `normalize` - Normalizes content files to make it easier to compare them.  E.g. if you want to compare kitchen baked output to cnx-recipes baked output, you should normalize the files first.  `normalize somefile.xhtml` produces `somefile.normalized.xhtml` which has its attributes sorted by attribute name, copied element ID numbers masked (because they change based on order of operations in recipes, but their values are not important), and some errors in legacy baked files removed (e.g. unnumbered tables get a `summary` attribute with a bogus number).
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

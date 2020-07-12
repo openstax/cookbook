@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+
+require "bundler/inline"
+
+gemfile do
+  gem 'nokogiri'
+  gem 'byebug'
+end
+
+require 'nokogiri'
+require 'byebug'
+
+# In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
+# attributes.
+def sort_attributes(document)
+  document.traverse do |child|
+    next if child.text? || child.document?
+    attributes = child.attributes
+    attributes.each do |key, value|
+      child.remove_attribute(key)
+    end
+    sorted_keys = attributes.keys.sort
+    sorted_keys.each do |key|
+      value = attributes[key].to_s
+      child[key] = value
+    end
+  end
+end
+
+# Legacy baked docs have a few issues that I think are unintentional; clean those
+def clean_legacy_baked(document)
+  document.traverse do |child|
+    next if child.text? || child.document?
+
+    # Legacy bakings of unnumbered tables include a bogus number, delete it
+    if child.name == "table" && (child[:class] || "").include?("unnumbered")
+      child.remove_attribute("summary")
+    end
+
+    # Sometimes there is `class=' '`, get rid of these
+    child.attributes.each do |key, value|
+      child.remove_attribute(key) if key == "class" && value.to_s.strip == ""
+    end
+  end
+end
+
+def mask_copied_id_numbers(document)
+  document.traverse do |child|
+    if child[:id]
+      child[:id] = child[:id].gsub(/_copy_(\d+)$/,"_copy_XXX")
+    end
+  end
+end
+
+def process(input_file:, output_file:)
+  read_and_write(input_file: input_file, output_file: output_file) do |doc|
+    clean_legacy_baked(doc)
+    sort_attributes(doc)
+    mask_copied_id_numbers(doc)
+  end
+end
+
+def read_and_write(input_file:, output_file:)
+  doc = Nokogiri::XML(File.open(input_file)){|config| config.noblanks}
+
+  yield(doc) if block_given?
+
+  File.open(output_file, "w") do |f|
+    f.write doc.to_xhtml(indent:2)
+  end
+end
+
+ARGV.each do |input_file|
+  output_file = input_file.gsub(/(\.\w+)\z/,'.normalized\1')
+
+  process(input_file: input_file, output_file: output_file)
+
+  puts "Normalized '#{input_file}' to '#{output_file}'"
+end
