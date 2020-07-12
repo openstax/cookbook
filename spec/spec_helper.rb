@@ -1,6 +1,3 @@
-require "bundler/setup"
-require "kitchen"
-
 require 'simplecov'
 SimpleCov.start
 
@@ -9,6 +6,9 @@ if ENV['ENABLE_CODECOV']
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
+require "bundler/setup"
+
+require "kitchen"
 require "byebug"
 require "nokogiri/diff"
 require "rainbow"
