@@ -1,0 +1,28 @@
+<div class="os-eob os-index-container " data-type="composite-page" data-uuid-key="index">
+  <h1 data-type="document-title">
+    <span class="os-text"><%= I18n.t(:eob_index_title) %></span>
+  </h1>
+  <div data-type="metadata" style="display: none;">
+    <h1 data-type="document-title" itemprop="name"><%= I18n.t(:eob_index_title) %></h1>
+    <%= @metadata_elements.paste %>
+  </div>
+  <% @index.sections.each do |section| %>
+    <div class="group-by">
+      <span class="group-label"><%= section.name %></span>
+      <% section.items.each do |item| %>
+        <div class="os-index-item">
+          <% item.terms.each_with_index do |term, ii| %>
+            <% if ii == 0 %>
+              <span class="os-term" group-by="<%= term.group_by %>"><%= term.text %></span>
+            <% else %>
+              <span class="os-index-link-separator">, </span>
+            <% end %>
+            <a class="os-term-section-link" href="#<%= term.id %>">
+              <span class="os-term-section"><%= term.page_title %></span>
+            </a>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

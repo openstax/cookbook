@@ -291,6 +291,135 @@ Recognizing that our books will be translated into multiple languages, Kitchen h
 <span class="os-title-label">#{I18n.t(:example)} </span>
 ```
 
+### Building HTML strings
+
+There are a number of valid ways of building up HTML strings to insert into documents.
+
+Maybe you have a tiny bit of HTML to add and you can use vanilla Ruby strings:
+
+```ruby
+some_element.append(child: "<br/>")
+```
+
+You can continue doing this with multiline strings but it gets to be a pain -- you have to add your own newlines (`\n`) and line continuation symbols (`\`):
+
+```ruby
+some_element.append(child: "first line\n" \
+                           "second line")
+```
+
+Ruby has a much better way of handling multiline strings: [heredocs](https://ruby-doc.org/core-2.5.0/doc/syntax/literals_rdoc.html#label-Here+Documents).  The best of these is the "squiggly" heredoc, which captures string content between `<<~SOME_ARBITRARY_TEXT` and `SOME_ARBITRARY_TEXT`:
+
+```ruby
+some_element.append(sibling: <<~HTML
+    <div class="os-caption-container">
+      <span class="os-caption">Awesomeness</span>
+    </div>
+  HTML
+)
+```
+
+The squiggly heredoc removes the shortest leading indentation from each line.  It lets you use single and double quotes inside the string without escaping them.  And at least in certain editors when you use `HTML` as your "some arbitrary text", you'll get HTML syntax highlighting.  You can also do interpolate variables into the string using `#{some_variable}` The above example is equivalent to this Ruby string written in the earlier approach:
+
+```ruby
+"<div class=\"os-caption-container\">\n" \
+"  <span class=\"os-caption\">Awesomeness</span>\n" \
+"</div>\n"
+```
+
+The big downside to all of these approaches is that for more complicated strings, we often need to use some Ruby logic to build up different parts of the string, and the techniques above don't allow for that.
+
+Let's invent an example of needing to build some HTML that had a listing of all chapter titles in a bulleted list and then their page titles within them in a nested bulleted list (kind of like a table of contents).  This is an example of what we'd be shooting for:
+
+```html
+<ul>
+  <li>
+    <span>Chapter 1 Title</span>
+    <ul>
+      <li><span>Page 1.1 Title</span></li>
+      <li><span>Page 1.2 Title</span></li>
+    </ul>
+  </li>
+  <li>
+    ... etc etc
+  </li>
+</ul>
+```
+
+Here's one way we could build up this string using squiggly heredocs:
+
+```ruby
+class SomethingThatBakes
+  def bake(doc)
+    @book = doc.book
+
+    chapter_bullets_array = @book.chapters.map do |chapter|
+      page_bullets_array = chapter.pages.map do
+        <<~HTML
+          <li><span>#{page.title.text}</span></li>
+        HTML
+      end
+
+      <<~HTML
+        <li>
+          <span>#{chapter.title.text}</span>
+          <ul>
+            #{page_bullets_array.join("\n")}
+          </ul>
+        </li>
+      HTML
+    end.join("\n")
+
+    final_string = <<~HTML
+      <ul>#{chapter_bullets_array.join("\n")}</ul>
+    HTML
+
+    # do something with that final_string
+  end
+end
+```
+
+The above works but it is a little fragmented to read.  We have to build up parts of the bulleted lists in arrays, then join them together with newlines and embed them in other strings (some of which are also collected in an array and then later substituted and joined).
+
+For these more complex strings we have another option: [ERB (Embedded RuBy)](https://www.stuartellis.name/articles/erb/).  ERB is part of standard Ruby and had its heyday when Rails came out in the 2000s.  ERB lets us make a separate HTML file with Ruby sprinkled within it.  Let's call this file `blah.html.erb`:
+
+```erb
+<ul>
+  <% @book.chapters.each do |chapter| %>
+    <li>
+      <span><%= chapter.title.text</span>
+      <ul>
+        <% chapter.pages.each do |page| %>
+          <li><span><%= page.title.text %></span></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+```
+
+In our Ruby class doing the generation, we add a `renderable` statement at the top code we can then say:
+
+```ruby
+class SomethingThatBakes
+  renderable
+
+  def bake(doc)
+    final_string = render(file: 'blah.html.erb')
+
+    # do something with that final_string
+  end
+end
+```
+
+This ERB approach is a lot easier to read -- you can see the nesting structure directly in the template file.  The Ruby code in the ERB template will have access to any instance variable in the code that called it, i.e. the variables that start with `@`.
+
+The `render` method takes a `file` argument that is a string file path.  If the path is relative, it is relative to the directory in which the `render` call is made.
+
+If you want to make relative file paths be relative to a different directory, you can pass a directory string to the `renderable` statement: `renderable dir: '/Some/other/directory'`.
+
+Again, all these techniques work and there are times to use them all.
+
 ## One-file scripts
 
 Want to make a one-file script to do some baking?  Use the "inline" form of bundler:
