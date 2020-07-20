@@ -176,22 +176,22 @@ In kitchen we can prepend or append element children or siblings:
 
 ```ruby
 # <div><span>Hi</span></div> => <div><span><br/>Hi</span></div>
-doc.search("span").first.prepend child: "<br/>"
+doc.search("span").first.prepend(child: "<br/>")
 ```
 
 ```ruby
 # <div><span>Hi</span></div> => <div><div></div><span>Hi</span></div>
-doc.search("span").first.prepend sibling: "<div></div>"
+doc.search("span").first.prepend(sibling: "<div></div>")
 ```
 
 ```ruby
 # <div><span>Hi</span></div> => <div><span>Hi<br/></span></div>
-doc.search("span").first.append child: "<br/>"
+doc.search("span").first.append(child: "<br/>")
 ```
 
 ```ruby
 # <div><span>Hi</span></div> => <div><span>Hi</span><p/></div>
-doc.search("span").first.append sibling: "<p/>"
+doc.search("span").first.append(sibling: "<p/>")
 ```
 
 We can also replace all children:
