@@ -181,7 +181,7 @@ doc.search("span").first.prepend(child: "<br/>")
 
 ```ruby
 # <div><span>Hi</span></div> => <div><div></div><span>Hi</span></div>
-doc.search("span").first.prepend(sibling: "<div></div>")
+doc.search("span").first.prepend(sibling: "<div>")
 ```
 
 ```ruby
