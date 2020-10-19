@@ -513,22 +513,11 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## TODO
 
-* Right now, all specific search methods (e.g. `.pages`) are available on all element types and enumerator
-types.  Change this so that you can't do something like `book.pages.chapters`.  But do allow `book.search("arbitrary").pages`.
-* Figure out an approach for passing specific selectors into the book when it is parsed (so that things
-like `ChapterElement` and `ChapterElementEnumerator` don't have hardcoded selectors in them).
-* Make a clean way to search for all of one kind of element that may or may not be inside another element, e.g.
-have a nice way to iterate through all pages that may or may not be in chapters with the ability to get the chapter element for those pages in chapters.  Right now we can say `book.search("[data-type='page'], [data-type='chapter'] > [data-type='page']")` which gives us all those pages but doesn't track ancestry or counts well.  Maybe something like `book.either{*|chapters}.pages.each...`
-* Add code coverage tracking
-* Convert all hardcoded inserted words into I18N translations.
 * Specs galore :-)
   * `$` search path substitution (making sure not to mess up xpath)
 * Think up and handle a bunch more recipe errors, test they all raise some kind of `RecipeError`.
 * Encapsulate numbering schemes (e.g. chapter pages are "5.2", appendix pages are "D7") and maybe set on book document?  Right now we are doing inline things like `*('A'..'Z')][page.count_in(:book)-1]}#{table.count_in(:page)` which is ugly.
 * Add rubocop for linting.
-* Finish adding Yard documentation
-* Use Yard documentation when printing error debug info. (https://stackoverflow.com/a/25947541)
-* Change `search` methods (and related) to also take an `as:` argument.  Use this "as" to name the found elements in search histories instead of using a name based on the search CSS.
 * Control I18n language in Oven.
 * Get doc normalization scripts into this repo from testkitchen (for comparing two large baked outputs).
 * Change from ElementBase <- Element to Element <- BasicElement
