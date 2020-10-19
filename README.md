@@ -243,7 +243,7 @@ In the generic usage, you can chain `search` methods:
 ```ruby
 doc.book.search("[data-type='page']").search("figure")
 ```
-<!-- There is no other mention above of `my_chapter` was this intentional? -->
+
 will find all figure elements inside pages inside `my_chapter`.
 
 In the book-oriented usage, you can chain specific search methods to achieve the same effect:
