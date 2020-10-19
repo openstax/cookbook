@@ -450,6 +450,10 @@ To release a new version, update the version number in `version.rb`, and then ru
 
 Documentation is handled via YARD.  The [Solargraph gem](https://solargraph.org/guides/getting-started) can be used in popular editors for code completion.
 
+Run `yard server --reload` to watch for changes in your local codebase everytime you refresh the page. 
+
+Navidate to `http://localhost:8808/` to view documentation in your browser. 
+
 ### Specs
 
 Run `bundle exec rspec` to run the specs.  `rake rspec` probably does the same thing.
