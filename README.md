@@ -94,7 +94,7 @@ doc.first("p").copy to: :foo
 And then in some code where you are building up a string of HTML to insert you can
 
 ```ruby
-new_html = doc.clipboard(name: :my_special_clipboard).paste}
+new_html = doc.clipboard(name: :my_special_clipboard).paste
 ```
 
 `cut` puts the element on the clipboard and removes the original from the document.  `copy` leaves the element in the document and puts a copy of the element on the clipboard.
@@ -107,7 +107,7 @@ doc.search("div.example").each do |div|
   div.cut(to: my_clipboard)
 end
 
-new_html = new_clipboard.paste
+new_html = my_clipboard.paste
 ```
 
 This is often the better way to go because if you use the named ones in the document you have to remember to `clear` them before you use it to not get stuck with whatever you left there the last time you used it.
@@ -176,22 +176,22 @@ In kitchen we can prepend or append element children or siblings:
 
 ```ruby
 # <div><span>Hi</span></div> => <div><span><br/>Hi</span></div>
-doc.search("span").first.prepend child: "<br/>"
+doc.search("span").first.prepend(child: "<br/>")
 ```
 
 ```ruby
-# <div><span>Hi</span></div> => <div><br/><span>Hi</span></div>
-doc.search("span").first.prepend sibling: "<div></div>"
+# <div><span>Hi</span></div> => <div><div></div><span>Hi</span></div>
+doc.search("span").first.prepend(sibling: "<div>")
 ```
 
 ```ruby
 # <div><span>Hi</span></div> => <div><span>Hi<br/></span></div>
-doc.search("span").first.append child: "<br/>"
+doc.search("span").first.append(child: "<br/>")
 ```
 
 ```ruby
-# <div><span>Hi</span></div> => <div><span>Hi</span><br/></div>
-doc.search("span").first.append sibling: "<p/>"
+# <div><span>Hi</span></div> => <div><span>Hi</span><p/></div>
+doc.search("span").first.append(sibling: "<p/>")
 ```
 
 We can also replace all children:
@@ -449,6 +449,10 @@ To release a new version, update the version number in `version.rb`, and then ru
 ### Documentation
 
 Documentation is handled via YARD.  The [Solargraph gem](https://solargraph.org/guides/getting-started) can be used in popular editors for code completion.
+
+Run `yard server --reload` to watch for changes in your local codebase everytime you refresh the page. 
+
+Navidate to `http://localhost:8808/` to view documentation in your browser. 
 
 ### Specs
 
