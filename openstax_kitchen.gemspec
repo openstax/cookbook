@@ -1,18 +1,18 @@
 require_relative 'lib/kitchen/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "kitchen"
+  spec.name          = "openstax_kitchen"
   spec.version       = Kitchen::VERSION
   spec.authors       = ["JP Slavinsky"]
   spec.email         = ["jpslav@gmail.com"]
 
-  spec.summary       = %q{OpenStax Recipe Prototype}
-  spec.description   = %q{OpenStax Recipe Prototype}
+  spec.summary       = %q{OpenStax content baking library}
+  spec.description   = %q{OpenStax content baking library}
   spec.homepage      = "https://github.com/openstax/kitchen"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
-  spec.metadata["allowed_push_host"] = "http://mygemserver.com"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/openstax/kitchen"
