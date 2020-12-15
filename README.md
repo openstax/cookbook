@@ -1,6 +1,6 @@
 # Kitchen
 
-[![Build Status](https://travis-ci.org/openstax/kitchen.svg?branch=master)](https://travis-ci.org/openstax/kitchen)
+[![Tests](https://github.com/openstax/kitchen/workflows/Tests/badge.svg)](https://github.com/openstax/kitchen/actions?query=workflow:Tests)
 [![Coverage Status](https://img.shields.io/codecov/c/github/openstax/kitchen.svg)](https://codecov.io/gh/openstax/kitchen)
 
 Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`
@@ -579,9 +579,9 @@ To release a new version, update the version number in `version.rb`, and then ru
 
 Documentation is handled via YARD.  The [Solargraph gem](https://solargraph.org/guides/getting-started) can be used in popular editors for code completion.
 
-Run `yard server --reload` to watch for changes in your local codebase everytime you refresh the page. 
+Run `yard server --reload` to watch for changes in your local codebase everytime you refresh the page.
 
-Navidate to `http://localhost:8808/` to view documentation in your browser. 
+Navidate to `http://localhost:8808/` to view documentation in your browser.
 
 ### Specs
 
