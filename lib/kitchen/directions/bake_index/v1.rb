@@ -1,5 +1,6 @@
 module Kitchen::Directions::BakeIndex
   class V1
+    renderable
 
     class Term
       attr_reader :text, :id, :group_by, :page_title
@@ -106,9 +107,9 @@ module Kitchen::Directions::BakeIndex
     end
 
     def bake(book:)
-      metadata_elements = book.metadata.search(%w(.authors .publishers .print-style
-                                                  .permissions [data-type='subject'])).copy
-      index = Index.new
+      @metadata_elements = book.metadata.search(%w(.authors .publishers .print-style
+                                                   .permissions [data-type='subject'])).copy
+      @index = Index.new
 
       book.pages.terms.each do |term_element|
         # Markup the term
@@ -122,7 +123,7 @@ module Kitchen::Directions::BakeIndex
         term_element['group-by'] = group_by
 
         # Add it to our index object
-        index.add_term(Term.new(
+        @index.add_term(Term.new(
           text: term_element.text,
           id: term_element.id,
           group_by: group_by,
@@ -130,48 +131,7 @@ module Kitchen::Directions::BakeIndex
         ))
       end
 
-      index_sections = index.sections.map do |section|
-        index_items = section.items.map do |item|
-          term_locations = item.terms.map do |term|
-            <<~HTML
-              <a class="os-term-section-link" href="##{term.id}">
-                <span class="os-term-section">#{term.page_title}</span>
-              </a>
-            HTML
-          end.join('<span class="os-index-link-separator">, </span>')
-
-          first_term = item.terms.first
-          <<~HTML
-            <div class="os-index-item">
-              <span class="os-term" group-by="#{first_term.group_by}">#{first_term.text}</span>
-              #{term_locations}
-            </div>
-          HTML
-        end.join("\n")
-
-        <<~HTML
-          <div class="group-by">
-            <span class="group-label">#{section.name}</span>
-            #{index_items}
-          </div>
-        HTML
-      end.join("\n")
-
-      # Add the index page
-      book.first("body").append(child:
-        <<~HTML
-        <div class="os-eob os-index-container " data-type="composite-page" data-uuid-key="index">
-          <h1 data-type="document-title">
-            <span class="os-text">#{I18n.t(:eob_index_title)}</span>
-          </h1>
-          <div data-type="metadata" style="display: none;">
-            <h1 data-type="document-title" itemprop="name">#{I18n.t(:eob_index_title)}</h1>
-            #{metadata_elements.paste}
-          </div>
-          #{index_sections}
-        </div>
-        HTML
-      )
+      book.first("body").append(child: render(file: 'v1.xhtml.erb'))
     end
 
   end
