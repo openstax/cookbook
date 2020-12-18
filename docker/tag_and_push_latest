@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+TAG="docker tag openstax/recipes:latest openstax/recipes:$1"
+PUSH="docker push openstax/recipes:$1"
+
+echo "About to run the following:"
+echo $TAG
+echo $PUSH
+
+read -p "Are you sure? (Y/n) " -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    $TAG
+    echo Tagged!
+    $PUSH
+fi

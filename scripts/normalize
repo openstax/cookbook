@@ -1,0 +1,80 @@
+#!/usr/bin/env ruby
+
+require "bundler/inline"
+
+gemfile do
+  gem 'nokogiri', '1.6.8'
+  gem 'byebug'
+end
+
+# In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
+# attributes.
+
+sort_attributes = ->(element) do
+  next if element.text? || element.document?
+  attributes = element.attributes
+  attributes.each do |key, value|
+    element.remove_attribute(key)
+  end
+  sorted_keys = attributes.keys.sort
+  sorted_keys.each do |key|
+    value = attributes[key].to_s
+    element[key] = value
+  end
+end
+
+# Legacy bakings of unnumbered tables include a bogus number, delete it
+
+remove_bogus_number_from_unnumbered_tables = ->(element) do
+  next if element.text? || element.document?
+  if element.name == "table" && (element[:class] || "").include?("unnumbered")
+    element.remove_attribute("summary")
+  end
+end
+
+# Sometimes there is `class=' '`, get rid of these; happens in legacy baked docs
+
+remove_blank_classes = ->(element) do
+  next if element.text? || element.document?
+  element.attributes.each do |key, value|
+    element.remove_attribute(key) if key == "class" && value.to_s.strip == ""
+  end
+end
+
+# The index of copied elements (the number in _copy_23) isn't meaningful so
+# hide it.
+
+mask_copied_id_numbers = ->(element) do
+  if element[:id]
+    element[:id] = element[:id].gsub(/_copy_(\d+)$/,"_copy_XXX")
+  end
+end
+
+def process(input_file:, output_file:)
+  read_and_write(input_file: input_file, output_file: output_file) do |doc|
+    doc.traverse do |child|
+      remove_bogus_number_from_unnumbered_tables.call(child)
+      remove_blank_classes.call(child)
+      sort_attributes.call(child)
+      mask_copied_id_numbers.call(child)
+    end
+  end
+end
+
+def read_and_write(input_file:, output_file:)
+  doc = Nokogiri::XML(File.open(input_file)){|config| config.noblanks}
+
+  yield(doc) if block_given?
+
+  File.open(output_file, "w") do |f|
+    f.write doc.to_xhtml(indent:2)
+  end
+end
+
+ARGV.each do |input_file|
+  output_file = input_file.gsub(/(\.\w+)\z/,'.normalized\1')
+
+  process(input_file: input_file, output_file: output_file)
+
+  puts "Normalized '#{input_file}' to '#{output_file}'"
+end
