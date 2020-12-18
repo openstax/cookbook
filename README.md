@@ -19,7 +19,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install kitchen
+    $ gem install openstax_kitchen
 
 ## Two Ways to Use Kitchen
 
