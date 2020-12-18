@@ -8,7 +8,7 @@ end
 
 require "bundler/setup"
 
-require "kitchen"
+require "openstax_kitchen"
 require "byebug"
 require "nokogiri/diff"
 require "rainbow"
