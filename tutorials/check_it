@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "kitchen"
+require "openstax_kitchen"
 require "rspec"
 require "byebug"
 require "rainbow"

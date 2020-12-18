@@ -10,7 +10,7 @@ Kitchen lets you modify the structure and content of XML files.  You create a `R
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'kitchen'
+gem 'openstax_kitchen'
 ```
 
 And then execute:
@@ -32,7 +32,7 @@ We'll first talk about the generic way since those tools are also available in t
 Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` and `bake` it in the `Oven`:
 
 ```ruby
-require "kitchen"
+require "openstax_kitchen"
 
 recipe = Kitchen::Recipe.new do |document|
   document.search("div.section").each do |element|
@@ -430,10 +430,10 @@ Want to make a one-file script to do some baking?  Use the "inline" form of bund
 require "bundler/inline"
 
 gemfile do
-  gem 'kitchen', git: 'https://github.com/openstax/kitchen.git', ref: 'some_sha_here'
+  gem 'openstax_kitchen', '2.0.0'
 end
 
-require "kitchen"
+require "openstax_kitchen"
 
 recipe = Kitchen::Recipe.new do |doc|
   # ... recipe steps here
