@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+# Recipes all use different versions of kitchen, so we can't just use one
+# Gemfile.  Pull each version of each gem used by the recipes out and manually
+# install them.
+
+source_filenames = (Dir.glob(File.join(__dir__,"../books/**/*")) + [File.join(__dir__,"console"),File.join(__dir__,"normalize")])
+                       .select{|filename| !File.directory?(filename)}
+
+gem_name_to_versions_array_hash = source_filenames.each_with_object({}) do |filename,hash|
+  source = File.read(filename)
+  gem_names_and_versions = source.scan(/gem\s+['"](\w+)['"]\s*,\s*['"](.+)['"]/)
+  gem_names_and_versions.each do |gem_name, version|
+    (hash[gem_name] ||= []).push(version)
+  end
+end
+
+gem_name_to_versions_array_hash.each do |gem_name, versions|
+  versions.each do |version|
+    command = "gem install #{gem_name} -v #{version}"
+    puts command
+    puts `#{command}`
+  end
+end
