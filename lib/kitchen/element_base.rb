@@ -57,6 +57,11 @@ module Kitchen
       @is_a_clone = false
     end
 
+    # Returns true if this class represents the element for the given node
+    #
+    # @param node [Nokogiri::XML::Node] the underlying node
+    # @return [Boolean]
+    #
     def self.is_the_element_class_for?(node)
       # override this in subclasses
       false
@@ -75,6 +80,13 @@ module Kitchen
     end
 
     # A way to set values and chain them
+    #
+    # @param property [String, Symbol] the name of the property to set
+    # @param value [String] the value to set
+    #
+    # @example 
+    #   element.set(:name,"div").set("id","foo")
+    #
     def set(property, value)
       case property.to_sym
       when :name
@@ -85,18 +97,39 @@ module Kitchen
       self
     end
 
+    # Returns this element's ancestor of the given type
+    #
+    # @param type [String, Symbol] e.g. +:page+, +:term+
+    # @return [Ancestor]
+    # @raise [StandardError] if there is no ancestor of the given type
+    #
     def ancestor(type)
       @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'")
     end
 
+    # Returns true iff this element has an ancestor of the given type
+    #
+    # @param type [String, Symbol] e.g. +:page+, +:term+
+    # @return [Boolean]
+    #
     def has_ancestor?(type)
       @ancestors[type.to_sym].present?
     end
 
+    # Returns the element's ancestors
+    #
+    # @return [Array<Ancestor>]
+    #
     def ancestors
       @ancestors
     end
 
+    # Adds ancestors to this element
+    #
+    # @param args [Array<Hash, Ancestor, Element, Document>] the ancestors
+    # @raise [StandardError] if there is already an ancestor with the one of 
+    #   the given ancestors' types
+    #
     def add_ancestors(*args)
       args.each do |arg|
         case arg
@@ -112,6 +145,11 @@ module Kitchen
       end
     end
 
+    # Adds one ancestor
+    #
+    # @param ancestor [Ancestor]
+    # @raise [StandardError] if there is already an ancestor with the given ancestor's type
+    #
     def add_ancestor(ancestor)
       if @ancestors[ancestor.type].present?
         raise "Trying to add an ancestor of type '#{ancestor.type}' but one of that " \
@@ -121,37 +159,71 @@ module Kitchen
       @ancestors[ancestor.type] = ancestor
     end
 
+    # Return the elements in all of the ancestors
+    #
+    # @return [Array<ElementBase>]
+    #
     def ancestor_elements
       @ancestors.values.map(&:element)
     end
 
+    # Increments the count of this element in all of this element's ancestors
+    #
     def count_as_descendant
       @ancestors.each_pair do |type, ancestor|
         @counts_in[type] = ancestor.increment_descendant_count(short_type)
       end
     end
 
+    # Returns the count of this element's type in the given ancestor type
+    #
+    # @param ancestor_type [String, Symbol]
+    #
     def count_in(ancestor_type)
       @counts_in[ancestor_type] || raise("No ancestor of type '#{ancestor_type}'")
     end
 
+    # Track the sub elements with the given selectors have been counted
+    #
+    # @param css_or_xpath [String] the selectors matching elements that need to be counted
+    # @param count [Integer] The count of those matching subelements
+    #
     def remember_that_sub_elements_are_already_counted(css_or_xpath:, count:)
       @css_or_xpath_that_has_been_counted[css_or_xpath] = count
     end
 
+    # Returns true if subelements with given selectors have been counted already
+    #
+    # @param css_or_xpath [String] the selectors
+    # @return [Boolean]
+    #
     def have_sub_elements_already_been_counted?(css_or_xpath)
       number_of_sub_elements_already_counted(css_or_xpath) != 0
     end
 
+    # Returns the number of subelements with given selectors that have been counted
+    #
+    # @param css_or_xpath [String] the selectors
+    # @return [Integer]
+    #
     def number_of_sub_elements_already_counted(css_or_xpath)
       @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
     end
 
+    # Returns the search history that found this element
+    #
+    # @return [String] a space-separated list of selectors that led to this element
+    #
     def search_history
       history = ancestor_elements.map(&:css_or_xpath_that_found_me) + [css_or_xpath_that_found_me]
       history.compact.join(" ")
     end
 
+    # Returns an ElementEnumerator that iterates over the provided selector or xpath queries
+    #
+    # @param selector_or_xpath_args [Array<String>] Selector or XPath queries
+    # @return [ElementEnumerator]
+    #
     def search(*selector_or_xpath_args)
       block_error_if(block_given?)
 
@@ -185,13 +257,26 @@ module Kitchen
       end
     end
 
+    # @!method at
+    #   @see first
     alias_method :at, :first
 
-    def element_children()
+    # Returns an enumerator over the direct child elements of this element, with the
+    # specific type (e.g. +TermElement+) if such type is available.
+    #
+    # @return [TypeCastingElementEnumerator]
+    #
+    def element_children
       block_error_if(block_given?)
       TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: "./*")
     end
 
+    # Searches for elements handled by a list of enumerator classes.  All element that
+    # matches one of those enumerator classes are iterated over.
+    #
+    # @param enumerator_classes [Array<ElementEnumeratorBase>]
+    # @return [TypeCastingElementEnumerator]
+    #
     def search_with(*enumerator_classes)
       block_error_if(block_given?)
       raise "must supply at least one enumerator class" if enumerator_classes.empty?
@@ -365,22 +450,40 @@ module Kitchen
       node
     end
 
+    # Returns a string version of this element
+    #
+    # @return [String]
+    #
     def inspect
       to_s
     end
 
+    # Returns a string version of this element
+    #
+    # @return [String]
+    #
     def to_s
       remove_default_namespaces_if_clone(node.to_s)
     end
 
+    # Returns a string version of this element as XML
+    #
+    # @return [String]
+    #
     def to_xml
       remove_default_namespaces_if_clone(node.to_xml)
     end
 
+    # Returns a string version of this element as XHTML
+    #
+    # @return [String]
+    #
     def to_xhtml
       remove_default_namespaces_if_clone(node.to_xhtml)
     end
 
+    # Returns a clone of this object
+    #
     def clone
       super.tap do |element|
         # When we call dup, the dup gets a bunch of default namespace stuff that
@@ -411,6 +514,9 @@ module Kitchen
     #   Returns a pages enumerator
     def_delegators :as_enumerator, :pages, :chapters, :terms, :figures, :notes, :tables, :examples
 
+    # Returns this element as an enumerator (over only one element, itself)
+    #
+    # @return [ElementEnumeratorBase] (actually returns the appropriate enumerator class for this element)
     def as_enumerator
       enumerator_class.new(css_or_xpath: css_or_xpath_that_found_me) {|block| block.yield(self)}
     end

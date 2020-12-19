@@ -23,7 +23,7 @@ module Kitchen
       chain_to(ChapterElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end
 
-    # use block_error_if
+    # TODO use block_error_if
     def figures(css_or_xpath=nil, &block)
       chain_to(FigureElementEnumerator, css_or_xpath: css_or_xpath, &block)
     end

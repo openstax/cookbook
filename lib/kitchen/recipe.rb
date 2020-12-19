@@ -16,6 +16,7 @@ module Kitchen
 
     # Make a new Recipe
     #
+    # @yield A block for defining the steps of the recipe
     # @yieldparam doc [Document] an object representing an XML document
     #
     def initialize(&block)

@@ -1,0 +1,6 @@
+files:
+  # define files excluded from the analysis (defaults to [])
+  excluded:
+    - lib/kitchen/directions/**/*.rb # may want to add this in later in a limited way
+    - lib/kitchen/debug/**/*.rb
+    - lib/openstax_kitchen.rb

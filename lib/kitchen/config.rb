@@ -1,6 +1,9 @@
 module Kitchen
+  # Kitchen configuration
+  #
   class Config
 
+    # Named CSS or XPath selectors
     attr_reader :selectors
 
     def self.new_from_file(file)
@@ -15,6 +18,5 @@ module Kitchen
       @selectors = selectors || Kitchen::Selectors::Standard1.new
       @hash = hash
     end
-
   end
 end

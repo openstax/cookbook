@@ -1,15 +1,43 @@
 require 'forwardable'
 
 module Kitchen
+  # Wrapper around a Nokogiri `Document`, adding search with Kitchen enumerators,
+  # clipboards, pantries, etc.
+  #
   class Document
     extend Forwardable
 
+    # @return [Element] the current element yielded from search results
     attr_accessor :location
+    # @return [Config] the configuration used in this document
     attr_reader :config
 
+    # @!method selectors
+    #   The document's selectors
+    #   @see Config#selectors
+    #   @return [Selectors::Base]
     def_delegators :config, :selectors
+
+    # @!method to_xhtml
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#to_xhtml-instance_method Nokogiri::XML::Node#to_xhtml
+    #   @return [String] the document as an XHTML string
+    # @!method to_s
+    #   Turn this node in to a string. If the document is HTML, this method returns html. 
+    #   If the document is XML, this method returns XML.
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#to_s-instance_method Nokogiri::XML::Node#to_s
+    #   @return [String]
+    # @!method to_xml
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#to_xml-instance_method Nokogiri::XML::Node#to_xml
+    #   @return [String] the document as an XML string
+    # @!method to_html
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#to_html-instance_method Nokogiri::XML::Node#to_html
+    #   @return [String] the document as an HTML string
     def_delegators :@nokogiri_document, :to_xhtml, :to_s, :to_xml, :to_html
 
+    # Return a new instance of Document
+    #
+    # @param nokogiri_document [Nokogiri::XML::Document]
+    # @param config [Config]
     def initialize(nokogiri_document:, config: nil)
       @nokogiri_document = nokogiri_document
       @location = nil
@@ -19,7 +47,8 @@ module Kitchen
     end
 
     # Returns an enumerator that iterates over all children of this document
-    # that match the provided selector or XPath arguments.
+    # that match the provided selector or XPath arguments.  Updates `location`
+    # during iteration.
     #
     # @param selector_or_xpath_args [Array<String>] CSS selectors or XPath arguments
     # @return [ElementEnumerator]
@@ -92,6 +121,15 @@ module Kitchen
       )
     end
 
+    # Create a new Element from a string
+    #
+    # @param string [String] the element as a string
+    #
+    # @example 
+    #   create_element_from_string("<div class='foo'>bar</div>") #=> <div class="foo">bar</div>
+    #
+    # @return [Element]
+    #
     def create_element_from_string(string)
       Kitchen::Element.new(
         node: @nokogiri_document.create_element("div"),
@@ -100,11 +138,22 @@ module Kitchen
       ).element_children.first
     end
 
+    # Keeps track that an element with the given ID has been copied.  When such
+    # elements are pasted, this information is used to give those elements unique
+    # IDs that don't duplicate the original element.
+    #
+    # @param id [String] the ID
+    #
     def record_id_copied(id)
       return if id.blank?
       @next_paste_count_for_id[id] ||= 1
     end
 
+    # Returns a unique ID given the ID of an element that was copied and is about
+    # to be pasted
+    #
+    # @param original_id [String]
+    #
     def modified_id_to_paste(original_id)
       return nil if original_id.nil?
       return "" if original_id.blank?

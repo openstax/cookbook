@@ -1,4 +1,6 @@
 module Kitchen
+  # An element for a note
+  #
   class NoteElement < ElementBase
 
     TITLE_TRANSLATION_KEYS = %w(
@@ -8,6 +10,11 @@ module Kitchen
       chemist-portrait
     )
 
+    # Creates a new +NoteElement+
+    #
+    # @param node [Nokogiri::XML::Node] the node this element wraps
+    # @param document [Document] this element's document
+    #
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
@@ -15,6 +22,10 @@ module Kitchen
             short_type: :note)
     end
 
+    # Returns the note's title element
+    #
+    # @return [Element, nil]
+    #
     def title
       block_error_if(block_given?)
       first("[data-type='title']")
@@ -35,6 +46,11 @@ module Kitchen
       keys.first
     end
 
+    # Returns true if this class represents the element for the given node
+    #
+    # @param node [Nokogiri::XML::Node] the underlying node
+    # @return [Boolean]
+    #
     def self.is_the_element_class_for?(node)
       node['data-type'] == "note"
     end

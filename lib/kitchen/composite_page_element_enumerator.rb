@@ -1,6 +1,12 @@
 module Kitchen
+  # An enumerator for composite page elements
+  #
   class CompositePageElementEnumerator < ElementEnumeratorBase
 
+    # Returns a factory for this enumerator
+    #
+    # @return [ElementEnumeratorFactory]
+    #
     def self.factory
       ElementEnumeratorFactory.new(
         default_css_or_xpath: "div[data-type='composite-page']",

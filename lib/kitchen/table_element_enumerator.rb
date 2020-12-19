@@ -1,6 +1,12 @@
 module Kitchen
+  # An enumerator for table elements
+  #
   class TableElementEnumerator < ElementEnumeratorBase
 
+    # Returns a factory for this enumerator
+    #
+    # @return [ElementEnumeratorFactory]
+    #
     def self.factory
       ElementEnumeratorFactory.new(
         default_css_or_xpath: "table", # TODO get from config?
