@@ -1,7 +1,9 @@
+# Monkey patches for +Object+
+#
 class Object
 
   # Adds a `render` method to a class for rendering an ERB template to a string.
-  # 
+  #
   # @param dir [String] a directory in which to find the template to be rendered,
   #   populated with a guess from the call stack if not provided.
   def self.renderable(dir: nil)

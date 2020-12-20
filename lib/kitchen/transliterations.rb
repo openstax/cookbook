@@ -4,7 +4,7 @@ module Kitchen
   # `ActiveSupport::Inflector.transliterate` to ensure that the sorting is
   # sensible.  This method does not know about Greek characters by default so
   # we teach it about them by adding the rules below to the i18n configuration.
-
+  #
   TRANSLITERATIONS = {
     i18n: {
       transliterate: {

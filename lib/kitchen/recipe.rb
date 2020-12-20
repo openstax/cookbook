@@ -1,9 +1,21 @@
 module Kitchen
+  # An object that yields a +Document+ for modification (those modifications are
+  # the "recipe")
+  #
   class Recipe
 
+    # The document the recipe makes available for modification
+    # @return [Document]
     attr_reader :document
+
+    # The file location of the recipe
+    # @return [String]
     attr_reader :source_location
 
+    # Sets the document so the recipe can yield it for modification
+    #
+    # @param [Document] the document to modify
+    #
     def document=(document)
       @document =
         case document
@@ -24,10 +36,8 @@ module Kitchen
       @block = block
     end
 
-    def node!
-      node || raise("The recipe's node has not been set")
-    end
-
+    # Executes the block given to +Recipe.new+ on the document.  Aka, does the baking.
+    #
     def bake
       begin
         @block.to_proc.call(document)

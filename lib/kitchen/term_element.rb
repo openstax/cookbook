@@ -1,4 +1,6 @@
 module Kitchen
+  # An element for a term
+  #
   class TermElement < ElementBase
 
     # Creates a new +TermElement+

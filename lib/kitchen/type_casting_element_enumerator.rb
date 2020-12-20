@@ -15,6 +15,12 @@ module Kitchen
       )
     end
 
+    # Returns a new enumerator that returns only the specified element classes within the
+    # scope of this enumerator.
+    #
+    # @param element_classes [Array<ElementBase>] the element classes to limit iteration to
+    # @return [TypeCastingElementEnumerator]
+    #
     def only(*element_classes)
       element_classes.flatten!
 
