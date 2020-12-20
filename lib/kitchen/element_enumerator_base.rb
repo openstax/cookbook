@@ -3,14 +3,14 @@ module Kitchen
   #
   class ElementEnumeratorBase < Enumerator
     include Mixins::BlockErrorIf
-    
+
     # Creates a new instance
     #
     # @param size [Integer, Proc] How to calculate the size lazily, either a value
     #   or a callable object
     # @param css_or_xpath [String] the selectors this enumerator uses to search through
     #   the document
-    # @param upstream_enumerator [ElementEnumeratorBase] the enumerator to which this 
+    # @param upstream_enumerator [ElementEnumeratorBase] the enumerator to which this
     #   enumerator is chained, used to access the upstream search history
     #
     def initialize(size=nil, css_or_xpath: nil, upstream_enumerator: nil)
@@ -33,9 +33,9 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def terms(css_or_xpath=nil, &block)
+    def terms(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(TermElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(TermElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates through pages within the scope of this enumerator
@@ -44,9 +44,9 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def pages(css_or_xpath=nil, &block)
+    def pages(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(PageElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(PageElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates through chapters within the scope of this enumerator
@@ -55,9 +55,9 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def chapters(css_or_xpath=nil, &block)
+    def chapters(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(ChapterElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(ChapterElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates through figures within the scope of this enumerator
@@ -66,9 +66,9 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def figures(css_or_xpath=nil, &block)
+    def figures(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(FigureElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(FigureElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates through notes within the scope of this enumerator
@@ -77,9 +77,9 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def notes(css_or_xpath=nil, &block)
+    def notes(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(NoteElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(NoteElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates through tables within the scope of this enumerator
@@ -88,9 +88,9 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def tables(css_or_xpath=nil, &block)
+    def tables(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(TableElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(TableElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates through examples within the scope of this enumerator
@@ -99,18 +99,18 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def examples(css_or_xpath=nil, &block)
+    def examples(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(ExampleElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(ExampleElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates within the scope of this enumerator
     #
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over
     #
-    def search(css_or_xpath=nil, &block)
+    def search(css_or_xpath=nil)
       block_error_if(block_given?)
-      chain_to(ElementEnumerator, css_or_xpath: css_or_xpath, &block)
+      chain_to(ElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates through elements within the scope of this enumerator
@@ -118,7 +118,7 @@ module Kitchen
     # @param enumerator_class [ElementEnumeratorBase] the enumerator to use for the iteration
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over
     #
-    def chain_to(enumerator_class, css_or_xpath: nil, &block)
+    def chain_to(enumerator_class, css_or_xpath: nil)
       block_error_if(block_given?)
       enumerator_class.factory.build_within(self, css_or_xpath: css_or_xpath)
     end
@@ -171,7 +171,7 @@ module Kitchen
     end
 
     # Returns the element at the provided index
-    # 
+    #
     # @param index [Integer]
     # @return [Element]
     #
