@@ -14,7 +14,7 @@ module Kitchen
 
     # Sets the document so the recipe can yield it for modification
     #
-    # @param [Document] the document to modify
+    # @param document [Document] the document to modify
     #
     def document=(document)
       @document =
@@ -78,6 +78,10 @@ module Kitchen
       error.backtrace.any? {|entry| entry.start_with?(@source_location)}
     end
 
+    # Print the given recipe error and do a process exit
+    #
+    # @param error [RecipeError] the error
+    #
     def print_recipe_error_and_exit(error)
       Kitchen::Debug.print_recipe_error(error: error,
                                         source_location: source_location,

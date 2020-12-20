@@ -79,7 +79,7 @@ module Kitchen
 
     # @!method config
     #   Get the config for this element's document
-    #   @return [Config]                           
+    #   @return [Config]
     def_delegators :document, :config
 
     # @!method selectors
@@ -129,7 +129,7 @@ module Kitchen
 
     # Returns true if this element has the given class
     #
-    # @param klass [String] the class to test for 
+    # @param klass [String] the class to test for
     # @return [Boolean]
     #
     def has_class?(klass)
@@ -157,7 +157,7 @@ module Kitchen
     # @param property [String, Symbol] the name of the property to set
     # @param value [String] the value to set
     #
-    # @example 
+    # @example
     #   element.set(:name,"div").set("id","foo")
     #
     def set(property, value)
@@ -200,7 +200,7 @@ module Kitchen
     # Adds ancestors to this element
     #
     # @param args [Array<Hash, Ancestor, Element, Document>] the ancestors
-    # @raise [StandardError] if there is already an ancestor with the one of 
+    # @raise [StandardError] if there is already an ancestor with the one of
     #   the given ancestors' types
     #
     def add_ancestors(*args)
@@ -596,9 +596,19 @@ module Kitchen
 
     protected
 
+    # The wrapped Nokogiri node
+    # @return [Nokogiri::XML::Node] the node
     attr_accessor :node
+
+    # If this element is a clone
+    # @return [Boolean]
     attr_accessor :is_a_clone
 
+    # Return a clipboard
+    #
+    # @param name_or_object [String, Clipboard] the name of the clipboard or the clipboard itself
+    # @return [Clipboard]
+    #
     def clipboard(name_or_object)
       case name_or_object
       when Symbol
@@ -611,6 +621,9 @@ module Kitchen
       end
     end
 
+    # Clean up some default namespace junk for cloned elements
+    #
+    # @param string [String] the string to clean
     def remove_default_namespaces_if_clone(string)
       if is_a_clone
         string.gsub("xmlns:default=\"http://www.w3.org/1999/xhtml\"","").gsub("default:","")

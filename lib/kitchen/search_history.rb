@@ -51,6 +51,11 @@ module Kitchen
 
     protected
 
+    # Create a new instance
+    #
+    # @param upstream [SearchHistory] prior search history
+    # @param latest [String] the new history
+    #
     def initialize(upstream=nil, latest=nil)
       @upstream = upstream
       @latest = latest
