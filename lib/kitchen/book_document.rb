@@ -9,8 +9,8 @@ module Kitchen
     attr_reader :short_name
 
     # Creates a new BookDocument
-    # 
-    # @param document [Document, Nokogiri::XML::Document] the underlying document; 
+    #
+    # @param document [Document, Nokogiri::XML::Document] the underlying document;
     #   if a +Document+ it is converted to a +Nokogiri::XML::Document+
     # @param short_name [Symbol, String] the book's short name
     # @param config [Config] the book's configuration

@@ -15,7 +15,7 @@ module Kitchen
             short_type: :page)
     end
 
-    # Returns the title element.  This method is aware that the title of the 
+    # Returns the title element.  This method is aware that the title of the
     # introduction page moves during the baking process.
     #
     # @raise [ElementNotFoundError] if no matching element is found
@@ -52,7 +52,7 @@ module Kitchen
       has_class?("appendix")
     end
 
-    # Returns the metadata element. 
+    # Returns the metadata element.
     #
     # @raise [ElementNotFoundError] if no matching element is found
     # @return [Element]
@@ -61,7 +61,7 @@ module Kitchen
       first!("div[data-type='metadata']")
     end
 
-    # Returns the summary element. 
+    # Returns the summary element.
     #
     # @raise [ElementNotFoundError] if no matching element is found
     # @return [Element]
@@ -70,7 +70,7 @@ module Kitchen
       first!("section.summary")
     end
 
-    # Returns the exercises element. 
+    # Returns the exercises element.
     #
     # @raise [ElementNotFoundError] if no matching element is found
     # @return [Element]

@@ -41,7 +41,7 @@ module Kitchen
     end
 
     # Returns true if the table is unnumbered
-    # 
+    #
     # @return [Boolean]
     #
     def unnumbered?

@@ -22,7 +22,7 @@ module Kitchen
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#to_xhtml-instance_method Nokogiri::XML::Node#to_xhtml
     #   @return [String] the document as an XHTML string
     # @!method to_s
-    #   Turn this node in to a string. If the document is HTML, this method returns html. 
+    #   Turn this node in to a string. If the document is HTML, this method returns html.
     #   If the document is XML, this method returns XML.
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#to_s-instance_method Nokogiri::XML::Node#to_s
     #   @return [String]
@@ -125,7 +125,7 @@ module Kitchen
     #
     # @param string [String] the element as a string
     #
-    # @example 
+    # @example
     #   create_element_from_string("<div class='foo'>bar</div>") #=> <div class="foo">bar</div>
     #
     # @return [Element]

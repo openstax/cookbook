@@ -1,5 +1,5 @@
 module Kitchen
-  # A specialized +Recipe+ that yields a +BookDocument+ instead of a plain 
+  # A specialized +Recipe+ that yields a +BookDocument+ instead of a plain
   # +Document+
   #
   class BookRecipe < Recipe

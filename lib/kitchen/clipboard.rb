@@ -17,7 +17,7 @@ module Kitchen
     end
 
     # Add an element to the clipboard
-    # 
+    #
     # @param item [ElementBase]
     #
     def add(item)

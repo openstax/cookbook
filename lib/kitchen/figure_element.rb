@@ -16,7 +16,7 @@ module Kitchen
     end
 
     # Returns the caption element
-    # 
+    #
     # @return [Element, nil]
     #
     def caption
