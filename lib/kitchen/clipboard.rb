@@ -5,8 +5,13 @@ module Kitchen
   class Clipboard
     include Enumerable
 
+    # The underlying array
+    # @return [Array<ElementBase>]
+    #
     attr_reader :items
 
+    # Creates a new +Clipboard+
+    #
     def initialize
       clear
     end

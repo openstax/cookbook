@@ -10,30 +10,90 @@ module Kitchen
     extend Forwardable
     include Mixins::BlockErrorIf
 
+    # The element's document
+    # @return [Document]
     attr_reader :document
+
+    # The element's type, e.g. +:page+
+    # @return [Symbol, String]
     attr_reader :short_type
+
+    # The enumerator class for this element
+    # @return [Class]
     attr_reader :enumerator_class
+
+    # The selector that located this element in the DOM
+    # @return [String]
     attr_accessor :css_or_xpath_that_found_me
 
     # @!method name
     #   Get the element name (the tag)
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#name-instance_method Nokogiri::XML::Node#name
+    #   @return [String]
     # @!method name=
     #   Set the element name (the tag)
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#name=-instance_method Nokogiri::XML::Node#name=
     # @!method []
     #   Get an element attribute
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#[]-instance_method Nokogiri::XML::Node#[]
+    #   @return [String]
     # @!method []=
     #   Set an element attribute
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#[]=-instance_method Nokogiri::XML::Node#[]=
     # @!method add_class
     #   Add a class to the element
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#add_class-instance_method Nokogiri::XML::Node#add_class
     # @!method remove_class
     #   Remove a class from the element
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#remove_class-instance_method Nokogiri::XML::Node#remove_class
+    # @!method text
+    #   Get the element text
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#text-instance_method Nokogiri::XML::Node#text
+    #   @return [String]
+    # @!method wrap
+    #   Add HTML around this element
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#wrap-instance_method Nokogiri::XML::Node#wrap
+    #   @return [Nokogiri::XML::Node]
+    # @!method children
+    #   Get the element's children
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#children-instance_method Nokogiri::XML::Node#children
+    #   @return [Nokogiri::XML::NodeSet]
+    # @!method to_html
+    #   Get the element as HTML
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#to_html-instance_method Nokogiri::XML::Node#to_html
+    #   @return [String]
+    # @!method remove_attribute
+    #   Removes an attribute from the element
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#remove_attribute-instance_method Nokogiri::XML::Node#remove_attribute
+    # @!method classes
+    #   Gets the element's classes
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#classes-instance_method Nokogiri::XML::Node#classes
+    #   @return [Array<String>]
+    # @!method path
+    #   Get the path for this element
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#path-instance_method Nokogiri::XML::Node#path
+    #   @return [String]
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
                            :text, :wrap, :children, :to_html, :remove_attribute,
                            :classes, :path
 
+    # @!method config
+    #   Get the config for this element's document
+    #   @return [Config]                           
     def_delegators :document, :config
+
+    # @!method selectors
+    #   Get the selectors for this element's document
+    #   @return [Selectors::Base]
     def_delegators :config, :selectors
 
+    # Creates a new instance
+    #
+    # @param node [Nokogiri::XML::Node] the wrapped element
+    # @param document [Document] the element's document
+    # @param enumerator_class [ElementEnumeratorBase] the enumerator that matches this element type
+    # @param short_type [Symbol, String] the type of this element
+    #
     def initialize(node:, document:, enumerator_class:, short_type: nil)
       raise(ArgumentError, "node cannot be nil") if node.nil?
       @node = node
@@ -67,14 +127,27 @@ module Kitchen
       false
     end
 
+    # Returns true if this element has the given class
+    #
+    # @param klass [String] the class to test for 
+    # @return [Boolean]
+    #
     def has_class?(klass)
       (self[:class] || "").include?(klass)
     end
 
+    # Returns the element's ID
+    #
+    # @return [String]
+    #
     def id
       self[:id]
     end
 
+    # Sets the element's ID
+    #
+    # @param value [String] the new value for the ID
+    #
     def id=(value)
       self[:id] = value
     end

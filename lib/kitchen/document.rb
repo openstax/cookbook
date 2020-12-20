@@ -41,7 +41,7 @@ module Kitchen
     def initialize(nokogiri_document:, config: nil)
       @nokogiri_document = nokogiri_document
       @location = nil
-      @config = config || Config.new_default
+      @config = config || Config.new
       @next_paste_count_for_id = {}
       @id_copy_suffix = "_copy_"
     end
@@ -172,6 +172,7 @@ module Kitchen
     # Returns the underlying Nokogiri Document object
     #
     # @return [Nokogiri::XML::Document]
+    #
     def raw
       @nokogiri_document
     end
