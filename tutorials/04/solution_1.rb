@@ -13,7 +13,7 @@
     doc.pantry(name: :link_text).store figure_name, label: figure.id
   end
 
-  book.search("a.needs-label").each do |anchor|
+  book.search('a.needs-label').each do |anchor|
     id = anchor[:href][1..-1]
     anchor.replace_children(with: doc.pantry(name: :link_text).get(id))
   end

@@ -33,7 +33,7 @@ module Kitchen
     # @return [Boolean]
     #
     def self.is_the_element_class_for?(node)
-      node['data-type'] == "composite-chapter"
+      node['data-type'] == 'composite-chapter'
     end
 
   end

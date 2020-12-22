@@ -9,11 +9,11 @@ module Kitchen
     i18n: {
       transliterate: {
         rule: {
-          σ: "σ",
-          Δ: "Δ",
-          π: "π",
+          σ: 'σ',
+          Δ: 'Δ',
+          π: 'π'
         }
       }
     }
-  }
+  }.freeze
 end

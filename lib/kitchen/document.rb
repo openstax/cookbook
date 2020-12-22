@@ -43,7 +43,7 @@ module Kitchen
       @location = nil
       @config = config || Config.new
       @next_paste_count_for_id = {}
-      @id_copy_suffix = "_copy_"
+      @id_copy_suffix = '_copy_'
     end
 
     # Returns an enumerator that iterates over all children of this document
@@ -132,7 +132,7 @@ module Kitchen
     #
     def create_element_from_string(string)
       Kitchen::Element.new(
-        node: @nokogiri_document.create_element("div"),
+        node: @nokogiri_document.create_element(string),
         document: self,
         short_type: "created_element_#{SecureRandom.hex(4)}"
       ).element_children.first
@@ -146,6 +146,7 @@ module Kitchen
     #
     def record_id_copied(id)
       return if id.blank?
+
       @next_paste_count_for_id[id] ||= 1
     end
 
@@ -156,7 +157,7 @@ module Kitchen
     #
     def modified_id_to_paste(original_id)
       return nil if original_id.nil?
-      return "" if original_id.blank?
+      return '' if original_id.blank?
 
       count = next_count_for_pasted_id(original_id)
 
@@ -181,6 +182,7 @@ module Kitchen
 
     def next_count_for_pasted_id(id)
       return if id.blank?
+
       (@next_paste_count_for_id[id] ||= 0).tap do
         @next_paste_count_for_id[id] += 1
       end

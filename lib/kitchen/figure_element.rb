@@ -20,7 +20,7 @@ module Kitchen
     # @return [Element, nil]
     #
     def caption
-      first("figcaption")
+      first('figcaption')
     end
 
     # Returns true if this class represents the element for the given node
@@ -29,7 +29,7 @@ module Kitchen
     # @return [Boolean]
     #
     def self.is_the_element_class_for?(node)
-      node.name == "figure"
+      node.name == 'figure'
     end
 
   end

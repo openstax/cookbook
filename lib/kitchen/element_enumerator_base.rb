@@ -129,7 +129,7 @@ module Kitchen
     # @raise [RecipeError] if a first element isn't available
     # @return [Element]
     #
-    def first!(missing_message: "Could not return a first result")
+    def first!(missing_message: 'Could not return a first result')
       first || raise(RecipeError, "#{missing_message} matching #{search_history.latest} " \
                                   "inside [#{search_history.upstream}]")
     end
@@ -143,7 +143,7 @@ module Kitchen
     #
     def cut(to: nil)
       to ||= Clipboard.new
-      self.each do |element|
+      each do |element|
         element.cut(to: to)
       end
       to
@@ -158,7 +158,7 @@ module Kitchen
     #
     def copy(to: nil)
       to ||= Clipboard.new
-      self.each do |element|
+      each do |element|
         element.copy(to: to)
       end
       to
@@ -167,7 +167,7 @@ module Kitchen
     # Removes all matching elements from the document
     #
     def trash
-      self.each(&:trash)
+      each(&:trash)
     end
 
     # Returns the element at the provided index
@@ -184,7 +184,7 @@ module Kitchen
     # @return [String]
     #
     def to_s
-      self.map(&:to_s).join("")
+      map(&:to_s).join('')
     end
 
   end

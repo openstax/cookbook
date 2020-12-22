@@ -33,7 +33,7 @@ module Kitchen
     # @return [Boolean]
     #
     def self.is_the_element_class_for?(node)
-      node['data-type'] == "composite-page"
+      node['data-type'] == 'composite-page'
     end
 
     # Returns true if this page is a book index
@@ -41,7 +41,7 @@ module Kitchen
     # @return [Boolean]
     #
     def is_index?
-      has_class?("os-index-container")
+      has_class?('os-index-container')
     end
 
   end

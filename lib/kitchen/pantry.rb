@@ -39,7 +39,7 @@ module Kitchen
     # @yieldparam item [Object] the item
     #
     def each(&block)
-      @hash.each{|k,v| block.call(k,v)}
+      @hash.each { |k, v| block.call(k, v) }
     end
 
     # Returns the number of items in the pantry

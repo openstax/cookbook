@@ -1,12 +1,12 @@
 @solution_1 = Kitchen::Recipe.new do |doc|
 
   doc.search("[data-type='chapter']").each do |chapter|
-    review_questions = chapter.search(".review-questions").cut
-    critical_thinking = chapter.search(".critical-thinking").cut
+    review_questions = chapter.search('.review-questions').cut
+    critical_thinking = chapter.search('.critical-thinking').cut
 
     [review_questions, critical_thinking].each do |clipboard|
       clipboard.each do |element|
-        element.first("h3").trash
+        element.first('h3').trash
       end
     end
 

@@ -23,9 +23,7 @@ module Kitchen
                              element_class: nil,
                              default_short_type: nil,
                              detect_element_class: false)
-      element_class ||= detect_element_class ?
-                        specific_element_class_for_node(node) :
-                        Element
+      element_class ||= detect_element_class ? specific_element_class_for_node(node) : Element
 
       if element_class == Element
         element_class.new(node: node,
@@ -36,8 +34,6 @@ module Kitchen
                           document: document)
       end
     end
-
-    protected
 
     def self.specific_element_class_for_node(node)
       ELEMENT_CLASSES.find do |klass|

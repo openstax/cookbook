@@ -13,7 +13,7 @@ class Object
         location.absolute_path == this_patch_file
       end
 
-      location_that_called_renderable = caller_locations[(this_patch_file_caller_index || -1)+1]
+      location_that_called_renderable = caller_locations[(this_patch_file_caller_index || -1) + 1]
       File.dirname(location_that_called_renderable.path)
     end
 
@@ -30,7 +30,6 @@ class Object
         ERB.new(template).result(binding)
       end
     end
-
   end
 
 end

@@ -1,0 +1,6 @@
+inherit_from: ../../../.rubocop.yml
+
+# Directions are supposed to be a big list of steps, so don't let Rubocop penalize
+# us for that
+Metrics/MethodLength:
+  Enabled: false

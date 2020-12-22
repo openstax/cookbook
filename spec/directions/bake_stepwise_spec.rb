@@ -4,7 +4,7 @@ RSpec.describe Kitchen::Directions::BakeStepwise do
 
   before do
     stub_locales({
-      'stepwise_step_label': "Step"
+      'stepwise_step_label': 'Step'
     })
   end
 
@@ -24,10 +24,10 @@ RSpec.describe Kitchen::Directions::BakeStepwise do
     )
   end
 
-  it "works" do
+  it 'works' do
     described_class.v1(book: book_1)
 
-    expect(book_1.search("ol").to_s).to match_normalized_html(
+    expect(book_1.search('ol').to_s).to match_normalized_html(
       <<~HTML
         <ol class="os-stepwise">
           <li>

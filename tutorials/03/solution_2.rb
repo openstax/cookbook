@@ -8,8 +8,9 @@
     )
 
     chapter.pages.each do |page|
-      page.title.set(:name, "h2")
-                .prepend(child: "#{chapter.count_in(:book)}.#{page.count_in(:chapter)} ")
+      page.title
+          .set(:name, 'h2')
+          .prepend(child: "#{chapter.count_in(:book)}.#{page.count_in(:chapter)} ")
     end
   end
 end

@@ -39,33 +39,31 @@ module Kitchen
     # Executes the block given to +Recipe.new+ on the document.  Aka, does the baking.
     #
     def bake
-      begin
-        @block.to_proc.call(document)
-      rescue RecipeError => ee
-        print_recipe_error_and_exit(ee)
-      rescue ArgumentError => ee
-        if if_any_stack_file_matches_source_location?(ee)
-          print_recipe_error_and_exit(ee)
-        else
-          raise
-        end
-      rescue NoMethodError => ee
-        if if_any_stack_file_matches_source_location?(ee)
-          print_recipe_error_and_exit(ee)
-        else
-          raise
-        end
-      rescue NameError => ee
-        if if_stack_starts_with_source_location?(ee)
-          print_recipe_error_and_exit(ee)
-        else
-          raise
-        end
-      rescue ElementNotFoundError => ee
-        print_recipe_error_and_exit(ee)
-      rescue Nokogiri::CSS::SyntaxError => ee
-        print_recipe_error_and_exit(ee)
+      @block.to_proc.call(document)
+    rescue RecipeError => e
+      print_recipe_error_and_exit(e)
+    rescue ArgumentError => e
+      if if_any_stack_file_matches_source_location?(e)
+        print_recipe_error_and_exit(e)
+      else
+        raise
       end
+    rescue NoMethodError => e
+      if if_any_stack_file_matches_source_location?(e)
+        print_recipe_error_and_exit(e)
+      else
+        raise
+      end
+    rescue NameError => e
+      if if_stack_starts_with_source_location?(e)
+        print_recipe_error_and_exit(e)
+      else
+        raise
+      end
+    rescue ElementNotFoundError => e
+      print_recipe_error_and_exit(e)
+    rescue Nokogiri::CSS::SyntaxError => e
+      print_recipe_error_and_exit(e)
     end
 
     protected
@@ -75,7 +73,7 @@ module Kitchen
     end
 
     def if_any_stack_file_matches_source_location?(error)
-      error.backtrace.any? {|entry| entry.start_with?(@source_location)}
+      error.backtrace.any? { |entry| entry.start_with?(@source_location) }
     end
 
     # Print the given recipe error and do a process exit

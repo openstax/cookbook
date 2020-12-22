@@ -28,8 +28,8 @@ module Kitchen
     # @return [Nokogiri::XML::NodeSet] Unusual to return the raw Nokogiri nodes!
     #
     def title
-      # TODO replace +children+ with +element_children+?
-      title_row&.first('th').children
+      # TODO: replace +children+ with +element_children+?
+      title_row&.first('th')&.children
     end
 
     # Returns true if the table has a title at the top
@@ -53,7 +53,7 @@ module Kitchen
     # @return [Element, nil]
     #
     def caption
-      first("caption")
+      first('caption')
     end
 
     # Returns true if this class represents the element for the given node
@@ -62,7 +62,7 @@ module Kitchen
     # @return [Boolean]
     #
     def self.is_the_element_class_for?(node)
-      node.name == "table"
+      node.name == 'table'
     end
 
   end

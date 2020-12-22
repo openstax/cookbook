@@ -1,6 +1,5 @@
 module FactoryHelpers
-
-  def book_containing(short_name: :not_set, html:)
+  def book_containing(html:, short_name: :not_set)
     Kitchen::BookDocument.new(short_name: short_name, document: Nokogiri::XML(
       <<~HTML
         <html>
@@ -33,8 +32,9 @@ module FactoryHelpers
       HTML
     )
 
-    children = nokogiri_document.search("body").first.element_children
-    raise("new_element must only make one top-level element") if children.many?
+    children = nokogiri_document.search('body').first.element_children
+    raise('new_element must only make one top-level element') if children.many?
+
     node = children.first
 
     Kitchen::Element.new(
@@ -42,5 +42,4 @@ module FactoryHelpers
       document: Kitchen::Document.new(nokogiri_document: nokogiri_document)
     )
   end
-
 end

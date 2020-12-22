@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "byebug"
-require "rainbow"
+require 'bundler/setup'
+require 'byebug'
+require 'rainbow'
 
 Dir.chdir(__dir__)
-tutorial_numbers = Dir.glob("*").select{|f| File.directory?(f) && f.match?(/\d\d/)}
+tutorial_numbers = Dir.glob('*').select { |f| File.directory?(f) && f.match?(/\d\d/) }
 
 tutorial_numbers.each do |tutorial_number|
   file_name = File.expand_path("#{tutorial_number}/my_recipe.rb", __dir__)
@@ -13,7 +13,7 @@ tutorial_numbers.each do |tutorial_number|
     puts "Skipped making recipe skeleton; my_recipe.rb exists in tutorials folder '#{tutorial_number}'"
     next
   else
-    File.open(file_name, "w") do |f|
+    File.open(file_name, 'w') do |f|
       f.write <<~CONTENTS
         # This file is IGNORED by Git
 

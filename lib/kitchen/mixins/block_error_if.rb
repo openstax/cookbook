@@ -11,7 +11,6 @@ module Kitchen
     #     end
     #   end
     module BlockErrorIf
-
       # All Ruby methods can take blocks, but not all of them use the block.  If a block is given but
       # not expected, we want to raise an error to help the developer figure out why their block isn't
       # doing what they expect.  The method does some work to figure out where the block was errantly
@@ -23,15 +22,14 @@ module Kitchen
       def block_error_if(block_given)
         calling_method = begin
           this_method_location_index = caller_locations.find_index do |location|
-            location.label == "block_error_if"
+            location.label == 'block_error_if'
           end
 
           caller_locations[(this_method_location_index || -1) + 1].label
         end
 
-        raise(RecipeError, "The `#{calling_method}` method does not take a block argument") if block_given
+        raise(RecipeError, "The `#{calling_method}` method does not take a block") if block_given
       end
-
     end
   end
 end

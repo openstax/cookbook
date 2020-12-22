@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::BakeFigure do
 
   let(:figure_classes) { '' }
-  let(:figure_caption) { "<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>" }
+  let(:figure_caption) { '<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>' }
 
   let(:book_1) do
     book_containing(html:
@@ -22,13 +22,13 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   let(:book_1_figure) { book_1.chapters.figures.first }
 
-  context "v1" do
-    it "works" do
-      expect(book_1.document.pantry(name: :link_text)).to receive(:store).with("Figure 1.2", label: "someId")
+  context 'v1' do
+    it 'works' do
+      expect(book_1.document.pantry(name: :link_text)).to receive(:store).with('Figure 1.2', label: 'someId')
 
-      described_class.v1(figure: book_1_figure, number: "1.2")
+      described_class.v1(figure: book_1_figure, number: '1.2')
 
-      expect(book_1.search(".os-figure").first).to match_html_nodes(
+      expect(book_1.search('.os-figure').first).to match_html_nodes(
         <<~HTML
           <div class="os-figure">
             <figure id="someId" class="">
@@ -48,28 +48,28 @@ RSpec.describe Kitchen::Directions::BakeFigure do
       )
     end
 
-    context "without a caption" do
+    context 'without a caption' do
       let(:figure_caption) { '' }
 
-      it "works without a caption" do
-        described_class.v1(figure: book_1_figure, number: "1.2")
-        expect(book_1.search(".os-caption").first).to be nil
+      it 'works without a caption' do
+        described_class.v1(figure: book_1_figure, number: '1.2')
+        expect(book_1.search('.os-caption').first).to be nil
       end
     end
 
-    context "figure has splash class" do
+    context 'figure has splash class' do
       let(:figure_classes) { 'splash' }
 
       it "gets a 'has-splash' class" do
-        described_class.v1(figure: book_1_figure, number: "1.2")
-        expect(book_1.search(".os-figure").first.has_class?("has-splash")).to be true
+        described_class.v1(figure: book_1_figure, number: '1.2')
+        expect(book_1.search('.os-figure').first.has_class?('has-splash')).to be true
       end
     end
 
-    context "figure does not have splash class" do
+    context 'figure does not have splash class' do
       it "does not get a 'has-splash' class" do
-        described_class.v1(figure: book_1_figure, number: "1.2")
-        expect(book_1.search(".os-figure").first.has_class?("has-splash")).to be false
+        described_class.v1(figure: book_1_figure, number: '1.2')
+        expect(book_1.search('.os-figure').first.has_class?('has-splash')).to be false
       end
     end
   end

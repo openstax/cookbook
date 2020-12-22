@@ -1,9 +1,8 @@
 module MatchHelpers
-
   RSpec::Matchers.define :match_html_strict do |expected|
     match do |actual|
-      @actual = Nokogiri::XML(actual.to_s){|config| config.noblanks}.to_xhtml(indent: 2)
-      @expected = Nokogiri::XML(expected.to_s){|config| config.noblanks}.to_xhtml(indent: 2)
+      @actual = Nokogiri::XML(actual.to_s) { |config| config.noblanks }.to_xhtml(indent: 2)
+      @expected = Nokogiri::XML(expected.to_s) { |config| config.noblanks }.to_xhtml(indent: 2)
       @actual == @expected
     end
 
@@ -39,37 +38,37 @@ module MatchHelpers
     match do |actual|
       @actual = normalized_xml_doc(actual)
       @expected = normalized_xml_doc(expected)
-      @actual.diff(@expected).all?{|change, _| change.blank?}
+      @actual.diff(@expected).all? { |change, _| change.blank? }
     end
 
     failure_message do |actual|
       @actual = normalized_xml_doc(actual)
       @expected = normalized_xml_doc(expected)
 
-      diff_lines = @actual.diff(@expected).map do |change,node|
+      diff_lines = @actual.diff(@expected).map do |change, node|
         reduced_node = node.dup
-        reduced_node.children = "..."
-        "#{change} #{reduced_node.to_xhtml}".ljust(30) if !change.blank?
+        reduced_node.children = '...'
+        "#{change} #{reduced_node.to_xhtml}".ljust(30) unless change.blank?
       end.compact
 
       <<~MSG
-        #{colorize("expected that actual:", :yellow)}
+        #{colorize('expected that actual:', :yellow)}
 
         #{colorize(@actual, :white)}
 
-        #{colorize("would match expected:", :yellow)}
+        #{colorize('would match expected:', :yellow)}
 
         #{colorize(@expected, :white)}
 
-        #{colorize("Diff:", :yellow)}
+        #{colorize('Diff:', :yellow)}
 
-        #{diff_lines.map{|line| colorize(line, line[0] == "+" ? :green : :red)}.join("\n")}
+        #{diff_lines.map { |line| colorize(line, line[0] == '+' ? :green : :red) }.join("\n")}
       MSG
     end
   end
 
   def colorize(stringable, color)
-    stringable.to_s.split("\n").map{|line| Rainbow(line).send(color)}.join("\n")
+    stringable.to_s.split("\n").map { |line| Rainbow(line).send(color) }.join("\n")
   end
 
   def normalized_xml_doc(xml_thing_with_to_s)
@@ -93,7 +92,6 @@ module MatchHelpers
 
     doc.alphabetize_attributes!
 
-    doc.search("dummy").children.to_xhtml(indent: 2)
+    doc.search('dummy').children.to_xhtml(indent: 2)
   end
-
 end

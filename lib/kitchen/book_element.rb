@@ -20,7 +20,7 @@ module Kitchen
     # @return [Element]
     #
     def body
-      first!("body")
+      first!('body')
     end
 
     # Returns the top metadata element
@@ -36,7 +36,7 @@ module Kitchen
     # @return [Element]
     #
     def toc
-      first!("nav#toc")
+      first!('nav#toc')
     end
 
   end

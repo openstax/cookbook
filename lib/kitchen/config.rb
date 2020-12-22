@@ -11,8 +11,8 @@ module Kitchen
 
     # Creates a new config from a file (not implemented)
     #
-    def self.new_from_file(file)
-      raise "NYI"
+    def self.new_from_file(_file)
+      raise 'NYI'
     end
 
     # Creates a new Config instance

@@ -27,7 +27,7 @@ RSpec.describe Kitchen::TableElement do
 
   let(:titled_table) { book_with_titled_table.tables.first }
 
-  it "gets the title" do
-    expect(titled_table.title.text).to eq "The Title"
+  it 'gets the title' do
+    expect(titled_table.title.text).to eq 'The Title'
   end
 end

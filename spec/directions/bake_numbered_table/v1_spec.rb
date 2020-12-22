@@ -4,11 +4,11 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
 
   before do
     stub_locales({
-      'table_label': "Table",
+      'table_label': 'Table'
     })
   end
 
-  let(:caption) { '<caption>A caption</caption>'}
+  let(:caption) { '<caption>A caption</caption>' }
 
   let(:table) do
     book_containing(html:
@@ -35,10 +35,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
-  it "works" do
-    described_class.new.bake(table: table, number: "2.3")
+  it 'works' do
+    described_class.new.bake(table: table, number: '2.3')
 
-    expect(table.document.search(".os-table").first).to match_normalized_html(
+    expect(table.document.search('.os-table').first).to match_normalized_html(
       <<~HTML
         <div class="os-table">
           <div class="os-table-title">A title</div>
@@ -66,12 +66,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     )
   end
 
-  context "no caption" do
-    let(:caption) { "" }
+  context 'no caption' do
+    let(:caption) { '' }
 
-    it "does not include an os-caption div" do
-      described_class.new.bake(table: table, number: "2.3")
-      expect(table.document).not_to match("os-caption")
+    it 'does not include an os-caption div' do
+      described_class.new.bake(table: table, number: '2.3')
+      expect(table.document).not_to match('os-caption')
     end
   end
 

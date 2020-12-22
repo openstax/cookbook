@@ -2,7 +2,6 @@ require 'forwardable'
 require 'securerandom'
 
 module Kitchen
-
   # Abstract base class for all elements.  If you are looking for a simple concrete
   # element class, use `Element`.
   #
@@ -74,8 +73,8 @@ module Kitchen
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#path-instance_method Nokogiri::XML::Node#path
     #   @return [String]
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
-                           :text, :wrap, :children, :to_html, :remove_attribute,
-                           :classes, :path
+                   :text, :wrap, :children, :to_html, :remove_attribute,
+                   :classes, :path
 
     # @!method config
     #   Get the config for this element's document
@@ -95,10 +94,12 @@ module Kitchen
     # @param short_type [Symbol, String] the type of this element
     #
     def initialize(node:, document:, enumerator_class:, short_type: nil)
-      raise(ArgumentError, "node cannot be nil") if node.nil?
+      raise(ArgumentError, 'node cannot be nil') if node.nil?
+
       @node = node
 
-      raise(ArgumentError, "enumerator_class cannot be nil") if enumerator_class.nil?
+      raise(ArgumentError, 'enumerator_class cannot be nil') if enumerator_class.nil?
+
       @enumerator_class = enumerator_class
 
       @short_type = short_type || "unknown_type_#{SecureRandom.hex(4)}"
@@ -108,7 +109,7 @@ module Kitchen
         when Kitchen::Document
           document
         else
-          raise(ArgumentError, "`document` is not a known document type")
+          raise(ArgumentError, '`document` is not a known document type')
         end
 
       @ancestors = HashWithIndifferentAccess.new
@@ -122,7 +123,7 @@ module Kitchen
     # @param node [Nokogiri::XML::Node] the underlying node
     # @return [Boolean]
     #
-    def self.is_the_element_class_for?(node)
+    def self.is_the_element_class_for?(_node)
       # override this in subclasses
       false
     end
@@ -133,7 +134,7 @@ module Kitchen
     # @return [Boolean]
     #
     def has_class?(klass)
-      (self[:class] || "").include?(klass)
+      (self[:class] || '').include?(klass)
     end
 
     # Returns the element's ID
@@ -193,9 +194,7 @@ module Kitchen
     #
     # @return [Array<Ancestor>]
     #
-    def ancestors
-      @ancestors
-    end
+    attr_reader :ancestors
 
     # Adds ancestors to this element
     #
@@ -289,7 +288,7 @@ module Kitchen
     #
     def search_history
       history = ancestor_elements.map(&:css_or_xpath_that_found_me) + [css_or_xpath_that_found_me]
-      history.compact.join(" ")
+      history.compact.join(' ')
     end
 
     # Returns an ElementEnumerator that iterates over the provided selector or xpath queries
@@ -341,7 +340,7 @@ module Kitchen
     #
     def element_children
       block_error_if(block_given?)
-      TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: "./*")
+      TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: './*')
     end
 
     # Searches for elements handled by a list of enumerator classes.  All element that
@@ -352,7 +351,7 @@ module Kitchen
     #
     def search_with(*enumerator_classes)
       block_error_if(block_given?)
-      raise "must supply at least one enumerator class" if enumerator_classes.empty?
+      raise 'must supply at least one enumerator class' if enumerator_classes.empty?
 
       factory = enumerator_classes[0].factory
       enumerator_classes[1..-1].each do |enumerator_class|
@@ -390,6 +389,7 @@ module Kitchen
       the_copy = clone
       the_copy.raw.traverse do |node|
         next if node.text? || node.document?
+
         document.record_id_copied(node[:id])
       end
       clipboard(to).add(the_copy) if to.present?
@@ -405,6 +405,7 @@ module Kitchen
       temp_copy = clone
       temp_copy.raw.traverse do |node|
         next if node.text? || node.document?
+
         node[:id] = document.modified_id_to_paste(node[:id]) unless node[:id].blank?
       end
       temp_copy.to_s
@@ -421,7 +422,7 @@ module Kitchen
       Element.new(node: raw.parent, document: document, short_type: "parent(#{short_type})")
     end
 
-    # TODO make it clear if all of these methods take Element, Node, or String
+    # TODO: make it clear if all of these methods take Element, Node, or String
 
     # If child argument given, prepends it before the element's current children.
     # If sibling is given, prepends it as a sibling to this element.
@@ -431,9 +432,9 @@ module Kitchen
     #
     def prepend(child: nil, sibling: nil)
       if child && sibling
-        raise RecipeError, "Only one of `child` or `sibling` can be specified"
+        raise RecipeError, 'Only one of `child` or `sibling` can be specified'
       elsif !child && !sibling
-        raise RecipeError, "One of `child` or `sibling` must be specified"
+        raise RecipeError, 'One of `child` or `sibling` must be specified'
       elsif child
         if node.children.empty?
           node.children = child.to_s
@@ -443,6 +444,7 @@ module Kitchen
       else
         node.add_previous_sibling(sibling)
       end
+
       self
     end
 
@@ -454,9 +456,9 @@ module Kitchen
     #
     def append(child: nil, sibling: nil)
       if child && sibling
-        raise RecipeError, "Only one of `child` or `sibling` can be specified"
+        raise RecipeError, 'Only one of `child` or `sibling` can be specified'
       elsif !child && !sibling
-        raise RecipeError, "One of `child` or `sibling` must be specified"
+        raise RecipeError, 'One of `child` or `sibling` must be specified'
       elsif child
         if node.children.empty?
           node.children = child.to_s
@@ -466,6 +468,7 @@ module Kitchen
       else
         node.next = sibling
       end
+
       self
     end
 
@@ -478,7 +481,7 @@ module Kitchen
       self
     end
 
-    # TODO methods like replace_children that take string, either forbid or handle Element/Node args
+    # TODO: methods like replace_children that take string, either forbid or handle Element/Node args
 
     # Get the content of children matching the provided selector.  Mostly
     # useful when there is one child with text you want to extract.
@@ -508,11 +511,13 @@ module Kitchen
     # @return [String] the sub header tag name
     #
     def sub_header_name
-      first_header = node.search("h1, h2, h3, h4, h5, h6").first
+      first_header = node.search('h1, h2, h3, h4, h5, h6').first
 
-      first_header.nil? ?
-        "h1" :
-        first_header.name.gsub(/\d/) {|num| (num.to_i + 1).to_s}
+      if first_header.nil?
+        'h1'
+      else
+        first_header.name.gsub(/\d/) { |num| (num.to_i + 1).to_s }
+      end
     end
 
     # Returns the underlying Nokogiri object
@@ -591,7 +596,7 @@ module Kitchen
     #
     # @return [ElementEnumeratorBase] (actually returns the appropriate enumerator class for this element)
     def as_enumerator
-      enumerator_class.new(css_or_xpath: css_or_xpath_that_found_me) {|block| block.yield(self)}
+      enumerator_class.new(css_or_xpath: css_or_xpath_that_found_me) { |block| block.yield(self) }
     end
 
     protected
@@ -616,7 +621,7 @@ module Kitchen
       when Clipboard
         name_or_object
       else
-        raise ArgumentError, "The provided argument (#{name_or_object}) is not "
+        raise ArgumentError, "The provided argument (#{name_or_object}) is not " \
                              "a clipboard name or a clipboard"
       end
     end
@@ -626,7 +631,7 @@ module Kitchen
     # @param string [String] the string to clean
     def remove_default_namespaces_if_clone(string)
       if is_a_clone
-        string.gsub("xmlns:default=\"http://www.w3.org/1999/xhtml\"","").gsub("default:","")
+        string.gsub('xmlns:default="http://www.w3.org/1999/xhtml"', '').gsub('default:', '')
       else
         string
       end

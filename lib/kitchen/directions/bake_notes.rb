@@ -1,7 +1,6 @@
 module Kitchen
   module Directions
     module BakeNotes
-
       def self.v1(book:)
         book.notes.each do |note|
           title = note.title&.cut
@@ -22,23 +21,23 @@ module Kitchen
                 HTML
               )
 
-              title.name = "h4"
-              title.add_class("os-subtitle")
+              title.name = 'h4'
+              title.add_class('os-subtitle')
               title.replace_children(with:
                 <<~HTML
                   <span class="os-subtitle-label">#{title.children}</span>
                 HTML
               )
-              note.first!(".os-note-body").prepend(child: title.raw)
+              note.first!('.os-note-body').prepend(child: title.raw)
             else
-              title.name = "h3"
-              title.add_class("os-title")
+              title.name = 'h3'
+              title.add_class('os-title')
               title.replace_children(with:
                 <<~HTML
                   <span data-type="" id="#{title.id}" class="os-title-label">#{title.children}</span>
                 HTML
               )
-              title.remove_attribute("id")
+              title.remove_attribute('id')
               note.prepend(child: title.raw)
             end
           else
@@ -52,7 +51,6 @@ module Kitchen
           end
         end
       end
-
     end
   end
 end

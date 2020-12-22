@@ -1,7 +1,6 @@
 module Kitchen
   module Directions
     module BakeChapterIntroductions
-
       def self.v1(book:)
         book.chapters.each do |chapter|
           outline_items_html = chapter.pages.map do |page|
@@ -10,13 +9,13 @@ module Kitchen
             <<~HTML
               <div class="os-chapter-objective">
                 <a class="os-chapter-objective" href="##{page.title[:id]}">
-                  <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)-1}</span>
+                  <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter) - 1}</span>
                   <span class="os-divider"> </span>
                   <span data-type="" itemprop="" class="os-text">#{page.title.children[0].text}</span>
                 </a>
               </div>
             HTML
-          end.join("")
+          end.join('')
 
           introduction_page = chapter.introduction_page
 
@@ -24,7 +23,7 @@ module Kitchen
           introduction_page.search("div[data-type='abstract']").trash
 
           title = introduction_page.title.cut
-          title.name = "h2"
+          title.name = 'h2'
           MoveTitleTextIntoSpan.v1(title: title)
 
           intro_content = introduction_page.search("> :not([data-type='metadata']):not(figure)").cut
@@ -52,7 +51,6 @@ module Kitchen
         something_with_selectors.selectors.title_in_introduction_page =
           ".intro-text > [data-type='document-title']"
       end
-
     end
   end
 end

@@ -6,16 +6,16 @@ if ENV['ENABLE_CODECOV']
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
-require "bundler/setup"
+require 'bundler/setup'
 
-require "openstax_kitchen"
-require "byebug"
-require "nokogiri/diff"
-require "rainbow"
+require 'openstax_kitchen'
+require 'byebug'
+require 'nokogiri/diff'
+require 'rainbow'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+  config.example_status_persistence_file_path = '.rspec_status'
 
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
@@ -25,7 +25,7 @@ RSpec.configure do |config|
   end
 end
 
-Dir[File.expand_path(__dir__ + "/helpers/*.rb")].each {|f| require f}
+Dir[File.expand_path(__dir__ + '/helpers/*.rb')].each { |f| require f }
 
 include StubHelpers
 include FactoryHelpers
