@@ -1,7 +1,6 @@
 module Kitchen
   module Directions
     module BakeToc
-
       def self.v1(book:)
         li_tags = book.body.element_children.map do |element|
           case element
@@ -14,12 +13,12 @@ module Kitchen
           end
         end.compact.join("\n")
 
-        book.first!("nav").replace_children(with: <<~HTML
-            <h1 class="os-toc-title">Contents</h1>
-            <ol>
-              #{li_tags}
-            </ol>
-          HTML
+        book.first!('nav').replace_children(with: <<~HTML
+          <h1 class="os-toc-title">Contents</h1>
+          <ol>
+            #{li_tags}
+          </ol>
+        HTML
         )
       end
 
@@ -32,7 +31,7 @@ module Kitchen
               #{chapter.title.children.to_s}
             </a>
             <ol class="os-chapter">
-              #{pages.map{|page| li_for_page(page)}.join("\n")}
+              #{pages.map { |page| li_for_page(page) }.join("\n")}
             </ol>
           </li>
         HTML
@@ -46,10 +45,10 @@ module Kitchen
             <a href="##{chapter.title.id}">
               <span class="os-number"><span class="os-part-text">Chapter </span>#{chapter.count_in(:book)}</span>
               <span class="os-divider"> </span>
-              <span class="os-text" data-type="" itemprop="">#{chapter.title.first!(".os-text").text}</span>
+              <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
             </a>
             <ol class="os-chapter">
-              #{pages.map{|page| li_for_page(page)}.join("\n")}
+              #{pages.map { |page| li_for_page(page) }.join("\n")}
             </ol>
           </li>
         HTML
@@ -59,19 +58,19 @@ module Kitchen
         li_class =
           if page.is_a?(PageElement)
             if page.has_ancestor?(:chapter)
-              "os-toc-chapter-page"
+              'os-toc-chapter-page'
             elsif page.is_appendix?
-              "os-toc-appendix"
+              'os-toc-appendix'
             elsif page.is_preface?
-              "os-toc-preface"
+              'os-toc-preface'
             else
               raise "do not know what TOC class to use for page with classes #{page.classes}"
             end
           elsif page.is_a?(CompositePageElement)
             if page.is_index?
-              "os-toc-index"
+              'os-toc-index'
             elsif page.has_ancestor?(:composite_chapter) || page.has_ancestor?(:chapter)
-              "os-toc-chapter-composite-page"
+              'os-toc-chapter-composite-page'
             else
               raise "do not know what TOC class to use for page with classes #{page.classes}"
             end
@@ -82,8 +81,8 @@ module Kitchen
         title = page.title.copy
 
         # The part text gets inserted as a child to the number span
-        part_text = title.first(".os-part-text")
-        number = title.first(".os-number")
+        part_text = title.first('.os-part-text')
+        number = title.first('.os-number')
         if part_text && number
           part_text = part_text.cut
           number.prepend(child: part_text.paste)
@@ -97,7 +96,6 @@ module Kitchen
           </li>
         HTML
       end
-
     end
   end
 end

@@ -23,9 +23,7 @@ module Kitchen
     #
     def title
       # The selector for intro titles changes during the baking process
-      first!(is_introduction? ?
-               selectors.title_in_introduction_page :
-               selectors.title_in_page)
+      first!(is_introduction? ? selectors.title_in_introduction_page : selectors.title_in_page)
     end
 
     # Returns true if this page is an introduction
@@ -33,7 +31,7 @@ module Kitchen
     # @return [Boolean]
     #
     def is_introduction?
-      has_class?("introduction")
+      has_class?('introduction')
     end
 
     # Returns true if this page is a preface
@@ -41,7 +39,7 @@ module Kitchen
     # @return [Boolean]
     #
     def is_preface?
-      has_class?("preface")
+      has_class?('preface')
     end
 
     # Returns true if this page is an appendix
@@ -49,7 +47,7 @@ module Kitchen
     # @return [Boolean]
     #
     def is_appendix?
-      has_class?("appendix")
+      has_class?('appendix')
     end
 
     # Returns the metadata element.
@@ -67,7 +65,7 @@ module Kitchen
     # @return [Element]
     #
     def summary
-      first!("section.summary")
+      first!('section.summary')
     end
 
     # Returns the exercises element.
@@ -76,7 +74,7 @@ module Kitchen
     # @return [Element]
     #
     def exercises
-      first!("section.exercises")
+      first!('section.exercises')
     end
 
     # Returns true if this class represents the element for the given node
@@ -85,7 +83,7 @@ module Kitchen
     # @return [Boolean]
     #
     def self.is_the_element_class_for?(node)
-      node['data-type'] == "page"
+      node['data-type'] == 'page'
     end
 
   end

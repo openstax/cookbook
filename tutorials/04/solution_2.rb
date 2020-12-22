@@ -6,8 +6,8 @@
   # enumerator and the label):
 
   enumerators_to_labels_map = {
-    book.tables => "Table",
-    book.figures => "Figure"
+    book.tables => 'Table',
+    book.figures => 'Figure'
   }
 
   enumerators_to_labels_map.each do |enumerator, label|
@@ -18,7 +18,7 @@
     end
   end
 
-  book.search("a.needs-label").each do |anchor|
+  book.search('a.needs-label').each do |anchor|
     id = anchor[:href][1..-1]
     anchor.replace_children(with: doc.pantry(name: :link_text).get(id))
   end

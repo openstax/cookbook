@@ -33,7 +33,7 @@ RSpec.describe Kitchen::Directions::BakeFootnotes::V1 do
     )
   end
 
-  it "works" do
+  it 'works' do
     described_class.new.bake(book: book_1)
 
     expect(book_1.body.children.to_s).to match_normalized_html(

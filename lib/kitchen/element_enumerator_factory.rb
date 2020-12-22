@@ -16,8 +16,8 @@ module Kitchen
     # @param enumerator_class [ElementEnumeratorBase] The enumerator class to return
     # @param detect_sub_element_class [Boolean] If true, infers the sub_element_class from the node
     #
-    def initialize(default_css_or_xpath: nil, sub_element_class: nil,
-                   enumerator_class:, detect_sub_element_class: false)
+    def initialize(enumerator_class:, default_css_or_xpath: nil, sub_element_class: nil,
+                   detect_sub_element_class: false)
       @default_css_or_xpath = default_css_or_xpath
       @sub_element_class = sub_element_class
       @enumerator_class = enumerator_class
@@ -57,7 +57,7 @@ module Kitchen
     #
     def or_with(other_factory)
       self.class.new(
-        default_css_or_xpath: default_css_or_xpath + ", " + other_factory.default_css_or_xpath,
+        default_css_or_xpath: default_css_or_xpath + ', ' + other_factory.default_css_or_xpath,
         enumerator_class: TypeCastingElementEnumerator,
         detect_sub_element_class: true
       )
@@ -66,8 +66,10 @@ module Kitchen
     protected
 
     def self.apply_default_css_or_xpath_and_normalize(css_or_xpath: nil, default_css_or_xpath: nil)
-      css_or_xpath ||= "$"
-      [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, [default_css_or_xpath].flatten.join(", ")) }
+      css_or_xpath ||= '$'
+      [css_or_xpath].flatten.each do |item|
+        item.gsub!(/\$/, [default_css_or_xpath].flatten.join(', '))
+      end
       [css_or_xpath].flatten
     end
 
@@ -80,24 +82,22 @@ module Kitchen
 
         element.raw.search(*css_or_xpath).each_with_index do |sub_node, index|
           sub_element = ElementFactory.build_from_node(
-                          node: sub_node,
-                          document: element.document,
-                          element_class: sub_element_class,
-                          default_short_type: Utils.search_path_to_type(css_or_xpath),
-                          detect_element_class: detect_sub_element_class
-                        )
+            node: sub_node,
+            document: element.document,
+            element_class: sub_element_class,
+            default_short_type: Utils.search_path_to_type(css_or_xpath),
+            detect_element_class: detect_sub_element_class
+          )
 
           # If the provided `css_or_xpath` has already been counted, we need to uncount
           # them on the ancestors so that when they are counted again below, the counts
           # are correct.  Only do this on the first loop!
-          if index == 0
-            if element.have_sub_elements_already_been_counted?(css_or_xpath)
-              grand_ancestors.values.each do |ancestor|
-                ancestor.decrement_descendant_count(
-                  sub_element.short_type,
-                  by: element.number_of_sub_elements_already_counted(css_or_xpath)
-                )
-              end
+          if index == 0 && element.have_sub_elements_already_been_counted?(css_or_xpath)
+            grand_ancestors.values.each do |ancestor|
+              ancestor.decrement_descendant_count(
+                sub_element.short_type,
+                by: element.number_of_sub_elements_already_counted(css_or_xpath)
+              )
             end
           end
 
@@ -127,7 +127,8 @@ module Kitchen
     def build_within_other_enumerator(other_enumerator, css_or_xpath:)
       # Return a new enumerator instance that internally iterates over `other_enumerator`
       # running a new enumerator for each element returned by that other enumerator.
-      enumerator_class.new(css_or_xpath: css_or_xpath, upstream_enumerator: other_enumerator) do |block|
+      enumerator_class.new(css_or_xpath: css_or_xpath,
+                           upstream_enumerator: other_enumerator) do |block|
         other_enumerator.each do |element|
           build_within_element(element, css_or_xpath: css_or_xpath).each do |sub_element|
             block.yield(sub_element)

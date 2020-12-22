@@ -26,12 +26,10 @@ module Kitchen::Directions::BakeFootnotes
         aside_id_to_footnote_number[aside_id] = footnote_number
       end
 
-
-      container.search("aside").each do |aside|
+      container.search('aside').each do |aside|
         footnote_number = aside_id_to_footnote_number[aside.id]
         aside.prepend(child: "<div class='footnote-number'>#{footnote_number}</div>")
       end
-
     end
 
   end

@@ -1,8 +1,8 @@
 @solution_1 = Kitchen::Recipe.new do |doc|
 
   doc.search("[data-type='chapter']").each do |chapter|
-    movers = chapter.search(".will-move").cut
-    movers.each{|mover| mover.name = "section"}
+    movers = chapter.search('.will-move').cut
+    movers.each { |mover| mover.name = 'section' }
 
     chapter.append(child: <<~HTML
         <div class="eoc">

@@ -85,10 +85,10 @@ RSpec.describe Kitchen::Directions::BakeToc do
     end
   end
 
-  it "works" do
+  it 'works' do
     described_class.v1(book: book_1)
 
-    expect(book_1.search("nav").to_s).to match_normalized_html(
+    expect(book_1.search('nav').to_s).to match_normalized_html(
       <<~HTML
         <nav id="toc">
           <h1 class="os-toc-title">Contents</h1>
@@ -169,6 +169,5 @@ RSpec.describe Kitchen::Directions::BakeToc do
       HTML
     )
   end
-
 
 end

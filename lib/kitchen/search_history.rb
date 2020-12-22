@@ -20,7 +20,7 @@ module Kitchen
     # @return [SearchHistory]
     #
     def add(css_or_xpath)
-      self.class.new(self, css_or_xpath.nil? ? nil : [css_or_xpath].join(", "))
+      self.class.new(self, css_or_xpath.nil? ? nil : [css_or_xpath].join(', '))
     end
 
     # Returns the history as a string
@@ -29,8 +29,8 @@ module Kitchen
     #   is used in its place
     # @return [String]
     #
-    def to_s(missing_string="?")
-      to_a.map{|item| "[#{item || missing_string}]"}.join(" ")
+    def to_s(missing_string='?')
+      to_a.map { |item| "[#{item || missing_string}]" }.join(' ')
     end
 
     # Returns this instance as an array of selectors

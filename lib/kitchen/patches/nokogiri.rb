@@ -8,7 +8,7 @@ module Nokogiri
       # terminal
       #
       def inspect
-        "Nokogiri::XML::Document <hidden for brevity>"
+        'Nokogiri::XML::Document <hidden for brevity>'
       end
 
       # Alphabetizes all attributes within the document, useful for comparing one
@@ -17,8 +17,9 @@ module Nokogiri
       def alphabetize_attributes!
         traverse do |child|
           next if child.text? || child.document?
+
           child_attributes = child.attributes
-          child_attributes.each do |key, value|
+          child_attributes.each do |key, _value|
             child.remove_attribute(key)
           end
           sorted_keys = child_attributes.keys.sort

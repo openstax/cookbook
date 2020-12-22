@@ -1,7 +1,6 @@
 module Kitchen
   module Directions
     module BakeExercises
-
       def self.v1(book:)
         metadata_elements = book.metadata.search(%w(.authors .publishers .print-style
                                                     .permissions [data-type='subject'])).copy
@@ -13,16 +12,16 @@ module Kitchen
           solution_clipboard = Clipboard.new
           solutions_clipboards.push(solution_clipboard)
 
-          chapter.pages("$:not(.introduction)").each do |page|
+          chapter.pages('$:not(.introduction)').each do |page|
             exercise_section = page.exercises
             exercise_section.first("[data-type='title']")&.trash
             exercise_section_title = page.title.copy
-            exercise_section_title.name = "h3"
+            exercise_section_title.name = 'h3'
             exercise_section_title.replace_children(with: <<~HTML
-                <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-                <span class="os-divider"> </span>
-                <span class="os-text" data-type="" itemprop="">#{exercise_section_title.children}</span>
-              HTML
+              <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+              <span class="os-divider"> </span>
+              <span class="os-text" data-type="" itemprop="">#{exercise_section_title.children}</span>
+            HTML
             )
 
             exercise_section.prepend(child:
@@ -46,6 +45,8 @@ module Kitchen
             exercise_section.cut(to: exercise_clipboard)
           end
 
+          next if exercise_clipboard.none?
+
           chapter.append(child:
             <<~HTML
               <div class="os-eoc os-exercises-container" data-type="composite-page" data-uuid-key=".exercises">
@@ -59,7 +60,7 @@ module Kitchen
                 #{exercise_clipboard.paste}
               </div>
             HTML
-          ) unless exercise_clipboard.none?
+          )
         end
 
         # Store a paste here to use at end so that uniquifyied IDs match legacy baking
@@ -67,12 +68,12 @@ module Kitchen
 
         solutions = solutions_clipboards.map.with_index do |solution_clipboard, index|
           <<~HTML
-            <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution#{index+1}">
+            <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution#{index + 1}">
               <h2 data-type="document-title">
-                <span class="os-text">#{index+1}</span>
+                <span class="os-text">#{index + 1}</span>
               </h2>
               <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">#{index+1}</h1>
+                <h1 data-type="document-title" itemprop="name">#{index + 1}</h1>
                 #{metadata_elements.paste}
               </div>
               #{solution_clipboard.paste}
@@ -80,20 +81,22 @@ module Kitchen
           HTML
         end
 
-        book.first("body").append(child:
-          <<~HTML
-          <div class="os-eob os-solution-container " data-type="composite-chapter" data-uuid-key=".solution">
-            <h1 data-type="document-title" id="composite-chapter-1">
-              <span class="os-text">#{I18n.t(:eoc_answer_key_title)}</span>
-            </h1>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_answer_key_title)}</h1>
-              #{eob_metadata}
-            </div>
-            #{solutions.join("\n")}
-          </div>
-          HTML
-        ) unless solutions.none?
+        unless solutions.none?
+          book.first('body').append(child:
+            <<~HTML
+              <div class="os-eob os-solution-container " data-type="composite-chapter" data-uuid-key=".solution">
+                <h1 data-type="document-title" id="composite-chapter-1">
+                  <span class="os-text">#{I18n.t(:eoc_answer_key_title)}</span>
+                </h1>
+                <div data-type="metadata" style="display: none;">
+                  <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_answer_key_title)}</h1>
+                  #{eob_metadata}
+                </div>
+                #{solutions.join("\n")}
+              </div>
+            HTML
+          )
+        end
       end
 
       def self.bake_exercise_in_place(exercise:)
@@ -138,7 +141,7 @@ module Kitchen
         if solution.present?
           solution.id = "#{exercise.id}-solution"
 
-          exercise.add_class("os-hasSolution")
+          exercise.add_class('os-hasSolution')
           problem_number = "<a href='##{solution.id}' class='os-number' >#{exercise.count_in(:chapter)}</a>"
 
           solution.replace_children(with:
@@ -158,7 +161,6 @@ module Kitchen
           HTML
         )
       end
-
     end
   end
 end

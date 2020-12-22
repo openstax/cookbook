@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::PageElement do
 
-  let(:page_title_text) { "A title!"}
+  let(:page_title_text) { 'A title!' }
 
   let(:metadata) do
     <<~HTML
@@ -19,21 +19,20 @@ RSpec.describe Kitchen::PageElement do
           #{metadata}
           <div data-type="document-title">#{page_title_text}</div>
         HTML
-      )
-    ).pages.first
+      )).pages.first
   end
 
-  context "#title" do
-    context "no metadata" do
-      let(:metadata) { "" }
+  context '#title' do
+    context 'no metadata' do
+      let(:metadata) { '' }
 
-      it "finds the title" do
+      it 'finds the title' do
         expect(page_1.title.text).to eq page_title_text
       end
     end
 
-    context "with metadata" do
-      it "finds the title" do
+    context 'with metadata' do
+      it 'finds the title' do
         expect(page_1.title.text).to eq page_title_text
       end
     end

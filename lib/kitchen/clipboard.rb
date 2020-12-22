@@ -34,7 +34,7 @@ module Kitchen
     # @return [String]
     #
     def paste
-      @items.map(&:paste).join("")
+      @items.map(&:paste).join('')
     end
 
     # Iterates over each item on the clipboard

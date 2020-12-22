@@ -1,7 +1,6 @@
 module Kitchen
   module Directions
     module BakeExample
-
       def self.v1(example:, number:, title_tag:)
         example.replace_children(with:
           <<~HTML
@@ -21,11 +20,12 @@ module Kitchen
           HTML
         )
 
-        example.document.pantry(name: :link_text).store "#{I18n.t(:example_label)} #{number}", label: example.id
+        example.document
+               .pantry(name: :link_text)
+               .store("#{I18n.t(:example_label)} #{number}", label: example.id)
 
-        example.titles.each {|title| title.name = "h4"}
+        example.titles.each { |title| title.name = 'h4' }
       end
-
     end
   end
 end

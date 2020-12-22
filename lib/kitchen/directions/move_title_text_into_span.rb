@@ -1,7 +1,6 @@
 module Kitchen
   module Directions
     module MoveTitleTextIntoSpan
-
       def self.v1(title:)
         title.replace_children(with:
           <<~HTML
@@ -9,7 +8,6 @@ module Kitchen
           HTML
         )
       end
-
     end
   end
 end

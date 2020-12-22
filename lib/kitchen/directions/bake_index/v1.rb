@@ -3,7 +3,10 @@ module Kitchen::Directions::BakeIndex
     renderable
 
     class Term
-      attr_reader :text, :id, :group_by, :page_title
+      attr_reader :text
+      attr_reader :id
+      attr_reader :group_by
+      attr_reader :page_title
 
       def initialize(text:, id:, group_by:, page_title:)
         @text = text.strip
@@ -38,7 +41,7 @@ module Kitchen::Directions::BakeIndex
       end
 
       def <=>(other)
-        self.sortable <=> other.sortable
+        sortable <=> other.sortable
       end
 
       protected
@@ -64,7 +67,8 @@ module Kitchen::Directions::BakeIndex
       def <=>(other)
         return -1 if force_first
         return 1 if other.force_first
-        self.name <=> other.name
+
+        name <=> other.name
       end
 
       protected
@@ -117,21 +121,21 @@ module Kitchen::Directions::BakeIndex
         term_element.id = "auto_#{page.id}_term#{term_element.count_in(:book)}"
 
         group_by = term_element.text.strip[0]
-        if !group_by.match? (/\w/)
-          group_by = I18n.t(:eob_index_symbols_group)
-        end
+        group_by = I18n.t(:eob_index_symbols_group) unless group_by.match?(/\w/)
         term_element['group-by'] = group_by
 
         # Add it to our index object
-        @index.add_term(Term.new(
-          text: term_element.text,
-          id: term_element.id,
-          group_by: group_by,
-          page_title: page.title.text.gsub(/\n/,'')
-        ))
+        @index.add_term(
+          Term.new(
+            text: term_element.text,
+            id: term_element.id,
+            group_by: group_by,
+            page_title: page.title.text.gsub(/\n/, '')
+          )
+        )
       end
 
-      book.first("body").append(child: render(file: 'v1.xhtml.erb'))
+      book.first('body').append(child: render(file: 'v1.xhtml.erb'))
     end
 
   end

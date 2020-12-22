@@ -10,11 +10,7 @@ module Kitchen
     # @param recipes [Array<Recipe>] an array of recipes with which to bake the document
     # @param output_file [String] the path to the output file
     #
-    def self.bake(input_file:,
-                  config_file: nil,
-                  recipes:,
-                  output_file:)
-
+    def self.bake(input_file:, recipes:, output_file:, config_file: nil)
       profile = BakeProfile.new
       profile.started!
 
@@ -36,8 +32,8 @@ module Kitchen
       end
       profile.baked!
 
-      File.open(output_file, "w") do |f|
-        f.write doc.to_xhtml(indent:2)
+      File.open(output_file, 'w') do |f|
+        f.write doc.to_xhtml(indent: 2)
       end
       profile.written!
 
@@ -49,24 +45,31 @@ module Kitchen
     class BakeProfile
       # Record that baking has started
       def started!; @started_at = Time.now; end
+
       # Record that the input file has been opened
       def opened!;  @opened_at = Time.now;  end
+
       # Record that the input file has been parsed
       def parsed!;  @parsed_at = Time.now;  end
+
       # Record that the input file has been baked
       def baked!;   @baked_at = Time.now;   end
+
       # Record that the output file has been written
       def written!; @written_at = Time.now; end
 
       # Return the number of seconds it took to open the input file
       # @return [Float]
       def open_seconds;  @opened_at  - @started_at; end
+
       # Return the number of seconds it took to parse the input file after opening
       # @return [Float]
       def parse_seconds; @parsed_at  - @opened_at;  end
+
       # Return the number of seconds it took to bake the parsed file
       # @return [Float]
       def bake_seconds;  @baked_at   - @parsed_at;  end
+
       # Return the number of seconds it took to write the baked file
       # @return [Float]
       def write_seconds; @written_at - @baked_at;   end

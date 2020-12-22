@@ -2,7 +2,7 @@ module Kitchen::Directions::BakeNumberedTable
   class V1
 
     def bake(table:, number:)
-      table.wrap(%Q(<div class="os-table">))
+      table.wrap(%(<div class="os-table">))
 
       table_label = "#{I18n.t(:table_label)} #{number}"
       table.document.pantry(name: :link_text).store table_label, label: table.id
@@ -16,9 +16,9 @@ module Kitchen::Directions::BakeNumberedTable
         table.title_row.trash
       end
 
-      # TODO extra spaces added here to match legacy implementation, but probably not meaningful?
-      new_summary = table_label + "  "
-      new_caption = ""
+      # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
+      new_summary = table_label + '  '
+      new_caption = ''
 
       if (caption = table.caption&.cut)
         new_summary += caption.text
@@ -29,7 +29,7 @@ module Kitchen::Directions::BakeNumberedTable
 
       table[:summary] = new_summary
 
-      if !table.unnumbered?
+      unless table.unnumbered?
         table.append(sibling:
           <<~HTML
             <div class="os-caption-container">

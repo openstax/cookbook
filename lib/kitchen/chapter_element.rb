@@ -48,7 +48,7 @@ module Kitchen
     # @return [ElementEnumerator]
     #
     def key_equations
-      search("section.key-equations")
+      search('section.key-equations')
     end
 
     # Returns true if this class represents the element for the given node
@@ -57,7 +57,7 @@ module Kitchen
     # @return [Boolean]
     #
     def self.is_the_element_class_for?(node)
-      node['data-type'] == "chapter"
+      node['data-type'] == 'chapter'
     end
 
   end
