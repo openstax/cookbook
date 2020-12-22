@@ -1,19 +1,32 @@
 {
- "name": "Kitchen Dev",
- "dockerComposeFile": ["../docker-compose.yml"],
- "service": "app",
- "workspaceFolder": "/code",
- "shutdownAction": "stopCompose",
- "extensions": [
-   "castwide.solargraph",
- ],
- "settings": {
-   "[ruby]": {
-     "editor.insertSpaces": true,
-     "editor.tabSize": 2
-   },
-   "solargraph.commandPath": "/usr/local/bundle/bin/solargraph",
-   "solargraph.bundlerPath": "/usr/local/bin/bundle",
- },
- "postCreateCommand": "bundle install"
+  "name": "Kitchen Dev",
+  "build": {
+    "dockerfile": "../docker/Dockerfile",
+    "context": "..",
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",
+  "workspaceFolder": "/code",
+  "extensions": [
+    "castwide.solargraph",
+    "rebornix.Ruby"
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "[ruby]": {
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2,
+    },
+    "ruby.lint": {
+      "rubocop": {
+        "useBundler": true // enable rubocop via bundler
+      },
+    },
+    "ruby.format": "rubocop", // use rubocop for formatting
+    "ruby.useLanguageServer": true,
+    "solargraph.commandPath": "/usr/local/bundle/bin/solargraph",
+    "solargraph.bundlerPath": "/usr/local/bin/bundle",
+    "ruby.rubocop.executePath": "/usr/local/bundle/bin/",
+    "ruby.rubocop.onSave": true,
+    "ruby.rubocop.configFilePath": "/code/.rubocop.yml"
+  }
 }

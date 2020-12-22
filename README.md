@@ -452,19 +452,23 @@ Incidentally, the `bake` method returns timing information, if you `puts` its re
 
 ### Docker
 
-You can use Docker for your development environment.
+You can use Docker for your development environment.  To build the image:
 
 ```bash
-$> docker-compose up -d
+$> ./docker/build
 ```
 
-to build and run the Docker container, then:
+To drop into the running container:
 
 ```bash
 $> ./docker/bash
 ```
 
-To drop into the container at the command line.
+To run specs (or something else) from the host:
+
+```bash
+$> ./docker/run rspec
+```
 
 ### Non-Docker
 
@@ -611,7 +615,19 @@ expect(book_1).to match_html_nodes("some string of HTML here")
 4. Click "Remote-Containers: Open Folder in Container"
 5. Select the cloned kitchen folder.
 
-This (assuming you have Docker installed) will launch a docker container for Kitchen, install Ruby and needed libraries, and then let you edit the code running in that container through VSCode.  Solargraph will work (code completion and inline documentation).
+This (assuming you have Docker installed) will launch a docker container for Kitchen, install Ruby and needed libraries, and then let you edit the code running in that container through VSCode.  Solargraph will work (code completion and inline documentation) as will Rubocop for linting.
+
+### Rubocop
+
+Rubocop is good for helping us keep our code style standardized, but it isn't the end-all be-all of things.  We can disable certain checks within a file, e.g.
+
+```ruby
+# rubocop:disable Style/NumericPredicate
+```
+
+or we can disable or change global settings in the `.rubocop.yml` file.
+
+Rubocop is setup to run within the VSCode dev container (see above).
 
 #### Misc References
 
@@ -645,13 +661,9 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## TODO
 
 * Specs galore :-)
-  * `$` search path substitution (making sure not to mess up xpath)
 * Think up and handle a bunch more recipe errors, test they all raise some kind of `RecipeError`.
 * Encapsulate numbering schemes (e.g. chapter pages are "5.2", appendix pages are "D7") and maybe set on book document?  Right now we are doing inline things like `*('A'..'Z')][page.count_in(:book)-1]}#{table.count_in(:page)` which is ugly.
-* Add rubocop for linting.
 * Control I18n language in Oven.
-* Get doc normalization scripts into this repo from testkitchen (for comparing two large baked outputs).
-* Change from ElementBase <- Element to Element <- BasicElement
 * README: element_children, .only, selectors, config files
 * Use ERB for more readable string building?
 

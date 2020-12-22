@@ -1,0 +1,32 @@
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Naming/PredicateName:
+  Enabled: false
+
+Metrics/ClassLength:
+  Description: 'Avoid classes longer than 300 lines of code.'
+  Enabled: true
+  VersionAdded: '0.25'
+  VersionChanged: '0.87'
+  CountComments: false  # count full line comments?
+  Max: 300
+  CountAsOne: []
+
+Metrics/MethodLength:
+  Description: 'Avoid methods longer than 50 lines of code.'
+  StyleGuide: '#short-methods'
+  Enabled: true
+  VersionAdded: '0.25'
+  VersionChanged: '1.5'
+  CountComments: false  # count full line comments?
+  Max: 50
+  CountAsOne: []
+  ExcludedMethods: [] # deprecated, retained for backwards compatibility
+  IgnoredMethods: []
