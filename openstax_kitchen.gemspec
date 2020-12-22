@@ -37,4 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'nokogiri-diff'
   spec.add_development_dependency 'rainbow'
   spec.add_development_dependency 'inch'
+  spec.add_development_dependency 'rubocop'
 end
