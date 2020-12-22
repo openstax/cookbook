@@ -54,4 +54,3 @@ I18n.load_path << file_glob("/locales/*.yml")
 I18n.available_locales.each do |available_locale|
   I18n.backend.store_translations(available_locale, Kitchen::TRANSLITERATIONS)
 end
-

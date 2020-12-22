@@ -583,6 +583,8 @@ Run `yard server --reload` to watch for changes in your local codebase everytime
 
 Navidate to `http://localhost:8808/` to view documentation in your browser.
 
+Use the `inch` gem to get feedback on where documentation is lacking `bundle exec inch` (add `--help` for more options).
+
 ### Specs
 
 Run `bundle exec rspec` to run the specs.  `rake rspec` probably does the same thing.

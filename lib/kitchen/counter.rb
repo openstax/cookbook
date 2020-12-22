@@ -1,6 +1,9 @@
 module Kitchen
+  # A simple counting object
+  #
   class Counter # hehe
 
+    # Creates a new +Counter+ instance
     def initialize
       reset
     end
@@ -13,7 +16,8 @@ module Kitchen
       @value += by
     end
 
-    # (see #increment)
+    # @!method inc
+    #   @see increment
     alias_method :inc, :increment
 
     # Returns the value of the counter

@@ -1,4 +1,6 @@
 module Kitchen
+  # Builds specific subclasses of ElementEnumeratorBase
+  #
   class ElementEnumeratorFactory
 
     attr_reader :default_css_or_xpath
@@ -6,6 +8,14 @@ module Kitchen
     attr_reader :sub_element_class
     attr_reader :detect_sub_element_class
 
+    # Creates a new instance
+    #
+    # @param default_css_or_xpath [String] The selectors to substitute for the "$" character
+    #   when this factory is used to build an enumerator.
+    # @param sub_element_class [ElementBase] The element class to use for what the enumerator finds.
+    # @param enumerator_class [ElementEnumeratorBase] The enumerator class to return
+    # @param detect_sub_element_class [Boolean] If true, infers the sub_element_class from the node
+    #
     def initialize(default_css_or_xpath: nil, sub_element_class: nil,
                    enumerator_class:, detect_sub_element_class: false)
       @default_css_or_xpath = default_css_or_xpath
@@ -14,15 +24,22 @@ module Kitchen
       @detect_sub_element_class = detect_sub_element_class
     end
 
-    # TODO spec this!
-    def apply_default_css_or_xpath_and_normalize(css_or_xpath=nil)
-      css_or_xpath ||= "$"
-      [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, [default_css_or_xpath].flatten.join(", ")) }
-      [css_or_xpath].flatten
-    end
-
+    # Builds a new enumerator within the scope of the provided argument (either
+    # an enumerator or a class).  Accepts optional selectors to further limit
+    # the scope of results found.
+    #
+    # @param enumerator_or_element [ElementEnumeratorBase, ElementBase] the object
+    #   within which to iterate
+    # @param css_or_xpath [String, Array<String>] selectors to use to limit iteration
+    #   results
+    # @return [ElementEnumeratorBase] actually returns the concrete enumerator class
+    #   given to the factory in its constructor.
+    #
     def build_within(enumerator_or_element, css_or_xpath: nil)
-      css_or_xpath = apply_default_css_or_xpath_and_normalize(css_or_xpath)
+      css_or_xpath = self.class.apply_default_css_or_xpath_and_normalize(
+        css_or_xpath: css_or_xpath,
+        default_css_or_xpath: default_css_or_xpath
+      )
 
       case enumerator_or_element
       when ElementBase
@@ -32,6 +49,12 @@ module Kitchen
       end
     end
 
+    # Builds a new enumerator that finds elements matching either this factory's or the provided
+    # factory's selectors.
+    #
+    # @param other_factory [ElementEnumeratorFactory]
+    # @return [ElementEnumeratorFactory]
+    #
     def or_with(other_factory)
       self.class.new(
         default_css_or_xpath: default_css_or_xpath + ", " + other_factory.default_css_or_xpath,
@@ -41,6 +64,12 @@ module Kitchen
     end
 
     protected
+
+    def self.apply_default_css_or_xpath_and_normalize(css_or_xpath: nil, default_css_or_xpath: nil)
+      css_or_xpath ||= "$"
+      [css_or_xpath].flatten.each {|item| item.gsub!(/\$/, [default_css_or_xpath].flatten.join(", ")) }
+      [css_or_xpath].flatten
+    end
 
     def build_within_element(element, css_or_xpath:)
       enumerator_class.new(css_or_xpath: css_or_xpath) do |block|

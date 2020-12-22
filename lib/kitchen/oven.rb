@@ -1,6 +1,15 @@
 module Kitchen
+  # A class for baking documents according to the instructions in recipes
+  #
   class Oven
 
+    # Bakes an input file using a recipe to produce an output file
+    #
+    # @param input_file [String] the path to the input file
+    # @param config_file [String] the path to the configuration file
+    # @param recipes [Array<Recipe>] an array of recipes with which to bake the document
+    # @param output_file [String] the path to the output file
+    #
     def self.bake(input_file:,
                   config_file: nil,
                   recipes:,
@@ -35,18 +44,35 @@ module Kitchen
       profile
     end
 
+    # Stats on baking
+    #
     class BakeProfile
+      # Record that baking has started
       def started!; @started_at = Time.now; end
+      # Record that the input file has been opened
       def opened!;  @opened_at = Time.now;  end
+      # Record that the input file has been parsed
       def parsed!;  @parsed_at = Time.now;  end
+      # Record that the input file has been baked
       def baked!;   @baked_at = Time.now;   end
+      # Record that the output file has been written
       def written!; @written_at = Time.now; end
 
+      # Return the number of seconds it took to open the input file
+      # @return [Float]
       def open_seconds;  @opened_at  - @started_at; end
+      # Return the number of seconds it took to parse the input file after opening
+      # @return [Float]
       def parse_seconds; @parsed_at  - @opened_at;  end
+      # Return the number of seconds it took to bake the parsed file
+      # @return [Float]
       def bake_seconds;  @baked_at   - @parsed_at;  end
+      # Return the number of seconds it took to write the baked file
+      # @return [Float]
       def write_seconds; @written_at - @baked_at;   end
 
+      # Return the profile stats as a string
+      # @return [String]
       def to_s
         <<~STRING
           Open:  #{open_seconds} s
