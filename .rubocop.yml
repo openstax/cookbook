@@ -4,6 +4,9 @@ Layout/EmptyLinesAroundClassBody:
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 50
+
 Metrics/LineLength:
   Max: 100
 
@@ -20,6 +23,8 @@ Metrics/MethodLength:
 
 Metrics/BlockLength:
   CountAsOne: ['heredoc']
+  Exclude:
+    - *.gemspec
 
 Metrics/ModuleLength:
   CountAsOne: ['heredoc']
@@ -41,6 +46,12 @@ Style/SingleLineMethods:
 
 Style/RegexpLiteral:
   AllowInnerSlashes: true
+
+Style/SymbolProc:
+  IgnoredMethods:
+    - respond_to
+    - define_method
+    - XML # For Nokogiri::XML
 
 Layout/ClosingParenthesisIndentation:
   Enabled: false # when true hanging parens look weird

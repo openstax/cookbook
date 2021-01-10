@@ -3,7 +3,9 @@
 [![Tests](https://github.com/openstax/kitchen/workflows/Tests/badge.svg)](https://github.com/openstax/kitchen/actions?query=workflow:Tests)
 [![Coverage Status](https://img.shields.io/codecov/c/github/openstax/kitchen.svg)](https://codecov.io/gh/openstax/kitchen)
 
-Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`
+Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`.
+
+[Full documentation at rubydoc.info](https://rubydoc.info/github/openstax/kitchen).
 
 ## Installation
 

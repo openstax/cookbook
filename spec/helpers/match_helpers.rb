@@ -73,14 +73,17 @@ module MatchHelpers
 
   def normalized_xml_doc(xml_thing_with_to_s)
     Nokogiri::XML(
-      Nokogiri::XML(xml_thing_with_to_s.to_s) do |config|
-        config.noblanks
-      end.to_xhtml(indent: 2)
+      normalized_xml_doc_string(xml_thing_with_to_s)
     ) do |config|
       config.noblanks
     end.tap(&:remove_namespaces!)
   end
 
+  # A way to standardize an XML string, useful for comparisons
+  #
+  # @param xml_thing_with_to_s [Object] An object that gives XML string when +to_s+ is called
+  # @return [String]
+  #
   def normalized_xml_doc_string(xml_thing_with_to_s)
     # in case xml_thing_with_to_s is several top level elements, wrap it
     # in a dummy element and extract it back out below

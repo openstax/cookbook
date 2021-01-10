@@ -58,30 +58,50 @@ module Kitchen
       # Record that the output file has been written
       def written!; @written_at = Time.now; end
 
-      # Return the number of seconds it took to open the input file
-      # @return [Float]
-      def open_seconds;  @opened_at  - @started_at; end
+      # Return the number of seconds it took to open the input file or nil if this
+      # info isn't available.
+      # @return [Float, nil]
+      def open_seconds
+        @opened_at - @started_at
+      rescue NoMethodError
+        nil
+      end
 
-      # Return the number of seconds it took to parse the input file after opening
-      # @return [Float]
-      def parse_seconds; @parsed_at  - @opened_at;  end
+      # Return the number of seconds it took to parse the input file after opening or
+      # nil if this info isn't available.
+      # @return [Float, nil]
+      def parse_seconds
+        @parsed_at - @opened_at
+      rescue NoMethodError
+        nil
+      end
 
-      # Return the number of seconds it took to bake the parsed file
-      # @return [Float]
-      def bake_seconds;  @baked_at   - @parsed_at;  end
+      # Return the number of seconds it took to bake the parsed file or nil if this
+      # info isn't available.
+      # @return [Float, nil]
+      def bake_seconds
+        @baked_at - @parsed_at
+      rescue NoMethodError
+        nil
+      end
 
-      # Return the number of seconds it took to write the baked file
-      # @return [Float]
-      def write_seconds; @written_at - @baked_at;   end
+      # Return the number of seconds it took to write the baked file or nil if this
+      # info isn't available.
+      # @return [Float, nil]
+      def write_seconds
+        @written_at - @baked_at
+      rescue NoMethodError
+        nil
+      end
 
       # Return the profile stats as a string
       # @return [String]
       def to_s
         <<~STRING
-          Open:  #{open_seconds} s
-          Parse: #{parse_seconds} s
-          Bake:  #{bake_seconds} s
-          Write: #{write_seconds} s
+          Open:  #{open_seconds || '??'} s
+          Parse: #{parse_seconds || '??'} s
+          Bake:  #{bake_seconds || '??'} s
+          Write: #{write_seconds || '??'} s
         STRING
       end
     end

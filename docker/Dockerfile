@@ -1,9 +1,12 @@
 FROM ruby:2.6-slim
 
+ARG bundler_version
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     git \
     vim \
+    openssh-server \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
@@ -20,7 +23,7 @@ WORKDIR /code
 COPY . /code/
 
 RUN gem install solargraph && \
-    gem install bundler --no-document && \
+    gem install bundler --no-document --version $bundler_version && \
     bundle config set no-cache 'true' && \
     bundle config set silence_root_warning 'true' && \
     bundle install && \

@@ -16,3 +16,6 @@ Style/BlockDelimiters:
     - subject
     - watch
     - expect # added this
+
+Style/SymbolProc:
+  Enabled: false

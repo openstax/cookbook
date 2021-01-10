@@ -32,6 +32,8 @@ module Kitchen
     # @yieldparam doc [Document] an object representing an XML document
     #
     def initialize(&block)
+      raise(RecipeError, 'Recipes must be initialized with a block') unless block_given?
+
       @source_location = block.source_location[0]
       @block = block
     end
@@ -40,39 +42,25 @@ module Kitchen
     #
     def bake
       @block.to_proc.call(document)
-    rescue RecipeError => e
+    rescue RecipeError, ElementNotFoundError, Nokogiri::CSS::SyntaxError => e
       print_recipe_error_and_exit(e)
-    rescue ArgumentError => e
-      if if_any_stack_file_matches_source_location?(e)
-        print_recipe_error_and_exit(e)
-      else
-        raise
-      end
-    rescue NoMethodError => e
-      if if_any_stack_file_matches_source_location?(e)
-        print_recipe_error_and_exit(e)
-      else
-        raise
-      end
+    rescue ArgumentError, NoMethodError => e
+      raise unless any_stack_file_matches_source_location?(e)
+
+      print_recipe_error_and_exit(e)
     rescue NameError => e
-      if if_stack_starts_with_source_location?(e)
-        print_recipe_error_and_exit(e)
-      else
-        raise
-      end
-    rescue ElementNotFoundError => e
-      print_recipe_error_and_exit(e)
-    rescue Nokogiri::CSS::SyntaxError => e
+      raise unless stack_starts_with_source_location?(e)
+
       print_recipe_error_and_exit(e)
     end
 
     protected
 
-    def if_stack_starts_with_source_location?(error)
+    def stack_starts_with_source_location?(error)
       error.backtrace.first.start_with?(source_location)
     end
 
-    def if_any_stack_file_matches_source_location?(error)
+    def any_stack_file_matches_source_location?(error)
       error.backtrace.any? { |entry| entry.start_with?(@source_location) }
     end
 

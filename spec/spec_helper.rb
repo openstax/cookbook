@@ -30,3 +30,4 @@ Dir[File.expand_path(__dir__ + '/helpers/*.rb')].each { |f| require f }
 include StubHelpers
 include FactoryHelpers
 include MatchHelpers
+include StringHelpers
