@@ -3,6 +3,9 @@
   "build": {
     "dockerfile": "../docker/Dockerfile",
     "context": "..",
+    "args": {
+      "bundler_version": "2.2.4"
+    }
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",
   "workspaceFolder": "/code",
