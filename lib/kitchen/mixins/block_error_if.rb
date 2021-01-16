@@ -20,6 +20,8 @@ module Kitchen
       # @raise [RecipeError] if a block was given
       #
       def block_error_if(block_given)
+        return if !block_given
+
         calling_method = begin
           this_method_location_index = caller_locations.find_index do |location|
             location.label == 'block_error_if'
@@ -28,7 +30,7 @@ module Kitchen
           caller_locations[(this_method_location_index || -1) + 1].label
         end
 
-        raise(RecipeError, "The `#{calling_method}` method does not take a block") if block_given
+        raise(RecipeError, "The `#{calling_method}` method does not take a block")
       end
     end
   end
