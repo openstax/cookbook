@@ -33,4 +33,23 @@ RSpec.describe Kitchen::ElementEnumeratorFactory do
       expect(method.call(default_css_or_xpath: 'div')).to eq ['div']
     end
   end
+
+  context 'specific enumerators create a factory' do
+    [
+      Kitchen::ChapterElementEnumerator,
+      Kitchen::CompositePageElementEnumerator,
+      Kitchen::ExampleElementEnumerator,
+      Kitchen::FigureElementEnumerator,
+      Kitchen::NoteElementEnumerator,
+      Kitchen::PageElementEnumerator,
+      Kitchen::TableElementEnumerator,
+      Kitchen::TermElementEnumerator,
+      Kitchen::TypeCastingElementEnumerator
+    ].each do |enumerator_class|
+      it "it is created by #{enumerator_class}" do
+        expect(described_class).to receive(:new)
+        enumerator_class.factory
+      end
+    end
+  end
 end
