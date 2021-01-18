@@ -11,7 +11,8 @@
   "workspaceFolder": "/code",
   "extensions": [
     "castwide.solargraph",
-    "rebornix.Ruby"
+    "rebornix.Ruby",
+    "MS-vsliveshare.vsliveshare-pack"
   ],
   "settings": {
     "files.trimTrailingWhitespace": true,

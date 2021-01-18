@@ -8,6 +8,7 @@ RUN apt-get update && \
     vim \
     openssh-server \
     build-essential \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Install a quick colorized prompt and turn on ls coloring
@@ -18,6 +19,9 @@ RUN git clone https://github.com/nojhan/liquidprompt.git ~/liquidprompt && \
     echo 'export LP_USER_ALWAYS=-1' >>~/.config/liquidpromptrc && \
     sed -i "/color=auto/"' s/# //' ~/.bashrc && \
     sed -i "/alias ls/,/lA/"' s/# //' ~/.bashrc
+
+# VSCode Live Share libraries
+RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vsls-reqs && ~/vsls-reqs
 
 WORKDIR /code
 COPY . /code/
