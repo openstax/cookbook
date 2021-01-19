@@ -23,8 +23,6 @@ Metrics/MethodLength:
 
 Metrics/BlockLength:
   CountAsOne: ['heredoc']
-  Exclude:
-    - *.gemspec
 
 Metrics/ModuleLength:
   CountAsOne: ['heredoc']
