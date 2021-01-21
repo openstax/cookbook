@@ -20,3 +20,6 @@ Style/BlockDelimiters:
 
 Style/SymbolProc:
   Enabled: false
+
+RSpec/FilePath:
+  Enabled: false

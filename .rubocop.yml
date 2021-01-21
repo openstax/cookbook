@@ -4,11 +4,11 @@ Layout/EmptyLinesAroundClassBody:
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
 
+Layout/LineLength:
+  Max: 100
+
 Metrics/AbcSize:
   Max: 50
-
-Metrics/LineLength:
-  Max: 100
 
 Naming/PredicateName:
   Enabled: false
@@ -53,6 +53,3 @@ Style/SymbolProc:
 
 Layout/ClosingParenthesisIndentation:
   Enabled: false # when true hanging parens look weird
-
-RSpec/Filepath:
-  Enabled: false
