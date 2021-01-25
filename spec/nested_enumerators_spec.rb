@@ -51,7 +51,7 @@ RSpec.describe 'nested enumerators' do
     end
   end
 
-  context 'multi-level iteration' do
+  context 'when performing multi-level iteration' do
     context 'works' do
       it 'can iterate over chapters and then pages' do
         expect(book_1.chapters.pages.map(&:id)).to eq %w[c1p1 c1p2 c2p1 c2p2]
@@ -99,7 +99,7 @@ RSpec.describe 'nested enumerators' do
       expect(enumerator.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
     end
 
-    context 'enumerators broken up with individual element access' do
+    context 'when enumerators broken up with individual element access' do
       it 'can access ancestors all the way up the ancestry' do
         book_1.chapters.each do |chapter|
           chapter.pages.each do |page|
