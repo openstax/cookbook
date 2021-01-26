@@ -8,7 +8,9 @@ module Kitchen
     # The underlying array
     # @return [Array<ElementBase>]
     #
-    attr_reader :items
+    def items
+      @items.clone
+    end
 
     # Creates a new +Clipboard+
     #
@@ -22,12 +24,14 @@ module Kitchen
     #
     def add(item)
       @items.push(item)
+      self
     end
 
     # Clears the clipboard
     #
     def clear
       @items = []
+      self
     end
 
     # Returns a concatenation of the pasting of each item on the clipboard
@@ -44,7 +48,7 @@ module Kitchen
     def each(&block)
       @items.each do |item|
         block.call(item)
-      end
+      end if block_given?
       self
     end
 
@@ -54,6 +58,7 @@ module Kitchen
     #
     def sort_by!(&block)
       @items.sort_by!(&block)
+      self
     end
   end
 end
