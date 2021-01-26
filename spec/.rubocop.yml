@@ -23,3 +23,6 @@ Style/SymbolProc:
 
 RSpec/FilePath:
   Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
