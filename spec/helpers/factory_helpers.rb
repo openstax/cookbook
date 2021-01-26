@@ -43,3 +43,7 @@ module FactoryHelpers
     )
   end
 end
+
+def chapter_element(chapter_children_html)
+  book_containing(html: "<div data-type='chapter'>#{chapter_children_html}</div>").chapters.first
+end
