@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeChapterGlossary do
-
-  # TODO: test that...
-  # 1) definitions with the same term sort next by the definition
-
   let(:chapter) do
     chapter_element(
       <<~HTML
@@ -28,22 +24,12 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary do
     )
   end
 
-  let(:metadata) do
-    new_element(
+  it 'works' do
+    metadata = metadata_element.append(child:
       <<~HTML
-        <div data-type="metadata" style="display: none;">
-          <div class="authors" id="authors">Authors</div>
-          <div class="publishers" id="publishers">Publishers</div>
-          <div class="print-style" id="print-style">Print Style</div>
-          <div class="permissions" id="permissions">Permissions</div>
-          <div data-type="subject" id="subject">Subject</div>
-          <div data-type="random" id="subject">Random - should not be included</div>
-        </div>
+        <div data-type="random" id="subject">Random - should not be included</div>
       HTML
     )
-  end
-
-  it 'works' do
     expect(
       described_class.v1(chapter: chapter, metadata_source: metadata)
     ).to match_normalized_html(

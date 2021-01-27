@@ -47,3 +47,17 @@ end
 def chapter_element(chapter_children_html)
   book_containing(html: "<div data-type='chapter'>#{chapter_children_html}</div>").chapters.first
 end
+
+def metadata_element
+  new_element(
+    <<~HTML
+      <div data-type="metadata" style="display: none;">
+        <div class="authors" id="authors">Authors</div>
+        <div class="publishers" id="publishers">Publishers</div>
+        <div class="print-style" id="print-style">Print Style</div>
+        <div class="permissions" id="permissions">Permissions</div>
+        <div data-type="subject" id="subject">Subject</div>
+      </div>
+    HTML
+  )
+end

@@ -8,22 +8,22 @@ module Kitchen
         chapter.key_equations.search('h3').trash
         key_equations = chapter.key_equations.cut
 
-        unless key_equations.none?
-          chapter.append(child:
-            <<~HTML
-              <div class="os-eoc os-key-equations-container" data-type="composite-page" data-uuid-key=".key-equations">
-                <h2 data-type="document-title">
-                  <span class="os-text">#{I18n.t(:eoc_key_equations)}</span>
-                </h2>
-                <div data-type="metadata" style="display: none;">
-                  <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_key_equations)}</h1>
-                  #{metadata_elements.paste}
-                </div>
-                #{key_equations.paste}
+        return if key_equations.none?
+
+        chapter.append(child:
+          <<~HTML
+            <div class="os-eoc os-key-equations-container" data-type="composite-page" data-uuid-key=".key-equations">
+              <h2 data-type="document-title">
+                <span class="os-text">#{I18n.t(:eoc_key_equations)}</span>
+              </h2>
+              <div data-type="metadata" style="display: none;">
+                <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_key_equations)}</h1>
+                #{metadata_elements.paste}
               </div>
-            HTML
-          )
-        end
+              #{key_equations.paste}
+            </div>
+          HTML
+        )
       end
     end
   end
