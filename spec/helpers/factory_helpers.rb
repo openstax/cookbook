@@ -21,6 +21,10 @@ module FactoryHelpers
     HTML
   end
 
+  def page_element(page_children_html)
+    book_containing(html: "<div data-type='page'>#{page_children_html}</div>").pages.first
+  end
+
   def new_element(html)
     nokogiri_document = Nokogiri::XML(
       <<~HTML
