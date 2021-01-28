@@ -1,0 +1,6 @@
+pre-push:
+  commands:
+    rubocop:
+      files: git diff --name-only master
+      glob: "*.rb"
+      run: bundle exec rubocop {files} --disable-pending-cops

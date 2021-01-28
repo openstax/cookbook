@@ -26,3 +26,8 @@ RSpec/FilePath:
 
 RSpec/ExampleLength:
   Enabled: false
+
+# JP likes to say `expect().to receive(:blah)` before things happen rather than
+# doing things and saying `expect().to have_received(:blah)` afterwards
+RSpec/MessageSpies:
+  EnforcedStyle: receive

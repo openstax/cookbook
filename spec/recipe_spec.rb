@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Kitchen::Recipe do
   let(:dummy_document) { Kitchen::Document.new(nokogiri_document: nil) }
 
-  context '#initialize' do
+  describe '#initialize' do
     it 'requires a block' do
       expect { described_class.new }.to raise_error(Kitchen::RecipeError)
     end
@@ -14,7 +16,7 @@ RSpec.describe Kitchen::Recipe do
     expect(recipe.source_location).to eq __FILE__
   end
 
-  context '#document=' do
+  describe '#document=' do
     it 'works for a Kitchen::Document' do
       expect { (described_class.new {}).document = dummy_document }.not_to raise_error
     end
@@ -24,7 +26,7 @@ RSpec.describe Kitchen::Recipe do
     end
   end
 
-  context '#bake' do
+  describe '#bake' do
     it 'calls the recipe block with the document' do
       expect(target = double).to receive(:foo).with(nil)
       recipe = described_class.new do |document|
@@ -38,14 +40,14 @@ RSpec.describe Kitchen::Recipe do
     end
 
     it 'prints ElementNotFoundError' do
-      expect_error_print_and_exit_on_bake(error_class: Kitchen::RecipeError)
+      expect_error_print_and_exit_on_bake(error_class: Kitchen::ElementNotFoundError)
     end
 
     it 'prints Nokogiri::CSS::SyntaxError' do
       expect_error_print_and_exit_on_bake(error_class: Nokogiri::CSS::SyntaxError)
     end
 
-    context 'ArgumentError' do
+    context 'when there is an ArgumentError' do
       it 'prints when a callstack location matches the source location' do
         expect_error_print_and_exit_on_bake(error_class: ArgumentError)
       end
@@ -55,7 +57,7 @@ RSpec.describe Kitchen::Recipe do
       end
     end
 
-    context 'NoMethodError' do
+    context 'when there is an NoMethodError' do
       it 'prints when a callstack location matches the source location' do
         expect_error_print_and_exit_on_bake(error_class: NoMethodError)
       end
@@ -65,7 +67,7 @@ RSpec.describe Kitchen::Recipe do
       end
     end
 
-    context 'NameError' do
+    context 'when there is an NameError' do
       it 'prints when a callstack location matches the source location' do
         expect_error_print_and_exit_on_bake(error_class: NameError)
       end
@@ -80,12 +82,12 @@ RSpec.describe Kitchen::Recipe do
     recipe_block = proc { raise error_class }
     allow(recipe_block).to receive(:source_location).and_return(['foobar'])
     expect(Kitchen::Debug).not_to receive(:print_recipe_error)
-    expect { (described_class.new &recipe_block).bake }.to raise_error(error_class)
+    expect { described_class.new(&recipe_block).bake }.to raise_error(error_class)
   end
 
   def expect_error_print_and_exit_on_bake(error_class:)
     recipe_block = proc { raise error_class }
     expect(Kitchen::Debug).to receive(:print_recipe_error)
-    expect { (described_class.new &recipe_block).bake }.to raise_error(SystemExit)
+    expect { described_class.new(&recipe_block).bake }.to raise_error(SystemExit)
   end
 end
