@@ -1,5 +1,6 @@
-FROM ubuntu:18.04
+FROM ruby:2.6.6-buster
 
+ARG EASYBAKE_VERSION=1.2.7
 # Install bundler and all the versions of gems we need. Notes:
 #
 # 1) Git is required for bundler since we may sometimes have a
@@ -16,6 +17,7 @@ RUN apt-get update && \
     python-dev \
     python-setuptools \
     python-pip \
+    python-wheel \
     ruby-full \
     ruby-dev \
     zlib1g-dev \
@@ -29,7 +31,7 @@ RUN apt-get update && \
 
 # Install cnx-easybake (if for any reason we end up using more python
 # dependencies this can get pulled out into a requirements.txt)
-RUN pip install cnx-easybake==1.2.7
+RUN pip install cnx-easybake==${EASYBAKE_VERSION}
 
 # Install gems which are needed to run each recipe
 COPY . /code
