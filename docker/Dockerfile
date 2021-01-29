@@ -18,8 +18,6 @@ RUN apt-get update && \
     python-setuptools \
     python-pip \
     python-wheel \
-    ruby-full \
-    ruby-dev \
     zlib1g-dev \
     libicu-dev \
     && \
