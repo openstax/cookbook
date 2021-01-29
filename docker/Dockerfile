@@ -13,16 +13,23 @@ RUN apt-get update && \
     build-essential \
     software-properties-common \
     python3 \
+    python-dev \
+    python-setuptools \
     python-pip \
     ruby-full \
     ruby-dev \
     zlib1g-dev \
+    libicu-dev \
     && \
     gem install bundler --no-document && \
     gem install byebug --no-document && \
     bundle config set no-cache 'true' && \
     bundle config set silence_root_warning 'true' && \
     rm -rf /var/lib/apt/lists/*
+
+# Install cnx-easybake (if for any reason we end up using more python
+# dependencies this can get pulled out into a requirements.txt)
+RUN pip install cnx-easybake==1.2.7
 
 # Install gems which are needed to run each recipe
 COPY . /code
