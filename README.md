@@ -43,6 +43,14 @@ Normal big Ruby projects have a `Gemfile` that is processed by the `bundler` gem
 
 There's a top-level `bake` Bash script that calls the right scripts in the `books` folder based on the book slug.  E.g. if you call `./bake -b chemistry2e -i in.xhtml -o out.xhtml` this script will turn around and call `./books/chemistry2e/bake --input in.xhtml --output out.xhtml`.  Every time we add a new recipe, we'll need to update this top-level bake script so it knows how to call it.  This is also why the names of the scripts inside `/books` don't really matter, because the top-level `bake` script knows the names of the lower-level scripts.
 
+## The `bake_legacy` script
+
+This script can be used to build a book using legacy baking (e.g. `cnx-easybake`) given an old style CSS recipe file (an example of how to run this script with Docker can be found below).
+
+## The `bake_root` script
+
+This script can be used if you don't want to invoke `bake` (kitchen baking) or `bake_legacy` (`cnx-easybake` baking) directly, and instead want to use a single script that will adopt the appropriate process for the given book. When kitchen support is added for a book, this script should be updated accordingly (it will fallback to legacy baking for all unknown books). Also, this is the script that will be utilized by build pipelines (e.g. CORGI, web hosting, etc.), so it controls when a book is ready to switchover from legacy to kitchen baking in those environments.
+
 ## Docker
 
 Development and execution can be done using Docker.
@@ -74,3 +82,32 @@ $> docker run --rm \                                                            
 The above runs the baking in the latest (or some tagged) image.  If you want to run using your latest recipe code on your local machine, you can mount that code in the container by adding another `-v` argument: `-v /path/to/my/local/recipes:/code`.
 
 Want to run the recipes and do interactive debugging?  Add the `-it` flags to the `docker run` call above.
+
+### Other examples of using baking scripts with Docker
+
+Given a directory with old style recipe files, the `bake_root` script can be invoked via Docker per the following example (this assumes you have `cnx-recipes` cloned to `/home/user`, but you can replace the path to wherever your style files are):
+
+```bash
+>$ docker run --rm \
+    -v $PWD:/files \                                                                        # Mount the current directory as /files
+    -v /home/user/cnx-recipes/recipes/output:/recipes \                                     # Mount the directory with old style recipes as /recipes
+    openstax/recipes:latest \
+    /code/bake_root -b chemistry2e -i /files/input.xhtml -r /recipes -o /files/baked.xhtml  # Invoke the `bake_root` script
+
+Baking book 'chemistry2e' with kitchen
+warning! could not find a replacement for '[link]' on an element with ID 'auto_f7224d2a-76cb-49f8-91ba-915271b912af_fs-idp283136'
+Open:  0.000516647 s
+Parse: 0.458909273 s
+Bake:  13.600444227 s
+Write: 0.298500043 s
+```
+
+If you want to bake a book with legacy baking which `bake_root` would otherwise route to `bake`, then you can utilize the `bake_legacy` script directly and pass the specific recipe file you desire:
+
+```bash
+>$ docker run --rm \
+    -v $PWD:/files \                                                                         # Mount the current directory as /files
+    -v /home/user/cnx-recipes/recipes/output:/recipes \                                      # Mount the directory with old style recipes as /recipes
+    openstax/recipes:latest \
+    /code/bake_legacy -i /files/input.xhtml -r /recipes/chemistry.css -o /files/baked.xhtml  # Invoke the `bake_legacy` script
+```
