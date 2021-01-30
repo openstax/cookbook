@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require "bundler/inline"
+# frozen_string_literal: true
+
+require 'bundler/inline'
 
 gemfile do
   gem 'openstax_kitchen', '2.0.0'
@@ -8,22 +10,22 @@ gemfile do
   gem 'byebug'
 end
 
-include Kitchen::Directions
-
 recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
+  include Kitchen::Directions
+
   book = doc.book
 
   # Some stuff just goes away
-  book.search("cnx-pi").trash
+  book.search('cnx-pi').trash
 
-  # Update the preface title
-  book.pages("$.preface").search("div[data-type='document-title']").each do |title| # TODO add title method
+  # Update the preface title  TODO: add title method
+  book.pages('$.preface').search("div[data-type='document-title']").each do |title|
     title.replace_children(with:
       <<~HTML
         <span data-type="" itemprop="" class="os-text">#{title.text}</span>
       HTML
     )
-    title.name = "h1"
+    title.name = 'h1'
   end
 
   book.chapters.each do |chapter|
@@ -37,7 +39,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
 
   book.chapters.each do |chapter|
     # Fix up chapter titles - TODO put this in BakeChapter
-    heading = chapter.at("h1[2]")
+    heading = chapter.at('h1[2]')
     heading[:id] = "chapTitle#{chapter.count_in(:book)}"
     heading.replace_children(with:
       <<~HTML
@@ -48,22 +50,23 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
       HTML
     )
 
-    chapter.tables("$:not(.unnumbered)").each do |table|
-      BakeNumberedTable.v1(table: table, number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
     chapter.examples.each do |example|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
-                     title_tag: "h3")
+                     title_tag: 'h3')
     end
 
-    chapter.pages("$:not(.introduction)").each do |page|
+    chapter.pages('$:not(.introduction)').each do |page|
       page.search("div[data-type='description']").each(&:trash)
-      page.add_class("chapter-content-module")
+      page.add_class('chapter-content-module')
 
       title = page.search("div[data-type='document-title']").first
-      title.name = "h2"
+      title.name = 'h2'
       title.replace_children(with:
         <<~HTML
           <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
@@ -74,25 +77,26 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
     end
 
     chapter.figures.each do |figure|
-      BakeFigure.v1(figure: figure, number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
   end
 
-  book.pages("$.appendix").each do |page|
-    appendix_letter = [*('A'..'Z')][page.count_in(:book)-1]
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
     page.figures.each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
 
-    page.tables("$:not(.unnumbered)").each do |table|
+    page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
     end
 
     page.examples.each do |example|
       BakeExample.v1(example: example,
                      number: "#{appendix_letter}#{example.count_in(:page)}",
-                     title_tag: "div")
+                     title_tag: 'div')
     end
 
     BakeAppendix.v1(page: page, number: appendix_letter)
@@ -109,14 +113,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
   BakeToc.v1(book: book)
 
   # competing docs from elements - BakeLinkPlaceholders
-  book.search("a").each do |anchor|
-    next unless anchor.text == "[link]"
+  book.search('a').each do |anchor|
+    next unless anchor.text == '[link]'
+
     id = anchor[:href][1..-1]
     replacement = doc.pantry(name: :link_text).get(id)
     if replacement.present?
       anchor.replace_children(with: replacement)
     else
-      # TODO log a warning!
+      # TODO: log a warning!
       puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
     end
   end

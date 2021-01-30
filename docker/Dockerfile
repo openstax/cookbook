@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-buster
+FROM ruby:2.6.6-buster AS runtime-env
 
 ARG EASYBAKE_VERSION=1.2.7
 # Install bundler and all the versions of gems we need. Notes:
@@ -34,3 +34,31 @@ RUN pip install cnx-easybake==${EASYBAKE_VERSION}
 # Install gems which are needed to run each recipe
 COPY . /code
 RUN /code/scripts/install_used_gem_versions
+WORKDIR /code
+
+# The following dev-env stage is mostly useful for devcontainer runs in VSCode
+
+FROM runtime-env AS dev-env
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    vim \
+    openssh-server \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install a quick colorized prompt and turn on ls coloring
+RUN git clone https://github.com/nojhan/liquidprompt.git ~/liquidprompt && \
+    echo '[[ $- = *i* ]] && source ~/liquidprompt/liquidprompt' >>~/.bashrc && \
+    mkdir -p ~/.config && \
+    echo 'export LP_HOSTNAME_ALWAYS=1' >>~/.config/liquidpromptrc && \
+    echo 'export LP_USER_ALWAYS=-1' >>~/.config/liquidpromptrc && \
+    sed -i "/color=auto/"' s/# //' ~/.bashrc && \
+    sed -i "/alias ls/,/lA/"' s/# //' ~/.bashrc
+
+# VSCode Live Share libraries
+RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vsls-reqs && ~/vsls-reqs
+
+RUN gem install solargraph && \
+    gem install lefthook && \
+    gem install rubocop

@@ -61,6 +61,8 @@ To build the docker image:
 $> ./docker/build
 ```
 
+Note this builds the runtime environment, suitable for running in production and some development work.  If you want a more full development environment, use VS Code using the remote containers extension.  This will build the development environment with a nice terminal, VS Code Live Share for pairing, etc.  To install the remote containers extension, visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser.
+
 This image includes all of the versions of gems used in each recipe so that they are available when used to bake files.  Notably, if you change the version of a gem in one of the executable recipes, you'll need to either rebuild the Docker image or call the `./scripts/install_used_gem_versions` script which scans through all of the recipes, installing the gem versions they specify in their inline gem file declarations.
 
 To drop into the Docker container:
@@ -111,3 +113,7 @@ If you want to bake a book with legacy baking which `bake_root` would otherwise 
     openstax/recipes:latest \
     /code/bake_legacy -i /files/input.xhtml -r /recipes/chemistry.css -o /files/baked.xhtml  # Invoke the `bake_legacy` script
 ```
+
+## Rubocop
+
+Rubocop is available inside the VSCode dev container.  Moreover, the `lefthook` gem enforces that Rubocop linting passes on modified files before pushes are allowed.  To test this without pushing run `lefthook run pre-push`.
