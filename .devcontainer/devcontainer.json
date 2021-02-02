@@ -6,6 +6,8 @@
     "target": "dev-env",
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",
+  // Uncomment the line below and replace src with the path to your local kitchen directory
+  // "mounts": ["type=bind,src=[path/to/kitchen],dst=/kitchen,readonly"],
   "workspaceFolder": "/code",
   "extensions": [
     "castwide.solargraph",
