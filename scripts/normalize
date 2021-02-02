@@ -10,54 +10,53 @@ end
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
 
-sort_attributes = ->(element) do
-  next if element.text? || element.document?
-  attributes = element.attributes
-  attributes.each do |key, value|
-    element.remove_attribute(key)
-  end
-  sorted_keys = attributes.keys.sort
-  sorted_keys.each do |key|
-    value = attributes[key].to_s
-    element[key] = value
-  end
-end
-
-# Legacy bakings of unnumbered tables include a bogus number, delete it
-
-remove_bogus_number_from_unnumbered_tables = ->(element) do
-  next if element.text? || element.document?
-  if element.name == "table" && (element[:class] || "").include?("unnumbered")
-    element.remove_attribute("summary")
+def sort_attributes(document)
+  document.traverse do |child|
+    next if child.text? || child.document?
+    attributes = child.attributes
+    attributes.each do |key, value|
+      child.remove_attribute(key)
+    end
+    sorted_keys = attributes.keys.sort
+    sorted_keys.each do |key|
+      value = attributes[key].to_s
+      child[key] = value
+    end
   end
 end
 
-# Sometimes there is `class=' '`, get rid of these; happens in legacy baked docs
+def clean_legacy_baked(document)
+  document.traverse do |child|
+    next if child.text? || child.document?
 
-remove_blank_classes = ->(element) do
-  next if element.text? || element.document?
-  element.attributes.each do |key, value|
-    element.remove_attribute(key) if key == "class" && value.to_s.strip == ""
+    # Legacy bakings of unnumbered tables include a bogus number, delete it
+    if child.name == "table" && (child[:class] || "").include?("unnumbered")
+      child.remove_attribute("summary")
+    end
+
+    # Sometimes there is `class=' '`, get rid of these
+    child.attributes.each do |key, value|
+      child.remove_attribute(key) if key == "class" && value.to_s.strip == ""
+    end
   end
 end
 
 # The index of copied elements (the number in _copy_23) isn't meaningful so
 # hide it.
 
-mask_copied_id_numbers = ->(element) do
-  if element[:id]
-    element[:id] = element[:id].gsub(/_copy_(\d+)$/,"_copy_XXX")
+def mask_copied_id_numbers(document)
+  document.traverse do |child|
+    if child[:id]
+      child[:id] = child[:id].gsub(/_copy_(\d+)$/,"_copy_XXX")
+    end
   end
 end
 
 def process(input_file:, output_file:)
   read_and_write(input_file: input_file, output_file: output_file) do |doc|
-    doc.traverse do |child|
-      remove_bogus_number_from_unnumbered_tables.call(child)
-      remove_blank_classes.call(child)
-      sort_attributes.call(child)
-      mask_copied_id_numbers.call(child)
-    end
+    clean_legacy_baked(doc)
+    sort_attributes(doc)
+    mask_copied_id_numbers(doc)
   end
 end
 
