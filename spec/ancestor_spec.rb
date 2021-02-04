@@ -34,16 +34,18 @@ RSpec.describe Kitchen::Ancestor do
         ancestor.get_descendant_count(descendant_type)
       }.by(-1)
     end
+
     it 'decreases the descendant count for the given type by 5' do
       ancestor.increment_descendant_count(descendant_type)
       expect {
         ancestor.decrement_descendant_count(descendant_type, by: 5)
-      }.to raise_error("An element cannot have negative descendants")
+      }.to raise_error('An element cannot have negative descendants')
     end
+
     it 'decrement when the type is not yet tracked' do
       expect{
         ancestor.decrement_descendant_count(descendant_type, by: 1)
-      }.to raise_error("An element cannot have negative descendants")
+      }.to raise_error('An element cannot have negative descendants')
     end
   end
 
