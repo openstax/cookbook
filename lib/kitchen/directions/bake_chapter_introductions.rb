@@ -32,7 +32,7 @@ module Kitchen
             <<~HTML
               <div class="intro-body">
                 <div class="os-chapter-outline">
-                  <h3 class="os-title">Chapter Outline</h3>
+                  <h3 class="os-title">#{I18n.t(:chapter_outline)}</h3>
                   #{outline_items_html}
                 </div>
                 <div class="intro-text">

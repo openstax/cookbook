@@ -3,6 +3,12 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeToc do
+  before do
+    stub_locales({
+      'toc_title': 'Contents',
+      'chapter': 'Chapter'
+    })
+  end
 
   let(:book1) do
     book_containing(html:

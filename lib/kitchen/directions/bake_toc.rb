@@ -14,7 +14,7 @@ module Kitchen
         end.compact.join("\n")
 
         book.first!('nav').replace_children(with: <<~HTML
-          <h1 class="os-toc-title">Contents</h1>
+          <h1 class="os-toc-title">#{I18n.t(:toc_title)}</h1>
           <ol>
             #{li_tags}
           </ol>
@@ -43,7 +43,7 @@ module Kitchen
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
             <a href="##{chapter.title.id}">
-              <span class="os-number"><span class="os-part-text">Chapter </span>#{chapter.count_in(:book)}</span>
+              <span class="os-number"><span class="os-part-text">#{I18n.t(:chapter)} </span>#{chapter.count_in(:book)}</span>
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
             </a>

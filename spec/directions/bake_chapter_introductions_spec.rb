@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
+  before do
+    stub_locales({
+      'chapter_outline': 'Chapter Outline'
+    })
+  end
+
   let(:book) do
     book_containing(html:
       <<~HTML

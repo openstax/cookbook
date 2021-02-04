@@ -11,7 +11,7 @@ module Kitchen::Directions::BakeChapterTitle
       heading[:id] = "chapTitle#{chapter.count_in(:book)}"
       heading.replace_children(with:
         <<~HTML
-          <span class="os-part-text">Chapter </span>
+          <span class="os-part-text">#{I18n.t(:chapter)} </span>
           <span class="os-number">#{chapter.count_in(:book)}</span>
           <span class="os-divider"> </span>
           <span data-type="" itemprop="" class="os-text">#{heading.text}</span>
