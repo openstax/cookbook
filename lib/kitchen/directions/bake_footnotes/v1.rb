@@ -28,7 +28,7 @@ module Kitchen::Directions::BakeFootnotes
 
       container.search('aside').each do |aside|
         footnote_number = aside_id_to_footnote_number[aside.id]
-        aside.prepend(child: "<div class='footnote-number'>#{footnote_number}</div>")
+        aside.prepend(child: "<div data-type='footnote-number'>#{footnote_number}</div>")
       end
     end
 
