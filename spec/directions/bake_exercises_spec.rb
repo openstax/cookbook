@@ -5,7 +5,8 @@ RSpec.describe Kitchen::Directions::BakeExercises do
   before do
     stub_locales({
       eoc_exercises_title: 'Exercises',
-      eoc_answer_key_title: 'Answer Key'
+      eoc_answer_key_title: 'Answer Key',
+      chapter: 'Chapter'
     })
   end
 
@@ -173,9 +174,9 @@ RSpec.describe Kitchen::Directions::BakeExercises do
               #{metadata(title: 'Answer Key', id_suffix: '_copy_2')}
               <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution1">
                 <h2 data-type="document-title">
-                  <span class="os-text">1</span>
+                  <span class="os-text">Chapter 1</span>
                 </h2>
-                #{metadata(title: '1', id_suffix: '_copy_3')}
+                #{metadata(title: 'Chapter 1', id_suffix: '_copy_3')}
                 <div data-type="solution" id="auto_m68761_fs-idp113763312-solution">
                   <a class="os-number" href="#auto_m68761_fs-idp113763312">1</a>
                   <span class="os-divider">. </span>

@@ -70,10 +70,10 @@ module Kitchen
           <<~HTML
             <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution#{index + 1}">
               <h2 data-type="document-title">
-                <span class="os-text">#{index + 1}</span>
+                <span class="os-text">#{I18n.t(:chapter)} #{index + 1}</span>
               </h2>
               <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">#{index + 1}</h1>
+                <h1 data-type="document-title" itemprop="name">#{I18n.t(:chapter)} #{index + 1}</h1>
                 #{metadata_elements.paste}
               </div>
               #{solution_clipboard.paste}
