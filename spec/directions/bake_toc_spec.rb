@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeToc do
 
-  let(:book_1) do
+  let(:book1) do
     book_containing(html:
       <<~HTML
         <nav id="toc"></nav>
@@ -85,10 +87,34 @@ RSpec.describe Kitchen::Directions::BakeToc do
     end
   end
 
-  it 'works' do
-    described_class.v1(book: book_1)
+  let(:preface_page) do
+    page_element(
+      <<~HTML
+        <div data-type="page" id="p1" class="preface">
+          <h1 data-type="document-title">
+            <span data-type="" itemprop="" class="os-text">Preface</span>
+          </h1>
+        </div>
+      HTML
+    )
+  end
 
-    expect(book_1.search('nav').to_s).to match_normalized_html(
+  let(:page1) do
+    new_element(
+      <<~HTML
+        <div data-type="composite-page">
+          <h1 data-type="document-title">
+            <span class="os-text">Index</span>
+          </h1>
+        </div>
+      HTML
+    )
+  end
+
+  it 'works' do
+    described_class.v1(book: book1)
+
+    expect(book1.search('nav').to_s).to match_normalized_html(
       <<~HTML
         <nav id="toc">
           <h1 class="os-toc-title">Contents</h1>
@@ -170,4 +196,25 @@ RSpec.describe Kitchen::Directions::BakeToc do
     )
   end
 
+  describe 'raises error' do
+    it 'Page element classes not found' do
+      expect do
+        described_class.li_for_page(preface_page)
+      end.to raise_error("do not know what TOC class to use for page with classes #{preface_page.classes}")
+    end
+
+    it 'Composite page element classes not found' do
+      dummy_document = Kitchen::Document.new(nokogiri_document: nil)
+      composite_page = Kitchen::CompositePageElement.new(node: page1, document: dummy_document)
+      expect do
+        described_class.li_for_page(composite_page)
+      end.to raise_error("do not know what TOC class to use for page with classes #{composite_page.classes}")
+    end
+
+    it 'No familiar classes found' do
+      expect do
+        described_class.li_for_page(page1)
+      end.to raise_error("don't know how to put `#{page1.class}` into the TOC")
+    end
+  end
 end

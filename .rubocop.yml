@@ -23,6 +23,7 @@ Metrics/MethodLength:
 
 Metrics/BlockLength:
   CountAsOne: ['heredoc']
+  Max: 30
 
 Metrics/ModuleLength:
   CountAsOne: ['heredoc']
