@@ -15,6 +15,7 @@ module Kitchen
     # Sets the document so the recipe can yield it for modification
     #
     # @param document [Document] the document to modify
+    # @raise [StandardError] if not passed supported document type
     #
     def document=(document)
       @document =

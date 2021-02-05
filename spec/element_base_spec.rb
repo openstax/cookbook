@@ -86,4 +86,18 @@ RSpec.describe Kitchen::ElementBase do
       expect(p_element.has_ancestor?(:figure)).to eq false
     end
   end
+
+  describe '#ancestor_elements' do
+    context 'when the element has no ancestors' do
+      it 'returns an empty array' do
+        expect(book.ancestor_elements).to eq []
+      end
+    end
+
+    context 'when the element has ancestors' do
+      it 'returns the elements in all of the ancestors' do
+        expect(para.ancestor_elements).to eq Array(book)
+      end
+    end
+  end
 end

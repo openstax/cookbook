@@ -25,7 +25,7 @@ module Kitchen
     # Get an item from the pantry, raising if not present
     #
     # @param label [String, Symbol] the item's label
-    # @raises [RecipeError] if there's no item for the label
+    # @raise [RecipeError] if there's no item for the label
     # @return [Object]
     #
     def get!(label)
