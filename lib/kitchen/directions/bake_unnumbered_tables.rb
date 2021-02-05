@@ -5,6 +5,8 @@ module Kitchen
         book.tables('$.unnumbered').each do |table|
           table.wrap(%(<div class="os-table">))
           table.remove_attribute('summary')
+          table.parent.add_class('os-unstyled-container') if table.unstyled?
+          table.parent.add_class('os-column-header-container') if table.column_header?
         end
       end
     end

@@ -8,6 +8,7 @@ module Kitchen::Directions::BakeNumberedTable
       table.document.pantry(name: :link_text).store table_label, label: table.id
 
       if table.top_titled?
+        table.parent.add_class('os-top-titled-container')
         table.prepend(sibling:
           <<~HTML
             <div class="os-table-title">#{table.title}</div>
@@ -15,6 +16,8 @@ module Kitchen::Directions::BakeNumberedTable
         )
         table.title_row.trash
       end
+
+      table.parent.add_class('os-column-header-container') if table.column_header?
 
       # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
       new_summary = table_label + '  '
