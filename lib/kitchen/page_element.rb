@@ -26,6 +26,14 @@ module Kitchen
       first!(is_introduction? ? selectors.title_in_introduction_page : selectors.title_in_page)
     end
 
+    # Returns an enumerator for titles.
+    #
+    # @return [ElementEnumerator]
+    #
+    def titles
+      search("div[data-type='document-title']")
+    end
+
     # Returns true if this page is an introduction
     #
     # @return [Boolean]

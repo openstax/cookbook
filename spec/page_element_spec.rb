@@ -12,7 +12,7 @@ RSpec.describe Kitchen::PageElement do
     HTML
   end
 
-  let(:page_1) do
+  let(:page1) do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
@@ -22,19 +22,38 @@ RSpec.describe Kitchen::PageElement do
       )).pages.first
   end
 
-  context '#title' do
-    context 'no metadata' do
+  let(:page_with_multiple_titles) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="page">
+          <div data-type="document-title">Title</div>
+          <div data-type="metadata">
+            <div data-type="document-title">Title MetaData</div>
+          </div>
+        </div>
+      HTML
+    ).pages.first!
+  end
+
+  describe '#title' do
+    context 'with no metadata' do
       let(:metadata) { '' }
 
       it 'finds the title' do
-        expect(page_1.title.text).to eq page_title_text
+        expect(page1.title.text).to eq page_title_text
       end
     end
 
     context 'with metadata' do
       it 'finds the title' do
-        expect(page_1.title.text).to eq page_title_text
+        expect(page1.title.text).to eq page_title_text
       end
+    end
+  end
+
+  describe '#titles' do
+    it 'returns all titles in element' do
+      expect(page_with_multiple_titles.titles.map(&:to_s)).to match([/Title/, /Title MetaData/])
     end
   end
 
