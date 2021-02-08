@@ -1,8 +1,10 @@
+# frozen-string-literal: true
+
 module FactoryHelpers
-  def book_containing(html:, short_name: :not_set)
+  def book_containing(html:, short_name: :not_set, add_math_namespace: true)
     Kitchen::BookDocument.new(short_name: short_name, document: Nokogiri::XML(
       <<~HTML
-        <html>
+        <html #{'xmlns:m="http://www.w3.org/1998/Math/MathML"' if add_math_namespace}>
           <body>
             #{html}
           </body>

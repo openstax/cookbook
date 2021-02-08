@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakePreface::V1 do
@@ -17,22 +19,20 @@ RSpec.describe Kitchen::Directions::BakePreface::V1 do
   it 'works' do
     described_class.new.bake(book: book1)
 
-    expect(book1).to match_normalized_html(
+    expect(book1.body).to match_normalized_html(
       <<~HTML
-        <html xmlns="http://www.w3.org/1999/xhtml">
-          <body>
-            <div class="preface" data-type="page">
+        <body>
+          <div class="preface" data-type="page">
+            <h1 data-type="document-title">
+              <span class="os-text" data-type="" itemprop="">Preface</span>
+            </h1>
+            <div data-type="metadata">
               <h1 data-type="document-title">
                 <span class="os-text" data-type="" itemprop="">Preface</span>
               </h1>
-              <div data-type="metadata">
-                <h1 data-type="document-title">
-                  <span class="os-text" data-type="" itemprop="">Preface</span>
-                </h1>
-              </div>
             </div>
-          </body>
-        </html>
+          </div>
+        </body>
       HTML
     )
   end
