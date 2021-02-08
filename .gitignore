@@ -2,3 +2,9 @@
 .xhtml
 .xml
 .byebug_history
+
+# locally mounted kitchen in the devcontainer
+kitchen
+
+# file that contains the unique-to-a-dev absolute path to kitchen
+.devcontainer/kitchen_path

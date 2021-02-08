@@ -5,7 +5,9 @@
     "context": "..",
     "target": "dev-env",
   },
+  "initializeCommand": "./docker/symlink_kitchen_in_tmp",
   "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",
+  "mounts": ["source=/tmp/kitchen,target=/code/kitchen,type=bind,consistency=default"],
   "workspaceFolder": "/code",
   "extensions": [
     "castwide.solargraph",
