@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Kitchen::ElementBase do
@@ -9,6 +11,21 @@ RSpec.describe Kitchen::ElementBase do
           <div data-type="example" class="class1" id="div1">
             <p>This is a paragraph.</p>
           </div>
+        HTML
+      ))
+  end
+
+  let(:searchable_book) do
+    book_containing(html:
+      chapter_element(
+        <<~HTML
+          <div data-type="page" id="page1">
+            <div data-type="example" class="class1" id="example1">
+              <p>This is an example.</p>
+            </div>
+            <figure id="figure1">can't touch this (stop! hammer time)</figure>
+          </div>
+          <div data-type="page" id="page2"> This is a page </div>
         HTML
       ))
   end
@@ -54,9 +71,9 @@ RSpec.describe Kitchen::ElementBase do
     it 'changes the tag name of an element and gives it a property and value' do
       p_matcher = /<p>This is a paragraph.<\/p>/
       span_matcher = /<span class="span1">This is a paragraph.<\/span>/
-      expect {
+      expect do
         para.set(:name, 'span').set(:class, 'span1')
-      }.to change(para, :to_html).from(p_matcher).to(span_matcher)
+      end.to change(para, :to_html).from(p_matcher).to(span_matcher)
     end
   end
 
@@ -69,9 +86,9 @@ RSpec.describe Kitchen::ElementBase do
 
     it 'raises an error when there is no ancestor of the given type' do
       type = :figure
-      expect {
+      expect do
         p_element.ancestor(type).id
-      }.to raise_error("No ancestor of type '#{type}'")
+      end.to raise_error("No ancestor of type '#{type}'")
     end
   end
 
@@ -98,6 +115,13 @@ RSpec.describe Kitchen::ElementBase do
       it 'returns the elements in all of the ancestors' do
         expect(para.ancestor_elements).to eq Array(book)
       end
+    end
+  end
+
+  describe '#search_with' do
+    it 'returns elements in the right order' do
+      result = searchable_book.search_with(Kitchen::PageElementEnumerator, Kitchen::ExampleElementEnumerator)
+      expect(result.map(&:id)).to eq %w[page1 example1 page2]
     end
   end
 end
