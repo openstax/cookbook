@@ -3,9 +3,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', '2.0.0'
-  # Uncomment the line below & comment out the above to use a locally mounted version of kitchen
-  # gem 'openstax_kitchen', path: '/kitchen'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '2.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
