@@ -117,3 +117,35 @@ If you want to bake a book with legacy baking which `bake_root` would otherwise 
 ## Rubocop
 
 Rubocop is available inside the VSCode dev container.  Moreover, the `lefthook` gem enforces that Rubocop linting passes on modified files before pushes are allowed.  To test this without pushing run `lefthook run pre-push`.
+
+## Using your local git clone of kitchen within the recipes devcontainer
+
+If you put the absolute path of your machine's cloned kitchen folder into a `.devcontainer/kitchen_path` text file, e.g.:
+
+```
+/Users/staxly/dev/openstax/kitchen
+```
+
+the devcontainer in VS Code will mount that folder to `/code/kitchen`.  This will let you look at and edit the code from within your VS Code recipes workspace and will let you point recipes at this local code with
+
+```ruby
+gem 'openstax_kitchen', path: '/code/kitchen'
+```
+
+so that you can develop in both recipes and kitchen at the same time.  The kitchen folder has its own independent git state.
+
+If you don't have a `kitchen_path` file, the devcontainer will mount a fake empty directory in `/tmp`.
+
+If you use a line like the following in your recipe script to choose the kitchen gem version:
+
+```ruby
+gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '2.0.0'
+```
+
+And then call the recipe script prefixed with defining the `USE_LOCAL_KITCHEN` variable:
+
+```bash
+$ /code> USE_LOCAL_KITCHEN=1 ./books/chemistry2e/bake ...
+```
+
+then your recipe will use your local kitchen folder.  You can leave the `gem` line as is when you commit it, and in production runs since the `USE_LOCAL_KITCHEN` environment variable isn't set, the version number at the end will be used.
