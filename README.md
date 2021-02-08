@@ -41,7 +41,7 @@ Normal big Ruby projects have a `Gemfile` that is processed by the `bundler` gem
 
 ## The main `bake` script
 
-There's a top-level `bake` Bash script that calls the right scripts in the `books` folder based on the book slug.  E.g. if you call `./bake -b chemistry2e -i in.xhtml -o out.xhtml` this script will turn around and call `./books/chemistry2e/bake --input in.xhtml --output out.xhtml`.  Every time we add a new recipe, we'll need to update this top-level bake script so it knows how to call it.  This is also why the names of the scripts inside `/books` don't really matter, because the top-level `bake` script knows the names of the lower-level scripts.
+There's a top-level `bake` Bash script that calls the right scripts in the `books` folder based on the book slug.  E.g. if you call `./bake -b chemistry -i in.xhtml -o out.xhtml` this script will turn around and call `./books/chemistry/bake --input in.xhtml --output out.xhtml`.  Every time we add a new recipe, we'll need to update this top-level bake script so it knows how to call it.  This is also why the names of the scripts inside `/books` don't really matter, because the top-level `bake` script knows the names of the lower-level scripts.
 
 ## The `bake_legacy` script
 
@@ -78,7 +78,7 @@ $> docker run --rm \                                                            
               -v $PWD:/files \                                                      # Mount the current host directory as /files so we can put files
                                                                                     #   in and get them out
               openstax/recipes:latest \                                             # The image ID (could use a specific tagged image instead of "latest")
-              /code/bake -b chemistry2e -i /files/input.xhtml -o /files/baked.xhtml # The call to the main `bake` script
+              /code/bake -b chemistry -i /files/input.xhtml -o /files/baked.xhtml # The call to the main `bake` script
 ```
 
 The above runs the baking in the latest (or some tagged) image.  If you want to run using your latest recipe code on your local machine, you can mount that code in the container by adding another `-v` argument: `-v /path/to/my/local/recipes:/code`.
@@ -94,9 +94,9 @@ Given a directory with old style recipe files, the `bake_root` script can be inv
     -v $PWD:/files \                                                                        # Mount the current directory as /files
     -v /home/user/cnx-recipes/recipes/output:/recipes \                                     # Mount the directory with old style recipes as /recipes
     openstax/recipes:latest \
-    /code/bake_root -b chemistry2e -i /files/input.xhtml -r /recipes -o /files/baked.xhtml  # Invoke the `bake_root` script
+    /code/bake_root -b chemistry -i /files/input.xhtml -r /recipes -o /files/baked.xhtml  # Invoke the `bake_root` script
 
-Baking book 'chemistry2e' with kitchen
+Baking book 'chemistry' with kitchen
 warning! could not find a replacement for '[link]' on an element with ID 'auto_f7224d2a-76cb-49f8-91ba-915271b912af_fs-idp283136'
 Open:  0.000516647 s
 Parse: 0.458909273 s
