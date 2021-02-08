@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kitchen
   # An element for a page
   #

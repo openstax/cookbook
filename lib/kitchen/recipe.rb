@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kitchen
   # An object that yields a +Document+ for modification (those modifications are
   # the "recipe")

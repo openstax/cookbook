@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kitchen
   # An element for a chapter
   #
@@ -22,7 +24,8 @@ module Kitchen
     #
     def title
       # Get the title in the immediate children, not the one in the metadata.  Could use
-      # CSS of ":not([data-type='metadata']) > [data-type='document-title'], [data-type='document-title']"
+      # CSS of ":not([data-type='metadata']) >
+      #       [data-type='document-title'], [data-type='document-title']"
       # but xpath is shorter
       first!("./*[@data-type = 'document-title']")
     end
@@ -49,6 +52,14 @@ module Kitchen
     #
     def key_equations
       search('section.key-equations')
+    end
+
+    # Returns an enumerator for the abstracts
+    #
+    # @return [ElementEnumerator]
+    #
+    def abstracts
+      search('[data-type="abstract"]')
     end
 
     # Returns true if this class represents the element for the given node

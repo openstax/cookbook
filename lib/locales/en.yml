@@ -2,12 +2,12 @@ en:
   figure: Figure
   table_label: Table
   appendix: Appendix
-  chapter: Chapter
   chapter_outline: Chapter Outline
   toc_title: Contents
   example_label: Example
   exercise_label: Exercise
   chapter: Chapter
+  learning_objectives: Learning Objectives
   stepwise_step_label: Step
   eoc_key_terms_title: Key Terms
   eoc_summary_title: Summary

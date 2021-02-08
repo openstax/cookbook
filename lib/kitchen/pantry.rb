@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kitchen
   # A place to store labeled items during recipe work.  Essentially, a slightly
   # improved hash.
