@@ -59,4 +59,8 @@ RSpec.describe Kitchen::PageElement do
     end
   end
 
+  it 'returns the metadata' do
+    expect(page1.metadata).to match_normalized_html(metadata)
+  end
+
 end
