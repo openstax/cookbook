@@ -21,8 +21,13 @@ done
 # Known supported books will use the kitchen baking, all others will fallback
 # to legacy.
 
+# NOTE: The dummy recipe is a temporary placeholder until there's a recipe that
+#       is ready for release. At that point, the case statement can be updated
+#       accordingly and the dummy recipe removed altogether both here and in
+#       the underlying bake script.
+
 case "${book}" in
-  chemistry)
+  dummy)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   *) echo "Baking book '${book}' with legacy baking";

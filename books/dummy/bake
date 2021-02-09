@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', '2.0.0'
+  gem 'slop', '4.8.2'
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [],
+  output_file: opts[:output]
+)
