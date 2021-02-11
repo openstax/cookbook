@@ -152,7 +152,9 @@ then your recipe will use your local kitchen folder.  You can leave the `gem` li
 
 ## Creating a new recipe
 
-Create a recipe file in `books/{book-name}`. In order to run the new recipe via the bake script, the recipe must be added to [the `case` statement](https://github.com/openstax/recipes/blob/main/bake#L25), i.e.:
+New recipes files are created in `books/{book-name}`. 
+
+In order to run the new recipe via the bake script, the recipe must be added to [the `case` statement](https://github.com/openstax/recipes/blob/main/bake#L25), i.e.:
 
 ```bash
 case "${book}" in
@@ -167,7 +169,7 @@ Note that the recipe file must be made executable by running `chmod +x [path]` o
 
 ## Working on a recipe (converting from easybake)
 
-The main goal of recipe development is to produce output via a kitchen recipe that is identical to the easybake output. It's helpful to use VSCode's native differ or another diff tool to compare the output from the two methods of baking.
+When developing a recipe that already exists in easybake, the main goal is to produce output via the kitchen recipe that is identical to the easybake output. It's helpful to use VSCode's native differ or another diff tool to compare the output from the two methods of baking.
 
 ### Normalize
 
