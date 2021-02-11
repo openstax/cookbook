@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require 'simplecov'
+
 SimpleCov.start
 
 if ENV['ENABLE_CODECOV']
@@ -13,6 +16,10 @@ require 'byebug'
 require 'nokogiri/diff'
 require 'rainbow'
 
+Dir[File.expand_path("#{__dir__}/helpers/*.rb")].sort.each do |f|
+  require f unless f.ends_with?('_spec.rb')
+end
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
@@ -23,11 +30,9 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include StubHelpers
+  config.include FactoryHelpers
+  config.include MatchHelpers
+  config.include StringHelpers
 end
-
-Dir[File.expand_path(__dir__ + '/helpers/*.rb')].each { |f| require f }
-
-include StubHelpers
-include FactoryHelpers
-include MatchHelpers
-include StringHelpers

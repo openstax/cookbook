@@ -104,6 +104,39 @@ RSpec.describe Kitchen::ElementBase do
     end
   end
 
+  describe '#add_ancestors' do
+    it 'add ancestors to an element' do
+      ancestor_example = Kitchen::Ancestor.new(example)
+      expect(para).to receive(:add_ancestor).with(ancestor_example)
+      para.add_ancestors(ancestor_example)
+    end
+
+    it 'raises an error if unsupported ancestor type given' do
+      random_string = 'blah'
+      expect do
+        para.add_ancestors(random_string)
+      end.to raise_error("Unsupported ancestor type `#{random_string.class}`")
+    end
+  end
+
+  describe '#add_ancestor' do
+    it 'adds one ancestor to an element' do
+      example_key = 'div[data-type="example"]'
+      para.add_ancestor(Kitchen::Ancestor.new(example))
+      expect(para.ancestors[example_key].type).to eq example_key
+    end
+
+    it 'raises an error if there is already an ancestor with the given ancestors type' do
+      para = book.chapters.pages.examples.search('p').first!
+      example_copy = para.ancestors['example'].element
+      type = :example
+      expect do
+        para.add_ancestor(Kitchen::Ancestor.new(example_copy))
+      end.to raise_error("Trying to add an ancestor of type '#{type}' but one of that " \
+        "type is already present")
+    end
+  end
+
   describe '#ancestor_elements' do
     context 'when the element has no ancestors' do
       it 'returns an empty array' do
