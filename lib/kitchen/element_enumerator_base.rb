@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kitchen
   # Base class for all element enumerators
   #
@@ -102,6 +104,17 @@ module Kitchen
     def examples(css_or_xpath=nil)
       block_error_if(block_given?)
       chain_to(ExampleElementEnumerator, css_or_xpath: css_or_xpath)
+    end
+
+    # Returns an enumerator that iterates through metadata within the scope of this enumerator
+    #
+    # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
+    #   a "$" in this argument will be replaced with the default selector for the element being
+    #   iterated over.
+    #
+    def metadatas(css_or_xpath=nil)
+      block_error_if(block_given?)
+      chain_to(MetadataElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
     # Returns an enumerator that iterates within the scope of this enumerator

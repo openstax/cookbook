@@ -55,7 +55,7 @@ def chapter_element(chapter_children_html)
 end
 
 def metadata_element
-  new_element(
+  book_containing(html:
     <<~HTML
       <div data-type="metadata" style="display: none;">
         <div class="authors" id="authors">Authors</div>
@@ -65,5 +65,5 @@ def metadata_element
         <div data-type="subject" id="subject">Subject</div>
       </div>
     HTML
-  )
+  ).metadata
 end

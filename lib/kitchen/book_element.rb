@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kitchen
   # An element for an entire book
   #
@@ -25,10 +27,10 @@ module Kitchen
 
     # Returns the top metadata element
     #
-    # @return [Element]
+    # @return [MetadataElement]
     #
     def metadata
-      first!("div[data-type='metadata']")
+      metadatas.first
     end
 
     # Returns the table of contents (toc) element

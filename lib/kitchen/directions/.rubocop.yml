@@ -4,3 +4,6 @@ inherit_from: ../../../.rubocop.yml
 # us for that
 Metrics/MethodLength:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false

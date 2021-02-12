@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 module Kitchen
   module Directions
+    # Bake directions for eoc key equations
+    #
     module BakeChapterKeyEquations
       def self.v1(chapter:, metadata_source:)
-        metadata_elements = metadata_source.search(%w(.authors .publishers .print-style
-                                                      .permissions [data-type='subject'])).copy
+        metadata_elements = metadata_source.children_to_keep.copy
 
         chapter.key_equations.search('h3').trash
         key_equations = chapter.key_equations.cut

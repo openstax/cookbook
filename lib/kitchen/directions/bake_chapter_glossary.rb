@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 module Kitchen
   module Directions
+    # Bake directons for eoc glossary
+    #
     module BakeChapterGlossary
       def self.v1(chapter:, metadata_source:)
-        metadata_elements = metadata_source.search(%w(.authors .publishers .print-style
-                                                      .permissions [data-type='subject'])).copy
+        metadata_elements = metadata_source.children_to_keep.copy
 
         definitions = chapter.glossaries.search('dl').cut
         definitions.sort_by! do |definition|
