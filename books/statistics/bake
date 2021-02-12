@@ -32,7 +32,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     #BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  #BakeExercises.v1(book: book)
+  BakeExercises.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
   book.chapters.each do |chapter|
