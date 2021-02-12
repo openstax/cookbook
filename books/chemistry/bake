@@ -95,19 +95,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
 
   BakeToc.v1(book: book)
 
-  # competing docs from elements - BakeLinkPlaceholders
-  book.search('a').each do |anchor|
-    next unless anchor.text == '[link]'
-
-    id = anchor[:href][1..-1]
-    replacement = doc.pantry(name: :link_text).get(id)
-    if replacement.present?
-      anchor.replace_children(with: replacement)
-    else
-      # TODO: log a warning!
-      puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
-    end
-  end
+  BakeLinkPlaceholders.v1(book: book, pantry: doc.pantry(name: :link_text))
 
 end
 
