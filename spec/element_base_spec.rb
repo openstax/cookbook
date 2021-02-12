@@ -15,6 +15,20 @@ RSpec.describe Kitchen::ElementBase do
       ))
   end
 
+  let(:header_book) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <h1 data-type="document-title">
+              <span class="os-text">Title1</span>
+          </h1>
+          <div data-type="example" class="class1" id="div1">
+            <p>This is a paragraph.</p>
+          </div>
+        HTML
+      ))
+  end
+
   let(:searchable_book) do
     book_containing(html:
       chapter_element(
@@ -234,6 +248,32 @@ RSpec.describe Kitchen::ElementBase do
             <div>Sibling</div>
           HTML
         )
+      end
+    end
+  end
+
+  describe '#content' do
+    it 'gets the children matching the provided selector' do
+      expect(book.content('.class1')).to match_normalized_html('<p>This is a paragraph.</p>')
+    end
+  end
+
+  describe '#contains?' do
+    it 'returns true if the element has a child matching the provided selector' do
+      expect(book.contains?('.class1')).to eq true
+    end
+  end
+
+  describe '#sub_header_name' do
+    context 'when there isn\'t already a header' do
+      it 'returns an h1' do
+        expect(book.sub_header_name).to eq('h1')
+      end
+    end
+
+    context 'when there is a header of h1 or greater already' do
+      it 'returns the header one level lower' do
+        expect(header_book.sub_header_name).to eq('h2')
       end
     end
   end
