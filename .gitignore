@@ -8,3 +8,6 @@ kitchen
 
 # file that contains the unique-to-a-dev absolute path to kitchen
 .devcontainer/kitchen_path
+
+# a folder for test data
+data
