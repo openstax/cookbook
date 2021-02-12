@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'forwardable'
 
 module Kitchen
@@ -58,9 +60,11 @@ module Kitchen
 
       ElementEnumerator.new do |block|
         nokogiri_document.search(*selector_or_xpath_args).each do |inner_node|
-          element = Kitchen::Element.new(node: inner_node,
-                                         document: self,
-                                         short_type: Utils.search_path_to_type(selector_or_xpath_args))
+          element = Kitchen::Element.new(
+            node: inner_node,
+            document: self,
+            short_type: Utils.search_path_to_type(selector_or_xpath_args)
+          )
           self.location = element
           block.yield(element)
         end
@@ -131,11 +135,14 @@ module Kitchen
     # @return [Element]
     #
     def create_element_from_string(string)
-      Kitchen::Element.new(
-        node: @nokogiri_document.create_element(string),
-        document: self,
-        short_type: "created_element_#{SecureRandom.hex(4)}"
-      ).element_children.first
+      children = Nokogiri::XML("<foo>#{string}</foo>").search('foo').first.element_children
+      raise('new_element must only make one top-level element') if children.many?
+
+      node = children.first
+
+      create_element(node.name, node.attributes).tap do |element|
+        element.inner_html = node.children
+      end
     end
 
     # Keeps track that an element with the given ID has been copied.  When such
@@ -163,7 +170,7 @@ module Kitchen
 
       # A count of 0 means the element was cut and this is the first paste, do not
       # modify the ID; otherwise, use the uniquified ID.
-      if count == 0
+      if count.zero?
         original_id
       else
         "#{original_id}#{@id_copy_suffix}#{count}"

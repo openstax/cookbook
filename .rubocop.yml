@@ -6,6 +6,7 @@ Layout/EmptyLinesAroundBlockBody:
 
 Layout/LineLength:
   Max: 100
+  IgnoredPatterns: ['(\A|\s)#']
 
 Metrics/AbcSize:
   Max: 50

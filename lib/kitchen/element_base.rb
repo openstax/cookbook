@@ -72,9 +72,13 @@ module Kitchen
     #   Get the path for this element
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#path-instance_method Nokogiri::XML::Node#path
     #   @return [String]
+    # @!method inner_html=
+    #   Set the inner HTML for this element
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#inner_html=-instance_method Nokogiri::XML::Node#inner_html=
+    #   @return Object
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
                    :text, :wrap, :children, :to_html, :remove_attribute,
-                   :classes, :path
+                   :classes, :path, :inner_html=
 
     # @!method config
     #   Get the config for this element's document
