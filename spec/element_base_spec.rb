@@ -48,6 +48,14 @@ RSpec.describe Kitchen::ElementBase do
 
   let(:para) { book.first!('p') }
 
+  describe '#initialize' do
+    it 'explodes if given a bad document type' do
+      expect {
+        described_class.new(node: 'foo', document: 'some string', enumerator_class: 'bar')
+      }.to raise_error(/not a known document type/)
+    end
+  end
+
   describe '#has_class?' do
     it 'returns true if element has given class' do
       expect(example.has_class?('class1')).to eq true
@@ -131,6 +139,11 @@ RSpec.describe Kitchen::ElementBase do
         para.add_ancestors(random_string)
       end.to raise_error("Unsupported ancestor type `#{random_string.class}`")
     end
+
+    it 'adds an element as an ancestor' do
+      expect(para).to receive(:add_ancestor).with(kind_of(Kitchen::Ancestor))
+      para.add_ancestors(example)
+    end
   end
 
   describe '#add_ancestor' do
@@ -173,8 +186,8 @@ RSpec.describe Kitchen::ElementBase do
   end
 
   describe '#prepend' do
-    sibling = '<div>Sibling</div>'
-    child = '<div>Child</div>'
+    let(:sibling) { '<div>Sibling</div>' }
+    let(:child) { '<div>Child</div>' }
 
     it 'raises a RecipeError when a child and sibling are specified' do
       expect do
@@ -208,6 +221,14 @@ RSpec.describe Kitchen::ElementBase do
             <p>This is a paragraph.</p>
           HTML
         )
+      end
+    end
+
+    context 'when the element has no children' do
+      it 'prepends a child' do
+        childless = new_element('<div/>')
+        childless.prepend(child: '<span>foo</span>')
+        expect(childless.children.to_s).to eq '<span>foo</span>'
       end
     end
   end
@@ -250,6 +271,14 @@ RSpec.describe Kitchen::ElementBase do
         )
       end
     end
+
+    context 'when the element has no children' do
+      it 'appends a child' do
+        childless = new_element('<div/>')
+        childless.append(child: '<span>foo</span>')
+        expect(childless.children.to_s).to eq '<span>foo</span>'
+      end
+    end
   end
 
   describe '#content' do
@@ -275,6 +304,40 @@ RSpec.describe Kitchen::ElementBase do
       it 'returns the header one level lower' do
         expect(header_book.sub_header_name).to eq('h2')
       end
+    end
+  end
+
+  describe '#clipboard' do
+    it 'explodes when the argument is not a clipboard or symbol' do
+      expect { book.send(:clipboard, 'foo') }.to raise_error(/is not a clipboard name or a clipboard/)
+    end
+  end
+
+  describe '#inspect' do
+    it 'calls to_s' do
+      expect(book).to receive(:to_s)
+      book.inspect
+    end
+  end
+
+  describe '#to_xml' do
+    it 'delegates to the node' do
+      expect(book.raw).to receive(:to_xml)
+      book.to_xml
+    end
+  end
+
+  describe '#to_xhtml' do
+    it 'delegates to the node' do
+      expect(book.raw).to receive(:to_xhtml)
+      book.to_xhtml
+    end
+  end
+
+  describe '#to_s' do
+    it 'delegates to the node' do
+      expect(book.raw).to receive(:to_s)
+      book.to_s
     end
   end
 end
