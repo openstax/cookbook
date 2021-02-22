@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '2.0.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+
+  book.chapters.each do |chapter|
+    # Fix up chapter titles - TODO put this in BakeChapter
+    heading = chapter.at('h1[2]')
+    heading[:id] = "chapTitle#{chapter.count_in(:book)}"
+    heading.replace_children(with:
+      <<~HTML
+        <span class="os-part-text">Chapter </span>
+        <span class="os-number">#{chapter.count_in(:book)}</span>
+        <span class="os-divider"> </span>
+        <span data-type="" itemprop="" class="os-text">#{heading.text}</span>
+      HTML
+    )
+    chapter.pages('$:not(.introduction)').each do |page|
+      page.search("div[data-type='description']").each(&:trash)
+      page.add_class('chapter-content-module')
+
+      title = page.search("div[data-type='document-title']").first
+      title.name = 'h2'
+      title.replace_children(with:
+        <<~HTML
+          <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+          <span class="os-divider"> </span>
+          <span data-type="" itemprop="" class="os-text">#{title.text}</span>
+        HTML
+      )
+    end
+  end
+
+  BakeToc.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: recipe,
+  output_file: opts[:output]
+)
