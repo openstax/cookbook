@@ -2,12 +2,15 @@
 .xhtml
 .xml
 .byebug_history
+.DS_Store
 
-# locally mounted kitchen in the devcontainer
+# locally mounted repos in the devcontainer
 kitchen
+legacy_recipes
 
-# file that contains the unique-to-a-dev absolute path to kitchen
+# file that contains the unique-to-a-dev absolute path to repos
 .devcontainer/kitchen_path
+.devcontainer/legacy_recipes_path
 
 # a folder for test data
 data
