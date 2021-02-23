@@ -47,6 +47,8 @@ There's a top-level `bake` Bash script that calls the right scripts in the `book
 
 This script can be used to build a book using legacy baking (e.g. `cnx-easybake`) given an old style CSS recipe file (an example of how to run this script with Docker can be found below).
 
+Within the devcontainer, provided that [the legacy recipes](https://github.com/openstax/cnx-recipes/tree/master/recipes/output) have been [properly mounted](https://github.com/openstax/recipes#using-legacy-recipes-within-the-recipes-devcontainer), this script can be called with `./bake_legacy -i {input-file} -r legacy_recipes/{book-name}.css -o {output-file}`.
+
 ## The `bake_root` script
 
 This script can be used if you don't want to invoke `bake` (kitchen baking) or `bake_legacy` (`cnx-easybake` baking) directly, and instead want to use a single script that will adopt the appropriate process for the given book. When kitchen support is added for a book, this script should be updated accordingly (it will fallback to legacy baking for all unknown books). Also, this is the script that will be utilized by build pipelines (e.g. CORGI, web hosting, etc.), so it controls when a book is ready to switchover from legacy to kitchen baking in those environments.
@@ -150,9 +152,15 @@ $ /code> USE_LOCAL_KITCHEN=1 ./books/chemistry2e/bake ...
 
 then your recipe will use your local kitchen folder.  You can leave the `gem` line as is when you commit it, and in production runs since the `USE_LOCAL_KITCHEN` environment variable isn't set, the version number at the end will be used.
 
+## Using legacy recipes within the recipes devcontainer
+
+As with kitchen, legacy recipes can be mounted within the devcontainer if you put the absolute path in a `.devcontainer/legacy_recipes_path` file.
+
+"Legacy recipes" refers to [this folder](https://github.com/openstax/cnx-recipes/tree/master/recipes/output) in the cnx-recipes repository.
+
 ## Creating a new recipe
 
-New recipes files are created in `books/{book-name}`. 
+New recipes files are created in `books/{book-name}`.
 
 In order to run the new recipe via the bake script, the recipe must be added to [the `case` statement](https://github.com/openstax/recipes/blob/main/bake#L25), i.e.:
 
