@@ -47,7 +47,7 @@ There's a top-level `bake` Bash script that calls the right scripts in the `book
 
 This script can be used to build a book using legacy baking (e.g. `cnx-easybake`) given an old style CSS recipe file (an example of how to run this script with Docker can be found below).
 
-Within the devcontainer, provided that [the legacy recipes](https://github.com/openstax/cnx-recipes/tree/master/recipes/output) have been [properly mounted](https://github.com/openstax/recipes#using-legacy-recipes-within-the-recipes-devcontainer), this script can be called with `./bake_legacy -i {input-file} -r legacy_recipes/{book-name}.css -o {output-file}`.
+Within the devcontainer, provided that [the legacy recipes](https://github.com/openstax/cnx-recipes/tree/master/recipes/output) have been [properly mounted](#using-legacy-recipes-within-the-recipes-devcontainer), this script can be called with `./bake_legacy -i {input-file} -r legacy_recipes/{book-name}.css -o {output-file}`.
 
 ## The `bake_root` script
 
