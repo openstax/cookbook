@@ -5,7 +5,7 @@
     "context": "..",
     "target": "dev-env",
   },
-  "initializeCommand": "./docker/symlink_kitchen_in_tmp",
+  "initializeCommand": "./docker/symlink_dependencies_in_tmp",
   "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",
   "mounts": ["source=/tmp/kitchen,target=/code/kitchen,type=bind,consistency=default",
     "source=/tmp/legacy_recipes,target=/code/legacy_recipes,type=bind,consistency=default"],
