@@ -2,30 +2,23 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# mount kitchen
-rm -rf /tmp/fake_kitchen_dir_to_mount
+dependencies=( kitchen legacy_recipes )
 
-if (test -a $DIR/../.devcontainer/kitchen_path); then
-  kitchen_dir=$(cat $DIR/../.devcontainer/kitchen_path)
-else
-  mkdir /tmp/fake_kitchen_dir_to_mount
-  echo "To make this directory be your real kitchen directory, see the README" >> /tmp/fake_kitchen_dir_to_mount/where_is_kitchen.txt
-  kitchen_dir=/tmp/fake_kitchen_dir_to_mount
-fi
+for dependency in "${dependencies[@]}"
+do
+    fake_dependency_dir=/tmp/fake_"$dependency"_dir_to_mount
+    real_dependency_dir=$(cat $DIR/../.devcontainer/"$dependency"_path)
 
-rm -f /tmp/kitchen
-ln -s $kitchen_dir /tmp/kitchen
+    rm -rf $fake_dependency_dir
 
-# mount cnx-recipes/recipes/output
-rm -rf /tmp/fake_legacy_recipes_dir_to_mount
+    if (test -a $real_dependency_dir); then
+      dependency_dir=$real_dependency_dir
+    else
+      mkdir $fake_dependency_dir
+      echo "To make this directory be your real $dependency directory, see the README" >> $fake_dependency_dir/where_is_"$dependency".txt
+      dependency_dir=$fake_dependency_dir
+    fi
 
-if (test -a $DIR/../.devcontainer/legacy_recipes_path); then
-  legacy_recipes_dir=$(cat $DIR/../.devcontainer/legacy_recipes_path)
-else
-  mkdir /tmp/fake_legacy_recipes_dir_to_mount
-  echo "To make this directory be your real legacy_recipes directory, see the README" >> /tmp/fake_legacy_recipes_dir_to_mount/where_is_legacy_recipes.txt
-  legacy_recipes_dir=/tmp/fake_legacy_recipes_dir_to_mount
-fi
-
-rm -f /tmp/legacy_recipes
-ln -s $legacy_recipes_dir /tmp/legacy_recipes
+    rm -f /tmp/"$dependency"
+    ln -s $dependency_dir /tmp/"$dependency"
+done
