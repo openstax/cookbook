@@ -19,7 +19,7 @@ done
 # List additional books here
 
 case "${book}" in
-  chemistry) dest="${DIR}/data/chemistry-shortened" && script="${DIR}/books/chemistry/shorten";;
+  chemistry) dest="${DIR}/data/chemistry/short" && script="${DIR}/books/chemistry/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
