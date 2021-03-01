@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Monkey patches for +String+
 #
 class String

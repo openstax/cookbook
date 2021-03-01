@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Kitchen
   # Records the search history that was used to find a certain element
   #

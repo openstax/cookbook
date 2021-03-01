@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Kitchen
   # Builds Elements from Nokogiri Nodes
   #

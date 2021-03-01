@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Kitchen
   # These are added to every translation locale, including the `test` locale
   # set by `stub_locales`.  When we sort strings with accent marks, we use

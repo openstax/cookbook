@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Kitchen::Mixins::BlockErrorIf do
   class BlockErrorIfTestClass
     include Kitchen::Mixins::BlockErrorIf

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 @solution_1 = Kitchen::BookRecipe.new do |doc|
   book = doc.book
 

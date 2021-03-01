@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Kitchen
   # An enumerator for book elements
   #

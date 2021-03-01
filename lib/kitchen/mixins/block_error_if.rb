@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Kitchen
   module Mixins
     # A mixin for including the block_error_if method

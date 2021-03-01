@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Kitchen
   module Selectors
     # A specific set of selectors

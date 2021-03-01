@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module StubHelpers
   def stub_locales(hash)
     I18n.config.available_locales = %i[test en]

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module MatchHelpers
   RSpec::Matchers.define :match_html_strict do |expected|
     match do |actual|

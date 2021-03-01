@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Kitchen
   # A centralized place to put common CSS selectors so they aren't sprinkled
   # throughout the baseline (and so that they can be changed easily if needed)

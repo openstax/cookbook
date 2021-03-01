@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe 'Nokogiri patches' do
   let(:document) do
     Nokogiri::XML(

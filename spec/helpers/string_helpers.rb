@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module StringHelpers
   def with_captured_stdout(clear_colors: false)
     original_stdout = $stdout   # capture previous value of $stdout
