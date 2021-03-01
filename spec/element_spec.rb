@@ -78,7 +78,7 @@ RSpec.describe Kitchen::Element do
   end
 
   it 'can be converted to an HTML string' do
-    expect(element_1.to_html + "\n").to eq(
+    expect("#{element_1.to_html}\n").to eq(
       <<~HTML
         <div id="divId" class="class1 class2" data-type="a-div">
           <p id="pId"><span>Hi there</span></p>

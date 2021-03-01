@@ -26,7 +26,7 @@ end
 
 tutorial_number = ARGV[0]
 
-Dir[File.expand_path(__dir__ + "/#{tutorial_number}/*.rb")].each { |f| require f }
+Dir[File.expand_path(__dir__ + "/#{tutorial_number}/*.rb")].sort.each { |f| require f }
 
 recipe_name = (ARGV[1] || 'my_recipe')
 recipe_variable_name = "@#{recipe_name}".to_sym
@@ -58,8 +58,8 @@ if diff.blank?
   puts Rainbow('The actual output matches the expected output! Way to go!').green
 else
   puts Rainbow('The actual output does not match the expected output.').yellow
-  puts Rainbow('-').red + ' = actual output'
-  puts Rainbow('+').green + ' = expected output'
+  puts "#{Rainbow('-').red} = actual output"
+  puts "#{Rainbow('+').green} = expected output"
   puts "\n"
   puts diff
 end

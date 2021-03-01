@@ -10,7 +10,7 @@ module Kitchen
 end
 
 def file_glob(relative_folder_and_extension)
-  Dir[File.expand_path(__dir__ + '/' + relative_folder_and_extension)]
+  Dir[File.expand_path("#{__dir__}/#{relative_folder_and_extension}")]
 end
 
 def require_all(relative_folder, file_matcher='**/*.rb')
