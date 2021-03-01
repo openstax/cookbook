@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen
   # A wrapper for an element representing an ancestor (up the DOM tree) of another
   # element; keeps track of the number of descendants it has of a particular type

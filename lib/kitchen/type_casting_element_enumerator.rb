@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen
   # An enumerator that detects the element type as it iterates and returns specific,
   # different element classes based on that type.

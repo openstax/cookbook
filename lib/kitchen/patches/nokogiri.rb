@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Make debug output more useful (dumping entire document out is not useful)
 module Nokogiri
   module XML

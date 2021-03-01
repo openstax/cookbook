@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen
   # A simple counting object
   #

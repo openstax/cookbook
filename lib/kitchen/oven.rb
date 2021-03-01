@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen
   # A class for baking documents according to the instructions in recipes
   #

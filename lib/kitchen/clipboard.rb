@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen
   # A place to store lists of things during recipe work.  Essentially a
   # slightly fancy array.

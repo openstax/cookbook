@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe Kitchen::BookRecipe do
   context 'book_short_name' do
     it 'is :not_set when not set' do

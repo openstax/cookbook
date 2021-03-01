@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen
   # An one-off element that isn't one of the main elements we have dedicated classes
   # for (like ChapterElement).  Provides a way to set an arbitrary +short_type+

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen
   # A specialized +Recipe+ that yields a +BookDocument+ instead of a plain
   # +Document+

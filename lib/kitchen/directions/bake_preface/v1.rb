@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kitchen::Directions::BakePreface
   class V1
     def bake(book:)
