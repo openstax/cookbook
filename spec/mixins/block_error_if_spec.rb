@@ -7,6 +7,6 @@ RSpec.describe Kitchen::Mixins::BlockErrorIf do
   end
 
   it 'raises a RecipeError if a block is given' do
-    expect{BlockErrorIfTestClass.new.some_method{}}.to raise_error(Kitchen::RecipeError,/some_method/)
+    expect { BlockErrorIfTestClass.new.some_method {} }.to raise_error(Kitchen::RecipeError, /some_method/)
   end
 end

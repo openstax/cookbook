@@ -6,7 +6,7 @@ module StringHelpers
 
     # return the captured string
     if clear_colors
-      $stdout.string.gsub(/\e\[(\d+)(;\d+)*m/,'')
+      $stdout.string.gsub(/\e\[(\d+)(;\d+)*m/, '')
     else
       $stdout.string
     end

@@ -42,7 +42,7 @@ module Kitchen
       if get_descendant_count(descendant_type) - by >= 0
         @descendant_counts[descendant_type.to_sym] = get_descendant_count(descendant_type) - by
       else
-        raise(RangeError, "An element cannot have negative descendants")
+        raise(RangeError, 'An element cannot have negative descendants')
       end
     end
 

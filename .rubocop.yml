@@ -55,3 +55,6 @@ Style/SymbolProc:
 
 Layout/ClosingParenthesisIndentation:
   Enabled: false # when true hanging parens look weird
+
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false

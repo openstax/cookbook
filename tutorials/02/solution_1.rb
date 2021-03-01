@@ -11,18 +11,18 @@
     end
 
     chapter.append(child: <<~HTML
-        <div class="eoc">
-          <h2 data-type="document-title">End of Chapter Stuff</h2>
-          <div class="critical-thinking-container">
-            <div class="os-title">Critical Thinking Questions</div>
-            #{critical_thinking.paste}
-          </div>
-          <div class="review-questions-container">
-            <div class="os-title">Review Questions</div>
-            #{review_questions.paste}
-          </div>
+      <div class="eoc">
+        <h2 data-type="document-title">End of Chapter Stuff</h2>
+        <div class="critical-thinking-container">
+          <div class="os-title">Critical Thinking Questions</div>
+          #{critical_thinking.paste}
         </div>
-      HTML
+        <div class="review-questions-container">
+          <div class="os-title">Review Questions</div>
+          #{review_questions.paste}
+        </div>
+      </div>
+    HTML
     )
   end
 

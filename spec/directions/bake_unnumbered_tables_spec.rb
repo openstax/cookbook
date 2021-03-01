@@ -65,7 +65,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
 
   it 'bakes column header table' do
     described_class.v1(book: book_with_column_header_table)
-    expect(book_with_column_header_table.tables.first.parent). to match_normalized_html(
+    expect(book_with_column_header_table.tables.first.parent).to match_normalized_html(
       <<~HTML
         <div class="os-table os-column-header-container">
           <table class="unnumbered column-header" id="tId">

@@ -37,7 +37,7 @@ RSpec.describe Kitchen::ElementEnumerator do
     expect(element_1_enumerator.map(&:name)).to eq %w[div]
   end
 
-  context '#search' do
+  describe '#search' do
     it 'iterates over all children' do
       expect(element_1_enumerator.search('*').map(&:id)).to eq %w[id1 id2 id3 id4]
     end
@@ -47,7 +47,7 @@ RSpec.describe Kitchen::ElementEnumerator do
     end
   end
 
-  context '#cut' do
+  describe '#cut' do
     let(:enumerator) { element_1_enumerator.search('p') }
 
     it 'can cut to a named clipboard' do
@@ -73,7 +73,7 @@ RSpec.describe Kitchen::ElementEnumerator do
     end
   end
 
-  context '#copy' do
+  describe '#copy' do
     let(:enumerator) { element_1_enumerator.search('p') }
     let(:original_element_1_string) { element_1.to_s }
 
@@ -97,14 +97,14 @@ RSpec.describe Kitchen::ElementEnumerator do
     end
   end
 
-  context '#search_history' do
+  describe '#search_history' do
     it 'works' do
       chained_enumerator = element_2_enumerator.search('.foo').search('#pId').search('span')
       expect(chained_enumerator.search_history.to_s).to eq '[?] [.foo] [#pId] [span]'
     end
   end
 
-  context '#first!' do
+  describe '#first!' do
     it 'gives a meaningful error message when it bombs' do
       expect {
         element_2_enumerator.search('.foo').search('#blah').first!

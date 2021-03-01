@@ -28,7 +28,7 @@ module Kitchen
         <<~HTML
           <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
             <a href="##{chapter.title.id}">
-              #{chapter.title.children.to_s}
+              #{chapter.title.children}
             </a>
             <ol class="os-chapter">
               #{pages.map { |page| li_for_page(page) }.join("\n")}

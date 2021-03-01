@@ -154,7 +154,6 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     )
   end
 
-
   context 'no caption' do
     let(:caption) { '' }
 

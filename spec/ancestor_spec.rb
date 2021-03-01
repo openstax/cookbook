@@ -43,7 +43,7 @@ RSpec.describe Kitchen::Ancestor do
     end
 
     it 'decrement when the type is not yet tracked' do
-      expect{
+      expect {
         ancestor.decrement_descendant_count(descendant_type, by: 1)
       }.to raise_error('An element cannot have negative descendants')
     end

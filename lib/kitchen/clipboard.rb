@@ -46,9 +46,11 @@ module Kitchen
     # @return [Clipboard] self
     #
     def each(&block)
-      @items.each do |item|
-        block.call(item)
-      end if block_given?
+      if block_given?
+        @items.each do |item|
+          block.call(item)
+        end
+      end
       self
     end
 

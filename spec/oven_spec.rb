@@ -13,7 +13,7 @@ RSpec.describe Kitchen::Oven do
     end
   end
 
-  context '#bake' do
+  describe '#bake' do
     it 'does nada when there are no recipes' do
       input_file = Tempfile.new.tap { |file| file.write("<div>Howdy</div>\n"); file.rewind }
       output_file = Tempfile.new

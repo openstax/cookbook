@@ -1,16 +1,18 @@
 RSpec.describe 'Nokogiri patches' do
-  let (:document) { Nokogiri::XML(
-    <<~XML
-      <div style='blah' class='hi'>
-        <span data-type='foo' blah='howdy'>Hi</span>
-      </div>
-    XML
-  )}
+  let(:document) do
+    Nokogiri::XML(
+      <<~XML
+        <div style='blah' class='hi'>
+          <span data-type='foo' blah='howdy'>Hi</span>
+        </div>
+      XML
+  )
+  end
 
   context 'Nokogiri::XML::Document' do
     it 'can alphabetize attributes by key' do
       document.alphabetize_attributes!
-      expect(document.to_s.gsub("\n",'')).to match(/class.*style.*blah.*data-type/)
+      expect(document.to_s.gsub("\n", '')).to match(/class.*style.*blah.*data-type/)
     end
 
     it 'does not print the whole document when inspected' do

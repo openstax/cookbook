@@ -85,7 +85,7 @@ RSpec.describe Kitchen::Element do
     )
   end
 
-  context '#cut and #paste' do
+  describe '#cut and #paste' do
     before { @parent = element_1.parent }
 
     context 'using clipboards' do
@@ -127,7 +127,7 @@ RSpec.describe Kitchen::Element do
     end
   end
 
-  context '#copy and #paste' do
+  describe '#copy and #paste' do
     before { @parent = element_1.parent }
 
     context 'using clipboards' do
@@ -174,7 +174,7 @@ RSpec.describe Kitchen::Element do
     end
   end
 
-  context '#first' do
+  describe '#first' do
     it 'records ancestry' do
       inner = element_1.search('p').search('span').first
       expect(inner.ancestor('p').id).to eq 'pId'

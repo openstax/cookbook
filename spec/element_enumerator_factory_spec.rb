@@ -46,7 +46,7 @@ RSpec.describe Kitchen::ElementEnumeratorFactory do
       Kitchen::TermElementEnumerator,
       Kitchen::TypeCastingElementEnumerator
     ].each do |enumerator_class|
-      it "it is created by #{enumerator_class}" do
+      it "is created by #{enumerator_class}" do
         expect(described_class).to receive(:new)
         enumerator_class.factory
       end

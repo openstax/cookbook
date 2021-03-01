@@ -20,7 +20,7 @@ module Kitchen
       # @raise [RecipeError] if a block was given
       #
       def block_error_if(block_given)
-        return if !block_given
+        return unless block_given
 
         calling_method = begin
           this_method_location_index = caller_locations.find_index do |location|
