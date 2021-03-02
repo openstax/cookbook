@@ -149,3 +149,28 @@ $ /code> USE_LOCAL_KITCHEN=1 ./books/chemistry2e/bake ...
 ```
 
 then your recipe will use your local kitchen folder.  You can leave the `gem` line as is when you commit it, and in production runs since the `USE_LOCAL_KITCHEN` environment variable isn't set, the version number at the end will be used.
+
+## Creating a new recipe
+
+New recipes files are created in `books/{book-name}`. 
+
+In order to run the new recipe via the bake script, the recipe must be added to [the `case` statement](https://github.com/openstax/recipes/blob/main/bake#L25), i.e.:
+
+```bash
+case "${book}" in
+  chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
+  ... [other cases]
+  {book-name}) $DIR/books/{book-name}/bake --input $input_file --output $output_file;;
+  *) echo "Unknown book '${book}'"; exit 1;;
+esac
+```
+
+Note that the recipe file must be made executable by running `chmod +x [path]` or `chmod 755 [path]` before it can be called by the bake script.
+
+## Working on a recipe (converting from easybake)
+
+When developing a recipe that already exists in easybake, the main goal is to produce output via the kitchen recipe that is identical to the easybake output. It's helpful to use VSCode's native differ or another diff tool to compare the output from the two methods of baking.
+
+### Normalize
+
+The kitchen output and the easybake output may have a number of unimportant differences such as in whitespace and the ordering of attributes. The `normalize` script tidies the HTML and puts all attributes in alphabetical order. Call this script on an HTML file by calling `ruby scripts/normalize [path]`.
