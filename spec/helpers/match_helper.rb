@@ -16,7 +16,8 @@ end
 RSpec::Matchers.define :bake_correctly do
   match do |book|
     actual_file = Tempfile.new(book)
-    `./bake -b #{book} -i spec/books/#{book}/input.xhtml -o #{actual_file.path}`
+    `#{__dir__}/../../bake -b #{book} -i #{__dir__}/../../spec/books/#{book}/input.xhtml -o \
+      #{actual_file.path}`
     expect("spec/books/#{book}/expected_output.xhtml").to be_same_file_as(actual_file.path)
   end
 end

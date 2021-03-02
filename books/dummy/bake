@@ -11,7 +11,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
   include Kitchen::Directions
 
   book = doc.book
-  book.search('div').first.replace_children(with: 'Hello, world!')
+  book.search('div.test123').first.replace_children(with: 'Hello, world!')
 end
 
 opts = Slop.parse do |slop|
