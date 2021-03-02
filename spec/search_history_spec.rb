@@ -3,15 +3,19 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::SearchHistory do
-  context 'init' do
-    it 'creates instance variables' do
-      sh = described_class.new('foo', 'bar')
-      expect(sh.upstream).to eq('foo')
-      expect(sh.latest).to eq('bar')
+  describe '#initialize' do
+    let(:instance) { described_class.new('foo', 'bar') }
+
+    it 'sets upstream' do
+      expect(instance.upstream).to eq('foo')
+    end
+
+    it 'sets latest' do
+      expect(instance.latest).to eq('bar')
     end
   end
 
-  context 'empty' do
+  describe 'empty' do
     it 'converts to an empty array' do
       expect(described_class.empty.to_a).to eq []
     end

@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe 'nested enumerators' do
 
-  let(:book_1) do
+  let(:book1) do
     book_containing(html:
       <<~HTML
         <div data-type="page" id="p1">
@@ -31,69 +31,69 @@ RSpec.describe 'nested enumerators' do
 
   # TODO: see if we do any weird iteration in tutorials and spec them here
 
-  context 'single-level iteration' do
+  context 'when performing single-level iteration' do
     it 'can iterate over chapters' do
-      expect(book_1.chapters.map(&:id)).to eq %w[c1 c2]
+      expect(book1.chapters.map(&:id)).to eq %w[c1 c2]
     end
 
     it 'can iterate over pages' do
-      expect(book_1.pages.map(&:id)).to eq %w[p1 c1p1 c1p2 c2p1 c2p2]
+      expect(book1.pages.map(&:id)).to eq %w[p1 c1p1 c1p2 c2p1 c2p2]
     end
 
     it 'can iterate over terms' do
-      expect(book_1.terms.map(&:id)).to eq %w[p1t1 c1p1t1 c2p1t1 c2p1t2 c2p2t1]
+      expect(book1.terms.map(&:id)).to eq %w[p1t1 c1p1t1 c2p1t1 c2p1t2 c2p2t1]
     end
 
     it 'records counts within ancestors' do
-      expect(book_1.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
+      expect(book1.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
     end
 
     it 'records counts for abitrary searches' do
-      expect(book_1.search('span').map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
+      expect(book1.search('span').map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
     end
   end
 
   context 'when performing multi-level iteration' do
-    context 'works' do
+    describe 'basic operation' do
       it 'can iterate over chapters and then pages' do
-        expect(book_1.chapters.pages.map(&:id)).to eq %w[c1p1 c1p2 c2p1 c2p2]
+        expect(book1.chapters.pages.map(&:id)).to eq %w[c1p1 c1p2 c2p1 c2p2]
       end
 
       it 'can iterate over chapters then pages then terms' do
-        expect(book_1.chapters.pages.terms.map(&:id)).to eq %w[c1p1t1 c2p1t1 c2p1t2 c2p2t1]
+        expect(book1.chapters.pages.terms.map(&:id)).to eq %w[c1p1t1 c2p1t1 c2p1t2 c2p2t1]
       end
     end
 
-    context 'ancestors are available' do
+    context 'when ancestors are available' do
       it 'can access the book from an iterated chapter' do
-        book_1.chapters.each do |chapter|
-          expect(chapter.ancestor(:book)).to eq book_1
+        book1.chapters.each do |chapter|
+          expect(chapter.ancestor(:book)).to eq book1
         end
       end
 
       it 'can access the book and chapter from an iterated page' do
-        expect(book_1.chapters.pages[1].ancestor(:chapter).id).to eq 'c1'
-        expect(book_1.chapters.pages[2].ancestor(:chapter).id).to eq 'c2'
+        expect(book1.chapters.pages[1].ancestor(:chapter).id).to eq 'c1'
+        expect(book1.chapters.pages[2].ancestor(:chapter).id).to eq 'c2'
       end
     end
 
     it 'records counts within ancestors' do
-      expect(book_1.pages.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
+      expect(book1.pages.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
     end
 
     it 'records counts within reused ancestor element (like book)' do
-      expect(book_1.pages.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
-      expect(book_1.pages.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
+      expect(book1.pages.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
+      expect(book1.pages.terms.map { |t| t.count_in(:book) }).to eq [1, 2, 3, 4, 5]
     end
 
     it 'counts for multiple ancestors' do
-      expect(book_1.pages.terms.map do |t|
+      expect(book1.pages.terms.map do |t|
         [t.count_in(:book), t.count_in(:page)]
       end).to eq [[1, 1], [2, 1], [3, 1], [4, 2], [5, 1]]
     end
 
     it 'records counts when enumerator ancestors are reused' do
-      enumerator = book_1.pages
+      enumerator = book1.pages
 
       expect(enumerator.terms.map { |t| t.count_in(:page) }).to eq [1, 1, 1, 2, 1]
       expect(enumerator.terms.map { |t| t.count_in(:page) }).to eq [1, 1, 1, 2, 1]
@@ -103,7 +103,7 @@ RSpec.describe 'nested enumerators' do
 
     context 'when enumerators broken up with individual element access' do
       it 'can access ancestors all the way up the ancestry' do
-        book_1.chapters.each do |chapter|
+        book1.chapters.each do |chapter|
           chapter.pages.each do |page|
             expect(page.ancestor(:chapter).id).to eq chapter.id
             expect(page.ancestor(:book).name).to eq 'html'
@@ -112,7 +112,7 @@ RSpec.describe 'nested enumerators' do
       end
 
       it 'counts correctly with single use of individual elements' do
-        counts = book_1.chapters.map do |chapter|
+        counts = book1.chapters.map do |chapter|
           chapter.pages.map do |p|
             [p.count_in(:chapter), p.count_in(:book)]
           end
@@ -123,7 +123,8 @@ RSpec.describe 'nested enumerators' do
 
       it 'counts correctly with repeated iteration calls on the same element' do
         counts = []
-        book_1.chapters.each do |chapter|
+        book1.chapters.each do |chapter|
+          # rubocop:disable Style/CombinableLoops
           chapter.pages.each do |page|
             counts.push(page.count_in(:chapter))
             counts.push(page.count_in(:book))
@@ -134,6 +135,7 @@ RSpec.describe 'nested enumerators' do
             counts.push(page.count_in(:chapter))
             counts.push(page.count_in(:book))
           end
+          # rubocop:enable Style/CombinableLoops
         end
         # first chapter      second chapter
         expect(counts).to eq [1, 1, 2, 2, 1, 1, 2, 2] + [1, 3, 2, 4, 1, 3, 2, 4]

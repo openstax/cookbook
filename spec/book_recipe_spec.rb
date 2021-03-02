@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Kitchen::BookRecipe do
-  context 'book_short_name' do
+  describe 'book_short_name' do
     it 'is :not_set when not set' do
       expect(described_class.new {}.book_short_name).to eq :not_set
     end

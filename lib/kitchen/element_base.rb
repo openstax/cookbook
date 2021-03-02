@@ -435,13 +435,12 @@ module Kitchen
     #
     # @param child [String] the child to prepend
     # @param sibling [String] the sibling to prepend
+    # @raise [RecipeError] if specify other than just a child or a sibling
     #
     def prepend(child: nil, sibling: nil)
-      if child && sibling
-        raise RecipeError, 'Only one of `child` or `sibling` can be specified'
-      elsif !child && !sibling
-        raise RecipeError, 'One of `child` or `sibling` must be specified'
-      elsif child
+      require_one_of_child_or_sibling(child, sibling)
+
+      if child
         if node.children.empty?
           node.children = child.to_s
         else
@@ -459,13 +458,12 @@ module Kitchen
     #
     # @param child [String] the child to append
     # @param sibling [String] the sibling to append
+    # @raise [RecipeError] if specify other than just a child or a sibling
     #
     def append(child: nil, sibling: nil)
-      if child && sibling
-        raise RecipeError, 'Only one of `child` or `sibling` can be specified'
-      elsif !child && !sibling
-        raise RecipeError, 'One of `child` or `sibling` must be specified'
-      elsif child
+      require_one_of_child_or_sibling(child, sibling)
+
+      if child
         if node.children.empty?
           node.children = child.to_s
         else
@@ -642,6 +640,11 @@ module Kitchen
       else
         string
       end
+    end
+
+    def require_one_of_child_or_sibling(child, sibling)
+      raise RecipeError, 'Only one of `child` or `sibling` can be specified' if child && sibling
+      raise RecipeError, 'One of `child` or `sibling` must be specified' if !child && !sibling
     end
 
   end

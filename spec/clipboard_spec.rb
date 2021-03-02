@@ -41,8 +41,8 @@ RSpec.describe Kitchen::Clipboard do
   end
 
   describe '#each' do
-    context 'return self' do
-      context 'when the clipboard has contents' do
+    describe 'return self' do
+      describe 'when the clipboard has contents' do
         before { my_clipboard.add(fake_element(2)) }
 
         it 'and block is given' do

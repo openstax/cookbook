@@ -3,6 +3,7 @@
 require 'rainbow'
 
 module Kitchen
+  # Debug helpers
   module Debug
     CONTEXT_LINES = 2
 
@@ -32,7 +33,7 @@ module Kitchen
         puts "Full backtrace:\n"
         puts(error.backtrace.map { |line| Rainbow(line).blue })
       else
-        puts 'Full backtrace suppressed (enable by setting the VERBOSE environment variable to something)'
+        puts 'Full backtrace suppressed; enable by setting the VERBOSE env variable to something'
       end
     end
 
@@ -75,7 +76,7 @@ module Kitchen
     end
 
     def self.print_file_line(line_number, line)
-      puts "#{'%5s' % line_number}| #{line}"
+      puts "#{format('%5s', line_number)}| #{line}"
     end
 
     def self.print_specific_help_line(error)

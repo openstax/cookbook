@@ -10,7 +10,7 @@ RSpec.describe Kitchen::Directions::BakeStepwise do
     })
   end
 
-  let(:book_1) do
+  let(:book1) do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
@@ -27,9 +27,9 @@ RSpec.describe Kitchen::Directions::BakeStepwise do
   end
 
   it 'works' do
-    described_class.v1(book: book_1)
+    described_class.v1(book: book1)
 
-    expect(book_1.search('ol').to_s).to match_normalized_html(
+    expect(book1.search('ol').to_s).to match_normalized_html(
       <<~HTML
         <ol class="os-stepwise">
           <li>

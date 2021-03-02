@@ -14,6 +14,9 @@ Style/BlockDelimiters:
   IgnoredMethods:
     - expect
 
+Style/Semicolon:
+  Enabled: false
+
 Style/SymbolProc:
   Enabled: false
 
@@ -30,3 +33,15 @@ RSpec/MessageSpies:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/MultipleExpectations:
+  Max: 4

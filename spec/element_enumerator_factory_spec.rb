@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::ElementEnumeratorFactory do
-  context 'apply_default_css_or_xpath_and_normalize' do
+  describe 'apply_default_css_or_xpath_and_normalize' do
     let(:method) { described_class.method(:apply_default_css_or_xpath_and_normalize) }
 
     it 'arrayifies a string' do
@@ -36,7 +36,7 @@ RSpec.describe Kitchen::ElementEnumeratorFactory do
     end
   end
 
-  context 'specific enumerators create a factory' do
+  describe 'specific enumerators create a factory' do
     [
       Kitchen::ChapterElementEnumerator,
       Kitchen::CompositePageElementEnumerator,

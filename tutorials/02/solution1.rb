@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-@solution_1 = Kitchen::Recipe.new do |doc|
+@solution1 = Kitchen::Recipe.new do |doc|
 
   doc.search("[data-type='chapter']").each do |chapter|
     review_questions = chapter.search('.review-questions').cut

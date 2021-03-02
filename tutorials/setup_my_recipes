@@ -11,7 +11,7 @@ tutorial_numbers = Dir.glob('*').select { |f| File.directory?(f) && f.match?(/\d
 tutorial_numbers.each do |tutorial_number|
   file_name = File.expand_path("#{tutorial_number}/my_recipe.rb", __dir__)
   if File.exist?(file_name)
-    puts "Skipped making recipe skeleton; my_recipe.rb exists in tutorials folder '#{tutorial_number}'"
+    puts "Skipped making recipe skeleton; my_recipe.rb exists in tutorials folder #{tutorial_number}"
     next
   else
     File.open(file_name, 'w') do |f|

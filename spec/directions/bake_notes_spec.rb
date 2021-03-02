@@ -53,7 +53,7 @@ RSpec.describe Kitchen::Directions::BakeNotes do
     })
   end
 
-  context 'v1' do
+  describe 'v1' do
     let(:book) { book_with_titled_note }
 
     context 'with title' do

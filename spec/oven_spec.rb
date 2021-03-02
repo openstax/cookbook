@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'tempfile'
 
 RSpec.describe Kitchen::Oven do
-  context 'BakeProfile' do
+  describe 'BakeProfile' do
     it 'can be written to string' do
       expect(Kitchen::Oven::BakeProfile.new.to_s).to eq <<~STRING
         Open:  ?? s

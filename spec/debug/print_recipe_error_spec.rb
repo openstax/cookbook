@@ -38,9 +38,10 @@ RSpec.describe 'print_recipe_error' do
   end
 
   it 'prints lines from the recipe' do
-    expect(output).to match(/at or near/)
-    expect(output).to match(/spec\/debug\/print_recipe_error_spec.rb/)
-    expect(output).to match(/9|\s+document\.foo/)
+    expect(output)
+      .to match(/at or near/)
+      .and match(/spec\/debug\/print_recipe_error_spec.rb/)
+      .and match(/9|\s+document\.foo/)
   end
 
   it 'says how to get the full backtrace' do
@@ -52,7 +53,7 @@ RSpec.describe 'print_recipe_error' do
     expect(output).to match(/Full backtrace:\s+.*print_recipe_error_spec/)
   end
 
-  context 'error encountered within a document' do
+  context 'when error encountered within a document' do
     let(:recipe) do
       Kitchen::Recipe.new do |document|
         document.search('div').search('span').first!
@@ -60,8 +61,9 @@ RSpec.describe 'print_recipe_error' do
     end
 
     it 'prints the line in the document where the error happened' do
-      expect(output).to match('Encountered on line 1')
-      expect(output).to match('<div class="hi">...</div>')
+      expect(output)
+        .to match('Encountered on line 1')
+        .and match('<div class="hi">...</div>')
     end
   end
 end

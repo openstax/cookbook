@@ -1,3 +1,6 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
@@ -25,6 +28,8 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   CountAsOne: ['heredoc']
   Max: 30
+  Exclude:
+    - 'openstax_kitchen.gemspec'
 
 Metrics/ModuleLength:
   CountAsOne: ['heredoc']

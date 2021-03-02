@@ -9,6 +9,7 @@ module Kitchen
       # Create a new instance
       #
       def initialize
+        super
         self.title_in_page              = "./*[@data-type = 'document-title']"
         self.title_in_introduction_page = "./*[@data-type = 'document-title']"
       end

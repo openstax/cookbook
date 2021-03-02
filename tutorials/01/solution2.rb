@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-@solution_2 = Kitchen::BookRecipe.new do |doc|
+@solution2 = Kitchen::BookRecipe.new do |doc|
 
   #                       ^
   #                       |

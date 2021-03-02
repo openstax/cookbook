@@ -6,6 +6,7 @@ require 'nokogiri'
 require 'active_support/all'
 
 module Kitchen
+  # Contains snippets of recipes that accomplish a certain medium-sized task
   module Directions; end
 end
 

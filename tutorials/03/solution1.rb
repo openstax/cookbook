@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-@solution_2 = Kitchen::BookRecipe.new do |doc|
+@solution1 = Kitchen::BookRecipe.new do |doc|
   book = doc.book
 
   book.chapters.each do |chapter|
@@ -10,9 +10,9 @@
     )
 
     chapter.pages.each do |page|
-      page.title
-          .set(:name, 'h2')
-          .prepend(child: "#{chapter.count_in(:book)}.#{page.count_in(:chapter)} ")
+      page_title = page.title
+      page_title.name = 'h2'
+      page_title.prepend(child: "#{chapter.count_in(:book)}.#{page.count_in(:chapter)} ")
     end
   end
 end

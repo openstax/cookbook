@@ -30,7 +30,7 @@ RSpec.describe Kitchen::NoteElement do
       })
     end
 
-    context 'book that has a title in locales' do
+    context 'when book has a title in locales' do
       let(:short_name) { :chemistry }
 
       it 'gives the book specific title' do
@@ -38,7 +38,7 @@ RSpec.describe Kitchen::NoteElement do
       end
     end
 
-    context 'book that does not have a title in locales' do
+    context 'when book does not have a title in locales' do
       let(:short_name) { :foo }
 
       it 'gives the generic title' do

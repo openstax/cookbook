@@ -13,7 +13,7 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
 
   let(:a_section) { described_class::IndexSection.new(name: 'whatever') }
 
-  let(:book_1) do
+  let(:book1) do
     book_containing(html:
       <<~HTML
         <div data-type="metadata" style="display: none;">
@@ -41,9 +41,9 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
   end
 
   it 'works' do
-    described_class.new.bake(book: book_1)
+    described_class.new.bake(book: book1)
 
-    expect(book_1.first('.os-index-container').to_s).to match_normalized_html(
+    expect(book1.first('.os-index-container').to_s).to match_normalized_html(
       <<~HTML
         <div class="os-eob os-index-container " data-type="composite-page" data-uuid-key="index">
           <h1 data-type="document-title">

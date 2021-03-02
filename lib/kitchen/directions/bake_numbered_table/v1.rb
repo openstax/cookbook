@@ -34,18 +34,18 @@ module Kitchen::Directions::BakeNumberedTable
 
       table[:summary] = new_summary
 
-      unless table.unnumbered?
-        table.append(sibling:
-          <<~HTML
-            <div class="os-caption-container">
-              <span class="os-title-label">#{I18n.t(:table_label)} </span>
-              <span class="os-number">#{number}</span>
-              <span class="os-divider"> </span>
-              <span class="os-divider"> </span>#{new_caption}
-            </div>
-          HTML
-        )
-      end
+      return if table.unnumbered?
+
+      table.append(sibling:
+        <<~HTML
+          <div class="os-caption-container">
+            <span class="os-title-label">#{I18n.t(:table_label)} </span>
+            <span class="os-number">#{number}</span>
+            <span class="os-divider"> </span>
+            <span class="os-divider"> </span>#{new_caption}
+          </div>
+        HTML
+      )
     end
 
   end

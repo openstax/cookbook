@@ -2,8 +2,21 @@ inherit_from: ../../../.rubocop.yml
 
 # Directions are supposed to be a big list of steps, so don't let Rubocop penalize
 # us for that
+
 Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
   Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Style/Documentation:
+  Enabled: false # module names here are pretty clear
