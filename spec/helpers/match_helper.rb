@@ -16,8 +16,13 @@ end
 RSpec::Matchers.define :bake_correctly do
   match do |book|
     actual_file = Tempfile.new(book)
-    `#{__dir__}/../../bake -b #{book} -i #{__dir__}/../../spec/books/#{book}/input.xhtml -o \
+    cmd = `#{__dir__}/../../bake -b #{book} -i #{__dir__}/../../spec/books/#{book}/input.xhtml -o \
       #{actual_file.path}`
+    if ENV['USE_LOCAL_KITCHEN']
+      system({ 'USE_LOCAL_KITCHEN' => '1' }, cmd, %i[out err] => File::NULL)
+    else
+      cmd
+    end
     expect("spec/books/#{book}/expected_output.xhtml").to be_same_file_as(actual_file.path)
   end
 end
