@@ -1,2 +1,14 @@
 # See https://github.com/openstax/staxly#plugins for more options for this file
-filename: CHANGELOG.md
+changelog:
+  # See https://github.com/mikz/probot-changelog for details
+
+  # The filename of the CHANGELOG that needs to be updated in every PullRequest
+  filename: CHANGELOG.md
+
+  # (optional) when files matching these patterns are changed then disallow merging
+  # until the CHANGELOG is updated.
+  # If this pattern is not included then **all** Pull Requests require an edit to 
+  # the CHANGELOG file
+  
+  # include:
+  #   - /^src\//
