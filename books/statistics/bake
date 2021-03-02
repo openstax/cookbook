@@ -32,7 +32,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     #BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  BakeExercises.v1(book: book)
+  #BakeExercises.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -84,7 +84,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
     page.figures.each do |figure|
-      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+      BakeFigure.v1(figure: figure,
+                    number: "#{appendix_letter}#{figure.count_in(:page)}",
+                    caption_selector: "div[data-type='title']") # page figures use <div data-type='title'>
     end
 
     page.tables('$:not(.unnumbered)').each do |table|
