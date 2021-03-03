@@ -8,7 +8,7 @@ gemfile do
   gem 'byebug'
 end
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
+recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   include Kitchen::Directions
 
   book = doc.book
