@@ -273,6 +273,17 @@ The CSS for these specific search methods is hidden away so you don't have to de
 doc.book.tables("$.unnumbered").cut
 ```
 
+### Overriding Default Book-Oriented Selectors
+
+Book-oriented methods like `book.pages.figures` hide from us the CSS or XPath selectors that let us find child elements like `.pages`.  But sometimes, the default selector we have isn't what is used in a certain book.  In these cases, we can override the selector once in the recipe and still continue to use the book-oriented usage.  For example, a page summary is normally found using the CSS `section.summary`.  But some books use a `.section-summary` class.  For these books, we can override the selectors in their recipes:
+
+```ruby
+recipe = Kitchen::BookRecipe.new do |doc|
+  doc.selectors.override(
+    page_summary: ".section-summary"
+  )
+```
+
 ## Directions
 
 All of the above talks about the how to search through the XML file and perform basic operations on that file.  Our recipes will be combinations of all of the above: search for elements; cut, copy and paste them; count them; rework them; etc.

@@ -75,7 +75,7 @@ module Kitchen
     # @return [Element]
     #
     def summary
-      first!('section.summary')
+      first!(selectors.page_summary)
     end
 
     # Returns the exercises element.
