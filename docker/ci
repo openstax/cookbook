@@ -8,9 +8,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # https://github.com/codecov/codecov-ruby/blob/484767f1c3d7992a9d7fedd6dc72d35a80d04f70/lib/codecov.rb#L68-L69
 
 docker run $CI_ENV \
-           -e ENABLE_CODECOV=1 -e CI=true \
+           -e CI=true \
            -v $DIR/..:/code \
-           -v vendor/bundle \
            -w /code \
-           openstax/recipes:latest \
-           /bin/bash -c "./scripts/install_used_gem_versions && bundle install && bundle exec rspec"
+           openstax/recipes.ci:latest \
+           /bin/bash -c "exec rspec"
