@@ -13,6 +13,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book = doc.book
 
+  # Set overrides
+  doc.selectors.override(
+    page_summary: ".section-summary"
+  )
+
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
@@ -28,11 +33,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
+    # BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  BakeExercises.v1(book: book)
+  # BakeExercises.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -103,7 +108,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   BakeNotes.v1(book: book)
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
-  BakeMathInParagraph.v1(book: book)
+  # BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
