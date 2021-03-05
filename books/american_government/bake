@@ -13,7 +13,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
 
   book = doc.book
 
+  # Update the preface title  TODO: add title method
+  book.pages('$.preface').search("div[data-type='document-title']").each do |title|
+    title.replace_children(with:
+      <<~HTML
+        <span data-type="" itemprop="" class="os-text">#{title.text}</span>
+      HTML
+    )
+    title.name = 'h1'
+  end
+
+  BakeChapterIntroductions.v1(book: book)
+
   book.chapters.each do |chapter|
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     # Fix up chapter titles - TODO put this in BakeChapter
     heading = chapter.at('h1[2]')
     heading[:id] = "chapTitle#{chapter.count_in(:book)}"
