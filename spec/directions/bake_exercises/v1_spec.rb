@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeExercises do
+RSpec.describe Kitchen::Directions::BakeExercises::V1 do
 
   before do
     stub_locales({
@@ -77,7 +77,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
   end
 
   it 'works' do
-    described_class.v1(book: book1)
+    described_class.new.bake(book: book1)
 
     expect(book1.body).to match_normalized_html(
       <<~HTML
@@ -231,7 +231,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
       end
 
       it 'works' do
-        described_class.bake_exercise_in_place(exercise: exercise)
+        described_class.new.bake_exercise_in_place(exercise: exercise)
 
         expect(exercise).to match_html_nodes(
           <<~HTML
@@ -260,7 +260,7 @@ RSpec.describe Kitchen::Directions::BakeExercises do
       let(:solution) { '' }
 
       it 'works' do
-        described_class.bake_exercise_in_place(exercise: exercise)
+        described_class.new.bake_exercise_in_place(exercise: exercise)
 
         expect(exercise).to match_html_nodes(
           <<~HTML
