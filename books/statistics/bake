@@ -74,7 +74,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       )
     end
 
-    chapter.figures.each do |figure|
+    chapter.figures.filter{ |fig| !fig.subfigure? }.each do |figure|  #pass in select figures that are not children
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
@@ -85,8 +85,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     page.figures.each do |figure|
       BakeFigure.v1(figure: figure,
-                    number: "#{appendix_letter}#{figure.count_in(:page)}",
-                    caption_selector: "div[data-type='title']") # page figures use <div data-type='title'>
+                    number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
 
     page.tables('$:not(.unnumbered)').each do |table|
