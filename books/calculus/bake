@@ -1,0 +1,252 @@
+#!/usr/bin/env ruby
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '2.0.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+
+  # Some stuff just goes away
+  book.search('cnx-pi').trash
+
+  # Update the preface title  TODO: add title method
+  book.pages('$.preface').search("div[data-type='document-title']").each do |title|
+    title.replace_children(with:
+      <<~HTML
+        <span data-type="" itemprop="" class="os-text">#{title.text}</span>
+      HTML
+    )
+    title.name = 'h1'
+  end
+
+
+  BakeNotes.v1(book: book)
+
+  book.chapters.each do |chapter|
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: book.metadata)
+
+    chapter.pages.each do |page|
+      page.search('section.review-exercises').each do |section|
+        section.search('div[data-type="exercise"]').each do |exercise|
+          BakeExercises.bake_exercise_in_place(exercise: exercise, bake_solution: false)
+        end
+      end
+
+      page.search('section.section-exercises').each do |section|
+        section.search('div[data-type="exercise"]').each do |exercise|
+          BakeExercises.bake_section_exercises(exercise: exercise)
+        end
+      end
+
+      page.search('div[data-type="note"]').each do |note|
+        note.search('div[data-type="exercise"]').each do |exercise|
+          BakeExercises.bake_note_exercises(exercise: exercise)
+        end
+      end
+
+      page.search('div[data-type="note"].theorem').each do |theorem|
+        number = "#{chapter.count_in(:book)}.#{theorem.count_in(:chapter)}"
+        BakeNotes.bake_theorems(note: theorem, number: number)
+      end
+    end
+  end
+
+  # bake review exercises in place
+  BakeExercises.v1(book: book, class_name: 'section.review-exercises')
+
+  # rest of the exercises
+  BakeExercises.v3(book: book)
+  BakeChapterIntroductions.v1(book: book)
+
+  book.chapters.each do |chapter|
+    # Fix up chapter titles - TODO put this in BakeChapter
+    heading = chapter.at('h1[2]')
+    heading[:id] = "chapTitle#{chapter.count_in(:book)}"
+    heading.replace_children(with:
+      <<~HTML
+        <span class="os-part-text">Chapter </span>
+        <span class="os-number">#{chapter.count_in(:book)}</span>
+        <span class="os-divider"> </span>
+        <span data-type="" itemprop="" class="os-text">#{heading.text}</span>
+      HTML
+    )
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    chapter.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
+                     title_tag: 'h3')
+
+      example.search('div[data-type="exercise"]').each do |exercise|
+        BakeExercises.bake_exercise_helper(exercise: exercise)
+      end
+    end
+
+    chapter.pages('$:not(.introduction)').each do |page|
+      page.search("div[data-type='description']").each(&:trash)
+      page.add_class('chapter-content-module')
+
+      title = page.search("div[data-type='document-title']").first
+      title.name = 'h2'
+      title.replace_children(with:
+        <<~HTML
+          <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+          <span class="os-divider"> </span>
+          <span data-type="" itemprop="" class="os-text">#{title.text}</span>
+        HTML
+      )
+    end
+
+    chapter.figures.each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+  end
+
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+
+    page.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{appendix_letter}#{example.count_in(:page)}",
+                     title_tag: 'div')
+    end
+
+    BakeAppendix.v1(page: page, number: appendix_letter)
+  end
+
+  BakeStepwise.v1(book: book)
+  BakeUnnumberedTables.v1(book: book)
+
+  book.pages.each do |page|
+    # fix table captions
+    page.search('div.os-table div.os-caption-container').each do |caption|
+      caption_text = caption.first('span.os-caption [data-type="title"]')
+      next unless caption_text.present?
+
+      caption_text.add_class('os-title').name = 'span'
+      divider_aux = caption.first('span.os-divider')
+      divider_aux.append(sibling:
+        <<~HTML
+          #{caption_text&.cut}
+        HTML
+      )
+    end
+  end
+
+  BakeMathInParagraph.v1(book: book)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeFootnotes.v1(book: book)
+
+  BakeToc.v1(book: book)
+
+  # group composite pages at the end of the chapter
+  book.toc.search('.os-toc-chapter ol.os-chapter').each_with_index do |chapter, index|
+    chapter_element = Nokogiri::XML.fragment(chapter.children)
+    composite_pages = chapter_element.search('li.os-toc-chapter-composite-page')
+    # first_composite_href = composite_pages.search('a').first['href']
+    chapter.search('class').each(&:trash)
+    chapter_element.search('li.os-toc-chapter-composite-page').remove
+    chapter.replace_children(with:
+      <<~HTML
+        #{chapter_element}
+        <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+          <a href="#composite-chapter-#{index + 1}">
+            <span class="os-text">#{I18n.t(:chapter_review)}</span>
+          </a>
+          <ol class="os-chapter">
+            #{composite_pages}
+          </ol>
+        </li>
+      HTML
+    )
+  end
+
+  book.chapters.each do |chapter|
+    chapter.notes('$.checkpoint').each do |note|
+      BakeNotes.bake_checkpoint_note(
+        note: note,
+        number: "#{chapter.count_in(:book)}.#{note.count_in(:chapter)}"
+      )
+    end
+
+    # chapter.notes.each do |note|
+    #   note.search('div[data-type="equation"]').each do |equation|
+    #     equation.append(child:
+    #       <<~HTML
+    #         <div class="os-equation-number">
+    #           <span class="os-number">(#{chapter.count_in(:book)}.#{equation.count_in(:note)})</span>
+    #         </div>
+    #       HTML
+    #     )
+    #   end
+    # end
+
+    BakePageAbstracts.v1(chapter: chapter)
+    chapter.abstracts.each do |abstract|
+      abstract.search('ul').each do |ul|
+        ul.add_class('os-abstract')
+        ul_element = Nokogiri::XML.fragment(ul)
+        ul_element.children.remove
+        ul.search('li').each_with_index do |li, index|
+          ul_element.add_child(
+            <<~HTML
+              <li>
+                <span class="os-abstract-token">#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}</span>
+                <span class="os-abstract-content">#{li.text}</span>
+              </li>
+            HTML
+          )
+        end
+        ul.replace_children(with: ul_element.children)
+      end
+    end
+  end
+
+  # competing docs from elements - BakeLinkPlaceholders
+  book.search('a').each do |anchor|
+    next unless anchor.text == '[link]'
+
+    id = anchor[:href][1..-1]
+    replacement = doc.pantry(name: :link_text).get(id)
+    if replacement.present?
+      anchor.replace_children(with: replacement)
+    else
+      # TODO: log a warning!
+      puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
+    end
+  end
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: recipe,
+  output_file: opts[:output]
+)
