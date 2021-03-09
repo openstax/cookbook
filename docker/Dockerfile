@@ -1,6 +1,6 @@
 FROM ruby:2.6.6-buster AS runtime-env
 
-ARG EASYBAKE_VERSION=1.2.7
+ARG EASYBAKE_VERSION=1.2.8
 # Install bundler and all the versions of gems we need. Notes:
 #
 # 1) Git is required for bundler since we may sometimes have a
