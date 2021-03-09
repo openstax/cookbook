@@ -26,7 +26,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     title.name = 'h1'
   end
 
-
   BakeNotes.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -57,6 +56,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
         number = "#{chapter.count_in(:book)}.#{theorem.count_in(:chapter)}"
         BakeNotes.bake_theorems(note: theorem, number: number)
       end
+    end
+
+    chapter.notes('$.checkpoint').each do |note|
+      BakeNotes.bake_checkpoint_note(
+        note: note,
+        number: "#{chapter.count_in(:book)}.#{note.count_in(:chapter)}"
+      )
     end
   end
 
@@ -185,24 +191,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   end
 
   book.chapters.each do |chapter|
-    chapter.notes('$.checkpoint').each do |note|
-      BakeNotes.bake_checkpoint_note(
-        note: note,
-        number: "#{chapter.count_in(:book)}.#{note.count_in(:chapter)}"
-      )
+    chapter.notes.each do |note|
+      note.search('div[data-type="equation"]:not(.unnumbered)').each do |equation|
+        equation.append(child:
+          <<~HTML
+            <div class="os-equation-number">
+              <span class="os-number">(#{chapter.count_in(:book)}.#{equation.count_in(:chapter)})</span>
+            </div>
+          HTML
+        )
+      end
     end
-
-    # chapter.notes.each do |note|
-    #   note.search('div[data-type="equation"]').each do |equation|
-    #     equation.append(child:
-    #       <<~HTML
-    #         <div class="os-equation-number">
-    #           <span class="os-number">(#{chapter.count_in(:book)}.#{equation.count_in(:note)})</span>
-    #         </div>
-    #       HTML
-    #     )
-    #   end
-    # end
 
     BakePageAbstracts.v1(chapter: chapter)
     chapter.abstracts.each do |abstract|
