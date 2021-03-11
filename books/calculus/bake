@@ -40,10 +40,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
         end
       end
 
-      page.search('section.section-exercises').each do |section|
+      page.search('section.section-exercises').each_with_index do |section, index|
         section.search('div[data-type="exercise"]').each do |exercise|
           BakeExercises.bake_section_exercises(exercise: exercise)
         end
+
+        section.wrap(%(<div class="os-eos os-section-exercises-container" data-uuid-key=".section-exercises">"))
+        section.prepend(sibling:
+          <<~HTML
+            <h3 data-type="document-title">
+              <span class="os-text">Section #{chapter.count_in(book)}.#{index} Exercises</span>
+            </h3>
+          HTML
+        )
       end
 
       page.search('div[data-type="note"]').each do |note|
@@ -191,16 +200,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   end
 
   book.chapters.each do |chapter|
-    chapter.notes.each do |note|
-      note.search('div[data-type="equation"]:not(.unnumbered)').each do |equation|
-        equation.append(child:
-          <<~HTML
-            <div class="os-equation-number">
-              <span class="os-number">(#{chapter.count_in(:book)}.#{equation.count_in(:chapter)})</span>
-            </div>
-          HTML
-        )
-      end
+    chapter.search('div[data-type="equation"]:not(.unnumbered)').each do |equation|
+      equation.append(child:
+        <<~HTML
+          <div class="os-equation-number">
+            <span class="os-number">(#{chapter.count_in(:book)}.#{equation.count_in(:chapter)})</span>
+          </div>
+        HTML
+      )
     end
 
     BakePageAbstracts.v1(chapter: chapter)
