@@ -12,4 +12,4 @@ docker run $CI_ENV \
            -v $DIR/..:/code \
            -w /code \
            openstax/recipes.ci:latest \
-           /bin/bash -c "exec rspec"
+           /bin/bash -c "rspec"
