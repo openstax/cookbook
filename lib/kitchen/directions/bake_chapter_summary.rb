@@ -13,7 +13,7 @@ module Kitchen
         # TODO: include specific page types somehow without writing it out
         chapter.pages('$:not(.introduction)').each do |page|
           summary = page.summary
-          summary.first("[data-type='title']").trash # get rid of old title
+          summary.first("[data-type='title']")&.trash # get rid of old title if exists
           summary_title = page.title.copy
           summary_title.name = 'h3'
           summary_title.replace_children(with: <<~HTML

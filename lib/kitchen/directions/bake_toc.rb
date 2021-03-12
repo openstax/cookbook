@@ -6,6 +6,8 @@ module Kitchen
       def self.v1(book:)
         li_tags = book.body.element_children.map do |element|
           case element
+          when UnitElement
+            li_for_unit(element)
           when ChapterElement
             li_for_chapter(element)
           when PageElement, CompositePageElement
@@ -22,6 +24,22 @@ module Kitchen
           </ol>
         HTML
         )
+      end
+
+      def self.li_for_unit(unit)
+        chapters = unit.element_children.only(ChapterElement)
+        <<~HTML
+          <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit">
+            <a href="#">
+              <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span> #{unit.count_in(:book)}</span>
+              <span class="os-divider"> </span>
+              <span data-type itemprop class="os-text"> #{unit.title.children} </span>
+            </a>
+            <ol class="os-unit">
+              #{chapters.map { |chapter| li_for_chapter(chapter) }.join("\n")}
+            </ol>
+          </li>
+        HTML
       end
 
       def self.li_for_composite_chapter(chapter)
