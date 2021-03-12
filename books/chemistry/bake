@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# frozen_string_literal: true
+
 require 'bundler/inline'
 
 gemfile do
@@ -16,15 +18,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  # Update the preface title  TODO: add title method
-  book.pages('$.preface').search("div[data-type='document-title']").each do |title|
-    title.replace_children(with:
-      <<~HTML
-        <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-      HTML
-    )
-    title.name = 'h1'
-  end
+  BakePreface.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
@@ -34,19 +28,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
 
   BakeExercises.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    # Fix up chapter titles - TODO put this in BakeChapter
-    heading = chapter.at('h1[2]')
-    heading[:id] = "chapTitle#{chapter.count_in(:book)}"
-    heading.replace_children(with:
-      <<~HTML
-        <span class="os-part-text">Chapter </span>
-        <span class="os-number">#{chapter.count_in(:book)}</span>
-        <span class="os-divider"> </span>
-        <span data-type="" itemprop="" class="os-text">#{heading.text}</span>
-      HTML
-    )
+    BakePageAbstracts.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -109,20 +94,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
   BakeFootnotes.v1(book: book)
 
   BakeToc.v1(book: book)
-
-  # competing docs from elements - BakeLinkPlaceholders
-  book.search('a').each do |anchor|
-    next unless anchor.text == '[link]'
-
-    id = anchor[:href][1..-1]
-    replacement = doc.pantry(name: :link_text).get(id)
-    if replacement.present?
-      anchor.replace_children(with: replacement)
-    else
-      # TODO: log a warning!
-      puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
-    end
-  end
+  BakeLinkPlaceholders.v1(book: book)
 
 end
 
