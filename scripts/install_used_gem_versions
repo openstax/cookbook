@@ -4,6 +4,8 @@
 # Gemfile.  Pull each version of each gem used by the recipes out and manually
 # install them.
 
+require 'set'
+
 source_filenames = (Dir.glob(File.join(__dir__,"../books/**/*")) + [File.join(__dir__,"console"),File.join(__dir__,"normalize")])
                        .select{|filename| !File.directory?(filename)}
 
@@ -11,7 +13,7 @@ gem_name_to_versions_array_hash = source_filenames.each_with_object({}) do |file
   source = File.read(filename)
   gem_names_and_versions = source.scan(/gem\s+['"](\w+)['"]\s*,\s*['"](.+)['"]/)
   gem_names_and_versions.each do |gem_name, version|
-    (hash[gem_name] ||= []).push(version)
+    (hash[gem_name] ||= Set.new([])).add(version)
   end
 end
 
