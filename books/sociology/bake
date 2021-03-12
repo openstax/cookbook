@@ -8,15 +8,20 @@ gemfile do
   gem 'byebug'
 end
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
+cleanup_recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   include Kitchen::Directions
 
   book = doc.book
 
   # Set overrides
-  doc.selectors.override(
-    page_summary: ".section-summary"
-  )
+  doc.search('TK.EXERCISES')
+     .each { |_sec| section.exercises = 'exercises'; div['data-type'] = 'exercise' }
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
@@ -33,11 +38,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    # BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  # BakeExercises.v1(book: book)
+  BakeExercises.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -138,6 +143,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: recipe,
+  recipes: [cleanup_recipe, recipe],
   output_file: opts[:output]
 )
