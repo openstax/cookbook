@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+# frozen_string_literal: true
+
+# TODO: content update needed - add os-toc-preface class
+
 require 'bundler/inline'
 
 gemfile do
@@ -27,6 +31,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+
     # Fix up chapter titles - TODO put this in BakeChapter
     heading = chapter.at('h1[2]')
     heading[:id] = "chapTitle#{chapter.count_in(:book)}"
@@ -54,6 +60,27 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     end
   end
 
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+
+    page.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{appendix_letter}#{example.count_in(:page)}",
+                     title_tag: 'div')
+    end
+
+    BakeAppendix.v1(page: page, number: appendix_letter)
+  end
+
+  BakeIndex.v1(book: book)
   BakeToc.v1(book: book)
 end
 
