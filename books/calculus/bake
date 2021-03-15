@@ -34,22 +34,25 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: book.metadata)
 
     chapter.pages.each do |page|
-      page.search('section.review-exercises').each do |section|
-        section.search('div[data-type="exercise"]').each do |exercise|
-          BakeExercises.bake_exercise_in_place(exercise: exercise, bake_solution: false)
-        end
-      end
+      # page.search('section.review-exercises').each do |section|
+      #   section.search('div[data-type="exercise"]').each do |exercise|
+      #     BakeExercises.bake_exercise_in_place(exercise: exercise, bake_solution: false)
+      #   end
+      # end
 
-      page.search('section.section-exercises').each_with_index do |section, index|
+      page.search('section.section-exercises').each do |section|
         section.search('div[data-type="exercise"]').each do |exercise|
-          BakeExercises.bake_section_exercises(exercise: exercise)
+          number = exercise.count_in(:chapter)
+          # puts number
+          BakeExercises.section_exercises(exercise: exercise, number: number)
         end
 
-        section.wrap(%(<div class="os-eos os-section-exercises-container" data-uuid-key=".section-exercises">"))
+        section.wrap(%(<div class="os-eos os-section-exercises-container" data-uuid-key=".section-exercises">))
+        section_title = I18n.t(:section_exercises, number: "#{chapter.count_in(:book)}.#{section.count_in(:chapter)}")
         section.prepend(sibling:
           <<~HTML
             <h3 data-type="document-title">
-              <span class="os-text">Section #{chapter.count_in(book)}.#{index} Exercises</span>
+              <span class="os-text">#{section_title}</span>
             </h3>
           HTML
         )
@@ -57,7 +60,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
 
       page.search('div[data-type="note"]').each do |note|
         note.search('div[data-type="exercise"]').each do |exercise|
-          BakeExercises.bake_note_exercises(exercise: exercise)
+          BakeExercises.note_exercises(exercise: exercise)
         end
       end
 
@@ -76,10 +79,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   end
 
   # bake review exercises in place
-  BakeExercises.v1(book: book, class_name: 'section.review-exercises')
-
-  # rest of the exercises
-  BakeExercises.v3(book: book)
+  BakeExercises.v1(book: book, class_name: 'section.review-exercises', bake_eob: false, bake_section_title: false)
+  # eob exercises
+  BakeExercises.v3(book: book, class_names:
+    {
+      'checkpoint': '.checkpoint',
+      'section_exercises': 'section.section-exercises',
+      'review_exercises': 'section.review-exercises'
+    })
   BakeChapterIntroductions.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -106,7 +113,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
                      title_tag: 'h3')
 
       example.search('div[data-type="exercise"]').each do |exercise|
-        BakeExercises.bake_exercise_helper(exercise: exercise)
+        BakeExercises.example_exercises(exercise: exercise)
       end
     end
 
@@ -156,6 +163,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
 
   book.pages.each do |page|
     # fix table captions
+
+    page.search('.section-exercises').each do |section|
+      section.search('.os-problem-container > .os-table:first-child').each do |table|
+        table.add_class('first-element')
+        table.parent.add_class('has-first-element')
+      end
+
+      section.search('.os-problem-container > [data-type="media"]:first-child').each do |img|
+        img.add_class('first-element')
+        img.parent.add_class('has-first-element')
+      end
+    end
+
     page.search('div.os-table div.os-caption-container').each do |caption|
       caption_text = caption.first('span.os-caption [data-type="title"]')
       next unless caption_text.present?
