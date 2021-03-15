@@ -39,10 +39,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    # BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  BakeExercises.v1(book: book)
+  BakeExercises.v1(book: book, classname: '.section-quiz')
+  BakeExercises.v1(book: book, classname: '.short-answer')
   BakeChapterIntroductions.v1(book: book)
 
   book.chapters.each do |chapter|
