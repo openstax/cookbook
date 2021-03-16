@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Created `BakeUnitTitle` class
 * Created `UnitElement` and `UnitElementEnumerator` classes (minor)
 * Added support for Units in `BakeToc` direction (minor)
 * Added `Unit` to `en.yml` (patch)

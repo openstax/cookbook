@@ -62,6 +62,17 @@ module Kitchen
       chain_to(ChapterElementEnumerator, css_or_xpath: css_or_xpath)
     end
 
+    # Returns an enumerator that iterates through units within the scope of this enumerator
+    #
+    # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
+    #   a "$" in this argument will be replaced with the default selector for the element being
+    #   iterated over.
+    #
+    def units(css_or_xpath=nil)
+      block_error_if(block_given?)
+      chain_to(UnitElementEnumerator, css_or_xpath: css_or_xpath)
+    end
+
     # Returns an enumerator that iterates through figures within the scope of this enumerator
     #
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
