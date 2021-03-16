@@ -23,9 +23,9 @@ module Kitchen
     # @return [Class]
     attr_reader :enumerator_class
 
-    # The selector that located this element in the DOM
-    # @return [String]
-    attr_accessor :css_or_xpath_that_found_me
+    # The search query that located this element in the DOM
+    # @return [SearchQuery]
+    attr_accessor :search_query_that_found_me
 
     # @!method name
     #   Get the element name (the tag)
@@ -119,8 +119,7 @@ module Kitchen
         end
 
       @ancestors = HashWithIndifferentAccess.new
-      @counts_in = HashWithIndifferentAccess.new
-      @css_or_xpath_that_has_been_counted = {}
+      @search_query_matches_that_have_been_counted = {}
       @is_a_clone = false
     end
 
@@ -202,7 +201,7 @@ module Kitchen
     #
     attr_reader :ancestors
 
-    # Adds ancestors to this element
+    # Adds ancestors to this element, for each incrementing descendant counts for this type
     #
     # @param args [Array<Hash, Ancestor, Element, Document>] the ancestors
     # @raise [StandardError] if there is already an ancestor with the one of
@@ -223,7 +222,7 @@ module Kitchen
       end
     end
 
-    # Adds one ancestor
+    # Adds one ancestor, incrementing its descendant counts for this element type
     #
     # @param ancestor [Ancestor]
     # @raise [StandardError] if there is already an ancestor with the given ancestor's type
@@ -234,6 +233,7 @@ module Kitchen
               "type is already present"
       end
 
+      ancestor.increment_descendant_count(short_type)
       @ancestors[ancestor.type] = ancestor
     end
 
@@ -245,67 +245,70 @@ module Kitchen
       @ancestors.values.map(&:element)
     end
 
-    # Increments the count of this element in all of this element's ancestors
-    #
-    def count_as_descendant
-      @ancestors.each_pair do |type, ancestor|
-        @counts_in[type] = ancestor.increment_descendant_count(short_type)
-      end
-    end
-
     # Returns the count of this element's type in the given ancestor type
     #
     # @param ancestor_type [String, Symbol]
     #
     def count_in(ancestor_type)
-      @counts_in[ancestor_type] || raise("No ancestor of type '#{ancestor_type}'")
+      @ancestors[ancestor_type]&.get_descendant_count(short_type) ||
+        raise("No ancestor of type '#{ancestor_type}'")
     end
 
-    # Track the sub elements with the given selectors have been counted
+    # Track that a sub element found by the given query has been counted
     #
-    # @param css_or_xpath [String] the selectors matching elements that need to be counted
-    # @param count [Integer] The count of those matching subelements
+    # @param search_query [SearchQuery] the search query matching the counted element
+    # @param type [String] the type of the sub element that was counted
     #
-    def remember_that_sub_elements_are_already_counted(css_or_xpath:, count:)
-      @css_or_xpath_that_has_been_counted[css_or_xpath] = count
+    def remember_that_a_sub_element_was_counted(search_query, type)
+      @search_query_matches_that_have_been_counted[search_query.to_s] ||= Hash.new(0)
+      @search_query_matches_that_have_been_counted[search_query.to_s][type] += 1
     end
 
-    # Returns true if subelements with given selectors have been counted already
+    # Undo the counts from a prior search query (so that they can be counted again)
     #
-    # @param css_or_xpath [String] the selectors
-    # @return [Boolean]
+    # @param search_query [SearchQuery] the prior search query whose counts need to be undone
     #
-    def have_sub_elements_already_been_counted?(css_or_xpath)
-      number_of_sub_elements_already_counted(css_or_xpath) != 0
-    end
-
-    # Returns the number of subelements with given selectors that have been counted
-    #
-    # @param css_or_xpath [String] the selectors
-    # @return [Integer]
-    #
-    def number_of_sub_elements_already_counted(css_or_xpath)
-      @css_or_xpath_that_has_been_counted[css_or_xpath] || 0
+    def uncount(search_query)
+      @search_query_matches_that_have_been_counted.delete(search_query.to_s)&.each do |type, count|
+        ancestors.each_value do |ancestor|
+          ancestor.decrement_descendant_count(type, by: count)
+        end
+      end
     end
 
     # Returns the search history that found this element
     #
-    # @return [String] a space-separated list of selectors that led to this element
+    # @return [SearchHistory]
     #
     def search_history
-      history = ancestor_elements.map(&:css_or_xpath_that_found_me) + [css_or_xpath_that_found_me]
-      history.compact.join(' ')
+      SearchHistory.new(
+        ancestor_elements.last&.search_history || SearchHistory.empty,
+        search_query_that_found_me
+      )
     end
 
     # Returns an ElementEnumerator that iterates over the provided selector or xpath queries
     #
     # @param selector_or_xpath_args [Array<String>] Selector or XPath queries
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     # @return [ElementEnumerator]
     #
-    def search(*selector_or_xpath_args)
+    def search(*selector_or_xpath_args, only: nil, except: nil)
       block_error_if(block_given?)
 
-      ElementEnumerator.factory.build_within(self, css_or_xpath: selector_or_xpath_args)
+      ElementEnumerator.factory.build_within(
+        self,
+        search_query: SearchQuery.new(
+          css_or_xpath: selector_or_xpath_args,
+          only: only,
+          except: except
+        )
+      )
     end
 
     # Yields and returns the first child element that matches the provided
@@ -346,7 +349,10 @@ module Kitchen
     #
     def element_children
       block_error_if(block_given?)
-      TypeCastingElementEnumerator.factory.build_within(self, css_or_xpath: './*')
+      TypeCastingElementEnumerator.factory.build_within(
+        self,
+        search_query: SearchQuery.new(css_or_xpath: './*')
+      )
     end
 
     # Searches for elements handled by a list of enumerator classes.  All element that
@@ -524,6 +530,12 @@ module Kitchen
       end
     end
 
+    # Mark the location so that if there's an error we can show the developer where.
+    #
+    def mark_as_current_location!
+      document.location = self
+    end
+
     # Returns the underlying Nokogiri object
     #
     # @return [Nokogiri::XML::Node]
@@ -600,8 +612,9 @@ module Kitchen
     # Returns this element as an enumerator (over only one element, itself)
     #
     # @return [ElementEnumeratorBase] (actually returns the appropriate enumerator class for this element)
+    #
     def as_enumerator
-      enumerator_class.new(css_or_xpath: css_or_xpath_that_found_me) { |block| block.yield(self) }
+      enumerator_class.new(search_query: search_query_that_found_me) { |block| block.yield(self) }
     end
 
     protected

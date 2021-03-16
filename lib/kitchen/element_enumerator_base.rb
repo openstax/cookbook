@@ -6,17 +6,24 @@ module Kitchen
   class ElementEnumeratorBase < Enumerator
     include Mixins::BlockErrorIf
 
+    # Return the selectors or other search strings that this enumerator uses to
+    # search through the document
+    #
+    # @return [String]
+    #
+    attr_reader :search_query
+
     # Creates a new instance
     #
     # @param size [Integer, Proc] How to calculate the size lazily, either a value
     #   or a callable object
-    # @param css_or_xpath [String] the selectors this enumerator uses to search through
-    #   the document
+    # @param search_query [String] the selectors or other search strings that this
+    #   enumerator uses to search through the document
     # @param upstream_enumerator [ElementEnumeratorBase] the enumerator to which this
     #   enumerator is chained, used to access the upstream search history
     #
-    def initialize(size=nil, css_or_xpath: nil, upstream_enumerator: nil)
-      @css_or_xpath = css_or_xpath
+    def initialize(size=nil, search_query: nil, upstream_enumerator: nil)
+      @search_query = search_query
       @upstream_enumerator = upstream_enumerator
       super(size)
     end
@@ -26,7 +33,7 @@ module Kitchen
     # @return [SearchHistory]
     #
     def search_history
-      (@upstream_enumerator&.search_history || SearchHistory.empty).add(@css_or_xpath)
+      (@upstream_enumerator&.search_history || SearchHistory.empty).add(@search_query)
     end
 
     # Returns an enumerator that iterates through terms within the scope of this enumerator
@@ -34,10 +41,16 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def terms(css_or_xpath=nil)
+    def terms(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(TermElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(TermElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through pages within the scope of this enumerator
@@ -45,10 +58,16 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def pages(css_or_xpath=nil)
+    def pages(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(PageElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(PageElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through chapters within the scope of this enumerator
@@ -56,10 +75,16 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def chapters(css_or_xpath=nil)
+    def chapters(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(ChapterElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(ChapterElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through units within the scope of this enumerator
@@ -68,9 +93,9 @@ module Kitchen
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
     #
-    def units(css_or_xpath=nil)
+    def units(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(UnitElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(UnitElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through figures within the scope of this enumerator
@@ -78,10 +103,16 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def figures(css_or_xpath=nil)
+    def figures(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(FigureElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(FigureElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through notes within the scope of this enumerator
@@ -89,10 +120,16 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def notes(css_or_xpath=nil)
+    def notes(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(NoteElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(NoteElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through tables within the scope of this enumerator
@@ -100,10 +137,16 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def tables(css_or_xpath=nil)
+    def tables(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(TableElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(TableElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through examples within the scope of this enumerator
@@ -111,10 +154,16 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def examples(css_or_xpath=nil)
+    def examples(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(ExampleElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(ExampleElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through metadata within the scope of this enumerator
@@ -122,29 +171,48 @@ module Kitchen
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
     #   a "$" in this argument will be replaced with the default selector for the element being
     #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def metadatas(css_or_xpath=nil)
+    def metadatas(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(MetadataElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(MetadataElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates within the scope of this enumerator
     #
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over
     #
-    def search(css_or_xpath=nil)
+    def search(css_or_xpath=nil, only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(ElementEnumerator, css_or_xpath: css_or_xpath)
+      chain_to(ElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
     # Returns an enumerator that iterates through elements within the scope of this enumerator
     #
     # @param enumerator_class [ElementEnumeratorBase] the enumerator to use for the iteration
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
     #
-    def chain_to(enumerator_class, css_or_xpath: nil)
+    def chain_to(enumerator_class, css_or_xpath: nil, only: nil, except: nil)
       block_error_if(block_given?)
-      enumerator_class.factory.build_within(self, css_or_xpath: css_or_xpath)
+      enumerator_class.factory.build_within(
+        self,
+        search_query: SearchQuery.new(
+          css_or_xpath: css_or_xpath,
+          only: only,
+          except: except
+        )
+      )
     end
 
     # Returns the first element in this enumerator

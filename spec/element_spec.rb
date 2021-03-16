@@ -186,7 +186,7 @@ RSpec.describe Kitchen::Element do
   describe 'search_history' do
     it 'returns search history' do
       inner = element1.search('#pId').search('span').first
-      expect(inner.search_history).to eq '#pId span'
+      expect(inner.search_history.to_s).to eq '[#pId] [span]'
     end
   end
 

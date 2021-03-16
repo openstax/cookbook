@@ -140,6 +140,27 @@ RSpec.describe 'nested enumerators' do
         # first chapter      second chapter
         expect(counts).to eq [1, 1, 2, 2, 1, 1, 2, 2] + [1, 3, 2, 4, 1, 3, 2, 4]
       end
+
+      it 'counts correctly with repeated iteration calls and conditions' do
+        counts = []
+        condition = ->(p) { p.id.ends_with?('p2') }
+        book1.chapters.each do |chapter|
+          # rubocop:disable Style/CombinableLoops
+          chapter.pages(only: condition).each do |page|
+            counts.push(page.count_in(:chapter))
+            counts.push(page.count_in(:book))
+          end
+
+          chapter.pages(only: condition).each do |page|
+            # Don't want these counts to be doubled
+            counts.push(page.count_in(:chapter))
+            counts.push(page.count_in(:book))
+          end
+          # rubocop:enable Style/CombinableLoops
+        end
+        # first chapter      second chapter
+        expect(counts).to eq [1, 1, 1, 1] + [1, 2, 1, 2]
+      end
     end
 
   end

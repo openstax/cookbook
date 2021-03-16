@@ -273,6 +273,20 @@ The CSS for these specific search methods is hidden away so you don't have to de
 doc.book.tables("$.unnumbered").cut
 ```
 
+Sometimes, it is difficult to setup a search using CSS.  In such cases, you can also pass `only` and `except` arguments to search methods, e.g.:
+
+```ruby
+doc.book.figures(except: :subfigure?)
+```
+
+`only` and `except` can be the names of methods (that return truthy/falsy values) on the element being iterated over, as shown above, or they can be lambdas or procs as shown here:
+
+```ruby
+doc.book.figures(only: ->(fig) { fig.children.count == 2 })
+```
+
+Obviously this is a somewhat contrived example, but the idea is that by passing a callable you can do complex searches.
+
 ### Overriding Default Book-Oriented Selectors
 
 Book-oriented methods like `book.pages.figures` hide from us the CSS or XPath selectors that let us find child elements like `.pages`.  But sometimes, the default selector we have isn't what is used in a certain book.  In these cases, we can override the selector once in the recipe and still continue to use the book-oriented usage.  For example, a page summary is normally found using the CSS `section.summary`.  But some books use a `.section-summary` class.  For these books, we can override the selectors in their recipes:

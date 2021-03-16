@@ -340,4 +340,10 @@ RSpec.describe Kitchen::ElementBase do
       book.to_s
     end
   end
+
+  describe '#count_in' do
+    it 'raises when asked for counts in a non-existent ancestor' do
+      expect { para.count_in(:foo) }.to raise_error(/No ancestor/)
+    end
+  end
 end

@@ -102,7 +102,7 @@ RSpec.describe Kitchen::ElementEnumerator do
   describe '#search_history' do
     it 'works' do
       chained_enumerator = element2_enumerator.search('.foo').search('#pId').search('span')
-      expect(chained_enumerator.search_history.to_s).to eq '[?] [.foo] [#pId] [span]'
+      expect(chained_enumerator.search_history.to_s).to eq '[.foo] [#pId] [span]'
     end
   end
 
@@ -111,6 +111,30 @@ RSpec.describe Kitchen::ElementEnumerator do
       expect {
         element2_enumerator.search('.foo').search('#blah').first!
       }.to raise_error(/not return a first result matching #blah inside .*\.foo/)
+    end
+  end
+
+  describe 'only and except searches' do
+    let(:element) do
+      new_element(
+        <<~HTML
+          <div id="divId">
+            <span id="blah">hi</span>
+            <figure id="a"></figure>
+            <figure id="b">
+              <figure id="c"></figure>
+            </figure>
+          </div>
+        HTML
+      )
+    end
+
+    it 'can search via except' do
+      expect(element.figures(except: ->(f) { f.id == 'c' }).map(&:id)).to eq %w[a b]
+    end
+
+    it 'can search via only' do
+      expect(element.figures(only: ->(f) { f.id == 'c' }).map(&:id)).to eq %w[c]
     end
   end
 

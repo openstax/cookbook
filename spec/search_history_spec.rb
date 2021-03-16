@@ -3,15 +3,17 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::SearchHistory do
-  describe '#initialize' do
-    let(:instance) { described_class.new('foo', 'bar') }
+  let(:foo_query) { Kitchen::SearchQuery.new(css_or_xpath: 'foo') }
+  let(:bar_query) { Kitchen::SearchQuery.new(css_or_xpath: 'bar') }
+  let(:blah_or_bar_query) { Kitchen::SearchQuery.new(css_or_xpath: ['.blah', '.bar']) }
 
-    it 'sets upstream' do
-      expect(instance.upstream).to eq('foo')
+  describe '#initialize' do
+    it 'raises if upstream is not a SearchHistory' do
+      expect { described_class.new('foo', nil) }.to raise_error(/must be a SearchHistory/)
     end
 
-    it 'sets latest' do
-      expect(instance.latest).to eq('bar')
+    it 'raises if latest is not a SearchQuery' do
+      expect { described_class.new(nil, 'bar') }.to raise_error(/must be a SearchQuery/)
     end
   end
 
@@ -29,17 +31,21 @@ RSpec.describe Kitchen::SearchHistory do
 
   describe '#to_s' do
     it 'works' do
-      expect(described_class.empty.add(nil).add('foo').add(['.blah', '.bar']).to_s).to eq '[?] [foo] [.blah, .bar]'
+      expect(described_class.empty.add(nil)
+                                  .add(foo_query)
+                                  .add(blah_or_bar_query).to_s).to eq '[foo] [.blah,.bar]'
     end
   end
 
   describe '#to_a' do
     it 'returns [latest] if no upstream' do
-      expect(described_class.empty.add('foo').to_a).to eq(['foo'])
+      expect(described_class.empty.add(foo_query).to_a.map(&:to_s)).to eq(['foo'])
     end
 
     it 'returns array with upstream and latest' do
-      expect(described_class.empty.add('foo').add(%w[blah bar]).add(['baz']).to_a).to eq(['foo', 'blah, bar', 'baz'])
+      expect(described_class.empty.add(foo_query)
+                                  .add(blah_or_bar_query)
+                                  .add(bar_query).to_a.map(&:to_s)).to eq(['foo', '.blah,.bar', 'bar'])
     end
   end
 

@@ -32,22 +32,18 @@ module Kitchen
     #
     # @param enumerator_or_element [ElementEnumeratorBase, ElementBase] the object
     #   within which to iterate
-    # @param css_or_xpath [String, Array<String>] selectors to use to limit iteration
-    #   results
+    # @param search_query [SearchQuery] search directives to limit iteration results
     # @return [ElementEnumeratorBase] actually returns the concrete enumerator class
     #   given to the factory in its constructor.
     #
-    def build_within(enumerator_or_element, css_or_xpath: nil)
-      css_or_xpath = self.class.apply_default_css_or_xpath_and_normalize(
-        css_or_xpath: css_or_xpath,
-        default_css_or_xpath: default_css_or_xpath
-      )
+    def build_within(enumerator_or_element, search_query: SearchQuery.new)
+      search_query.apply_default_css_or_xpath_and_normalize(default_css_or_xpath)
 
       case enumerator_or_element
       when ElementBase
-        build_within_element(enumerator_or_element, css_or_xpath: css_or_xpath)
+        build_within_element(enumerator_or_element, search_query: search_query)
       when ElementEnumeratorBase
-        build_within_other_enumerator(enumerator_or_element, css_or_xpath: css_or_xpath)
+        build_within_other_enumerator(enumerator_or_element, search_query: search_query)
       end
     end
 
@@ -65,72 +61,53 @@ module Kitchen
       )
     end
 
-    def self.apply_default_css_or_xpath_and_normalize(css_or_xpath: nil, default_css_or_xpath: nil)
-      [css_or_xpath || '$'].flatten.map do |item|
-        item.gsub(/\$/, [default_css_or_xpath].flatten.join(', '))
-      end
-    end
-
     protected
 
-    def build_within_element(element, css_or_xpath:)
-      enumerator_class.new(css_or_xpath: css_or_xpath) do |block|
+    def build_within_element(element, search_query:)
+      enumerator_class.new(search_query: search_query) do |block|
         grand_ancestors = element.ancestors
         parent_ancestor = Ancestor.new(element)
 
-        num_sub_elements = 0
+        # If the provided `search_query` has already been iterated through on this element,
+        # we need to undo any counting on the ancestors so that when they are counted again
+        # below, the counts are correct.
+        element.uncount(search_query)
 
-        element.raw.search(*css_or_xpath).each_with_index do |sub_node, index|
+        element.raw.search(*search_query.css_or_xpath).each do |sub_node|
           sub_element = ElementFactory.build_from_node(
             node: sub_node,
             document: element.document,
             element_class: sub_element_class,
-            default_short_type: Utils.search_path_to_type(css_or_xpath),
+            default_short_type: search_query.as_type,
             detect_element_class: detect_sub_element_class
           )
 
-          # If the provided `css_or_xpath` has already been counted, we need to uncount
-          # them on the ancestors so that when they are counted again below, the counts
-          # are correct.  Only do this on the first loop!
-          if index.zero? && element.have_sub_elements_already_been_counted?(css_or_xpath)
-            grand_ancestors.each_value do |ancestor|
-              ancestor.decrement_descendant_count(
-                sub_element.short_type,
-                by: element.number_of_sub_elements_already_counted(css_or_xpath)
-              )
-            end
-          end
+          next unless search_query.conditions_match?(sub_element)
 
           # Record this sub element's ancestors and increment their descendant counts
           sub_element.add_ancestors(grand_ancestors, parent_ancestor)
-          sub_element.count_as_descendant
 
-          # Remember how this sub element was found so can trace search history given
-          # any element.
-          sub_element.css_or_xpath_that_found_me = css_or_xpath
+          # Remember that we counted this sub element in case we need to later reset the counts
+          element.remember_that_a_sub_element_was_counted(search_query, sub_element.short_type)
 
-          # Count runs through this loop for below
-          num_sub_elements += 1
+          # Remember how this sub element was found so can trace search history given any element.
+          sub_element.search_query_that_found_me = search_query
 
           # Mark the location so that if there's an error we can show the developer where.
-          sub_element.document.location = sub_element
+          sub_element.mark_as_current_location!
 
           block.yield(sub_element)
         end
-
-        element.remember_that_sub_elements_are_already_counted(
-          css_or_xpath: css_or_xpath, count: num_sub_elements
-        )
       end
     end
 
-    def build_within_other_enumerator(other_enumerator, css_or_xpath:)
+    def build_within_other_enumerator(other_enumerator, search_query:)
       # Return a new enumerator instance that internally iterates over `other_enumerator`
       # running a new enumerator for each element returned by that other enumerator.
-      enumerator_class.new(css_or_xpath: css_or_xpath,
+      enumerator_class.new(search_query: search_query,
                            upstream_enumerator: other_enumerator) do |block|
         other_enumerator.each do |element|
-          build_within_element(element, css_or_xpath: css_or_xpath).each do |sub_element|
+          build_within_element(element, search_query: search_query).each do |sub_element|
             block.yield(sub_element)
           end
         end
