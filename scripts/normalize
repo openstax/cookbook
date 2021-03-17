@@ -43,7 +43,7 @@ end
 # Strips trailing whitespace from class names
 
 def remove_class_whitespace(element)
-  element[:class] = element[:class].strip
+  element[:class] = element[:class].strip if element[:class]
 end
 
 # The index of copied elements (the number in _copy_23) isn't meaningful so
@@ -63,7 +63,7 @@ def process(input_file:, output_file:)
 
       remove_bogus_number_from_unnumbered_tables(child)
       remove_blank_classes(child)
-      remove_class_whitespace(child) if child[:class]
+      remove_class_whitespace(child)
       sort_attributes(child)
     end
   end
