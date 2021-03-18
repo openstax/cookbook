@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Added a subfigure? method to `FigureElements`(minor)
+* Added support for titles in `BakeFigure` (minor)
 * Created `BakeUnitTitle` class
 * Created `UnitElement` and `UnitElementEnumerator` classes (minor)
 * Added support for Units in `BakeToc` direction (minor)

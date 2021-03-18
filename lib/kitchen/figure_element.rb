@@ -25,6 +25,22 @@ module Kitchen
       first('figcaption')
     end
 
+    # Returns the Figure Title
+    #
+    # @return [Element, nil]
+    #
+    def title
+      first("div[data-type='title']")
+    end
+
+    # Returns true if the figure is a child of another figure
+    #
+    # @return [Boolean]
+    #
+    def subfigure?
+      parent.name == 'figure'
+    end
+
     # Returns true if this class represents the element for the given node
     #
     # @param node [Nokogiri::XML::Node] the underlying node

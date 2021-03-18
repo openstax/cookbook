@@ -6,6 +6,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   let(:figure_classes) { '' }
   let(:figure_caption) { '<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>' }
+  let(:figure_title)   { "<div data-type='title'>This Is A Title</div>" }
 
   let(:book1) do
     book_containing(html:
@@ -13,9 +14,28 @@ RSpec.describe Kitchen::Directions::BakeFigure do
         <<~HTML
           <figure id="someId" class="#{figure_classes}">
             #{figure_caption}
+            #{figure_title}
             <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
               <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
             </span>
+          </figure>
+        HTML
+      )
+    )
+  end
+
+  let(:book2) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <figure id="someId" class="#{figure_classes}">
+            #{figure_caption}
+            <figure id="otherId" data-alt="This figure shows pieces of a ...">
+              <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
+            </figure>
+            <figure id="otherId" data-alt="This figure shows pieces of a ...">
+              <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
+            </figure>
           </figure>
         HTML
       )
@@ -42,6 +62,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
               <span class="os-title-label">Figure </span>
               <span class="os-number">1.2</span>
               <span class="os-divider"> </span>
+              <span class="os-title" data-type="title" id="">This Is A Title</span>
               <span class="os-divider"> </span>
               <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
             </div>
@@ -59,6 +80,15 @@ RSpec.describe Kitchen::Directions::BakeFigure do
       end
     end
 
+    context 'without a title' do
+      let(:figure_title) { '' }
+
+      it 'works without a title' do
+        described_class.v1(figure: book1_figure, number: '1.2')
+        expect(book1.search('.os-title').first).to be nil
+      end
+    end
+
     context 'when figure has splash class' do
       let(:figure_classes) { 'splash' }
 
@@ -73,6 +103,12 @@ RSpec.describe Kitchen::Directions::BakeFigure do
         described_class.v1(figure: book1_figure, number: '1.2')
         expect(book1.search('.os-figure').first.has_class?('has-splash')).to be false
       end
+    end
+  end
+
+  describe '#subfigure?' do
+    it 'can detect subfigures' do
+      expect(book2.chapters.figures.map(&:subfigure?)).to eq([false, true, true])
     end
   end
 
