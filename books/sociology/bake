@@ -11,11 +11,11 @@ end
 cleanup_recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   include Kitchen::Directions
 
-  book = doc.book
-
   # Set overrides
-  doc.search('TK.EXERCISES')
-     .each { |_sec| section.exercises = 'exercises'; div['data-type'] = 'exercise' }
+  doc.search('div.section_summary').each do |elem|
+    elem.name = 'section'
+    elem.add_class('summary').elem.remove_class('section_summary')
+  end
 end
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
