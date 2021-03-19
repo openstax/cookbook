@@ -70,6 +70,17 @@ module Kitchen
       chain_to(PageElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
+    # Returns an enumerator that iterates through pages that arent the introduction page within the scope of this enumerator
+    #
+    # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
+    #   a "$" in this argument will be replaced with the default selector for the element being
+    #   iterated over.
+    #
+    def non_introduction_pages(only: nil, except: nil)
+      block_error_if(block_given?)
+      chain_to(PageElementEnumerator, css_or_xpath: '$:not(.introduction)', only: only, except: except)
+    end
+
     # Returns an enumerator that iterates through chapters within the scope of this enumerator
     #
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;

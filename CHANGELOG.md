@@ -21,7 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   wrap `css_or_xpath` variables along with `only` and `except` conditions. (major?)
 
 ## [2.0.0] - 2020-12-18
-
+* Added a file for baking key concepts called (`bake_chapter_key_concepts`) and the respective specs.
+(minor change) only affects the book if called from the recipe
 * Refactored bake_exercises to better support parallel work on multiple versions.
 (minor change) Does not affect existing recipes.
 * Changed the main gem source file to have the same name as the gem (`openstax_kitchen`) so that you don't have to `require` a different name than you use in your `gem` call.

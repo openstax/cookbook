@@ -87,6 +87,14 @@ module Kitchen
       first!('section.exercises')
     end
 
+    # Returns the key concepts
+    #
+    # @return [Element]
+    #
+    def key_concepts
+      search('section.key-concepts')
+    end
+
     # Returns true if this class represents the element for the given node
     #
     # @param node [Nokogiri::XML::Node] the underlying node
