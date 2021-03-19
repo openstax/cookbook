@@ -62,4 +62,6 @@ RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vs
 
 RUN gem install solargraph && \
     gem install lefthook && \
+    gem install byebug --no-document && \
+    gem install rspec && \
     gem install rubocop
