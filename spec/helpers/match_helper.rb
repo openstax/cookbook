@@ -26,7 +26,7 @@ RSpec::Matchers.define :bake_correctly do
       cmd
     end
 
-    puts `ruby scripts/normalize #{actual_file.path}`
+    `ruby scripts/normalize #{actual_file.path}`
     normalized_path = "#{actual_file.path}.normalized"
 
     expect("spec/books/#{book}/expected_output.xhtml").to be_same_file_as(normalized_path)
