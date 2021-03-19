@@ -22,7 +22,6 @@ RUN apt-get update && \
     libicu-dev \
     && \
     gem install bundler --no-document && \
-    gem install rspec && \
     gem install byebug --no-document && \
     bundle config set no-cache 'true' && \
     bundle config set silence_root_warning 'true' && \
@@ -62,4 +61,5 @@ RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vs
 
 RUN gem install solargraph && \
     gem install lefthook && \
+    gem install rspec && \
     gem install rubocop
