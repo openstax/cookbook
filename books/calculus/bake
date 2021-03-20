@@ -34,16 +34,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: book.metadata)
 
     chapter.pages.each do |page|
-      # page.search('section.review-exercises').each do |section|
-      #   section.search('div[data-type="exercise"]').each do |exercise|
-      #     BakeExercises.bake_exercise_in_place(exercise: exercise, bake_solution: false)
-      #   end
-      # end
-
       page.search('section.section-exercises').each do |section|
-        section.search('div[data-type="exercise"]').each do |exercise|
+        section.exercises.each do |exercise|
           number = exercise.count_in(:chapter)
-          # puts number
           BakeExercises.section_exercises(exercise: exercise, number: number)
         end
 
@@ -59,7 +52,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
       end
 
       page.search('div[data-type="note"]').each do |note|
-        note.search('div[data-type="exercise"]').each do |exercise|
+        note.exercises.each do |exercise|
           BakeExercises.note_exercises(exercise: exercise)
         end
       end
@@ -76,16 +69,45 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
         number: "#{chapter.count_in(:book)}.#{note.count_in(:chapter)}"
       )
     end
+
+    # fix numbering
+    # chapter.exercises(except: ->(ex) { ex.has_ancestor?(:example) }).each do |exercise|
+    #   problem = exercise.problem
+    #   solution = exercise.solution
+    #   count = exercise.count_in(:chapter)
+
+    #   puts exercise.has_ancestor?(:note)
+    #   number = exercise.has_ancestor?(:note) ? "#{chapter.count_in(:book)}.#{count}" : count
+    #   problem.first('.os-number')&.inner_html = number.to_s
+    #   next unless solution.present?
+
+    #   solution.first('.os-number')&.inner_html = number.to_s
+    # end
   end
 
   # bake review exercises in place
   BakeExercises.v1(book: book, class_name: 'section.review-exercises', bake_eob: false, bake_section_title: false)
   # eob exercises
-  BakeExercises.v3(book: book, class_names:
+  BakeExercises.eob(book: book, class_names:
     {
-      'checkpoint': '.checkpoint',
-      'section_exercises': 'section.section-exercises',
-      'review_exercises': 'section.review-exercises'
+      'checkpoint':
+        {
+          classname: '.checkpoint',
+          decimal: true,
+          sectional: false
+        },
+      'section_exercises':
+        {
+          classname: 'section.section-exercises',
+          decimal: false,
+          sectional: true
+        },
+      'review_exercises':
+        {
+          classname: 'section.review-exercises',
+          decimal: false,
+          sectional: false
+        }
     })
   BakeChapterIntroductions.v1(book: book)
 
@@ -112,7 +134,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3')
 
-      example.search('div[data-type="exercise"]').each do |exercise|
+      example.exercises.each do |exercise|
         BakeExercises.example_exercises(exercise: exercise)
       end
     end
@@ -136,6 +158,21 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
+
+    # fix numbering
+    # chapter.exercises(except: ->(ex) { ex.has_ancestor?(:example) }).each do |exercise|
+    #   # next unless exercise.has_class?('section.review-exercises')
+    #   problem = exercise.problem
+    #   solution = exercise.solution
+    #   count = exercise.count_in(:chapter)
+
+    #   puts exercise.has_ancestor?(:note)
+    #   number = exercise.has_ancestor?(:note) ? "#{chapter.count_in(:book)}.#{count}" : count
+    #   problem.first('.os-number')&.inner_html = number.to_s
+    #   next unless solution.present?
+
+    #   solution.first('.os-number')&.inner_html = number.to_s
+    # end
   end
 
   book.pages('$.appendix').each do |page|
