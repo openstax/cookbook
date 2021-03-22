@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Added `NumberedTable` support for titles and always captions
+
 ## [3.0.0] - 2021-03-17
 
 * Added a subfigure? method to `FigureElements`(minor)

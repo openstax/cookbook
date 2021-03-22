@@ -3,7 +3,7 @@
 module Kitchen::Directions::BakeNumberedTable
   class V1
 
-    def bake(table:, number:)
+    def bake(table:, number:, always_caption: false)
       table.wrap(%(<div class="os-table">))
 
       table_label = "#{I18n.t(:table_label)} #{number}"
@@ -22,13 +22,27 @@ module Kitchen::Directions::BakeNumberedTable
       table.parent.add_class('os-column-header-container') if table.column_header?
 
       # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
-      new_summary = "#{table_label}  "
+      new_summary = "#{table_label} "
       new_caption = ''
+      caption_title = ''
+
+      if (title = table.first("span[data-type='title']")&.cut)
+        new_summary += title.text
+        caption_title = <<~HTML
+          \n<span class="os-title" data-type="title">#{title.children}</span>
+        HTML
+      end
+
+      new_summary += ' '
 
       if (caption = table.caption&.cut)
         new_summary += caption.text
         new_caption = <<~HTML
           \n<span class="os-caption">#{caption.children}</span>
+        HTML
+      elsif always_caption
+        new_caption = <<~HTML
+          \n<span class="os-caption"></span>
         HTML
       end
 
@@ -41,7 +55,7 @@ module Kitchen::Directions::BakeNumberedTable
           <div class="os-caption-container">
             <span class="os-title-label">#{I18n.t(:table_label)} </span>
             <span class="os-number">#{number}</span>
-            <span class="os-divider"> </span>
+            <span class="os-divider"> </span>#{caption_title}
             <span class="os-divider"> </span>#{new_caption}
           </div>
         HTML
