@@ -29,6 +29,7 @@ module Kitchen::Directions::BakeChapterKeyConcepts
           key_concept&.cut(to: key_concepts_clipboard)
         end
         @key_concepts.push(key_concepts_clipboard.paste)
+        key_concepts_clipboard.clear
       end
 
       chapter.append(child: render(file: 'key_concepts.xhtml.erb'))

@@ -5,15 +5,22 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
   let(:chapter) do
     chapter_element(
-      page_element(
-        <<~HTML
+      <<~HTML
+        <div data-type="page">
           <h1 data-type="document-title">Page 1</h1>
           <section id="auto_7c_fs-id1" class="key-concepts">
             <h3 data-type="document-title">WWF History</h3>
             <p>Concepts blah.</p>
           </section>
-        HTML
-      )
+        </div>
+        <div data-type="page">
+          <h1 data-type="document-title">Page 2</h1>
+          <section id="auto_7c_fs-id2" class="key-concepts">
+            <h3 data-type="document-title">WWF History</h3>
+            <p>Concepts two</p>
+          </section>
+        </div>
+      HTML
     )
   end
 
@@ -25,6 +32,9 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
         <div data-type="chapter">
           <div data-type="page">
             <h1 data-type="document-title">Page 1</h1>
+          </div>
+          <div data-type="page">
+            <h1 data-type="document-title">Page 2</h1>
           </div>
           <div class="os-eoc os-key-concepts-container" data-type="composite-page" data-uuid-key=".key-concepts">
             <h2 data-type="document-title">
@@ -45,6 +55,18 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
                     </h3>
                   </a>
                   <p>Concepts blah.</p>
+                </section>
+              </div>
+              <div class="os-section-area">
+                <section id="auto_7c_fs-id2" class="key-concepts">
+                  <a href="#auto_7c_0">
+                    <h3 data-type="document-title" id="auto_7c_0_copy_1">
+                      <span class="os-number">1.2</span>
+                      <span class="os-divider"> </span>
+                      <span class="os-text" data-type="" itemprop="">Page 2</span>
+                    </h3>
+                  </a>
+                  <p>Concepts two</p>
                 </section>
               </div>
             </div>
