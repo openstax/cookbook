@@ -78,7 +78,10 @@ module Kitchen
     #
     def non_introduction_pages(only: nil, except: nil)
       block_error_if(block_given?)
-      chain_to(PageElementEnumerator, css_or_xpath: '$:not(.introduction)', only: only, except: except)
+      chain_to(PageElementEnumerator,
+               css_or_xpath: '$:not(.introduction)',
+               only: only,
+               except: except)
     end
 
     # Returns an enumerator that iterates through chapters within the scope of this enumerator
@@ -177,6 +180,27 @@ module Kitchen
       chain_to(ExampleElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
+    # Returns an enumerator that iterates through titles within the scope of this enumerator
+    #
+    # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
+    #   a "$" in this argument will be replaced with the default selector for the element being
+    #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
+    #
+    def titles(css_or_xpath=nil, only: nil, except: nil)
+      block_error_if(block_given?)
+      chain_to(ElementEnumerator,
+               default_css_or_xpath: '[data-type="title"]',
+               css_or_xpath: css_or_xpath,
+               only: only,
+               except: except)
+    end
+
     # Returns an enumerator that iterates through metadata within the scope of this enumerator
     #
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
@@ -206,7 +230,12 @@ module Kitchen
     # Returns an enumerator that iterates through elements within the scope of this enumerator
     #
     # @param enumerator_class [ElementEnumeratorBase] the enumerator to use for the iteration
+    # @param default_css_or_xpath [String] the default CSS or xpath to use when iterating.  Normally,
+    #   this value is provided by the `enumerator_class`, but that isn't always the case, e.g.
+    #   when that class is a generic `ElementEnumerator`.
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over
+    #   a "$" in this argument will be replaced with the default selector for the element being
+    #   iterated over.
     # @param only [Symbol, Callable] the name of a method to call on an element or a
     #   lambda or proc that accepts an element; elements will only be included in the
     #   search results if the method or callable returns true
@@ -214,16 +243,21 @@ module Kitchen
     #   lambda or proc that accepts an element; elements will not be included in the
     #   search results if the method or callable returns false
     #
-    def chain_to(enumerator_class, css_or_xpath: nil, only: nil, except: nil)
+    def chain_to(enumerator_class, default_css_or_xpath: nil, css_or_xpath: nil,
+                 only: nil, except: nil)
       block_error_if(block_given?)
-      enumerator_class.factory.build_within(
-        self,
-        search_query: SearchQuery.new(
-          css_or_xpath: css_or_xpath,
-          only: only,
-          except: except
-        )
+
+      search_query = SearchQuery.new(
+        css_or_xpath: css_or_xpath,
+        only: only,
+        except: except
       )
+
+      if default_css_or_xpath
+        search_query.apply_default_css_or_xpath_and_normalize(default_css_or_xpath)
+      end
+
+      enumerator_class.factory.build_within(self, search_query: search_query)
     end
 
     # Returns the first element in this enumerator

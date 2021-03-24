@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Added `NumberedTable` support for titles and always captions
+* Added `NumberedTable` support for titles and always captions (minor)
+* Added titles method to `ElementEnumeratorBase` and `ElementBase` (minor)
 
 ## [3.0.0] - 2021-03-17
 
