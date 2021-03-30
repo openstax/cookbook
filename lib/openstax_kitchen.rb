@@ -51,7 +51,7 @@ require 'kitchen/element_factory'
 
 require_all('kitchen/directions')
 
-I18n.load_path << file_glob('/locales/*.yml')
+I18n.backend.load_translations(file_glob('/locales/*.yml'))
 
 I18n.available_locales.each do |available_locale|
   I18n.backend.store_translations(available_locale, Kitchen::TRANSLITERATIONS)
