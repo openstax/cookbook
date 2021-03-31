@@ -1,0 +1,20 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  rspec:
+    timeout-minutes: 10
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build docker image and run specs within it
+        # See https://docs.codecov.io/docs/testing-with-docker
+        run: |
+          ./docker/build --ci
+          CI_ENV=`bash <(curl -s https://codecov.io/env)` ./docker/ci
