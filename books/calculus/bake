@@ -15,115 +15,41 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
-
-  # Update the preface title  TODO: add title method
-  book.pages('$.preface').search("div[data-type='document-title']").each do |title|
-    title.replace_children(with:
-      <<~HTML
-        <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-      HTML
-    )
-    title.name = 'h1'
-  end
-
+  BakePreface.v1(book: book)
   BakeNotes.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: book.metadata)
+    chapter_review = BakeChapterReview.v1(chapter: chapter, metadata_source: book.metadata)
 
-    chapter.pages.each do |page|
-      page.search('section.section-exercises').each do |section|
-        section.exercises.each do |exercise|
-          number = exercise.count_in(:chapter)
-          BakeExercises.section_exercises(exercise: exercise, number: number)
-        end
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
+    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
+    BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
+    BakeChapterReviewExercises.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
+    BakeChapterSectionExercises.v1(chapter: chapter)
 
-        section.wrap(%(<div class="os-eos os-section-exercises-container" data-uuid-key=".section-exercises">))
-        section_title = I18n.t(:section_exercises, number: "#{chapter.count_in(:book)}.#{section.count_in(:chapter)}")
-        section.prepend(sibling:
-          <<~HTML
-            <h3 data-type="document-title">
-              <span class="os-text">#{section_title}</span>
-            </h3>
-          HTML
-        )
-      end
-
-      page.search('div[data-type="note"]').each do |note|
-        note.exercises.each do |exercise|
-          BakeExercises.note_exercises(exercise: exercise)
-        end
-      end
-
-      page.search('div[data-type="note"].theorem').each do |theorem|
-        number = "#{chapter.count_in(:book)}.#{theorem.count_in(:chapter)}"
-        BakeNotes.bake_theorems(note: theorem, number: number)
-      end
+    # This is somewhat backwards from how chemistry does it.  Just above we moved all of the review exercises
+    # to the end of the chapter.  Now, with all of the non-checkpoint exercises in the correct order, we
+    # bake them (the "in place" stuff) and number them.  THIS IS HOW WE GET SECTION EXERCISES AND REVIEW
+    # EXERCISES NUMBERED IN ORDER
+    chapter.search('.section-exercises, .review-exercises').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    chapter.notes('$.checkpoint').each do |note|
-      BakeNotes.bake_checkpoint_note(
-        note: note,
-        number: "#{chapter.count_in(:book)}.#{note.count_in(:chapter)}"
-      )
+    chapter.notes('$.theorem').each do |theorem|
+      BakeTheorem.v1(theorem: theorem,
+                     number: "#{chapter.count_in(:book)}.#{theorem.count_in(:chapter)}")
     end
 
-    # fix numbering
-    # chapter.exercises(except: ->(ex) { ex.has_ancestor?(:example) }).each do |exercise|
-    #   problem = exercise.problem
-    #   solution = exercise.solution
-    #   count = exercise.count_in(:chapter)
-
-    #   puts exercise.has_ancestor?(:note)
-    #   number = exercise.has_ancestor?(:note) ? "#{chapter.count_in(:book)}.#{count}" : count
-    #   problem.first('.os-number')&.inner_html = number.to_s
-    #   next unless solution.present?
-
-    #   solution.first('.os-number')&.inner_html = number.to_s
-    # end
+    chapter.notes('$.checkpoint').each do |checkpoint|
+      BakeCheckpoint.v1(checkpoint: checkpoint,
+                        number: "#{chapter.count_in(:book)}.#{checkpoint.count_in(:chapter)}")
+    end
   end
 
-  # bake review exercises in place
-  BakeExercises.v1(book: book, class_name: 'section.review-exercises', bake_eob: false, bake_section_title: false)
-  # eob exercises
-  BakeExercises.eob(book: book, class_names:
-    {
-      'checkpoint':
-        {
-          classname: '.checkpoint',
-          decimal: true,
-          sectional: false
-        },
-      'section_exercises':
-        {
-          classname: 'section.section-exercises',
-          decimal: false,
-          sectional: true
-        },
-      'review_exercises':
-        {
-          classname: 'section.review-exercises',
-          decimal: false,
-          sectional: false
-        }
-    })
   BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    # Fix up chapter titles - TODO put this in BakeChapter
-    heading = chapter.at('h1[2]')
-    heading[:id] = "chapTitle#{chapter.count_in(:book)}"
-    heading.replace_children(with:
-      <<~HTML
-        <span class="os-part-text">Chapter </span>
-        <span class="os-number">#{chapter.count_in(:book)}</span>
-        <span class="os-divider"> </span>
-        <span data-type="" itemprop="" class="os-text">#{heading.text}</span>
-      HTML
-    )
-
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
@@ -133,46 +59,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3')
-
-      example.exercises.each do |exercise|
-        BakeExercises.example_exercises(exercise: exercise)
-      end
     end
 
-    chapter.pages('$:not(.introduction)').each do |page|
-      page.search("div[data-type='description']").each(&:trash)
-      page.add_class('chapter-content-module')
-
-      title = page.search("div[data-type='document-title']").first
-      title.name = 'h2'
-      title.replace_children(with:
-        <<~HTML
-          <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-          <span class="os-divider"> </span>
-          <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-        HTML
-      )
+    chapter.non_introduction_pages.each do |page|
+      number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+      BakePageTitle.v1(page: page, number: number)
     end
 
     chapter.figures.each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
-
-    # fix numbering
-    # chapter.exercises(except: ->(ex) { ex.has_ancestor?(:example) }).each do |exercise|
-    #   # next unless exercise.has_class?('section.review-exercises')
-    #   problem = exercise.problem
-    #   solution = exercise.solution
-    #   count = exercise.count_in(:chapter)
-
-    #   puts exercise.has_ancestor?(:note)
-    #   number = exercise.has_ancestor?(:note) ? "#{chapter.count_in(:book)}.#{count}" : count
-    #   problem.first('.os-number')&.inner_html = number.to_s
-    #   next unless solution.present?
-
-    #   solution.first('.os-number')&.inner_html = number.to_s
-    # end
   end
 
   book.pages('$.appendix').each do |page|
@@ -195,12 +92,28 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  # Ok so here we go, now let's move the solutions to the end of the book.  As you know,
+  # unlike Chemistry, Calculus has an "Answer Key" composite chapter after the appendices.
+  # Similar to how we made a chapter review composite chapter above, let's make one
+  # for the Answer Key and then iterate over the chapters, making the chapter's answer key
+  # composite page which we append to the Answer Key composite chapter.
+
+  # New direction that makes the composite chapter Answer Key, appends it at the end of the
+  # book, then returns it
+  book_answer_key = BakeBookAnswerKey.v1(book: book)
+
+  book.chapters.each do |chapter|
+    BakeChapterAnswerKey.v1(chapter: chapter,
+                            metadata_source: book.metadata,
+                            strategy: :calculus,
+                            append_to: book_answer_key)
+  end
+
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
   book.pages.each do |page|
     # fix table captions
-
     page.search('.section-exercises').each do |section|
       section.search('.os-problem-container > .os-table:first-child').each do |table|
         table.add_class('first-element')
@@ -231,30 +144,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
-
   BakeToc.v1(book: book)
-
-  # group composite pages at the end of the chapter
-  book.toc.search('.os-toc-chapter ol.os-chapter').each_with_index do |chapter, index|
-    chapter_element = Nokogiri::XML.fragment(chapter.children)
-    composite_pages = chapter_element.search('li.os-toc-chapter-composite-page')
-    # first_composite_href = composite_pages.search('a').first['href']
-    chapter.search('class').each(&:trash)
-    chapter_element.search('li.os-toc-chapter-composite-page').remove
-    chapter.replace_children(with:
-      <<~HTML
-        #{chapter_element}
-        <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
-          <a href="#composite-chapter-#{index + 1}">
-            <span class="os-text">#{I18n.t(:chapter_review)}</span>
-          </a>
-          <ol class="os-chapter">
-            #{composite_pages}
-          </ol>
-        </li>
-      HTML
-    )
-  end
 
   book.chapters.each do |chapter|
     chapter.search('div[data-type="equation"]:not(.unnumbered)').each do |equation|
@@ -268,39 +158,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     end
 
     BakePageAbstracts.v1(chapter: chapter)
-    chapter.abstracts.each do |abstract|
-      abstract.search('ul').each do |ul|
-        ul.add_class('os-abstract')
-        ul_element = Nokogiri::XML.fragment(ul)
-        ul_element.children.remove
-        ul.search('li').each_with_index do |li, index|
-          ul_element.add_child(
-            <<~HTML
-              <li>
-                <span class="os-abstract-token">#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}</span>
-                <span class="os-abstract-content">#{li.text}</span>
-              </li>
-            HTML
-          )
-        end
-        ul.replace_children(with: ul_element.children)
-      end
-    end
+    BakePageAbstracts.v2(chapter: chapter)
   end
 
-  # competing docs from elements - BakeLinkPlaceholders
-  book.search('a').each do |anchor|
-    next unless anchor.text == '[link]'
-
-    id = anchor[:href][1..-1]
-    replacement = doc.pantry(name: :link_text).get(id)
-    if replacement.present?
-      anchor.replace_children(with: replacement)
-    else
-      # TODO: log a warning!
-      puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
-    end
-  end
+  BakeLinkPlaceholders.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
