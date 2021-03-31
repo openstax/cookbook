@@ -9,11 +9,7 @@ module Kitchen
           ol.add_class('os-stepwise')
 
           ol.search('li').each_with_index do |li, ii|
-            li.replace_children(with:
-              <<~HTML
-                <span class="os-stepwise-content">#{li.children}</span>
-              HTML
-            )
+            li.wrap_children('span', class: 'os-stepwise-content')
             li.prepend(child:
               <<~HTML
                 <span class="os-stepwise-token">#{I18n.t(:stepwise_step_label)} #{ii + 1}. </span>

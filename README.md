@@ -210,6 +210,13 @@ And we can wrap an element with another element:
 doc.search("span").first.wrap("<span class='other'>")
 ```
 
+or wrap an element's children:
+
+```ruby
+# <div><span>Hi</span></div> => <div><span><span class="other" data-type="foo">Hi</span></span></div>
+doc.search("span").first.wrap_children('span', class: 'other', data_type: 'foo')
+```
+
 ### Checking for elements
 
 You can see if an element contains an element matching a selector:

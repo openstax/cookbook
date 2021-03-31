@@ -4,13 +4,7 @@ module Kitchen
   module Directions
     module BakeExample
       def self.v1(example:, number:, title_tag:)
-        example.replace_children(with:
-          <<~HTML
-            <div class="body">
-              #{example.children}
-            </div>
-          HTML
-        )
+        example.wrap_children(class: 'body')
 
         example.prepend(child:
           <<~HTML

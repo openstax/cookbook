@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Added `wrap_children` method on elements (minor)
 * Refactored `NoteElement` to infer the note title from book-specific locales (minor)
 * Added support for a recipe to infer or be given a book-specific locale file (minor)
 * Added `NumberedTable` support for titles and always captions (minor)

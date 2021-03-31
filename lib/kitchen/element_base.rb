@@ -491,6 +491,35 @@ module Kitchen
       self
     end
 
+    # Wraps the element's children in a new element.  Yields the new wrapper element
+    # to a block, if provided.
+    #
+    # @param name [String] the wrapper's tag name, defaults to 'div'.
+    # @param attributes [Hash] the wrapper's attributes.  XML attributes often use hyphens
+    #   (e.g. 'data-type') which are hard to put into symbols.  Therefore underscores in
+    #   keys passed to this method will be converted to hyphens.  If you really want an
+    #   underscore you can use a double underscore.
+    # @yieldparam [Element] the wrapper Element
+    # @return [Element] self
+    #
+    def wrap_children(name='div', attributes={})
+      if name.is_a?(Hash)
+        attributes = name
+        name = 'div'
+      end
+
+      node.children = node.document.create_element(name) do |new_node|
+        # For some reason passing attributes to create_element doesn't work, so doing here
+        attributes.each do |k, v|
+          new_node[k.to_s.gsub(/([^_])_([^_])/, '\1-\2').gsub('__', '_')] = v
+        end
+        new_node.children = children.to_s
+        yield Element.new(node: new_node, document: document, short_type: nil) if block_given?
+      end.to_s
+
+      self
+    end
+
     # TODO: methods like replace_children that take string, either forbid or handle Element/Node args
 
     # Get the content of children matching the provided selector.  Mostly

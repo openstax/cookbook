@@ -294,6 +294,57 @@ RSpec.describe Kitchen::ElementBase do
     end
   end
 
+  describe '#wrap_children' do
+    let(:element) { new_element('<div>something <i>awesome</i></div>') }
+
+    it 'wraps with no arguments' do
+      expect(element.wrap_children).to match_normalized_html(
+        '<div><div>something <i>awesome</i></div></div>'
+      )
+    end
+
+    it 'can set attributes on the wrapper' do
+      expect(element.wrap_children(class: 'foo')).to match_normalized_html(
+        '<div><div class="foo">something <i>awesome</i></div></div>'
+      )
+    end
+
+    it 'works with a different name' do
+      expect(element.wrap_children('span')).to match_normalized_html(
+        '<div><span>something <i>awesome</i></span></div>'
+      )
+    end
+
+    it 'accepts a block to do extra work on the wrapper' do
+      element.wrap_children(class: 'outer') do |wrapper|
+        wrapper.wrap_children(class: 'inner')
+      end
+
+      expect(element).to match_normalized_html(
+        '<div><div class="outer"><div class="inner">something <i>awesome</i></div></div></div>'
+      )
+    end
+
+    it 'returns self for chaining' do
+      element.wrap_children.add_class('foo')
+      expect(element).to match_normalized_html(
+        '<div class="foo"><div>something <i>awesome</i></div></div>'
+      )
+    end
+
+    it 'converts underscores to dashes in attribute keys' do
+      expect(element.wrap_children(data_type: 'foo')).to match_normalized_html(
+        '<div><div data-type="foo">something <i>awesome</i></div></div>'
+      )
+    end
+
+    it 'converts double underscores to single underscores in attribute keys' do
+      expect(element.wrap_children(data__type: 'foo')).to match_normalized_html(
+        '<div><div data_type="foo">something <i>awesome</i></div></div>'
+      )
+    end
+  end
+
   describe '#content' do
     it 'gets the children matching the provided selector' do
       expect(book.content('.class1')).to match_normalized_html('<p>This is a paragraph.</p>')
