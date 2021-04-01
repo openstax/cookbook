@@ -59,6 +59,7 @@ module Kitchen
 
       def self.li_for_chapter(chapter)
         pages = chapter.element_children.only(PageElement, CompositePageElement)
+        inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
 
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
@@ -69,6 +70,7 @@ module Kitchen
             </a>
             <ol class="os-chapter">
               #{pages.map { |page| li_for_page(page) }.join("\n")}
+              #{inner_composite_chapters.map { |composite_chapter| li_for_composite_chapter(composite_chapter) }.join("\n")}
             </ol>
           </li>
         HTML

@@ -49,4 +49,19 @@ RSpec.describe Kitchen::Directions::BakePageAbstracts do
       HTML
     )
   end
+
+  it 'adds abstract-token and abstract-content' do
+    described_class.v2(chapter: chapter)
+    expect(chapter.non_introduction_pages).to match_normalized_html(
+      <<~HTML
+        <div class="chapter-content-module" data-type="page">
+          <h2 data-type="document-title">Module 1.1 title</h2>
+          <div data-type="abstract">
+              By the end of this module, you will be able to:
+                <ul class="os-abstract"><li><span class="os-abstract-token">1.1.1</span><span class="os-abstract-content">Outline the historical development of chemistry</span></li><li><span class="os-abstract-token">1.1.2</span><span class="os-abstract-content">Provide examples of the importance of chemistry in everyday life</span></li></ul>
+              </div>
+        </div>
+      HTML
+    )
+  end
 end

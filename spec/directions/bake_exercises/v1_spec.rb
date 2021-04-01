@@ -168,12 +168,12 @@ RSpec.describe Kitchen::Directions::BakeExercises::V1 do
               </section>
             </div>
           </div>
-          <div class="os-eob os-solution-container " data-type="composite-chapter" data-uuid-key=".solution">
+          <div class="os-eob os-solution-container" data-type="composite-chapter" data-uuid-key=".solution">
             <h1 data-type="document-title" id="composite-chapter-1">
               <span class="os-text">Answer Key</span>
             </h1>
             #{metadata(title: 'Answer Key', id_suffix: '_copy_2')}
-            <div class="os-eob os-solution-container " data-type="composite-page" data-uuid-key=".solution1">
+            <div class="os-eob os-solution-container" data-type="composite-page" data-uuid-key=".solution1">
               <h2 data-type="document-title">
                 <span class="os-text">Chapter 1</span>
               </h2>
@@ -218,7 +218,7 @@ RSpec.describe Kitchen::Directions::BakeExercises::V1 do
               #{solution}
             </div>
           HTML
-      )).chapters.search('#exerciseId').first
+      )).chapters.exercises.first
     end
 
     context 'with a solution' do

@@ -212,6 +212,37 @@ RSpec.describe Kitchen::Directions::BakeToc do
     end
   end
 
+  let(:book_with_eoc_composite_chapter) do
+    book_containing(html:
+      <<~HTML
+        <nav id="toc"></nav>
+        <div data-type="page" id="p1" class="preface">
+          <h1 data-type="document-title">
+            <span data-type="" itemprop="" class="os-text">Preface</span>
+          </h1>
+        </div>
+        <div data-type="chapter">
+          <h1 data-type="document-title" id="composite-chapter-1">
+            <span class="os-text">Answer Key</span>
+          </h1>
+          <div data-type="composite-chapter">
+            <h1 data-type="document-title" id="composite-chapter-1">
+              <span class="os-text">Chapter 1</span>
+            </h1>
+            <div data-type="composite-page" id="p8">
+              <h2 data-type="document-title">
+                <span class="os-text">Chapter 1</span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      HTML
+    ).tap do |book|
+      # TOC runs after introduction baking which changes some selectors
+      Kitchen::Directions::BakeChapterIntroductions.v1_update_selectors(book)
+    end
+  end
+
   let(:preface_page) do
     page_element(
       <<~HTML
@@ -443,6 +474,45 @@ RSpec.describe Kitchen::Directions::BakeToc do
               <a href="#p7">
                 <span class="os-text">Index</span>
               </a>
+            </li>
+          </ol>
+        </nav>
+      HTML
+    )
+  end
+
+  it 'works for composite chapters inside chapters' do
+    described_class.v1(book: book_with_eoc_composite_chapter)
+    expect(book_with_eoc_composite_chapter.search('nav').to_s).to match_normalized_html(
+      <<~HTML
+        <nav id="toc">
+          <h1 class="os-toc-title">Contents</h1>
+          <ol>
+            <li class="os-toc-preface" cnx-archive-shortid="" cnx-archive-uri="p1">
+              <a href="#p1">
+              <span data-type="" itemprop="" class="os-text">Preface</span>
+              </a>
+            </li>
+            <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+              <a href="#composite-chapter-1">
+              <span class="os-number"><span class="os-part-text">Chapter </span>1</span>
+              <span class="os-divider"> </span>
+              <span class="os-text" data-type="" itemprop="">Answer Key</span>
+              </a>
+              <ol class="os-chapter">
+                <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+                  <a href="#composite-chapter-1">
+                  <span class="os-text">Chapter 1</span>
+                  </a>
+                  <ol class="os-chapter">
+                    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p8">
+                      <a href="#p8">
+                      <span class="os-text">Chapter 1</span>
+                      </a>
+                    </li>
+                  </ol>
+                </li>
+              </ol>
             </li>
           </ol>
         </nav>

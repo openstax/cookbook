@@ -2,14 +2,19 @@ en:
   figure: Figure
   table_label: Table
   appendix: Appendix
+  theorem: Theorem
+  solution: Solution
   chapter_outline: Chapter Outline
   toc_title: Contents
   example_label: Example
   exercise_label: Exercise
   chapter: Chapter
   unit: Unit
+  checkpoint: Checkpoint
+  chapter_review: Chapter Review
   learning_objectives: Learning Objectives
   stepwise_step_label: Step
+  eoc_chapter_review: Chapter Review
   eoc_key_terms_title: Key Terms
   eoc_summary_title: Summary
   eoc_exercises_title: Exercises
@@ -19,3 +24,5 @@ en:
   eoc_suggested_reading: Suggestions for Further Study
   eob_index_title: Index
   eob_index_symbols_group: Symbols
+  review_exercises: Review Exercises
+  section_exercises: ! 'Section %{number} Exercises'

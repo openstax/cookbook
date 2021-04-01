@@ -21,6 +21,26 @@ module Kitchen
                .store("#{I18n.t(:example_label)} #{number}", label: example.id)
 
         example.titles.each { |title| title.name = 'h4' }
+
+        example.exercises.each do |exercise|
+          if (problem = exercise.problem)
+            problem.titles.each { |title| title.name = 'h4' }
+            problem.wrap_children(class: 'os-problem-container')
+          end
+
+          if (solution = exercise.solution)
+            solution.replace_children(with:
+              <<~HTML
+                <h4 data-type="solution-title">
+                  <span class="os-title-label">#{I18n.t(:solution)} </span>
+                </h4>
+                <div class="os-solution-container">#{solution.children}</div>
+              HTML
+            )
+          end
+
+          exercise.add_class('unnumbered')
+        end
       end
     end
   end

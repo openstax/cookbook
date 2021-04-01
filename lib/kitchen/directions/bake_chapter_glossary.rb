@@ -5,7 +5,7 @@ module Kitchen
     # Bake directons for eoc glossary
     #
     module BakeChapterGlossary
-      def self.v1(chapter:, metadata_source:)
+      def self.v1(chapter:, metadata_source:, append_to: nil)
         metadata_elements = metadata_source.children_to_keep.copy
 
         definitions = chapter.glossaries.search('dl').cut
@@ -17,7 +17,9 @@ module Kitchen
 
         return if definitions.none?
 
-        chapter.append(child:
+        append_to_element = append_to || chapter
+
+        append_to_element.append(child:
           <<~HTML
             <div class="os-eoc os-glossary-container" data-type="composite-page" data-uuid-key="glossary">
               <h2 data-type="document-title">

@@ -3,7 +3,7 @@
 module Kitchen::Directions::BakeChapterKeyConcepts
   class V1
     renderable
-    def bake(chapter:, metadata_source:)
+    def bake(chapter:, metadata_source:, append_to:)
       @metadata_elements = metadata_source.children_to_keep.copy
 
       @key_concepts = []
@@ -32,7 +32,9 @@ module Kitchen::Directions::BakeChapterKeyConcepts
         key_concepts_clipboard.clear
       end
 
-      chapter.append(child: render(file: 'key_concepts.xhtml.erb'))
+      append_to_element = append_to || chapter
+
+      append_to_element.append(child: render(file: 'key_concepts.xhtml.erb'))
     end
   end
 end

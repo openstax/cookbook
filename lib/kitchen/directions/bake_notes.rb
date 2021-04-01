@@ -4,7 +4,7 @@ module Kitchen
   module Directions
     module BakeNotes
       def self.v1(book:)
-        book.notes.each do |note|
+        book.notes('$:not(.checkpoint):not(.theorem)').each do |note|
           title = note.title&.cut
 
           note.wrap_children(class: 'os-note-body')
