@@ -35,7 +35,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeExercises.v1(book: book, classname: '.review-questions')
+    # BakeExercises.v1(book: book, classname: '.review-questions')
     BakeSuggestedReading.v1(book: book)
 
     BakeChapterTitle.v1(book: book)
@@ -82,7 +82,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeNotes.v1(book: book)
+  Bake titled and unclassified notes
+  book.chapters.pages.notes.each do |note|
+    if note.classes.empty?
+      BakeUnclassifiedNote.v1(note: note)
+  end
+  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning middle-ground milestone get-connected insider-perspective])
   BakeReferences.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
