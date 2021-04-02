@@ -59,6 +59,8 @@ module Kitchen
 
     def detected_note_title_key
       @detected_note_title_key ||= begin
+        return 0 if classes.empty?
+
         unless I18n.t('.').key?(:notes)
           puts 'An entry for notes does not exist in locales'
           return 0
