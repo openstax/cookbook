@@ -8,18 +8,22 @@ gemfile do
   gem 'byebug'
 end
 
-cleanup_recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
-  include Kitchen::Directions
+# cleanup_recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
+#   include Kitchen::Directions
 
-  # Set overrides
-  doc.search('div.section_summary').each do |elem|
-    elem.name = 'section'
-    elem.add_class('summary').elem.remove_class('section_summary')
-  end
-end
+#   # Set overrides
+#   doc.search('div.section_summary').each do |elem|
+#     elem.name = 'section'
+#     elem.add_class('summary').elem.remove_class('section_summary')
+#   end
+# end
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   include Kitchen::Directions
+
+  doc.selectors.override(
+    page_summary: '.section-summary'
+  )
 
   book = doc.book
 
@@ -35,15 +39,35 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     )
     title.name = 'h1'
   end
-
-  book.chapters.each do |chapter|
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
-    # BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+  # Bake NumberedTable in Preface
+  book.pages('$.preface').tables('$:not(.unnumbered)').each do |table|
+    BakeNumberedTable.v1(table: table,
+                         number: "#{table.count_in(:page)}")
   end
 
-  BakeExercises.v1(book: book, classname: '.section-quiz')
-  BakeExercises.v1(book: book, classname: '.short-answer')
+  book.chapters.each do |chapter|
+    # BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
+    # BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
+    # BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeExercises.v1(book: book, classname: '.section-quiz')
+    BakeExercises.v1(book: book, classname: '.short-answer')
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+  end
+
+  # Remove description form the whole book (it also present in Preface)
+  book.search('[data-type="metadata"] > [data-type="description"]').trash
+
+  BakeExercises.v1(
+    book: book,
+    exercise_section_classname: 'section-quiz',
+    exercise_section_title: 'eoc_section_quiz_exercises_title'
+  )
+  BakeExercises.v1(
+    book: book,
+    exercise_section_classname: 'short-answer',
+    exercise_section_title: 'eoc_short_answer_exercises_title'
+  )
+
   BakeChapterIntroductions.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -71,7 +95,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     end
 
     chapter.pages('$:not(.introduction)').each do |page|
+<<<<<<< HEAD
       page.search("div[data-type='description']").each(&:trash)
+=======
+      # page.search("div[data-type='description']").each(&:trash)
+>>>>>>> a7994d766b7f09421b52a74f8a2074d8b7a6ba78
       page.add_class('chapter-content-module')
 
       title = page.search("div[data-type='document-title']").first
@@ -144,6 +172,10 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
+<<<<<<< HEAD
   recipes: [cleanup_recipe, recipe],
+=======
+  recipes: [recipe],
+>>>>>>> a7994d766b7f09421b52a74f8a2074d8b7a6ba78
   output_file: opts[:output]
 )
