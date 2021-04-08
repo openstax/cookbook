@@ -70,7 +70,11 @@ module Kitchen
             </a>
             <ol class="os-chapter">
               #{pages.map { |page| li_for_page(page) }.join("\n")}
-              #{inner_composite_chapters.map { |composite_chapter| li_for_composite_chapter(composite_chapter) }.join("\n")}
+              #{
+                inner_composite_chapters.map do |composite_chapter|
+                  li_for_composite_chapter(composite_chapter)
+                end.join("\n")
+              }
             </ol>
           </li>
         HTML

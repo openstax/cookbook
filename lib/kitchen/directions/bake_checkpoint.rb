@@ -23,6 +23,7 @@ module Kitchen
         problem.wrap_children(class: 'os-problem-container')
 
         solution = exercise.solution
+        exercise.add_class('unnumbered') unless solution.present?
         return unless solution.present?
 
         solution.id = "#{exercise.id}-solution"

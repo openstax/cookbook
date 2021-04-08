@@ -24,7 +24,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReview::V1 do
             This is a page
           </div>
           <div class="os-eoc os-chapter-review-container" data-type="composite-chapter" data-uuid-key=".chapter-review">
-            <h2 data-type="document-title" id="composite-chapter-1">
+            <h2 data-type="document-title">
               <span class="os-text">Chapter Review</span>
             </h2>
             <div data-type="metadata" style="display: none;">

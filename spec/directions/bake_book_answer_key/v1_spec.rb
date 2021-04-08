@@ -20,7 +20,7 @@ RSpec.describe Kitchen::Directions::BakeBookAnswerKey::V1 do
     expect(described_class.new.bake(book: book)).to match_normalized_html(
       <<~HTML
         <div class="os-eob os-solutions-container" data-type="composite-chapter" data-uuid-key=".solutions">
-          <h1 data-type="document-title" id="composite-chapter-1">
+          <h1 data-type="document-title">
             <span class="os-text">Answer Key</span>
           </h1>
           <div data-type="metadata" style="display: none;">
