@@ -157,19 +157,19 @@ RSpec.describe Kitchen::Directions::BakeChapterAnswerKey::V1 do
               <span class="os-text">Chapter 1</span>
             </h2>
             <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">Book Title</h1>
+              <h1 data-type="document-title" itemprop="name">Chapter 1</h1>
               <div class="authors">
-                <span id="author-1"><a>OpenStaxCollege</a></span>
+                <span id="author-1_copy_1"><a>OpenStaxCollege</a></span>
               </div>
               <div class="publishers">
-                <span id="publisher-1"><a>OpenStaxCollege</a></span>
+                <span id="publisher-1_copy_1"><a>OpenStaxCollege</a></span>
               </div>
               <div class="print-style">
                 <span data-type="print-style">ccap-calculus</span>
               </div>
               <div class="permissions">
                 <p class="copyright">
-                    <span id="copyright-holder-1"><a>OSCRiceUniversity</a></span>
+                    <span id="copyright-holder-1_copy_1"><a>OSCRiceUniversity</a></span>
                 </p>
                 <p class="license">
                     <a>CC BY</a>

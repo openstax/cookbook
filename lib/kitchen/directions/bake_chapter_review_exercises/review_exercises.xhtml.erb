@@ -1,10 +1,10 @@
-<div class="os-eoc os-review-exercises-container" data-type="composite-page" data-uuid-key=".review-exercises">
+<div class="os-eoc os-<%=@klass%>-container" data-type="composite-page" data-uuid-key=".<%=@klass%>">
   <h3 data-type="document-title">
-    <span class="os-text"><%= I18n.t(:eoc_exercises_title) %></span>
+    <span class="os-text"><%= @title %></span>
   </h3>
   <div data-type="metadata" style="display: none;">
     <h1 data-type="document-title" itemprop="name"><%= I18n.t(:eoc_exercises_title) %></h1>
-    <%= @metadata %>
+    <%= @metadata.paste %>
   </div>
-  <%= @exercise_clipboard.paste %>
+  <%= @content %>
 </div>

@@ -14,7 +14,8 @@ RSpec.describe Kitchen::ElementEnumeratorFactory do
       Kitchen::TableElementEnumerator,
       Kitchen::TermElementEnumerator,
       Kitchen::TypeCastingElementEnumerator,
-      Kitchen::UnitElementEnumerator
+      Kitchen::UnitElementEnumerator,
+      Kitchen::CompositePageElementEnumerator
     ].each do |enumerator_class|
       it "is created by #{enumerator_class}" do
         expect(described_class).to receive(:new)

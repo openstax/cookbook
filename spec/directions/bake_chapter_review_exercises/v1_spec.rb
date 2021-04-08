@@ -6,7 +6,10 @@ RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V1 do
   before do
     stub_locales({
       'eoc_exercises_title': 'Review Exercises',
-      'eoc_chapter_review': 'Chapter Review'
+      'eoc_chapter_review': 'Chapter Review',
+      'eoc': {
+        'review-exercises': 'foo'
+      }
     })
   end
 
@@ -47,34 +50,8 @@ RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V1 do
     )
   end
 
-  let(:metadata) do
-    <<~HTML
-      <div data-type="metadata" style="display: none;">
-        <h1 data-type="document-title" itemprop="name">A Title</h1>
-        <div class="authors">
-          <span id="author-1#" ><a>OpenStaxCollege</a></span>
-        </div>
-        <div class="publishers">
-          <span id="publisher-1#"><a>OpenStaxCollege</a></span>
-        </div>
-        <div class="print-style">
-          <span data-type="print-style">ccap-book</span>
-        </div>
-        <div class="permissions">
-          <p class="copyright">
-            <span id="copyright-holder-1#"><a>OSCRiceUniversity</a></span>
-          </p>
-          <p class="license">
-            <a>CC BY</a>
-          </p>
-        </div>
-        <div itemprop="about" data-type="subject">Book Title</div>
-      </div>
-    HTML
-  end
-
   it 'works' do
-    described_class.new.bake(chapter: book_with_review_exercises.chapters.first, metadata_source: metadata, append_to: append_to)
+    described_class.new.bake(chapter: book_with_review_exercises.chapters.first, metadata_source: metadata_element, append_to: append_to, klass: 'review-exercises')
     expect(append_to).to match_normalized_html(
       <<~HTML
         <div class="os-eoc os-chapter-review-container" data-type="composite-chapter" data-uuid-key=".chapter-review">
@@ -87,31 +64,15 @@ RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V1 do
             </div>
             <div class="os-eoc os-review-exercises-container" data-type="composite-page" data-uuid-key=".review-exercises">
                 <h3 data-type="document-title">
-                  <span class="os-text">Review Exercises</span>
+                  <span class="os-text">foo</span>
                 </h3>
                 <div data-type="metadata" style="display: none;">
                   <h1 data-type="document-title" itemprop="name">Review Exercises</h1>
-                  <div data-type="metadata" style="display: none;">
-                      <h1 data-type="document-title" itemprop="name">A Title</h1>
-                      <div class="authors">
-                        <span id="author-1#"><a>OpenStaxCollege</a></span>
-                      </div>
-                      <div class="publishers">
-                        <span id="publisher-1#"><a>OpenStaxCollege</a></span>
-                      </div>
-                      <div class="print-style">
-                        <span data-type="print-style">ccap-book</span>
-                      </div>
-                      <div class="permissions">
-                        <p class="copyright">
-                            <span id="copyright-holder-1#"><a>OSCRiceUniversity</a></span>
-                        </p>
-                        <p class="license">
-                            <a>CC BY</a>
-                        </p>
-                      </div>
-                      <div itemprop="about" data-type="subject">Book Title</div>
-                  </div>
+                  <div class="authors" id="authors_copy_1">Authors</div>
+                  <div class="publishers" id="publishers_copy_1">Publishers</div>
+                  <div class="print-style" id="print-style_copy_1">Print Style</div>
+                  <div class="permissions" id="permissions_copy_1">Permissions</div>
+                  <div data-type="subject" id="subject_copy_1">Subject</div>
                 </div>
                 <section id="sectionId1" class="review-exercises">
                   <div data-type="exercise" id="exercise_id1">

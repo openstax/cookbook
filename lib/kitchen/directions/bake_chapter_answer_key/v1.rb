@@ -7,6 +7,8 @@ module Kitchen::Directions::BakeChapterAnswerKey
         case strategy
         when :calculus
           Strategies::Calculus
+        when :uphysics
+          Strategies::UPhysics
         else
           raise 'No such strategy'
         end
@@ -17,7 +19,10 @@ module Kitchen::Directions::BakeChapterAnswerKey
             <h2 data-type="document-title">
               <span class="os-text">#{I18n.t(:chapter)} #{chapter.count_in(:book)}</span>
             </h2>
-            #{metadata_source.copy}
+            <div data-type="metadata" style="display: none;">
+              <h1 data-type="document-title" itemprop="name">#{I18n.t(:chapter)} #{chapter.count_in(:book)}</h1>
+              #{metadata_source.children_to_keep.copy.paste}
+            </div>
           </div>
         HTML
       )
