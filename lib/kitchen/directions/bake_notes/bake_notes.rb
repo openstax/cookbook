@@ -4,6 +4,8 @@ module Kitchen
   module Directions
     module BakeNotes
       def self.v1(book:)
+        warn 'WARNING! deprecated direction used: BakeNotes'
+
         book.notes('$:not(.checkpoint):not(.theorem)').each do |note|
           title = note.title&.cut
 
