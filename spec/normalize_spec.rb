@@ -33,16 +33,7 @@ RSpec.describe 'normalize script' do
   end
 
   it 'normalizes' do
-    doc.traverse do |child|
-      mask_copied_id_numbers(child)
-
-      next if child.text? || child.document?
-
-      remove_bogus_number_from_unnumbered_tables(child)
-      remove_blank_classes(child)
-      sort_classes_strip_whitespace(child)
-      sort_attributes(child)
-    end
+    normalize(doc)
     expect(doc.to_xml).to eq(expected_output.to_xml)
   end
 end

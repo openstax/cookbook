@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
 
@@ -45,4 +44,16 @@ def mask_copied_id_numbers(element)
   return unless element[:id]
 
   element[:id] = element[:id].gsub(/_copy_(\d+)$/, '_copy_XXX')
+end
+
+def normalize(doc)
+  doc.traverse do |child|
+    mask_copied_id_numbers(child)
+    next if child.text? || child.document?
+
+    remove_bogus_number_from_unnumbered_tables(child)
+    remove_blank_classes(child)
+    sort_classes_strip_whitespace(child)
+    sort_attributes(child)
+  end
 end
