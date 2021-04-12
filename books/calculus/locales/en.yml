@@ -1,7 +1,10 @@
 en:
-  eoc_exercises_title: Review Exercises
+  eoc:
+    review-exercises: Review Exercises
   media-2: Media
   notes:
     media-2: Media
     problem-solving: Problem-Solving Strategy
     project: Student Project
+    theorem: Theorem
+    checkpoint: Checkpoint

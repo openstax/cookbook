@@ -16,15 +16,27 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
   BakePreface.v1(book: book)
-  BakeNotes.v1(book: book)
+  BakeUnclassifiedNotes.v1(book: book)
 
   book.chapters.each do |chapter|
-    chapter_review = BakeChapterReview.v1(chapter: chapter, metadata_source: book.metadata)
+    chapter.notes('$.theorem').each do |theorem|
+      theorem['use-subtitle'] = true
+    end
+  end
+
+  BakeAutotitledNotes.v1(book: book, classes: %w[media-2 problem-solving project])
+  BakeNumberedNotes.v1(book: book, classes: %w[theorem checkpoint])
+
+  book.chapters.each do |chapter|
+    chapter_review = BakeChapterReview.v1(
+      chapter: chapter,
+      metadata_source: book.metadata
+    )
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
     BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
-    BakeChapterReviewExercises.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review)
+    BakeChapterReviewExercises.v1(chapter: chapter, metadata_source: book.metadata, append_to: chapter_review, klass: 'review-exercises')
     BakeChapterSectionExercises.v1(chapter: chapter)
 
     # This is somewhat backwards from how chemistry does it.  Just above we moved all of the review exercises
@@ -35,15 +47,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    chapter.notes('$.theorem').each do |theorem|
-      BakeTheorem.v1(theorem: theorem,
-                     number: "#{chapter.count_in(:book)}.#{theorem.count_in(:chapter)}")
-    end
+    # chapter.notes('$.theorem').each do |theorem|
+    #   BakeTheorem.v1(theorem: theorem,
+    #                  number: "#{chapter.count_in(:book)}.#{theorem.count_in(:chapter)}")
+    # end
 
-    chapter.notes('$.checkpoint').each do |checkpoint|
-      BakeCheckpoint.v1(checkpoint: checkpoint,
-                        number: "#{chapter.count_in(:book)}.#{checkpoint.count_in(:chapter)}")
-    end
+    # chapter.notes('$.checkpoint').each do |checkpoint|
+    #   BakeCheckpoint.v1(checkpoint: checkpoint,
+    #                     number: "#{chapter.count_in(:book)}.#{checkpoint.count_in(:chapter)}")
+    # end
   end
 
   BakeChapterIntroductions.v1(book: book)
@@ -141,6 +153,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
 
   book.chapters.each do |chapter|
