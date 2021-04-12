@@ -50,7 +50,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}",
+                           always_caption: true)
     end
 
     chapter.examples.each do |example|
@@ -74,22 +75,24 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       )
     end
 
-    chapter.figures.filter{ |fig| !fig.subfigure? }.each do |figure|  #pass in select figures that are not children
-      BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
-    end
+    # chapter.figures(except: :subfigure?).each do |figure|
+    #   BakeFigure.v1(figure: figure,
+    #                 number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    # end
   end
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    page.figures.each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{appendix_letter}#{figure.count_in(:page)}")
-    end
+    # page.figures.each do |figure|
+    #   BakeFigure.v1(figure: figure,
+    #                 number: "#{appendix_letter}#{figure.count_in(:page)}")
+    # end
 
     page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+      BakeNumberedTable.v1(table: table,
+                           number: "#{appendix_letter}#{table.count_in(:page)}",
+                           always_caption: true)
     end
 
     page.examples.each do |example|
