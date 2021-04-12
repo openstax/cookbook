@@ -207,3 +207,7 @@ When developing a recipe that already exists in easybake, the main goal is to pr
 ### Normalize
 
 The kitchen output and the easybake output may have a number of unimportant differences such as in whitespace and the ordering of attributes. The `normalize` script tidies the HTML and puts all attributes in alphabetical order. Call this script on an HTML file by calling `ruby scripts/normalize [path]`.
+
+## Book-specific locale files
+
+A book may contain translations specific to itself (i.e., the note title 'Portrait of a Chemist' only appears in Chemistry). To solve this problem, locales specific to the book may be created. A recipe has the ability to receive a custom locales path, or infer the location of the locales directory as long as this directory is stored next to the bake file. For example, the recipe in `books/chemistry/bake` would look for a directory called `books/chemistry/locales`. This locale file does not permanently modify the I18n backend and only persists for as long as the recipe runs, so no need to worry about conflicts with other books' locales.
