@@ -56,7 +56,7 @@ RSpec.describe Kitchen::Directions::BakePageAbstracts do
       <<~HTML
         <div class="chapter-content-module" data-type="page">
           <h2 data-type="document-title">Module 1.1 title</h2>
-          <div data-type="abstract">
+          <div data-type="abstract"><h3 data-type="title">Learning Objectives</h3>
               By the end of this module, you will be able to:
                 <ul class="os-abstract"><li><span class="os-abstract-token">1.1.1</span><span class="os-abstract-content">Outline the historical development of chemistry</span></li><li><span class="os-abstract-token">1.1.2</span><span class="os-abstract-content">Provide examples of the importance of chemistry in everyday life</span></li></ul>
               </div>

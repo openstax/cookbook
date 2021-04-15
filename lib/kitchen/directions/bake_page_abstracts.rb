@@ -12,6 +12,7 @@ module Kitchen
 
       def self.v2(chapter:)
         chapter.abstracts.each do |abstract|
+          abstract.prepend(child: "<h3 data-type='title'>#{I18n.t(:learning_objectives)}</h3>")
           ul = abstract.first!('ul')
           ul.add_class('os-abstract')
           ul.search('li').each_with_index do |li, index|
