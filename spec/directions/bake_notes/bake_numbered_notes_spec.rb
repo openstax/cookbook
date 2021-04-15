@@ -23,9 +23,18 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
           </div>
           <div data-type="note" id="789" class="foo">
             <p>content 2.2</p>
+            <div data-type="exercise">
+              <div data-type="problem">what is your quest?</div>
+            </div>
           </div>
           <div data-type="note" id="333" class="hello">
             <p>content 2.1</p>
+            <div data-type="exercise" id="abcde">
+              <div data-type="problem" id="unchanged">what is your favorite color?</div>
+              <div data-type="solution" id="xyz">
+                <p>chartreuse</p>
+              </div>
+            </div>
           </div>
           <div data-type="note" id="000" class=":/">
             <p>don't bake me</p>
@@ -100,6 +109,11 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
               </div>
               <div class="os-note-body">
                 <p>content 2.2</p>
+                <div class="unnumbered" data-type="exercise">
+                  <div data-type="problem">
+                    <div class="os-problem-container">what is your quest?</div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="hello" data-type="note" id="333">
@@ -110,6 +124,18 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
               </div>
               <div class="os-note-body">
                 <p>content 2.1</p>
+                <div class="unnumbered os-hasSolution" data-type="exercise" id="abcde">
+                  <div data-type="problem" id="unchanged">
+                    <div class="os-problem-container">what is your favorite color?</div>
+                  </div>
+                  <div data-type="solution" id="abcde-solution">
+                    <a class="os-number" href="#abcde">2.1</a>
+                    <span class="os-divider"> </span>
+                    <div class="os-solution-container">
+                      <p>chartreuse</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div data-type="note" id="000" class=":/">

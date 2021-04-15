@@ -7,10 +7,13 @@ RSpec.describe Kitchen::Directions::BakeChapterAnswerKey::V1 do
     stub_locales({
       'chapter': 'Chapter',
       'eoc': {
-        'review-conceptual-questions': 'foo',
-        'review-problems': 'bar',
-        'review-additional-problems': 'hello',
-        'review-challenge': 'world'
+        'review-conceptual-questions': 'Conceptual Questions',
+        'review-problems': 'Problems',
+        'review-additional-problems': 'Additional Problems',
+        'review-challenge': 'Challenge'
+      },
+      'notes': {
+        'check-understanding': 'Check Understanding'
       }
     })
   end
@@ -21,6 +24,17 @@ RSpec.describe Kitchen::Directions::BakeChapterAnswerKey::V1 do
         <div data-type="chapter">
           <h1 data-type="document-title">Title for Ch1</h1>
           <div data-type="page">
+            <div class="check-understanding" data-type="note">
+              <div data-type="exercise">
+                <div data-type="problem">problem 1</div>
+                <div data-type="solution">solution 1</div>
+              </div>
+            </div>
+            <div class="check-understanding" data-type="note">
+              <div data-type="exercise">
+                <div data-type="problem">no solution</div>
+              </div>
+            </div>
             <section class="review-conceptual-questions">
               <div data-type="exercise">
                 <div data-type="problem">Problem 1</div>
@@ -112,7 +126,13 @@ RSpec.describe Kitchen::Directions::BakeChapterAnswerKey::V1 do
             </div>
             <div class="os-solution-area">
               <h3 data-type="title">
-                <span class="os-title-label">foo</span>
+                <span class="os-title-label">Check Understanding</span>
+              </h3>
+              <div data-type="solution">solution 1</div>
+            </div>
+            <div class="os-solution-area">
+              <h3 data-type="title">
+                <span class="os-title-label">Conceptual Questions</span>
               </h3>
               <div data-type="solution">Solution 1</div>
               <div data-type="solution">Solution 3</div>
@@ -120,13 +140,13 @@ RSpec.describe Kitchen::Directions::BakeChapterAnswerKey::V1 do
             </div>
             <div class="os-solution-area">
               <h3 data-type="title">
-                <span class="os-title-label">bar</span>
+                <span class="os-title-label">Problems</span>
               </h3>
               <div data-type="solution">Solution 1</div>
             </div>
             <div class="os-solution-area">
               <h3 data-type="title">
-                <span class="os-title-label">world</span>
+                <span class="os-title-label">Challenge</span>
               </h3>
               <div data-type="solution">Solution 1</div>
             </div>
@@ -145,13 +165,13 @@ RSpec.describe Kitchen::Directions::BakeChapterAnswerKey::V1 do
             </div>
             <div class="os-solution-area">
               <h3 data-type="title">
-                <span class="os-title-label">foo</span>
+                <span class="os-title-label">Conceptual Questions</span>
               </h3>
               <div data-type="solution">Solution 1</div>
             </div>
             <div class="os-solution-area">
               <h3 data-type="title">
-                <span class="os-title-label">hello</span>
+                <span class="os-title-label">Additional Problems</span>
               </h3>
               <div data-type="solution">Solution 1</div>
             </div>

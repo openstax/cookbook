@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add to `BakeNumberedNotes` directions for baking exercises in a note
 * Add `BakeEquations` direction (minor)
 * Remove `NoteElement` logging (minor)
 * Adds `BakeChapterReviewExercises` v2 and a u-physics `Strategy` to `BakeChapterAnswerKey` to support baking exercises in u-physics (minor)
