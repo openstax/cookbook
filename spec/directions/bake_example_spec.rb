@@ -51,6 +51,9 @@ RSpec.describe Kitchen::Directions::BakeExample do
           <div data-type="solution" id="solution_id">
             <p>Solution content</p>
           </div>
+          <div data-type="commentary" id="commentary_id">
+            <div data-type="title" id="title_id">Analysis</div>
+          </div>
         </div>
       HTML
     end
@@ -82,6 +85,11 @@ RSpec.describe Kitchen::Directions::BakeExample do
                   <div class="os-solution-container">
                     <p>Solution content</p>
                   </div>
+                </div>
+                <div data-type="commentary" id="commentary_id">
+                  <h4 data-type="commentary-title" id="title_id">
+                    <span class="os-title-label">Analysis</span>
+                  </h4>
                 </div>
               </div>
             </div>

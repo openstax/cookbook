@@ -40,6 +40,14 @@ module Kitchen
           end
 
           exercise.add_class('unnumbered')
+
+          commentary = exercise.first('[data-type="commentary"]')
+          next unless commentary.present?
+
+          commentary_title = commentary.titles.first
+          commentary_title.name = 'h4'
+          commentary_title['data-type'] = 'commentary-title'
+          commentary_title.wrap_children('span', class: 'os-title-label')
         end
       end
     end
