@@ -20,6 +20,7 @@ done
 
 case "${book}" in
   chemistry) dest="${DIR}/data/chemistry/short" && script="${DIR}/books/chemistry/shorten";;
+  pl-psychology) dest="${DIR}/data/pl-psychology/short" && script="${DIR}/books/pl-psychology/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
