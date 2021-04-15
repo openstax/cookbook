@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'set'
+
+DUPLICATE_IDS_TO_IGNORE = %w[author-1 publisher-1 publisher-2 copyright-holder-1].freeze
+
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
 
@@ -43,8 +47,21 @@ end
 def mask_copied_id_numbers(element)
   return unless element[:id]
 
+  warn_if_already_seen(element[:id])
   element[:id] = element[:id].gsub(/_copy_(\d+)$/, '_copy_XXX')
 end
+
+# Check for duplicate IDs before masking copy numbers
+
+def warn_if_already_seen(id)
+  @already_seen_ids ||= Set.new
+  if @already_seen_ids.include?(id) && !DUPLICATE_IDS_TO_IGNORE.include?(id)
+    puts "warning! duplicate id found for #{id}"
+  end
+  @already_seen_ids.add(id)
+end
+
+# Main normalize function for an XML document
 
 def normalize(doc)
   doc.traverse do |child|

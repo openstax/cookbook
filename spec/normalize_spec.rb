@@ -32,8 +32,35 @@ RSpec.describe 'normalize script' do
     )
   end
 
+  let(:doc_with_duplicate_ids) do
+    Nokogiri::XML(
+      <<~HTML
+        <body>
+          <div id="duplicate1"/>
+          <div id="unique">
+            <div id="duplicate1"/>
+            <div id="publisher-1"/>
+          </div>
+          <div id="publisher-1"/>
+          <div>
+            <div>
+              <div>
+                <div id="duplicate1">
+              </div>
+            </div>
+          </div>
+        </body>
+      HTML
+    )
+  end
+
   it 'normalizes' do
     normalize(doc)
     expect(doc.to_xml).to eq(expected_output.to_xml)
+  end
+
+  it 'warns about duplicate ids' do
+    expect($stdout).to receive(:puts).with('warning! duplicate id found for duplicate1').twice
+    normalize(doc_with_duplicate_ids)
   end
 end
