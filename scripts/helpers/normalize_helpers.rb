@@ -2,6 +2,8 @@
 
 require 'set'
 
+DUPLICATE_IDS_TO_IGNORE = %w[author-1 publisher-1 publisher-2 copyright-holder-1].freeze
+
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
 
@@ -42,21 +44,28 @@ end
 # The index of copied elements (the number in _copy_23) isn't meaningful so
 # hide it.
 
-def mask_copied_id_numbers(element, existing_ids)
+def mask_copied_id_numbers(element)
   return unless element[:id]
 
-  ids_to_exclude = %w[author-1 publisher-1 publisher-2 copyright-holder-1]
-  if existing_ids.include?(element[:id]) && !ids_to_exclude.include?(element[:id])
-    puts "warning! duplicate id found for #{element[:id]}"
-  end
-  existing_ids.add(element[:id])
+  warn_if_already_seen(element[:id])
   element[:id] = element[:id].gsub(/_copy_(\d+)$/, '_copy_XXX')
 end
 
+# Check for duplicate IDs before masking copy numbers
+
+def warn_if_already_seen(id)
+  @already_seen_ids ||= Set.new
+  if @already_seen_ids.include?(id) && !DUPLICATE_IDS_TO_IGNORE.include?(id)
+    puts "warning! duplicate id found for #{id}"
+  end
+  @already_seen_ids.add(id)
+end
+
+# Main normalize function for an XML document
+
 def normalize(doc)
-  ids_set = Set.new
   doc.traverse do |child|
-    mask_copied_id_numbers(child, ids_set)
+    mask_copied_id_numbers(child)
     next if child.text? || child.document?
 
     remove_bogus_number_from_unnumbered_tables(child)
