@@ -10,6 +10,8 @@ gemfile do
   gem 'byebug'
 end
 
+I18n.locale = :pl
+
 recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   include Kitchen::Directions
 
