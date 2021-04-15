@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'set'
+
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
 
@@ -40,15 +42,21 @@ end
 # The index of copied elements (the number in _copy_23) isn't meaningful so
 # hide it.
 
-def mask_copied_id_numbers(element)
+def mask_copied_id_numbers(element, existing_ids)
   return unless element[:id]
 
+  ids_to_exclude = %w[author-1 publisher-1 publisher-2 copyright-holder-1]
+  if existing_ids.include?(element[:id]) && !ids_to_exclude.include?(element[:id])
+    puts "warning! duplicate id found for #{element[:id]}"
+  end
+  existing_ids.add(element[:id])
   element[:id] = element[:id].gsub(/_copy_(\d+)$/, '_copy_XXX')
 end
 
 def normalize(doc)
+  ids_set = Set.new
   doc.traverse do |child|
-    mask_copied_id_numbers(child)
+    mask_copied_id_numbers(child, ids_set)
     next if child.text? || child.document?
 
     remove_bogus_number_from_unnumbered_tables(child)
