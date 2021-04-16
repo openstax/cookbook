@@ -55,7 +55,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
     BakeNonIntroductionPages.v1(chapter: chapter)
   end
 
-  BakeNotes.v1(book: book)
+  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning
+                                                 dig-deeper
+                                                 everyday-connection
+                                                 what-do-you-think
+                                                 connect-the-concepts])
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
