@@ -44,6 +44,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
                      title_tag: 'h3')
     end
 
+    # Captions of figures in easybaked files contain ids.
+    # They're necessary only in Adaptarr (content editing tool used by Polish team),
+    # so there is no need to add them to kitchen baked files.
     chapter.figures.each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
