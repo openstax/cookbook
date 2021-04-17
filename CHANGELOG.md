@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `pl.yml` and add pl to available locals in `StubHelpers` module (minor)
 * Add to `BakeNumberedNotes` directions for baking exercises in a note (with this comes removing bake checkpoints and theorems)
 * Add `BakeEquations` direction (minor)
 * Remove `NoteElement` logging (minor)
