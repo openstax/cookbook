@@ -40,6 +40,7 @@ module Kitchen
         # bake problem
         exercise.problem.wrap_children('div', class: 'os-problem-container')
         exercise.problem.first('strong')&.trash
+        exercise.search('[data-type="commentary"]').each(&:trash)
         solution = exercise.solution
         return unless solution
 

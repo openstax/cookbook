@@ -43,6 +43,18 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
             <div data-type="title" id="title_id15">Two Important Limits</div>
             <p> some content </p>
           </div>
+          <div data-type="note" id="4" class="foo">
+            <p>A title 4</p>
+            <div data-type="exercise" id="123">
+              <div data-type="problem" id="456">Problem content</div>
+              <div data-type="solution" id="xyz">
+                <p>solution content</p>
+              </div>
+              <div data-type="commentary" id="xyza">
+                <p>remove me</p>
+              </div>
+            </div>
+          </div>
         </div>
       HTML
     )
@@ -157,6 +169,28 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
                   <span class="os-subtitle-label">Two Important Limits</span>
                 </h4>
                 <p> some content </p>
+              </div>
+            </div>
+            <div class="foo" data-type="note" id="4">
+              <div class="os-title">
+                <span class="os-title-label">Bar</span>
+                <span class="os-number">2.3</span>
+                <span class="os-divider"> </span>
+              </div>
+              <div class="os-note-body">
+                <p>A title 4</p>
+                <div class="unnumbered os-hasSolution" data-type="exercise" id="123">
+                  <div data-type="problem" id="456">
+                    <div class="os-problem-container">Problem content</div>
+                  </div>
+                  <div data-type="solution" id="123-solution">
+                    <a class="os-number" href="#123">2.3</a>
+                    <span class="os-divider"> </span>
+                    <div class="os-solution-container">
+                      <p>solution content</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
