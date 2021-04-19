@@ -17,14 +17,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
+
   BakePreface.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
 
-  book.chapters.each do |chapter|
-    chapter.notes('$.theorem').each do |theorem|
-      theorem['use-subtitle'] = true
-    end
-  end
+  book.notes('$.theorem').each { |theorem| theorem['use-subtitle'] = true }
 
   BakeAutotitledNotes.v1(book: book, classes: %w[media-2 problem-solving project])
   BakeNumberedNotes.v1(book: book, classes: %w[theorem checkpoint])
@@ -50,23 +47,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     )
     BakeChapterSectionExercises.v1(chapter: chapter)
 
-    # This is somewhat backwards from how chemistry does it.  Just above we moved all of the review
-    # exercises to the end of the chapter.  Now, with all of the non-checkpoint exercises in the
-    # correct order, we bake them (the "in place" stuff) and number them.
-    # THIS IS HOW WE GET SECTION EXERCISES AND REVIEW EXERCISES NUMBERED IN ORDER
+    # Just above we moved the review exercises to the end of the chapter. Now that all of the
+    # non-checkpoint exercises are in the right order, we bake them (the "in place" modifications)
+    # and number them.
     chapter.search('.section-exercises, .review-exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
-
-    # chapter.notes('$.theorem').each do |theorem|
-    #   BakeTheorem.v1(theorem: theorem,
-    #                  number: "#{chapter.count_in(:book)}.#{theorem.count_in(:chapter)}")
-    # end
-
-    # chapter.notes('$.checkpoint').each do |checkpoint|
-    #   BakeCheckpoint.v1(checkpoint: checkpoint,
-    #                     number: "#{chapter.count_in(:book)}.#{checkpoint.count_in(:chapter)}")
-    # end
   end
 
   BakeChapterIntroductions.v1(book: book)
@@ -112,14 +98,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  # Ok so here we go, now let's move the solutions to the end of the book.  As you know,
-  # unlike Chemistry, Calculus has an "Answer Key" composite chapter after the appendices.
-  # Similar to how we made a chapter review composite chapter above, let's make one
-  # for the Answer Key and then iterate over the chapters, making the chapter's answer key
-  # composite page which we append to the Answer Key composite chapter.
-
-  # New direction that makes the composite chapter Answer Key, appends it at the end of the
-  # book, then returns it
+  # Here we move the solutions to the end of the book. Calculus has an "Answer Key" composite
+  # chapter after the appendices. So we make the answer key, then iterate over the chapters, making
+  # an answer key composite page for each chapter that we append to the answer key composite chapter
   book_answer_key = BakeBookAnswerKey.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -132,32 +113,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
-  book.pages.each do |page|
-    # fix table captions
-    page.search('.section-exercises').each do |section|
-      section.search('.os-problem-container > .os-table:first-child').each do |table|
-        table.add_class('first-element')
-        table.parent.add_class('has-first-element')
-      end
-
-      section.search('.os-problem-container > [data-type="media"]:first-child').each do |img|
-        img.add_class('first-element')
-        img.parent.add_class('has-first-element')
-      end
-    end
-
-    page.search('div.os-table div.os-caption-container').each do |caption|
-      caption_text = caption.first('span.os-caption [data-type="title"]')
-      next unless caption_text.present?
-
-      caption_text.add_class('os-title').name = 'span'
-      divider_aux = caption.first('span.os-divider')
-      divider_aux.append(sibling:
-        <<~HTML
-          #{caption_text&.cut}
-        HTML
-      )
-    end
+  book.search('.section-exercises').each do |within|
+    BakeProblemFirstElements.v1(
+      within: within,
+      selectors: ['.os-table', '[data-type="media"]']
+    )
   end
 
   BakeMathInParagraph.v1(book: book)
@@ -166,19 +126,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
+  BakeEquations.v1(book: book)
 
   book.chapters.each do |chapter|
-    chapter.search('div[data-type="equation"]:not(.unnumbered)').each do |equation|
-      equation.append(child:
-        <<~HTML
-          <div class="os-equation-number">
-            <span class="os-number">(#{chapter.count_in(:book)}.#{equation.count_in(:chapter)})</span>
-          </div>
-        HTML
-      )
-    end
-
-    BakePageAbstracts.v1(chapter: chapter)
     BakePageAbstracts.v2(chapter: chapter)
   end
 
