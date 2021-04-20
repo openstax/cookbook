@@ -71,6 +71,28 @@ RSpec.describe Kitchen::Directions::BakeEquations do
     )
   end
 
+  it 'decorates number with parenthesis' do
+    described_class.v1(book: book_with_one_equation, number_decorator: :parentheses)
+    expect(book_with_one_equation.chapters.first).to match_normalized_html(
+      <<~HTML
+        <div data-type="chapter">
+          <div data-type="equation" id="123">
+            <p>equation 1</p>
+            <div class="os-equation-number">
+              <span class="os-number">(1.1)</span>
+            </div>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  it 'raises if decorator is not supported' do
+    expect {
+      described_class.v1(book: book_with_one_equation, number_decorator: :dots)
+    }.to raise_error("Unsupported number_decorator 'dots'")
+  end
+
   it 'stores link text' do
     pantry = book_with_one_equation.document.pantry(name: :link_text)
     expect(pantry).to receive(:store).with('Equation 1.1', { label: '123' })
