@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.1.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.2.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -126,7 +126,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
-  BakeEquations.v1(book: book)
+  BakeEquations.v1(book: book, number_decorator: :parentheses)
 
   book.chapters.each do |chapter|
     BakePageAbstracts.v2(chapter: chapter)
