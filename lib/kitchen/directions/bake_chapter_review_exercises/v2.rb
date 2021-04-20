@@ -20,17 +20,7 @@ module Kitchen::Directions::BakeChapterReviewExercises
           exercise_section.first("[data-type='title']")&.trash
 
           # Get parent page title
-          id = exercise_section.id.split('fs-id')[0]
-          section_title = <<~HTML
-            <a href="##{id}0">
-              <h3 data-type="document-title" id="#{id}0">
-                <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-                <span class="os-divider"> </span>
-                <span class="os-text" data-type="" itemprop="">#{page.title.text}</span>
-              </h3>
-            </a>
-          HTML
-
+          section_title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: page)
           exercise_section.exercises.each do |exercise|
             exercise.document.pantry(name: :link_text).store(
               "#{I18n.t(:exercise_label)} #{chapter.count_in(:book)}.#{exercise.count_in(:chapter)}",

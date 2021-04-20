@@ -20,8 +20,8 @@ RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V2 do
       <<~HTML
         <div data-type="chapter">
           <div data-type="page">
-            <div data-type="document-title">page title</div>
-            <section id="sectionId1_fs-id-123456789" class="CLASSNAME">
+            <div data-type="document-title" id="page1TitleId">page title</div>
+            <section id="sectionId1" class="CLASSNAME">
               <div data-type="exercise" id="exercise_id1">
                 <div data-type="problem" id="problem_id1">
                   <p>exercise content 1</p>
@@ -33,8 +33,8 @@ RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V2 do
             </section>
           </div>
           <div data-type="page">
-            <div data-type="document-title">page 2 title</div>
-            <section id="sectionId1_fs-id-123456789" class="CLASSNAME">
+            <div data-type="document-title" id="page2TitleId">page 2 title</div>
+            <section id="sectionId2" class="CLASSNAME">
             </section>
           </div>
         </div>
@@ -61,9 +61,9 @@ RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V2 do
                 </div>
                 <div class="os-CLASSNAME">
                   <div class="os-section-area">
-                    <section id="sectionId1_fs-id-123456789" class="CLASSNAME">
-                      <a href="#sectionId1_0">
-                        <h3 data-type="document-title" id="sectionId1_0">
+                    <section id="sectionId1" class="CLASSNAME">
+                      <a href="#page1TitleId">
+                        <h3 data-type="document-title" id="page1TitleId_copy_1">
                           <span class="os-number">1.1</span>
                           <span class="os-divider"> </span>
                           <span class="os-text" data-type="" itemprop="">page title</span>
@@ -80,9 +80,9 @@ RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V2 do
                     </section>
                   </div>
                   <div class="os-section-area">
-                    <section class="CLASSNAME" id="sectionId1_fs-id-123456789_copy_1">
-                      <a href="#sectionId1_0">
-                        <h3 data-type="document-title" id="sectionId1_0_copy_1">
+                    <section class="CLASSNAME" id="sectionId2">
+                      <a href="#page2TitleId">
+                        <h3 data-type="document-title" id="page2TitleId_copy_1">
                           <span class="os-number">1.2</span>
                           <span class="os-divider"> </span>
                           <span class="os-text" data-type="" itemprop="">page 2 title</span>

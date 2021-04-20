@@ -7,15 +7,15 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
     chapter_element(
       <<~HTML
         <div data-type="page">
-          <h1 data-type="document-title">Page 1</h1>
-          <section id="auto_7c_fs-id1" class="key-concepts">
+          <h1 data-type="document-title" id="page1TitleId">Page 1</h1>
+          <section id="sectionId1" class="key-concepts">
             <h3 data-type="document-title">WWF History</h3>
             <p>Concepts blah.</p>
           </section>
         </div>
         <div data-type="page">
-          <h1 data-type="document-title">Page 2</h1>
-          <section id="auto_7c_fs-id2" class="key-concepts">
+          <h1 data-type="document-title" id="page2TitleId">Page 2</h1>
+          <section id="sectionId2" class="key-concepts">
             <h3 data-type="document-title">WWF History</h3>
             <p>Concepts two</p>
           </section>
@@ -31,10 +31,10 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
       <<~HTML
         <div data-type="chapter">
           <div data-type="page">
-            <h1 data-type="document-title">Page 1</h1>
+            <h1 data-type="document-title" id="page1TitleId">Page 1</h1>
           </div>
           <div data-type="page">
-            <h1 data-type="document-title">Page 2</h1>
+            <h1 data-type="document-title" id="page2TitleId">Page 2</h1>
           </div>
           <div class="os-eoc os-key-concepts-container" data-type="composite-page" data-uuid-key=".key-concepts">
             <h2 data-type="document-title">
@@ -46,9 +46,9 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
             </div>
             <div class="os-key-concepts">
               <div class="os-section-area">
-                <section id="auto_7c_fs-id1" class="key-concepts">
-                  <a href="#auto_7c_0">
-                    <h3 data-type="document-title" id="auto_7c_0">
+                <section id="sectionId1" class="key-concepts">
+                  <a href="#page1TitleId">
+                    <h3 data-type="document-title" id="page1TitleId_copy_1">
                       <span class="os-number">1.1</span>
                       <span class="os-divider"> </span>
                       <span class="os-text" data-type="" itemprop="">Page 1</span>
@@ -58,9 +58,9 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
                 </section>
               </div>
               <div class="os-section-area">
-                <section id="auto_7c_fs-id2" class="key-concepts">
-                  <a href="#auto_7c_0">
-                    <h3 data-type="document-title" id="auto_7c_0_copy_1">
+                <section id="sectionId2" class="key-concepts">
+                  <a href="#page2TitleId">
+                    <h3 data-type="document-title" id="page2TitleId_copy_1">
                       <span class="os-number">1.2</span>
                       <span class="os-divider"> </span>
                       <span class="os-text" data-type="" itemprop="">Page 2</span>

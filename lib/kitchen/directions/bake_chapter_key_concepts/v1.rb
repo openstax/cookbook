@@ -13,19 +13,9 @@ module Kitchen::Directions::BakeChapterKeyConcepts
         next if key_concepts.none?
 
         key_concepts.search('h3').trash
+        title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: page)
         key_concepts.each do |key_concept|
-          id = key_concept.id.split('fs-id')
-          key_concept.prepend(child:
-            <<~HTML
-              <a href="##{id[0]}0">
-                <h3 data-type="document-title" id="#{id[0]}0">
-                  <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-                  <span class="os-divider"> </span>
-                  <span class="os-text" data-type="" itemprop="">#{page.title.text}</span>
-                </h3>
-              </a>
-            HTML
-          )
+          key_concept.prepend(child: title)
           key_concept&.cut(to: key_concepts_clipboard)
         end
         @key_concepts.push(key_concepts_clipboard.paste)

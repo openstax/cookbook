@@ -423,6 +423,12 @@ module Kitchen
       temp_copy.to_s
     end
 
+    # Copy the element's id
+    def copied_id
+      document.record_id_copied(id)
+      document.modified_id_to_paste(id)
+    end
+
     # Delete the element
     #
     def trash
