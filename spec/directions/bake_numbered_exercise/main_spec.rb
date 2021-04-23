@@ -8,4 +8,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
       .with(exercise: 'exercise1', number: '1.1')
     described_class.v1(exercise: 'exercise1', number: '1.1')
   end
+
+  it 'calls bake_solution_v1' do
+    expect_any_instance_of(Kitchen::Directions::BakeNumberedExercise::V1).to receive(:bake_solution)
+      .with(exercise: 'exercise1', number: '1.1', divider: 'abc')
+    described_class.bake_solution_v1(exercise: 'exercise1', number: '1.1', divider: 'abc')
+  end
 end

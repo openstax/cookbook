@@ -41,22 +41,11 @@ module Kitchen
         exercise.problem.wrap_children('div', class: 'os-problem-container')
         exercise.problem.first('strong')&.trash
         exercise.search('[data-type="commentary"]').each(&:trash)
-        solution = exercise.solution
-        return unless solution
+        return unless exercise.solution
 
         # bake solution in place
-        exercise.add_class('os-hasSolution')
-        solution[:id] = "#{exercise[:id]}-solution"
-        solution_number = note.first('.os-number').text
-        solution.replace_children(with:
-          <<~HTML
-            <a class="os-number" href="##{exercise[:id]}">#{solution_number}</a>
-            <span class="os-divider"> </span>
-            <div class="os-solution-container">
-              #{solution.children}
-            </div>
-          HTML
-        )
+        BakeNumberedExercise.bake_solution_v1(
+          exercise: exercise, number: note.first('.os-number').text, divider: ' ')
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeProblemFirstElements do
+RSpec.describe Kitchen::Directions::BakeFirstElements do
   let(:book) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -72,6 +72,22 @@ RSpec.describe Kitchen::Directions::BakeProblemFirstElements do
                 </div>
               </div>
             </div>
+            <div data-type="exercise" id="bla7">
+              <div data-type="problem"/>
+              <div data-type="solution">
+                <div class="os-solution-container">
+                  <div data-type="media">Media</div>
+                </div>
+              </div>
+            </div>
+            <div data-type="exercise" id="bla8">
+              <div data-type="problem"/>
+              <div data-type="solution">
+                <div class="os-solution-container">
+                  <div data-type="not media">bla10</div>
+                </div>
+              </div>
+            </div>
           </section>
         HTML
       )
@@ -79,10 +95,10 @@ RSpec.describe Kitchen::Directions::BakeProblemFirstElements do
   end
 
   it 'works' do
-    within = book.search('.section-exercises').first
+    section = book.search('.section-exercises').first
     described_class.v1(
-      within: within,
-      selectors: ['.os-table', '[data-type="media"]']
+      within: section,
+      selectors: ['.os-problem-container > .os-table', '.os-problem-container > [data-type="media"]', '.os-solution-container > [data-type="media"]']
     )
 
     expect(book.body).to match_normalized_html(
@@ -152,6 +168,22 @@ RSpec.describe Kitchen::Directions::BakeProblemFirstElements do
                           <div>do not bake this content</div>
                         </table>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-type="exercise" id="bla7">
+                  <div data-type="problem"></div>
+                  <div data-type="solution">
+                    <div class="os-solution-container has-first-element">
+                      <div class="first-element" data-type="media">Media</div>
+                    </div>
+                  </div>
+                </div>
+                <div data-type="exercise" id="bla8">
+                  <div data-type="problem"></div>
+                  <div data-type="solution">
+                    <div class="os-solution-container">
+                      <div data-type="not media">bla10</div>
                     </div>
                   </div>
                 </div>
