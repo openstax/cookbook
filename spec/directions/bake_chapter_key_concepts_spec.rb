@@ -14,7 +14,11 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
           </section>
         </div>
         <div data-type="page">
-          <h1 data-type="document-title" id="page2TitleId">Page 2</h1>
+          <h2 data-type="document-title" id="page2TitleId">
+            <span class="os-number">1.1</span>
+            <span class="os-divider"> </span>
+            <span data-type="" itemprop="" class="os-text">Baked Title</span>
+          </h2>
           <section id="sectionId2" class="key-concepts">
             <h3 data-type="document-title">WWF History</h3>
             <p>Concepts two</p>
@@ -34,7 +38,11 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
             <h1 data-type="document-title" id="page1TitleId">Page 1</h1>
           </div>
           <div data-type="page">
-            <h1 data-type="document-title" id="page2TitleId">Page 2</h1>
+            <h2 data-type="document-title" id="page2TitleId">
+              <span class="os-number">1.1</span>
+              <span class="os-divider"> </span>
+              <span data-type="" itemprop="" class="os-text">Baked Title</span>
+            </h2>
           </div>
           <div class="os-eoc os-key-concepts-container" data-type="composite-page" data-uuid-key=".key-concepts">
             <h2 data-type="document-title">
@@ -63,7 +71,7 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
                     <h3 data-type="document-title" id="page2TitleId_copy_1">
                       <span class="os-number">1.2</span>
                       <span class="os-divider"> </span>
-                      <span class="os-text" data-type="" itemprop="">Page 2</span>
+                      <span class="os-text" data-type="" itemprop="">Baked Title</span>
                     </h3>
                   </a>
                   <p>Concepts two</p>

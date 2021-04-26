@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.2.0] - 2021-04-19
 
+* Adds method to allow unit and page title text to be retrieved regardless of bake status (minor)
 * Rename several directions (major)
   * `BakeChapterReviewExercises` -> `MoveExercisesToEOC`
   * `BakeChapterReview` -> `ChapterReviewContainer`

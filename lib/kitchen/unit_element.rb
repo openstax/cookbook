@@ -27,6 +27,14 @@ module Kitchen
       first!("./*[@data-type = 'document-title']")
     end
 
+    # Returns the title's text regardless of whether the title has been baked
+    #
+    # @return [String]
+    #
+    def title_text
+      title.children.one? ? title.text : title.first('.os-text').text
+    end
+
     # Returns true if this class represents the element for the given node
     #
     # @param node [Nokogiri::XML::Node] the underlying node
