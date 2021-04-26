@@ -56,7 +56,7 @@ RSpec.describe Kitchen::ElementEnumerator do
       enumerator.cut(to: :something)
       expect(element1.to_s).not_to match(/id1|id2|id4/)
       expect(element1.to_s).to match(/id3/)
-      expect(element1.document.clipboard(name: :something).paste).to match(/id1.*id2[^3]*id4/)
+      expect(element1.clipboard(name: :something).paste).to match(/id1.*id2[^3]*id4/)
     end
 
     it 'can cut to a new clipboard' do
@@ -82,7 +82,7 @@ RSpec.describe Kitchen::ElementEnumerator do
     it 'can copy to a named clipboard' do
       enumerator.copy(to: :something)
       expect(element1.to_s).to eq original_element1_string
-      expect(element1.document.clipboard(name: :something).paste).to match(/id1.*id2[^3]*id4/)
+      expect(element1.clipboard(name: :something).paste).to match(/id1.*id2[^3]*id4/)
     end
 
     it 'can copy to a new clipboard' do

@@ -46,7 +46,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   describe 'v1' do
     it 'works' do
-      expect(book1.document.pantry(name: :link_text)).to receive(:store).with('Figure 1.2', label: 'someId')
+      expect(book1.pantry(name: :link_text)).to receive(:store).with('Figure 1.2', label: 'someId')
 
       described_class.v1(figure: book1_figure, number: '1.2')
 

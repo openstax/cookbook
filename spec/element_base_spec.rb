@@ -389,9 +389,9 @@ RSpec.describe Kitchen::ElementBase do
     end
   end
 
-  describe '#clipboard' do
+  describe '#get_clipboard' do
     it 'explodes when the argument is not a clipboard or symbol' do
-      expect { book.send(:clipboard, 'foo') }.to raise_error(/is not a clipboard name or a clipboard/)
+      expect { book.send(:get_clipboard, 'foo') }.to raise_error(/is not a clipboard name or a clipboard/)
     end
   end
 

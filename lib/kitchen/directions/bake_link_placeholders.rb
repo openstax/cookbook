@@ -10,7 +10,7 @@ module Kitchen
           next unless anchor.text == '[link]'
 
           id = anchor[:href][1..-1]
-          replacement = book.document.pantry(name: :link_text).get(id)
+          replacement = book.pantry(name: :link_text).get(id)
           if replacement.present?
             anchor.replace_children(with: replacement)
           else

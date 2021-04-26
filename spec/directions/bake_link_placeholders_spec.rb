@@ -22,7 +22,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
   end
 
   before do
-    book.document.pantry(name: :link_text).store('Example x.y', label: 'key')
+    book.pantry(name: :link_text).store('Example x.y', label: 'key')
   end
 
   it 'bakes' do

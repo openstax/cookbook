@@ -101,7 +101,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
   it 'stores info in the pantry' do
     expect { described_class.v1(example: example, number: 4, title_tag: 'title-tag-name') }.to change {
-      example.document.pantry(name: :link_text).get(example.id)
+      example.pantry(name: :link_text).get(example.id)
     }.from(nil)
   end
 end

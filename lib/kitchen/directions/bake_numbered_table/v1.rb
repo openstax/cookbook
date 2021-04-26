@@ -7,7 +7,7 @@ module Kitchen::Directions::BakeNumberedTable
       table.wrap(%(<div class="os-table">))
 
       table_label = "#{I18n.t(:table_label)} #{number}"
-      table.document.pantry(name: :link_text).store table_label, label: table.id
+      table.pantry(name: :link_text).store table_label, label: table.id
 
       if table.top_titled?
         table.parent.add_class('os-top-titled-container')

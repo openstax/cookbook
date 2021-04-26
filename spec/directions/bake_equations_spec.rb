@@ -94,7 +94,7 @@ RSpec.describe Kitchen::Directions::BakeEquations do
   end
 
   it 'stores link text' do
-    pantry = book_with_one_equation.document.pantry(name: :link_text)
+    pantry = book_with_one_equation.pantry(name: :link_text)
     expect(pantry).to receive(:store).with('Equation 1.1', { label: '123' })
     described_class.v1(book: book_with_one_equation)
   end

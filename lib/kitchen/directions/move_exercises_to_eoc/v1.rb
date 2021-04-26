@@ -18,7 +18,7 @@ module Kitchen::Directions::MoveExercisesToEOC
           exercise_section.first("[data-type='title']")&.trash
 
           exercise_section.exercises.each do |exercise|
-            exercise.document.pantry(name: :link_text).store(
+            exercise.pantry(name: :link_text).store(
               "#{I18n.t(:exercise_label)} #{chapter.count_in(:book)}.#{exercise.count_in(:chapter)}",
               label: exercise.id
             )

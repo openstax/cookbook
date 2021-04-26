@@ -10,7 +10,7 @@ module Kitchen
 
           # Store label information
           equation_label = "#{I18n.t(:equation)} #{number}"
-          book.document.pantry(name: :link_text).store equation_label, label: eq.id
+          book.pantry(name: :link_text).store equation_label, label: eq.id
 
           decorated_number =
             case number_decorator

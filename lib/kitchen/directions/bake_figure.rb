@@ -6,7 +6,7 @@ module Kitchen
       def self.v1(figure:, number:)
         figure.wrap(%(<div class="os-figure#{' has-splash' if figure.has_class?('splash')}">))
 
-        figure.document.pantry(name: :link_text).store "#{I18n.t(:figure)} #{number}", label: figure.id
+        figure.pantry(name: :link_text).store "#{I18n.t(:figure)} #{number}", label: figure.id
         title = figure.title&.cut
 
         caption = figure.caption&.cut

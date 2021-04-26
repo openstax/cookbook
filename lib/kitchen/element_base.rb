@@ -92,6 +92,14 @@ module Kitchen
     #   @return [Selectors::Base]
     def_delegators :config, :selectors
 
+    # @!method pantry
+    #   Access the pantry for this element's document
+    #   @return [Pantry]
+    # @!method :clipboard
+    #   Access the clipboard for this element's document
+    #   @return [Clipboard]
+    def_delegators :document, :pantry, :clipboard
+
     # Creates a new instance
     #
     # @param node [Nokogiri::XML::Node] the wrapped element
@@ -383,7 +391,7 @@ module Kitchen
       block_error_if(block_given?)
 
       node.remove
-      clipboard(to).add(self) if to.present?
+      get_clipboard(to).add(self) if to.present?
       self
     end
 
@@ -404,7 +412,7 @@ module Kitchen
 
         document.record_id_copied(node[:id])
       end
-      clipboard(to).add(the_copy) if to.present?
+      get_clipboard(to).add(the_copy) if to.present?
       the_copy
     end
 
@@ -671,10 +679,10 @@ module Kitchen
     # @param name_or_object [String, Clipboard] the name of the clipboard or the clipboard itself
     # @return [Clipboard]
     #
-    def clipboard(name_or_object)
+    def get_clipboard(name_or_object)
       case name_or_object
       when Symbol
-        document.clipboard(name: name_or_object)
+        clipboard(name: name_or_object)
       when Clipboard
         name_or_object
       else
