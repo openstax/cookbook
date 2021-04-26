@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.2.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : 'cf0b374a71a1bcc30576988cf07f6b816cb3d0f0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -114,9 +114,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeUnnumberedTables.v1(book: book)
 
   book.search('.section-exercises').each do |within|
-    BakeProblemFirstElements.v1(
+    BakeFirstElements.v1(
       within: within,
-      selectors: ['.os-table', '[data-type="media"]']
+      selectors: [
+        '.os-problem-container > .os-table',
+        '.os-problem-container > [data-type="media"]'
+      ]
     )
   end
 
