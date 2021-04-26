@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeChapterReviewExercises::V1 do
+RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V1 do
   before do
     stub_locales({
       'eoc_exercises_title': 'Review Exercises',

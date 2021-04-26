@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kitchen::Directions::BakeChapterAnswerKey
+module Kitchen::Directions::MoveSolutionsToAnswerKey
   module Strategies
     class Calculus
       def bake(chapter:, append_to:)

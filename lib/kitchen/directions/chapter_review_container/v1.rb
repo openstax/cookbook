@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kitchen::Directions::BakeChapterReview
+module Kitchen::Directions::ChapterReviewContainer
   class V1
     renderable
 

@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-module Kitchen::Directions::BakeChapterReviewExercises
-  # Main difference from v1 is the presence of a section title
-  # and some additional wrappers
-  class V2
+module Kitchen::Directions::MoveExercisesToEOC
+  class V1
     renderable
 
     def bake(chapter:, metadata_source:, append_to:, klass:)
@@ -19,8 +17,6 @@ module Kitchen::Directions::BakeChapterReviewExercises
         sections.each do |exercise_section|
           exercise_section.first("[data-type='title']")&.trash
 
-          # Get parent page title
-          section_title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: page)
           exercise_section.exercises.each do |exercise|
             exercise.document.pantry(name: :link_text).store(
               "#{I18n.t(:exercise_label)} #{chapter.count_in(:book)}.#{exercise.count_in(:chapter)}",
@@ -28,21 +24,13 @@ module Kitchen::Directions::BakeChapterReviewExercises
             )
           end
 
-          # Configure section title & wrappers
-          exercise_section.prepend(child: section_title)
-          exercise_section.wrap('<div class="os-section-area">')
-          exercise_section = exercise_section.parent
           exercise_section.cut(to: exercise_clipboard)
         end
       end
 
       return if exercise_clipboard.none?
 
-      @content = <<~HTML
-        <div class="os-#{@klass}">
-          #{exercise_clipboard.paste}
-        </div>
-      HTML
+      @content = exercise_clipboard.paste
 
       append_to.append(child: render(file: 'review_exercises.xhtml.erb'))
     end

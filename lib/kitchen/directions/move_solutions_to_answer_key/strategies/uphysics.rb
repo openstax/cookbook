@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kitchen::Directions::BakeChapterAnswerKey
+module Kitchen::Directions::MoveSolutionsToAnswerKey
   module Strategies
     class UPhysics
       def bake(chapter:, append_to:)

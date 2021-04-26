@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeChapterReview::V1 do
+RSpec.describe Kitchen::Directions::ChapterReviewContainer::V1 do
   let(:chapter) do
     book_containing(html:
       <<~HTML

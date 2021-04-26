@@ -2,7 +2,7 @@
 
 module Kitchen
   module Directions
-    module BakeChapterReviewExercises
+    module MoveExercisesToEOC
       def self.v1(chapter:, metadata_source:, append_to:, klass:)
         V1.new.bake(chapter: chapter, metadata_source: metadata_source, append_to: append_to, klass: klass)
       end

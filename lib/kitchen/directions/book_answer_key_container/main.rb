@@ -2,7 +2,7 @@
 
 module Kitchen
   module Directions
-    module BakeBookAnswerKey
+    module BookAnswerKeyContainer
       def self.v1(book:)
         V1.new.bake(book: book)
       end

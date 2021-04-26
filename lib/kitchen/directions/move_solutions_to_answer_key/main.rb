@@ -2,7 +2,7 @@
 
 module Kitchen
   module Directions
-    module BakeChapterAnswerKey
+    module MoveSolutionsToAnswerKey
       def self.v1(chapter:, metadata_source:, strategy:, append_to:)
         V1.new.bake(
           chapter: chapter,

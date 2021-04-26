@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kitchen::Directions::BakeChapterAnswerKey
+module Kitchen::Directions::MoveSolutionsToAnswerKey
   class V1
     def bake(chapter:, metadata_source:, strategy:, append_to:)
       strategy =

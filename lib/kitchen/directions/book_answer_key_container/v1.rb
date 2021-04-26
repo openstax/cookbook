@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kitchen::Directions::BakeBookAnswerKey
+module Kitchen::Directions::BookAnswerKeyContainer
   class V1
     renderable
 
