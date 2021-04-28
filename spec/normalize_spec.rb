@@ -13,6 +13,8 @@ RSpec.describe 'normalize script' do
           <table class="" summary="123456">table 2</table>
           <div class=" ccccc   aaa bbb ">stuff</div>
           <div d="4" c="3" a="1"  e="5" b="2"/>
+          <span data-type="term" id="auto_123456_term471"/>
+          <a class="os-term-section-link" href="#auto_123456_term168">
         </body>
       HTML
     )
@@ -27,6 +29,8 @@ RSpec.describe 'normalize script' do
           <table summary="123456">table 2</table>
           <div class="aaa bbb ccccc">stuff</div>
           <div a="1" b="2" c="3" d="4" e="5"/>
+          <span data-type="term" id="auto_123456_termXXX"/>
+          <a class="os-term-section-link" href="#auto_123456_termXXX">
         </body>
       HTML
     )
