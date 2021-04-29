@@ -30,17 +30,27 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     title.name = 'h1'
   end
 
+  # BakeUnitTitle.v1(book: book)
+  BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
-
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
-    # BakeExercises.v1(book: book, classname: '.review-questions')
-    BakeSuggestedReading.v1(book: book)
-
-    BakeChapterTitle.v1(book: book)
-    BakeUnitTitle.v1(book: book)
-
+    chapter.search('.review-questions, .critical-thinking').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+    MoveExercisesToEOC.v1(
+      chapter: chapter,
+      metadata_source: book.metadata,
+      append_to: chapter,
+      klass: 'review-questions'
+    )
+    MoveExercisesToEOC.v1(
+      chapter: chapter,
+      metadata_source: book.metadata,
+      append_to: chapter,
+      klass: 'critical-thinking'
+    )
     chapter.pages('$:not(.introduction)').each do |page|
       page.search("div[data-type='description']").each(&:trash)
       page.add_class('chapter-content-module')
@@ -61,6 +71,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
   end
+  BakeSuggestedReading.v1(book: book)
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
@@ -82,12 +93,22 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  Bake titled and unclassified notes
+  # Bake titled and unclassified notes
   book.chapters.pages.notes.each do |note|
     if note.classes.empty?
       BakeUnclassifiedNote.v1(note: note)
+    end
   end
   BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning middle-ground milestone get-connected insider-perspective])
+  solutions_container = BookAnswerKeyContainer.v1(book: book)
+  book.chapters.each do |chapter|
+    MoveSolutionsToAnswerKey.v1(
+      chapter: chapter,
+      metadata_source: book.metadata,
+      strategy: :american_government,
+      append_to: solutions_container
+    )
+  end
   BakeReferences.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
