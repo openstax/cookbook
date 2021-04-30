@@ -25,6 +25,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'review-questions')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'critical-thinking')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'personal-application')
+
+    chapter.search('.review-questions, .critical-thinking, .personal-application').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution: true)
+    end
   end
 
   BakeChapterIntroductions.v1(book: book)
