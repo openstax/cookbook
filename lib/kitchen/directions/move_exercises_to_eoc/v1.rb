@@ -4,7 +4,7 @@ module Kitchen::Directions::MoveExercisesToEOC
   class V1
     renderable
 
-    def bake(chapter:, metadata_source:, append_to:, klass:)
+    def bake(chapter:, metadata_source:, klass:, append_to: nil)
       @klass = klass
       @metadata = metadata_source.children_to_keep.copy
       @title = I18n.t(:"eoc.#{klass}")
@@ -32,7 +32,11 @@ module Kitchen::Directions::MoveExercisesToEOC
 
       @content = exercise_clipboard.paste
 
-      append_to.append(child: render(file: 'review_exercises.xhtml.erb'))
+      append_to_element = append_to || chapter
+      @tag = append_to ? 'h3' : 'h2'
+      @metadata_title = append_to ? I18n.t(:eoc_exercises_title) : @title
+
+      append_to_element.append(child: render(file: 'review_exercises.xhtml.erb'))
     end
   end
 end
