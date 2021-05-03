@@ -72,7 +72,7 @@ end
 
 # Main normalize function for an XML document
 
-def normalize(doc)
+def normalize(doc, args: [])
   doc.traverse do |child|
     mask_copied_id_numbers(child)
     next if child.text? || child.document?
@@ -81,6 +81,6 @@ def normalize(doc)
     remove_blank_classes(child)
     sort_classes_strip_whitespace(child)
     sort_attributes(child)
-    mask_term_numbers(child)
+    mask_term_numbers(child) if args.include?('--mask-terms')
   end
 end
