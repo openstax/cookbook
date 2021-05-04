@@ -26,7 +26,7 @@ module Kitchen
       # Get the title in the immediate children, not the one in the metadata.  Could use
       # CSS of ":not([data-type='metadata']) > [data-type='document-title'], [data-type='document-title']"
       # but xpath is shorter
-      first!("./*[@data-type = 'document-title']")
+      first!("./*[@data-type = 'document-title' or @data-type = 'title']")
     end
 
     # Returns true if this class represents the element for the given node
