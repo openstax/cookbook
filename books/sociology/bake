@@ -49,36 +49,30 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
+    BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
   # Remove description form the whole book (it also present in Preface)
   book.search('[data-type="metadata"] > [data-type="description"]').trash
 
-  BakeExercises.v1(
-    book: book,
-    exercise_section_classname: 'section-quiz',
-    exercise_section_title: 'eoc_section_quiz_exercises_title'
-  )
-  BakeExercises.v1(
-    book: book,
-    exercise_section_classname: 'short-answer',
-    exercise_section_title: 'eoc_short_answer_exercises_title'
-  )
+  # BakeExercises.v1(
+  #   book: book,
+  #   exercise_section_classname: 'section-quiz',
+  #   exercise_section_title: 'eoc_section_quiz_exercises_title'
+  # )
+  # BakeExercises.v1(
+  #   book: book,
+  #   exercise_section_classname: 'short-answer',
+  #   exercise_section_title: 'eoc_short_answer_exercises_title'
+  # )
 
   BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    # Fix up chapter titles - TODO put this in BakeChapter
-    heading = chapter.at('h1[2]')
-    heading[:id] = "chapTitle#{chapter.count_in(:book)}"
-    heading.replace_children(with:
-      <<~HTML
-        <span class="os-part-text">Chapter </span>
-        <span class="os-number">#{chapter.count_in(:book)}</span>
-        <span class="os-divider"> </span>
-        <span data-type="" itemprop="" class="os-text">#{heading.text}</span>
-      HTML
-    )
+    BakePageAbstracts.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -91,20 +85,21 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
                      title_tag: 'h3')
     end
 
-    chapter.pages('$:not(.introduction)').each do |page|
-      # page.search("div[data-type='description']").each(&:trash)
-      page.add_class('chapter-content-module')
+    # chapter.pages('$:not(.introduction)').each do |page|
+    #   # page.search("div[data-type='description']").each(&:trash)
+    #   page.add_class('chapter-content-module')
 
-      title = page.search("div[data-type='document-title']").first
-      title.name = 'h2'
-      title.replace_children(with:
-        <<~HTML
-          <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-          <span class="os-divider"> </span>
-          <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-        HTML
-      )
-    end
+    #   title = page.search("div[data-type='document-title']").first
+    #   title.name = 'h2'
+    #   title.replace_children(with:
+    #     <<~HTML
+    #       <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+    #       <span class="os-divider"> </span>
+    #       <span data-type="" itemprop="" class="os-text">#{title.text}</span>
+    #     HTML
+    #   )
+    # end
+    BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.figures.each do |figure|
       BakeFigure.v1(figure: figure,
@@ -132,7 +127,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeNotes.v1(book: book)
+  # BakeNotes.v1(book: book)
+  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning
+                                                 dig-deeper
+                                                 everyday-connection
+                                                 what-do-you-think
+                                                 connect-the-concepts])
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   # BakeMathInParagraph.v1(book: book)
