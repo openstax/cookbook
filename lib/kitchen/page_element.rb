@@ -103,6 +103,14 @@ module Kitchen
       search('section.key-concepts')
     end
 
+    # Returns the free response questions
+    #
+    # @return [Element]
+    #
+    def free_response
+      search('section.free-response')
+    end
+
     # Returns true if this class represents the element for the given node
     #
     # @param node [Nokogiri::XML::Node] the underlying node
