@@ -47,7 +47,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
@@ -56,17 +55,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   # Remove description form the whole book (it also present in Preface)
   book.search('[data-type="metadata"] > [data-type="description"]').trash
-
-  # BakeExercises.v1(
-  #   book: book,
-  #   exercise_section_classname: 'section-quiz',
-  #   exercise_section_title: 'eoc_section_quiz_exercises_title'
-  # )
-  # BakeExercises.v1(
-  #   book: book,
-  #   exercise_section_classname: 'short-answer',
-  #   exercise_section_title: 'eoc_short_answer_exercises_title'
-  # )
 
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
@@ -85,22 +73,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
                      title_tag: 'h3')
     end
 
-    # chapter.pages('$:not(.introduction)').each do |page|
-    #   # page.search("div[data-type='description']").each(&:trash)
-    #   page.add_class('chapter-content-module')
-
-    #   title = page.search("div[data-type='document-title']").first
-    #   title.name = 'h2'
-    #   title.replace_children(with:
-    #     <<~HTML
-    #       <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-    #       <span class="os-divider"> </span>
-    #       <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-    #     HTML
-    #   )
-    # end
     BakeNonIntroductionPages.v1(chapter: chapter)
 
+    # chapter.pages('$:not(.introduction)').each do |page|
+      # page.search("div[data-type='description']").each(&:trash)
+    # end
     chapter.figures.each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
@@ -139,22 +116,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
-
+  BakeLinkPlaceholders.v1(book: book)
   BakeToc.v1(book: book)
-
-  # competing docs from elements - BakeLinkPlaceholders
-  book.search('a').each do |anchor|
-    next unless anchor.text == '[link]'
-
-    id = anchor[:href][1..-1]
-    replacement = doc.pantry(name: :link_text).get(id)
-    if replacement.present?
-      anchor.replace_children(with: replacement)
-    else
-      # TODO: log a warning!
-      puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
-    end
-  end
 
 end
 
