@@ -47,7 +47,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, summary_selector_overriden: true)
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
