@@ -18,27 +18,49 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise::V1 do
     )
   end
 
-  it 'works' do
-    described_class.new.bake(exercise: exercise1, number: '1.1')
+  context 'when solutions are not suppressed' do
+    it 'works' do
+      described_class.new.bake(exercise: exercise1, number: '1.1')
 
-    expect(exercise1).to match_normalized_html(
-      <<~HTML
-        <div data-type="exercise" id="exercise_id" class="os-hasSolution">
-          <div data-type="problem" id="problem_id">
-            <a class="os-number" href="#exercise_id-solution">1.1</a>
-            <span class="os-divider">. </span>
-            <div class="os-problem-container">
-              <p>example content</p>
+      expect(exercise1).to match_normalized_html(
+        <<~HTML
+          <div data-type="exercise" id="exercise_id" class="os-hasSolution">
+            <div data-type="problem" id="problem_id">
+              <a class="os-number" href="#exercise_id-solution">1.1</a>
+              <span class="os-divider">. </span>
+              <div class="os-problem-container">
+                <p>example content</p>
+              </div>
+            </div>
+            <div data-type="solution" id="exercise_id-solution"><a class="os-number" href="#exercise_id">1.1</a>
+              <span class="os-divider">. </span>
+              <div class="os-solution-container">
+                <p>Solution content</p>
+              </div>
             </div>
           </div>
-          <div data-type="solution" id="exercise_id-solution"><a class="os-number" href="#exercise_id">1.1</a>
-            <span class="os-divider">. </span>
-            <div class="os-solution-container">
-              <p>Solution content</p>
+        HTML
+      )
+    end
+  end
+
+  context 'when solutions are suppressed' do
+    it 'works' do
+      described_class.new.bake(exercise: exercise1, number: '1.1', suppress_solution: true)
+
+      expect(exercise1).to match_normalized_html(
+        <<~HTML
+          <div data-type="exercise" id="exercise_id">
+            <div data-type="problem" id="problem_id">
+              <span class='os-number'>1.1</span>
+              <span class="os-divider">. </span>
+              <div class="os-problem-container">
+                <p>example content</p>
+              </div>
             </div>
           </div>
-        </div>
-      HTML
-    )
+        HTML
+      )
+    end
   end
 end
