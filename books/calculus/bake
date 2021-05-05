@@ -27,7 +27,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeNumberedNotes.v1(book: book, classes: %w[theorem checkpoint])
 
   book.chapters.each do |chapter|
-    chapter_review = BakeChapterReview.v1(
+    chapter_review = ChapterReviewContainer.v1(
       chapter: chapter,
       metadata_source: book.metadata
     )
@@ -41,7 +41,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     BakeChapterKeyConcepts.v1(
       chapter: chapter, metadata_source: book.metadata, append_to: chapter_review
     )
-    BakeChapterReviewExercises.v1(
+    MoveExercisesToEOC.v1(
       chapter: chapter, metadata_source: book.metadata,
       append_to: chapter_review, klass: 'review-exercises'
     )
@@ -101,13 +101,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   # Here we move the solutions to the end of the book. Calculus has an "Answer Key" composite
   # chapter after the appendices. So we make the answer key, then iterate over the chapters, making
   # an answer key composite page for each chapter that we append to the answer key composite chapter
-  book_answer_key = BakeBookAnswerKey.v1(book: book)
+  book_answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeChapterAnswerKey.v1(chapter: chapter,
-                            metadata_source: book.metadata,
-                            strategy: :calculus,
-                            append_to: book_answer_key)
+    MoveSolutionsToAnswerKey.v1(chapter: chapter,
+                                metadata_source: book.metadata,
+                                strategy: :calculus,
+                                append_to: book_answer_key)
   end
 
   BakeStepwise.v1(book: book)
