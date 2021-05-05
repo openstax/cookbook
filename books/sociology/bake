@@ -104,12 +104,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  # BakeNotes.v1(book: book)
-  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning
-                                                 dig-deeper
-                                                 everyday-connection
-                                                 what-do-you-think
-                                                 connect-the-concepts])
+  BakeAutotitledNotes.v1(book: book, classes: %w[sociological-research
+                                                 sociology-real-world
+                                                 sociology-big-picture
+                                                 sociology-policy-debate])
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   # BakeMathInParagraph.v1(book: book)

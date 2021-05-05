@@ -5,6 +5,6 @@ en:
     sociology-real-world: Sociology in the Real World
     sociology-big-picture: Big Picture
     sociology-policy-debate: Social Policy and Debate
-  eoc_section_quiz_exercises_title: Section Quiz
-  eoc_short_answer_exercises_title: Short Answer
-
+  eoc:
+    section-quiz: Section Quiz
+    short-answer: Short Answer
