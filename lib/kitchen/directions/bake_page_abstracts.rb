@@ -19,7 +19,7 @@ module Kitchen
             li.replace_children(with:
               <<~HTML
                 <span class="os-abstract-token">#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}</span>
-                <span class="os-abstract-content">#{li.text}</span>
+                <span class="os-abstract-content">#{li.children}</span>
               HTML
             )
           end

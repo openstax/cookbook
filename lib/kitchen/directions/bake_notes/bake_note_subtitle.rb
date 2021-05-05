@@ -8,6 +8,10 @@ module Kitchen
 
         return unless title
 
+        # Store label information
+        note_label = title.children
+        note.pantry(name: :link_text).store note_label, label: note.id
+
         title.name = 'h4'
         title.add_class('os-subtitle')
         title.wrap_children('span', class: 'os-subtitle-label')

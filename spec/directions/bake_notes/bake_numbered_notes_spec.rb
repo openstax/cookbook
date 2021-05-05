@@ -77,31 +77,31 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
         <body>
           <div data-type="chapter">
             <div class="foo" data-type="note" id="123">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Bar</span>
                 <span class="os-number">1.1</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <p>content 1.1</p>
               </div>
             </div>
             <div class="hello" data-type="note" id="111">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Hello World</span>
                 <span class="os-number">1.1</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <p>content 1.1</p>
               </div>
             </div>
             <div class="hello" data-type="note" id="222">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Hello World</span>
                 <span class="os-number">1.2</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <p>content 1.2</p>
               </div>
@@ -109,21 +109,21 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
           </div>
           <div data-type="chapter">
             <div class="foo" data-type="note" id="456">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Bar</span>
                 <span class="os-number">2.1</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <p>content 2.1</p>
               </div>
             </div>
             <div class="foo" data-type="note" id="789">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Bar</span>
                 <span class="os-number">2.2</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <p>content 2.2</p>
                 <div class="unnumbered" data-type="exercise">
@@ -134,11 +134,11 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
               </div>
             </div>
             <div class="hello" data-type="note" id="333">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Hello World</span>
                 <span class="os-number">2.1</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <p>content 2.1</p>
                 <div class="unnumbered os-hasSolution" data-type="exercise" id="abcde">
@@ -159,11 +159,11 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
               <p>don't bake me</p>
             </div>
             <div class="theorem" data-type="note" id="note_id15" use-subtitle="true">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Theorem</span>
                 <span class="os-number">2.1</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <h4 class="os-subtitle" data-type="title" id="title_id15">
                   <span class="os-subtitle-label">Two Important Limits</span>
@@ -172,11 +172,11 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
               </div>
             </div>
             <div class="foo" data-type="note" id="4">
-              <div class="os-title">
+              <h3 class="os-title">
                 <span class="os-title-label">Bar</span>
                 <span class="os-number">2.3</span>
                 <span class="os-divider"> </span>
-              </div>
+              </h3>
               <div class="os-note-body">
                 <p>A title 4</p>
                 <div class="unnumbered os-hasSolution" data-type="exercise" id="123">

@@ -18,13 +18,14 @@ module Kitchen
         return if definitions.none?
 
         append_to_element = append_to || chapter
+        title_tag = append_to ? 'h3' : 'h2'
 
         append_to_element.append(child:
           <<~HTML
             <div class="os-eoc os-glossary-container" data-type="composite-page" data-uuid-key="glossary">
-              <h2 data-type="document-title">
+              <#{title_tag} data-type="document-title">
                 <span class="os-text">#{I18n.t(:eoc_key_terms_title)}</span>
-              </h2>
+              </#{title_tag}>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_key_terms_title)}</h1>
                 #{metadata_elements.paste}

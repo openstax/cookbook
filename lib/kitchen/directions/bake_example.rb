@@ -20,7 +20,11 @@ module Kitchen
                .pantry(name: :link_text)
                .store("#{I18n.t(:example_label)} #{number}", label: example.id)
 
-        example.titles.each { |title| title.name = 'h4' }
+        example.titles.each do |title|
+          next if title.parent.has_class?('os-caption-container')
+
+          title.name = 'h4'
+        end
 
         example.exercises.each do |exercise|
           if (problem = exercise.problem)

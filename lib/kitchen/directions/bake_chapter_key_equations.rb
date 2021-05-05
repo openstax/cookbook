@@ -14,13 +14,14 @@ module Kitchen
         return if key_equations.none?
 
         append_to_element = append_to || chapter
+        title_tag = append_to ? 'h3' : 'h2'
 
         append_to_element.append(child:
           <<~HTML
             <div class="os-eoc os-key-equations-container" data-type="composite-page" data-uuid-key=".key-equations">
-              <h2 data-type="document-title">
+              <#{title_tag} data-type="document-title">
                 <span class="os-text">#{I18n.t(:eoc_key_equations)}</span>
-              </h2>
+              </#{title_tag}>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_key_equations)}</h1>
                 #{metadata_elements.paste}
