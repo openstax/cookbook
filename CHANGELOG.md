@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `BakeFreeResponse` Directions (minor)
 * Add terms from composite pages to index (minor)
 * Access `.pantry` and `.clipboard` through an element instead of just its document (minor)
+* Add strategy for American Government answer key (minor)
 
 ## [3.2.0] - 2021-04-19
 
