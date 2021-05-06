@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# frozen_string_literal: true
+
 require 'bundler/inline'
 
 gemfile do
@@ -21,6 +23,7 @@ end
 recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   include Kitchen::Directions
 
+  # Set overrides
   doc.selectors.override(
     page_summary: '.section-summary'
   )
@@ -30,15 +33,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  # Update the preface title  TODO: add title method
-  book.pages('$.preface').search("div[data-type='document-title']").each do |title|
-    title.replace_children(with:
-      <<~HTML
-        <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-      HTML
-    )
-    title.name = 'h1'
-  end
+  BakePreface.v1(book: book)
+
   # Bake NumberedTable in Preface
   book.pages('$.preface').tables('$:not(.unnumbered)').each do |table|
     BakeNumberedTable.v1(table: table,
@@ -47,14 +43,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, summary_selector_overriden: true)
+    BakeChapterSummary.v1(chapter: chapter,
+                          metadata_source: book.metadata,
+                          summary_class: 'section-summary',
+                          summary_uuid: 'section-summary')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  # Remove description form the whole book (it also present in Preface)
-  book.search('[data-type="metadata"] > [data-type="description"]').trash
+  # Remove description form the whole book
+  # book.search('[data-type="metadata"] > [data-type="description"]').trash
 
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
