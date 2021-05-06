@@ -122,7 +122,12 @@ RSpec.describe Kitchen::Directions::BakeToc do
             </h2>
           </div>
         </div>
-        <div class="os-index-container" data-type="composite-page" id="p9">
+        <div class="os-reference-container" data-type="composite-page" id="p9">
+          <h1 data-type="document-title">
+            <span class="os-text">References</span>
+          </h1>
+        </div>
+        <div class="os-index-container" data-type="composite-page" id="p10">
           <h1 data-type="document-title">
             <span class="os-text">Index</span>
           </h1>
@@ -205,7 +210,12 @@ RSpec.describe Kitchen::Directions::BakeToc do
             </h2>
           </div>
         </div>
-        <div class="os-index-container" data-type="composite-page" id="p7">
+        <div class="os-reference-container" data-type="composite-page" id="p7">
+          <h1 data-type="document-title">
+            <span class="os-text">References</span>
+          </h1>
+        </div>
+        <div class="os-index-container" data-type="composite-page" id="p8">
           <h1 data-type="document-title">
             <span class="os-text">Index</span>
           </h1>
@@ -390,8 +400,13 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 </li>
               </ol>
             </li>
-            <li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p9">
+            <li class="os-toc-reference" cnx-archive-shortid="" cnx-archive-uri="p9">
               <a href="#p9">
+                <span class="os-text">References</span>
+              </a>
+            </li>
+            <li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p10">
+              <a href="#p10">
                 <span class="os-text">Index</span>
               </a>
             </li>
@@ -475,8 +490,13 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 </li>
               </ol>
             </li>
-            <li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p7">
+            <li class="os-toc-reference" cnx-archive-shortid="" cnx-archive-uri="p7">
               <a href="#p7">
+                <span class="os-text">References</span>
+              </a>
+            </li>
+            <li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p8">
+              <a href="#p8">
                 <span class="os-text">Index</span>
               </a>
             </li>
