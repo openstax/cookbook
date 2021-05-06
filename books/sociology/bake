@@ -43,13 +43,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter,
-                          metadata_source: book.metadata,
-                          summary_class: 'section-summary',
-                          summary_uuid: 'section-summary')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
+    # BakeChapterSummary.v1(chapter: chapter,
+    #                       metadata_source: book.metadata,
+    #                       summary_class: 'section-summary',
+    #                       summary_uuid: 'section-summary')
+    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
+    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
+    chapter.search('.section-quiz, .short-answer').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
   end
 
   # Remove description form the whole book
