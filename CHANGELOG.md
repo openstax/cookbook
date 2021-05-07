@@ -12,8 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Replaced a .text with .children to include math text (minor)
 * Changed title tag on numbered notes to always be h3 (major)
 * Storing all note subtitles in the pantry for link placeholders (minor)
+* Added another xmlns string option to remove if clone (minor)
 * Add class to reference superscript & add metadata to `BakeSuggestedReading` (minor)
-
 * Add `BakeFreeResponse` Directions (minor)
 * Add terms from composite pages to index (minor)
 * Access `.pantry` and `.clipboard` through an element instead of just its document (minor)
