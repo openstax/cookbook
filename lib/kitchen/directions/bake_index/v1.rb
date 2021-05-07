@@ -44,6 +44,10 @@ module Kitchen::Directions::BakeIndex
         @term_text = @term_text.uncapitalize
       end
 
+      def capitalize_term_text!
+        @term_text = @term_text.capitalize
+      end
+
       def <=>(other)
         sortable <=> other.sortable
       end
@@ -83,6 +87,11 @@ module Kitchen::Directions::BakeIndex
         @items_by_term_text[term.text] ||= begin
           different_caps_item = @items_by_term_text[term.text.uncapitalize]
           different_caps_item&.uncapitalize_term_text!
+
+          unless different_caps_item
+            different_caps_item = @items_by_term_text[term.text.capitalize]
+            different_caps_item&.capitalize_term_text!
+          end
 
           (different_caps_item || IndexItem.new(term_text: term.text)).tap do |item|
             @items.add(item)
