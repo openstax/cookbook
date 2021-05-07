@@ -75,10 +75,10 @@ RSpec.describe Kitchen::Directions::BakeReferences do
               </div>
               <p>
                 <a data-type="cite" href="#auto_12345">
-                  <sup>1</sup>
+                  <sup class="os-citation-number">1</sup>
                 </a>
                 <a data-type="cite" href="#auto_54321">
-                  <sup>2</sup>
+                  <sup class="os-citation-number">2</sup>
                 </a>
               </p>
             </div>
@@ -96,7 +96,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
               </div>
               <p>
                 <a data-type="cite" href="#auto_6789">
-                  <sup>1</sup>
+                  <sup class="os-citation-number">1</sup>
                 </a>
               </p>
             </div>

@@ -12,7 +12,7 @@ module Kitchen
           chapter.search('[data-type="cite"]').each do |link|
             link.prepend(child:
               <<~HTML
-                <sup>#{link.count_in(:chapter)}</sup>
+                <sup class="os-citation-number">#{link.count_in(:chapter)}</sup>
               HTML
             )
           end
