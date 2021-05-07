@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `suppress_solution` option to `BakeNumberedExercise` (minor)
 * Add strategy for American Government answer key (minor)
 * Add `BakeReferences` direction (minor)
+* Fix xmlns string replacement done in PR #209 (minor)
 
 ## [3.2.0] - 2021-04-19
 

@@ -697,8 +697,9 @@ module Kitchen
     # @param string [String] the string to clean
     def remove_default_namespaces_if_clone(string)
       if is_a_clone
-        string.gsub('xmlns:default="http://www.w3.org/1999/xhtml"', '').gsub('default:', '')
-        string.gsub('xmlns="http://www.w3.org/1999/xhtml"', '').gsub('default:', '')
+        string.gsub('xmlns:default="http://www.w3.org/1999/xhtml"', '')
+              .gsub('xmlns="http://www.w3.org/1999/xhtml"', '')
+              .gsub('default:', '')
       else
         string
       end
