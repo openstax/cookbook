@@ -13,7 +13,7 @@ RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V2 do
     })
   end
 
-  let(:append_to) { new_element('<div class="os-eoc os-chapter-review-container"></div>') }
+  let(:append_to) { new_element('<div class="os-eoc os-chapter-review-container" data-type="composite-chapter"></div>') }
 
   let(:book_with_review_exercises) do
     book_containing(html:
@@ -47,9 +47,9 @@ RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V2 do
       described_class.new.bake(chapter: book_with_review_exercises.chapters.first, metadata_source: metadata_element, append_to: append_to, klass: 'CLASSNAME')
       expect(append_to).to match_normalized_html(
         <<~HTML
-          <div class="os-eoc os-chapter-review-container">
+          <div class="os-eoc os-chapter-review-container" data-type="composite-chapter">
               <div class="os-eoc os-CLASSNAME-container" data-type="composite-page" data-uuid-key=".CLASSNAME">
-                  <h3 data-type="document-title">
+                  <h3 data-type="title">
                     <span class="os-text">foo</span>
                   </h3>
                   <div data-type="metadata" style="display: none;">

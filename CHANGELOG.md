@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `BakeReferences` direction (minor)
 * Fix xmlns string replacement done in PR #209 (minor)
 
+* Add `template` folder to kitchen to hold templates (minor)
+* Add `eoc_section_title_template` (minor)
+
 ## [3.2.0] - 2021-04-19
 
 * Adds method to allow unit and page title text to be retrieved regardless of bake status (minor)

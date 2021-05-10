@@ -65,7 +65,7 @@ RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V1 do
               <div>metadata</div>
               </div>
               <div class="os-eoc os-review-exercises-container" data-type="composite-page" data-uuid-key=".review-exercises">
-                  <h3 data-type="document-title">
+                  <h3 data-type="title">
                     <span class="os-text">foo</span>
                   </h3>
                   <div data-type="metadata" style="display: none;">

@@ -3,10 +3,12 @@
 module Kitchen::Directions::BakeChapterKeyConcepts
   class V1
     renderable
-    def bake(chapter:, metadata_source:, append_to:)
-      @metadata_elements = metadata_source.children_to_keep.copy
+    def bake(chapter:, metadata_source:, append_to:, uuid_prefix:)
+      @metadata = metadata_source.children_to_keep.copy
+      @klass = 'key-concepts'
+      @title = I18n.t(:eoc_key_concepts)
+      @uuid_prefix = uuid_prefix
 
-      @key_concepts = []
       key_concepts_clipboard = Kitchen::Clipboard.new
       chapter.non_introduction_pages.each do |page|
         key_concepts = page.key_concepts
@@ -16,16 +18,18 @@ module Kitchen::Directions::BakeChapterKeyConcepts
         title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: page)
         key_concepts.each do |key_concept|
           key_concept.prepend(child: title)
-          key_concept&.cut(to: key_concepts_clipboard)
+          key_concept.wrap("<div class='os-section-area'>")
+          page.search('.os-section-area').first.cut(to: key_concepts_clipboard)
         end
-        @key_concepts.push(key_concepts_clipboard.paste)
-        key_concepts_clipboard.clear
       end
 
-      append_to_element = append_to || chapter
-      @title_tag = append_to ? 'h3' : 'h2'
+      @content = "<div class=\"os-key-concepts\"> #{key_concepts_clipboard.paste} </div>"
 
-      append_to_element.append(child: render(file: 'key_concepts.xhtml.erb'))
+      append_to_element = append_to || chapter
+      @in_composite_chapter = append_to_element[:'data-type'] == 'composite-chapter'
+
+      append_to_element.append(child: render(file:
+        '../../templates/eoc_section_title_template.xhtml.erb'))
     end
   end
 end

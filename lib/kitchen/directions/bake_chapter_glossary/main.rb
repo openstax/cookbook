@@ -2,8 +2,10 @@
 
 module Kitchen
   module Directions
-    module BakeChapterKeyConcepts
-      def self.v1(chapter:, metadata_source:, append_to: nil, uuid_prefix: '.')
+    # Bake directons for eoc glossary
+    #
+    module BakeChapterGlossary
+      def self.v1(chapter:, metadata_source:, append_to: nil, uuid_prefix: nil)
         V1.new.bake(
           chapter: chapter,
           metadata_source: metadata_source,
