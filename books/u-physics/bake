@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '2.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.2.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -25,14 +25,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     BakeNonIntroductionPages.v1(chapter: chapter)
   end
 
-  solutions_container = BookAnswerKeyContainer.v1(book: book)
-
   # Bake the notes
   BakeAutotitledNotes.v1(book: book, classes: %w[media-2 problem-solving])
   BakeUnclassifiedNotes.v1(book: book)
   BakeNumberedNotes.v1(book: book, classes: %w[check-understanding])
 
   # Bake EOC sections
+  solutions_container = BookAnswerKeyContainer.v1(book: book)
   book.chapters.each do |chapter|
     eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: book.metadata)
 
@@ -90,16 +89,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
   BakeUnnumberedTables.v1(book: book)
   BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)
-
-  # Fix titles in chapter review composite pages
-  # TODO: remove this
-  book.chapters('.os-eoc.os-chapter-review-container').composite_pages.each do |page|
-    title = page.search('[data-type="document-title"]').first
-    title[:'data-type'] = 'title'
-    title.name = 'h3'
-    page.metadatas.first.search('[data-type="document-title"]').first.replace_children(with: 'Chapter Review')
-  end
-
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
@@ -107,19 +96,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeUnitTitle.v1(book: book)
-
-end
-
-after = Kitchen::BookRecipe.new(book_short_name: :u_physics) do |doc|
-  include Kitchen::Directions
-
-  book = doc.book
-
-  # remove w3 from toc
-  # TODO: remove this
-  book.search('nav#toc').first.search('[xmlns="http://www.w3.org/1999/xhtml"]').each do |el|
-    el.remove_attribute('xmlns')
-  end
 end
 
 opts = Slop.parse do |slop|
@@ -129,6 +105,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [recipe, after],
+  recipes: [recipe],
   output_file: opts[:output]
 )
