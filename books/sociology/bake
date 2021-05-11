@@ -52,12 +52,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
     chapter.search('.section-quiz, .short-answer').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+
     end
   end
 
   # Remove description form the whole book
   # book.search('[data-type="metadata"] > [data-type="description"]').trash
 
+  # Bake answer key from chapter/ move solutions from eoc into answer key
+  solution_container = BookAnswerKeyContainer.v1(book: book)
+  book.chapters.each do |chapter|
+    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: book.metadata, strategy: :sociology, append_to: solution_container)
+  end
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
 
