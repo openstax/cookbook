@@ -13,8 +13,14 @@ module Kitchen
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
-            enumerator_class: ReferenceElementEnumerator,
-            short_type: :reference)
+            enumerator_class: ReferenceElementEnumerator)
+    end
+
+    # Returns the short type
+    # @return [Symbol]
+    #
+    def self.short_type
+      :reference
     end
 
     # Returns true if this class represents the element for the given node

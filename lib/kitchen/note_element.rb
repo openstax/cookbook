@@ -13,8 +13,14 @@ module Kitchen
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
-            enumerator_class: NoteElementEnumerator,
-            short_type: :note)
+            enumerator_class: NoteElementEnumerator)
+    end
+
+    # Returns the short type
+    # @return [Symbol]
+    #
+    def self.short_type
+      :note
     end
 
     # Returns the note's title element

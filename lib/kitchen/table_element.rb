@@ -13,8 +13,14 @@ module Kitchen
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
-            enumerator_class: TableElementEnumerator,
-            short_type: :table)
+            enumerator_class: TableElementEnumerator)
+    end
+
+    # Returns the short type
+    # @return [Symbol]
+    #
+    def self.short_type
+      :table
     end
 
     # Returns an element for the title row, if present

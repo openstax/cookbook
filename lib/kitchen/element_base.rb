@@ -3,6 +3,7 @@
 require 'forwardable'
 require 'securerandom'
 
+# rubocop:disable Metrics/ClassLength
 module Kitchen
   # Abstract base class for all elements.  If you are looking for a simple concrete
   # element class, use `Element`.
@@ -116,7 +117,9 @@ module Kitchen
 
       @enumerator_class = enumerator_class
 
-      @short_type = short_type || "unknown_type_#{SecureRandom.hex(4)}"
+      @short_type = short_type ||
+                    self.class.try(:short_type) ||
+                    "unknown_type_#{SecureRandom.hex(4)}"
 
       @document =
         case document
@@ -129,6 +132,42 @@ module Kitchen
       @ancestors = HashWithIndifferentAccess.new
       @search_query_matches_that_have_been_counted = {}
       @is_a_clone = false
+    end
+
+    # Returns ElementBase descendent type or nil if none found
+    #
+    # @param type [Symbol] the descendant type, e.g. `:page`
+    # @return [Class] the child class for the given type
+    #
+    def self.descendant(type)
+      @types_to_descendants ||=
+        descendants.each_with_object({}) do |descendant, hash|
+          next unless descendant.try(:short_type)
+
+          hash[descendant.short_type] = descendant
+        end
+
+      @types_to_descendants[type]
+    end
+
+    # Returns ElementBase descendent type or Error if none found
+    #
+    # @param type [Symbol] the descendant type, e.g. `:page`
+    # @raise if the type is unknown
+    # @return [Class] the child class for the given type
+    #
+    def self.descendant!(type)
+      descendant(type) || raise("Unknown ElementBase descendant type '#{type}'")
+    end
+
+    # Returns true if this element is the given type
+    #
+    # @param type [Symbol] the descendant type, e.g. `:page`
+    # @raise if the type is unknown
+    # @return [Boolean]
+    #
+    def is?(type)
+      ElementBase.descendant!(type).is_the_element_class_for?(raw)
     end
 
     # Returns true if this class represents the element for the given node
@@ -712,3 +751,4 @@ module Kitchen
 
   end
 end
+# rubocop:enable Metrics/ClassLength

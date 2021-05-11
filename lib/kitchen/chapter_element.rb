@@ -13,8 +13,14 @@ module Kitchen
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
-            enumerator_class: ChapterElementEnumerator,
-            short_type: :chapter)
+            enumerator_class: ChapterElementEnumerator)
+    end
+
+    # Returns the short type
+    # @return [Symbol]
+    #
+    def self.short_type
+      :chapter
     end
 
     # Returns the title element (the one in the immediate children, not the one in the metadata)

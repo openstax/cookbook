@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `template` folder to kitchen to hold templates (minor)
 * Add `eoc_section_title_template` (minor)
 
+* Add `is?` method to `ElementBase` (minor)
+* Replaced in_composite_chapter to use `is?` (minor)
+* Add callable `short_type` to Elements (minor)
+
 ## [3.2.0] - 2021-04-19
 
 * Adds method to allow unit and page title text to be retrieved regardless of bake status (minor)

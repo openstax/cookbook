@@ -13,8 +13,14 @@ module Kitchen
     def initialize(node:, document: nil)
       super(node: node,
             document: document,
-            enumerator_class: ExampleElementEnumerator,
-            short_type: :example)
+            enumerator_class: ExampleElementEnumerator)
+    end
+
+    # Returns the short type
+    # @return [Symbol]
+    #
+    def self.short_type
+      :example
     end
 
     # Returns the an enumerator for titles.
