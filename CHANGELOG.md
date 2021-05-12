@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `template` folder to kitchen to hold templates (minor)
 * Add `eoc_section_title_template` (minor)
 
+* Expand specs with `append_to` to have with/without `append_to` contexts (minor)
 * Add `is?` method to `ElementBase` (minor)
 * Replaced in_composite_chapter to use `is?` (minor)
 * Add callable `short_type` to Elements (minor)
