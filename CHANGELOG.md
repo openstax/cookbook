@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* `BakeFootnotes` now looks for footnotes in composite chapters
+* Move exercise pantry label storage to `BakeNumberedExercises` to ensure consistency between exercise number and link text
 * Update `BakeIndex` term capitalization handling to be less case sensitive (minor)
 * Added a title tag variable to choose between h2 and h3 for children of chapter review (minor)
 * Added a fix for examples not to bake table captions (minor)

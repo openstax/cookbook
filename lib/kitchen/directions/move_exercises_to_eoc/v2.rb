@@ -22,12 +22,6 @@ module Kitchen::Directions::MoveExercisesToEOC
 
           # Get parent page title
           section_title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: page)
-          exercise_section.exercises.each do |exercise|
-            exercise.pantry(name: :link_text).store(
-              "#{I18n.t(:exercise_label)} #{chapter.count_in(:book)}.#{exercise.count_in(:chapter)}",
-              label: exercise.id
-            )
-          end
 
           # Configure section title & wrappers
           exercise_section.prepend(child: section_title)

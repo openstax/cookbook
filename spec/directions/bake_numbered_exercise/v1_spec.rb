@@ -4,18 +4,20 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeNumberedExercise::V1 do
   let(:exercise1) do
-    exercise_element(
-      <<~HTML
-        <div data-type="exercise" id="exercise_id">
-          <div data-type="problem" id="problem_id">
-            <p>example content</p>
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <div data-type="exercise" id="exercise_id">
+            <div data-type="problem" id="problem_id">
+              <p>example content</p>
+            </div>
+            <div data-type="solution" id="solution_id">
+              <p>Solution content</p>
+            </div>
           </div>
-          <div data-type="solution" id="solution_id">
-            <p>Solution content</p>
-          </div>
-        </div>
-      HTML
-    )
+        HTML
+      )
+    ).chapters.exercises.first
   end
 
   context 'when solutions are not suppressed' do

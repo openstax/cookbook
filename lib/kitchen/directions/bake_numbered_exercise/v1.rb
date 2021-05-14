@@ -6,6 +6,10 @@ module Kitchen::Directions::BakeNumberedExercise
       problem = exercise.problem
       solution = exercise.solution
 
+      exercise.pantry(name: :link_text).store(
+        "#{I18n.t(:exercise_label)} #{exercise.ancestor(:chapter).count_in(:book)}.#{number}",
+        label: exercise.id
+      )
       problem_number = "<span class='os-number'>#{number}</span>"
 
       if solution.present?

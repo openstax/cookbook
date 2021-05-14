@@ -8,7 +8,8 @@ module Kitchen::Directions::BakeFootnotes
       # appendices, etc) or within chapters. Tackle each case separately
 
       book.body.element_children.only(Kitchen::PageElement,
-                                      Kitchen::CompositePageElement).each do |page|
+                                      Kitchen::CompositePageElement,
+                                      Kitchen::CompositeChapterElement).each do |page|
         bake_footnotes_within(page)
       end
 
