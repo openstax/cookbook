@@ -1,0 +1,10 @@
+<div class="os-eob os-<%=@klass%>-container" data-type="composite-page" data-uuid-key="<%=@uuid_prefix%><%=@klass%>">
+  <h1 data-type="document-title">
+    <span class="os-text"><%= @title %></span>
+  </h1>
+  <div data-type="metadata" style="display: none;">
+    <h1 data-type="document-title" itemprop="name"><%= @title %></h1>
+    <%= @metadata.paste %>
+  </div>
+  <%= @content %>
+</div>

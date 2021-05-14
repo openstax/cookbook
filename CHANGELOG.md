@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `is?` method to `ElementBase` (minor)
 * Replaced in_composite_chapter to use `is?` (minor)
 * Add callable `short_type` to Elements (minor)
+* Add template for eob titles - `eob_section_title_template` (minor)
 
 ## [3.2.0] - 2021-04-19
 

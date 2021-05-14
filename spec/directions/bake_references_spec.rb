@@ -15,9 +15,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
           <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
         </h1>
         <div data-type="page">
-          <div data-type="metadata" style="display: none;">
-            <p> I am metadata chap 1</p>
-          </div>
+          #{metadata_element}
           <p>
             <a href="#auto_12345" data-type="cite">
               <div data-type="note" class="reference" display="inline" id="auto_12345">
@@ -40,9 +38,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
           <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
         </h1>
         <div data-type="page">
-          <div data-type="metadata" style="display: none;">
-            <p> I am metadata chap 2</p>
-          </div>
+          #{metadata_element}
           <p>
             <a href="#auto_6789" data-type="cite">
               <div data-type="note" class="reference" display="inline" id="auto_6789">
@@ -57,7 +53,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
   end
 
   it 'works' do
-    described_class.v1(book: book1)
+    described_class.v1(book: book1, metadata_source: metadata_element)
 
     expect(book1.body).to match_normalized_html(
       <<~HTML
@@ -71,7 +67,11 @@ RSpec.describe Kitchen::Directions::BakeReferences do
             </h1>
             <div data-type="page">
               <div data-type="metadata" style="display: none;">
-                <p> I am metadata chap 1</p>
+                <div class="authors" id="authors">Authors</div>
+                <div class="publishers" id="publishers">Publishers</div>
+                <div class="print-style" id="print-style">Print Style</div>
+                <div class="permissions" id="permissions">Permissions</div>
+                <div data-type="subject" id="subject">Subject</div>
               </div>
               <p>
                 <a data-type="cite" href="#auto_12345">
@@ -92,7 +92,11 @@ RSpec.describe Kitchen::Directions::BakeReferences do
             </h1>
             <div data-type="page">
               <div data-type="metadata" style="display: none;">
-                <p> I am metadata chap 2</p>
+                <div class="authors" id="authors">Authors</div>
+                <div class="publishers" id="publishers">Publishers</div>
+                <div class="print-style" id="print-style">Print Style</div>
+                <div class="permissions" id="permissions">Permissions</div>
+                <div data-type="subject" id="subject">Subject</div>
               </div>
               <p>
                 <a data-type="cite" href="#auto_6789">
@@ -107,6 +111,11 @@ RSpec.describe Kitchen::Directions::BakeReferences do
             </h1>
             <div data-type="metadata" style="display: none;">
               <h1 data-type="document-title" itemprop="name">References</h1>
+              <div class="authors" id="authors_copy_1">Authors</div>
+              <div class="publishers" id="publishers_copy_1">Publishers</div>
+              <div class="print-style" id="print-style_copy_1">Print Style</div>
+              <div class="permissions" id="permissions_copy_1">Permissions</div>
+              <div data-type="subject" id="subject_copy_1">Subject</div>
             </div>
             <div class="os-chapter-area">
               <h2 data-type="document-title">
