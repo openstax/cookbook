@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V1 do
   before do
     stub_locales({
-      'eoc_exercises_title': 'Review Exercises',
+      'eoc_composite_metadata_title': 'Exercises',
       'eoc_chapter_review': 'Chapter Review',
       'eoc': {
         'review-exercises': 'foo'
@@ -69,7 +69,7 @@ RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V1 do
                     <span class="os-text">foo</span>
                   </h3>
                   <div data-type="metadata" style="display: none;">
-                    <h1 data-type="document-title" itemprop="name">Review Exercises</h1>
+                    <h1 data-type="document-title" itemprop="name">Exercises</h1>
                     <div class="authors" id="authors_copy_1">Authors</div>
                     <div class="publishers" id="publishers_copy_1">Publishers</div>
                     <div class="print-style" id="print-style_copy_1">Print Style</div>

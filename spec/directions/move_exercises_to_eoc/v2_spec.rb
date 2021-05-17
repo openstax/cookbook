@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V2 do
   before do
     stub_locales({
-      'eoc_exercises_title': 'Review Exercises',
+      'eoc_composite_metadata_title': 'Review Exercises',
       'eoc_chapter_review': 'Chapter Review',
       'eoc': {
         'CLASSNAME': 'foo'

@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fix xmlns string replacement done in PR #209 (minor)
 * Remove depreciated directions `BakeNotes` and `BakeExercises` (major)
 
+* Adds `eoc_composite_metadata_title` to en.yml and eoc template (major)
+
 * Add `template` folder to kitchen to hold templates (minor)
 * Add `eoc_section_title_template` (minor)
 
