@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add strategy for American Government answer key (minor)
 * Add `BakeReferences` direction (minor)
 * Fix xmlns string replacement done in PR #209 (minor)
+* Move title above metadata in `BakeSuggestedReading` direction (major)
 * Remove depreciated directions `BakeNotes` and `BakeExercises` (major)
 
 * Adds `eoc_composite_metadata_title` to en.yml and eoc template (major)

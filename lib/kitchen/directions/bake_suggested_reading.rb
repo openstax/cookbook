@@ -13,13 +13,13 @@ module Kitchen
           chapter.append(child:
             <<~HTML
               <div class="os-eoc os-suggested-reading-container" data-type="composite-page" data-uuid-key=".suggested-reading">
+                <h2 data-type="document-title">
+                  <span class="os-text">#{I18n.t(:eoc_suggested_reading)}</span>
+                </h2>
                 <div data-type="metadata" style="display: none;">
                   <h1 data-type="document-title" itemprop="name">#{I18n.t(:eoc_suggested_reading)}</h1>
                   #{metadata_elements.paste}
                 </div>
-                <h2 data-type="document-title">
-                  <span class="os-text">#{I18n.t(:eoc_suggested_reading)}</span>
-                </h2>
                 #{suggested_reading.paste}
               </div>
             HTML

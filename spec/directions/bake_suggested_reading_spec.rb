@@ -38,12 +38,12 @@ RSpec.describe Kitchen::Directions::BakeSuggestedReading do
             <span>This is a page</span>
           </div>
           <div class="os-eoc os-suggested-reading-container" data-type="composite-page" data-uuid-key=".suggested-reading">
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">Suggestions for Further Study</h1>
-            </div>
             <h2 data-type="document-title">
               <span class="os-text">Suggestions for Further Study</span>
             </h2>
+            <div data-type="metadata" style="display: none;">
+              <h1 data-type="document-title" itemprop="name">Suggestions for Further Study</h1>
+            </div>
             <section class="suggested-reading">
               <p>Books:</p>
               <p>Dahl, Robert A. 1991. <em data-effect="italics">Democracy and Its Critics</em>.</p>
