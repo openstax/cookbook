@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Support namespaces defined on elements other than the root (minor)
 * Non-splash figures now treated like normal intro-body content in `BakeChapterIntroductions`
 * `BakeNumberedNotes` and the uphysics strategy for `MoveSolutionsToAnswerKey` updated to accomodate multiple exercises in a note.
 * `BakeFootnotes` now looks for footnotes in composite chapters

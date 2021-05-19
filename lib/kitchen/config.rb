@@ -11,6 +11,12 @@ module Kitchen
     #
     attr_reader :selectors
 
+    # @!attribute [rw] enable_all_namespaces
+    #
+    # @return [Boolean]
+    #
+    attr_accessor :enable_all_namespaces
+
     # Creates a new config from a file (not implemented)
     #
     def self.new_from_file(_file)
@@ -21,6 +27,7 @@ module Kitchen
     #
     def initialize(hash: {}, selectors: nil)
       @selectors = selectors || Kitchen::Selectors::Standard1.new
+      @enable_all_namespaces = hash[:enable_all_namespaces] || true
       @hash = hash
     end
   end
