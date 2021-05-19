@@ -12,8 +12,11 @@ module Kitchen
 
     # Creates a new instance
     #
-    # @param default_css_or_xpath [String] The selectors to substitute for the "$" character
-    #   when this factory is used to build an enumerator.
+    # @param default_css_or_xpath [String, Proc, Symbol] The selectors to substitute for the "$" character
+    #   when this factory is used to build an enumerator.  A string argument is used literally.  A proc
+    #   is eventually called given the document's Config object (for accessing selectors).  A symbol
+    #   is interpreted as the name of a selector and is called on the document's Config object's
+    #   selectors object.  The easiest way to get a Proc is to pass `Selector.named(:name_of_selector)`
     # @param sub_element_class [ElementBase] The element class to use for what the enumerator finds.
     # @param enumerator_class [ElementEnumeratorBase] The enumerator class to return
     # @param detect_sub_element_class [Boolean] If true, infers the sub_element_class from the node
@@ -37,8 +40,6 @@ module Kitchen
     #   given to the factory in its constructor.
     #
     def build_within(enumerator_or_element, search_query: SearchQuery.new)
-      search_query.apply_default_css_or_xpath_and_normalize(default_css_or_xpath)
-
       case enumerator_or_element
       when ElementBase
         build_within_element(enumerator_or_element, search_query: search_query)
@@ -55,7 +56,7 @@ module Kitchen
     #
     def or_with(other_factory)
       self.class.new(
-        default_css_or_xpath: "#{default_css_or_xpath}, #{other_factory.default_css_or_xpath}",
+        default_css_or_xpath: [default_css_or_xpath, other_factory.default_css_or_xpath],
         enumerator_class: TypeCastingElementEnumerator,
         detect_sub_element_class: true
       )
@@ -64,6 +65,9 @@ module Kitchen
     protected
 
     def build_within_element(element, search_query:)
+      search_query.apply_default_css_or_xpath_and_normalize(default_css_or_xpath,
+                                                            config: element.config)
+
       enumerator_class.new(search_query: search_query) do |block|
         grand_ancestors = element.ancestors
         parent_ancestor = Ancestor.new(element)

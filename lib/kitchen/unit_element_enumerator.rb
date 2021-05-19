@@ -11,7 +11,7 @@ module Kitchen
     #
     def self.factory
       ElementEnumeratorFactory.new(
-        default_css_or_xpath: "div[data-type='unit']",
+        default_css_or_xpath: Selector.named(:unit),
         sub_element_class: UnitElement,
         enumerator_class: self
       )

@@ -23,14 +23,5 @@ module Kitchen
       :term
     end
 
-    # Returns true if this class represents the element for the given node
-    #
-    # @param node [Nokogiri::XML::Node] the underlying node
-    # @return [Boolean]
-    #
-    def self.is_the_element_class_for?(node)
-      node['data-type'] == 'term'
-    end
-
   end
 end

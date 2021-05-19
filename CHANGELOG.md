@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Changes `default_css_or_xpath` to optionally be a proc to be evaluated w.r.t. a document's config (minor)
 * Support namespaces defined on elements other than the root (minor)
 * Non-splash figures now treated like normal intro-body content in `BakeChapterIntroductions`
 * `BakeNumberedNotes` and the uphysics strategy for `MoveSolutionsToAnswerKey` updated to accomodate multiple exercises in a note.
@@ -28,12 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fix xmlns string replacement done in PR #209 (minor)
 * Move title above metadata in `BakeSuggestedReading` direction (major)
 * Remove depreciated directions `BakeNotes` and `BakeExercises` (major)
-
 * Adds `eoc_composite_metadata_title` to en.yml and eoc template (major)
-
 * Add `template` folder to kitchen to hold templates (minor)
 * Add `eoc_section_title_template` (minor)
-
 * Expand specs with `append_to` to have with/without `append_to` contexts (minor)
 * Add `is?` method to `ElementBase` (minor)
 * Replaced in_composite_chapter to use `is?` (minor)

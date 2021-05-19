@@ -11,7 +11,7 @@ module Kitchen
     #
     def self.factory
       ElementEnumeratorFactory.new(
-        default_css_or_xpath: "div[data-type='exercise']", # TODO: element.document.selectors.exercise
+        default_css_or_xpath: Selector.named(:exercise),
         sub_element_class: ExerciseElement,
         enumerator_class: self
       )

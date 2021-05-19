@@ -11,7 +11,7 @@ module Kitchen
     #
     def self.factory
       ElementEnumeratorFactory.new(
-        default_css_or_xpath: "div[data-type='metadata']",
+        default_css_or_xpath: Selector.named(:metadata),
         sub_element_class: MetadataElement,
         enumerator_class: self
       )

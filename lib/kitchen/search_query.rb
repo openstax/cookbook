@@ -24,6 +24,7 @@ module Kitchen
       @css_or_xpath = css_or_xpath
       @only = only.is_a?(String) ? only.to_sym : only
       @except = except.is_a?(String) ? except.to_sym : except
+      @default_already_applied = false
     end
 
     # Returns true iff the element passes the `only` and `except` conditions
@@ -35,13 +36,34 @@ module Kitchen
     end
 
     # Replaces '$' in the `css_or_xpath` with the provided value; also normalizes
-    # `css_or_xpath` to an array
+    # `css_or_xpath` to an array.
     #
-    def apply_default_css_or_xpath_and_normalize(default_css_or_xpath=nil)
+    # @param default_css_or_xpath [String, Proc, Symbol] The selectors to substitute for the "$" character
+    #   when this factory is used to build an enumerator.  A string argument is used literally.  A proc
+    #   is eventually called given the document's Config object (for accessing selectors).  A symbol
+    #   is interpreted as the name of a selector and is called on the document's Config object's
+    #   selectors object.
+    #
+    def apply_default_css_or_xpath_and_normalize(default_css_or_xpath=nil, config: nil)
+      return if @default_already_applied
+
+      default_css_or_xpath = [default_css_or_xpath].flatten.map do |item|
+        case item
+        when Proc
+          item.call(config)
+        when Symbol
+          config.selectors.send(item)
+        else
+          item
+        end
+      end
+
       @as_type = nil
       @css_or_xpath = [css_or_xpath || '$'].flatten.map do |item|
-        item.gsub(/\$/, [default_css_or_xpath].flatten.join(', '))
+        item.gsub(/\$/, default_css_or_xpath.join(', '))
       end
+
+      @default_already_applied = true
     end
 
     # Returns the search query as a spaceless string suitable for use as an element type

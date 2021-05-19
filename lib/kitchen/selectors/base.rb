@@ -17,6 +17,45 @@ module Kitchen
       # Selector for the summary in a page
       # @return [String]
       attr_accessor :page_summary
+      # Selector for a reference
+      # @return [String]
+      attr_accessor :reference
+      # Selector for a chapter
+      # @return [String]
+      attr_accessor :chapter
+      # Selector for a page
+      # @return [String]
+      attr_accessor :page
+      # Selector for a note
+      # @return [String]
+      attr_accessor :note
+      # Selector for a term
+      # @return [String]
+      attr_accessor :term
+      # Selector for a table
+      # @return [String]
+      attr_accessor :table
+      # Selector for a figure
+      # @return [String]
+      attr_accessor :figure
+      # Selector for a metadata
+      # @return [String]
+      attr_accessor :metadata
+      # Selector for a composite page
+      # @return [String]
+      attr_accessor :composite_page
+      # Selector for a composite chapter
+      # @return [String]
+      attr_accessor :composite_chapter
+      # Selector for an example
+      # @return [String]
+      attr_accessor :example
+      # Selector for an exercise
+      # @return [String]
+      attr_accessor :exercise
+      # Selector for an unit
+      # @return [String]
+      attr_accessor :unit
 
       # Override specific selectors
       #

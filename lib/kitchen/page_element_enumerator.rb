@@ -11,7 +11,7 @@ module Kitchen
     #
     def self.factory
       ElementEnumeratorFactory.new(
-        default_css_or_xpath: "div[data-type='page']", # TODO: get from config?
+        default_css_or_xpath: Selector.named(:page),
         sub_element_class: PageElement,
         enumerator_class: self
       )

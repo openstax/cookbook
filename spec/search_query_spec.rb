@@ -36,11 +36,23 @@ RSpec.describe Kitchen::SearchQuery do
     it 'adds a $ when css nil' do
       expect_normalization(default_css_or_xpath: 'div', to: ['div'])
     end
+
+    it 'works with a proc' do
+      expect_normalization(default_css_or_xpath: ->(config) { config.selectors.reference },
+                           config: Kitchen::Config.new.tap { |config| config.selectors.reference = 'foo' },
+                           to: ['foo'])
+    end
+
+    it 'works with a symbol' do
+      expect_normalization(default_css_or_xpath: :reference,
+                           config: Kitchen::Config.new.tap { |config| config.selectors.reference = 'foo' },
+                           to: ['foo'])
+    end
   end
 
-  def expect_normalization(to:, css_or_xpath: nil, default_css_or_xpath: nil)
+  def expect_normalization(to:, css_or_xpath: nil, default_css_or_xpath: nil, config: nil)
     instance = described_class.new(css_or_xpath: css_or_xpath)
-    instance.apply_default_css_or_xpath_and_normalize(default_css_or_xpath)
+    instance.apply_default_css_or_xpath_and_normalize(default_css_or_xpath, config: config)
     expect(instance.css_or_xpath).to eq to
   end
 

@@ -40,6 +40,7 @@ require 'kitchen/oven'
 require 'kitchen/clipboard'
 require 'kitchen/pantry'
 require 'kitchen/counter'
+require 'kitchen/selector'
 
 require 'kitchen/element_enumerator_base'
 require 'kitchen/element_enumerator_factory'

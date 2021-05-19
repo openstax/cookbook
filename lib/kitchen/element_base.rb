@@ -167,17 +167,17 @@ module Kitchen
     # @return [Boolean]
     #
     def is?(type)
-      ElementBase.descendant!(type).is_the_element_class_for?(raw)
+      ElementBase.descendant!(type).is_the_element_class_for?(raw, config: config)
     end
 
     # Returns true if this class represents the element for the given node
     #
     # @param node [Nokogiri::XML::Node] the underlying node
+    # @param config [Kitchen::Config]
     # @return [Boolean]
     #
-    def self.is_the_element_class_for?(_node)
-      # override this in subclasses
-      false
+    def self.is_the_element_class_for?(node, config:)
+      Selector.named(short_type).matches?(node, config: config)
     end
 
     # Returns true if this element has the given class
