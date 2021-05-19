@@ -19,7 +19,8 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
             <div data-type="description">trash this</div>
             <div data-type="abstract">and this</div>
             <div data-type="metadata">don't touch this</div>
-            <figure>can't touch this (stop! hammer time)</figure>
+            <figure class="splash">can't touch this (stop! hammer time)</figure>
+            <figure>move this</figure>
             <div>content</div>
           </div>
           <div data-type="page">
@@ -55,7 +56,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
               <h1 data-type="document-title">Chapter 1 Title</h1>
               <div class="introduction" data-type="page">
                 <div data-type="metadata">don't touch this</div>
-                <figure>can't touch this (stop! hammer time)</figure>
+                <figure class="splash">can't touch this (stop! hammer time)</figure>
                 <div class="intro-body">
                   <div class="os-chapter-outline">
                     <h3 class="os-title">Chapter Outline</h3>
@@ -78,6 +79,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
                     <h2 data-type="document-title">
                       <span class="os-text" data-type="" itemprop="">Introduction 1</span>
                     </h2>
+                    <figure>move this</figure>
                     <div>content</div>
                   </div>
                 </div>

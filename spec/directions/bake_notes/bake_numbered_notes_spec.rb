@@ -54,6 +54,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
                 <p>remove me</p>
               </div>
             </div>
+            <div data-type="exercise" id="2_123">
+              <div data-type="problem" id="2_456">a second exercise</div>
+              <div data-type="solution" id="2_xyz">
+                <p>second solution content</p>
+              </div>
+            </div>
           </div>
         </div>
       HTML
@@ -188,6 +194,18 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
                     <span class="os-divider"> </span>
                     <div class="os-solution-container">
                       <p>solution content</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="unnumbered os-hasSolution" data-type="exercise" id="2_123">
+                  <div data-type="problem" id="2_456">
+                    <div class="os-problem-container">a second exercise</div>
+                  </div>
+                  <div data-type="solution" id="2_123-solution">
+                    <a class="os-number" href="#2_123">2.3</a>
+                    <span class="os-divider"> </span>
+                    <div class="os-solution-container">
+                      <p>second solution content</p>
                     </div>
                   </div>
                 </div>

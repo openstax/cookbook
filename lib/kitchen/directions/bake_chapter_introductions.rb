@@ -28,7 +28,7 @@ module Kitchen
           title.name = 'h2'
           MoveTitleTextIntoSpan.v1(title: title)
 
-          intro_content = introduction_page.search("> :not([data-type='metadata']):not(figure)").cut
+          intro_content = introduction_page.search("> :not([data-type='metadata']):not(.splash):not(.has-splash)").cut
 
           introduction_page.append(child:
             <<~HTML

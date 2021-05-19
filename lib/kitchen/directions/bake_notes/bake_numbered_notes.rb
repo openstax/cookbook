@@ -7,7 +7,9 @@ module Kitchen
         classes.each do |klass|
           book.chapters.notes("$.#{klass}").each do |note|
             bake_note(note: note)
-            bake_note_exercise(note: note)
+            note.exercises.each do |exercise|
+              bake_note_exercise(note: note, exercise: exercise)
+            end
           end
         end
       end
@@ -32,10 +34,7 @@ module Kitchen
         BakeNoteSubtitle.v1(note: note)
       end
 
-      def self.bake_note_exercise(note:)
-        exercise = note.exercises.first
-        return unless exercise
-
+      def self.bake_note_exercise(note:, exercise:)
         exercise.add_class('unnumbered')
         # bake problem
         exercise.problem.wrap_children('div', class: 'os-problem-container')

@@ -32,8 +32,10 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
       def bake_from_notes(chapter:, append_to:, klass:)
         solutions = []
         chapter.notes(".#{klass}").each do |note|
-          solution = note.exercises.first.solution
-          solutions.push(solution.cut) if solution
+          note.exercises.each do |exercise|
+            solution = exercise.solution
+            solutions.push(solution.cut) if solution
+          end
         end
         return if solutions.empty?
 

@@ -29,6 +29,10 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
                 <div data-type="problem">problem 1</div>
                 <div data-type="solution">solution 1</div>
               </div>
+              <div data-type="exercise">
+                <div data-type="problem">another one</div>
+                <div data-type="solution">another solution</div>
+              </div>
             </div>
             <div class="check-understanding" data-type="note">
               <div data-type="exercise">
@@ -129,6 +133,7 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
                 <span class="os-title-label">Check Understanding</span>
               </h3>
               <div data-type="solution">solution 1</div>
+              <div data-type="solution">another solution</div>
             </div>
             <div class="os-solution-area">
               <h3 data-type="title">
