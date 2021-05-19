@@ -43,27 +43,38 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    # BakeChapterSummary.v1(chapter: chapter,
-    #                       metadata_source: book.metadata,
-    #                       summary_class: 'section-summary',
-    #                       summary_uuid: 'section-summary')
+    # BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-summary')
     MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
     MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
-    chapter.search('.section-quiz, .short-answer').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+  end
 
+  book.composite_pages.each do |composite_page|
+    composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_even_solution: true)
     end
   end
 
-  # Remove description form the whole book
-  # book.search('[data-type="metadata"] > [data-type="description"]').trash
-
-  # Bake answer key from chapter/ move solutions from eoc into answer key
   solution_container = BookAnswerKeyContainer.v1(book: book, klass: 'solution')
   book.chapters.each do |chapter|
-    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: book.metadata, strategy: :sociology, append_to: solution_container, klass: 'solution')
+    MoveSolutionsToAnswerKey.v1(chapter: chapter,
+                                metadata_source: book.metadata,
+                                strategy: :sociology,
+                                append_to: solution_container,
+                                klass: 'solution')
   end
+
+  # Hacky solution for fixing empty titles in the Answer Key
+  if solution_container.contains?(' > [data-type="composite-page"] > div[data-type="solution"]')
+    solution_container.add_class('has-solutions')
+    book.body.add_class('has-answerkey')
+  else
+    solution_container.add_class('no-solutions')
+    book.search('.os-eob.os-solution-container.no-solutions[data-type = "composite-chapter"]').first.trash
+    book.body.add_class('no-answerkey')
+    book.search('body.no-answerkey > #toc > ol > li.os-toc-composite-chapter').trash
+  end
+
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
 
@@ -83,9 +94,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    # chapter.pages('$:not(.introduction)').each do |page|
-      # page.search("div[data-type='description']").each(&:trash)
-    # end
+    chapter.non_introduction_pages.each do |page|
+      page.search("div[data-type='description']").each(&:trash)
+    end
+
     chapter.figures.each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
@@ -121,6 +133,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   # BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeToc.v1(book: book)
