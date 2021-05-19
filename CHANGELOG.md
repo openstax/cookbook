@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2021-05-18
+
 * Changes `default_css_or_xpath` to optionally be a proc to be evaluated w.r.t. a document's config (minor)
 * Support namespaces defined on elements other than the root (minor)
 * Non-splash figures now treated like normal intro-body content in `BakeChapterIntroductions`
@@ -38,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add callable `short_type` to Elements (minor)
 * Add template for eob titles - `eob_section_title_template` (minor)
 
-## [3.2.0] - 2021-04-19
+## [3.2.0] - 2021-04-20
 
 * Adds method to allow unit and page title text to be retrieved regardless of bake status (minor)
 * Rename several directions (major)
