@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Added `BakeChapterReferences` Directions (minor)
+
 ## [4.0.0] - 2021-05-18
 
 * Changes `default_css_or_xpath` to optionally be a proc to be evaluated w.r.t. a document's config (minor)
