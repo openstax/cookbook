@@ -61,9 +61,18 @@ def warn_if_already_seen(id)
   @already_seen_ids.add(id)
 end
 
+# The order of term baking/numbering differs between Kitchen and Easybake, so mask the term numbers
+
+def mask_term_numbers(element)
+  return unless element[:'data-type'] == 'term' || element[:class]&.split(' ')&.include?('os-term-section-link')
+
+  element[:id] = element[:id]&.gsub(/_term(\d+)$/, '_termXXX') if element[:id]
+  element[:href] = element[:href]&.gsub(/_term(\d+)$/, '_termXXX') if element[:href]
+end
+
 # Main normalize function for an XML document
 
-def normalize(doc)
+def normalize(doc, args: [])
   doc.traverse do |child|
     mask_copied_id_numbers(child)
     next if child.text? || child.document?
@@ -72,5 +81,6 @@ def normalize(doc)
     remove_blank_classes(child)
     sort_classes_strip_whitespace(child)
     sort_attributes(child)
+    mask_term_numbers(child) if args.include?('--mask-terms')
   end
 end
