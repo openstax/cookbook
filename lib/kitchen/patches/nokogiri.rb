@@ -43,6 +43,46 @@ module Nokogiri
       def inspect
         to_s
       end
+
+      def quick_matches?(selector)
+        self.class.selector_to_css_nodes(selector).any? { |css_node| matches_css_node?(css_node) }
+      end
+
+      def classes
+        self[:class]&.split || []
+      end
+
+      def self.selector_to_css_nodes(selector)
+        # No need to parse the same selector more than once.
+        @parsed_selectors ||= {}
+        @parsed_selectors[selector] ||= Nokogiri::CSS::Parser.new.parse(selector)
+      end
+
+      protected
+
+      # rubocop:disable Metrics/CyclomaticComplexity
+      def matches_css_node?(css_node)
+        case css_node.type
+        when :CONDITIONAL_SELECTOR
+          css_node.value.all? { |inner_css_node| matches_css_node?(inner_css_node) }
+        when :ELEMENT_NAME
+          css_node.value == ['*'] || css_node.value.include?(name)
+        when :CLASS_CONDITION
+          (css_node.value & classes).any?
+        when :ATTRIBUTE_CONDITION
+          attribute, operator, value = css_node.value
+
+          raise "Unknown attribute condition operator in #{css_node}" if operator != :equal
+
+          attribute_name = attribute.value
+          raise "More attribute names than expected, #{attribute_name}" if attribute_name.many?
+
+          self[attribute_name.first] == value.gsub('"', '').gsub("'", '')
+        else
+          raise "Unknown Nokogiri::CSS:Node type in #{css_node}"
+        end
+      end
+      # rubocop:enable Metrics/CyclomaticComplexity
     end
   end
 end

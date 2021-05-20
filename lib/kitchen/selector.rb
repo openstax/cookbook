@@ -18,7 +18,7 @@ module Kitchen
     def matches?(node, config:)
       # This may not be incredibly efficient as it does a search of this node's
       # ancestors to see if the node is in the results.  Watch the performance.
-      node.matches?(call(config))
+      node.quick_matches?(call(config))
     end
   end
 end
