@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Cache Selector objects since they don't change (patch)
 * Caches calls to `first` and `first!` which on Chemistry halves baking time (minor)
 
 ## [4.1.0] - 2021-05-18

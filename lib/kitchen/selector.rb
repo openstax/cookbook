@@ -7,7 +7,8 @@ module Kitchen
     attr_reader :name
 
     def self.named(name)
-      new(name) { |config| config.selectors.send(name) }
+      @instances ||= {}
+      @instances[name] ||= new(name) { |config| config.selectors.send(name) }
     end
 
     def initialize(name, &block)
