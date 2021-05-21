@@ -4,6 +4,8 @@ require 'simplecov'
 
 SimpleCov.start
 
+ENV['TESTING'] = 'true'
+
 if ENV['ENABLE_CODECOV']
   require 'codecov'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
@@ -35,4 +37,8 @@ RSpec.configure do |config|
   config.include FactoryHelpers
   config.include MatchHelpers
   config.include StringHelpers
+
+  config.after(:suite) do
+    Nokogiri::XML.print_profile_data if ENV['PROFILE']
+  end
 end

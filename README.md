@@ -641,6 +641,14 @@ expect(book_1).to match_normalized_html("some string of HTML here")
 expect(book_1).to match_html_nodes("some string of HTML here")
 ```
 
+### Profiling
+
+If you set the `PROFILE` environment variable to something before you run specs or a recipe, search query profile data will be collected and printed, e.g.
+
+```bash
+%> PROFILE=1 rspec
+```
+
 ### VSCode
 
 1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser

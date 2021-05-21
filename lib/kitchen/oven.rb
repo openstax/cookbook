@@ -39,6 +39,8 @@ module Kitchen
       end
       profile.written!
 
+      Nokogiri::XML.print_profile_data if ENV['PROFILE'] && !ENV['TESTING']
+
       profile
     end
 

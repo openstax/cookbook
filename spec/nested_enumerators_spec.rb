@@ -161,6 +161,13 @@ RSpec.describe 'nested enumerators' do
         # first chapter      second chapter
         expect(counts).to eq [1, 1, 1, 1] + [1, 2, 1, 2]
       end
+
+      it 'counts correctly when using element_children multiple times with cached element' do
+        chapter = book1.first("[data-type='chapter']")
+        expect(chapter.element_children.map { |child| child.count_in(:book) }).to eq [1, 2]
+        chapter = book1.first("[data-type='chapter']")
+        expect(chapter.element_children.map { |child| child.count_in(:book) }).to eq [1, 2]
+      end
     end
 
   end

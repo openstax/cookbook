@@ -365,8 +365,8 @@ module Kitchen
     # @yieldparam [Element] the matched XML element
     # @return [Element, nil] the matched XML element or nil if no match found
     #
-    def first(*selector_or_xpath_args)
-      search(*selector_or_xpath_args).first.tap do |element|
+    def first(*selector_or_xpath_args, reload: false)
+      cached_search(selector_or_xpath_args, method: :first, reload: reload).tap do |element|
         yield(element) if block_given?
       end
     end
@@ -379,8 +379,8 @@ module Kitchen
     # @raise [ElementNotFoundError] if no matching element is found
     # @return [Element] the matched XML element
     #
-    def first!(*selector_or_xpath_args)
-      search(*selector_or_xpath_args).first!.tap do |element|
+    def first!(*selector_or_xpath_args, reload: false)
+      cached_search(selector_or_xpath_args, method: :first!, reload: reload).tap do |element|
         yield(element) if block_given?
       end
     end
@@ -747,6 +747,15 @@ module Kitchen
     def require_one_of_child_or_sibling(child, sibling)
       raise RecipeError, 'Only one of `child` or `sibling` can be specified' if child && sibling
       raise RecipeError, 'One of `child` or `sibling` must be specified' if !child && !sibling
+    end
+
+    def cached_search(*selector_or_xpath_args, method:, reload: false)
+      key = [method, selector_or_xpath_args]
+      @search_cache ||= {}
+      @search_cache[key] = nil if reload
+      # cache nil search results with a fake -1 value
+      @search_cache[key] ||= search(*selector_or_xpath_args).send(method.to_sym) || -1
+      @search_cache[key] == -1 ? nil : @search_cache[key]
     end
 
   end
