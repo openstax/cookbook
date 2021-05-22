@@ -17,6 +17,12 @@ module Kitchen
     #
     attr_accessor :enable_all_namespaces
 
+    # @!attribute [rw] enable_search_cache
+    #
+    # @return [Boolean]
+    #
+    attr_accessor :enable_search_cache
+
     # Creates a new config from a file (not implemented)
     #
     def self.new_from_file(_file)
@@ -28,6 +34,7 @@ module Kitchen
     def initialize(hash: {}, selectors: nil)
       @selectors = selectors || Kitchen::Selectors::Standard1.new
       @enable_all_namespaces = hash[:enable_all_namespaces] || true
+      @enable_search_cache = hash[:enable_search_cache] || false
       @hash = hash
     end
   end

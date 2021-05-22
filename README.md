@@ -649,6 +649,14 @@ If you set the `PROFILE` environment variable to something before you run specs 
 %> PROFILE=1 rspec
 ```
 
+### Caching
+
+There's a low-level CSS query caching tool that saves repeated queries.  In some tests, it saves 15% of query time.  It is disabled by default (because we aren't super sure that it is completely safe) but can be turned on with
+
+```ruby
+doc.config.enable_search_cache = true
+```
+
 ### VSCode
 
 1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser

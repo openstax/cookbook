@@ -39,12 +39,16 @@ module Kitchen
     # @return [ElementEnumeratorBase] actually returns the concrete enumerator class
     #   given to the factory in its constructor.
     #
-    def build_within(enumerator_or_element, search_query: SearchQuery.new)
+    def build_within(enumerator_or_element, search_query: SearchQuery.new, reload: false)
       case enumerator_or_element
       when ElementBase
-        build_within_element(enumerator_or_element, search_query: search_query)
+        build_within_element(enumerator_or_element,
+                             search_query: search_query,
+                             reload: reload)
       when ElementEnumeratorBase
-        build_within_other_enumerator(enumerator_or_element, search_query: search_query)
+        build_within_other_enumerator(enumerator_or_element,
+                                      search_query: search_query,
+                                      reload: reload)
       end
     end
 
@@ -64,7 +68,7 @@ module Kitchen
 
     protected
 
-    def build_within_element(element, search_query:)
+    def build_within_element(element, search_query:, reload:)
       search_query.apply_default_css_or_xpath_and_normalize(default_css_or_xpath,
                                                             config: element.config)
 
@@ -77,7 +81,7 @@ module Kitchen
         # below, the counts are correct.
         element.uncount(search_query)
 
-        element.raw.search(*search_query.css_or_xpath).each do |sub_node|
+        element.raw_search(*search_query.css_or_xpath, reload: reload).each do |sub_node|
           sub_element = ElementFactory.build_from_node(
             node: sub_node,
             document: element.document,
@@ -105,13 +109,15 @@ module Kitchen
       end
     end
 
-    def build_within_other_enumerator(other_enumerator, search_query:)
+    def build_within_other_enumerator(other_enumerator, search_query:, reload:)
       # Return a new enumerator instance that internally iterates over `other_enumerator`
       # running a new enumerator for each element returned by that other enumerator.
       enumerator_class.new(search_query: search_query,
                            upstream_enumerator: other_enumerator) do |block|
         other_enumerator.each do |element|
-          build_within_element(element, search_query: search_query).each do |sub_element|
+          build_within_element(element,
+                               search_query: search_query,
+                               reload: reload).each do |sub_element|
             block.yield(sub_element)
           end
         end
