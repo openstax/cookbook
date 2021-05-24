@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '4.1.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '4.1.1'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -40,17 +40,24 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
     BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
     # EoC sections with exercises
-    MoveExercisesToEOC.v2(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: 'review-conceptual-questions')
-    MoveExercisesToEOC.v2(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: 'review-problems')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: 'review-additional-problems')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: 'review-challenge')
+    MoveExercisesToEOC.v2(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper,
+                          klass: 'review-conceptual-questions')
+    MoveExercisesToEOC.v2(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper,
+                          klass: 'review-problems')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper,
+                          klass: 'review-additional-problems')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper,
+                          klass: 'review-challenge')
     # In-place bake exercises & solutions
-    chapter.search('section.review-conceptual-questions, section.review-problems, section.review-additional-problems, section.review-challenge').exercises.each do |exercise|
+    exercise_selectors = 'section.review-conceptual-questions, section.review-problems, ' \
+                         'section.review-additional-problems, section.review-challenge'
+    chapter.search(exercise_selectors).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
     # Bake answer key from chapter/ move solutions from eoc into answer key
-    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: metadata, strategy: :uphysics, append_to: solutions_container)
+    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: metadata, strategy: :uphysics,
+                                append_to: solutions_container)
   end
 
   book.search('div[data-type="solution"]').each do |solution|
