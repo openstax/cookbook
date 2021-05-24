@@ -47,16 +47,8 @@ module Kitchen
       @next_paste_count_for_id = {}
       @id_copy_suffix = '_copy_'
 
-      # Nokogiri by default only recognizes the namespaces on the root node.  Collect all
-      # namespaces and add them manually.
-      return unless @config.enable_all_namespaces && raw.present?
-
-      raw.collect_namespaces.each do |namespace, url|
-        prefix, name = namespace.split(':')
-        next unless prefix == 'xmlns' && name.present?
-
-        raw.root.add_namespace_definition(name, url)
-      end
+      # Nokogiri by default only recognizes the namespaces on the root node.  Add all others.
+      raw&.add_all_namespaces! if @config.enable_all_namespaces
     end
 
     # Returns an enumerator that iterates over all children of this document

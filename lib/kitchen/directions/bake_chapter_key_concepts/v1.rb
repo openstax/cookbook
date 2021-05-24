@@ -19,7 +19,7 @@ module Kitchen::Directions::BakeChapterKeyConcepts
         key_concepts.each do |key_concept|
           key_concept.prepend(child: title)
           key_concept.wrap("<div class='os-section-area'>")
-          page.search('.os-section-area').first.cut(to: key_concepts_clipboard)
+          page.search('div.os-section-area').first.cut(to: key_concepts_clipboard)
         end
       end
 

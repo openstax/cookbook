@@ -46,6 +46,12 @@ module Kitchen
                              search_query: search_query,
                              reload: reload)
       when ElementEnumeratorBase
+        if enumerator_class != ElementEnumerator && !search_query.expects_substitution?
+          raise "Query #{search_query} is missing the substitution character ('$') but " \
+                "is run with an enumerator #{enumerator_class.name} that has its own " \
+                "selectors for substitution."
+        end
+
         build_within_other_enumerator(enumerator_or_element,
                                       search_query: search_query,
                                       reload: reload)

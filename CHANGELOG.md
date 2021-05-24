@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Adds low level Nokogiri caching, disabled by default (patch)
 * Cache Selector objects since they don't change (patch)
+* Use more specific selectors when to reduce bake time (patch)
 
 ## [4.1.0] - 2021-05-18
 

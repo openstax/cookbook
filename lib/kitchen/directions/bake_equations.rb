@@ -4,7 +4,7 @@ module Kitchen
   module Directions
     module BakeEquations
       def self.v1(book:, number_decorator: :none)
-        book.chapters.search('[data-type="equation"]:not(.unnumbered)').each do |eq|
+        book.chapters.search('div[data-type="equation"]:not(.unnumbered)').each do |eq|
           chapter = eq.ancestor(:chapter)
           number = "#{chapter.count_in(:book)}.#{eq.count_in(:chapter)}"
 

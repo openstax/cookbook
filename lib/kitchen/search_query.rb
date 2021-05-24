@@ -82,6 +82,12 @@ module Kitchen
       as_type
     end
 
+    # Returns true if the query has the substitution character ('$')
+    #
+    def expects_substitution?
+      css_or_xpath.nil? || [css_or_xpath].flatten.all? { |item| item.include?('$') }
+    end
+
     protected
 
     def condition_passes?(method_or_callable, element, success_outcome)

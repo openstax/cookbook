@@ -3,6 +3,10 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::ElementEnumeratorFactory do
+  let(:element1) do
+    chapter_element('<p>Hi!</p>')
+  end
+
   describe 'specific enumerators create a factory' do
     [
       Kitchen::ChapterElementEnumerator,
@@ -22,5 +26,11 @@ RSpec.describe Kitchen::ElementEnumeratorFactory do
         enumerator_class.factory
       end
     end
+  end
+
+  it 'raises when a specific enumerator has CSS missing the substitution character' do
+    expect {
+      element1.pages('.foo') # should be '$.foo' otherwise no point to using `pages`
+    }.to raise_error(/is missing the substitution character/)
   end
 end

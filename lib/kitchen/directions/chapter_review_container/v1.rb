@@ -7,7 +7,7 @@ module Kitchen::Directions::ChapterReviewContainer
     def bake(chapter:, metadata_source:)
       @metadata = metadata_source.children_to_keep.copy
       chapter.append(child: render(file: 'chapter_review.xhtml.erb'))
-      chapter.first('.os-eoc.os-chapter-review-container')
+      chapter.first('div.os-eoc.os-chapter-review-container')
     end
   end
 end

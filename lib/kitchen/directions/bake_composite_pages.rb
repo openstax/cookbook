@@ -4,7 +4,7 @@ module Kitchen
   module Directions
     module BakeCompositePages
       def self.v1(book:)
-        book.search("[data-type='composite-page']").each do |page|
+        book.composite_pages.each do |page|
           page.id = "composite-page-#{page.count_in(:book)}"
         end
       end

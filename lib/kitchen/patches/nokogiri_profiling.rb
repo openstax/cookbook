@@ -10,6 +10,8 @@ module Nokogiri
     # rubocop:enable Style/MutableConstant
 
     if ENV['PROFILE']
+      ENV['VERBOSE_PROFILE'] = 1 if ENV['PROFILE'].to_s.downcase == 'verbose'
+
       # Patches inside Nokogiri to count, time, and print searches.  At end of baking
       # you can `puts Nokogiri::XML::PROFILE_DATA` to see the totals.  The counts
       # hash is defined outside of the if block so that code that prints it doesn't
@@ -40,7 +42,7 @@ module Nokogiri
       class XPathContext
         alias_method :original_evaluate, :evaluate
         def evaluate(search_path, handler=nil)
-          puts search_path
+          puts search_path if ENV['VERBOSE_PROFILE']
 
           PROFILE_DATA[search_path] ||= Hash.new(0)
           PROFILE_DATA[search_path][:count] += 1

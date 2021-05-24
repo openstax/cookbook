@@ -7,7 +7,7 @@ module Kitchen::Directions::BookAnswerKeyContainer
     def bake(book:)
       @metadata = book.metadata.children_to_keep.copy
       book.body.append(child: render(file: 'eob_solutions_container.xhtml.erb'))
-      book.body.first('.os-eob.os-solutions-container')
+      book.body.first('div.os-eob.os-solutions-container')
     end
   end
 end

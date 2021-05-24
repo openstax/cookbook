@@ -31,6 +31,21 @@ module Nokogiri
           end
         end
       end
+
+      def add_all_namespaces!
+        # Nokogiri by default only recognizes the namespaces on the root node.  Collect all
+        # namespaces and add them manually.
+        return if @all_namespaces_added
+
+        collect_namespaces.each do |namespace, url|
+          prefix, name = namespace.split(':')
+          next unless prefix == 'xmlns' && name.present?
+
+          root.add_namespace_definition(name, url)
+        end
+
+        @all_namespaces_added = true
+      end
     end
 
     # Monkey patches for Nokogiri::XML::Node

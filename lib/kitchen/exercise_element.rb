@@ -28,7 +28,7 @@ module Kitchen
     # @return ElementEnumerator
     #
     def problem
-      first("[data-type='problem']")
+      first("div[data-type='problem']")
     end
 
     # Returns the enumerator for solution.
@@ -36,7 +36,7 @@ module Kitchen
     # @return ElementEnumerator
     #
     def solution
-      first("[data-type='solution']")
+      first("div[data-type='solution']")
     end
   end
 end

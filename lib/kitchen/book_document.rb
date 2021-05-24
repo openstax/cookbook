@@ -29,7 +29,7 @@ module Kitchen
     # @return [BookElement]
     #
     def book
-      BookElement.new(node: nokogiri_document.search('html').first, document: self)
+      BookElement.new(node: nokogiri_document.root, document: self)
     end
 
   end
