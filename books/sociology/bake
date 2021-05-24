@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '4.1.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -41,17 +41,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
                          number: "#{table.count_in(:page)}")
   end
 
+  BakeReferences.v1(book: book, metadata_source: book.metadata)
+
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    # BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-summary')
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-summary')
     MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
     MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
-  end
-
-  book.composite_pages.each do |composite_page|
-    composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_even_solution: true)
+    chapter.composite_pages.each do |composite_page|
+      composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
+        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_even_solution: true)
+      end
     end
   end
 
