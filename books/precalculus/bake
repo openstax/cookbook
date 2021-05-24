@@ -25,7 +25,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
 
   BakeAutotitledNotes.v1(book: book, classes: %w[how-to-notitle qa media-notitle])
   BakeUnclassifiedNotes.v1(book: book)
-  BakeNumberedNotes.v1(book: book, classes: %w[try])
+  BakeNumberedNotes.v2(book: book, classes: %w[try])
 
   # Bake EOC sections
   solutions_container = BookAnswerKeyContainer.v1(book: book)

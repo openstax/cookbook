@@ -3,6 +3,7 @@ en:
   eoc:
     practice-test: Practice Test
     review-exercises: Review Exercises
+    section-exercises: ! '%{number} Section Exercises'
   notes:
     try: "Try It "
     how-to-notitle: How To
