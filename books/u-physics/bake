@@ -45,7 +45,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: 'review-additional-problems')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: 'review-challenge')
     # In-place bake exercises & solutions
-    chapter.search('.review-conceptual-questions, .review-problems, .review-additional-problems, .review-challenge').exercises.each do |exercise|
+    chapter.search('section.review-conceptual-questions, section.review-problems, section.review-additional-problems, section.review-challenge').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
@@ -53,11 +53,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: metadata, strategy: :uphysics, append_to: solutions_container)
   end
 
-  book.search('[data-type="solution"]').each do |solution|
+  book.search('div[data-type="solution"]').each do |solution|
     # Add the 'has-first-element' class to elements that need it
     BakeFirstElements.v1(within: solution,
-                         selectors: ['.os-solution-container > [data-type="media"]',
-                                     '.os-solution-container > .os-table'])
+                         selectors: ['div.os-solution-container > span[data-type="media"]',
+                                     'div.os-solution-container > span.os-table'])
   end
 
   book.chapters.each do |chapter|
@@ -94,7 +94,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
-  book.search('[role="doc-noteref"]').each do |el|
+  book.search('a[role="doc-noteref"]').each do |el|
     el.parent.add_class('has-noteref') if el.parent.name == 'p'
   end
   BakeToc.v1(book: book)
