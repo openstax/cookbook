@@ -58,10 +58,6 @@ def note_element(note_html)
   book_containing(html: note_html).notes.first
 end
 
-def exercise_element(exercise_html)
-  book_containing(html: exercise_html).exercises.first
-end
-
 def metadata_element
   book_containing(html:
     <<~HTML

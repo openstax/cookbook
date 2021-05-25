@@ -76,7 +76,7 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
               <div data-type="problem"/>
               <div data-type="solution">
                 <div class="os-solution-container">
-                  <div data-type="media">Media</div>
+                  <span data-type="media">Media</span>
                 </div>
               </div>
             </div>
@@ -96,10 +96,7 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
 
   it 'works' do
     section = book.search('.section-exercises').first
-    described_class.v1(
-      within: section,
-      selectors: ['.os-problem-container > .os-table', '.os-problem-container > [data-type="media"]', '.os-solution-container > [data-type="media"]']
-    )
+    described_class.v1(within: section)
 
     expect(book.body).to match_normalized_html(
       <<~HTML
@@ -175,7 +172,7 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                   <div data-type="problem"></div>
                   <div data-type="solution">
                     <div class="os-solution-container has-first-element">
-                      <div class="first-element" data-type="media">Media</div>
+                      <span class="first-element" data-type="media">Media</span>
                     </div>
                   </div>
                 </div>
