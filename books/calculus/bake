@@ -113,14 +113,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
-  book.search('.section-exercises').each do |within|
-    BakeFirstElements.v1(
-      within: within,
-      selectors: [
-        '.os-problem-container > .os-table',
-        '.os-problem-container > [data-type="media"]'
-      ]
-    )
+  book.search('.section-exercises', '.os-eob.os-solutions-container').each do |within|
+    BakeFirstElements.v1(within: within)
   end
 
   BakeMathInParagraph.v1(book: book)
