@@ -27,13 +27,6 @@ module Kitchen::Directions::BakeIndex
       def initialize(term_text:)
         @term_text = term_text
         @terms = []
-
-        # Sort by transliterated version first to support accent marks,
-        # then by the raw text to support the same text with different capitalization
-        @sortable = [
-          ActiveSupport::Inflector.transliterate(term_text).downcase,
-          term_text
-        ]
       end
 
       def add_term(term)
@@ -49,12 +42,8 @@ module Kitchen::Directions::BakeIndex
       end
 
       def <=>(other)
-        sortable <=> other.sortable
+        I18n.sort_strings(term_text, other.term_text)
       end
-
-      protected
-
-      attr_reader :sortable
     end
 
     class IndexSection

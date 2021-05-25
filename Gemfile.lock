@@ -6,6 +6,7 @@ PATH
       i18n
       nokogiri
       rainbow
+      twitter_cldr
 
 GEM
   remote: https://rubygems.org/
@@ -18,6 +19,8 @@ GEM
       zeitwerk (~> 2.3)
     ast (2.4.1)
     byebug (11.1.2)
+    camertron-eprun (1.1.1)
+    cldr-plurals-runtime-rb (1.1.0)
     codecov (0.2.13)
       simplecov (~> 0.18.0)
     coderay (1.1.3)
@@ -94,6 +97,10 @@ GEM
       tins (~> 1.0)
     tins (1.26.0)
       sync
+    twitter_cldr (6.6.0)
+      camertron-eprun
+      cldr-plurals-runtime-rb (~> 1.1)
+      tzinfo
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
