@@ -3,10 +3,12 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Document do
+  let(:lang) { nil }
+
   let(:xml) do
     Nokogiri::XML(
       <<~HTML
-        <html>
+        <html #{"lang=\"#{lang}\"" if lang}>
           <body>
             <div class='hi'>Howdy</div>
           </body>
@@ -59,5 +61,23 @@ RSpec.describe Kitchen::Document do
     it 'raises when the string has more than one top-level element' do
       expect { instance.create_element_from_string('<div></div><span></span>') }.to raise_error(/one top-level/)
     end
+  end
+
+  describe('#locale') do
+    context 'when lang is present' do
+      let(:lang) { 'pl' }
+
+      it 'returns pl' do
+        expect(instance.locale).to eq :pl
+      end
+    end
+
+    context 'when lang is absent' do
+      it 'defaults to en' do
+        expect(Warning).to receive(:warn).with(/No `lang`/)
+        expect(instance.locale).to eq :en
+      end
+    end
+
   end
 end

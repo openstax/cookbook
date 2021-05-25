@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Moved selectors from recipe to kitchen on `BakeFirstElements` Direction (minor)
+* Auto-detect language based on document; force output encoding to UTF-8 (major)
 * Switched to using a library to sort strings in a language-specific way (patch)
 
 ## [4.1.1] - 2021-05-24

@@ -46,6 +46,16 @@ RSpec.describe Kitchen::Oven do
       expect(I18n.t(:some_recipe_specific_term)).to match(/translation missing/)
     end
 
+    it 'autodetects the language' do
+      recipe = Kitchen::Recipe.new do |document|
+        document.search('div').first.replace_children(with: I18n.t(:appendix))
+      end
+
+      expect_bakes(input_xml: '<div lang="es"></div>',
+                   recipes: recipe,
+                   output_xml: "<div lang=\"es\" xml:lang=\"es\">Apéndice</div>\n")
+    end
+
     context 'when both recipe-specific and kitchen locales exist' do
       # This is a rare case when we do not call `stub_locales` because that messes with how
       # locales are found, and here we want to test our recipe-specific chaining logic.
