@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '4.1.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '4.1.1'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -25,7 +25,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   # Set overrides
   doc.selectors.override(
-    page_summary: '.section-summary'
+    page_summary: '.section-summary',
+    reference: '.references'
   )
 
   book = doc.book
@@ -41,40 +42,39 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
                          number: "#{table.count_in(:page)}")
   end
 
-  BakeReferences.v1(book: book, metadata_source: book.metadata)
-
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-summary')
-    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
-    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
-    BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
+    # MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
+    # MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
+    # BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
     chapter.composite_pages.each do |composite_page|
       composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
         BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_even_solution: true)
       end
     end
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  solution_container = BookAnswerKeyContainer.v1(book: book, klass: 'solution')
-  book.chapters.each do |chapter|
-    MoveSolutionsToAnswerKey.v1(chapter: chapter,
-                                metadata_source: book.metadata,
-                                strategy: :sociology,
-                                append_to: solution_container,
-                                klass: 'solution')
-  end
+  # solution_container = BookAnswerKeyContainer.v1(book: book, klass: 'solution')
+  # book.chapters.each do |chapter|
+  #   MoveSolutionsToAnswerKey.v1(chapter: chapter,
+  #                               metadata_source: book.metadata,
+  #                               strategy: :sociology,
+  #                               append_to: solution_container,
+  #                               klass: 'solution')
+  # end
 
   # Hacky solution for fixing empty titles in the Answer Key
-  if solution_container.contains?(' > [data-type="composite-page"] > div[data-type="solution"]')
-    solution_container.add_class('has-solutions')
-    book.body.add_class('has-answerkey')
-  else
-    solution_container.add_class('no-solutions')
-    book.search('.os-eob.os-solution-container.no-solutions[data-type = "composite-chapter"]').first.trash
-    book.body.add_class('no-answerkey')
-    book.search('body.no-answerkey > #toc > ol > li.os-toc-composite-chapter').trash
-  end
+  # if solution_container.contains?(' > [data-type="composite-page"] > div[data-type="solution"]')
+  #   solution_container.add_class('has-solutions')
+  #   book.body.add_class('has-answerkey')
+  # else
+  #   solution_container.add_class('no-solutions')
+  #   book.search('.os-eob.os-solution-container.no-solutions[data-type = "composite-chapter"]').first.trash
+  #   book.body.add_class('no-answerkey')
+  #   book.search('body.no-answerkey > #toc > ol > li.os-toc-composite-chapter').trash
+  # end
 
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
