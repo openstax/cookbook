@@ -1,0 +1,32 @@
+es:
+  figure: Figura
+  table_label: Tabla
+  appendix: Apéndice
+  theorem: Teorema
+  solution: Solución
+  chapter_outline: Esquema Del Capitulo
+  toc_title: Contenido
+  example_label: Ejemplo
+  exercise_label: Ejercicio
+  equation: Ecuación
+  chapter: Capítulo
+  unit: Unidad
+  checkpoint: Punto De Control
+  chapter_review: Revisión Del Capítulo
+  learning_objectives: Objetivos De Aprendizaje
+  stepwise_step_label: Paso
+  references: Referencias
+  eoc_chapter_review: Revisión Del Capítulo
+  eoc_key_terms_title: Términos Clave
+  eoc_summary_title: Resumen
+  eoc_exercises_title: Ejercicios
+  eoc_composite_metadata_title: Revisión Del Capítulo
+  eoc_answer_key_title: Respuestas Clave
+  eoc_key_concepts: Conceptos Clave
+  eoc_key_equations: Ecuaciones Clave
+  eoc_suggested_reading: Sugerencias Para Estudios Adicionales
+  eoc_further_research_title: Investigación Adicional
+  eob_index_title: Índice
+  eob_index_symbols_group: Símbolos
+  review_exercises: Ejercicios De Repaso
+  section_exercises: ! 'Sección %{number} Ejercicios'
