@@ -50,7 +50,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
     chapter.composite_pages.each do |composite_page|
       composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
-        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_even_solution: true)
+        # BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_even_solution: true)
+        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_solution_if: :even?, note_suppressed_solutions: true)
+
       end
     end
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
