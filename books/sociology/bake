@@ -58,24 +58,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
   end
 
-  solution_container = BookAnswerKeyContainer.v1(book: book, klass: 'solution')
-  book.chapters.each do |chapter|
-    MoveSolutionsToAnswerKey.v1(chapter: chapter,
-                                metadata_source: book.metadata,
-                                strategy: :sociology,
-                                append_to: solution_container,
-                                klass: 'solution')
-  end
-
-  # Hacky solution for fixing empty titles in the Answer Key
-  if solution_container.contains?(' > [data-type="composite-page"] > div[data-type="solution"]')
-    solution_container.add_class('has-solutions')
-    book.body.add_class('has-answerkey')
-  else
-    solution_container.add_class('no-solutions')
-    book.search('.os-eob.os-solution-container.no-solutions[data-type = "composite-chapter"]').first.trash
-    book.body.add_class('no-answerkey')
-    book.search('body.no-answerkey > #toc > ol > li.os-toc-composite-chapter').trash
+  if book.contains?(' div[data-type="solution"]')
+    solution_container = BookAnswerKeyContainer.v1(book: book, klass: 'solution')
+    book.chapters.each do |chapter|
+      MoveSolutionsToAnswerKey.v1(chapter: chapter,
+                                  metadata_source: book.metadata,
+                                  strategy: :sociology,
+                                  append_to: solution_container,
+                                  klass: 'solution')
+    end
   end
 
   BakeChapterIntroductions.v1(book: book)
