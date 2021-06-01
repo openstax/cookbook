@@ -7,9 +7,15 @@ dependencies=( kitchen legacy_recipes )
 for dependency in "${dependencies[@]}"
 do
     fake_dependency_dir=/tmp/fake_"$dependency"_dir_to_mount
-    real_dependency_dir=$(cat $DIR/../.devcontainer/"$dependency"_path)
-
     rm -rf $fake_dependency_dir
+
+    file_containing_real_dependency_dir=$DIR/../.devcontainer/"$dependency"_path
+
+    if (test -a $file_containing_real_dependency_dir); then
+      real_dependency_dir=$(cat $DIR/../.devcontainer/"$dependency"_path)
+    else
+      real_dependency_dir=/tmp/certainly_does_not_exist
+    fi
 
     if (test -a $real_dependency_dir); then
       dependency_dir=$real_dependency_dir

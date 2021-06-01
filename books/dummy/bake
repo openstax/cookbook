@@ -7,6 +7,13 @@ gemfile do
   gem 'slop', '4.8.2'
 end
 
+recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  book.search('div.test123').first.replace_children(with: 'Hello, world!')
+end
+
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
@@ -14,6 +21,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [],
+  recipes: recipe,
   output_file: opts[:output]
 )

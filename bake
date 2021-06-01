@@ -25,6 +25,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 case "${book}" in
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
   american_government) $DIR/books/american_government/bake --input $input_file --output $output_file;;
+  u-physics) $DIR/books/u-physics/bake --input $input_file --output $output_file;;
   dummy) $DIR/books/dummy/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac

@@ -2,7 +2,9 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-docker build -f $DIR/Dockerfile \
-             -t openstax/recipes:latest \
+if [ "$1" == "--ci" ]; then SUFFIX=".ci"; else SUFFIX=""; fi
+
+docker build -f $DIR/Dockerfile$SUFFIX \
+             -t openstax/recipes$SUFFIX:latest \
              --target runtime-env \
              $DIR/..

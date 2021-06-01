@@ -3,62 +3,18 @@
 # frozen_string_literal: true
 
 require 'bundler/inline'
+require_relative 'helpers/normalize_helpers'
 
 gemfile do
-  gem 'nokogiri', '1.6.8'
+  gem 'nokogiri', '>=1.7.0'
   gem 'byebug'
 end
 
-# In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
-# attributes.
+AVAILABLE_FLAGS = %w[--mask-terms].freeze
 
-def sort_attributes(element)
-  attributes = element.attributes
-  attributes.each do |key, value|
-    element.remove_attribute(key)
-  end
-  sorted_keys = attributes.keys.sort
-  sorted_keys.each do |key|
-    value = attributes[key].to_s
-    element[key] = value
-  end
-end
-
-# Legacy bakings of unnumbered tables include a bogus number, delete it
-
-def remove_bogus_number_from_unnumbered_tables(element)
-  return unless element.name == 'table' && (element[:class] || '').include?('unnumbered')
-
-  element.remove_attribute('summary')
-end
-
-# Sometimes there is `class=' '`, get rid of these
-
-def remove_blank_classes(element)
-  element.attributes.each do |key, value|
-    element.remove_attribute(key) if key == 'class' && value.to_s.strip == ''
-  end
-end
-
-# The index of copied elements (the number in _copy_23) isn't meaningful so
-# hide it.
-
-def mask_copied_id_numbers(element)
-  return unless element[:id]
-
-  element[:id] = element[:id].gsub(/_copy_(\d+)$/, '_copy_XXX')
-end
-
-def process(input_file:, output_file:)
+def process(input_file:, output_file:, args: [])
   read_and_write(input_file: input_file, output_file: output_file) do |doc|
-    doc.traverse do |child|
-      mask_copied_id_numbers(child)
-      next if child.text? || child.document?
-
-      remove_bogus_number_from_unnumbered_tables(child)
-      remove_blank_classes(child)
-      sort_attributes(child)
-    end
+    normalize(doc, args: args)
   end
 end
 
@@ -68,14 +24,21 @@ def read_and_write(input_file:, output_file:)
   yield(doc) if block_given?
 
   File.open(output_file, 'w') do |f|
-    f.write doc.to_xhtml(indent:2)
+    f.write doc.to_xhtml(indent: 2)
   end
 end
 
 ARGV.each do |input_file|
-  output_file = input_file.gsub(/(\.\w+)\z/, '.normalized\1')
+  next if AVAILABLE_FLAGS.include?(input_file)
 
-  process(input_file: input_file, output_file: output_file)
+  output_file =
+    if File.extname(input_file) != ''
+      input_file.gsub(/(\.\w+)\z/, '.normalized\1')
+    else
+      "#{input_file}.normalized"
+    end
+
+  process(input_file: input_file, output_file: output_file, args: ARGV & AVAILABLE_FLAGS)
 
   puts "Normalized '#{input_file}' to '#{output_file}'"
 end
