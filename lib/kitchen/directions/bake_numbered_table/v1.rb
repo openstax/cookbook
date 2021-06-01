@@ -22,21 +22,16 @@ module Kitchen::Directions::BakeNumberedTable
       table.parent.add_class('os-column-header-container') if table.column_header?
 
       # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
-      new_summary = "#{table_label} "
       new_caption = ''
       caption_title = ''
 
       if (title = table.first("span[data-type='title']")&.cut)
-        new_summary += title.text
         caption_title = <<~HTML
           \n<span class="os-title" data-type="title">#{title.children}</span>
         HTML
       end
 
-      new_summary += ' '
-
       if (caption = table.caption&.cut)
-        new_summary += caption.text
         new_caption = <<~HTML
           \n<span class="os-caption">#{caption.children}</span>
         HTML
@@ -45,8 +40,6 @@ module Kitchen::Directions::BakeNumberedTable
           \n<span class="os-caption"></span>
         HTML
       end
-
-      table[:summary] = new_summary
 
       return if table.unnumbered?
 

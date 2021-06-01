@@ -17,7 +17,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <table class="top-titled" id="tId" summary="Some summary">
+          <table class="top-titled" id="tId">
             #{caption}
             <thead>
               <tr>
@@ -42,7 +42,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <table class="column-header" id="tId" summary="column header summary">
+          <table class="column-header" id="tId">
           </table>
         HTML
       )
@@ -53,7 +53,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <table class="some-class" id="tId" summary="Some summary">
+          <table class="some-class" id="tId">
             #{caption}
             <thead>
               <tr>
@@ -78,7 +78,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <table class="some-class" id="tId" summary="Some summary">
+          <table class="some-class" id="tId">
             #{caption_with_title}
             <thead>
               <tr>
@@ -106,7 +106,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
       <<~HTML
         <div class="os-table os-top-titled-container">
           <div class="os-table-title">A title</div>
-          <table class="top-titled" id="tId" summary="Table 2.3  A caption">
+          <table class="top-titled" id="tId">
             <thead>
               <tr>
                 <th>Another heading cell</th>
@@ -136,7 +136,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     expect(column_header_table.document.search('.os-table').first).to match_normalized_html(
       <<~HTML
         <div class="os-table os-column-header-container">
-          <table class="column-header" id="tId" summary="Table 2.3  ">
+          <table class="column-header" id="tId">
         </table>
           <div class="os-caption-container">
             <span class="os-title-label">Table </span>
@@ -155,7 +155,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     expect(other_table.document.search('.os-table').first).to match_normalized_html(
       <<~HTML
         <div class="os-table">
-          <table class="some-class" id="tId" summary="Table 2.3  A caption">
+          <table class="some-class" id="tId">
             <thead>
               <tr>
                 <th>A title</th>
@@ -188,7 +188,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     expect(table_with_caption_title.document.search('.os-table').first).to match_normalized_html(
       <<~HTML
         <div class="os-table">
-          <table class="some-class" id="tId" summary="Table 2.3 Secret Title A caption">
+          <table class="some-class" id="tId">
             <thead>
               <tr>
                 <th>A title</th>
@@ -233,7 +233,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
       expect(column_header_table.document.search('.os-table').first).to match_normalized_html(
         <<~HTML
           <div class="os-table os-column-header-container">
-            <table class="column-header" id="tId" summary="Table 2.3  ">
+            <table class="column-header" id="tId">
           </table>
             <div class="os-caption-container">
               <span class="os-title-label">Table </span>
