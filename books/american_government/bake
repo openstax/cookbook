@@ -27,30 +27,32 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
         <span data-type="" itemprop="" class="os-text">#{title.text}</span>
       HTML
     )
-    title.name = 'h1'
+    title.name = 'div'
   end
 
-  # BakeUnitTitle.v1(book: book)
+  BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+
     chapter.search('.review-questions, .critical-thinking').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
+
     MoveExercisesToEOC.v1(
       chapter: chapter,
       metadata_source: book.metadata,
-      append_to: chapter,
       klass: 'review-questions'
     )
     MoveExercisesToEOC.v1(
       chapter: chapter,
       metadata_source: book.metadata,
-      append_to: chapter,
       klass: 'critical-thinking'
     )
+
     chapter.pages('$:not(.introduction)').each do |page|
       page.search("div[data-type='description']").each(&:trash)
       page.add_class('chapter-content-module')
@@ -70,7 +72,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
   end
+
   BakeSuggestedReading.v1(book: book)
 
   book.pages('$.appendix').each do |page|
@@ -81,7 +89,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     end
 
     page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}", always_caption: true)
     end
 
     page.examples.each do |example|
@@ -95,11 +103,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
 
   # Bake titled and unclassified notes
   book.chapters.pages.notes.each do |note|
-    if note.classes.empty?
-      BakeUnclassifiedNote.v1(note: note)
-    end
+    note.classes.empty? && BakeUnclassifiedNote.v1(note: note)
   end
-  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning middle-ground milestone get-connected insider-perspective])
+
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[link-to-learning
+                middle-ground
+                milestone
+                get-connected
+                insider-perspective]
+  )
+
   solutions_container = BookAnswerKeyContainer.v1(book: book)
   book.chapters.each do |chapter|
     MoveSolutionsToAnswerKey.v1(
@@ -109,9 +124,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
       append_to: solutions_container
     )
   end
-  BakeReferences.v1(book: book)
+
+  BakeReferences.v1(book: book, metadata_source: book.metadata)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
 end
 
