@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    openstax_kitchen (4.1.1)
+    openstax_kitchen (5.0.0)
       activesupport
       i18n
       nokogiri

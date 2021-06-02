@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require 'simplecov'
-
-SimpleCov.start
-
 ENV['TESTING'] = 'true'
 
 if ENV['ENABLE_CODECOV']
+  require 'simplecov'
+  SimpleCov.start
+
   require 'codecov'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
