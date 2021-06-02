@@ -101,6 +101,8 @@ module Kitchen
     #   @return [Clipboard]
     def_delegators :document, :pantry, :clipboard
 
+    def_delegators :document, :id_tracker
+
     # Creates a new instance
     #
     # @param node [Nokogiri::XML::Node] the wrapped element
@@ -441,6 +443,11 @@ module Kitchen
     def cut(to: nil)
       block_error_if(block_given?)
 
+      raw.traverse do |node|
+        next if node.text? || node.document?
+
+        id_tracker.record_id_cut(node[:id])
+      end
       node.remove
       get_clipboard(to).add(self) if to.present?
       self
@@ -461,7 +468,7 @@ module Kitchen
       the_copy.raw.traverse do |node|
         next if node.text? || node.document?
 
-        document.record_id_copied(node[:id])
+        id_tracker.record_id_copied(node[:id])
       end
       get_clipboard(to).add(the_copy) if to.present?
       the_copy
@@ -472,20 +479,22 @@ module Kitchen
     def paste
       # See `clone` method for a note about namespaces
       block_error_if(block_given?)
-
       temp_copy = clone
       temp_copy.raw.traverse do |node|
         next if node.text? || node.document?
 
-        node[:id] = document.modified_id_to_paste(node[:id]) unless node[:id].blank?
+        if node[:id].present?
+          id_tracker.record_id_pasted(node[:id])
+          node[:id] = id_tracker.modified_id_to_paste(node[:id])
+        end
       end
       temp_copy.to_s
     end
 
     # Copy the element's id
     def copied_id
-      document.record_id_copied(id)
-      document.modified_id_to_paste(id)
+      id_tracker.record_id_copied(id)
+      id_tracker.modified_id_to_paste(id)
     end
 
     # Delete the element

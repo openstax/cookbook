@@ -63,7 +63,7 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
                   <span class="os-number">1.1</span>
                   <p id="auto_m68764_fs-idm164104512">Problem 5</p>
                 </div>
-                <div data-type="solution" id="auto_m68764_fs-idm128797504">
+                <div data-type="solution" id="auto_m68764_fs-idm128798615">
                   <span class="os-number">1.1</span>
                   <p id="auto_m68764_fs-idm152759136">Solution 5</p>
                 </div>
@@ -203,7 +203,7 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
               <h3 data-type="title">
                 <span class="os-title-label">Review Exercises</span>
               </h3>
-              <div data-type="solution" id="auto_m68764_fs-idm128797504_copy_1">
+              <div data-type="solution" id="auto_m68764_fs-idm128798615">
                 <span class="os-number">1.1</span>
                 <p id="auto_m68764_fs-idm152759136">Solution 5</p>
               </div>

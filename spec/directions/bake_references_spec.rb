@@ -121,10 +121,10 @@ RSpec.describe Kitchen::Directions::BakeReferences do
               <h2 data-type="document-title">
                 <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
               </h2>
-              <div class="reference" data-type="note" display="inline" id="auto_12345_copy_1"><span class="os-reference-number">1. </span>
+              <div class="reference" data-type="note" display="inline" id="auto_12345"><span class="os-reference-number">1. </span>
                   Reference 1
                 </div>
-              <div class="reference" data-type="note" display="inline" id="auto_54321_copy_1"><span class="os-reference-number">2. </span>
+              <div class="reference" data-type="note" display="inline" id="auto_54321"><span class="os-reference-number">2. </span>
                   Reference 2
                 </div>
             </div>
@@ -132,7 +132,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
               <h2 data-type="document-title">
                 <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
               </h2>
-              <div class="reference" data-type="note" display="inline" id="auto_6789_copy_1"><span class="os-reference-number">1. </span>
+              <div class="reference" data-type="note" display="inline" id="auto_6789"><span class="os-reference-number">1. </span>
                   Reference 3
                 </div>
             </div>

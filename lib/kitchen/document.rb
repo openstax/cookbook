@@ -13,6 +13,8 @@ module Kitchen
     attr_accessor :location
     # @return [Config] the configuration used in this document
     attr_reader :config
+    # @return [IdTracker] the counter for duplicate IDs
+    attr_reader :id_tracker
 
     # @!method selectors
     #   The document's selectors
@@ -47,8 +49,7 @@ module Kitchen
       @nokogiri_document = nokogiri_document
       @location = nil
       @config = config || Config.new
-      @next_paste_count_for_id = {}
-      @id_copy_suffix = '_copy_'
+      @id_tracker = IdTracker.new
 
       # Nokogiri by default only recognizes the namespaces on the root node.  Add all others.
       raw&.add_all_namespaces! if @config.enable_all_namespaces
@@ -151,38 +152,6 @@ module Kitchen
       end
     end
 
-    # Keeps track that an element with the given ID has been copied.  When such
-    # elements are pasted, this information is used to give those elements unique
-    # IDs that don't duplicate the original element.
-    #
-    # @param id [String] the ID
-    #
-    def record_id_copied(id)
-      return if id.blank?
-
-      @next_paste_count_for_id[id] ||= 1
-    end
-
-    # Returns a unique ID given the ID of an element that was copied and is about
-    # to be pasted
-    #
-    # @param original_id [String]
-    #
-    def modified_id_to_paste(original_id)
-      return nil if original_id.nil?
-      return '' if original_id.blank?
-
-      count = next_count_for_pasted_id(original_id)
-
-      # A count of 0 means the element was cut and this is the first paste, do not
-      # modify the ID; otherwise, use the uniquified ID.
-      if count.zero?
-        original_id
-      else
-        "#{original_id}#{@id_copy_suffix}#{count}"
-      end
-    end
-
     # Returns the underlying Nokogiri Document object
     #
     # @return [Nokogiri::XML::Document]
@@ -203,14 +172,6 @@ module Kitchen
     end
 
     protected
-
-    def next_count_for_pasted_id(id)
-      return if id.blank?
-
-      (@next_paste_count_for_id[id] ||= 0).tap do
-        @next_paste_count_for_id[id] += 1
-      end
-    end
 
     attr_reader :nokogiri_document
 
