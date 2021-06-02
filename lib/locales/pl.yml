@@ -14,10 +14,11 @@ pl:
   chapter_review: Podsumowanie rozdziału
   learning_objectives: Cel dydaktyczny
   stepwise_step_label: Krok
+  answer_key_title: Rozwiązania zadań
   eoc_chapter_review: Podsumowanie rozdziału
-  eoc_key_terms_title: Kluczowe pojęcia
+  key_terms_title: Kluczowe pojęcia
+  eoc_solutions_title: Rozwiązania
   eoc_summary_title: Podsumowanie
-  eoc_answer_key_title: Rozwiązania zadań
   eoc_key_equations: Najważniejsze wzory
   eob_index_title: Skorowidz rzeczowy
   eob_index_symbols_group: Symbole

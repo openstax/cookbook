@@ -16,12 +16,13 @@ es:
   learning_objectives: Objetivos De Aprendizaje
   stepwise_step_label: Paso
   references: Referencias
+  answer_key_title: Respuestas Clave
   eoc_chapter_review: Revisión Del Capítulo
   eoc_key_terms_title: Términos Clave
   eoc_summary_title: Resumen
   eoc_exercises_title: Ejercicios
   eoc_composite_metadata_title: Revisión Del Capítulo
-  eoc_answer_key_title: Respuestas Clave
+  eoc_solutions_title: Soluciones
   eoc_key_concepts: Conceptos Clave
   eoc_key_equations: Ecuaciones Clave
   eoc_suggested_reading: Sugerencias Para Estudios Adicionales
