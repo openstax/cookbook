@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Added a version of `BakeChapterIntroductions` without a chapter outline (minor)
+
 ## [5.0.0] - 2021-06-02
 
 * Reditributed duplicated id logic across `#record_id_copied`, `#record_id_cut`, `#record_id_pasted`, added a couple more tests for `#copy`, `#cut`, and `#paste`, created a new class `IdTracker` and moved `#record_id_copied`, `#record_id_cut`, `#record_id_pasted`, and `modified_id_to_paste` into the new class (major)
