@@ -15,6 +15,19 @@ module Kitchen
           </a>
         HTML
       end
+
+      def self.v2(page:)
+        chapter = page.ancestor(:chapter)
+        <<~HTML
+          <div>
+            <h3 data-type="document-title" id="#{page.title.copied_id}">
+              <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+              <span class="os-divider"> </span>
+              <span class="os-text" data-type="" itemprop="">#{page.title_text}</span>
+            </h3>
+          </div>
+        HTML
+      end
     end
   end
 end

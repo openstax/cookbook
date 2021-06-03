@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add a `Strategy` for Precalculus (minor)
+* Create a `BakeNumberedNotes` V2 (minor)
 * Added a version of `BakeChapterIntroductions` without a chapter outline (minor)
 * Add `BakeChapterSolutions` which bakes the free response solutions at the eoc (minor)
 * Changed locale `eoc_answer_key_title` to `answer_key_title` as it was only used in eob (major)

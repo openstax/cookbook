@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeNumberedNotes do
+RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
   let(:book_with_notes) do
     book_containing(html:
       <<~HTML
@@ -77,7 +77,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
   end
 
   it 'bakes' do
-    described_class.v1(book: book_with_notes, classes: %w[foo hello theorem])
+    described_class.new.bake(book: book_with_notes, classes: %w[foo hello theorem])
     expect(book_with_notes.body).to match_normalized_html(
       <<~HTML
         <body>
