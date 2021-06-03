@@ -2,8 +2,6 @@
 
 # frozen_string_literal: true
 
-# TODO: content update needed - add os-toc-preface class
-
 require 'bundler/inline'
 
 gemfile do
@@ -20,23 +18,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  # Update the preface title  TODO: add title method
-  book.pages('$.preface').search("div[data-type='document-title']").each do |title|
-    title.replace_children(with:
-      <<~HTML
-        <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-      HTML
-    )
-    title.name = 'div'
-  end
-
+  BakePreface.v1(book: book, title_element: 'div')
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
+  BakeSuggestedReading.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.search('.review-questions, .critical-thinking').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
@@ -53,21 +44,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
       klass: 'critical-thinking'
     )
 
-    chapter.pages('$:not(.introduction)').each do |page|
-      page.search("div[data-type='description']").each(&:trash)
-      page.add_class('chapter-content-module')
-
-      title = page.search("div[data-type='document-title']").first
-      title.name = 'h2'
-      title.replace_children(with:
-        <<~HTML
-          <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-          <span class="os-divider"> </span>
-          <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-        HTML
-      )
-    end
-
     chapter.figures.each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
@@ -78,8 +54,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
   end
-
-  BakeSuggestedReading.v1(book: book)
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
