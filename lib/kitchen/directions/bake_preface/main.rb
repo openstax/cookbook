@@ -3,7 +3,7 @@
 module Kitchen
   module Directions
     module BakePreface
-      def self.v1(book:, title_element:)
+      def self.v1(book:, title_element: 'h1')
         V1.new.bake(book: book, title_element: title_element)
       end
     end

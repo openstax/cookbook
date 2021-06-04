@@ -17,7 +17,7 @@ RSpec.describe Kitchen::Directions::BakePreface::V1 do
   end
 
   it 'works' do
-    described_class.new.bake(book: book1)
+    described_class.new.bake(book: book1, title_element: 'h1')
 
     expect(book1.body).to match_normalized_html(
       <<~HTML
