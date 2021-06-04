@@ -4,6 +4,7 @@ module Kitchen::Directions::BakeNumberedTable
   class V1
 
     def bake(table:, number:, always_caption: false)
+      table.remove_attribute('summary')
       table.wrap(%(<div class="os-table">))
 
       table_label = "#{I18n.t(:table_label)} #{number}"

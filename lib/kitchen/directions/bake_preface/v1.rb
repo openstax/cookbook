@@ -2,7 +2,7 @@
 
 module Kitchen::Directions::BakePreface
   class V1
-    def bake(book:)
+    def bake(book:, title_element: 'h1')
       book.pages('$.preface').each do |page|
         page.titles.each do |title|
           title.replace_children(with:
@@ -10,7 +10,7 @@ module Kitchen::Directions::BakePreface
               <span data-type="" itemprop="" class="os-text">#{title.text}</span>
             HTML
           )
-          title.name = 'h1'
+          title.name = title_element
         end
       end
     end
