@@ -55,7 +55,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
               </div>
             </div>
             <div data-type="exercise" id="2_123">
-              <div data-type="problem" id="2_456">a second exercise</div>
+              <div data-type="problem" id="2_456">a <strong>second</strong> exercise</div>
               <div data-type="solution" id="2_xyz">
                 <p>second solution content</p>
               </div>
@@ -199,7 +199,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
                 </div>
                 <div class="unnumbered os-hasSolution" data-type="exercise" id="2_123">
                   <div data-type="problem" id="2_456">
-                    <div class="os-problem-container">a second exercise</div>
+                    <div class="os-problem-container">a <strong>second</strong> exercise</div>
                   </div>
                   <div data-type="solution" id="2_123-solution">
                     <a class="os-number" href="#2_123">2.3</a>

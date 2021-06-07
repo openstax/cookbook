@@ -16,7 +16,6 @@ module Kitchen
         exercise.add_class('unnumbered')
         # bake problem
         exercise.problem.wrap_children('div', class: 'os-problem-container')
-        exercise.problem.first('strong')&.trash
         exercise.search('[data-type="commentary"]').each(&:trash)
         return unless exercise.solution
 
