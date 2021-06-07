@@ -4,6 +4,7 @@ module Kitchen::Directions::BakePreface
   class V1
     def bake(book:, title_element:)
       book.pages('$.preface').each do |page|
+        page.search('div[data-type="description"], div[data-type="abstract"]').each(&:trash)
         page.titles.each do |title|
           title.replace_children(with:
             <<~HTML

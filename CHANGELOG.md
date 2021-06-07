@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Delete `abstract` and `description` elements from preface in `BakePreface` (minor)
 * Stop deleting the first `<strong>` tag in `BakeNumberedNotes` (major)
 * Allow `BakeFigure` to bake unnumbered splash figures (minor)
 * Extend `ChapterReviewContainer` to accept other classes (major?)
