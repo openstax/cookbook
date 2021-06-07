@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Allow `BakeFigure` to bake unnumbered splash figures (minor)
 * Extend `ChapterReviewContainer` to accept other classes (major?)
 * Add a `Strategy` for Precalculus (minor)
 * Create a `BakeNumberedNotes` V2 (minor)

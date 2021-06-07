@@ -42,6 +42,21 @@ RSpec.describe Kitchen::Directions::BakeFigure do
     )
   end
 
+  let(:book_with_unnumbered_splash) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <figure id="someId" class="unnumbered splash">
+            <figcaption>figure caption</figcaption>
+            <span>
+              <img src="img.jpg"/>
+            </span>
+          </figure>
+        HTML
+      )
+    )
+  end
+
   let(:book1_figure) { book1.chapters.figures.first }
 
   describe 'v1' do
@@ -102,6 +117,28 @@ RSpec.describe Kitchen::Directions::BakeFigure do
       it "does not get a 'has-splash' class" do
         described_class.v1(figure: book1_figure, number: '1.2')
         expect(book1.search('.os-figure').first.has_class?('has-splash')).to be false
+      end
+    end
+
+    context 'when figure is unnumbered but also a splash' do
+      it 'bakes' do
+        described_class.v1(figure: book_with_unnumbered_splash.figures.first, number: 'blah')
+        expect(book_with_unnumbered_splash.pages.first).to match_normalized_html(
+          <<~HTML
+            <div data-type="page">
+              <div class="os-figure has-splash">
+                <figure class="unnumbered splash" id="someId">
+                  <span>
+                    <img src="img.jpg" />
+                  </span>
+                </figure>
+                <div class="os-caption-container">
+                  <span class="os-caption">figure caption</span>
+                </div>
+              </div>
+            </div>
+          HTML
+        )
       end
     end
   end
