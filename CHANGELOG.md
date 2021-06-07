@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Changed locale `eoc_answer_key_title` to `answer_key_title` as it was only used in eob (major)
 * Added spec for translations (minor)
 * Remove summary attribute from numbered tables, add option to pass title element to `BakePreface` (minor)
+* Renamed `American Government` strategy to `Default` inside `move_solutions_to_answer_key` for other books to use it with a sent in classname (major)
 
 ## [5.0.0] - 2021-06-02
 
