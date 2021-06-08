@@ -10,7 +10,7 @@ source_filenames = (Dir.glob(File.join(__dir__,"../books/**/*")) + [File.join(__
                        .select{|filename| !File.directory?(filename)}
 
 gem_name_to_versions_array_hash = source_filenames.each_with_object({}) do |filename,hash|
-  source = File.read(filename)
+  source = File.read(filename, :encoding => 'utf-8')
   gem_names_and_versions = source.scan(/gem\s+['"](\w+)['"]\s*,\s*(.+)['"](\d+\.\d+\.\d+)['"]/)
   gem_names_and_versions.each do |gem_name, _, version|
     (hash[gem_name] ||= Set.new([])).add(version)
