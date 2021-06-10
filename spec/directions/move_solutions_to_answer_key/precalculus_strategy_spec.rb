@@ -64,7 +64,7 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
   let(:append_to) do
     new_element(
       <<~HTML
-        <div class="lol"></div>
+        <div class="top-level"></div>
       HTML
     )
   end
@@ -75,14 +75,15 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
         chapter: chapter,
         metadata_source: metadata_element,
         strategy: :precalculus,
-        append_to: append_to
+        append_to: append_to,
+        solutions_plural: false
       )
     end
 
     expect(append_to).to match_normalized_html(
       <<~HTML
-        <div class="lol">
-          <div class="os-eob os-solutions-container" data-type="composite-page" data-uuid-key=".solutions1">
+        <div class="top-level">
+          <div class="os-eob os-solution-container" data-type="composite-page" data-uuid-key=".solution1">
             <h2 data-type="document-title">
               <span class="os-text">Chapter 1</span>
             </h2>
@@ -137,5 +138,11 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
         </div>
       HTML
     )
+  end
+
+  it 'raises exception if given an unrecognized book' do
+    expect {
+      described_class.new.bake(chapter: '', metadata_source: metadata_element, strategy: :unrecognized_strategy, append_to: append_to)
+    }.to raise_error('No such strategy')
   end
 end
