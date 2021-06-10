@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added spec for translations (minor)
 * Remove summary attribute from numbered tables, add option to pass title element to `BakePreface` (minor)
 * Renamed `American Government` strategy to `Default` inside `move_solutions_to_answer_key` for other books to use it with a sent in classname (major)
+* Added line that puts the classname `has-footnote` in the footnote ref's parent element (major)
+* Added a condition into `BakeChapterSummary` so it doesn't bake the title if it already includes the respective number in it
 
 ## [5.0.0] - 2021-06-02
 
