@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '2.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '5.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -14,6 +14,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   include Kitchen::Directions
 
   book = doc.book
+  metadata = book.metadata
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
@@ -22,11 +23,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
-  BakeSuggestedReading.v1(book: book)
+  BakeUnclassifiedNotes.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.search('.review-questions, .critical-thinking').exercises.each do |exercise|
@@ -35,12 +36,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
 
     MoveExercisesToEOC.v1(
       chapter: chapter,
-      metadata_source: book.metadata,
+      metadata_source: metadata,
       klass: 'review-questions'
     )
     MoveExercisesToEOC.v1(
       chapter: chapter,
-      metadata_source: book.metadata,
+      metadata_source: metadata,
       klass: 'critical-thinking'
     )
 
@@ -75,11 +76,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  # Bake titled and unclassified notes
-  book.chapters.pages.notes.each do |note|
-    note.classes.empty? && BakeUnclassifiedNote.v1(note: note)
-  end
-
   BakeAutotitledNotes.v1(
     book: book,
     classes: %w[link-to-learning
@@ -93,13 +89,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   book.chapters.each do |chapter|
     MoveSolutionsToAnswerKey.v1(
       chapter: chapter,
-      metadata_source: book.metadata,
-      strategy: :american_government,
+      metadata_source: metadata,
+      strategy: :default,
+      strategy_options: {
+        classes: ['review-questions']
+      },
       append_to: solutions_container
     )
   end
 
-  BakeReferences.v1(book: book, metadata_source: book.metadata)
+  BakeSuggestedReading.v1(book: book)
+  BakeReferences.v1(book: book, metadata_source: metadata)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
