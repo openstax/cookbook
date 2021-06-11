@@ -20,8 +20,8 @@ done
 
 case "${book}" in
   chemistry) dest="${DIR}/data/chemistry/short" && script="${DIR}/books/chemistry/shorten";;
-  sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
-  # sociology) dest="${DIR}/data/sociology-3e/short" && script="${DIR}/books/sociology/shorten";;
+  # sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
+  sociology) dest="${DIR}/data/sociology-3e/short" && script="${DIR}/books/sociology/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac

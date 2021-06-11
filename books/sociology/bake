@@ -62,17 +62,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
       end
     end
-    BakeChapterReferences.v2(chapter: chapter, metadata_source: book.metadata)
+    # BakeChapterReferences.v2(chapter: chapter, metadata_source: book.metadata)
   end
 
   if book.contains?(' div[data-type="solution"]')
-    solution_container = BookAnswerKeyContainer.v1(book: book, klass: 'solution')
+    solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
       MoveSolutionsToAnswerKey.v1(chapter: chapter,
                                   metadata_source: book.metadata,
-                                  strategy: :sociology,
+                                  strategy: :default,
+                                  strategy_options: { classes: %w[section-quiz] },
                                   append_to: solution_container,
-                                  klass: 'solution')
+                                  solutions_plural: false)
     end
   end
 
