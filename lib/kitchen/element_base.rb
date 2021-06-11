@@ -508,6 +508,21 @@ module Kitchen
       Element.new(node: raw.parent, document: document, short_type: "parent(#{short_type})")
     end
 
+    # returns previous element
+    # skips double indentations that the nokigiri sometimes picks up
+    # nil if there's no previous sibling
+    #
+    def previous
+      prev = raw.previous
+      return prev if prev.nil?
+
+      Element.new(
+        node: prev,
+        document: document,
+        short_type: "previous(#{short_type})"
+      )
+    end
+
     # TODO: make it clear if all of these methods take Element, Node, or String
 
     # If child argument given, prepends it before the element's current children.

@@ -57,9 +57,28 @@ RSpec.describe Kitchen::ElementBase do
       ))
   end
 
+  let(:sibling_book) do
+    book_containing(html:
+      chapter_element(
+        <<~HTML
+          <div data-type="page" id="page1">
+            <p>Some text</p>
+            <div data-type="example" class="class1" id="example1">
+              <p>This is an example.</p>
+            </div>
+            <figure id="figure1">Who is my closest sibling?</figure>
+            <p>Some other Text</p>
+          </div>
+        HTML
+      )
+    )
+  end
+
   let(:example) { book.first!('div[data-type="example"]') }
 
   let(:para) { book.first!('p') }
+
+  let(:figure) { sibling_book.first!('figure') }
 
   describe '#initialize' do
     it 'explodes if given a bad document type' do
@@ -89,6 +108,34 @@ RSpec.describe Kitchen::ElementBase do
     it 'sets the element\'s ID' do
       para.id = 'para1'
       expect(para.id).to eq 'para1'
+    end
+  end
+
+  describe '#parent' do
+    it 'returns the element\'s parent' do
+      expect(para.parent).to match_normalized_html(
+        <<~HTML
+          <div class="class1" data-type="example" id="div1">
+            <p>This is a paragraph.</p>
+          </div>
+        HTML
+      )
+    end
+  end
+
+  describe '#previous' do
+    it 'returns the element\'s immediately previous sibling' do
+      expect(figure.previous).to match_normalized_html(
+        <<~HTML
+          <div data-type="example" class="class1" id="example1">
+            <p>This is an example.</p>
+          </div>
+        HTML
+      )
+    end
+
+    it 'returns nil when a previous sibling does not exist' do
+      expect(para.previous).to eq nil
     end
   end
 

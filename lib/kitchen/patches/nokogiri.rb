@@ -67,6 +67,13 @@ module Nokogiri
         self[:class]&.split || []
       end
 
+      def previous
+        prev = previous_element
+        return nil if prev.nil?
+
+        prev.text? ? prev.previous : prev
+      end
+
       def self.selector_to_css_nodes(selector)
         # No need to parse the same selector more than once.
         @parsed_selectors ||= {}

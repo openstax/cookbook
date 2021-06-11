@@ -14,4 +14,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
       .with(book: 'book2', classes: 'class2')
     described_class.v2(book: 'book2', classes: 'class2')
   end
+
+  it 'calls v3' do
+    expect_any_instance_of(Kitchen::Directions::BakeNumberedNotes::V3).to receive(:bake)
+      .with(book: 'book3', classes: 'class3', suppress_solution: true)
+    described_class.v3(book: 'book3', classes: 'class3', suppress_solution: true)
+  end
 end
