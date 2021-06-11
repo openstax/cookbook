@@ -7,11 +7,11 @@ RSpec.describe Kitchen::Directions::BookAnswerKeyContainer::V1 do
     book_containing(html:
       <<~HTML
         #{metadata_element}
-        <div data-type="chapter">
-          <div data-type="page">
-            This is a page
+          <div data-type="chapter">
+            <div data-type="page">
+              This is a page
+            </div>
           </div>
-        </div>
       HTML
     )
   end

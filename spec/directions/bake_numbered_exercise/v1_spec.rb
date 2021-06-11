@@ -48,7 +48,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise::V1 do
 
   context 'when solutions are suppressed' do
     it 'works' do
-      described_class.new.bake(exercise: exercise1, number: '1.1', suppress_solution: true)
+      described_class.new.bake(exercise: exercise1, number: '1.1', suppress_solution_if: true)
 
       expect(exercise1).to match_normalized_html(
         <<~HTML
@@ -63,6 +63,52 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise::V1 do
           </div>
         HTML
       )
+    end
+  end
+
+  context 'when even solutions are suppressed' do
+    context 'when number is odd' do
+      it 'works' do
+        described_class.new.bake(exercise: exercise1, number: 1, suppress_solution_if: :even?, note_suppressed_solutions: true)
+        expect(exercise1).to match_normalized_html(
+          <<~HTML
+            <div data-type="exercise" id="exercise_id" class="os-hasSolution">
+              <div data-type="problem" id="problem_id">
+                <a class="os-number" href="#exercise_id-solution">1</a>
+                <span class="os-divider">. </span>
+                <div class="os-problem-container">
+                  <p>example content</p>
+                </div>
+              </div>
+              <div data-type="solution" id="exercise_id-solution"><a class="os-number" href="#exercise_id">1</a>
+                <span class="os-divider">. </span>
+                <div class="os-solution-container">
+                  <p>Solution content</p>
+                </div>
+              </div>
+            </div>
+          HTML
+        )
+      end
+    end
+
+    context 'when number is even' do
+      it 'works' do
+        described_class.new.bake(exercise: exercise1, number: 2, suppress_solution_if: :even?, note_suppressed_solutions: true)
+        expect(exercise1).to match_normalized_html(
+          <<~HTML
+            <div data-type="exercise" id="exercise_id" class="os-hasSolution-trashed">
+              <div data-type="problem" id="problem_id">
+                <span class="os-number">2</span>
+                <span class="os-divider">. </span>
+                <div class="os-problem-container">
+                  <p>example content</p>
+                </div>
+              </div>
+            </div>
+          HTML
+        )
+      end
     end
   end
 end

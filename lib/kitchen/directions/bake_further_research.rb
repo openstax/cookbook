@@ -24,6 +24,8 @@ module Kitchen
 
           chapter.non_introduction_pages.each do |page|
             further_research = page.first('.further-research')
+            next unless further_research.present?
+
             further_research.first("[data-type='title']")&.trash # get rid of old title if exists
             further_research_title = page.title.copy
             further_research_title.name = 'h3'
