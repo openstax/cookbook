@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add Rubocop and a working CHANGELOG check to GitHub actions (patch)
 * Allow `BakeFootnotes` to number footnotes with Roman numerals (minor)
 * Create V2 for `BakeNumberedTables` (minor)
 * Remove extraneous title in `BakeChapterSectionExercises` (minor)
