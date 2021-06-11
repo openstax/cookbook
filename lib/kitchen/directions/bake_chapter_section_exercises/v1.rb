@@ -2,9 +2,10 @@
 
 module Kitchen::Directions::BakeChapterSectionExercises
   class V1
-    def bake(chapter:)
+    def bake(chapter:, trash_title:)
       chapter.pages.each do |page|
         page.search('section.section-exercises').each do |section|
+          section.first('h3[data-type="title"]')&.trash if trash_title
           section.wrap(
             %(<div class="os-eos os-section-exercises-container"
               data-uuid-key=".section-exercises">)
