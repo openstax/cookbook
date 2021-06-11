@@ -21,7 +21,10 @@ module Kitchen
                .store("#{I18n.t(:example_label)} #{number}", label: example.id)
 
         example.titles.each do |title|
-          next if title.parent.has_class?('os-caption-container')
+          if title.parent.has_class?('os-caption-container') || \
+             title.parent.has_class?('os-caption')
+            next
+          end
 
           title.name = 'h4'
         end

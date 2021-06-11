@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create V2 for `BakeNumberedTables` (minor)
 * Remove extraneous title in `BakeChapterSectionExercises` (minor)
 * Create V2 for `BookAnswerKeyContainer` and `MoveSolutionsToEOC` with singular option for wrapper class (minor)
 * Delete `abstract` and `description` elements from preface in `BakePreface` (minor)

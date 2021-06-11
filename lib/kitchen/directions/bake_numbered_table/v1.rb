@@ -4,23 +4,7 @@ module Kitchen::Directions::BakeNumberedTable
   class V1
 
     def bake(table:, number:, always_caption: false)
-      table.remove_attribute('summary')
-      table.wrap(%(<div class="os-table">))
-
-      table_label = "#{I18n.t(:table_label)} #{number}"
-      table.pantry(name: :link_text).store table_label, label: table.id
-
-      if table.top_titled?
-        table.parent.add_class('os-top-titled-container')
-        table.prepend(sibling:
-          <<~HTML
-            <div class="os-table-title">#{table.title}</div>
-          HTML
-        )
-        table.title_row.trash
-      end
-
-      table.parent.add_class('os-column-header-container') if table.column_header?
+      Kitchen::Directions::BakeTableBody.v1(table: table, number: number)
 
       # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
       new_caption = ''
@@ -55,6 +39,5 @@ module Kitchen::Directions::BakeNumberedTable
         HTML
       )
     end
-
   end
 end
