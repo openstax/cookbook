@@ -8,7 +8,7 @@ module Kitchen::Directions::BakeNumberedNotes
         book.chapters.notes("$.#{klass}").each do |note|
           note.wrap_children(class: 'os-note-body')
           previous_example = note.previous
-          os_number = previous_example&.content('.os-number')
+          os_number = previous_example&.first('.os-number')&.children&.to_s
 
           note.prepend(child:
             <<~HTML

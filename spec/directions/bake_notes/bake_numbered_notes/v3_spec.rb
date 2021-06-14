@@ -25,6 +25,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
           </div>
           <div data-type="exercise">
             <span class="os-number">1.4</span>
+            <figure>
+              <span class="os-title">Figure</span>
+              <span class="os-number">1.1</span>
+            </figure>
           </div>
           <div data-type="note" id="222" class="hello">
             <p>content 1.4</p>
@@ -128,6 +132,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
             </div>
             <div data-type="exercise">
               <span class="os-number">1.4</span>
+              <figure>
+                <span class="os-title">Figure</span>
+                <span class="os-number">1.1</span>
+              </figure>
             </div>
             <div class="hello" data-type="note" id="222">
               <h3 class="os-title">
