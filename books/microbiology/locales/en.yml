@@ -1,0 +1,19 @@
+en:
+  notes:
+    clinical-focus: Clinical Focus
+    check-your-understanding: "Check Your Understanding"
+    micro-connection: Micro Connections
+    link-to-learning: Link to Learning
+    eye-on-ethics: Eye on Ethics
+    case-in-point: Case in Point
+    disease-profile: Disease Profile
+  eoc:
+    multiple-choice: Multiple Choice
+    fill-in-the-blank: Fill in the Blank
+    short-answer: Short Answer
+    critical-thinking: Critical Thinking
+    review-questions: Review Questions
+    true-false: True/False
+    matching: Matching
+  eoc_key_concepts: Summary
+  eoc_exercises_title: Chapter Review

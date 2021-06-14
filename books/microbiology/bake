@@ -1,0 +1,107 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '5.0.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  metadata = book.metadata
+
+  # Some stuff just goes away
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book, title_element: 'h1')
+  BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  book.chapters.each do |chapter|
+    BakePageAbstracts.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter)
+  end
+
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[clinical-focus check-your-understanding micro-connection link-to-learning eye-on-ethics case-in-point disease-profile]
+  )
+
+  book_answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
+  book.chapters.each do |chapter|
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+
+    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
+
+    # EoC sections with exercises
+    classnames = %w[multiple-choice true-false matching fill-in-the-blank short-answer critical-thinking]
+
+    classnames.each do |klass|
+      MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: klass)
+    end
+
+    chapter.search('.multiple-choice, .true-false, .matching, .fill-in-the-blank, .short-answer, .critical-thinking').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+
+    # Bake answer key from chapter/ move solutions from eoc into answer key
+
+    MoveSolutionsToAnswerKey.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      strategy: :default,
+      append_to: book_answer_key,
+      strategy_options: { classes: %w[multiple-choice true-false matching fill-in-the-blank short-answer] },
+      solutions_plural: false
+    )
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    chapter.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+  end
+
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+
+    BakeAppendix.v1(page: page, number: appendix_letter)
+  end
+
+  BakeUnnumberedTables.v1(book: book)
+  BakeMathInParagraph.v1(book: book)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeFootnotes.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
+  BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: recipe,
+  output_file: opts[:output]
+)
