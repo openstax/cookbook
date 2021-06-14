@@ -62,7 +62,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
       end
     end
-    # BakeChapterReferences.v2(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata, from_introduction: true)
+
   end
 
   if book.contains?(' div[data-type="solution"]')
