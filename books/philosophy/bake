@@ -16,6 +16,38 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
   metadata = book.metadata
 
   book.search('cnx-pi').trash
+
+  book.chapters.each do |chapter|
+    BakePreface.v1(book: book)
+    BakeChapterTitle.v1(book: book)
+    BakeChapterIntroductions.v1(book: book)
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+
+    chapter.search('.review-questions').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+    chapter.figures.each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+  end
+
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[read-philosopher
+                think-philosopher
+                write-philosopher
+                philo-connections
+                time-line]
+  )
+  BakeIndex.v1(book: book)
+  BakeToc.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
