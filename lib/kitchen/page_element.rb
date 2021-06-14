@@ -88,11 +88,10 @@ module Kitchen
 
     # Returns the summary element.
     #
-    # @raise [ElementNotFoundError] if no matching element is found
-    # @return [Element]
+    # @return [Element, nil] the summary or nil if no summary found
     #
     def summary
-      first!(selectors.page_summary)
+      first(selectors.page_summary)
     end
 
     # Returns the exercises element.
