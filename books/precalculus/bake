@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
+# frozen_string_literal: true
+
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.2.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '5.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -12,6 +14,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
   include Kitchen::Directions
 
   book = doc.book
+  metadata = book.metadata
 
   book.search('cnx-pi').trash
 
@@ -28,52 +31,62 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
   BakeNumberedNotes.v2(book: book, classes: %w[try])
 
   # Bake EOC sections
-  solutions_container = BookAnswerKeyContainer.v1(book: book)
+  solutions_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
   book.chapters.each do |chapter|
-    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: book.metadata)
+    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
 
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata, append_to: eoc_wrapper)
-    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata, append_to: eoc_wrapper)
-    BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: book.metadata, append_to: eoc_wrapper)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
+    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
+    BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
     # EoC sections with exercises
-    # MoveExercisesToEOC.v2(chapter: chapter, metadata_source: book.metadata, append_to: eoc_wrapper, klass: 'review-conceptual-questions')
-    # MoveExercisesToEOC.v2(chapter: chapter, metadata_source: book.metadata, append_to: eoc_wrapper, klass: 'review-problems')
-
-    eoc_exercises_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: book.metadata)
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, append_to: eoc_exercises_wrapper, klass: 'review-exercises')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, append_to: eoc_exercises_wrapper, klass: 'practice-test')
-    BakeChapterSectionExercises.v1(chapter: chapter)
-    # # In-place bake exercises & solutions
-    chapter.search('.review-exercises').exercises.each do |exercise|
+    eoc_exercises_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata,
+                                                      klass: 'exercises')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          append_to: eoc_exercises_wrapper, klass: 'review-exercises')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          append_to: eoc_exercises_wrapper, klass: 'practice-test')
+    BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+    # In-place bake exercises & solutions
+    chapter.search('section.review-exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
-    chapter.search('.practice-test').exercises.each do |exercise|
+    chapter.search('section.practice-test').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
-    chapter.pages.search('.section-exercises').exercises.each do |exercise|
+    chapter.pages.search('section.section-exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:page))
     end
 
     # # Bake answer key from chapter/ move solutions from eoc into answer key
-    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: book.metadata, strategy: :precalculus, append_to: solutions_container)
+    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: metadata,
+                                strategy: :precalculus, append_to: solutions_container,
+                                solutions_plural: false)
   end
 
-  puts ''
-
-  book.chapters.each do |chapter|
-    chapter.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+  book.pages('$:not(.appendix)').each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table,
+                           number: table.count_in(:page))
     end
-    chapter.figures('$:not(.unnumbered)').each do |figure|
+    page.figures.each do |figure|
       BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+                    number: figure.count_in(:page))
     end
-
-    chapter.examples.each do |example|
+    page.examples.each do |example|
       BakeExample.v1(example: example,
-                     number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
+                     number: example.count_in(:page),
                      title_tag: 'h3')
+    end
+  end
+
+  book.composite_pages.each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table,
+                           number: table.count_in(:composite_page))
+    end
+    page.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: figure.count_in(:composite_page))
     end
   end
 
@@ -82,7 +95,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
 
     page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+      BakeNumberedTable.v2(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
     end
     page.figures('$:not(.unnumbered)').each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
@@ -91,26 +104,56 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
 
   BakeUnnumberedTables.v1(book: book)
 
-  book.search('[data-type="exercise"], [data-type="solution"]').each do |exercise|
-    # Add the 'has-first-element' class to elements that need it
-    #byebug if exercise.id == "auto_11f4eacc-c348-4836-8c5b-747577d249ca_fs-id1165137644802"
-    BakeFirstElements.v1(within: exercise,
-                         selectors: ['.os-problem-container > [data-type="media"]',
-                                     '.os-problem-container > .os-table',
-                                     '.os-solution-container > [data-type="media"]',
-                                     '.os-solution-container > .os-table'])
+  # Add classes to exercises and solutions - TODO: think of a better way to do this
+  book.search('section.review-exercises, section.practice-test, section.section-exercises,' \
+    ' div[data-type="note"].try').exercises.each do |exercise|
+    BakeFirstElements.v1(within: exercise)
+    inline_list = exercise.solution&.first('div.os-solution-container > ol[type="1"]:first-child')
+    if inline_list
+      inline_list.add_class('first-inline-list-element')
+      inline_list.parent.add_class('has-first-inline-list-element')
+    end
+  end
+
+  book.search('div.os-solution-area > div[data-type="solution"]').each do |solution|
+    BakeFirstElements.v1(within: solution)
+    inline_list = solution&.first('div.os-solution-container > ol[type="1"]:first-child')
+    if inline_list
+      inline_list.add_class('first-inline-list-element')
+      inline_list.parent.add_class('has-first-inline-list-element')
+    end
   end
 
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
-  book.search('[role="doc-noteref"]').each do |el|
-    el.parent.add_class('has-noteref') if el.parent.name == 'p'
-  end
+  BakeStepwise.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+end
+
+cosmetic = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+
+  book.search('div[data-type="example"] > h3').each do |title|
+    title.element_children[-1].trash
+  end
+
+  book.search('section.review-exercises > section').each do |section|
+    section.first('h4[data-type="title"]').name = 'h5'
+  end
+
+  # add list separator span
+  book.search('span[data-list-type="labeled-item"]').each do |data_list|
+    items = data_list.search('span[data-type="item"]')
+    items.take(items.count - 1).each do |item|
+      item.append(child: '<span class="-os-inline-list-separator">;</span>')
+    end
+  end
 end
 
 opts = Slop.parse do |slop|
@@ -120,6 +163,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: recipe,
+  recipes: [recipe, cosmetic],
   output_file: opts[:output]
 )

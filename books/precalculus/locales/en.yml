@@ -1,9 +1,11 @@
 en:
-  test: Hello
+  section_exercises: ! '%{number} Section Exercises'
   eoc:
     practice-test: Practice Test
     review-exercises: Review Exercises
     section-exercises: ! '%{number} Section Exercises'
+    exercises: Exercises
+    chapter-review: Chapter Review
   notes:
     try: "Try It "
     how-to-notitle: How To
