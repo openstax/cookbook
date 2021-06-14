@@ -29,6 +29,7 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
           <span data-type="term">Foo</span>
           <span data-type="term">Bar</span>
           <span data-type="term">bar</span>
+          <span data-type="term">Ötzi the Iceman</span>
         </div>
         <div data-type="chapter">
           <div data-type="page" id="p2">
@@ -36,6 +37,7 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
             <span data-type="term">foo</span>
             <span data-type="term">ΔE</span>
             <span data-type="term"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
+            <span data-type="term">3-PGA</span>
           </div>
           <div data-type="composite-chapter">
             <div data-type="document-title">Chapter Review</div>
@@ -50,6 +52,8 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
           <div data-type="composite-page">
             <div data-type="document-title">Another EOC Section</div>
             <span data-type="term">composite page at the top level</span>
+            <span data-type="term">éblahblah</span>
+            <span data-type="term">5’ cap</span>
           </div>
         </div>
       HTML
@@ -76,8 +80,20 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
           <div class="group-by">
             <span class="group-label">Symbols</span>
             <div class="os-index-item">
+            <span class="os-term" group-by="Symbols">3-PGA</span>
+              <a class="os-term-section-link" href="#auto_p2_term9">
+                <span class="os-term-section">1.1 First Page</span>
+              </a>
+            </div>
+            <div class="os-index-item">
+              <span class="os-term" group-by="Symbols">5&#x2019; cap</span>
+              <a class="os-term-section-link" href="#auto_composite_page_term4">
+                <span class="os-term-section">2 Another EOC Section</span>
+              </a>
+            </div>
+            <div class="os-index-item">
               <span class="os-term" group-by="Symbols">&#x394;E</span>
-              <a class="os-term-section-link" href="#auto_p2_term6">
+              <a class="os-term-section-link" href="#auto_p2_term7">
                 <span class="os-term-section">1.1 First Page</span>
               </a>
             </div>
@@ -111,6 +127,15 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
             </div>
           </div>
           <div class="group-by">
+            <span class="group-label">E</span>
+            <div class="os-index-item">
+              <span class="os-term" group-by="e">&#xE9;blahblah</span>
+              <a class="os-term-section-link" href="#auto_composite_page_term3">
+                <span class="os-term-section">2 Another EOC Section</span>
+              </a>
+            </div>
+          </div>
+          <div class="group-by">
             <span class="group-label">F</span>
             <div class="os-index-item">
               <span class="os-term" group-by="f">foo</span>
@@ -122,8 +147,17 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
                 <span class="os-term-section">Preface</span>
               </a>
               <span class="os-index-link-separator">, </span>
-              <a class="os-term-section-link" href="#auto_p2_term5">
+              <a class="os-term-section-link" href="#auto_p2_term6">
                 <span class="os-term-section">1.1 First Page</span>
+              </a>
+            </div>
+          </div>
+          <div class="group-by">
+            <span class="group-label">O</span>
+            <div class="os-index-item">
+              <span class="os-term" group-by="O">&#xD6;tzi the Iceman</span>
+              <a class="os-term-section-link" href="#auto_p1_term5">
+                <span class="os-term-section">Preface</span>
               </a>
             </div>
           </div>
@@ -131,7 +165,7 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
             <span class="group-label">S</span>
             <div class="os-index-item">
               <span class="os-term" group-by="s">sp3d2 orbitals</span>
-              <a class="os-term-section-link" href="#auto_p2_term7">
+              <a class="os-term-section-link" href="#auto_p2_term8">
                 <span class="os-term-section">1.1 First Page</span>
               </a>
             </div>

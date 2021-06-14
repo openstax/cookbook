@@ -136,8 +136,8 @@ module Kitchen::Directions::BakeIndex
     end
 
     def add_term_to_index(term_element, page_title)
-      group_by = term_element.text.strip[0]
-      group_by = I18n.t(:eob_index_symbols_group) unless group_by.match?(/\w/)
+      group_by = I18n.transliterate(term_element.text.strip[0])
+      group_by = I18n.t(:eob_index_symbols_group) unless group_by.match?(/[[:alpha:]]/)
       term_element['group-by'] = group_by
 
       # Add it to our index object
