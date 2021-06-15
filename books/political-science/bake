@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '6.0.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  metadata = book.metadata
+
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book)
+
+  BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [recipe],
+  output_file: opts[:output]
+)
