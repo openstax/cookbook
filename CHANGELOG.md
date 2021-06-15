@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 and from v2 the lack of additional "os-section-area" and os-#{@klass} wrapper (minor)
 * Add a condition in BakeNumberedExercise to make it possible to suppress even solutions in the Answer Key (minor)
 * Fix BakeFurtherResearch baking with main bake script error by breaking the loop if further research sections are not present (minor)
+* Rework v1 of `BakeChapterReferences` to bake references also from introduction pages (major)
 * Fix for `BakeIndex` for words that start with a number to be grouped as symbols and for first letters with accent marks to be grouped with regular letters in alphabetic order (major)
 
 ## [5.0.0] - 2021-06-02

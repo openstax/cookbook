@@ -8,8 +8,7 @@ module Kitchen
           chapter: chapter,
           metadata_source: metadata_source,
           uuid_prefix: uuid_prefix,
-          klass: klass
-        )
+          klass: klass)
       end
     end
   end
