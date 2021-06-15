@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Don't check for CHANGELOG when merge a PR to main (patch)
 
 ## [6.0.0] - 2021-06-15
 
