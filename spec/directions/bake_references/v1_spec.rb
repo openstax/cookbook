@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeReferences do
+RSpec.describe Kitchen::Directions::BakeReferences::V1 do
 
   let(:book1) do
     book_containing(html:
@@ -53,7 +53,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
   end
 
   it 'works' do
-    described_class.v1(book: book1, metadata_source: metadata_element)
+    described_class.new.bake(book: book1, metadata_source: metadata_element)
 
     expect(book1.body).to match_normalized_html(
       <<~HTML

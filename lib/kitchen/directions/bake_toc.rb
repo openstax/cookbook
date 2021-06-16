@@ -96,8 +96,10 @@ module Kitchen
           when CompositePageElement
             if page.is_index?
               'os-toc-index'
-            elsif page.is_reference?
+            elsif page.is_citation_reference?
               'os-toc-reference'
+            elsif page.is_section_reference?
+              'os-toc-references'
             elsif page.has_ancestor?(:composite_chapter) || page.has_ancestor?(:chapter)
               'os-toc-chapter-composite-page'
             else
