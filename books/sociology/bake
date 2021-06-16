@@ -11,16 +11,6 @@ gemfile do
   gem 'twitter_cldr', '6.6.0'
 end
 
-# cleanup_recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
-#   include Kitchen::Directions
-
-#   # Set overrides
-#   doc.search('div.section_summary').each do |elem|
-#     elem.name = 'section'
-#     elem.add_class('summary').elem.remove_class('section_summary')
-#   end
-# end
-
 recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   include Kitchen::Directions
 
@@ -42,13 +32,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   # Bake NumberedTable in Preface
   book.pages('$.preface').tables('$:not(.unnumbered)').each do |table|
-    BakeNumberedTable.v1(table: table,
-                         number: "#{table.count_in(:page)}")
+    BakeNumberedTable.v1(table: table, number: "#{table.count_in(:page)}")
   end
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
+  # Bake EoC sections
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-summary')
@@ -57,16 +47,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
     chapter.composite_pages.each do |composite_page|
       composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
-        # BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_even_solution: true)
-        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:composite_page), suppress_solution_if: :even?, note_suppressed_solutions: true)
-
+        BakeNumberedExercise.v1(exercise: exercise,
+                                number: exercise.count_in(:composite_page),
+                                suppress_solution_if: :even?,
+                                note_suppressed_solutions: true)
       end
     end
-    BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata, from_introduction: true)
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
   end
 
-  if book.contains?(' div[data-type="solution"]')
+  # Bake Answer Key
+  if book.contains?(' div[data-type="solution"]') # Used only in Sociology 3e, Sociology 2e has supressed(commented out) all solutions
     solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
       MoveSolutionsToAnswerKey.v1(chapter: chapter,
@@ -78,21 +70,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     end
   end
 
-  # BakeChapterIntroductions.v1(book: book)
-  # BakeChapterTitle.v1(book: book)
-
   book.chapters.each do |chapter|
     BakePageAbstracts.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
-    end
-
-    chapter.examples.each do |example|
-      BakeExample.v1(example: example,
-                     number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
-                     title_tag: 'h3')
     end
 
     BakeNonIntroductionPages.v1(chapter: chapter)
@@ -104,33 +87,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     end
   end
 
-  book.pages('$.appendix').each do |page|
-    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
-
-    page.figures(except: :subfigure?).each do |figure|
-      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
-    end
-
-    page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
-    end
-
-    page.examples.each do |example|
-      BakeExample.v1(example: example,
-                     number: "#{appendix_letter}#{example.count_in(:page)}",
-                     title_tag: 'div')
-    end
-
-    BakeAppendix.v1(page: page, number: appendix_letter)
-  end
-
   BakeAutotitledNotes.v1(book: book, classes: %w[sociological-research
                                                  sociology-real-world
                                                  sociology-big-picture
                                                  sociology-policy-debate])
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
-  # BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
