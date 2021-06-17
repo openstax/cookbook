@@ -29,7 +29,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[clinical-focus check-your-understanding micro-connection link-to-learning eye-on-ethics case-in-point disease-profile]
+    classes: %w[clinical-focus check-your-understanding micro-connection
+                link-to-learning eye-on-ethics case-in-point disease-profile]
   )
 
   book_answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
@@ -38,19 +39,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
 
     eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
 
-    # EoC sections with exercises
-    classnames = %w[multiple-choice true-false matching fill-in-the-blank short-answer critical-thinking]
+    exercise_section_classes = %w[multiple-choice true-false matching
+                                  fill-in-the-blank short-answer critical-thinking]
 
-    classnames.each do |klass|
+    exercise_section_classes.each do |klass|
       MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: klass)
     end
 
-    chapter.search('.multiple-choice, .true-false, .matching, .fill-in-the-blank, .short-answer, .critical-thinking').exercises.each do |exercise|
+    chapter.search(exercise_section_classes.map{ |klass| "section.#{klass}" }.join(', ')).exercises
+           .each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
     # Bake answer key from chapter/ move solutions from eoc into answer key
-
     MoveSolutionsToAnswerKey.v1(
       chapter: chapter,
       metadata_source: metadata,
