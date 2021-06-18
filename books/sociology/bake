@@ -8,7 +8,6 @@ gemfile do
   gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '6.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
-  gem 'twitter_cldr', '6.6.0'
 end
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
@@ -21,6 +20,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   )
 
   book = doc.book
+  metadata = book.metadata
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
@@ -40,11 +40,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   # Bake EoC sections
   book.chapters.each do |chapter|
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata, klass: 'section-summary')
-    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'section-quiz')
-    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: book.metadata, klass: 'short-answer')
-    BakeFurtherResearch.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
+    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: metadata, klass: 'section-quiz')
+    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: metadata, klass: 'short-answer')
+    BakeFurtherResearch.v1(chapter: chapter, metadata_source: metadata)
     chapter.composite_pages.each do |composite_page|
       composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
         BakeNumberedExercise.v1(exercise: exercise,
@@ -53,7 +53,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
                                 note_suppressed_solutions: true)
       end
     end
-    BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: metadata)
 
   end
 
@@ -62,7 +62,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
       MoveSolutionsToAnswerKey.v1(chapter: chapter,
-                                  metadata_source: book.metadata,
+                                  metadata_source: metadata,
                                   strategy: :default,
                                   strategy_options: { classes: %w[section-quiz] },
                                   append_to: solution_container,
