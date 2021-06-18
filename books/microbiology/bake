@@ -58,7 +58,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
       strategy: :default,
       append_to: book_answer_key,
       strategy_options: {
-        classes: %w[
+        selectors: %w[
           section.multiple-choice
           section.true-false matching
           section.fill-in-the-blank
