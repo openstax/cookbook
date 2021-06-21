@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '6.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '6.1.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -15,8 +15,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   # Set overrides
   doc.selectors.override(
-    page_summary: '.section-summary',
-    reference: '.references'
+    page_summary: 'section.section-summary',
+    reference: 'section.references'
   )
 
   book = doc.book
@@ -25,8 +25,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  # Remove data-type="description" from body metadata
-  book.body.search('[data-type="metadata"] > [data-type="description"]').trash
+  # Remove data-type="description" from body metadata placed in Sociology 2e
+  book.body.search('div[data-type="metadata"] > div[data-type="description"]').trash
 
   BakePreface.v1(book: book)
 
@@ -46,7 +46,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     MoveExercisesToEOC.v3(chapter: chapter, metadata_source: metadata, klass: 'short-answer')
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: metadata)
     chapter.composite_pages.each do |composite_page|
-      composite_page.search('.short-answer, .section-quiz').exercises.each do |exercise|
+      composite_page.search('section.short-answer, section.section-quiz').exercises.each do |exercise|
         BakeNumberedExercise.v1(exercise: exercise,
                                 number: exercise.count_in(:composite_page),
                                 suppress_solution_if: :even?,
