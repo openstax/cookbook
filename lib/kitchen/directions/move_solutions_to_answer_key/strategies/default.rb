@@ -10,8 +10,8 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
       protected
 
       def bake_section(chapter:, append_to:)
-        @classes.each do |klass|
-          chapter.search(".#{klass} [data-type='solution']").each do |solution|
+        @selectors.each do |selector|
+          chapter.search("#{selector} div[data-type='solution']").each do |solution|
             append_to.add_child(solution.cut.to_s)
           end
         end
@@ -20,7 +20,7 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
       # This method helps to obtain more strategy-specific params through
       # "strategy_options: {blah1: 1, blah2: 2}"
       def initialize(strategy_options)
-        @classes = strategy_options[:classes] || (raise 'missing classes for strategy')
+        @selectors = strategy_options[:selectors] || (raise 'missing selectors for strategy')
       end
     end
   end
