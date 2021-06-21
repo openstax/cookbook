@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix Rubocop GitHub Action's regular expression used to select files to lint (patch)
+
 ## [6.1.0] - 2021-06-21
 
 * Create a `BakeReferences` V2 for unnumbered section references (minor)
