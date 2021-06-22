@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '5.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '7.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -92,7 +92,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
       metadata_source: metadata,
       strategy: :default,
       strategy_options: {
-        classes: ['review-questions']
+        selectors: ['section.review-questions']
       },
       append_to: solutions_container
     )
