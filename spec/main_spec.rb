@@ -15,6 +15,10 @@ RSpec.describe 'books' do
     expect('u-physics').to bake_correctly
   end
 
+  it 'bakes american_government' do
+    expect('american_government').to bake_correctly
+  end 
+
   it 'bakes microbio' do
     expect('microbiology').to bake_correctly
   end
