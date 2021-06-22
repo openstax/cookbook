@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '6.1.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '7.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -58,13 +58,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   end
 
   # Bake Answer Key
-  if book.contains?(' div[data-type="solution"]') # Used only in Sociology 3e, Sociology 2e has supressed(commented out) all solutions
+  if book.contains?(' div[data-type="solution"]') # Used only in Sociology 3e, Sociology 2e has supressed (commented out) all solutions
     solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
       MoveSolutionsToAnswerKey.v1(chapter: chapter,
                                   metadata_source: metadata,
                                   strategy: :default,
-                                  strategy_options: { classes: %w[section-quiz] },
+                                  strategy_options: { selectors: %w[section-quiz].prefix('section.') },
                                   append_to: solution_container,
                                   solutions_plural: false)
     end
