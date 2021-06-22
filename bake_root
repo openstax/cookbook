@@ -36,6 +36,9 @@ case "${book}" in
   u-physics)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  microbiology)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   *) echo "Baking book '${book}' with legacy baking";
     "${DIR}/bake_legacy" -i "$input_file" -o "$output_file" -r "${legacy_recipes_dir}/${book}.css";;
 esac
