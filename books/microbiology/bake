@@ -22,10 +22,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
   BakePreface.v1(book: book, title_element: 'h1')
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
-    BakeNonIntroductionPages.v1(chapter: chapter)
-  end
 
   BakeAutotitledNotes.v1(
     book: book,
@@ -35,18 +31,29 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
 
   book_answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
   book.chapters.each do |chapter|
+    BakePageAbstracts.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
-    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
+    eoc_wrapper = ChapterReviewContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      klass: 'review-questions'
+    )
 
     exercise_section_classes = %w[multiple-choice true-false matching
                                   fill-in-the-blank short-answer critical-thinking]
 
     exercise_section_classes.each do |klass|
-      MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper, klass: klass)
+      MoveExercisesToEOC.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        append_to: eoc_wrapper,
+        klass: klass
+      )
     end
 
-    chapter.search(exercise_section_classes.map{ |klass| "section.#{klass}" }.join(', ')).exercises
+    chapter.search(exercise_section_classes.prefix('section.').join(', ')).exercises
            .each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
@@ -58,12 +65,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
       strategy: :default,
       append_to: book_answer_key,
       strategy_options: {
-        selectors: %w[
-          multiple-choice
-          true-false matching
-          fill-in-the-blank
-          short-answer
-        ].prefix('section.')
+        selectors: exercise_section_classes.prefix('section.')
       },
       solutions_plural: false
     )
