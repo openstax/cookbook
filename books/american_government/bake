@@ -25,6 +25,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   BakeChapterIntroductions.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
 
+  solutions_container = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
@@ -53,6 +55,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
         number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}"
       )
     end
+
+    MoveSolutionsToAnswerKey.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      strategy: :default,
+      strategy_options: {
+        selectors: ['section.review-questions']
+      },
+      append_to: solutions_container
+    )
   end
 
   book.pages('$.appendix').each do |page|
@@ -89,19 +101,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
                 get-connected
                 insider-perspective]
   )
-
-  solutions_container = BookAnswerKeyContainer.v1(book: book)
-  book.chapters.each do |chapter|
-    MoveSolutionsToAnswerKey.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      strategy: :default,
-      strategy_options: {
-        selectors: ['section.review-questions']
-      },
-      append_to: solutions_container
-    )
-  end
 
   BakeSuggestedReading.v1(book: book)
   BakeReferences.v1(book: book, metadata_source: metadata)
