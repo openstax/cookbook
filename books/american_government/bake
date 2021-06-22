@@ -30,29 +30,28 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    chapter.search('.review-questions, .critical-thinking').exercises.each do |exercise|
+    exercise_section_classes = %w[review-questions critical-thinking]
+
+    chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    MoveExercisesToEOC.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      klass: 'review-questions'
-    )
-    MoveExercisesToEOC.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      klass: 'critical-thinking'
-    )
+    exercise_section_classes.each do |klass|
+      MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: klass)
+    end
 
     chapter.figures.each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+      BakeFigure.v1(
+        figure: figure,
+        number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
+      )
     end
 
     chapter.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+      BakeNumberedTable.v1(
+        table: table,
+        number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}"
+      )
     end
   end
 
@@ -64,13 +63,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     end
 
     page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}", always_caption: true)
+      BakeNumberedTable.v1(
+        table: table,
+        number: "#{appendix_letter}#{table.count_in(:page)}",
+        always_caption: true
+      )
     end
 
     page.examples.each do |example|
-      BakeExample.v1(example: example,
-                     number: "#{appendix_letter}#{example.count_in(:page)}",
-                     title_tag: 'div')
+      BakeExample.v1(
+        example: example,
+        number: "#{appendix_letter}#{example.count_in(:page)}",
+        title_tag: 'div'
+      )
     end
 
     BakeAppendix.v1(page: page, number: appendix_letter)
