@@ -1,0 +1,20 @@
+es:
+  notes:
+    clinical-focus: Enfoque Clínico
+    check-your-understanding: "Verifica Tu Comprensión "
+    micro-connection: Micro Conexiones
+    link-to-learning: Enlace Al Aprendizaje
+    eye-on-ethics: Ojo En La Etica
+    case-in-point: Caso En Punto
+    disease-profile: Perfil De Enfermedad
+  eoc:
+    multiple-choice: Selección Multiple
+    fill-in-the-blank: Complete El Espacio En Blanco
+    short-answer: Respuesta Corta
+    critical-thinking: Pensamiento Crítico
+    review-questions: Preguntas De Revisión
+    true-false: Verdadero/Falso
+    matching: Combinación
+  eoc_key_concepts: Resumen
+  eoc_exercises_title: Revisión Del Capítulo
+  eoc_composite_metadata_title: Preguntas De Revisión
