@@ -16,7 +16,7 @@ pl:
   stepwise_step_label: Krok
   answer_key_title: Rozwiązania zadań
   eoc_chapter_review: Podsumowanie rozdziału
-  key_terms_title: Kluczowe pojęcia
+  eoc_key_terms_title: Kluczowe pojęcia
   eoc_solutions_title: Rozwiązania
   eoc_summary_title: Podsumowanie
   eoc_key_equations: Najważniejsze wzory

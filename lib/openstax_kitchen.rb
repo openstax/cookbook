@@ -41,6 +41,7 @@ require 'kitchen/pantry'
 require 'kitchen/counter'
 require 'kitchen/selector'
 require 'kitchen/id_tracker'
+require 'kitchen/i18n_string'
 
 require 'kitchen/element_enumerator_base'
 require 'kitchen/element_enumerator_factory'
