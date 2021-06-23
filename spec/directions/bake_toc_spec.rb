@@ -55,6 +55,11 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 <span class="os-text">Key Terms</span>
               </h2>
             </div>
+            <div class="os-eoc os-references-container" data-type="composite-page" id="composite-page-2">
+              <h2 data-type="document-title">
+                <span class="os-text">References</span>
+              </h2>
+            </div>
           </div>
           <div data-type="chapter">
             <h1 data-type="document-title" id="chapTitle2">
@@ -97,9 +102,14 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 <span data-type="" itemprop="" class="os-text">Page 3.1 Title</span>
               </h2>
             </div>
-            <div data-type="composite-page" id="composite-page-2">
+            <div data-type="composite-page" id="composite-page-3">
               <h2 data-type="document-title">
                 <span class="os-text">Key Terms</span>
+              </h2>
+            </div>
+            <div class = "os-eoc os-references-container" data-type="composite-page" id="composite-page-4">
+              <h2 data-type="document-title">
+                <span class="os-text">References</span>
               </h2>
             </div>
           </div>
@@ -122,12 +132,12 @@ RSpec.describe Kitchen::Directions::BakeToc do
             </h2>
           </div>
         </div>
-        <div class="os-reference-container" data-type="composite-page" id="p9"> # citation type
+        <div class="os-eob os-reference-container" data-type="composite-page" id="p9"> # citation type
           <h1 data-type="document-title">
             <span class="os-text">References</span>
           </h1>
         </div>
-        <div class="os-references-container" data-type="composite-page" id="p10"> # section type
+        <div class="os-eob os-references-container" data-type="composite-page" id="p10"> # section type
           <h1 data-type="document-title">
             <span class="os-text">References</span>
           </h1>
@@ -181,6 +191,11 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 <span class="os-text">Key Terms</span>
               </h2>
             </div>
+            <div class = "os-eoc os-references-container" data-type="composite-page" id="composite-page-2">
+              <h2 data-type="document-title">
+                <span class="os-text">References</span>
+              </h2>
+            </div>
           </div>
           <div data-type="chapter">
             <h1 data-type="document-title" id="chapTitle2">
@@ -215,12 +230,12 @@ RSpec.describe Kitchen::Directions::BakeToc do
             </h2>
           </div>
         </div>
-        <div class="os-reference-container" data-type="composite-page" id="p7"> # citation type
+        <div class="os-eob os-reference-container" data-type="composite-page" id="p7"> # citation type
           <h1 data-type="document-title">
             <span class="os-text">References</span>
           </h1>
         </div>
-        <div class="os-references-container" data-type="composite-page" id="p8"> # section type
+        <div class="os-eob os-references-container" data-type="composite-page" id="p8"> # section type
           <h1 data-type="document-title">
             <span class="os-text">References</span>
           </h1>
@@ -336,6 +351,11 @@ RSpec.describe Kitchen::Directions::BakeToc do
                         <span class="os-text">Key Terms</span>
                       </a>
                     </li>
+                    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-2">
+                      <a href="#composite-page-2">
+                        <span class="os-text">References</span>
+                      </a>
+                    </li>
                   </ol>
                 </li>
                 <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
@@ -382,9 +402,14 @@ RSpec.describe Kitchen::Directions::BakeToc do
                         <span class="os-text" data-type="" itemprop="">Page 3.1 Title</span>
                       </a>
                     </li>
-                    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-2">
-                      <a href="#composite-page-2">
+                    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-3">
+                      <a href="#composite-page-3">
                         <span class="os-text">Key Terms</span>
+                      </a>
+                    </li>
+                    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-4">
+                      <a href="#composite-page-4">
+                        <span class="os-text">References</span>
                       </a>
                     </li>
                   </ol>
@@ -467,6 +492,11 @@ RSpec.describe Kitchen::Directions::BakeToc do
                   <a href="#composite-page-1">
                     <span class="os-text">Key Terms</span>
                   </a>
+                </li>
+                <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-2">
+                      <a href="#composite-page-2">
+                        <span class="os-text">References</span>
+                      </a>
                 </li>
               </ol>
             </li>

@@ -57,7 +57,7 @@ module Kitchen
     # @return [Boolean]
     #
     def is_citation_reference?
-      has_class?('os-reference-container')
+      has_class?('os-eob os-reference-container')
     end
 
     # Returns true if this page is a book section reference
@@ -65,7 +65,7 @@ module Kitchen
     # @return [Boolean]
     #
     def is_section_reference?
-      has_class?('os-references-container')
+      has_class?('os-eob os-references-container')
     end
 
   end
