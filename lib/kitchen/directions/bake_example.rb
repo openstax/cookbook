@@ -3,7 +3,7 @@
 module Kitchen
   module Directions
     module BakeExample
-      def self.v1(example:, number:, title_tag:)
+      def self.v1(example:, number:, title_tag:, numbered_solutions: false)
         example.wrap_children(class: 'body')
 
         example.prepend(child:
@@ -36,10 +36,16 @@ module Kitchen
           end
 
           if (solution = exercise.solution)
+            solution_number = if numbered_solutions
+                                "<span class=\"os-number\">#{exercise.count_in(:example)}</span>"
+                              else
+                                ''
+                              end
             solution.replace_children(with:
               <<~HTML
                 <h4 data-type="solution-title">
                   <span class="os-title-label">#{I18n.t(:solution)} </span>
+                  #{solution_number}
                 </h4>
                 <div class="os-solution-container">#{solution.children}</div>
               HTML
