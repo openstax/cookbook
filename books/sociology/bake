@@ -59,7 +59,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   end
 
   # Bake Answer Key
-  # if book.contains?('div[data-type="solution"]') # Used only in Sociology 3e, Sociology 2e has supressed (commented out) all solutions
   if edition == 3
     solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
