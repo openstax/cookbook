@@ -390,6 +390,22 @@ RSpec.describe Kitchen::ElementBase do
         '<div><div data_type="foo">something <i>awesome</i></div></div>'
       )
     end
+
+    context 'when a search finds nested elements and we use wrap_children' do
+      let(:element) { new_element('<outer><div class="bar">something <div class="bar">internal</div></div></outer>') }
+
+      it 'maintains the document structure so that iteration to nested elements still works' do
+        element.search('div.bar').each do |match|
+          match.add_class('foo')
+          match.wrap_children('div')
+        end
+
+        expect(element).to match_normalized_html(
+          '<outer><div class="bar foo"><div>something <div class="bar foo"><div>internal</div></div></div></div></outer>'
+        )
+      end
+
+    end
   end
 
   describe '#content' do

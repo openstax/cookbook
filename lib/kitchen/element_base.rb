@@ -602,9 +602,9 @@ module Kitchen
         attributes.each do |k, v|
           new_node[k.to_s.gsub(/([^_])_([^_])/, '\1-\2').gsub('__', '_')] = v
         end
-        new_node.children = children.to_s
+        new_node.children = children
         yield Element.new(node: new_node, document: document, short_type: nil) if block_given?
-      end.to_s
+      end
 
       self
     end
