@@ -22,9 +22,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book, title_element: 'h1')
-
+  BakeInlineLists.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
-  # BakeAutotitledNotes.v1(book: book, classes: %w[try]) #Same class name, same autotitle, key name has to be class name
+  BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
     # Stats EoC starts with the Glossary
@@ -47,17 +47,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   BakeChapterIntroductions.v1(book: book, bake_chapter_objectives: false)
 
   book.chapters.each do |chapter|
-    # Fix up chapter titles - TODO put this in BakeChapter
-    heading = chapter.at('h1[2]')
-    heading[:id] = "chapTitle#{chapter.count_in(:book)}"
-    heading.replace_children(with:
-      <<~HTML
-        <span class="os-part-text">Chapter </span>
-        <span class="os-number">#{chapter.count_in(:book)}</span>
-        <span class="os-divider"> </span>
-        <span data-type="" itemprop="" class="os-text">#{heading.text}</span>
-      HTML
-    )
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -68,7 +57,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     chapter.examples.each do |example|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
-                     title_tag: 'h3')
+                     title_tag: 'h3',
+                     numbered_solutions: true)
     end
 
     chapter.pages('$:not(.introduction)').each do |page|
