@@ -19,6 +19,7 @@ done
 # List additional books here
 
 case "${book}" in
+  calculus) dest="${DIR}/data/calculus/short" && script="${DIR}/books/calculus/shorten";;
   chemistry) dest="${DIR}/data/chemistry/short" && script="${DIR}/books/chemistry/shorten";;
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
   american_government) dest="${DIR}/data/american_government/short" && script="${DIR}/books/american_government/shorten";;
