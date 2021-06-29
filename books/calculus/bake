@@ -14,6 +14,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   include Kitchen::Directions
 
   book = doc.book
+  book_metadata = book.metadata
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
@@ -29,20 +30,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   book.chapters.each do |chapter|
     chapter_review = ChapterReviewContainer.v1(
       chapter: chapter,
-      metadata_source: book.metadata
+      metadata_source: book_metadata
     )
 
     BakeChapterGlossary.v1(
-      chapter: chapter, metadata_source: book.metadata, append_to: chapter_review
+      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
     )
     BakeChapterKeyEquations.v1(
-      chapter: chapter, metadata_source: book.metadata, append_to: chapter_review
+      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
     )
     BakeChapterKeyConcepts.v1(
-      chapter: chapter, metadata_source: book.metadata, append_to: chapter_review
+      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
     )
     MoveExercisesToEOC.v1(
-      chapter: chapter, metadata_source: book.metadata,
+      chapter: chapter, metadata_source: book_metadata,
       append_to: chapter_review, klass: 'review-exercises'
     )
     BakeChapterSectionExercises.v1(chapter: chapter)
@@ -105,7 +106,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
 
   book.chapters.each do |chapter|
     MoveSolutionsToAnswerKey.v1(chapter: chapter,
-                                metadata_source: book.metadata,
+                                metadata_source: book_metadata,
                                 strategy: :calculus,
                                 append_to: book_answer_key)
   end
@@ -113,7 +114,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
-  book.search('.section-exercises', '.os-eob.os-solutions-container').each do |within|
+  book.search('section.section-exercises', 'div.os-eob.os-solutions-container').each do |within|
     BakeFirstElements.v1(within: within)
   end
 
