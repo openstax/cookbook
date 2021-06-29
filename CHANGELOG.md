@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Added tags to classnames to optimize searches in `calculus strategy` for `move_solutions_to_answer_key`
 
 ## [8.0.0] - 2021-06-29
 
