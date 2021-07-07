@@ -1,6 +1,6 @@
 es:
   notes:
-    check-understanding: "Verifica Tu Comprensión "
+    check-understanding: "Compruebe Lo Aprendido "
     media-2: Interactivo
     problem-solving: Estrategia de Resolución De Problemas
   eoc:
@@ -8,5 +8,6 @@ es:
     review-problems: Problemas
     review-additional-problems: Problemas Adicionales
     review-challenge: Problemas De Desafío
+    chapter-review: Revisión Del Capítulo
+    key-concepts: Resumen
   eoc_key_concepts: Resumen
-  eoc_exercises_title: Revisión Del Capítulo

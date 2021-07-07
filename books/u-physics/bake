@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '4.1.1'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '6.1.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -62,9 +62,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
 
   book.search('div[data-type="solution"]').each do |solution|
     # Add the 'has-first-element' class to elements that need it
-    BakeFirstElements.v1(within: solution,
-                         selectors: ['div.os-solution-container > span[data-type="media"]',
-                                     'div.os-solution-container > span.os-table'])
+    BakeFirstElements.v1(within: solution)
   end
 
   book.chapters.each do |chapter|
@@ -101,9 +99,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
-  book.search('a[role="doc-noteref"]').each do |el|
-    el.parent.add_class('has-noteref') if el.parent.name == 'p'
-  end
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeUnitTitle.v1(book: book)
