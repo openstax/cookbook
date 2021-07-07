@@ -6,7 +6,9 @@ RSpec.describe Kitchen::Directions::BakeFurtherResearch do
 
   before do
     stub_locales({
-      'eoc_further_research_title': 'Further Research'
+      'eoc': {
+        'further-research': 'Further Research'
+      }
     })
   end
 
@@ -66,7 +68,7 @@ RSpec.describe Kitchen::Directions::BakeFurtherResearch do
             </div>
             <div class="os-eoc os-further-research-container" data-type="composite-page" data-uuid-key=".further-research">
               <h2 data-type="document-title">
-                <span class="os-text">#{I18n.t(:eoc_further_research_title)}</span>
+                <span class="os-text">Further Research</span>
               </h2>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">Further Research</h1>

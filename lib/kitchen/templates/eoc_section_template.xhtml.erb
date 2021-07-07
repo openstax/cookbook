@@ -1,0 +1,11 @@
+<% main_title_tag = @in_composite_chapter ? 'h3' : 'h2' %>
+<div class="os-eoc os-<%=@container_class_type%>-container" data-type="composite-page" data-uuid-key="<%= @uuid_key %>">
+  <<%= main_title_tag %> data-type="<%= @in_composite_chapter ? 'title' : 'document-title' %>">
+    <span class="os-text"><%= @title %></span>
+  </<%= main_title_tag %>>
+  <div data-type="metadata" style="display: none;">
+    <h1 data-type="document-title" itemprop="name"><%= @title %></h1>
+    <%= @metadata.paste %>
+  </div>
+  <%= @content %>
+</div>

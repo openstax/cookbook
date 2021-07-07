@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::BakeChapterKeyConcepts
+  # TODO: Refactor to use EocCompositePageContainer or MoveCustomSectionToEocContainer
   class V1
     renderable
     def bake(chapter:, metadata_source:, append_to:, uuid_prefix:)
@@ -29,7 +30,7 @@ module Kitchen::Directions::BakeChapterKeyConcepts
       @in_composite_chapter = append_to_element.is?(:composite_chapter)
 
       append_to_element.append(child: render(file:
-        '../../templates/eoc_section_title_template.xhtml.erb'))
+        '../../templates/eoc_section_template_old.xhtml.erb'))
     end
   end
 end

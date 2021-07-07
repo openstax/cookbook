@@ -52,14 +52,6 @@ module Kitchen
       search("div[data-type='glossary']")
     end
 
-    # Returns an enumerator for the key equations
-    #
-    # @return [ElementEnumerator]
-    #
-    def key_equations
-      search('section.key-equations')
-    end
-
     # Returns an enumerator for the abstracts
     #
     # @return [ElementEnumerator]

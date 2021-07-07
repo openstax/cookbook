@@ -17,22 +17,16 @@ module Kitchen
       class V1
         renderable
         def bake(chapter:, metadata_source:, append_to:, uuid_prefix:)
-          @metadata = metadata_source.children_to_keep.copy
-          @klass = 'key-equations'
-          @title = I18n.t(:eoc_key_equations)
-          @uuid_prefix = uuid_prefix
-
-          chapter.key_equations.search('h3').trash
-
-          return if chapter.key_equations.none?
-
-          @content = chapter.key_equations.cut.paste
-
-          append_to_element = append_to || chapter
-          @in_composite_chapter = append_to_element.is?(:composite_chapter)
-
-          append_to_element.append(child: render(file:
-            '../templates/eoc_section_title_template.xhtml.erb'))
+          MoveCustomSectionToEocContainer.v1(
+            chapter: chapter,
+            metadata_source: metadata_source,
+            container_key: 'key-equations',
+            uuid_key: "#{uuid_prefix}key-equations",
+            section_selector: 'section.key-equations',
+            append_to: append_to
+          ) do |section|
+            RemoveSectionTitle.v1(section: section)
+          end
         end
       end
     end

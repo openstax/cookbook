@@ -18,16 +18,17 @@ es:
   references: Referencias
   answer_key_title: Clave de Respuestas
   eoc_chapter_review: Revisión Del Capítulo
-  eoc_key_terms_title: Términos Clave
-  eoc_summary_title: Resumen
   eoc_exercises_title: Ejercicios
   eoc_composite_metadata_title: Revisión Del Capítulo
   eoc_solutions_title: Soluciones
   eoc_key_concepts: Conceptos Clave
-  eoc_key_equations: Ecuaciones Clave
   eoc_suggested_reading: Sugerencias Para Estudios Adicionales
-  eoc_further_research_title: Investigación Adicional
   eob_index_title: Índice
   eob_index_symbols_group: Símbolos
   review_exercises: Ejercicios De Repaso
   section_exercises: ! 'Sección %{number} Ejercicios'
+  eoc:
+    glossary: Términos Clave
+    key-equations: Ecuaciones Clave
+    summary: Resumen
+    further-research: Investigación Adicional

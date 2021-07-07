@@ -7,7 +7,11 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
   before do
     stub_locales({
       'eoc_summary_title': 'Summary',
-      'eoc_exercises_title': 'Exercises'
+      'eoc_exercises_title': 'Exercises',
+      'eoc': {
+        'summary': 'Summary',
+        'section-summary': 'Summary'
+      }
     })
   end
 

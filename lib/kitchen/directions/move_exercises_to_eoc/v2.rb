@@ -3,6 +3,7 @@
 module Kitchen::Directions::MoveExercisesToEOC
   # Main difference from v1 is the presence of a section title
   # and some additional wrappers
+  # TODO: Refactor to use EocCompositePageContainer or MoveCustomSectionToEocContainer
   class V2
     renderable
 
@@ -43,7 +44,7 @@ module Kitchen::Directions::MoveExercisesToEOC
       @in_composite_chapter = append_to_element[:'data-type'] == 'composite-chapter'
 
       append_to_element.append(child: render(file:
-        '../../templates/eoc_section_title_template.xhtml.erb'))
+        '../../templates/eoc_section_template_old.xhtml.erb'))
     end
   end
 end

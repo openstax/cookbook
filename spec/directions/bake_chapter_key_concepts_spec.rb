@@ -128,7 +128,7 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
                 <span class="os-text">Key Concepts</span>
               </h3>
               <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">Chapter Review</h1>
+                <h1 data-type="document-title" itemprop="name">Key Concepts</h1>
                 <div class="authors" id="authors_copy_1">Authors</div><div class="publishers" id="publishers_copy_1">Publishers</div><div class="print-style" id="print-style_copy_1">Print Style</div><div class="permissions" id="permissions_copy_1">Permissions</div><div data-type="subject" id="subject_copy_1">Subject</div>
               </div>
               <div class="os-key-concepts">

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::MoveExercisesToEOC
+  # TODO: Refactor to use EocCompositePageContainer or MoveCustomSectionToEocContainer
   class V1
     renderable
 
@@ -30,7 +31,7 @@ module Kitchen::Directions::MoveExercisesToEOC
       @in_composite_chapter = append_to_element.is?(:composite_chapter)
 
       append_to_element.append(child: render(file:
-        '../../templates/eoc_section_title_template.xhtml.erb'))
+        '../../templates/eoc_section_template_old.xhtml.erb'))
     end
   end
 end

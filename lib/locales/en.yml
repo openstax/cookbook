@@ -18,16 +18,17 @@ en:
   references: References
   answer_key_title: Answer Key
   eoc_chapter_review: Chapter Review
-  eoc_key_terms_title: Key Terms
-  eoc_summary_title: Summary
   eoc_exercises_title: Exercises
   eoc_composite_metadata_title: Chapter Review
   eoc_solutions_title: Solutions
   eoc_key_concepts: Key Concepts
-  eoc_key_equations: Key Equations
   eoc_suggested_reading: Suggestions for Further Study
-  eoc_further_research_title: Further Research
   eob_index_title: Index
   eob_index_symbols_group: Symbols
   review_exercises: Review Exercises
   section_exercises: ! 'Section %{number} Exercises'
+  eoc:
+    glossary: Key Terms
+    key-equations: Key Equations
+    summary: Summary
+    further-research: Further Research
