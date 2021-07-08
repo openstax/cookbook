@@ -28,9 +28,10 @@ RSpec::Matchers.define :bake_correctly do
 
     `ruby scripts/normalize #{actual_file.path}`
     normalized_path = "#{actual_file.path}.normalized"
-
+    FileUtils.cp(normalized_path, "spec/books/#{book}/actual_output.xhtml")
     expect("spec/books/#{book}/expected_output.xhtml").to be_same_file_as(normalized_path)
 
     File.delete(normalized_path)
+    File.delete("spec/books/#{book}/actual_output.xhtml")
   end
 end
