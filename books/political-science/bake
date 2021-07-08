@@ -29,8 +29,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
-    BakeGenericEocSection.v1(chapter: chapter, metadata_source: metadata,
-                             klass: 'suggested-readings', content_transform: [:remove_title])
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'suggested-readings',
+      uuid_key: '.suggested-readings',
+      section_selector: 'section.suggested-readings',
+      append_to: chapter,
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
     chapter.search('section.review-questions').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
@@ -56,8 +65,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
   BakeCompositePages.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  book.first('head').append(child: '<link rel="stylesheet" type="text/css" ' \
-    'href="./../../../../../../cnx-recipes/styles/output/political-science-pdf.css" />')
 end
 
 opts = Slop.parse do |slop|
