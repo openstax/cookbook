@@ -5,6 +5,7 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::BakeExample do
   let(:exercise) { '' }
   let(:table) { '' }
+  let(:title) { '<span data-type="title">example title becomes h4</span>' }
   let(:example) do
     book_containing(html:
       <<~HTML
@@ -12,7 +13,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
           <div data-type="page">
             <div data-type="document-title" id="auto_m68761_72010">Page 1 Title</div>
             <div data-type='example' id='example-test'>
-              <span data-type="title">example title becomes h4</span>
+              #{title}
               <p>content</p>
               #{exercise}
               #{table}
@@ -237,6 +238,33 @@ RSpec.describe Kitchen::Directions::BakeExample do
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        HTML
+      )
+    end
+  end
+
+  context 'when the title is a div' do
+    let(:title) do
+      <<~HTML
+        <div data-type="title">also works on divs</div>
+      HTML
+    end
+
+    it 'works' do
+      described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
+      expect(example).to match_normalized_html(
+        <<~HTML
+          <div data-type="example" id="example-test">
+            <title-tag-name class="os-title">
+              <span class="os-title-label">Example </span>
+              <span class="os-number">4</span>
+              <span class="os-divider"> </span>
+            </title-tag-name>
+            <div class="body">
+              <h4 data-type="title">also works on divs</h4>
+              <p>content</p>
             </div>
           </div>
         HTML

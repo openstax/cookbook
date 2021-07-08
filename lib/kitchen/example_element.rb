@@ -28,7 +28,7 @@ module Kitchen
     # @return [ElementEnumerator]
     #
     def titles
-      search("span[data-type='title']")
+      search("[data-type='title']")
     end
 
   end

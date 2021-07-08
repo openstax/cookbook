@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fixed `BakeExample.v1` to also search inside `.body` for titles (minor)
 * Add documentation to `MoveCustomSectionToEocContainer` & `EocCompositePageContainer` (minor)
 * Add a `MoveCustomSectionToEocContainer` to allow for custom sections (minor)
 * Add a `EocCompositePageContainer` direction to handle creation of eoc page wrapper (minor)
