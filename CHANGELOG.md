@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Refactor `BakeChapterKeyConcepts`, `BakeChapterReferences`, `BakeChapterSolutions`, and `MoveExercisesToEoc` versions 1-3 to use new general eoc directions (major?)
 * Fixed `BakeExample.v1` to also search inside `.body` for titles (minor)
 * Add documentation to `MoveCustomSectionToEocContainer` & `EocCompositePageContainer` (minor)
 * Add a `MoveCustomSectionToEocContainer` to allow for custom sections (minor)

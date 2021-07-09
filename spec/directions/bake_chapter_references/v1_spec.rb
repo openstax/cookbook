@@ -6,7 +6,9 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V1 do
 
   before do
     stub_locales({
-      'references': 'References'
+      'eoc': {
+        'references': 'References'
+      }
     })
   end
 

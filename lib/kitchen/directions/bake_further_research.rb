@@ -13,7 +13,6 @@ module Kitchen
       end
 
       class V1
-        renderable
         def bake(chapter:, metadata_source:, uuid_prefix: '.')
           MoveCustomSectionToEocContainer.v1(
             chapter: chapter,

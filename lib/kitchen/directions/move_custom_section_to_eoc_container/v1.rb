@@ -4,8 +4,6 @@
 # More parameters are ok here because these generic classes DRY up a lot of other code
 module Kitchen::Directions::MoveCustomSectionToEocContainer
   class V1
-    renderable
-
     def bake(chapter:, metadata_source:, container_key:, uuid_key:,
              section_selector:, append_to:, include_intro_page:, &block)
       section_clipboard = Kitchen::Clipboard.new

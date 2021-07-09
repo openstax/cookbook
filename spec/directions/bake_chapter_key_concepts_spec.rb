@@ -5,8 +5,10 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
   before do
     stub_locales({
-      'eoc_key_concepts': 'Key Concepts',
-      'eoc_composite_metadata_title': 'Chapter Review'
+      'eoc_composite_metadata_title': 'Chapter Review',
+      'eoc': {
+        'key-concepts': 'Key Concepts'
+      }
     })
   end
 
@@ -16,7 +18,7 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
         <div data-type="page">
           <h1 data-type="document-title" id="page1TitleId">Page 1</h1>
           <section id="sectionId1" class="key-concepts">
-            <h3 data-type="document-title">WWF History</h3>
+            <h3 data-type="title">WWF History</h3>
             <p>Concepts blah.</p>
           </section>
         </div>
@@ -27,7 +29,7 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
             <span data-type="" itemprop="" class="os-text">Baked Title</span>
           </h2>
           <section id="sectionId2" class="key-concepts">
-            <h3 data-type="document-title">WWF History</h3>
+            <h3 data-type="title">WWF History</h3>
             <p>Concepts two</p>
           </section>
         </div>

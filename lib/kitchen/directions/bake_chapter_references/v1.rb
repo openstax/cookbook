@@ -1,27 +1,23 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::BakeChapterReferences
-  # TODO: Refactor to use EocCompositePageContainer or MoveCustomSectionToEocContainer
   class V1
-    renderable
-
     def bake(chapter:, metadata_source:, uuid_prefix: '.', klass: 'references')
-      @metadata = metadata_source.children_to_keep.copy
-      @klass = klass
-      @title = I18n.t(:references)
-      @uuid_prefix = uuid_prefix
-
-      chapter.references.search('h3').trash
-
       bake_page_references(page: chapter.introduction_page)
 
       chapter.non_introduction_pages.each do |page|
         bake_page_references(page: page)
       end
 
-      @content = chapter.pages.references.cut.paste
-      chapter.append(child: render(file:
-        '../../templates/eoc_section_template_old.xhtml.erb'))
+      content = chapter.pages.references.cut.paste
+
+      Kitchen::Directions::EocCompositePageContainer.v1(
+        container_key: klass,
+        uuid_key: "#{uuid_prefix}#{klass}",
+        metadata_source: metadata_source,
+        content: content,
+        append_to: chapter
+      )
     end
 
     def bake_page_references(page:)
@@ -43,6 +39,7 @@ module Kitchen::Directions::BakeChapterReferences
               end
 
       references.each do |reference|
+        Kitchen::Directions::RemoveSectionTitle.v1(section: reference)
         reference.prepend(child: title)
       end
     end

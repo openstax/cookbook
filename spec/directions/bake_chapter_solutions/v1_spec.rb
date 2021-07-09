@@ -5,7 +5,9 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::BakeChapterSolutions::V1 do
   before do
     stub_locales({
-      'eoc_solutions_title': 'Solutions'
+      'eoc': {
+        'solutions': 'Solutions'
+      }
     })
   end
 

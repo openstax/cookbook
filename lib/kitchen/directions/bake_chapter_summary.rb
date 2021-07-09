@@ -15,7 +15,6 @@ module Kitchen
       end
 
       class V1
-        renderable
         def bake(chapter:, metadata_source:, uuid_prefix: '.', klass: 'summary')
           summaries = Clipboard.new
 

@@ -3,27 +3,17 @@
 module Kitchen::Directions::MoveExercisesToEOC
   # Main difference from v1 is the presence of a section title
   # and some additional wrappers
-  # TODO: Refactor to use EocCompositePageContainer or MoveCustomSectionToEocContainer
   class V2
-    renderable
-
     def bake(chapter:, metadata_source:, klass:, append_to: nil, uuid_prefix: '.')
-      @klass = klass
-      @metadata = metadata_source.children_to_keep.copy
-      @title = I18n.t(:"eoc.#{klass}")
-      @uuid_prefix = uuid_prefix
-
       exercise_clipboard = Kitchen::Clipboard.new
 
       chapter.non_introduction_pages.each do |page|
-        sections = page.search("section.#{@klass}")
+        sections = page.search("section.#{klass}")
 
         sections.each do |exercise_section|
-          exercise_section.first("[data-type='title']")&.trash
-
+          Kitchen::Directions::RemoveSectionTitle.v1(section: exercise_section)
           # Get parent page title
           section_title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: page)
-
           # Configure section title & wrappers
           exercise_section.prepend(child: section_title)
           exercise_section.wrap('<div class="os-section-area">')
@@ -34,17 +24,19 @@ module Kitchen::Directions::MoveExercisesToEOC
 
       return if exercise_clipboard.none?
 
-      @content = <<~HTML
-        <div class="os-#{@klass}">
+      content = <<~HTML
+        <div class="os-#{klass}">
           #{exercise_clipboard.paste}
         </div>
       HTML
 
-      append_to_element = append_to || chapter
-      @in_composite_chapter = append_to_element[:'data-type'] == 'composite-chapter'
-
-      append_to_element.append(child: render(file:
-        '../../templates/eoc_section_template_old.xhtml.erb'))
+      Kitchen::Directions::EocCompositePageContainer.v1(
+        container_key: klass,
+        uuid_key: "#{uuid_prefix}#{klass}",
+        metadata_source: metadata_source,
+        content: content,
+        append_to: append_to || chapter
+      )
     end
   end
 end

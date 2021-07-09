@@ -21,7 +21,6 @@ en:
   eoc_exercises_title: Exercises
   eoc_composite_metadata_title: Chapter Review
   eoc_solutions_title: Solutions
-  eoc_key_concepts: Key Concepts
   eoc_suggested_reading: Suggestions for Further Study
   eob_index_title: Index
   eob_index_symbols_group: Symbols
@@ -32,3 +31,5 @@ en:
     key-equations: Key Equations
     summary: Summary
     further-research: Further Research
+    key-concepts: Key Concepts
+    references: References

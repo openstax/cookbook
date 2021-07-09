@@ -2,8 +2,6 @@
 
 module Kitchen::Directions::BakeChapterGlossary
   class V1
-    renderable
-
     class Definition
       attr_reader :element
 
