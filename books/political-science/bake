@@ -35,7 +35,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
       container_key: 'suggested-readings',
       uuid_key: '.suggested-readings',
       section_selector: 'section.suggested-readings',
-      append_to: chapter,
       include_intro_page: true
     ) do |section|
       RemoveSectionTitle.v1(section: section)
