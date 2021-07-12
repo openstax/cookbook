@@ -1,5 +1,6 @@
 en:
-  eoc_summary_title: Chapter Review
   eoc_free_response: Homework
+  eoc:
+    summary: Chapter Review
   notes:
     try: Try It
