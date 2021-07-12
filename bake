@@ -23,6 +23,7 @@ done
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 case "${book}" in
+  calculus) $DIR/books/calculus/bake --input $input_file --output $output_file;;
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
   statistics) $DIR/books/statistics/bake --input $input_file --output $output_file;;
   american_government) $DIR/books/american_government/bake --input $input_file --output $output_file;;
