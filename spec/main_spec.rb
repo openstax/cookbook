@@ -11,12 +11,12 @@ RSpec.describe 'books' do
     expect('chemistry').to bake_correctly
   end
 
-  it 'bakes precalculus' do
-    expect('precalculus').to bake_correctly
-  end
-
   it 'bakes calculus' do
     expect('calculus').to bake_correctly
+  end
+
+  it 'bakes precalculus' do
+    expect('precalculus').to bake_correctly
   end
 
   it 'bakes u-physics' do
