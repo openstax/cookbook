@@ -29,10 +29,8 @@ module Kitchen
     # @return [Element]
     #
     def title
-      # Get the title in the immediate children, not the one in the metadata.  Could use
-      # CSS of ":not([data-type='metadata']) > [data-type='document-title'], [data-type='document-title']"
-      # but xpath is shorter
-      first!("./*[@data-type = 'document-title' or @data-type = 'title']")
+      first!('h3[data-type="title"], h2[data-type="document-title"],' \
+             'h1[data-type="document-title"]')
     end
 
     # Returns true if this page is a book index

@@ -54,7 +54,7 @@ module Kitchen
 
           exercise.add_class('unnumbered')
 
-          commentary = exercise.first('[data-type="commentary"]')
+          commentary = exercise.first('div[data-type="commentary"]')
           next unless commentary.present?
 
           commentary_title = commentary.titles.first
