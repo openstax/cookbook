@@ -10,7 +10,7 @@ module Kitchen
       SEPARATOR_CLASS = '-os-inline-list-separator'
 
       def self.v1(book:)
-        inline_lists = book.search('span[data-display="inline"][data-type="list"]')
+        inline_lists = book.search('span[data-display="inline"][data-list-type="labeled-item"]')
         inline_lists.each do |list|
           list.search('span[data-type="item"]')[0..-2].each do |item|
             item.append(child: "<span class=\"#{SEPARATOR_CLASS}\">#{LIST_SEPARATOR}</span>")
