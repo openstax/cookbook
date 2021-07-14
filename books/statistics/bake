@@ -17,6 +17,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   )
 
   book = doc.book
+  metadata = book.metadata
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
@@ -27,12 +28,51 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    # Stats EoC starts with the Glossary
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
+    # EOC sections
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
-    BakeFreeResponse.v1(chapter: chapter, metadata_source: book.metadata)
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'formula-review',
+      uuid_key: '.formula-review',
+      section_selector: 'section.formula-review',
+      append_to: chapter,
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      section.prepend(child: EocSectionTitleLinkSnippet.v1(
+        page: section.ancestor(:page)
+      ))
+    end
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'practice',
+      uuid_key: '.practice',
+      section_selector: 'section.practice',
+      append_to: chapter,
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
+
+    BakeFreeResponse.v1(chapter: chapter, metadata_source: metadata)
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'bringing-together-homework',
+      uuid_key: '.bringing-together-homework',
+      section_selector: 'section.bringing-together-homework',
+      append_to: chapter,
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
@@ -40,7 +80,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    BakeChapterSolutions.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterSolutions.v1(chapter: chapter, metadata_source: metadata)
 
   end
 

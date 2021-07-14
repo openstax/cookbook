@@ -2,5 +2,8 @@ en:
   eoc_free_response: Homework
   eoc:
     summary: Chapter Review
+    formula-review: Formula Review
+    practice: Practice
+    bringing-it-together-homework: 'Bringing It Together: Homework'
   notes:
-    try: Try It
+    try: 'Try It '
