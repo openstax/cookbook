@@ -26,6 +26,7 @@ en:
   eob_index_symbols_group: Symbols
   review_exercises: Review Exercises
   section_exercises: ! 'Section %{number} Exercises'
+  iframe_link_text: Click to view content
   eoc:
     glossary: Key Terms
     key-equations: Key Equations

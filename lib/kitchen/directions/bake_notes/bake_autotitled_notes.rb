@@ -12,6 +12,7 @@ module Kitchen
       end
 
       def self.bake_note(note:)
+        BakeNoteIFrames.v1(note: note)
         note.wrap_children(class: 'os-note-body')
 
         BakeNoteSubtitle.v1(note: note)
