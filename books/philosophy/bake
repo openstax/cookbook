@@ -5,13 +5,19 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen_local' } : '7.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '7.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
   include Kitchen::Directions
+
+  # Set overrides
+  doc.selectors.override(
+    reference: '.references'
+  )
+
   book = doc.book
   metadata = book.metadata
 
@@ -25,6 +31,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
     BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: metadata, module_title: false)
+    BakeFurtherReading.v1(chapter: chapter, metadata_source: metadata)
 
     chapter.search('.review-questions').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
@@ -43,9 +51,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
   end
-
-  BakeFurtherReading.v1(book: book)
-  BakeReferences.v2(book: book, metadata_source: metadata)
 
   BakeAutotitledNotes.v1(
     book: book,
