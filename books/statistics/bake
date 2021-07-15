@@ -30,7 +30,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   book.chapters.each do |chapter|
     # EOC sections
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
-
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
     MoveCustomSectionToEocContainer.v1(
@@ -54,6 +53,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       container_key: 'practice',
       uuid_key: '.practice',
       section_selector: 'section.practice',
+      append_to: chapter,
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'bringing-together-exercises',
+      uuid_key: '.bringing-together-exercises',
+      section_selector: 'section.bringing-together-exercises',
       append_to: chapter,
       include_intro_page: true
     ) do |section|
@@ -101,20 +112,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
                      numbered_solutions: true)
     end
 
-    chapter.pages('$:not(.introduction)').each do |page|
-      page.search("div[data-type='description']").each(&:trash)
-      page.add_class('chapter-content-module')
-
-      title = page.search("div[data-type='document-title']").first
-      title.name = 'h2'
-      title.replace_children(with:
-        <<~HTML
-          <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-          <span class="os-divider"> </span>
-          <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-        HTML
-      )
-    end
+    BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.figures(except: :subfigure?).each do |figure|
       BakeFigure.v1(figure: figure,
@@ -138,12 +136,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
                            always_caption: true)
     end
 
-    # page.examples.each do |example|
-    #   BakeExample.v1(example: example,
-    #                  number: "#{appendix_letter}#{example.count_in(:page)}",
-    #                  title_tag: 'div')
-    # end
-
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
@@ -156,20 +148,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
   BakeToc.v1(book: book)
 
-  # competing docs from elements - BakeLinkPlaceholders
-  book.search('a').each do |anchor|
-    next unless anchor.text == '[link]'
-
-    id = anchor[:href][1..-1]
-    replacement = doc.pantry(name: :link_text).get(id)
-    if replacement.present?
-      anchor.replace_children(with: replacement)
-    else
-      # TODO: log a warning!
-      puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
-    end
-  end
-
+  BakeLinkPlaceholders.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
