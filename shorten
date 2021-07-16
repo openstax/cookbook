@@ -19,10 +19,11 @@ done
 # List additional books here
 
 case "${book}" in
+  american_government) dest="${DIR}/data/american_government/short" && script="${DIR}/books/american_government/shorten";;
+  biology) dest="${DIR}/data/biology/short" && script="${DIR}/books/biology/shorten";;
   calculus) dest="${DIR}/data/calculus/short" && script="${DIR}/books/calculus/shorten";;
   chemistry) dest="${DIR}/data/chemistry/short" && script="${DIR}/books/chemistry/shorten";;
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
-  american_government) dest="${DIR}/data/american_government/short" && script="${DIR}/books/american_government/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
