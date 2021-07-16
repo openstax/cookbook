@@ -31,5 +31,6 @@ case "${book}" in
   microbiology) $DIR/books/microbiology/bake --input $input_file --output $output_file;;
   dummy) $DIR/books/dummy/bake --input $input_file --output $output_file;;
   sociology) $DIR/books/sociology/bake --input $input_file --output $output_file;;
+  anatomy) $DIR/books/anthropology/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
