@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Update `BakeFirstElements` to also add the `.has-first-inline-list` class (minor)
+
 ## [9.1.0] - 2021-07-16
 
 * Add `BakeNoteIFrames` direction (minor)

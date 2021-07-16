@@ -88,6 +88,26 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                 </div>
               </div>
             </div>
+            <div data-type="exercise" id="bla9">
+              <div data-type="solution"><div class="os-solution-container">
+                <ol class="circled" id="" type="1">
+                  <li><span class="token">&#x24D0;</span> yes</li>
+                  <li><span class="token">&#x24D1;</span> yes. (Note: If two players had been tied for, say, 4th place, then the name would not have been a function of rank.)</li>
+                </ol>
+              </div></div>
+            </div>
+            <div data-type="exercise" id="bla10">
+              <div data-type="problem">
+                <div class="os-problem-container">
+                  <ol class="circled" id="" type="a">
+                    <li>don't add a class to this one</li>
+                  </ol>
+                  <ol class="circled" id="" type="1">
+                    <li><span class="token">&#x24D0;</span> yes</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
           </section>
         HTML
       )
@@ -181,6 +201,28 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                   <div data-type="solution">
                     <div class="os-solution-container">
                       <div data-type="not media">bla10</div>
+                    </div>
+                  </div>
+                </div>
+                <div data-type="exercise" id="bla9">
+                  <div data-type="solution">
+                    <div class="os-solution-container has-first-inline-list-element">
+                      <ol class="circled first-inline-list-element" id="" type="1">
+                        <li><span class="token">&#x24D0;</span> yes</li>
+                        <li><span class="token">&#x24D1;</span> yes. (Note: If two players had been tied for, say, 4th place, then the name would not have been a function of rank.)</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+                <div data-type="exercise" id="bla10">
+                  <div data-type="problem">
+                    <div class="os-problem-container">
+                      <ol class="circled" id="" type="a">
+                        <li>don't add a class to this one</li>
+                      </ol>
+                      <ol class="circled" id="" type="1">
+                        <li><span class="token">&#x24D0;</span> yes</li>
+                      </ol>
                     </div>
                   </div>
                 </div>
