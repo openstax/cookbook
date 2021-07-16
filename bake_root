@@ -30,6 +30,9 @@ case "${book}" in
   chemistry)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  biology)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   dummy)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
@@ -47,7 +50,7 @@ case "${book}" in
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   american_government)
     echo "Baking book '${book}' with kitchen" ;
-    ${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   calculus)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
