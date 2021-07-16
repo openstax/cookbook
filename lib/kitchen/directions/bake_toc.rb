@@ -90,6 +90,8 @@ module Kitchen
               'os-toc-appendix'
             elsif page.is_preface?
               'os-toc-preface'
+            elsif page.is_handbook?
+              'os-toc-handbook'
             else
               raise "do not know what TOC class to use for page with classes #{page.classes}"
             end

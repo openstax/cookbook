@@ -119,5 +119,13 @@ module Kitchen
       search('section.free-response')
     end
 
+    # Returns true if this page is a handbook
+    #
+    # @return [Boolean]
+    #
+    def is_handbook?
+      has_class?('handbook')
+    end
+
   end
 end
