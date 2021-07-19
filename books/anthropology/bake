@@ -21,7 +21,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anthropology) do |doc|
   BakePreface.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  note_classes = %w[ethnographic-sketches fieldwork-activity profiles-anthropology media-podcast media-video]
+  note_classes = %w[ethnographic-sketches fieldwork-activity profiles-anthropology media-podcast
+                    media-video]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
   book.chapters.each do |chapter|
     BakePageAbstracts.v1(chapter: chapter)
@@ -51,7 +52,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anthropology) do |doc|
     ) do |section|
       RemoveSectionTitle.v1(section: section)
     end
-
 
     chapter.figures('$:not(.unnumbered)').each do |figure|
       BakeFigure.v1(figure: figure,
