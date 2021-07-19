@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.2.0] - 2021-07-19
+
 * Update `BakeFirstElements` to also add the `.has-first-inline-list` class (minor)
 
 ## [9.1.0] - 2021-07-16

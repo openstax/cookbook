@@ -3,5 +3,5 @@
 # A library for modifying the structure of OpenStax book XML.
 #
 module Kitchen
-  VERSION = '9.1.0'
+  VERSION = '9.2.0'
 end
