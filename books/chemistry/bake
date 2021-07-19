@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '8.0.1'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -14,24 +14,34 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
   include Kitchen::Directions
 
   book = doc.book
+  metadata = book.metadata
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
 
+  answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
   book.chapters.each do |chapter|
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+    MoveExercisesToEOC.v3(chapter: chapter, metadata_source: metadata, klass: 'exercises')
+    chapter.search('section.exercises').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+    MoveSolutionsToAnswerKey.v1(
+      chapter: chapter, metadata_source: metadata, strategy: :default, append_to: answer_key,
+      strategy_options: { selectors: ['section.exercises'] }, solutions_plural: false
+    )
   end
 
-  BakeExercises.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
     BakePageAbstracts.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -42,21 +52,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3')
-    end
-
-    chapter.pages('$:not(.introduction)').each do |page|
-      page.search("div[data-type='description']").each(&:trash)
-      page.add_class('chapter-content-module')
-
-      title = page.search("div[data-type='document-title']").first
-      title.name = 'h2'
-      title.replace_children(with:
-        <<~HTML
-          <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-          <span class="os-divider"> </span>
-          <span data-type="" itemprop="" class="os-text">#{title.text}</span>
-        HTML
-      )
     end
 
     chapter.figures.each do |figure|
@@ -85,17 +80,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeNotes.v1(book: book)
+  note_classes = %w[link-to-learning everyday-life chemist-portrait sciences-interconnect]
+  BakeAutotitledNotes.v1(book: book, classes: note_classes)
+  BakeUnclassifiedNotes.v1(book: book)
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
-
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-
 end
 
 opts = Slop.parse do |slop|
