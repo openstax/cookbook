@@ -7,6 +7,10 @@ RSpec.describe 'books' do
     expect('dummy').to bake_correctly
   end
 
+  it 'bakes anthropology' do
+    expect('anthropology').to bake_correctly
+  end
+
   it 'bakes chemistry' do
     expect('chemistry').to bake_correctly
   end
