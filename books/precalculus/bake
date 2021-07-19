@@ -104,7 +104,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
 
   BakeUnnumberedTables.v1(book: book)
 
-  # Add classes to exercises and solutions - TODO: think of a better way to do this
+  # Add classes to exercises and solutions
   book.search('section.review-exercises, section.practice-test, section.section-exercises,' \
     ' div[data-type="note"].try').exercises.each do |exercise|
     BakeFirstElements.v1(within: exercise)
