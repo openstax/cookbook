@@ -27,6 +27,9 @@ done
 #       the underlying bake script.
 
 case "${book}" in
+  anthropology)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   chemistry)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
