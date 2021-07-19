@@ -24,6 +24,7 @@ case "${book}" in
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
   american_government) dest="${DIR}/data/american_government/short" && script="${DIR}/books/american_government/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
+  english_composition) dest="${DIR}/data/english_composition/short" && script="${DIR}/books/english_composition/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
