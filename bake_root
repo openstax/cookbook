@@ -33,6 +33,9 @@ case "${book}" in
   dummy)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  political-science)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   u-physics)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
@@ -40,6 +43,12 @@ case "${book}" in
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   microbiology)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  sociology)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  calculus)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   *) echo "Baking book '${book}' with legacy baking";
