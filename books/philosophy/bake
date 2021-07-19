@@ -73,9 +73,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
                 philo-connections
                 time-line]
   )
-  book.notes.each do |note|
-    BakeNoteIFrames.v1(note: note)
-  end
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)

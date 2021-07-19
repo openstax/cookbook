@@ -27,7 +27,6 @@ case "${book}" in
   precalculus) dest="${DIR}/data/precalculus/short" && script="${DIR}/books/precalculus/shorten";;
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
-  philosophy) dest="${DIR}/data/philosophy/short" && script="${DIR}/books/philosophy/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
