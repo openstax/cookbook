@@ -31,7 +31,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
   BakeNumberedNotes.v2(book: book, classes: %w[try])
 
   # Bake EOC sections
-  solutions_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
   book.chapters.each do |chapter|
     eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
 
@@ -56,37 +55,27 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
     chapter.pages.search('section.section-exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:page))
     end
-
-    # # Bake answer key from chapter/ move solutions from eoc into answer key
-    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: metadata,
-                                strategy: :precalculus, append_to: solutions_container,
-                                solutions_plural: false)
   end
 
+  # Tables and figures must be baked after EOC sections are created to preserve number ordering
   book.pages('$:not(.appendix)').each do |page|
     page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v2(table: table,
-                           number: table.count_in(:page))
+      BakeNumberedTable.v2(table: table, number: table.count_in(:page))
     end
     page.figures.each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: figure.count_in(:page))
+      BakeFigure.v1(figure: figure, number: figure.count_in(:page))
     end
     page.examples.each do |example|
-      BakeExample.v1(example: example,
-                     number: example.count_in(:page),
-                     title_tag: 'h3')
+      BakeExample.v1(example: example, number: example.count_in(:page), title_tag: 'h3')
     end
   end
 
   book.composite_pages.each do |page|
     page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v2(table: table,
-                           number: table.count_in(:composite_page))
+      BakeNumberedTable.v2(table: table, number: table.count_in(:composite_page))
     end
     page.figures('$:not(.unnumbered)').each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: figure.count_in(:composite_page))
+      BakeFigure.v1(figure: figure, number: figure.count_in(:composite_page))
     end
   end
 
@@ -104,14 +93,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
 
   BakeUnnumberedTables.v1(book: book)
 
-  # Add classes to exercises and solutions
-  book.search('section.review-exercises, section.practice-test, section.section-exercises,' \
-    ' div[data-type="note"].try').exercises.each do |exercise|
-    BakeFirstElements.v1(within: exercise)
-  end
+  solutions_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
+  book.chapters.each do |chapter|
+    # BakeFirstElements is most efficiently called before solutions are separated from exercises
+    # BakeFirstElements must also be called after tables are baked.
+    chapter.search('section.review-exercises, section.practice-test, section.section-exercises,' \
+      ' div[data-type="note"].try').exercises.each do |exercise|
+      # Classes added: has-first-element; has-first-inline-list-element
+      BakeFirstElements.v1(within: exercise)
+    end
 
-  book.search('div.os-solution-area > div[data-type="solution"]').each do |solution|
-    BakeFirstElements.v1(within: solution)
+    MoveSolutionsToAnswerKey.v1(
+      chapter: chapter, metadata_source: metadata, strategy: :precalculus,
+      append_to: solutions_container, solutions_plural: false
+    )
   end
 
   BakeInlineLists.v1(book: book)
