@@ -13,11 +13,6 @@ end
 recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
   include Kitchen::Directions
 
-  # Set overrides
-  doc.selectors.override(
-    reference: '.references'
-  )
-
   book = doc.book
   metadata = book.metadata
 
@@ -31,8 +26,26 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
     BakeNonIntroductionPages.v1(chapter: chapter)
-    BakeChapterReferences.v1(chapter: chapter, metadata_source: metadata, module_title: false)
-    BakeFurtherReading.v1(chapter: chapter, metadata_source: metadata)
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'references',
+      uuid_key: '.references',
+      section_selector: 'section.references',
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'further-reading',
+      uuid_key: '.further-reading',
+      section_selector: 'section.further-reading',
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
 
     chapter.search('.review-questions').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
