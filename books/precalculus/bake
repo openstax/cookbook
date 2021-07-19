@@ -108,20 +108,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
   book.search('section.review-exercises, section.practice-test, section.section-exercises,' \
     ' div[data-type="note"].try').exercises.each do |exercise|
     BakeFirstElements.v1(within: exercise)
-    inline_list = exercise.solution&.first('div.os-solution-container > ol[type="1"]:first-child')
-    if inline_list
-      inline_list.add_class('first-inline-list-element')
-      inline_list.parent.add_class('has-first-inline-list-element')
-    end
   end
 
   book.search('div.os-solution-area > div[data-type="solution"]').each do |solution|
     BakeFirstElements.v1(within: solution)
-    inline_list = solution&.first('div.os-solution-container > ol[type="1"]:first-child')
-    if inline_list
-      inline_list.add_class('first-inline-list-element')
-      inline_list.parent.add_class('has-first-inline-list-element')
-    end
   end
 
   BakeInlineLists.v1(book: book)
