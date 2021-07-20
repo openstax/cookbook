@@ -42,6 +42,10 @@ RSpec.describe 'books' do
     expect('political-science').to bake_correctly
   end
 
+  it 'bakes philosophy' do
+    expect('philosophy').to bake_correctly
+  end
+
   it 'bakes biology' do
     expect('biology').to bake_correctly
   end

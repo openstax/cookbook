@@ -51,6 +51,9 @@ case "${book}" in
   microbiology)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  philosophy)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   sociology)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;

@@ -31,6 +31,7 @@ case "${book}" in
   anthropology) $DIR/books/anthropology/bake --input $input_file --output $output_file;;
   biology) $DIR/books/biology/bake --input $input_file --output $output_file;;
   political-science) $DIR/books/political-science/bake --input $input_file --output $output_file;;
+  philosophy) $DIR/books/philosophy/bake --input $input_file --output $output_file;;
   microbiology) $DIR/books/microbiology/bake --input $input_file --output $output_file;;
   sociology) $DIR/books/sociology/bake --input $input_file --output $output_file;;
   u-physics) $DIR/books/u-physics/bake --input $input_file --output $output_file;;
