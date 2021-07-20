@@ -26,6 +26,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
+  BakeHandbook.v1(book: book)
 
   # # Bake NumberedTable in Preface
   # book.pages('$.preface').tables('$:not(.unnumbered)').each do |table|
