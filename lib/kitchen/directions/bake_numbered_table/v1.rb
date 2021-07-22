@@ -16,7 +16,7 @@ module Kitchen::Directions::BakeNumberedTable
         HTML
       end
 
-      if (caption = table.caption&.cut)
+      if (caption = table.caption&.cut) && !caption&.children&.to_s&.blank?
         new_caption = <<~HTML
           \n<span class="os-caption">#{caption.children}</span>
         HTML

@@ -102,7 +102,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
   end
 
-  context 'when there is a table' do
+  context 'when there is a baked table' do
     let(:table) do
       <<~HTML
         <div class="os-table">
@@ -134,6 +134,53 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
 
     it 'doesn\'t affect the baked table' do
+      described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
+      expect(example).to match_normalized_html(
+        <<~HTML
+          <div data-type="example" id="example-test">
+            <title-tag-name class="os-title">
+              <span class="os-title-label">Example </span>
+              <span class="os-number">4</span>
+              <span class="os-divider"> </span>
+            </title-tag-name>
+            <div class="body">
+              <h4 data-type="title">example title becomes h4</h4>
+              <p>content</p>
+              #{table}
+            </div>
+          </div>
+        HTML
+      )
+    end
+  end
+
+  context 'when there is an unbaked table' do
+    let(:table) do
+      <<~HTML
+        <div class="os-table">
+          <table class="some-class" id="tId">
+            <thead>
+              <tr>
+                <th>A title</th>
+              </tr>
+              <tr>
+                <th>Another heading cell</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>One lonely cell</td>
+              </tr>
+            </tbody>
+            <caption>
+              <span data-type="title">Secret Title</span>
+            </caption>
+          </table>
+        </div>
+      HTML
+    end
+
+    it 'doesn\'t affect the unbaked table' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
       expect(example).to match_normalized_html(
         <<~HTML

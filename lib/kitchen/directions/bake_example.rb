@@ -22,7 +22,8 @@ module Kitchen
 
         example.titles.each do |title|
           if title.parent.has_class?('os-caption-container') || \
-             title.parent.has_class?('os-caption')
+             title.parent.has_class?('os-caption') || \
+             title.parent.name == 'caption'
             next
           end
 
