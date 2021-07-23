@@ -1,10 +1,14 @@
 en:
   notes:
-    link-to-learning: 'Link to Learning'
-    middle-ground: 'Finding a Middle Ground'
-    milestone: 'Milestone'
-    get-connected: 'Get Connected!'
-    insider-perspective: 'Insider Perspective'
+    interactive: 'Interactive Link'
+    everyday: 'Everyday Connection'
+    homeostatic: 'Homeostatic Imbalances'
+    disorders: 'Disorders of the...'
+    career: 'Career Connection'
   eoc:
-    review-questions: 'Review Questions'
-    critical-thinking: 'Critical Thinking Questions'
+    interactive-exercise: 'Interactive Link Questions'
+    multiple-choice: 'Review Questions'
+    free-response: 'Critical Thinking Questions'
+    summary: 'Chapter Review'
+    disorders: 'Disorders of the...'
+    career: 'Career Connection'
