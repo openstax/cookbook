@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Add `.os-problem-container` to `BakeFirstElement` selectors (minor)
 * Tweak `BakeExample` to not touch unbaked titles in captions (major)
 * Tweak `BakeNumberedTables.v1` to cut extra white space (minor)
 ## [9.2.0] - 2021-07-19

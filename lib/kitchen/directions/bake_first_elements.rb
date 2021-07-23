@@ -19,11 +19,12 @@ module Kitchen
         end
 
         # add first-inline-element class
-        inline_list = within&.first('div.os-solution-container > ol[type="1"]:first-child')
-        return unless inline_list
-
-        inline_list.add_class('first-inline-list-element')
-        inline_list.parent.add_class('has-first-inline-list-element')
+        inline_selector = 'div.os-solution-container > ol[type="1"]:first-child,' \
+                           'div.os-problem-container > ol[type="1"]:first-child'
+        within.search(inline_selector).each do |inline_list|
+          inline_list.add_class('first-inline-list-element')
+          inline_list.parent.add_class('has-first-inline-list-element')
+        end
       end
     end
   end

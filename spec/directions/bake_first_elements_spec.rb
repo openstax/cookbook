@@ -108,6 +108,15 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                 </div>
               </div>
             </div>
+            <div data-type="exercise" id="bla11">
+              <div data-type="problem">
+                <div class="os-problem-container">
+                  <ol class="circled" id="" type="1">
+                    <li>do add a class to this one</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
           </section>
         HTML
       )
@@ -222,6 +231,15 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                       </ol>
                       <ol class="circled" id="" type="1">
                         <li><span class="token">&#x24D0;</span> yes</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+                <div data-type="exercise" id="bla11">
+                  <div data-type="problem">
+                    <div class="os-problem-container has-first-inline-list-element">
+                      <ol class="circled first-inline-list-element" id="" type="1">
+                        <li>do add a class to this one</li>
                       </ol>
                     </div>
                   </div>
