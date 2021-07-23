@@ -73,4 +73,53 @@ RSpec.describe Kitchen::NoteElement do
     end
   end
 
+  describe '#title' do
+    let(:notes_with_subtitle) do
+      book_containing(html:
+        one_chapter_with_one_page_containing(
+          <<~HTML
+            <div data-type="note">
+              <div data-type="title">valid subtitle</div>
+            </div>
+            <div data-type="note">
+              <div class="os-note-body">
+                <div data-type="title">also valid subtitle</div>
+              </div>
+            </div>
+            <div data-type="note">
+              <div class="os-note-body">
+                <p><div data-type="title">subtitles can be in a paragraph element</div></p>
+              </div>
+            </div>
+          HTML
+        )
+      ).notes
+    end
+
+    let(:note_with_non_subtitle_title) do
+      book_containing(html:
+        one_chapter_with_one_page_containing(
+          <<~HTML
+            <div data-type="note">
+              <p>some other content</p>
+              <ul>
+                <li><div data-type="title">not a subtitle</div></li>
+              </ul>
+            </div>
+          HTML
+        )
+      ).notes.first
+    end
+
+    it 'gets the subtitle' do
+      expect(notes_with_subtitle.first.title).to match_normalized_html('<div data-type="title">valid subtitle</div>')
+      expect(notes_with_subtitle[1].title).to match_normalized_html('<div data-type="title">also valid subtitle</div>')
+      expect(notes_with_subtitle[2].title).to match_normalized_html('<div data-type="title">subtitles can be in a paragraph element</div>')
+    end
+
+    it 'does not get non subtitle titles' do
+      expect(note_with_non_subtitle_title.title).to eq(nil)
+    end
+  end
+
 end
