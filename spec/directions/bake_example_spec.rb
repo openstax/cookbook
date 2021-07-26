@@ -319,6 +319,66 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
   end
 
+  context 'when there are nested examples' do
+    let(:book_with_nested_examples) do
+      book_containing(html:
+        one_chapter_with_one_page_containing(
+          <<~HTML
+            <div data-type='example' id='example-test'>
+              <div data-type='example' id='example-test2'>
+                <div data-type='exercise'>
+                  <div data-type='problem'>Q</div>
+                  <div data-type='solution'>A</div>
+                </div>
+              </div>
+            </div>
+          HTML
+        )
+      )
+    end
+
+    it 'doesn\'t double-bake exercises' do
+      book_with_nested_examples.examples.each do |example|
+        described_class.v1(example: example, number: 5, title_tag: 'h5')
+      end
+      expect(book_with_nested_examples.pages.first).to match_normalized_html(
+        <<~HTML
+          <div data-type="page">
+            <div data-type="example" id="example-test">
+              <h5 class="os-title">
+                <span class="os-title-label">Example </span>
+                <span class="os-number">5</span>
+                <span class="os-divider"> </span>
+              </h5>
+              <div class="body">
+                <div data-type="example" id="example-test2">
+                  <h5 class="os-title">
+                    <span class="os-title-label">Example </span>
+                    <span class="os-number">5</span>
+                    <span class="os-divider"> </span>
+                  </h5>
+                  <div class="body">
+                    <div class="unnumbered" data-type="exercise">
+                      <div data-type="problem">
+                        <div class="os-problem-container">Q</div>
+                      </div>
+                      <div data-type="solution">
+                        <h4 data-type="solution-title">
+                          <span class="os-title-label">Solution </span>
+                        </h4>
+                        <div class="os-solution-container">A</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        HTML
+      )
+    end
+  end
+
   it 'stores info in the pantry' do
     expect { described_class.v1(example: example, number: 4, title_tag: 'title-tag-name') }.to change {
       example.pantry(name: :link_text).get(example.id)

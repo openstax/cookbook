@@ -31,6 +31,8 @@ module Kitchen
         end
 
         example.exercises.each do |exercise|
+          next if exercise.baked?
+
           if (problem = exercise.problem)
             problem.titles.each { |title| title.name = 'h4' }
             problem.wrap_children(class: 'os-problem-container')
