@@ -57,6 +57,25 @@ RSpec.describe Kitchen::Directions::BakeFigure do
     )
   end
 
+  let(:book_with_problematic_figures) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <figure id="fig1" class="unnumbered splash">
+          </figure>
+          <figure id="fig2" class="splash">
+          </figure>
+          <figure id="fig3" class="unnumbered">
+          </figure>
+          <figure id="fig4">
+            <figure id="fig5">
+            </figure>
+          </figure>
+        HTML
+      )
+    )
+  end
+
   let(:book1_figure) { book1.chapters.figures.first }
 
   describe 'v1' do
@@ -146,6 +165,12 @@ RSpec.describe Kitchen::Directions::BakeFigure do
   describe '#subfigure?' do
     it 'can detect subfigures' do
       expect(book2.chapters.figures.map(&:subfigure?)).to eq([false, true, true])
+    end
+  end
+
+  describe '#figure_to_bake?' do
+    it 'can select what figures should be baked' do
+      expect(book_with_problematic_figures.figures.map(&:figure_to_bake?)).to eq([true, true, false, true, false])
     end
   end
 

@@ -47,5 +47,16 @@ module Kitchen
       parent.name == 'figure'
     end
 
+    # Returns true unless the figure is a subfigure or has the 'unnumbered' class,
+    # unless the figure has both the 'unnumbered' and the 'splash' classes.
+    #
+    # @return [Boolean]
+    #
+    def figure_to_bake?
+      return false if subfigure? || (has_class?('unnumbered') && !has_class?('splash'))
+
+      true
+    end
+
   end
 end
