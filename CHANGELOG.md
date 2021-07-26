@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove `itemprop` attribute from `BakeChapterSummary` and `BakeFurtherResearch` (major)
 * Fix `NoteElement#title` to exclude nested element titles (patch)
 * Remove `BakeTheorem` (minor)
 * Allow `BakeChapterSolutions` to bake solutions from multiple sections (minor)

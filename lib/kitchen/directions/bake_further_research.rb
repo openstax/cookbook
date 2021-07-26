@@ -26,7 +26,6 @@ module Kitchen
             RemoveSectionTitle.v1(section: further_research)
             title = EocSectionTitleLinkSnippet.v1(page: further_research.ancestor(:page))
             further_research.prepend(child: title)
-            further_research.first('h3')[:itemprop] = 'name'
           end
         end
       end

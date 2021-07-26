@@ -26,7 +26,6 @@ module Kitchen
             summary.first("[data-type='title']")&.trash # get rid of old title if exists
             title = EocSectionTitleLinkSnippet.v1(page: page)
             summary.prepend(child: title)
-            summary.first('h3')[:itemprop] = 'name'
             summary.cut(to: summaries)
           end
 

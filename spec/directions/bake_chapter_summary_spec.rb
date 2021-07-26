@@ -102,7 +102,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
                 </div>
                 <section class="summary" data-element-type="section-summary">
                   <a href="#first">
-                    <h3 data-type="document-title" id="first_copy_1" itemprop="name">
+                    <h3 data-type="document-title" id="first_copy_1">
                       <span class="os-number">1.1</span>
                       <span class="os-divider"> </span>
                       <span class="os-text" data-type="" itemprop="">First Title</span>
@@ -112,7 +112,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
                 </section>
                 <section class="summary" data-element-type="section-summary">
                   <a href="#second">
-                    <h3 data-type="document-title" id="second_copy_1" itemprop="name">
+                    <h3 data-type="document-title" id="second_copy_1">
                       <span class="os-number">1.2</span>
                       <span class="os-divider"> </span>
                       <span class="os-text" data-type="" itemprop="">Second Title</span>
@@ -167,7 +167,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
                 </div>
                 <section class="summary" data-element-type="section-summary">
                   <a href="#first">
-                    <h3 data-type="document-title" id="first_copy_1" itemprop="name">
+                    <h3 data-type="document-title" id="first_copy_1">
                       <span class="os-number">1.1</span>
                       <span class="os-divider"> </span>
                       <span class="os-text" data-type="" itemprop="">First Title</span>
@@ -177,7 +177,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
                 </section>
                 <section class="summary" data-element-type="section-summary">
                   <a href="#second">
-                    <h3 data-type="document-title" id="second_copy_1" itemprop="name">
+                    <h3 data-type="document-title" id="second_copy_1">
                       <span class="os-number">1.2</span>
                       <span class="os-divider"> </span>
                       <span class="os-text" data-type="" itemprop="">Second Title</span>
@@ -222,7 +222,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
             </div>
             <section class="summary" data-element-type="section-summary">
               <a href="#intro">
-                <h3 data-type="document-title" id="intro_copy_1" itemprop="name">
+                <h3 data-type="document-title" id="intro_copy_1">
                   <span class="os-number">1.1</span>
                   <span class="os-divider"> </span>
                   <span class="os-text" data-type="" itemprop="">Introduction page!</span>
