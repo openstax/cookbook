@@ -10,7 +10,7 @@ gemfile do
   gem 'byebug'
 end
 
-AVAILABLE_FLAGS = %w[--mask-terms].freeze
+AVAILABLE_FLAGS = %w[--mask-terms --easybaked-only].freeze
 
 def process(input_file:, output_file:, args: [])
   read_and_write(input_file: input_file, output_file: output_file) do |doc|
