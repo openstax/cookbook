@@ -27,6 +27,11 @@ RSpec.describe Kitchen::Directions::BakeToc do
             <span class="os-divider"> </span>
             <span data-type="" itemprop="" class="os-text">Unit 1 Title</span>
           </h1>
+          <div data-type="page" id="p2">
+            <h2 data-type="document-title">
+              <span data-type="" itemprop="" class="os-text">Title holder for unit</span>
+            </h2>
+          </div>
           <div data-type="chapter">
             <h1 data-type="document-title" id="chapTitle1">
               <span class="os-part-text">Chapter </span>
@@ -34,7 +39,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
             </h1>
-            <div data-type="page" class="introduction" id="p2">
+            <div data-type="page" class="introduction" id="p3">
               <div class="intro-body">
                 <div class="intro-text">
                   <h2 data-type="document-title" id="auto_m68760_38230">
@@ -43,7 +48,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 </div>
               </div>
             </div>
-            <div data-type="page" id="p3">
+            <div data-type="page" id="p4">
               <h2 data-type="document-title">
                 <span class="os-number">1.1</span>
                 <span class="os-divider"> </span>
@@ -68,7 +73,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
             </h1>
-            <div data-type="page" id="p4">
+            <div data-type="page" id="p5">
               <h2 data-type="document-title">
                 <span class="os-number">2.1</span>
                 <span class="os-divider"> </span>
@@ -86,7 +91,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">Chapter 3 Title</span>
             </h1>
-            <div data-type="page" class="introduction" id="p5">
+            <div data-type="page" class="introduction" id="p6">
               <div class="intro-body">
                 <div class="intro-text">
                   <h2 data-type="document-title" id="auto_m68760_38230">
@@ -95,7 +100,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 </div>
               </div>
             </div>
-            <div data-type="page" id="p6">
+            <div data-type="page" id="p7">
               <h2 data-type="document-title">
                 <span class="os-number">3.1</span>
                 <span class="os-divider"> </span>
@@ -114,7 +119,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
             </div>
           </div>
         </div>
-        <div data-type="page" id="p7" class="appendix">
+        <div data-type="page" id="p8" class="appendix">
           <h1 data-type="document-title">
             <span class="os-part-text">Appendix </span>
             <span class="os-number">A</span>
@@ -126,28 +131,28 @@ RSpec.describe Kitchen::Directions::BakeToc do
           <h1 data-type="document-title" id="composite-chapter-1">
             <span class="os-text">Answer Key</span>
           </h1>
-          <div data-type="composite-page" id="p8">
+          <div data-type="composite-page" id="p9">
             <h2 data-type="document-title">
               <span class="os-text">Chapter 1</span>
             </h2>
           </div>
         </div>
-        <div class="os-eob os-reference-container" data-type="composite-page" id="p9"> # citation type
+        <div class="os-eob os-reference-container" data-type="composite-page" id="p10"> # citation type
           <h1 data-type="document-title">
             <span class="os-text">References</span>
           </h1>
         </div>
-        <div class="os-eob os-references-container" data-type="composite-page" id="p10"> # section type
+        <div class="os-eob os-references-container" data-type="composite-page" id="p11"> # section type
           <h1 data-type="document-title">
             <span class="os-text">References</span>
           </h1>
         </div>
-        <div data-type="page" class="handbook" id="p11">
+        <div data-type="page" class="handbook" id="p12">
           <h1 data-type="document-title">
             <span data-type="" itemprop="" class="os-text">Handbook</span>
           </h1>
         </div>
-        <div class="os-index-container" data-type="composite-page" id="p12">
+        <div class="os-index-container" data-type="composite-page" id="p13">
           <h1 data-type="document-title">
             <span class="os-text">Index</span>
           </h1>
@@ -337,6 +342,11 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 <span class="os-text" data-type="" itemprop="">Unit 1 Title</span>
               </a>
               <ol class="os-unit">
+                <li class="os-toc-unit-page" cnx-archive-shortid="" cnx-archive-uri="p2">
+                  <a href="#p2">
+                    <span data-type="" itemprop="" class="os-text">Title holder for unit</span>
+                  </a>
+                </li>
                 <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
                   <a href="#chapTitle1">
                     <span class="os-number"><span class="os-part-text">Chapter </span>1</span>
@@ -344,13 +354,13 @@ RSpec.describe Kitchen::Directions::BakeToc do
                     <span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
                   </a>
                   <ol class="os-chapter">
-                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p2">
-                      <a href="#p2">
+                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p3">
+                      <a href="#p3">
                         <span class="os-text" data-type="" itemprop="">Introduction</span>
                       </a>
                     </li>
-                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p3">
-                      <a href="#p3">
+                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p4">
+                      <a href="#p4">
                         <span class="os-number">1.1</span>
                         <span class="os-divider"> </span>
                         <span class="os-text" data-type="" itemprop="">Page 1.1 Title</span>
@@ -375,8 +385,8 @@ RSpec.describe Kitchen::Directions::BakeToc do
                     <span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
                   </a>
                   <ol class="os-chapter">
-                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p4">
-                      <a href="#p4">
+                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p5">
+                      <a href="#p5">
                         <span class="os-number">2.1</span>
                         <span class="os-divider"> </span>
                         <span class="os-text" data-type="" itemprop="">Page 2.1 Title</span>
@@ -400,13 +410,13 @@ RSpec.describe Kitchen::Directions::BakeToc do
                     <span class="os-text" data-type="" itemprop="">Chapter 3 Title</span>
                   </a>
                   <ol class="os-chapter">
-                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p5">
-                      <a href="#p5">
+                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p6">
+                      <a href="#p6">
                         <span class="os-text" data-type="" itemprop="">Introduction</span>
                       </a>
                     </li>
-                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p6">
-                      <a href="#p6">
+                    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p7">
+                      <a href="#p7">
                         <span class="os-number">3.1</span>
                         <span class="os-divider"> </span>
                         <span class="os-text" data-type="" itemprop="">Page 3.1 Title</span>
@@ -426,8 +436,8 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 </li>
               </ol>
             </li>
-            <li class="os-toc-appendix" cnx-archive-shortid="" cnx-archive-uri="p7">
-              <a href="#p7">
+            <li class="os-toc-appendix" cnx-archive-shortid="" cnx-archive-uri="p8">
+              <a href="#p8">
                 <span class="os-number"><span class="os-part-text">Appendix </span>A</span>
                 <span class="os-divider"> </span>
                 <span class="os-text" data-type="" itemprop="">Appendix A Title</span>
@@ -438,30 +448,30 @@ RSpec.describe Kitchen::Directions::BakeToc do
                 <span class="os-text">Answer Key</span>
               </a>
               <ol class="os-chapter">
-                <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p8">
-                  <a href="#p8">
+                <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p9">
+                  <a href="#p9">
                     <span class="os-text">Chapter 1</span>
                   </a>
                 </li>
               </ol>
             </li>
-            <li class="os-toc-reference" cnx-archive-shortid="" cnx-archive-uri="p9">
-              <a href="#p9">
-                <span class="os-text">References</span>
-              </a>
-            </li>
-            <li class="os-toc-references" cnx-archive-shortid="" cnx-archive-uri="p10">
+            <li class="os-toc-reference" cnx-archive-shortid="" cnx-archive-uri="p10">
               <a href="#p10">
                 <span class="os-text">References</span>
               </a>
             </li>
-            <li class="os-toc-handbook" cnx-archive-shortid="" cnx-archive-uri="p11">
+            <li class="os-toc-references" cnx-archive-shortid="" cnx-archive-uri="p11">
               <a href="#p11">
+                <span class="os-text">References</span>
+              </a>
+            </li>
+            <li class="os-toc-handbook" cnx-archive-shortid="" cnx-archive-uri="p12">
+              <a href="#p12">
                 <span class="os-text" data-type="" itemprop="">Handbook</span>
               </a>
             </li>
-            <li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p12">
-              <a href="#p12">
+            <li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p13">
+              <a href="#p13">
                 <span class="os-text">Index</span>
               </a>
             </li>

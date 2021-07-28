@@ -28,6 +28,8 @@ module Kitchen
 
       def self.li_for_unit(unit)
         chapters = unit.element_children.only(ChapterElement)
+        pages = unit.element_children.only(PageElement)
+
         <<~HTML
           <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit">
             <a href="#">
@@ -36,6 +38,7 @@ module Kitchen
               <span data-type itemprop class="os-text">#{unit.title_text}</span>
             </a>
             <ol class="os-unit">
+              #{pages.map { |page| li_for_page(page) }.join("\n")}
               #{chapters.map { |chapter| li_for_chapter(chapter) }.join("\n")}
             </ol>
           </li>
@@ -92,6 +95,10 @@ module Kitchen
               'os-toc-preface'
             elsif page.is_handbook?
               'os-toc-handbook'
+            elsif page.has_ancestor?(:unit) && !
+                  page.has_ancestor?(:chapter) && !
+                  page.has_ancestor?(:composite_chapter)
+              'os-toc-unit-page'
             else
               raise "do not know what TOC class to use for page with classes #{page.classes}"
             end
