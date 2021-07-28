@@ -384,4 +384,49 @@ RSpec.describe Kitchen::Directions::BakeExample do
       example.pantry(name: :link_text).get(example.id)
     }.from(nil)
   end
+
+  describe 'ExampleElement#titles_to_rename' do
+    let(:example) do
+      book_containing(html:
+        <<~HTML
+          <div data-type="chapter">
+            <div data-type="page">
+              <div data-type="document-title" id="auto_m68761_72010">Page 1 Title</div>
+              <div data-type='example' id='example-test'>
+                <span data-type="title" id="title1">example title becomes h4</span>
+                <div data-type="exercise">
+                  <span data-type="title" id="title2">exercises title becomes h4(?)</span>
+                </div>
+                <div data-type="note">
+                  <h3 data-type="title" id="title3">note title is skipped</h3>
+                </div>
+                <table><caption><span data-type="title" id="title4">unbaked table title is skipped</span></caption></table>
+                <div class="os-table">
+                  <table></table>
+                  <div class="os-caption-container">
+                    <span data-type="title" id="title5">baked table title (V1) is skipped</span>
+                  </div>
+                </div>
+                <div class="os-table">
+                  <table></table>
+                  <div class="os-caption-container">
+                    <div class="os-caption">
+                      <span data-type="title" id="title6">baked table title (V2) is skipped</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        HTML
+      ).examples.first
+    end
+
+    it 'skips titles within tables & notes' do
+      ids = %w[title1 title2]
+      example.titles_to_rename.each_with_index do |title, index|
+        expect(title.id).to eq(ids[index])
+      end
+    end
+  end
 end

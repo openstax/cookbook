@@ -27,9 +27,15 @@ module Kitchen
     #
     # @return [ElementEnumerator]
     #
-    def titles
-      search("[data-type='title']")
+    def titles_to_rename
+      titles(except: \
+        lambda do |title|
+          title.parent.has_class?('os-caption-container') || \
+          title.parent.has_class?('os-caption') || \
+          title.parent.name == 'caption' || \
+          title.parent[:'data-type'] == 'note'
+        end
+      )
     end
-
   end
 end
