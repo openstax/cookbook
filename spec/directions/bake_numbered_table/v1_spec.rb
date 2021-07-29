@@ -17,7 +17,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <table class="top-titled" id="tId">
+          <table class="top-titled">
             #{caption}
             <thead>
               <tr>
@@ -106,7 +106,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
       <<~HTML
         <div class="os-table os-top-titled-container">
           <div class="os-table-title">A title</div>
-          <table class="top-titled" id="tId">
+          <table class="top-titled">
             <thead>
               <tr>
                 <th>Another heading cell</th>

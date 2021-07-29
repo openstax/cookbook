@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Stop `BakeTableBody` from blowing up when table doesn't have an ID (patch)
 * Refactor `MoveExercisesToEOC::V2` & `BakeChapterKeyConcepts` to use `MoveCustomSectionToEocContainer` (minor)
 * Add wrapper support for `MoveCustomSectionToEocContainer` (minor)
 * Create `BakeHandbook` direction (minor)
