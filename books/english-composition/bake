@@ -13,12 +13,6 @@ end
 recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   include Kitchen::Directions
 
-  # # Set overrides
-  # doc.selectors.override(
-  #   page_summary: 'section.section-summary',
-  #   reference: 'section.references'
-  # )
-
   book = doc.book
   metadata = book.metadata
 
@@ -28,46 +22,25 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakePreface.v1(book: book)
   BakeHandbook.v1(book: book)
 
-  # # Bake NumberedTable in Preface
-  # book.pages('$.preface').tables('$:not(.unnumbered)').each do |table|
-  #   BakeNumberedTable.v1(table: table, number: "#{table.count_in(:page)}")
-  # end
-
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeUnitTitle.v1(book: book)
+  BakeUnitPageTitle.v1(book: book)
 
   # Bake EoC sections
-  book.chapters.each do |chapter|
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'further-reading',
-      uuid_key: '.further-reading',
-      section_selector: 'section.further-reading',
-      include_intro_page: false
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-    end
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'works-cited',
-      uuid_key: '.works-cited',
-      section_selector: 'section.works-cited',
-      include_intro_page: false
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-    end
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'works-consulted',
-      uuid_key: '.works-consulted',
-      section_selector: 'section.works-consulted',
-      include_intro_page: false
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
+  eoc_sections = %w[further-reading works-cited works-consulted]
+  eoc_sections.each do |section_key|
+    book.chapters.each do |chapter|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}",
+        include_intro_page: false
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
     end
   end
 
@@ -88,10 +61,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
     end
   end
 
-  # BakeAutotitledNotes.v1(book: book, classes: %w[sociological-research
-  #                                                sociology-real-world
-  #                                                sociology-big-picture
-  #                                                sociology-policy-debate])
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeMathInParagraph.v1(book: book)
@@ -100,7 +69,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  BakeUnitTitle.v1(book: book)
   BakeToc.v1(book: book)
 
 end
