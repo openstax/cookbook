@@ -103,14 +103,6 @@ module Kitchen
       first!('section.exercises')
     end
 
-    # Returns the key concepts
-    #
-    # @return [Element]
-    #
-    def key_concepts
-      search('section.key-concepts')
-    end
-
     # Returns the free response questions
     #
     # @return [Element]

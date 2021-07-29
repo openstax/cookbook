@@ -5,38 +5,20 @@ module Kitchen::Directions::MoveExercisesToEOC
   # and some additional wrappers
   class V2
     def bake(chapter:, metadata_source:, klass:, append_to: nil, uuid_prefix: '.')
-      exercise_clipboard = Kitchen::Clipboard.new
-
-      chapter.non_introduction_pages.each do |page|
-        sections = page.search("section.#{klass}")
-
-        sections.each do |exercise_section|
-          Kitchen::Directions::RemoveSectionTitle.v1(section: exercise_section)
-          # Get parent page title
-          section_title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: page)
-          # Configure section title & wrappers
-          exercise_section.prepend(child: section_title)
-          exercise_section.wrap('<div class="os-section-area">')
-          exercise_section = exercise_section.parent
-          exercise_section.cut(to: exercise_clipboard)
-        end
-      end
-
-      return if exercise_clipboard.none?
-
-      content = <<~HTML
-        <div class="os-#{klass}">
-          #{exercise_clipboard.paste}
-        </div>
-      HTML
-
-      Kitchen::Directions::EocCompositePageContainer.v1(
+      Kitchen::Directions::MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata_source,
         container_key: klass,
         uuid_key: "#{uuid_prefix}#{klass}",
-        metadata_source: metadata_source,
-        content: content,
-        append_to: append_to || chapter
-      )
+        section_selector: "section.#{klass}",
+        append_to: append_to || chapter,
+        include_intro_page: false,
+        wrap_section: true, wrap_content: true
+      ) do |section|
+        Kitchen::Directions::RemoveSectionTitle.v1(section: section)
+        title = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
+      end
     end
   end
 end

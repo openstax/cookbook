@@ -18,7 +18,8 @@ module Kitchen
       # @return [ElementBase] the append_to element with container appended
       #
       def self.v1(chapter:, metadata_source:, container_key:, uuid_key:,
-                  section_selector:, append_to: nil, include_intro_page: true)
+                  section_selector:, append_to: nil, include_intro_page: true,
+                  wrap_section: false, wrap_content: false)
         V1.new.bake(
           chapter: chapter,
           metadata_source: metadata_source,
@@ -26,7 +27,9 @@ module Kitchen
           uuid_key: uuid_key,
           section_selector: section_selector,
           append_to: append_to || chapter,
-          include_intro_page: include_intro_page
+          include_intro_page: include_intro_page,
+          wrap_section: wrap_section,
+          wrap_content: wrap_content
         ) do |section|
           yield section if block_given?
         end
