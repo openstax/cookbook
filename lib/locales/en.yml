@@ -27,6 +27,7 @@ en:
   review_exercises: Review Exercises
   section_exercises: ! 'Section %{number} Exercises'
   iframe_link_text: Click to view content
+  handbook_outline_title: Outline
   eoc:
     glossary: Key Terms
     key-equations: Key Equations
