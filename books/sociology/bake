@@ -21,15 +21,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
   book = doc.book
   metadata = book.metadata
-  edition = book.first('head').first('title').text.match(/(\d)e$/)[1].to_i
-
+  edition_symbol = book.first('head').first('title').text.match(/(\d)e$/).to_s
+  puts edition_symbol
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
   # Remove data-type="description" from body metadata placed in Sociology 2e
-  if edition == 2
+  if edition_symbol == '2e'
     book.body.search('div[data-type="metadata"] > div[data-type="description"]').trash
   end
+
   BakePreface.v1(book: book)
 
   # Bake NumberedTable in Preface
@@ -59,13 +60,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   end
 
   # Bake Answer Key
-  if edition == 3
+  if edition_symbol == '3e'
     solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
       MoveSolutionsToAnswerKey.v1(chapter: chapter,
                                   metadata_source: metadata,
                                   strategy: :default,
-                                  strategy_options: { selectors: %w[section-quiz].prefix('section.') },
+                                  strategy_options: { selectors: %w[section-quiz]
+                                                      .prefix('section.') },
                                   append_to: solution_container,
                                   solutions_plural: false)
     end
