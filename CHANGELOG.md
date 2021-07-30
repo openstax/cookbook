@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add support for baking multipart questions to `BakeNumberedExercise` (minor)
 * Add `has_para` option to `BakeChapterGlossary` for books from Adaptarr (minor)
 * Create `BakeListsWithPara` to remove paragraphs from lists in books created by Adaptarr (minor)
 * Create `Strategy::ContemporaryMath` (minor)

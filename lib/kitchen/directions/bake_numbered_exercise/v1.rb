@@ -37,6 +37,25 @@ module Kitchen::Directions::BakeNumberedExercise
           <div class="os-problem-container">#{problem.children}</div>
         HTML
       )
+
+      # Bake multipart questions
+      multipart_questions = problem.search('div.question-stem')
+      return unless multipart_questions.count > 1
+
+      multipart_clipboard = Kitchen::Clipboard.new
+      multipart_questions.each do |question|
+        question.wrap('<li>')
+        question = question.parent
+        question.cut(to: multipart_clipboard)
+      end
+
+      problem.first('div.question-stimulus, div.exercise-stimulus').append(sibling:
+        <<~HTML
+          <ol type="a">
+            #{multipart_clipboard.paste}
+          </ol>
+        HTML
+      )
     end
 
     def bake_solution(exercise:, number:, divider: '. ')
