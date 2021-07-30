@@ -21,8 +21,17 @@ module Kitchen::Directions::BakeChapterGlossary
       attr_reader :sortable
     end
 
-    def bake(chapter:, metadata_source:, append_to: nil, uuid_prefix: '')
+    def bake(chapter:, metadata_source:, append_to: nil, uuid_prefix: '', has_para: false)
       @glossary = []
+
+      # Use for books created by Adaptarr, where dd contains paragraphs
+      # More info: https://github.com/openstax/kitchen/issues/284
+      if has_para
+        chapter.glossaries.search('dd').each do |description|
+          description_content = description.first('p').text
+          description.replace_children with: description_content
+        end
+      end
 
       chapter.glossaries.search('dl').each do |definition_element|
         @glossary.push(Definition.new(definition_element.cut))
