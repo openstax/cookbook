@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Patch `BakeExample` crashing if an example has commentary but no title (patch)
+* Refactor `EocSectionTitleLinkSnippet` to only have v1 with optional params (major)
 
 ## [10.0.0] - 2021-07-30
 

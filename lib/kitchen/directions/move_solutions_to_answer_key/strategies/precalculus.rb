@@ -61,7 +61,10 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
           end
           next if solutions.items.empty?
 
-          title_snippet = Kitchen::Directions::EocSectionTitleLinkSnippet.v2(page: page)
+          title_snippet = Kitchen::Directions::EocSectionTitleLinkSnippet.v1(
+            page: page,
+            wrapper: 'div'
+          )
 
           append_solution_area(title: title_snippet, solutions: solutions,
                                append_to: append_to.search('div.os-try-solution-area').first)
