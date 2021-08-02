@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Patch `BakeExample` crashing if an example has commentary but no title (patch)
+
 ## [10.0.0] - 2021-07-30
 
 * Add support for baking multipart questions to `BakeNumberedExercise` (minor)
