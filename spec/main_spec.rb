@@ -7,12 +7,20 @@ RSpec.describe 'books' do
     expect('dummy').to bake_correctly
   end
 
+  it 'bakes anthropology' do
+    expect('anthropology').to bake_correctly
+  end
+
   it 'bakes chemistry' do
     expect('chemistry').to bake_correctly
   end
 
   it 'bakes calculus' do
     expect('calculus').to bake_correctly
+  end
+
+  it 'bakes precalculus' do
+    expect('precalculus').to bake_correctly
   end
 
   it 'bakes u-physics' do
@@ -32,5 +40,13 @@ RSpec.describe 'books' do
 
   it 'bakes political science' do
     expect('political-science').to bake_correctly
+  end
+
+  it 'bakes philosophy' do
+    expect('philosophy').to bake_correctly
+  end
+
+  it 'bakes biology' do
+    expect('biology').to bake_correctly
   end
 end
