@@ -3,7 +3,7 @@
 module Kitchen
   module Directions
     module BakeFirstElements
-      def self.v1(within:)
+      def self.v1(within:, first_inline_list: false)
         # add has-first-element class
         selectors = [
           'div.os-problem-container > div.os-table',
@@ -18,9 +18,11 @@ module Kitchen
           end
         end
 
+        return unless first_inline_list
+
         # add first-inline-element class
         inline_selector = 'div.os-solution-container > ol[type="1"]:first-child,' \
-                           'div.os-problem-container > ol[type="1"]:first-child'
+                          'div.os-problem-container > ol[type="1"]:first-child'
         within.search(inline_selector).each do |inline_list|
           inline_list.add_class('first-inline-list-element')
           inline_list.parent.add_class('has-first-inline-list-element')

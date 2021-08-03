@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Update `BakeFirstElement` to optionally add the `has-first-inline-element` class (patch)
 * Patch `BakeExample` crashing if an example has commentary but no title (patch)
 * Refactor `EocSectionTitleLinkSnippet` to only have v1 with optional params (major)
 

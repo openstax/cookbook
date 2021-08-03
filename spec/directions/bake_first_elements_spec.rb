@@ -65,7 +65,7 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                     </span>
                   </p>
                   <div class="os-table">
-                    <table class="unnumbered" data-label="" id="bla9">
+                    <table class="unnumbered" data-label="" id="table1">
                       <div>do not bake this content</div>
                     </table>
                   </div>
@@ -123,9 +123,9 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
     )
   end
 
-  it 'works' do
+  it 'works with first_inline_list' do
     section = book.search('.section-exercises').first
-    described_class.v1(within: section)
+    described_class.v1(within: section, first_inline_list: true)
 
     expect(book.body).to match_normalized_html(
       <<~HTML
@@ -190,7 +190,7 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                       </span>
                       </p>
                       <div class="os-table">
-                        <table class="unnumbered" data-label="" id="bla9">
+                        <table class="unnumbered" data-label="" id="table1">
                           <div>do not bake this content</div>
                         </table>
                       </div>
@@ -248,6 +248,25 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
             </div>
           </div>
         </body>
+      HTML
+    )
+  end
+
+  it 'works without first_inline_list' do
+    section = book.first('[id="bla9"]')
+    described_class.v1(within: section)
+    expect(section).to match_normalized_html(
+      <<~HTML
+        <div data-type="exercise" id="bla9">
+          <div data-type="solution">
+            <div class="os-solution-container">
+              <ol class="circled" id="" type="1">
+                <li><span class="token">&#x24D0;</span> yes</li>
+                <li><span class="token">&#x24D1;</span> yes. (Note: If two players had been tied for, say, 4th place, then the name would not have been a function of rank.)</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       HTML
     )
   end
