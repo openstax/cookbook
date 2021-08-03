@@ -44,6 +44,14 @@ module Kitchen
       pages('$.introduction').first
     end
 
+    # Returns true if the chapter has an introduction
+    #
+    # @return [Boolean]
+    #
+    def has_introduction?
+      @has_introduction ||= introduction_page.present?
+    end
+
     # Returns an enumerator for the glossaries
     #
     # @return [ElementEnumerator]

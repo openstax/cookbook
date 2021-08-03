@@ -33,4 +33,15 @@ RSpec.describe Kitchen::ChapterElement do
       expect(sample_chapter.abstracts.first).to match_normalized_html('<div data-type="abstract">abstract 1</div>')
     end
   end
+
+  describe '#has_introduction?' do
+    it 'returns true if chapter has introduction page' do
+      expect(sample_chapter.has_introduction?).to eq(true)
+    end
+
+    it 'returns false if chapter does not have an introduction page' do
+      sample_chapter.introduction_page.trash
+      expect(sample_chapter.has_introduction?).to eq(false)
+    end
+  end
 end

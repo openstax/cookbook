@@ -58,6 +58,31 @@ RSpec.describe Kitchen::PageElement do
       )).pages.first
   end
 
+  let(:introduction_page) do
+    <<~HTML
+      <div class="introduction" data-type="page">
+        <span>stuff</span>
+      </div>
+    HTML
+  end
+
+  let(:sample_chapter) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <h1 data-type="document-title">Chapter 1 Title</h1>
+          #{introduction_page}
+          <div data-type="page" class="foo">
+            <div data-type="document-title">section 1</div>
+          </div>
+          <div data-type="page" class="foo">
+            <div data-type="document-title">section 2</div>
+          </div>
+        </div>
+      HTML
+    ).chapters.first
+  end
+
   describe '#title' do
     context 'with no metadata' do
       let(:metadata) { '' }
@@ -70,6 +95,28 @@ RSpec.describe Kitchen::PageElement do
     context 'with metadata' do
       it 'finds the title' do
         expect(page1.title.text).to eq page_title_text
+      end
+    end
+  end
+
+  describe '#count_in_chapter_without_intro_page' do
+    context 'with an intro page' do
+      it 'breaks when asked to count an introduction page' do
+        expect { sample_chapter.introduction_page.count_in_chapter_without_intro_page }.to raise_error('Introduction pages cannot be counted with this method')
+      end
+
+      it 'numbers each page correctly' do
+        count = sample_chapter.pages.map { |page| page.count_in_chapter_without_intro_page unless page.is_introduction? }
+        expect(count).to eq([nil, 1, 2])
+      end
+    end
+
+    context 'with no intro page' do
+      let(:introduction_page) { '' }
+
+      it 'numbers each page correctly' do
+        count = sample_chapter.pages.map { |page| page.count_in_chapter_without_intro_page }
+        expect(count).to eq([1, 2])
       end
     end
   end
