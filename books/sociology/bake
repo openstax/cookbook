@@ -22,7 +22,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   book = doc.book
   metadata = book.metadata
   edition_symbol = book.first('head').first('title').text.match(/(\d)e$/).to_s
-  puts edition_symbol
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
