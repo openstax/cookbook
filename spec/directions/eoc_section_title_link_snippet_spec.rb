@@ -4,6 +4,12 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::EocSectionTitleLinkSnippet do
 
+  let(:introduction) do
+    <<~HTML
+      <div data-type="page"> </div>
+    HTML
+  end
+
   let(:book1) do
     book_containing(html:
     <<~HTML
@@ -31,7 +37,7 @@ RSpec.describe Kitchen::Directions::EocSectionTitleLinkSnippet do
   end
 
   it 'works for links' do
-    expect(described_class.v1(page: book1.chapters.first.pages.first)).to match_normalized_html(
+    expect(described_class.v1(page: book1.chapters.first.non_introduction_pages.first)).to match_normalized_html(
       <<~HTML
         <a href="#someId1">
           <h3 data-type="document-title" id="someId1_copy_1">

@@ -4,12 +4,20 @@ module Kitchen
   module Directions
     module EocSectionTitleLinkSnippet
       def self.v1(page:, title_tag: 'h3', wrapper: 'link')
-        chapter = page.ancestor(:chapter)
+        if page.is_introduction?
+          os_number = ''
+        else
+          chapter = page.ancestor(:chapter)
+          os_number =
+            <<~HTML
+              <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in_chapter_without_intro_page}</span>
+              <span class="os-divider"> </span>
+            HTML
+        end
 
         title_snippet = <<~HTML
           <#{title_tag} data-type="document-title" id="#{page.title.copied_id}">
-            <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
-            <span class="os-divider"> </span>
+            #{os_number}
             <span class="os-text" data-type="" itemprop="">#{page.title_text}</span>
           </#{title_tag}>
         HTML

@@ -14,11 +14,10 @@ module Kitchen
       # @param uuid_key [String] the uuid key for the wrapper class, e.g. `'.summary'`
       # @param section_selector [String] the selector for the section to be moved, e.g. `'section.summary'`
       # @param append_to [ElementBase] the element to be appended. Defaults to the value of `chapter` param if none given.
-      # @param include_intro_page [Boolean] control the introduction page for the chapter should be searched for a section to move, default is true
       # @return [ElementBase] the append_to element with container appended
       #
       def self.v1(chapter:, metadata_source:, container_key:, uuid_key:,
-                  section_selector:, append_to: nil, include_intro_page: true,
+                  section_selector:, append_to: nil,
                   wrap_section: false, wrap_content: false)
         V1.new.bake(
           chapter: chapter,
@@ -27,7 +26,6 @@ module Kitchen
           uuid_key: uuid_key,
           section_selector: section_selector,
           append_to: append_to || chapter,
-          include_intro_page: include_intro_page,
           wrap_section: wrap_section,
           wrap_content: wrap_content
         ) do |section|

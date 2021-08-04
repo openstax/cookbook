@@ -5,10 +5,10 @@
 module Kitchen::Directions::MoveCustomSectionToEocContainer
   class V1
     def bake(chapter:, metadata_source:, container_key:, uuid_key:,
-             section_selector:, append_to:, include_intro_page:, wrap_section:, wrap_content:,
+             section_selector:, append_to:, wrap_section:, wrap_content:,
              &block)
       section_clipboard = Kitchen::Clipboard.new
-      pages = include_intro_page ? chapter.pages : chapter.non_introduction_pages
+      pages = chapter.pages
       sections = pages.search(section_selector)
       sections.each(&block)
       if wrap_section

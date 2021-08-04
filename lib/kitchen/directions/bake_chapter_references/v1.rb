@@ -3,9 +3,7 @@
 module Kitchen::Directions::BakeChapterReferences
   class V1
     def bake(chapter:, metadata_source:, uuid_prefix: '.', klass: 'references')
-      bake_page_references(page: chapter.introduction_page)
-
-      chapter.non_introduction_pages.each do |page|
+      chapter.pages.each do |page|
         bake_page_references(page: page)
       end
 

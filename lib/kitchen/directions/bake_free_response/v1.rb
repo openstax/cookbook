@@ -8,7 +8,7 @@ module Kitchen::Directions::BakeFreeResponse
       @metadata_elements = metadata_source.children_to_keep.copy
 
       @free_response_clipboard = Kitchen::Clipboard.new
-      chapter.non_introduction_pages.each do |page|
+      chapter.pages.each do |page|
         free_response_questions = page.free_response
         next if free_response_questions.none?
 

@@ -18,7 +18,7 @@ module Kitchen
         def bake(chapter:, metadata_source:, uuid_prefix: '.', klass: 'summary')
           summaries = Clipboard.new
 
-          chapter.non_introduction_pages.each do |page|
+          chapter.pages.each do |page|
             summary = page.summary
 
             next if summary.nil?

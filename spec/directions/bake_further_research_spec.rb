@@ -19,7 +19,7 @@ RSpec.describe Kitchen::Directions::BakeFurtherResearch do
           <h1 data-type="document-title" itemprop="name" id="intro">Introduction page!</h1>
           <section class="further-research" data-element-type="further-research">
               <h3 data-type='title'>Kitchen Prep</h3>
-              <p>This should stay where it is.</p>
+              <p>This moves too!</p>
           </section>
         </div>
         <div data-type='page' id ="01">
@@ -55,10 +55,6 @@ RSpec.describe Kitchen::Directions::BakeFurtherResearch do
           <div data-type="chapter">
             <div data-type='page' id="00" class="introduction">
               <h1 data-type="document-title" id="intro" itemprop="name">Introduction page!</h1>
-              <section class="further-research" data-element-type="further-research">
-                <h3 data-type='title'>Kitchen Prep</h3>
-                <p>This should stay where it is.</p>
-              </section>
             </div>
             <div data-type="page" id="01">
               <h1 data-type="document-title" id="first" itemprop="name">First Title</h1>
@@ -78,6 +74,14 @@ RSpec.describe Kitchen::Directions::BakeFurtherResearch do
                 <div class="permissions" id="permissions_copy_1">Permissions</div>
                 <div data-type="subject" id="subject_copy_1">Subject</div>
               </div>
+              <section class="further-research" data-element-type="further-research">
+                <a href="#intro">
+                  <h3 data-type="document-title" id="intro_copy_1">
+                    <span class="os-text" data-type="" itemprop="">Introduction page!</span>
+                  </h3>
+                </a>
+                <p>This moves too!</p>
+              </section>
               <section class="further-research" data-element-type="further-research">
                 <a href="#first">
                   <h3 data-type="document-title" id="first_copy_1">

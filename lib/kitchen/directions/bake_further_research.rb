@@ -20,8 +20,7 @@ module Kitchen
             container_key: 'further-research',
             uuid_key: "#{uuid_prefix}further-research",
             section_selector: 'section.further-research',
-            append_to: nil,
-            include_intro_page: false
+            append_to: nil
           ) do |further_research|
             RemoveSectionTitle.v1(section: further_research)
             title = EocSectionTitleLinkSnippet.v1(page: further_research.ancestor(:page))
