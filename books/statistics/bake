@@ -18,6 +18,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     reference: '.references'
   )
 
+  # statistics: no stepwise, yes introbody
+  # hs-statistics: no stepwise lists, yes introbody
+  # business-statistics: no stepwise lists? no introbody
+
   book = doc.book
   metadata = book.metadata
 
@@ -29,7 +33,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   BakeInlineLists.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v1(book: book, bake_chapter_objectives: false)
+  BakeChapterIntroductions.v1(book: book, bake_chapter_objectives: false) # hs-statistics true, business false
 
   book.chapters.each do |chapter|
     # EOC sections
@@ -42,8 +46,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       container_key: 'formula-review',
       uuid_key: '.formula-review',
       section_selector: 'section.formula-review',
-      append_to: chapter,
-      include_intro_page: false
+      append_to: chapter
     ) do |section|
       RemoveSectionTitle.v1(section: section)
       section.prepend(child: EocSectionTitleLinkSnippet.v1(
@@ -57,8 +60,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       container_key: 'practice',
       uuid_key: '.practice',
       section_selector: 'section.practice',
-      append_to: chapter,
-      include_intro_page: false
+      append_to: chapter
     ) do |section|
       RemoveSectionTitle.v1(section: section)
       section.prepend(child: EocSectionTitleLinkSnippet.v1(
@@ -72,8 +74,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       container_key: 'bring-together-exercises',
       uuid_key: '.bring-together-exercises',
       section_selector: 'section.bring-together-exercises',
-      append_to: chapter,
-      include_intro_page: false
+      append_to: chapter
     ) do |section|
       RemoveSectionTitle.v1(section: section)
     end
@@ -86,21 +87,21 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       container_key: 'bring-together-homework',
       uuid_key: '.bring-together-homework',
       section_selector: 'section.bring-together-homework',
-      append_to: chapter,
-      include_intro_page: false
+      append_to: chapter
     ) do |section|
       RemoveSectionTitle.v1(section: section)
     end
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
-    chapter.search('.bring-together-homework, .practice, .free-response').exercises.each do |exercise|
+    chapter.search('.bring-together-homework, .bring-together-exercises, .practice, .free-response').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
     BakeChapterSolutions.v1(chapter: chapter,
                             metadata_source: metadata,
-                            classes: %w[practice free-response bring-together-homework])
+                            classes: %w[practice free-response bring-together-homework bring-together-exercises])
+                            #removed: bring-together-practice
 
     chapter.examples.each do |example|
       BakeExample.v1(example: example,
@@ -111,6 +112,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   end
 
   BakeNumberedNotes.v3(book: book, classes: %w[try])
+  BakeAutotitledNotes.v1(book: book, classes: %w[lab collab calculator])
 
   book.chapters.each do |chapter|
 
@@ -145,16 +147,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeStepwise.v1(book: book)
+  # 'div.os-eoc.os-solutions-container'
+  book.search('section.section-exercises', 'section.free-response', 'div.os-solutions-container').each do |within|
+    BakeFirstElements.v1(within: within)
+  end
+
+  # BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
-
-  BakeToc.v1(book: book)
-
   BakeLinkPlaceholders.v1(book: book)
+  BakeToc.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
