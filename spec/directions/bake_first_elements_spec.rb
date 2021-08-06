@@ -117,6 +117,15 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                 </div>
               </div>
             </div>
+            <div data-type="exercise" id="bla12">
+              <div data-type="problem">
+                <div class="os-problem-container">
+                  <div class="os-figure" data-type="media" id="fig1">
+                    <figure>something</figure>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
         HTML
       )
@@ -241,6 +250,15 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                       <ol class="circled first-inline-list-element" id="" type="1">
                         <li>do add a class to this one</li>
                       </ol>
+                    </div>
+                  </div>
+                </div>
+                <div data-type="exercise" id="bla12">
+                  <div data-type="problem">
+                    <div class="os-problem-container has-first-element">
+                      <div class="os-figure first-element" data-type="media" id="fig1">
+                        <figure>something</figure>
+                      </div>
                     </div>
                   </div>
                 </div>

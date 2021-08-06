@@ -8,8 +8,10 @@ module Kitchen
         selectors = [
           'div.os-problem-container > div.os-table',
           'div.os-problem-container > span[data-type="media"]',
+          'div.os-problem-container > div.os-figure',
           'div.os-solution-container > div.os-table',
-          'div.os-solution-container > span[data-type="media"]'
+          'div.os-solution-container > span[data-type="media"]',
+          'div.os-solution-container > div.os-figure'
         ]
         selectors.each do |selector|
           within.search("#{selector}:first-child").each do |problem|
