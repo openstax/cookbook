@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix `BakeUnitPageTite` to utilize only pages which are direct children of the unit (patch)
 * Patch `BakeFirstElements` to include first figure elements (patch)
 * Refactor `MoveCustomSectionToEocContainer` to remove `include_intro_page` (major)
 * Update `BakeFirstElement` to optionally add the `has-first-inline-element` class (patch)
