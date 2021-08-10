@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.1.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '10.0.0' # TODO: unreleased changes needed
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -54,7 +54,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :biology) do |doc|
         uuid_key: ".#{section_key}",
         section_selector: "section.#{section_key}",
         append_to: chapter_summary,
-        include_intro_page: false,
         wrap_section: true, wrap_content: true
       ) do |section|
         RemoveSectionTitle.v1(section: section)
@@ -68,15 +67,24 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :biology) do |doc|
       container_key: 'projects',
       uuid_key: '.projects',
       section_selector: 'section.projects',
-      append_to: chapter_summary,
-      include_intro_page: false
+      append_to: chapter_summary
     ) do |section|
       RemoveSectionTitle.v1(section: section)
     end
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'chapter-review',
-                          append_to: chapter_summary)
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'chapter-test',
-                          append_to: chapter_summary)
+    eoc_with_exercise = %w[chapter-review chapter-test]
+    eoc_with_exercise.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}",
+        append_to: chapter_summary
+      ) do |section|
+        ChangeSubsectionTitleTag.v1(section: section)
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
     chapter.pages.search('section.section-exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:page))
     end
@@ -104,7 +112,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :biology) do |doc|
     end
 
     chapter.search('div[data-type="exercise"]').each do |exercise|
-      # Classes added: has-first-element; has-first-inline-list-element
+      # Classes added: has-first-element
       BakeFirstElements.v1(within: exercise)
     end
 
