@@ -23,10 +23,11 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
         end
 
       solutions_or_solution = solutions_plural ? 'solutions' : 'solution'
+      uuid_key = ".#{solutions_or_solution}#{chapter.count_in(:book)}"
       append_to.append(child:
         <<~HTML
           <div class="os-eob os-#{solutions_or_solution}-container" data-type="composite-page" \
-          data-uuid-key=".#{solutions_or_solution}#{chapter.count_in(:book)}">
+          data-uuid-key="#{uuid_key}">
             <h2 data-type="document-title">
               <span class="os-text">#{I18n.t(:chapter)} #{chapter.count_in(:book)}</span>
             </h2>
@@ -37,7 +38,7 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
           </div>
         HTML
       )
-      strategy.bake(chapter: chapter, append_to: append_to.last_element)
+      strategy.bake(chapter: chapter, append_to: append_to.first("[data-uuid-key='#{uuid_key}']"))
     end
     # rubocop:enable Metrics/ParameterLists
   end

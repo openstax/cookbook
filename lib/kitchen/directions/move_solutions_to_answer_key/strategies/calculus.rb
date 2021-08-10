@@ -25,7 +25,7 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
       protected
 
       def append_solution_area(title, clipboard, append_to)
-        append_to.add_child(
+        append_to.append(child:
           <<~HTML
             <div class="os-solution-area">
               <h3 data-type="title">

@@ -9,40 +9,25 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
         # Bake section exercises
         chapter.non_introduction_pages.each do |page|
           number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
-          bake_section(chapter: page, append_to: append_to, klass: 'section-exercises',
-                       number: number)
+          Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+            chapter: page, append_to: append_to, section_class: 'section-exercises',
+            title_number: number
+          )
         end
 
         # Bake other types of exercises
         classes = %w[review-exercises practice-test]
         classes.each do |klass|
-          bake_section(chapter: chapter, append_to: append_to, klass: klass)
+          Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+            chapter: chapter, append_to: append_to, section_class: klass
+          )
         end
       end
 
       protected
 
-      def bake_section(chapter:, append_to:, klass:, number: nil)
-        section_solutions_set = Kitchen::Clipboard.new
-        chapter.search("section.#{klass}").each do |section|
-          section.search('div[data-type="solution"]').each do |solution|
-            solution.cut(to: section_solutions_set)
-          end
-        end
-
-        return if section_solutions_set.items.empty?
-
-        title = <<~HTML
-          <h3 data-type="title">
-            <span class="os-title-label">#{I18n.t(:"eoc.#{klass}", number: number)}</span>
-          </h3>
-        HTML
-
-        append_solution_area(title: title, solutions: section_solutions_set, append_to: append_to)
-      end
-
       def try_note_solutions(chapter:, append_to:)
-        append_to.add_child(
+        append_to.append(child:
           <<~HTML
             <div class="os-module-reset-solution-area os-try-solution-area">
               <h3 data-type="title">
@@ -51,7 +36,7 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
             </div>
           HTML
         )
-        chapter.non_introduction_pages.each do |page|
+        chapter.pages.each do |page|
           solutions = Kitchen::Clipboard.new
           page.notes('$.try').each do |note|
             note.exercises.each do |exercise|
@@ -66,21 +51,12 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
             wrapper: 'div'
           )
 
-          append_solution_area(title: title_snippet, solutions: solutions,
-                               append_to: append_to.search('div.os-try-solution-area').first)
+          append_to.first('div.os-try-solution-area').append(child:
+            Kitchen::Directions::SolutionAreaSnippet.v1(
+              title: title_snippet, solutions_clipboard: solutions
+            )
+          )
         end
-      end
-
-      def append_solution_area(title:, solutions:, append_to:)
-        append_to = append_to.add_child(
-          <<~HTML
-            <div class="os-solution-area">
-              #{title}
-            </div>
-          HTML
-        ).first
-
-        append_to.add_child(solutions.paste)
       end
     end
   end

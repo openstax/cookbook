@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `MoveSolutionsFromNumberedNote`, `MoveSolutionsFromExerciseSection`, and `SolutionAreaSnippet` for answer key baking (minor)
+* Refactor the following `Strategies`: contemporary math, precalculus, uphysics (minor)
 * Fix `BakeUnitPageTite` to utilize only pages which are direct children of the unit (patch)
 * Patch `BakeFirstElements` to include first figure elements (patch)
 * Refactor `MoveCustomSectionToEocContainer` to remove `include_intro_page` (major)

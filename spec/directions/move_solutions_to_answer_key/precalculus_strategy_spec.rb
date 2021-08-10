@@ -37,12 +37,19 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
             </section>
           </div>
           <div data-type="page">
+            <h2 data-type="document-title" id="page2Id">Page 2 title for try solutions in eob</h2>
             <section class="section-exercises">
               <div data-type="exercise">
                 <div data-type="problem"/>
                 <div data-type="solution">section 1.2 solution 1</div>
               </div>
             </section>
+            <div data-type="note" class="precalculus try">
+              <div data-type="exercise">
+                <div data-type="problem"/>
+                <div data-type="solution">try solution 2</div>
+              </div>
+            </div>
             <section class="review-exercises">
               <div data-type="exercise">
                 <div data-type="problem"/>
@@ -108,6 +115,16 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey::V1 do
                   </h3>
                 </div>
                 <div data-type="solution">try solution 1</div>
+              </div>
+              <div class="os-solution-area">
+                <div>
+                  <h3 data-type="document-title" id="page2Id_copy_1">
+                    <span class="os-number">1.2</span>
+                    <span class="os-divider"> </span>
+                    <span class="os-text" data-type="" itemprop="">Page 2 title for try solutions in eob</span>
+                  </h3>
+                </div>
+                <div data-type="solution">try solution 2</div>
               </div>
             </div>
             <div class="os-solution-area">
