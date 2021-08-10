@@ -59,7 +59,54 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
 
     end
-    BakeCustomSections.v1(chapter: chapter)
+    # BakeAnnotationClasses.v1(chapter: chapter)
+  end
+
+  # Bake Custom Sections
+  custom_sections_properties = {
+    narrative_trailblazer: {
+      class: 'narrative-trailblazer',
+      text: 'Literacy Narrative Trailblazer',
+      inject: 'title'
+    },
+    living_words: {
+      class: 'living-words',
+      text: 'Living by Their Own Words',
+      inject: 'subtitle'
+    },
+    quick_launch: {
+      class: 'quick-launch',
+      text: 'Quick Launch: ',
+      inject: 'title_prefix'
+    },
+    drafting: {
+      class: 'drafting',
+      text: 'Drafting: ',
+      inject: 'title_prefix'
+    },
+    peer_review: {
+      class: 'peer-review',
+      text: 'Peer Review: ',
+      inject: 'title_prefix'
+    },
+    revising: {
+      class: 'revising',
+      text: 'Revising: ',
+      inject: 'title_prefix'
+    }
+  }
+  custom_sections_properties.each do |_custom_section_name, property|
+    property_class = property[:class]
+    inject = property[:inject]
+    title_text = property[:text]
+    book.chapters.each do |chapter|
+      BakeCustomSections.v1(
+        chapter: chapter,
+        property_class: property_class,
+        inject: inject,
+        title_text: title_text
+      )
+    end
   end
 
   BakeStepwise.v1(book: book)
