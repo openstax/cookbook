@@ -1,0 +1,84 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.1.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc|
+  include Kitchen::Directions
+
+  doc.selectors.override(
+    reference: 'section.references'
+  )
+
+  book = doc.book
+  metadata = book.metadata
+
+  # Some stuff just goes away
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book, title_element: 'div')
+  # BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  BakeUnclassifiedNotes.v1(book: book)
+  BakeAutotitledNotes.v1(book: book, classes: %w[linkup bringhome clearup workout chapter-objectives])
+  solutions_container = BookAnswerKeyContainer.v1(book: book)
+  book.chapters.each do |chapter|
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+    MoveSolutionsToAnswerKey.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      strategy: :default,
+      strategy_options: {
+        selectors: %w[self-check-questions problems ap-test-prep].prefix('section.')
+      },
+      append_to: solutions_container
+    )
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+    chapter.figures.each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+    exercise_section_classes = %w[summary self-check-questions review-questions critical-thinking]
+
+    chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+
+    exercise_section_classes.each do |klass|
+      MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: klass)
+    end
+    BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: metadata)
+  end
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+    BakeAppendix.v1(page: page, number: appendix_letter)
+  end
+  # BakeReferences.v1(book: book, metadata_source: metadata)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
+  BakeToc.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: recipe,
+  output_file: opts[:output]
+)
