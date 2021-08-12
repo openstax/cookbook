@@ -48,6 +48,31 @@ module Kitchen
       has_class?('top-titled')
     end
 
+    # Returns an element for the top caption, if present
+    #
+    # @return [Element, nil]
+    #
+    def top_caption
+      top_captioned? ? first('caption') : nil
+    end
+
+    # Returns the caption title nodes
+    #
+    # @return [Nokogiri::XML::NodeSet]
+    #
+    def caption_title
+      top_caption&.first('span[data-type="title"]')&.children
+    end
+
+    # Returns true if the table has a caption at the top
+    # that transforms to top title
+    #
+    # @return [Boolean]
+    #
+    def top_captioned?
+      has_class?('top-captioned')
+    end
+
     # Returns true if the table is unnumbered
     #
     # @return [Boolean]

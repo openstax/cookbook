@@ -4,7 +4,7 @@ module Kitchen::Directions::BakeNumberedTable
   class V1
 
     def bake(table:, number:, always_caption: false)
-      Kitchen::Directions::BakeTableBody.v1(table: table, number: number)
+      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number)
 
       # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
       new_caption = ''
