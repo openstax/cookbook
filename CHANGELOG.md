@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Adds `PageElement#count_in_chapter_without_intro_page` (minor)
 * Adds `ChapterElement#has_introduction?` (minor)
 * Adds `BakeFolio` to set spanish translation variables in the html tag for folio-pdf purposes (minor)
+* Create `BakeAnnotationClasses` v1 for English Composition (minor)
 
 ## [10.0.0] - 2021-07-30
 
