@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    openstax_kitchen (10.0.0)
+    openstax_kitchen (11.0.0)
       activesupport
       i18n
       nokogiri
@@ -99,7 +99,7 @@ GEM
       tins (~> 1.0)
     tins (1.26.0)
       sync
-    twitter_cldr (6.6.0)
+    twitter_cldr (6.7.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.1)
       tzinfo

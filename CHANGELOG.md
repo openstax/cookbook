@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.0.0] - 2021-08-6
+
 * Add `ChangeSubsectionTitleTag` direction for modifying eoc sections (minor)
 * Add `MoveSolutionsFromNumberedNote`, `MoveSolutionsFromExerciseSection`, and `SolutionAreaSnippet` for answer key baking (minor)
 * Refactor the following `Strategies`: contemporary math, precalculus, uphysics (minor)
