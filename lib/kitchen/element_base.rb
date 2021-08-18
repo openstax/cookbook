@@ -67,6 +67,9 @@ module Kitchen
     # @!method remove_attribute
     #   Removes an attribute from the element
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#remove_attribute-instance_method Nokogiri::XML::Node#remove_attribute
+    # @!method key?(attribute)
+    #   Returns true if attribute is set
+    #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri%2FXML%2FNode:key%3F Nokogiri::XML::Node#key?(attribute)
     # @!method classes
     #   Gets the element's classes
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#classes-instance_method Nokogiri::XML::Node#classes
@@ -81,7 +84,7 @@ module Kitchen
     #   @return Object
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
                    :text, :wrap, :children, :to_html, :remove_attribute,
-                   :classes, :path, :inner_html=
+                   :key?, :classes, :path, :inner_html=
 
     # @!method config
     #   Get the config for this element's document

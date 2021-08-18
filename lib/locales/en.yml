@@ -22,7 +22,6 @@ en:
   eoc_composite_metadata_title: Chapter Review
   eoc_solutions_title: Solutions
   eoc_suggested_reading: Suggestions for Further Study
-  eob_index_title: Index
   eob_index_symbols_group: Symbols
   review_exercises: Review Exercises
   section_exercises: ! 'Section %{number} Exercises'
@@ -39,3 +38,5 @@ en:
   folio:
     preface: Preface
     access_for_free: Access for free at openstax.org
+  index:
+    main: Index

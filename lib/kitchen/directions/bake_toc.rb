@@ -103,7 +103,7 @@ module Kitchen
               raise "do not know what TOC class to use for page with classes #{page.classes}"
             end
           when CompositePageElement
-            if page.is_index?
+            if page.is_index? || page.is_index_of_type?
               'os-toc-index'
             elsif page.is_citation_reference?
               'os-toc-reference'

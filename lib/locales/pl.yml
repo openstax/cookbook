@@ -17,7 +17,6 @@ pl:
   answer_key_title: Rozwiązania zadań
   eoc_chapter_review: Podsumowanie rozdziału
   eoc_solutions_title: Rozwiązania
-  eob_index_title: Skorowidz rzeczowy
   eob_index_symbols_group: Symbole
   references: Bibliografia
   eoc:
@@ -25,4 +24,7 @@ pl:
     key-equations: Najważniejsze wzory
     summary: Podsumowanie
     references: Bibliografia
-
+  index:
+    name: Skorowidz nazwisk
+    term: Skorowidz rzeczowy
+    foreign: Skorowidz terminów obcojęzycznych

@@ -41,6 +41,14 @@ module Kitchen
       has_class?('os-index-container')
     end
 
+    # Returns true if this page is a book index of type
+    #
+    # @return [Boolean]
+    #
+    def is_index_of_type?
+      (self[:class] || '').match?(/os-index-.+-container/)
+    end
+
     # In books we can find two types of EOB References.
     #
     # One of them has form similar to footnotes. There are citation links in the text that provides

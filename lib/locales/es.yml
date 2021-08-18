@@ -23,7 +23,6 @@ es:
   eoc_solutions_title: Soluciones
   eoc_key_concepts: Conceptos Clave
   eoc_suggested_reading: Sugerencias Para Estudios Adicionales
-  eob_index_title: Índice
   eob_index_symbols_group: Símbolos
   review_exercises: Ejercicios De Repaso
   section_exercises: ! 'Sección %{number} Ejercicios'
@@ -36,3 +35,5 @@ es:
   folio:
     preface: Prefacio
     access_for_free: Acceso gratis en openstax.org
+  index:
+    main: Índice
