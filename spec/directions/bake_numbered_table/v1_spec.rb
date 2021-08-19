@@ -6,7 +6,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
 
   before do
     stub_locales({
-      'table_label': 'Table'
+      'table': 'Table'
     })
   end
 
@@ -277,6 +277,34 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
           </div>
         HTML
       )
+    end
+  end
+
+  context 'when book does not use grammatical cases' do
+    it 'stores link text' do
+      pantry = other_table.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Table 2.3', { label: 'tId' })
+      described_class.new.bake(table: other_table, number: '2.3')
+    end
+  end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'table': {
+            'nominative': 'Tabela',
+            'genitive': 'Tabeli'
+          }
+        })
+
+        pantry = other_table.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Tabela 2.3', { label: 'tId' })
+
+        pantry = other_table.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Tabeli 2.3', { label: 'tId' })
+        described_class.new.bake(table: other_table, number: '2.3', cases: true)
+      end
     end
   end
 

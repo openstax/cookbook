@@ -1,13 +1,13 @@
 en:
   figure: Figure
-  table_label: Table
+  table: Table
   appendix: Appendix
   theorem: Theorem
   solution: Solution
   chapter_outline: Chapter Outline
   toc_title: Contents
-  example_label: Example
-  exercise_label: Exercise
+  example: Example
+  exercise: Exercise
   equation: Equation
   chapter: Chapter
   unit: Unit

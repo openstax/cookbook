@@ -3,6 +3,14 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeExample do
+
+  before do
+    stub_locales({
+      'example': 'Example',
+      'solution': 'Solution'
+    })
+  end
+
   let(:exercise) { '' }
   let(:table) { '' }
   let(:title) { '<span data-type="title">example title becomes h4</span>' }
@@ -379,10 +387,32 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
   end
 
-  it 'stores info in the pantry' do
-    expect { described_class.v1(example: example, number: 4, title_tag: 'title-tag-name') }.to change {
-      example.pantry(name: :link_text).get(example.id)
-    }.from(nil)
+  context 'when book does not use grammatical cases' do
+    it 'stores link text' do
+      pantry = example.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Example 4', { label: 'example-test' })
+      described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
+    end
+  end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'example': {
+            'nominative': 'Przykład',
+            'genitive': 'Przykładu'
+          }
+        })
+
+        pantry = example.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Przykład 4', { label: 'example-test' })
+
+        pantry = example.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Przykładu 4', { label: 'example-test' })
+        described_class.v1(example: example, number: 4, title_tag: 'title-tag-name', cases: true)
+      end
+    end
   end
 
   describe 'ExampleElement#titles_to_rename' do

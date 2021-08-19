@@ -3,14 +3,13 @@
 module Kitchen
   module Directions
     module BakeEquations
-      def self.v1(book:, number_decorator: :none)
+      def self.v1(book:, number_decorator: :none, cases: false)
         book.chapters.search('div[data-type="equation"]:not(.unnumbered)').each do |eq|
           chapter = eq.ancestor(:chapter)
           number = "#{chapter.count_in(:book)}.#{eq.count_in(:chapter)}"
 
           # Store label information
-          equation_label = "#{I18n.t(:equation)} #{number}"
-          book.pantry(name: :link_text).store equation_label, label: eq.id
+          eq.target_label(label_text: 'equation', custom_content: number, cases: cases)
 
           decorated_number =
             case number_decorator

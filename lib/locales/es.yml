@@ -1,13 +1,13 @@
 es:
   figure: Figura
-  table_label: Tabla
+  table: Tabla
   appendix: Apéndice
   theorem: Teorema
   solution: Solución
   chapter_outline: Esquema Del Capitulo
   toc_title: Contenido
-  example_label: Ejemplo
-  exercise_label: Ejercicio
+  example: Ejemplo
+  exercise: Ejercicio
   equation: Ecuación
   chapter: Capítulo
   unit: Unidad

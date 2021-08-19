@@ -3,6 +3,13 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
+
+  before do
+    stub_locales({
+      'table': 'Table'
+    })
+  end
+
   let(:table_with_only_caption_title) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -114,4 +121,31 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
     )
   end
 
+  context 'when book does not use grammatical cases' do
+    it 'stores link text' do
+      pantry = table_with_only_caption_title.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Table S', { label: 'tId' })
+      described_class.new.bake(table: table_with_only_caption_title, number: 'S')
+    end
+  end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'table': {
+            'nominative': 'Tabela',
+            'genitive': 'Tabeli'
+          }
+        })
+
+        pantry = table_with_only_caption_title.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Tabela S', { label: 'tId' })
+
+        pantry = table_with_only_caption_title.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Tabeli S', { label: 'tId' })
+        described_class.new.bake(table: table_with_only_caption_title, number: 'S', cases: true)
+      end
+    end
+  end
 end

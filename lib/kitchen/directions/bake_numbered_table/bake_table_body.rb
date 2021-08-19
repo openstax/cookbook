@@ -36,12 +36,12 @@ module Kitchen
           end
         end
 
-        def bake(table:, number:)
+        def bake(table:, number:, cases: false)
           table.remove_attribute('summary')
           table.wrap(%(<div class="os-table">))
 
-          table_label = "#{I18n.t(:table_label)} #{number}"
-          table.pantry(name: :link_text).store table_label, label: table.id if table.id
+          # Store label information
+          table.target_label(label_text: 'table', custom_content: number, cases: cases)
 
           if table.top_titled?
             custom_table = CustomBody.new(table: table,

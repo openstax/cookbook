@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Modify target labels to use grammatical cases (minor)
 * Modify `BakeIndex` to bake multiple types of indexes (minor)
 ## [11.0.0] - 2021-08-6
 

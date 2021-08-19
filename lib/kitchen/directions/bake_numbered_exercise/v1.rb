@@ -2,14 +2,15 @@
 
 module Kitchen::Directions::BakeNumberedExercise
   class V1
-    def bake(exercise:, number:, suppress_solution_if: false, note_suppressed_solutions: false)
+    def bake(exercise:, number:, suppress_solution_if: false,
+             note_suppressed_solutions: false, cases: false)
       problem = exercise.problem
       solution = exercise.solution
 
-      exercise.pantry(name: :link_text).store(
-        "#{I18n.t(:exercise_label)} #{exercise.ancestor(:chapter).count_in(:book)}.#{number}",
-        label: exercise.id
-      )
+      # Store label information
+      label_number = "#{exercise.ancestor(:chapter).count_in(:book)}.#{number}"
+      exercise.target_label(label_text: 'exercise', custom_content: label_number, cases: cases)
+
       problem_number = "<span class='os-number'>#{number}</span>"
 
       suppress_solution =

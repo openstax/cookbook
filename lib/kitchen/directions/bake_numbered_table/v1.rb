@@ -3,8 +3,8 @@
 module Kitchen::Directions::BakeNumberedTable
   class V1
 
-    def bake(table:, number:, always_caption: false)
-      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number)
+    def bake(table:, number:, always_caption: false, cases: false)
+      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number, cases: cases)
 
       # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
       new_caption = ''
@@ -31,7 +31,7 @@ module Kitchen::Directions::BakeNumberedTable
       table.append(sibling:
         <<~HTML
           <div class="os-caption-container">
-            <span class="os-title-label">#{I18n.t(:table_label)} </span>
+            <span class="os-title-label">#{I18n.t("table#{'.nominative' if cases}")} </span>
             <span class="os-number">#{number}</span>
             <span class="os-divider"> </span>#{caption_title}
             <span class="os-divider"> </span>#{new_caption}

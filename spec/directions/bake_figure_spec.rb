@@ -4,6 +4,12 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeFigure do
 
+  before do
+    stub_locales({
+      'figure': 'Figure'
+    })
+  end
+
   let(:figure_classes) { '' }
   let(:figure_caption) { '<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>' }
   let(:figure_title)   { "<div data-type='title'>This Is A Title</div>" }
@@ -80,8 +86,6 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   describe 'v1' do
     it 'works' do
-      expect(book1.pantry(name: :link_text)).to receive(:store).with('Figure 1.2', label: 'someId')
-
       described_class.v1(figure: book1_figure, number: '1.2')
 
       expect(book1.search('.os-figure').first).to match_html_nodes(
@@ -158,6 +162,34 @@ RSpec.describe Kitchen::Directions::BakeFigure do
             </div>
           HTML
         )
+      end
+    end
+
+    context 'when book does not use grammatical cases' do
+      it 'stores link text' do
+        pantry = book1.pantry(name: :link_text)
+        expect(pantry).to receive(:store).with('Figure 1.2', { label: 'someId' })
+        described_class.v1(figure: book1_figure, number: '1.2')
+      end
+    end
+
+    context 'when book uses grammatical cases' do
+      it 'stores link text' do
+        with_locale(:pl) do
+          stub_locales({
+            'figure': {
+              'nominative': 'Rysunek',
+              'genitive': 'Rysunku'
+            }
+          })
+
+          pantry = book1.pantry(name: :nominative_link_text)
+          expect(pantry).to receive(:store).with('Rysunek 1.2', { label: 'someId' })
+
+          pantry = book1.pantry(name: :genitive_link_text)
+          expect(pantry).to receive(:store).with('Rysunku 1.2', { label: 'someId' })
+          described_class.v1(figure: book1_figure, number: '1.2', cases: true)
+        end
       end
     end
   end

@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Kitchen::Directions::BakeEquations do
+
+  before do
+    stub_locales({
+      'equation': 'Equation'
+    })
+  end
+
   let(:book_with_equations) do
     book_containing(html:
       <<~HTML
@@ -93,9 +100,32 @@ RSpec.describe Kitchen::Directions::BakeEquations do
     }.to raise_error("Unsupported number_decorator 'dots'")
   end
 
-  it 'stores link text' do
-    pantry = book_with_one_equation.pantry(name: :link_text)
-    expect(pantry).to receive(:store).with('Equation 1.1', { label: '123' })
-    described_class.v1(book: book_with_one_equation)
+  context 'when book does not use grammatical cases' do
+    it 'stores link text' do
+      pantry = book_with_one_equation.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Equation 1.1', { label: '123' })
+      described_class.v1(book: book_with_one_equation)
+    end
   end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'equation': {
+            'nominative': 'Równanie',
+            'genitive': 'Równania'
+          }
+        })
+
+        pantry = book_with_one_equation.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Równanie 1.1', { label: '123' })
+
+        pantry = book_with_one_equation.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Równania 1.1', { label: '123' })
+        described_class.v1(book: book_with_one_equation, cases: true)
+      end
+    end
+  end
+
 end

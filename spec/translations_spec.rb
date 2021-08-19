@@ -14,7 +14,7 @@ RSpec.describe 'Translations' do
 
     it 'polish' do
       with_locale(:pl) do
-        expect(I18n.t(:equation)).to match('Równanie')
+        expect(I18n.t('equation.nominative')).to match('Równanie')
         expect(I18n.t(:chapter_review)).to match('Podsumowanie rozdziału')
         expect(I18n.t(:learning_objectives)).to match('Cel dydaktyczny')
       end

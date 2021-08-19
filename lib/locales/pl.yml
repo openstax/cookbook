@@ -1,14 +1,49 @@
 pl:
-  figure: Rysunek
-  table_label: Tabela
+  figure:
+    nominative: Rysunek
+    genitive: Rysunku
+    dative: Rysunkowi
+    accusative: Rysunek
+    instrumental: Rysunkiem
+    locative: Rysunku
+    vocative: Rysunku
+  table:
+    nominative: Tabela
+    genitive: Tabeli
+    dative: Tabeli
+    accusative: Tabelę
+    instrumental: Tabelą
+    locative: Tabeli
+    vocative: Tabelo
+  example:
+    nominative: Przykład
+    genitive: Przykładu
+    dative: Przykładowi
+    accusative: Przykład
+    instrumental: Przykładem
+    locative: Przykładzie
+    vocative: Przykładzie
+  exercise:
+    nominative: Ćwiczenie
+    genitive: Ćwiczenia
+    dative: Ćwiczeniu
+    accusative: Ćwiczenie
+    instrumental: Ćwiczeniem
+    locative: Ćwiczeniu
+    vocative: Ćwiczenie
+  equation:
+    nominative: Równanie
+    genitive: Równania
+    dative: Równaniu
+    accusative: Równanie
+    instrumental: Równaniem
+    locative: Równaniu
+    vocative: Równanie
   appendix: Dodatek
   theorem: Twierdzenie
   solution: Rozwiązanie
   chapter_outline: Treść rozdziału
   toc_title: Spis treści
-  example_label: Przykład
-  exercise_label: Ćwiczenie
-  equation: Równanie
   chapter: Rozdział
   unit: Część
   chapter_review: Podsumowanie rozdziału

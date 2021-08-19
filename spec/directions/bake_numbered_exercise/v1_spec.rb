@@ -3,6 +3,13 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeNumberedExercise do
+
+  before do
+    stub_locales({
+      'exercise': 'Exercise'
+    })
+  end
+
   let(:exercise1) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -182,6 +189,34 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
             </div>
           HTML
         )
+      end
+    end
+
+    context 'when book does not use grammatical cases' do
+      it 'stores link text' do
+        pantry = exercise1.pantry(name: :link_text)
+        expect(pantry).to receive(:store).with('Exercise 1.1', { label: 'exercise_id' })
+        described_class.v1(exercise: exercise1, number: '1')
+      end
+    end
+
+    context 'when book uses grammatical cases' do
+      it 'stores link text' do
+        with_locale(:pl) do
+          stub_locales({
+            'exercise': {
+              'nominative': 'Ćwiczenie',
+              'genitive': 'Ćwiczenia'
+            }
+          })
+
+          pantry = exercise1.pantry(name: :nominative_link_text)
+          expect(pantry).to receive(:store).with('Ćwiczenie 1.1', { label: 'exercise_id' })
+
+          pantry = exercise1.pantry(name: :genitive_link_text)
+          expect(pantry).to receive(:store).with('Ćwiczenia 1.1', { label: 'exercise_id' })
+          described_class.v1(exercise: exercise1, number: '1', cases: true)
+        end
       end
     end
 

@@ -216,4 +216,15 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
       HTML
     )
   end
+
+  context 'when book does not use grammatical cases' do
+    it 'stores link text' do
+      pantry = book_with_notes.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Two Important Limits', { label: 'note_id15' })
+      described_class.new.bake(book: book_with_notes, classes: %w[foo hello theorem])
+    end
+  end
+
+  # context 'when book uses grammatical cases' will be implemented in the future
+  # current Polish books don't have links to notes
 end

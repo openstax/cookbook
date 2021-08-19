@@ -5,8 +5,8 @@ module Kitchen::Directions::BakeNumberedTable
   # V2 caption titles are nested within an .os-caption span
   class V2
 
-    def bake(table:, number:)
-      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number)
+    def bake(table:, number:, cases: false)
+      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number, cases: cases)
 
       caption = ''
       if table&.caption&.first("span[data-type='title']") && !table.top_captioned?
@@ -19,7 +19,7 @@ module Kitchen::Directions::BakeNumberedTable
       table.append(sibling:
         <<~HTML
           <div class="os-caption-container">
-            <span class="os-title-label">#{I18n.t(:table_label)} </span>
+            <span class="os-title-label">#{I18n.t("table#{'.nominative' if cases}")} </span>
             <span class="os-number">#{number}</span>
             <span class="os-divider"> </span>
             #{caption}
