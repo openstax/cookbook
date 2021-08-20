@@ -1,0 +1,132 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.2.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  metadata = book.metadata
+
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book)
+  BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  book.chapters.each do |chapter|
+    BakePageAbstracts.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter)
+  end
+
+  BakeAutotitledNotes.v1(book: book, classes: %w[how-to-notitle qa media-notitle])
+  BakeUnclassifiedNotes.v1(book: book)
+  BakeNumberedNotes.v2(book: book, classes: %w[try])
+
+  # Bake EOC sections
+  book.chapters.each do |chapter|
+    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
+
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
+    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
+    BakeChapterKeyConcepts.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
+    # EoC sections with exercises
+    eoc_exercises_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata,
+                                                      klass: 'exercises')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          append_to: eoc_exercises_wrapper, klass: 'review-exercises')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          append_to: eoc_exercises_wrapper, klass: 'practice-test')
+    BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+    # In-place bake exercises & solutions
+    chapter.search('section.review-exercises').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+    chapter.search('section.practice-test').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+    chapter.pages.search('section.section-exercises').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:page))
+    end
+  end
+
+  # Tables and figures must be baked after EOC sections are created to preserve number ordering
+  book.pages('$:not(.appendix)').each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table, number: table.count_in(:page))
+    end
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure, number: figure.count_in(:page))
+    end
+    page.examples.each do |example|
+      BakeExample.v1(example: example, number: example.count_in(:page), title_tag: 'h3')
+    end
+  end
+
+  book.composite_pages.each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table, number: table.count_in(:composite_page))
+    end
+    page.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure, number: figure.count_in(:composite_page))
+    end
+  end
+
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+    BakeAppendix.v1(page: page, number: appendix_letter)
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+    page.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+  end
+
+  BakeUnnumberedTables.v1(book: book)
+
+  solutions_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
+  book.chapters.each do |chapter|
+    # BakeFirstElements is most efficiently called before solutions are separated from exercises
+    # BakeFirstElements must also be called after tables are baked.
+    chapter.search('section.review-exercises, section.practice-test, section.section-exercises,' \
+      ' div[data-type="note"].try').exercises.each do |exercise|
+      # Classes added: has-first-element; has-first-inline-list-element
+      BakeFirstElements.v1(within: exercise)
+    end
+
+    MoveSolutionsToAnswerKey.v1(
+      chapter: chapter, metadata_source: metadata, strategy: :precalculus,
+      append_to: solutions_container, solutions_plural: false
+    )
+  end
+
+  BakeInlineLists.v1(book: book)
+  BakeMathInParagraph.v1(book: book)
+  BakeIndex.v1(book: book)
+  BakeFootnotes.v1(book: book)
+  BakeStepwise.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
+  BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [recipe],
+  output_file: opts[:output]
+)

@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+require 'set'
+
+DUPLICATE_IDS_TO_IGNORE = %w[author-1 author-2 publisher-1 publisher-2 publisher-3 publisher-4
+                             copyright-holder-1 copyright-holder-2].freeze
+
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
 
@@ -43,10 +48,32 @@ end
 def mask_copied_id_numbers(element)
   return unless element[:id]
 
+  warn_if_already_seen(element[:id])
   element[:id] = element[:id].gsub(/_copy_(\d+)$/, '_copy_XXX')
 end
 
-def normalize(doc)
+# Check for duplicate IDs before masking copy numbers
+
+def warn_if_already_seen(id)
+  @already_seen_ids ||= Set.new
+  if @already_seen_ids.include?(id) && !DUPLICATE_IDS_TO_IGNORE.include?(id)
+    puts "warning! duplicate id found for #{id}"
+  end
+  @already_seen_ids.add(id)
+end
+
+# The order of term baking/numbering differs between Kitchen and Easybake, so mask the term numbers
+
+def mask_term_numbers(element)
+  return unless element[:'data-type'] == 'term' || element[:class]&.split(' ')&.include?('os-term-section-link')
+
+  element[:id] = element[:id]&.gsub(/_term(\d+)$/, '_termXXX') if element[:id]
+  element[:href] = element[:href]&.gsub(/_term(\d+)$/, '_termXXX') if element[:href]
+end
+
+# Main normalize function for an XML document
+
+def normalize(doc, args: [])
   doc.traverse do |child|
     mask_copied_id_numbers(child)
     next if child.text? || child.document?
@@ -55,5 +82,6 @@ def normalize(doc)
     remove_blank_classes(child)
     sort_classes_strip_whitespace(child)
     sort_attributes(child)
+    mask_term_numbers(child) if args.include?('--mask-terms')
   end
 end

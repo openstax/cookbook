@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.1.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  metadata = book.metadata
+
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book)
+  BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  BakeUnitTitle.v1(book: book)
+  book.chapters.each do |chapter|
+    BakePageAbstracts.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter)
+    # Eoc sections
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'suggested-readings',
+      uuid_key: '.suggested-readings',
+      section_selector: 'section.suggested-readings',
+      include_intro_page: true
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
+    chapter.search('section.review-questions').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+    # Tables and figures
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+    chapter.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+  end
+
+  # Bake the notes
+  autotitled_classes = %w[show-data connecting-courses meet-professional fifty-fifty what-do
+                          where-engage media-video]
+  BakeAutotitledNotes.v1(book: book, classes: autotitled_classes)
+
+  # Eob sections
+  BakeReferences.v1(book: book, metadata_source: metadata)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [recipe],
+  output_file: opts[:output]
+)
