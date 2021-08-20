@@ -5,34 +5,27 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '3.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
 
-I18n.locale = :pl
-
 recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   include Kitchen::Directions
 
-  book = doc.book
+  # Set overrides
+  doc.selectors.override(
+    reference: 'section.references'
+  )
 
-  # Some stuff just goes away
+  book = doc.book
+  metadata = book.metadata
+
   book.search('cnx-pi').trash
 
+  BakeListsWithPara.v1(book: book)
+
   BakePreface.v1(book: book)
-
-  book.chapters.each do |chapter|
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: book.metadata)
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'review-questions')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'critical-thinking')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: book.metadata, klass: 'personal-application')
-
-    chapter.search('.review-questions, .critical-thinking, .personal-application').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution: true)
-    end
-  end
 
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
@@ -41,25 +34,60 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
     BakePageAbstracts.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+      BakeNumberedTable.v2(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}",
+                           cases: true)
     end
 
     chapter.examples.each do |example|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
-                     title_tag: 'h3')
+                     title_tag: 'h3',
+                     cases: true)
     end
 
-    # Captions of figures in easybaked files contain ids.
-    # They're necessary only in Adaptarr (content editing tool used by Polish team),
-    # so there is no need to add them to kitchen baked files.
     chapter.figures.each do |figure|
       BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}",
+                    cases: true)
     end
 
     BakeNonIntroductionPages.v1(chapter: chapter)
+
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata, has_para: true)
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'summary',
+      uuid_key: '.summary',
+      section_selector: 'section.summary'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
+    end
+
+    eoc_with_exercise = %w[review-questions critical-thinking personal-application]
+    eoc_with_exercise.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
+
+    selectors = 'section.review-questions, section.critical-thinking, section.personal-application'
+    chapter.search(selectors).exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise,
+                              number: exercise.count_in(:chapter),
+                              suppress_solution_if: true,
+                              cases: true)
+    end
   end
 
   BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning
@@ -67,13 +95,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
                                                  everyday-connection
                                                  what-do-you-think
                                                  connect-the-concepts])
-  BakeIndex.v1(book: book)
+
+  BakeReferences.v2(book: book, metadata_source: book.metadata)
+  BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.')
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
-
   BakeToc.v1(book: book)
-  BakeLinkPlaceholders.v1(book: book)
-
+  BakeLinkPlaceholders.v1(book: book, cases: true)
 end
 
 opts = Slop.parse do |slop|
