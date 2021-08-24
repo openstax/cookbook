@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.0.0' # TODO: update kitchen version
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -25,7 +25,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   BakeUnclassifiedNotes.v1(book: book)
   note_classes = %w[people-mathematics who-knew tech-check check-point video work-out]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
-  book.search('div.your-turn div[data-type="solution"]').each do |solution|
+  sections_with_unnumbered_tables_in_solutions = \
+    'div.your-turn, section.section-exercises, section.chapter-review, section.chapter-test'
+  book.search(sections_with_unnumbered_tables_in_solutions).solutions.each do |solution|
     solution.tables.each do |table|
       table.add_class('unnumbered')
     end
@@ -85,16 +87,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
         RemoveSectionTitle.v1(section: section)
       end
     end
-    chapter.pages.search('section.section-exercises').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:page))
-    end
 
-    chapter.search('section.chapter-review').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    chapter.pages.search('section.section-exercises').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:page))
     end
-
-    chapter.search('section.chapter-test').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    chapter.search('section.chapter-review').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    end
+    chapter.search('section.chapter-test').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
 
     chapter.figures(only: :figure_to_bake?).each do |figure|
