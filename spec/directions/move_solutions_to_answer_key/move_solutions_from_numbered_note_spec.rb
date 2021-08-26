@@ -20,6 +20,18 @@ RSpec.describe Kitchen::Directions::MoveSolutionsFromNumberedNote do
           </div>
           <div data-type="note" class="some-note">
             <div class="os-note-body">
+              <div data-type="injected-exercise">
+                <div data-type="exercise-question">
+                  <div data-type="question-solution">
+                    <span class="os-number">1.</div>
+                    <div class="os-solution-container">injected solution</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-type="note" class="some-note">
+            <div class="os-note-body">
               <div data-type="exercise">
                 <div data-type="solution">
                   <span class="os-number">1.1</div>
@@ -51,6 +63,10 @@ RSpec.describe Kitchen::Directions::MoveSolutionsFromNumberedNote do
               <span class="os-title-label">Some Note</span>
             </h3>
             <div data-type="solution">Solution 1</div>
+            <div data-type="question-solution">
+              <span class="os-number">1.</div>
+              <div class="os-solution-container">injected solution</div>
+            </div>
             <div data-type="solution">
               <span class="os-number">1.1</span>
               <div class="os-solution-container">Solution 1</div>

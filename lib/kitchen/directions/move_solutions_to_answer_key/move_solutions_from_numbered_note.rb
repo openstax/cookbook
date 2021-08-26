@@ -7,13 +7,7 @@ module Kitchen::Directions::MoveSolutionsFromNumberedNote
 
   class V1
     def bake(chapter:, append_to:, note_class:)
-      solutions_clipboard = Kitchen::Clipboard.new
-      chapter.notes("$.#{note_class}").exercises.each do |exercise|
-        solution = exercise.solution
-        next unless solution
-
-        solution.cut(to: solutions_clipboard)
-      end
+      solutions_clipboard = chapter.notes("$.#{note_class}").solutions.cut
 
       return if solutions_clipboard.items.empty?
 

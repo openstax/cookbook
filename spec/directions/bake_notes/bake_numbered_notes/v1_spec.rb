@@ -61,6 +61,17 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
               </div>
             </div>
           </div>
+          <div data-type="note" id="4" class="foo">
+            <p>A title 4</p>
+            <div data-type="injected-exercise">
+              <div data-type="exercise-question">
+                <div data-type="question-stem">a question stem</div>
+                <div data-type="question-solution">
+                  some solution
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       HTML
     )
@@ -210,6 +221,30 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="foo" data-type="note" id="4">
+              <h3 class="os-title">
+                <span class="os-title-label">Bar</span>
+                <span class="os-number">2.4</span>
+                <span class="os-divider"> </span>
+              </h3>
+              <div class="os-note-body">
+                <p>A title 4</p>
+                <div data-type="injected-exercise">
+                  <div class="unnumbered os-hasSolution" data-type="exercise-question">
+                    <div class="os-problem-container">
+                      <div data-type="question-stem">a question stem</div>
+                    </div>
+                    <div data-type="question-solution">
+                      <a class="os-number" href="#exercise-ref">2.4</a>
+                      <span class="os-divider">. </span>
+                      <div class="os-solution-container">
+                  some solution
+                </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
             </div>
           </div>
         </body>

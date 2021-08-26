@@ -28,6 +28,13 @@ RSpec.describe Kitchen::Directions::MoveSolutionsFromExerciseSection do
           <div data-type="exercise">
             No solution here
           </div>
+          <div data-type="injected-exercise">
+            <div data-type="exercise-question">
+              <div data-type="question-solution">
+                <div class="os-solution-container">injected solution</div>
+              </div>
+            </div>
+          </div>
         </section>
         <section class="another-exercise-section">
           <div data-type="exercise">
@@ -61,6 +68,9 @@ RSpec.describe Kitchen::Directions::MoveSolutionsFromExerciseSection do
               <div class="os-solution-container">Solution 1</div>
             </div>
             <div data-type="solution">Solution 2</div>
+            <div data-type="question-solution">
+              <div class="os-solution-container">injected solution</div>
+            </div>
           </div>
         </div>
       HTML

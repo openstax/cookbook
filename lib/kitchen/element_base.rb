@@ -762,7 +762,7 @@ module Kitchen
     #   Returns a pages enumerator
     def_delegators :as_enumerator, :pages, :chapters, :terms, :figures, :notes, :tables, :examples,
                    :metadatas, :non_introduction_pages, :units, :titles, :exercises, :references,
-                   :composite_pages, :composite_chapters
+                   :composite_pages, :composite_chapters, :solutions, :injected_questions
 
     # Returns this element as an enumerator (over only one element, itself)
     #

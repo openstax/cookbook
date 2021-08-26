@@ -6,8 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Update `BakeNumberedNotes` to handle injected questions in notes (minor)
+* Create `InjectedQuestionElement` and `InjectedQuestionElementEnumerator` classes (minor)
+* Create `BakeInjectedExercise` and `BakeInjectedExerciseQuestion` directions (minor)
+* Update `MoveSolutionsFromExerciseSection` and `MoveSolutionsFromNumberedNote` to move injected solutions (minor)
+* Add `SolutionElementEnumerator` to support the above (minor)
+* Remove multipart exercise baking from `BakeNumberedExercise`; this is now done in `InjectedExercise` directions (patch)
 * Modify target labels to use grammatical cases (minor)
 * Modify `BakeIndex` to bake multiple types of indexes (minor)
+
 ## [11.0.0] - 2021-08-6
 
 * Add `ChangeSubsectionTitleTag` direction for modifying eoc sections (minor)

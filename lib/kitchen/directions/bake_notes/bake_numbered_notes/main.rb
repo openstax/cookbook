@@ -21,6 +21,8 @@ module Kitchen
       # Used by V1, V2, V3
       def self.bake_note_exercise(note:, exercise:, divider: ' ', suppress_solution: false)
         exercise.add_class('unnumbered')
+        number = note.first('.os-number').text.gsub(/#/, '')
+
         # bake problem
         exercise.problem.wrap_children('div', class: 'os-problem-container')
         exercise.search('[data-type="commentary"]').each(&:trash)
@@ -33,10 +35,18 @@ module Kitchen
         else
           BakeNumberedExercise.bake_solution_v1(
             exercise: exercise,
-            number: note.first('.os-number').text.gsub(/#/, ''),
+            number: number,
             divider: divider
           )
         end
+      end
+
+      def self.bake_note_injected_question(note:, question:)
+        question.add_class('unnumbered')
+        number = note.first('.os-number').text.gsub(/#/, '')
+        Kitchen::Directions::BakeInjectedExerciseQuestion.v1(
+          question: question, number: number, only_number_solution: true
+        )
       end
     end
   end

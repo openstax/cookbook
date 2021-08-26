@@ -78,6 +78,17 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
               </div>
             </div>
           </div>
+          <div data-type="note" id="123" class="foo">
+            <p>note with injected exercise</p>
+            <div data-type="injected-exercise">
+              <div data-type="exercise-question">
+                <div data-type="question-stem">a question stem</div>
+                <div data-type="question-solution">
+                  some solution
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       HTML
     )
@@ -215,6 +226,29 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
                 <div class="unnumbered os-hasSolution" data-type="exercise" id="2_123">
                   <div data-type="problem" id="2_456">
                     <div class="os-problem-container">a second exercise</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="foo" data-type="note" id="123">
+              <h3 class="os-title">
+                <span class="os-title-label">Bar</span>
+                <span class="os-number"></span>
+              </h3>
+              <div class="os-note-body">
+                <p>note with injected exercise</p>
+                <div data-type="injected-exercise">
+                  <div class="unnumbered os-hasSolution" data-type="exercise-question">
+                    <div class="os-problem-container">
+                      <div data-type="question-stem">a question stem</div>
+                    </div>
+                    <div data-type="question-solution">
+                      <a class="os-number" href="#exercise-ref"></a>
+                      <span class="os-divider">. </span>
+                      <div class="os-solution-container">
+                  some solution
+                </div>
+                    </div>
                   </div>
                 </div>
               </div>
