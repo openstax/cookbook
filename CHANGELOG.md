@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Adds `BakeFolio` to set spanish translation variables in the html tag for folio-pdf purposes (minor)
 * Create `BakeCustomSections` direction for English Composition (minor)
 * Create `BakeAnnotationClasses` v1 for English Composition (minor)
+* Create `v2` in `BakeChapterIntroductions` (minor)
+* Added a DEPRECATION warning in `v1` for `BakeChapterIntroductions`(minor)
 
 ## [10.0.0] - 2021-07-30
 
