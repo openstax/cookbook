@@ -17,6 +17,23 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
         Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
           chapter: chapter, append_to: append_to, note_class: 'your-turn'
         )
+
+        # Bake section exercises
+        chapter.non_introduction_pages.each do |page|
+          number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+          Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+            chapter: page, append_to: append_to, section_class: 'section-exercises',
+            title_number: number
+          )
+        end
+
+        # Bake other exercise sections
+        classes = %w[chapter-review chapter-test]
+        classes.each do |klass|
+          Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+            chapter: chapter, append_to: append_to, section_class: klass
+          )
+        end
       end
     end
   end

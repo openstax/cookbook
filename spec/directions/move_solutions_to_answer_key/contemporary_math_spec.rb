@@ -8,6 +8,11 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey do
       'chapter': 'Chapter',
       'notes': {
         'your-turn': 'Your Turn '
+      },
+      'eoc': {
+        'section-exercises': 'Section #.# Exercises',
+        'chapter-review': 'Chapter Review',
+        'chapter-test': 'Chapter Test'
       }
     })
   end
@@ -41,6 +46,19 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey do
                 </div>
               </div>
             </div>
+            <section class="section-exercises">
+              <div data-type="injected-exercise">
+                <div data-type="exercise-question">
+                  <div data-type="question-solution">
+                    <a class="os-number">1</a>
+                    <span class="os-divider"> </span>
+                    <div class="os-solution-container">
+                      section exercises solution 1
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <div data-type="page">
             <div data-type="note" class="your-turn">
@@ -57,6 +75,33 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey do
                 </div>
               </div>
             </div>
+            <section class="section-exercises">
+              <div data-type="injected-exercise">
+                <div data-type="exercise-question">
+                  <div data-type="question-solution">
+                    section exercise solution 2
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="chapter-review">
+              <div data-type="injected-exercise">
+                <div data-type="exercise-question">
+                  <div data-type="question-solution">
+                    chapter review solution 1
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="chapter-test">
+              <div data-type="injected-exercise">
+                <div data-type="exercise-question">
+                  <div data-type="question-solution">
+                    chapter test solution 1
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       HTML
@@ -122,6 +167,42 @@ RSpec.describe Kitchen::Directions::MoveSolutionsToAnswerKey do
                     your turn solution 4
                   </div>
               </div>
+            </div>
+            <div class="os-solution-area">
+              <h3 data-type="title">
+                <span class="os-title-label">Section #.# Exercises</span>
+              </h3>
+              <div data-type="question-solution">
+                <a class="os-number">1</a>
+                <span class="os-divider"> </span>
+                <div class="os-solution-container">
+                      section exercises solution 1
+                    </div>
+              </div>
+            </div>
+            <div class="os-solution-area">
+              <h3 data-type="title">
+                <span class="os-title-label">Section #.# Exercises</span>
+              </h3>
+              <div data-type="question-solution">
+                    section exercise solution 2
+                  </div>
+            </div>
+            <div class="os-solution-area">
+              <h3 data-type="title">
+                <span class="os-title-label">Chapter Review</span>
+              </h3>
+              <div data-type="question-solution">
+                    chapter review solution 1
+                  </div>
+            </div>
+            <div class="os-solution-area">
+              <h3 data-type="title">
+                <span class="os-title-label">Chapter Test</span>
+              </h3>
+              <div data-type="question-solution">
+                    chapter test solution 1
+                  </div>
             </div>
           </div>
         </div>

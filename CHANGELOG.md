@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Update the contemporary math `Strategy` to target injected solution sections (minor)
 * Update `BakeNumberedNotes` to handle injected questions in notes (minor)
 * Create `InjectedQuestionElement` and `InjectedQuestionElementEnumerator` classes (minor)
 * Create `BakeInjectedExercise` and `BakeInjectedExerciseQuestion` directions (minor)
