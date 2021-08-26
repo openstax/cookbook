@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `BakeIframes` outer directory to allow bake iframes also from outside notes, remove `BakeNoteIFrames` module from notes directory (minor)
 * Update the contemporary math `Strategy` to target injected solution sections (minor)
 * Update `BakeNumberedNotes` to handle injected questions in notes (minor)
 * Create `InjectedQuestionElement` and `InjectedQuestionElementEnumerator` classes (minor)
