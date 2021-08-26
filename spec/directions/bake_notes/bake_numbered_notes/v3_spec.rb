@@ -242,8 +242,8 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
                     <div class="os-problem-container">
                       <div data-type="question-stem">a question stem</div>
                     </div>
-                    <div data-type="question-solution">
-                      <a class="os-number" href="#exercise-ref"></a>
+                    <div data-type="question-solution" id="-solution">
+                      <a class="os-number" href="#"></a>
                       <span class="os-divider">. </span>
                       <div class="os-solution-container">
                   some solution

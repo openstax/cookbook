@@ -7,7 +7,11 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
 
   class V1
     def bake(question:, number:, only_number_solution:)
-      # TODO: store label in pantry
+      # Store label in pantry
+      unless only_number_solution
+        label_number = "#{question.ancestor(:chapter).count_in(:book)}.#{number}"
+        question.target_label(label_text: 'exercise', custom_content: label_number)
+      end
 
       # Synthesize multiple choice solution
       if question.answers
@@ -31,7 +35,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       unless only_number_solution
         problem_number = "<span class='os-number'>#{number}</span>"
         if question.solution
-          problem_number = "<a class='os-number' href='#solution-ref'>#{number}</a>" # TODO: link to solution ID
+          problem_number = "<a class='os-number' href='##{question.id}-solution'>#{number}</a>"
         end
       end
 
@@ -52,9 +56,10 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       return unless solution
 
       question.add_class('os-hasSolution')
-      solution.replace_children(with:   # TODO: link to exercise/question ID
+      solution.id = "#{question.id}-solution"
+      solution.replace_children(with:
         <<~HTML
-          <a class='os-number' href='#exercise-ref'>#{number}</a>
+          <a class='os-number' href='##{question.id}'>#{number}</a>
           <span class='os-divider'>. </span>
           <div class="os-solution-container">#{solution.children}</div>
         HTML
