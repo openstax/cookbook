@@ -39,6 +39,14 @@ pl:
     instrumental: Równaniem
     locative: Równaniu
     vocative: Równanie
+  note:
+    nominative: Ramka
+    genitive: Ramki
+    dative: Ramce
+    accusative: Ramkę
+    instrumental: Ramką
+    locative: Ramce
+    vocative: Ramko
   appendix: Dodatek
   theorem: Twierdzenie
   solution: Rozwiązanie

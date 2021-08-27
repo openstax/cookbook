@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
+RSpec.describe Kitchen::Directions::BakeNumberedNotes do
   let(:book_with_notes) do
     book_containing(html:
       <<~HTML
@@ -88,7 +88,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
   end
 
   it 'bakes' do
-    described_class.new.bake(book: book_with_notes, classes: %w[foo hello theorem])
+    described_class.v1(book: book_with_notes, classes: %w[foo hello theorem])
     expect(book_with_notes.body).to match_normalized_html(
       <<~HTML
         <body>
@@ -256,10 +256,27 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V1 do
     it 'stores link text' do
       pantry = book_with_notes.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('Two Important Limits', { label: 'note_id15' })
-      described_class.new.bake(book: book_with_notes, classes: %w[foo hello theorem])
+      described_class.v1(book: book_with_notes, classes: %w[foo hello theorem])
     end
   end
 
-  # context 'when book uses grammatical cases' will be implemented in the future
-  # current Polish books don't have links to notes
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'note': {
+            'nominative': 'Ramka',
+            'genitive': 'Ramki'
+          }
+        })
+
+        pantry = book_with_notes.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Ramka Two Important Limits', { label: 'note_id15' })
+
+        pantry = book_with_notes.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Ramki Two Important Limits', { label: 'note_id15' })
+        described_class.v1(book: book_with_notes, classes: %w[foo hello theorem], cases: true)
+      end
+    end
+  end
 end

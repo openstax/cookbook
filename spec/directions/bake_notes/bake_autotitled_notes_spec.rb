@@ -200,4 +200,35 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
       HTML
     )
   end
+
+  context 'when book does not use grammatical cases' do
+    it 'stores link text' do
+      pantry = book_with_notes.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Resonance', { label: 'parent-note-1' })
+      expect(pantry).to receive(:store).with('note <em data-effect="italics">title</em>', { label: 'noteId' })
+      described_class.v1(book: book_with_notes, classes: %w[foo baz project media-2 interactive])
+    end
+  end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'note': {
+            'nominative': 'Ramka',
+            'genitive': 'Ramki'
+          }
+        })
+
+        pantry = book_with_notes.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Ramka Resonance', { label: 'parent-note-1' })
+        expect(pantry).to receive(:store).with('Ramka note <em data-effect="italics">title</em>', { label: 'noteId' })
+
+        pantry = book_with_notes.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Ramki Resonance', { label: 'parent-note-1' })
+        expect(pantry).to receive(:store).with('Ramki note <em data-effect="italics">title</em>', { label: 'noteId' })
+        described_class.v1(book: book_with_notes, classes: %w[foo baz project media-2 interactive], cases: true)
+      end
+    end
+  end
 end
