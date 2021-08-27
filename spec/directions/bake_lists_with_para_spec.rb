@@ -14,6 +14,9 @@ RSpec.describe Kitchen::Directions::BakeListsWithPara do
           <li>
             <p>blah2</p>
           </li>
+          <li>
+            <p><span>random term</span> blah3</p>
+          </li>
         </ol>
         <ul>
           <li>
@@ -21,6 +24,9 @@ RSpec.describe Kitchen::Directions::BakeListsWithPara do
           </li>
           <li>
             <p>foo2</p>
+          </li>
+          <li>
+            <p><span>random term2</span> foo3</p>
           </li>
         </ul>
       HTML
@@ -35,10 +41,12 @@ RSpec.describe Kitchen::Directions::BakeListsWithPara do
           <ol>
             <li>blah1</li>
             <li>blah2</li>
+            <li><span>random term</span> blah3</li>
           </ol>
           <ul>
             <li>foo1</li>
             <li>foo2</li>
+            <li><span>random term2</span> foo3</li>
           </ul>
         </body>
       HTML
