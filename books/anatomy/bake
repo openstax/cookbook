@@ -26,7 +26,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
 
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnitTitle.v1(book: book)
-  BakeChapterIntroductions.v1(book: book, bake_chapter_outline: false)
+  BakeChapterIntroductions.v2(
+    book: book,
+    strategy_options: {
+      strategy: :default,
+      bake_chapter_outline: false,
+      introduction_order: :v2
+    }
+  )
   BakeChapterTitle.v1(book: book)
 
   book.notes('$.homeostatic').each { |note| note['use-subtitle'] = true }
@@ -83,7 +90,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeReferences.v3(book: book, metadata_source: metadata)
+  BakeReferences.v2(book: book, metadata_source: metadata)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
