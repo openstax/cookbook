@@ -48,6 +48,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
 
     BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
 
+    chapter.pages.search('section.section-exercises').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:page))
+    end
+    chapter.pages.search('section.chapter-review').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    end
+    chapter.pages.search('section.chapter-test').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    end
+
     chapter_summary = \
       ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata,
                                 klass: 'chapter-summary')
@@ -90,16 +100,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
         ChangeSubsectionTitleTag.v1(section: section)
         RemoveSectionTitle.v1(section: section)
       end
-    end
-
-    chapter.pages.search('section.section-exercises').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:page))
-    end
-    chapter.search('section.chapter-review').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-    end
-    chapter.search('section.chapter-test').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
 
     chapter.figures(only: :figure_to_bake?).each do |figure|
