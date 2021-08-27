@@ -23,7 +23,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakeHandbook.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v1(book: book)
+  BakeChapterIntroductions.v2(book: book, strategy_options: { strategy: :add_objectives,
+                                                              bake_chapter_outline: true,
+                                                              introduction_order: :v1 })
   BakeUnitTitle.v1(book: book)
   BakeUnitPageTitle.v1(book: book)
 
@@ -46,9 +48,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   book.chapters.each do |chapter|
 
     chapter.pages.each do |page|
+      page.search('div[data-type="media"]').each do |media_container|
+        BakeIframes.v1(outer_element: media_container)
+      end
       page.search('section').exercises.each do |exercise|
         BakeNumberedExercise.v1(exercise: exercise,
-                                number: exercise.count_in(:page),
+                                number: exercise.count_in(:section),
                                 suppress_solution_if: false,
                                 note_suppressed_solutions: false)
       end
@@ -62,7 +67,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
 
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    chapter.figures(except: :subfigure?).each do |figure|
+    chapter.figures(only: :figure_to_bake?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
 
@@ -70,7 +75,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
     BakeAnnotationClasses.v1(chapter: chapter)
   end
 
-  Bake Custom Sections
+  # Bake Custom Sections
   custom_sections_properties = {
     narrative_trailblazer: {
       class: 'narrative-trailblazer',
@@ -107,7 +112,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
 
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
-  BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
