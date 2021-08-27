@@ -7,7 +7,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V2 do
     book_containing(html:
       <<~HTML
         <div data-type="chapter">
-          <div data-type="page">
+          <div data-type="page" id="page_1">
             <div data-type="note" id="123" class="foo">
               <p>foo content #1</p>
             </div>
@@ -18,14 +18,14 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V2 do
               <p>hello content #2</p>
             </div>
           </div>
-          <div data-type="page">
+          <div data-type="page" id="page_2">
             <div data-type="note" id="222" class="hello">
               <p>hello content #1</p>
             </div>
           </div>
         </div>
         <div data-type="chapter">
-          <div data-type="page">
+          <div data-type="page" id="page_3">
             <div data-type="note" id="456" class="foo">
               <p>content 2.1</p>
             </div>
@@ -68,7 +68,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V2 do
             <div data-type="note" id="123" class="foo">
               <p>note with injected exercise</p>
               <div data-type="injected-exercise">
-                <div data-type="exercise-question">
+                <div data-type="exercise-question" data-id="26">
                   <div data-type="question-stem">a question stem</div>
                   <div data-type="question-solution">
                     some solution
@@ -98,7 +98,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V2 do
       <<~HTML
         <body>
           <div data-type="chapter">
-            <div data-type="page">
+            <div data-type="page" id="page_1">
               <div class="foo" data-type="note" id="123">
                 <h3 class="os-title">
                   <span class="os-title-label">Bar</span>
@@ -127,7 +127,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V2 do
                 </div>
               </div>
             </div>
-            <div data-type="page">
+            <div data-type="page" id="page_2">
               <div class="hello" data-type="note" id="222">
                 <h3 class="os-title">
                   <span class="os-title-label">Hello World</span>
@@ -140,7 +140,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V2 do
             </div>
           </div>
           <div data-type="chapter">
-            <div data-type="page">
+            <div data-type="page" id="page_3">
               <div class="foo" data-type="note" id="456">
                 <h3 class="os-title">
                   <span class="os-title-label">Bar</span>
@@ -229,12 +229,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V2 do
                 <div class="os-note-body">
                   <p>note with injected exercise</p>
                   <div data-type="injected-exercise">
-                    <div class="unnumbered os-hasSolution" data-type="exercise-question">
+                    <div class="unnumbered os-hasSolution" data-type="exercise-question" data-id="26" id="auto_3_26">
                       <div class="os-problem-container">
                         <div data-type="question-stem">a question stem</div>
                       </div>
-                      <div data-type="question-solution" id="-solution">
-                        <a class="os-number" href="#">4</a>
+                      <div data-type="question-solution" id="auto_3_26-solution">
+                        <a class="os-number" href="#auto_3_26">4</a>
                         <span class="os-divider">. </span>
                         <div class="os-solution-container">
                     some solution

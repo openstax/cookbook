@@ -6,7 +6,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
   let(:book_with_notes) do
     book_containing(html:
       <<~HTML
-        <div data-type="chapter">
+        <div data-type="chapter"><div data-type="page" id="page_1">
           <div data-type="exercise">
             <span class="os-number">1.1</span>
           </div>
@@ -33,8 +33,8 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
           <div data-type="note" id="222" class="hello">
             <p>content 1.4</p>
           </div>
-        </div>
-        <div data-type="chapter">
+        </div></div>
+        <div data-type="chapter"><div data-type="page" id="page_2">
           <div data-type="note" id="456" class="foo">
             <p>content 2.1</p>
           </div>
@@ -81,7 +81,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
           <div data-type="note" id="123" class="foo">
             <p>note with injected exercise</p>
             <div data-type="injected-exercise">
-              <div data-type="exercise-question">
+              <div data-type="exercise-question" data-id="17">
                 <div data-type="question-stem">a question stem</div>
                 <div data-type="question-solution">
                   some solution
@@ -89,7 +89,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
               </div>
             </div>
           </div>
-        </div>
+        </div></div>
       HTML
     )
   end
@@ -113,7 +113,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
     expect(book_with_notes.body).to match_normalized_html(
       <<~HTML
         <body>
-          <div data-type="chapter">
+          <div data-type="chapter"><div data-type="page" id="page_1">
             <div data-type="exercise">
               <span class="os-number">1.1</span>
             </div>
@@ -157,8 +157,8 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
                 <p>content 1.4</p>
               </div>
             </div>
-          </div>
-          <div data-type="chapter">
+          </div></div>
+          <div data-type="chapter"><div data-type="page" id="page_2">
             <div class="foo" data-type="note" id="456">
               <h3 class="os-title">
                 <span class="os-title-label">Bar</span>
@@ -238,12 +238,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
               <div class="os-note-body">
                 <p>note with injected exercise</p>
                 <div data-type="injected-exercise">
-                  <div class="unnumbered os-hasSolution" data-type="exercise-question">
+                  <div class="unnumbered os-hasSolution" data-type="exercise-question" data-id="17" id="auto_2_17">
                     <div class="os-problem-container">
                       <div data-type="question-stem">a question stem</div>
                     </div>
-                    <div data-type="question-solution" id="-solution">
-                      <a class="os-number" href="#"></a>
+                    <div data-type="question-solution" id="auto_2_17-solution">
+                      <a class="os-number" href="#auto_2_17"></a>
                       <span class="os-divider">. </span>
                       <div class="os-solution-container">
                   some solution
@@ -253,7 +253,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
         </body>
       HTML
     )

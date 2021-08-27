@@ -6,7 +6,7 @@ module Kitchen::Directions
       # for the try it notes, must be called AFTER bake_exercises
       def bake(book:, classes:, suppress_solution: true)
         classes.each do |klass|
-          book.chapters.notes("$.#{klass}").each do |note|
+          book.chapters.pages.notes("$.#{klass}").each do |note|
             note.wrap_children(class: 'os-note-body')
             previous_example = note.previous
             os_number = previous_example&.first('.os-number')&.children&.to_s

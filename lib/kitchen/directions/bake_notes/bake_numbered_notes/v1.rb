@@ -5,7 +5,7 @@ module Kitchen::Directions
     class V1
       def bake(book:, classes:, cases: false)
         classes.each do |klass|
-          book.chapters.notes("$.#{klass}").each do |note|
+          book.chapters.pages.notes("$.#{klass}").each do |note|
             bake_note(note: note, cases: cases)
             note.exercises.each do |exercise|
               BakeNumberedNotes.bake_note_exercise(note: note, exercise: exercise)

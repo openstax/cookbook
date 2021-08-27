@@ -7,6 +7,8 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
 
   class V1
     def bake(question:, number:, only_number_solution:)
+      id = question.id
+
       # Store label in pantry
       unless only_number_solution
         label_number = "#{question.ancestor(:chapter).count_in(:book)}.#{number}"
@@ -35,7 +37,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       unless only_number_solution
         problem_number = "<span class='os-number'>#{number}</span>"
         if question.solution
-          problem_number = "<a class='os-number' href='##{question.id}-solution'>#{number}</a>"
+          problem_number = "<a class='os-number' href='##{id}-solution'>#{number}</a>"
         end
       end
 
@@ -56,10 +58,10 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       return unless solution
 
       question.add_class('os-hasSolution')
-      solution.id = "#{question.id}-solution"
+      solution.id = "#{id}-solution"
       solution.replace_children(with:
         <<~HTML
-          <a class='os-number' href='##{question.id}'>#{number}</a>
+          <a class='os-number' href='##{id}'>#{number}</a>
           <span class='os-divider'>. </span>
           <div class="os-solution-container">#{solution.children}</div>
         HTML

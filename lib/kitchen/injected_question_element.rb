@@ -65,5 +65,13 @@ module Kitchen
         answer[:'data-correctness'] == '1.0' ? alphabet[index] : nil
       end.compact
     end
+
+    # Returns or creates the question's id
+    #
+    # @return [String]
+    #
+    def id
+      self[:id] ||= "auto_#{ancestor(:page).id.gsub(/page_/, '')}_#{self[:'data-id']}"
+    end
   end
 end
