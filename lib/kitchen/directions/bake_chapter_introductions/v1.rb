@@ -2,10 +2,10 @@
 
 module Kitchen::Directions::BakeChapterIntroductions
   class V1
-    # <b>DEPRECATED:</b> Please use <tt>v2</tt> instead.
-    warn '[DEPRECATION] `v1` is deprecated.  Please use `v2` instead.'
-
     def bake(book:)
+      # <b>DEPRECATED:</b> Please use <tt>v2</tt> instead.
+      warn '[DEPRECATION] `v1` is deprecated.  Please use `v2` instead.'
+
       book.chapters.each do |chapter|
         introduction_page = chapter.introduction_page
 
