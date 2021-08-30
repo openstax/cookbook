@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Modify `BakeIndex` to bake multiple types of indexes (minor)
 * Create `v2` in `BakeChapterIntroductions` that should replace `v1` (minor)
 * Added a DEPRECATION warning in `v1` for `BakeChapterIntroductions` (minor)
+* Added a bit more description to deprecation warning for `BakeChapterIntroductions.v1`  (minor)
 
 ## [11.0.0] - 2021-08-6
 
