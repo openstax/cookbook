@@ -90,11 +90,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
     end
   end
 
-  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning
-                                                 dig-deeper
-                                                 everyday-connection
-                                                 what-do-you-think
-                                                 connect-the-concepts])
+  notes = %w[link-to-learning dig-deeper everyday-connection what-do-you-think connect-the-concepts]
+  BakeAutotitledNotes.v1(book: book, classes: notes, cases: true)
 
   BakeReferences.v2(book: book, metadata_source: book.metadata)
   BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.')
