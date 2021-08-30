@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -46,14 +46,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   end
 
   book.chapters.each do |chapter|
-
     chapter.pages.each do |page|
       page.search('div[data-type="media"]').each do |media_container|
         BakeIframes.v1(outer_element: media_container)
       end
       page.search('section').exercises.each do |exercise|
         BakeNumberedExercise.v1(exercise: exercise,
-                                number: exercise.count_in(:section),
+                                number: exercise.count_in(:chapter),
                                 suppress_solution_if: false,
                                 note_suppressed_solutions: false)
       end
@@ -73,37 +72,33 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
 
     end
     BakeAnnotationClasses.v1(chapter: chapter)
-  end
-
-  # Bake Custom Sections
-  custom_sections_properties = {
-    narrative_trailblazer: {
-      class: 'narrative-trailblazer',
-      inject: 'title'
-    },
-    living_words: {
-      class: 'living-words',
-      inject: 'subtitle'
-    },
-    quick_launch: {
-      class: 'quick-launch',
-      inject: 'title_prefix'
-    },
-    drafting: {
-      class: 'drafting',
-      inject: 'title_prefix'
-    },
-    peer_review: {
-      class: 'peer-review',
-      inject: 'title_prefix'
-    },
-    revising: {
-      class: 'revising',
-      inject: 'title_prefix'
+    # Bake Custom Sections
+    custom_sections_properties = {
+      narrative_trailblazer: {
+        class: 'narrative-trailblazer',
+        inject: 'title'
+      },
+      living_words: {
+        class: 'living-words',
+        inject: 'subtitle'
+      },
+      quick_launch: {
+        class: 'quick-launch',
+        inject: 'title_prefix'
+      },
+      drafting: {
+        class: 'drafting',
+        inject: 'title_prefix'
+      },
+      peer_review: {
+        class: 'peer-review',
+        inject: 'title_prefix'
+      },
+      revising: {
+        class: 'revising',
+        inject: 'title_prefix'
+      }
     }
-  }
-
-  book.chapters.each do |chapter|
     BakeCustomSections.v1(
       chapter: chapter,
       custom_sections_properties: custom_sections_properties
