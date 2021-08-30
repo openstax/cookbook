@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.1.0] - 2021-08-30
+
 * Update injected questions to synthesize ids during baking (minor)
 * Fix `BakeListsWithPara` to copy all children from para not just text (minor)
 * Implement labels with cases to `BakeAutotitledNotes` and `BakeNumberedNotes` (minor)
