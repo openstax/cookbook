@@ -23,9 +23,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakeHandbook.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v2(book: book, strategy_options: { strategy: :add_objectives,
-                                                              bake_chapter_outline: true,
-                                                              introduction_order: :v1 })
+  BakeChapterIntroductions.v2(
+    book: book, strategy_options: {
+      strategy: :add_objectives,
+      bake_chapter_outline: true,
+      introduction_order: :v1
+    }
+  )
   BakeUnitTitle.v1(book: book)
   BakeUnitPageTitle.v1(book: book)
 
