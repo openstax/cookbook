@@ -28,6 +28,7 @@ case "${book}" in
   calculus) $DIR/books/calculus/bake --input $input_file --output $output_file;;
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
   statistics) $DIR/books/statistics/bake --input $input_file --output $output_file;;
+  contemporary-math) $DIR/books/contemporary-math/bake --input $input_file --output $output_file;;
   precalculus) $DIR/books/precalculus/bake --input $input_file --output $output_file;;
   anthropology) $DIR/books/anthropology/bake --input $input_file --output $output_file;;
   biology) $DIR/books/biology/bake --input $input_file --output $output_file;;
