@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Small fix for parameter in `bake_note` definition (minor)
 ## [11.1.0] - 2021-08-30
 
 * Update injected questions to synthesize ids during baking (minor)

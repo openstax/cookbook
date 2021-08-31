@@ -11,7 +11,7 @@ module Kitchen
         end
       end
 
-      def self.bake_note(note:, bake_subtitle:, cases: false)
+      def self.bake_note(note:, bake_subtitle:, cases:)
         Kitchen::Directions::BakeIframes.v1(outer_element: note)
         note.wrap_children(class: 'os-note-body')
 
