@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '10.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -33,7 +33,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   BakeInlineLists.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v1(book: book, bake_chapter_objectives: false) # hs-statistics true, business false
+  BakeChapterIntroductions.v2(
+    book: book,
+    strategy_options: {
+      strategy: :default,
+      bake_chapter_outline: false,
+      introduction_order: :v2
+    }
+  )
 
   book.chapters.each do |chapter|
     # EOC sections
@@ -94,7 +101,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
-    chapter.search('.bring-together-homework, .bring-together-exercises, .practice, .free-response').exercises.each do |exercise|
+    exercise_selectors = '.bring-together-homework, .bring-together-exercises, .practice, .free-response'
+    chapter.search(exercise_selectors).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
@@ -112,7 +120,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   end
 
   BakeNumberedNotes.v3(book: book, classes: %w[try])
-  BakeAutotitledNotes.v1(book: book, classes: %w[lab collab calculator])
+  BakeAutotitledNotes.v1(book: book, classes: %w[lab calculator])
+  BakeAutotitledNotes.v1(book: book, classes: %w[collab], bake_subtitle: false)
 
   book.chapters.each do |chapter|
 
