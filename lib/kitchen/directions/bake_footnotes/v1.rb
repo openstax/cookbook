@@ -28,7 +28,11 @@ module Kitchen::Directions::BakeFootnotes
         anchor.replace_children(with: footnote_number)
         aside_id = anchor[:href][1..-1]
         aside_id_to_footnote_number[aside_id] = footnote_number
-        anchor.parent.add_class('has-noteref') if anchor.parent.name == 'p'
+        if anchor.parent.name == 'p'
+          anchor.parent.add_class('has-noteref')
+        elsif anchor.parent.name == 'em' && anchor.parent.parent.name == 'p'
+          anchor.parent.parent.add_class('has-noteref')
+        end
       end
 
       container.search('aside').each do |aside|
