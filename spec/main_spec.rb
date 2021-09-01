@@ -50,6 +50,10 @@ RSpec.describe 'books' do
     expect('biology').to bake_correctly
   end
 
+  it 'bakes english-composition' do
+    expect('english-composition').to bake_correctly
+  end
+
   it 'bakes contemporary-math' do
     expect('contemporary-math').to bake_correctly
   end

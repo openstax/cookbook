@@ -36,6 +36,7 @@ case "${book}" in
   philosophy) $DIR/books/philosophy/bake --input $input_file --output $output_file;;
   microbiology) $DIR/books/microbiology/bake --input $input_file --output $output_file;;
   sociology) $DIR/books/sociology/bake --input $input_file --output $output_file;;
+  english-composition) $DIR/books/english-composition/bake --input $input_file --output $output_file;;
   u-physics) $DIR/books/u-physics/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
