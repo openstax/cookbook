@@ -9,6 +9,9 @@ module Kitchen::Directions
           book.chapters.pages.notes("$.#{klass}").each do |note|
             note.wrap_children(class: 'os-note-body')
             previous_example = note.previous
+            until previous_example.nil? || previous_example[:'data-type'] == 'example'
+              previous_example = previous_example.previous
+            end
             os_number = previous_example&.first('.os-number')&.children&.to_s
 
             note.prepend(child:

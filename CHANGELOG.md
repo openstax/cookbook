@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 * Adds `BakeAccessibilityFixes` direction for (minor)
 * Remove deprecation warning from `BakeChapterIntroductions.v1` and adapted to be used like `.v2` (minor)
+* Fix `BakeNumberedNotes` to find related example better (minor)
 
 * Small fix for parameter in `bake_note` definition (minor)
 ## [11.1.0] - 2021-08-30
