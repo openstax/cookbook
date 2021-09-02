@@ -56,7 +56,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
       end
       page.search('section').exercises.each do |exercise|
         BakeNumberedExercise.v1(exercise: exercise,
-                                number: exercise.count_in(:chapter),
+                                number: exercise.count_in(:section),
                                 suppress_solution_if: false,
                                 note_suppressed_solutions: false)
       end
