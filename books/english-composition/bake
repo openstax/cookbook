@@ -55,7 +55,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
         BakeIframes.v1(outer_element: media_container)
       end
       page.search('section').injected_questions.each do |question|
-        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:section))
       end
     end
     BakePageAbstracts.v1(chapter: chapter)
