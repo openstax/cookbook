@@ -38,11 +38,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     strategy_options: {
       strategy: :default,
       bake_chapter_outline: false,
-      introduction_order: :v2
+      introduction_order: :v1
     }
   )
 
   book.chapters.each do |chapter|
+    BakePageAbstracts.v1(chapter: chapter)
+
     # EOC sections
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
@@ -101,15 +103,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
-    exercise_selectors = '.bring-together-homework, .bring-together-exercises, .practice, .free-response'
-    chapter.search(exercise_selectors).exercises.each do |exercise|
+    exercise_selectors = %w[bring-together-homework bring-together-exercises practice free-response]
+    chapter.search(exercise_selectors.prefix('section.').join(', ')).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
     BakeChapterSolutions.v1(chapter: chapter,
                             metadata_source: metadata,
-                            classes: %w[practice free-response bring-together-homework bring-together-exercises])
-                            #removed: bring-together-practice
+                            classes: exercise_selectors)
 
     chapter.examples.each do |example|
       BakeExample.v1(example: example,
