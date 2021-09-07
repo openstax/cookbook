@@ -10,7 +10,7 @@ gemfile do
   gem 'byebug'
 end
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
+recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
   include Kitchen::Directions
 
   # Set overrides
@@ -42,10 +42,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
   book.chapters.each do |chapter|
     BakePageAbstracts.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    title_snippet_sections = %w[cfa-institute]
+    chapter.pages.search('section').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:section))
+    end
+
+    title_snippet_sections = %w[cfa-institute sources-notes]
     title_snippet_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -60,7 +64,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
       end
     end
 
-    eoc_sections = %w[multiple-choice review-questions problem-set]
+    eoc_sections = %w[multiple-choice review-questions problem-set video-activity]
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -89,18 +93,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
         BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
       end
     end
-
-    # # Bake answer key from chapter/ move solutions from eoc into answer key
-    # MoveSolutionsToAnswerKey.v1(
-    #   chapter: chapter,
-    #   metadata_source: metadata,
-    #   strategy: :default,
-    #   append_to: book_answer_key,
-    #   strategy_options: {
-    #     selectors: exercise_section_classes.prefix('section.')
-    #   },
-    #   solutions_plural: false
-    # )
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
