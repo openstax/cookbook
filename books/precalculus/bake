@@ -3,13 +3,6 @@
 # frozen_string_literal: true
 
 require 'bundler/inline'
-
-gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.1.0'
-  gem 'slop', '4.8.2'
-  gem 'byebug'
-end
-
 require_relative './precalculus_recipe'
 
 opts = Slop.parse do |slop|

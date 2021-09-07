@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.1.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+# Used for precalculus, college algebra, and trigonometry
 PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
   include Kitchen::Directions
 
