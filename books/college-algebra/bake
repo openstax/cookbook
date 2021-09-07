@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.1.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+require_relative '../precalculus/precalculus_recipe'
+
+coreq_delete = Kitchen::BookRecipe.new(book_short_name: :coreq_delete) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+
+  book.search('section.practice-perfect').each(&:trash)
+  book.search('section.coreq-skills').each(&:trash)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [coreq_delete, PRECALCULUS_RECIPE],
+  output_file: opts[:output]
+)

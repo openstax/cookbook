@@ -30,6 +30,8 @@ case "${book}" in
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
   contemporary-math) $DIR/books/contemporary-math/bake --input $input_file --output $output_file;;
   precalculus) $DIR/books/precalculus/bake --input $input_file --output $output_file;;
+  college-algebra) $DIR/books/college-algebra/bake --input $input_file --output $output_file;;
+  trigonometry) $DIR/books/college-algebra/bake --input $input_file --output $output_file;;
   anthropology) $DIR/books/anthropology/bake --input $input_file --output $output_file;;
   biology) $DIR/books/biology/bake --input $input_file --output $output_file;;
   political-science) $DIR/books/political-science/bake --input $input_file --output $output_file;;
