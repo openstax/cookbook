@@ -23,6 +23,14 @@ RSpec.describe 'books' do
     expect('precalculus').to bake_correctly
   end
 
+  it 'bakes college algebra' do
+    expect('college-algebra').to bake_correctly_with('precalculus')
+  end
+
+  it 'bakes trigonometry' do
+    expect('trigonometry').to bake_correctly_with('precalculus')
+  end
+
   it 'bakes u-physics' do
     expect('u-physics').to bake_correctly
   end
