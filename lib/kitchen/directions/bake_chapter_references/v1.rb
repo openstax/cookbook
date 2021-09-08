@@ -7,6 +7,8 @@ module Kitchen::Directions::BakeChapterReferences
         bake_page_references(page: page)
       end
 
+      return if chapter.pages.references.none?
+
       content = chapter.pages.references.cut.paste
 
       Kitchen::Directions::EocCompositePageContainer.v1(

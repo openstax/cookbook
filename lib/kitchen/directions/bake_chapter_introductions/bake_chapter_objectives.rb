@@ -18,6 +18,8 @@ module Kitchen::Directions::BakeChapterIntroductions
     def bake_as_note(chapter:)
       chapter_objectives_note = chapter.notes('$.chapter-objectives').first
 
+      return unless chapter_objectives_note.present?
+
       # trash existing title
       chapter_objectives_note.titles.first&.trash
       Kitchen::Directions::BakeAutotitledNotes.v1(

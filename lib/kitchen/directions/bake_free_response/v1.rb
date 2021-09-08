@@ -20,6 +20,8 @@ module Kitchen::Directions::BakeFreeResponse
         end
       end
 
+      return if @free_response_clipboard.none?
+
       append_to_element = append_to || chapter
       @title_tag = append_to ? 'h3' : 'h2'
 

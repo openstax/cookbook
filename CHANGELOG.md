@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Small class fix for `BakeFootnotes.v1` (patch)
 * Fix `BakeNumberedNotes` to find related example better (minor)
 * Small fix for parameter in `bake_note` definition (minor)
+* Small fixes to return when no elements are found and not add an empty wrapper in `BakeChapterReferences` and
+`BakeFreeResponse` (minor)
+* Adding class `os-timeline-table-container` to numbered tables when required (minor)
 
 ## [11.1.0] - 2021-08-30
 
