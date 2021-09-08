@@ -38,15 +38,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
     classes: %w[cfa-institute]
   )
 
-  # book_answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
   book.chapters.each do |chapter|
     BakePageAbstracts.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    chapter.pages.search('section').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:section))
+    eoc_sections = %w[multiple-choice review-questions problem-set video-activity]
+
+    eoc_sections.each do |klass|
+      chapter.pages.search("section.#{klass}").injected_questions.each do |question|
+        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      end
     end
 
     title_snippet_sections = %w[cfa-institute sources-notes]
@@ -64,7 +67,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
       end
     end
 
-    eoc_sections = %w[multiple-choice review-questions problem-set video-activity]
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -75,23 +77,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
       ) do |section|
         RemoveSectionTitle.v1(section: section)
       end
-
-      chapter.search("section.#{section_key}").exercises.each do |exercise|
-        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-
-        next unless section_key == 'multiple-choice'
-
-        BakeAccessibilityFixes.v1(section: exercise)
-      end
     end
 
     exercise_section_classes = %w[video-activity]
     chapter.search(exercise_section_classes.prefix('section.').join(', ')).each do |element|
       BakeIframes.v1(outer_element: element)
-
-      element.exercises.each do |exercise|
-        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-      end
     end
 
     chapter.tables('$:not(.unnumbered)').each do |table|
