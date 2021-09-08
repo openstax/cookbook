@@ -24,11 +24,11 @@ RSpec.describe 'books' do
   end
 
   it 'bakes college algebra' do
-    expect('college-algebra').to bake_correctly
+    expect('college-algebra').to bake_correctly_with('precalculus')
   end
 
   it 'bakes trigonometry' do
-    expect('trigonometry').to bake_correctly
+    expect('trigonometry').to bake_correctly_with('precalculus')
   end
 
   it 'bakes u-physics' do

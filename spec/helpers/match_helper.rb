@@ -13,12 +13,12 @@ RSpec::Matchers.define(:be_same_file_as) do |expected_file_path|
   end
 end
 
-RSpec::Matchers.define :bake_correctly do
+RSpec::Matchers.define :bake_correctly_with do |recipe|
   match do |book|
     actual_file = Tempfile.new(book)
 
-    cmd = `#{__dir__}/../../bake -b #{book} -i #{__dir__}/../../spec/books/#{book}/input.xhtml -o \
-      #{actual_file.path}`
+    cmd = `#{__dir__}/../../bake -b #{recipe} -i #{__dir__}/../../spec/books/#{book}/input.xhtml \
+      -o #{actual_file.path}`
 
     if ENV['USE_LOCAL_KITCHEN']
       system({ 'USE_LOCAL_KITCHEN' => '1' }, cmd, %i[out err] => File::NULL)
@@ -33,5 +33,11 @@ RSpec::Matchers.define :bake_correctly do
 
     File.delete(normalized_path)
     File.delete("spec/books/#{book}/actual_output.xhtml")
+  end
+end
+
+RSpec::Matchers.define :bake_correctly do
+  match do |book|
+    expect(book).to bake_correctly_with(book)
   end
 end
