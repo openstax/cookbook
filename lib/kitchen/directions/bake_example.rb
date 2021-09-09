@@ -30,9 +30,9 @@ module Kitchen
             problem.wrap_children(class: 'os-problem-container')
           end
 
-          if (solution = exercise.solution)
+          exercise.solutions.each do |solution|
             solution_number = if numbered_solutions
-                                "<span class=\"os-number\">#{exercise.count_in(:example)}</span>"
+                                "<span class=\"os-number\">#{solution.count_in(:example)}</span>"
                               else
                                 ''
                               end

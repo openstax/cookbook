@@ -39,6 +39,14 @@ module Kitchen
       first("div[data-type='solution']")
     end
 
+    # Returns the enumerator for solutions
+    #
+    # @return [ElementEnumerator]
+    #
+    def solutions
+      search("div[data-type='solution']")
+    end
+
     # Returns whether the exercise has been baked
     #
     # @return [Boolean]
