@@ -30,6 +30,7 @@ case "${book}" in
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
   english-composition) dest="${DIR}/data/english-composition/short" && script="${DIR}/books/english-composition/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
+  bca) dest="${DIR}/data/bca/short" && script="${DIR}/books/bca/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
