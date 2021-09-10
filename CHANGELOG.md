@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [11.2.0] - 2021-09-10
+
 * Adds `BakeAccessibilityFixes` direction for (minor)
 * Remove deprecation warning from `BakeChapterIntroductions.v1` and adapted to be used like `.v2` (minor)
 * Small class fix for `BakeFootnotes.v1` (patch)
