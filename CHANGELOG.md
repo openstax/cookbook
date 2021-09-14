@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Adds an optional selector to `RemoveSectionTitles` (minor)
+
 ## [11.2.0] - 2021-09-10
 
 * Adds `BakeAccessibilityFixes` direction for (minor)

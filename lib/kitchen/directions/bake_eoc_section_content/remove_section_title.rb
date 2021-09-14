@@ -3,8 +3,8 @@
 module Kitchen
   module Directions
     module RemoveSectionTitle
-      def self.v1(section:)
-        section.first('[data-type="title"]')&.trash
+      def self.v1(section:, selector: '')
+        section.first("#{selector}[data-type=\"title\"]")&.trash
       end
     end
   end
