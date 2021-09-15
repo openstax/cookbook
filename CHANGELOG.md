@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Adds an optional selector to `RemoveSectionTitles` (minor)
 * Patches `BakeFreeResponse` to only delete the first h3, not all h3s (patch)
 * Lets `BakeExample` not count titles in lists as commentary titles (minor)
+* Renames `BakePageAbstracts` to `BakeLearningObjectives` and adds optional parameter for titles in `v2` (major)
 
 ## [11.2.0] - 2021-09-10
 

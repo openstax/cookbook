@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakePageAbstracts do
+RSpec.describe Kitchen::Directions::BakeLearningObjectives do
   before do
     stub_locales({
       'learning_objectives': 'Learning Objectives'

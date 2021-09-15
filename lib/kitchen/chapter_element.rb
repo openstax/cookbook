@@ -68,5 +68,12 @@ module Kitchen
       search('div[data-type="abstract"]')
     end
 
+    # Returns an enumerator for the learning objectives
+    #
+    # @return [ElementEnumerator]
+    #
+    def learning_objectives
+      search('section.learning-objectives')
+    end
   end
 end
