@@ -110,6 +110,73 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
   end
 
+  context 'when there is a list with a title inside the exercise commentary' do
+    let(:exercise) do
+      <<~HTML
+        <div data-type="exercise" id="exercise_id">
+          <div data-type="problem" id="problem_id">
+            <div data-type="title" id="title_id">Evaluating Functions</div>
+            <p>example content</p>
+          </div>
+          <div data-type="solution" id="solution_id">
+            <p>Solution content</p>
+          </div>
+          <div data-type="commentary" id="commentary_id">
+            <div data-type="list" id="list_id">
+              <div data-type="title" id="title_id">List Title</div>
+              <ul>
+                <li>List Item</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      HTML
+    end
+
+    it 'works' do
+      described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
+      expect(example).to match_normalized_html(
+        <<~HTML
+          <div data-type="example" id="example-test">
+            <title-tag-name class="os-title">
+              <span class="os-title-label">Example </span>
+              <span class="os-number">4</span>
+              <span class="os-divider"> </span>
+            </title-tag-name>
+            <div class="body">
+              <h4 data-type="title">example title becomes h4</h4>
+              <p>content</p>
+              <div data-type="exercise" id="exercise_id" class="unnumbered">
+                <div data-type="problem" id="problem_id">
+                  <div class="os-problem-container">
+                    <h4 data-type="title" id="title_id">Evaluating Functions</h4>
+                    <p>example content</p>
+                  </div>
+                </div>
+                <div data-type="solution" id="solution_id">
+                  <h4 data-type="solution-title">
+                    <span class="os-title-label">Solution </span>
+                  </h4>
+                  <div class="os-solution-container">
+                    <p>Solution content</p>
+                  </div>
+                </div>
+                <div data-type="commentary" id="commentary_id">
+                  <div data-type="list" id="list_id">
+                    <h4 data-type="title" id="title_id">List Title</h4>
+                    <ul>
+                      <li>List Item</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        HTML
+      )
+    end
+  end
+
   context 'when there is an example with multiple solutions' do
     let(:exercise) do
       <<~HTML

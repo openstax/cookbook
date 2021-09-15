@@ -53,7 +53,7 @@ module Kitchen
           next unless commentary.present?
 
           commentary_title = commentary.titles.first
-          next unless commentary_title.present?
+          next unless commentary_title.present? && commentary_title.parent['data-type'] != 'list'
 
           commentary_title.name = 'h4'
           commentary_title['data-type'] = 'commentary-title'

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Adds an optional selector to `RemoveSectionTitles` (minor)
+* Lets `BakeExample` not count titles in lists as commentary titles (minor)
 
 ## [11.2.0] - 2021-09-10
 
