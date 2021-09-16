@@ -81,7 +81,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
 
   book.pages('$.preface').each do |page|
     page.figures.each do |figure|
-      BakeFigure.v1(figure: figure, number: "#{figure.count_in(:page)}")
+      BakeFigure.v1(figure: figure, number: figure.count_in(:page))
     end
   end
 
