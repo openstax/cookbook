@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.1.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.2.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -23,7 +23,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
   BakeChapterTitle.v1(book: book)
   BakeUnitTitle.v1(book: book)
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
     # Eoc sections
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -34,8 +34,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
       metadata_source: metadata,
       container_key: 'suggested-readings',
       uuid_key: '.suggested-readings',
-      section_selector: 'section.suggested-readings',
-      include_intro_page: true
+      section_selector: 'section.suggested-readings'
     ) do |section|
       RemoveSectionTitle.v1(section: section)
     end
