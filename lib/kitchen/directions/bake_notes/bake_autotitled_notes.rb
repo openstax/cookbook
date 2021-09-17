@@ -16,7 +16,11 @@ module Kitchen
         Kitchen::Directions::BakeIframes.v1(outer_element: note)
         note.wrap_children(class: 'os-note-body')
 
-        BakeNoteSubtitle.v1(note: note, cases: cases) if bake_subtitle
+        if bake_subtitle
+          BakeNoteSubtitle.v1(note: note, cases: cases)
+        else
+          note.title&.trash
+        end
 
         note.prepend(child:
           <<~HTML

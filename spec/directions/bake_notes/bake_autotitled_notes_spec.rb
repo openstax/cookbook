@@ -13,6 +13,9 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
           <div data-type="note" id="noteId" class="baz">
             <div data-type="title" id="titleId">note <em data-effect="italics">title</em></div>
             <p>content</p>
+            <div>
+              <h3 data-type="title">Subsection title</h3>
+            </div>
           </div>
           <div data-type="note" id="untitlednote" class="123">
             <p>content</p>
@@ -128,6 +131,9 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
                 <span class="os-subtitle-label">note <em data-effect="italics">title</em></span>
               </h4>
               <p>content</p>
+            <div>
+              <h3 data-type="title">Subsection title</h3>
+            </div>
             </div>
           </div>
           <div data-type="note" id="untitlednote" class="123">
