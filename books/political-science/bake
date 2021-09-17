@@ -58,7 +58,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
   BakeAutotitledNotes.v1(book: book, classes: autotitled_classes)
 
   # Eob sections
-  BakeReferences.v1(book: book, metadata_source: metadata)
+  BakeReferences.v1(book: book, metadata_source: metadata, numbered_title: true)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeToc.v1(book: book)
