@@ -5,10 +5,11 @@ module Kitchen
     # Bake directions for EOB references
     #
     module BakeReferences
-      def self.v1(book:, metadata_source:)
+      def self.v1(book:, metadata_source:, numbered_title: false)
         V1.new.bake(
           book: book,
-          metadata_source: metadata_source
+          metadata_source: metadata_source,
+          numbered_title: numbered_title
         )
       end
 

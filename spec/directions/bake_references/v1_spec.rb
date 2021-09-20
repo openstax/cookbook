@@ -53,7 +53,7 @@ RSpec.describe Kitchen::Directions::BakeReferences::V1 do
   end
 
   it 'works' do
-    described_class.new.bake(book: book1, metadata_source: metadata_element)
+    described_class.new.bake(book: book1, metadata_source: metadata_element, numbered_title: false)
 
     expect(book1.body).to match_normalized_html(
       <<~HTML
@@ -138,6 +138,26 @@ RSpec.describe Kitchen::Directions::BakeReferences::V1 do
             </div>
           </div>
         </body>
+      HTML
+    )
+  end
+
+  it 'add chapter number to references title' do
+    described_class.new.bake(book: book1, metadata_source: metadata_element, numbered_title: true)
+    expect(
+      book1.body.search('div.os-reference-container').search('div.os-chapter-area > [data-type="document-title"]')
+    ).to match_normalized_html(
+      <<~HTML
+        <h2 data-type="document-title">
+          <span class="os-number">1</span>
+          <span class="os-divider"> </span>
+          <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
+        </h2>
+        <h2 data-type="document-title">
+          <span class="os-number">2</span>
+          <span class="os-divider"> </span>
+          <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
+        </h2>
       HTML
     )
   end

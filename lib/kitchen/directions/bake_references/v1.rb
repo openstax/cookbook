@@ -4,7 +4,7 @@ module Kitchen::Directions::BakeReferences
   class V1
     renderable
 
-    def bake(book:, metadata_source:)
+    def bake(book:, metadata_source:, numbered_title:)
       @metadata = metadata_source.children_to_keep.copy
       @klass = 'reference'
       @uuid_prefix = '.'
@@ -28,12 +28,17 @@ module Kitchen::Directions::BakeReferences
         end
 
         chapter_references = chapter.pages.references.cut
-        chapter_title_no_num = chapter.title.search('.os-text')
+
+        chapter_title = if numbered_title
+                          chapter.title.search('.os-number, .os-divider, .os-text')
+                        else
+                          chapter.title.search('.os-text')
+                        end
 
         chapter.append(child:
           <<~HTML
             <div class="os-chapter-area">
-              <h2 data-type="document-title">#{chapter_title_no_num}</h2>
+              <h2 data-type="document-title">#{chapter_title}</h2>
               #{chapter_references.paste}
             </div>
           HTML
