@@ -102,6 +102,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
               </div>
             </div>
           </div>
+          <div data-type="note" id="123" class="foo">
+            <p>note with solution to be suppressed</p>
+            <div data-type="solution">
+              <p>Some Solution</p>
+            </div>
+          </div>
         </div></div>
       HTML
     )
@@ -276,6 +282,15 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div data-type="note" id="123" class="foo">
+              <h3 class="os-title">
+                <span class="os-title-label">Bar</span>
+                <span class="os-number">2.5</span>
+              </h3>
+              <div class="os-note-body">
+                <p>note with solution to be suppressed</p>
               </div>
             </div>
           </div></div>

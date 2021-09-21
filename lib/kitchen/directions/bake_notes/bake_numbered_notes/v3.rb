@@ -32,6 +32,8 @@ module Kitchen::Directions
             note.injected_questions.each do |question|
               BakeNumberedNotes.bake_note_injected_question(note: note, question: question)
             end
+
+            note.search("div[data-type='solution']").each&.trash if suppress_solution
           end
         end
       end
