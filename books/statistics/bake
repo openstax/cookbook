@@ -18,10 +18,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     reference: '.references'
   )
 
-  # statistics: no stepwise, yes introbody
-  # hs-statistics: no stepwise lists, yes introbody
-  # business-statistics: no stepwise lists? no introbody
-
   book = doc.book
   metadata = book.metadata
 
@@ -158,12 +154,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  # 'div.os-eoc.os-solutions-container'
   book.search('section.section-exercises', 'section.free-response', 'section.bring-together-homework', 'div.os-solutions-container').each do |within|
     BakeFirstElements.v1(within: within)
   end
 
-  # BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
