@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -43,7 +43,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   )
 
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
 
     # EOC sections
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -71,7 +71,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       section_selector: 'section.practice',
       append_to: chapter
     ) do |section|
-      RemoveSectionTitle.v1(section: section)
+      RemoveSectionTitle.v1(section: section, selector: 'h3')
       section.prepend(child: EocSectionTitleLinkSnippet.v1(
         page: section.ancestor(:page)
       ))
@@ -103,14 +103,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
-    exercise_selectors = %w[bring-together-homework bring-together-exercises practice free-response]
-    chapter.search(exercise_selectors.prefix('section.').join(', ')).exercises.each do |exercise|
+    exercise_selectors = '.practice, .bring-together-exercises, .free-response, .bring-together-homework'
+    chapter.search(exercise_selectors).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
     BakeChapterSolutions.v1(chapter: chapter,
                             metadata_source: metadata,
-                            classes: exercise_selectors)
+                            classes: %w[practice bring-together-exercises free-response bring-together-homework])
+                            # breaks when replaced by exercise_selectors
 
     chapter.examples.each do |example|
       BakeExample.v1(example: example,
@@ -120,7 +121,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     end
   end
 
-  BakeNumberedNotes.v3(book: book, classes: %w[try])
+  BakeNumberedNotes.v3(book: book, classes: %w[try], suppress_solution: true)
   BakeAutotitledNotes.v1(book: book, classes: %w[lab calculator])
   BakeAutotitledNotes.v1(book: book, classes: %w[collab], bake_subtitle: false)
 
@@ -158,7 +159,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
   end
 
   # 'div.os-eoc.os-solutions-container'
-  book.search('section.section-exercises', 'section.free-response', 'div.os-solutions-container').each do |within|
+  book.search('section.section-exercises', 'section.free-response', 'section.bring-together-homework', 'div.os-solutions-container').each do |within|
     BakeFirstElements.v1(within: within)
   end
 
