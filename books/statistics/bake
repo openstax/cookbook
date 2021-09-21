@@ -154,7 +154,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  book.search('section.section-exercises', 'section.free-response', 'section.bring-together-homework', 'div.os-solutions-container').each do |within|
+  book.search('section.section-exercises',
+              'section.free-response',
+              'section.bring-together-homework',
+              'div.os-solutions-container').each do |within|
     BakeFirstElements.v1(within: within)
   end
 
