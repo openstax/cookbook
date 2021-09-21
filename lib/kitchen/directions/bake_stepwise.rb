@@ -8,7 +8,7 @@ module Kitchen
           ol.remove_class('stepwise')
           ol.add_class('os-stepwise')
 
-          ol.search('li').each_with_index do |li, ii|
+          ol.search('> li').each_with_index do |li, ii|
             li.wrap_children('span', class: 'os-stepwise-content')
             li.prepend(child:
               <<~HTML

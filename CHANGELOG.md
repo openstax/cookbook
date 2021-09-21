@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fixes `BakeStepwise` to skip nested lists (patch)
 * Adds an optional selector to `RemoveSectionTitles` (minor)
 * Patches `BakeFreeResponse` to only delete the first h3, not all h3s (patch)
 * Lets `BakeExample` not count titles in lists as commentary titles (minor)

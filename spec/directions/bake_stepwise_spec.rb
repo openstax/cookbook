@@ -19,7 +19,7 @@ RSpec.describe Kitchen::Directions::BakeStepwise do
             <li>content2</li>
           </ol>
           <ol class="stepwise">
-            <li>content3</li>
+            <li>content3: <ul><li>nested list should not be baked</li></ul></li>
           </ol>
         HTML
       )
@@ -44,7 +44,7 @@ RSpec.describe Kitchen::Directions::BakeStepwise do
         <ol class="os-stepwise">
           <li>
             <span class="os-stepwise-token">Step 1. </span>
-            <span class="os-stepwise-content">content3</span>
+            <span class="os-stepwise-content">content3: <ul><li>nested list should not be baked</li></ul></span>
           </li>
         </ol>
       HTML
