@@ -40,7 +40,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
       section.prepend(child: title)
     end
 
-    # MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
     chapter.pages.search('section.review-questions').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
