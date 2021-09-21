@@ -88,7 +88,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
                 think-philosopher
                 write-philosopher
                 philo-connections
-                time-line]
+                time-line
+                media-video
+                media-podcast]
   )
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
