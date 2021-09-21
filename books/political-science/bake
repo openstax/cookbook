@@ -27,20 +27,37 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
     BakeNonIntroductionPages.v1(chapter: chapter)
     # Eoc sections
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
+
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
-      container_key: 'suggested-readings',
-      uuid_key: '.suggested-readings',
-      section_selector: 'section.suggested-readings'
+      container_key: 'summary',
+      uuid_key: '.summary',
+      section_selector: 'section.summary'
     ) do |section|
       RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
     end
-    chapter.search('section.review-questions').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+
+    # MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'review-questions')
+    chapter.pages.search('section.review-questions').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
+
+    eoc_sections = %w[review-questions suggested-readings]
+    eoc_sections.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
+
     # Tables and figures
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -53,8 +70,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
   end
 
   # Bake the notes
-  autotitled_classes = %w[show-data connecting-courses meet-professional fifty-fifty what-do
-                          where-engage media-video]
+  autotitled_classes = %w[show-data connecting-courses meet-professional changing-political what-do
+                          where-engage media-video media-podcast]
   BakeAutotitledNotes.v1(book: book, classes: autotitled_classes)
 
   # Eob sections
