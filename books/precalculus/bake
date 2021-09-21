@@ -4,13 +4,16 @@
 
 require 'bundler/inline'
 
+# frozen_string_literal: true
+
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.2.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.1.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
+# Used for precalculus, college algebra, and trigonometry
+precalculus_recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
   include Kitchen::Directions
 
   book = doc.book
@@ -40,10 +43,21 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
     # EoC sections with exercises
     eoc_exercises_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata,
                                                       klass: 'exercises')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
-                          append_to: eoc_exercises_wrapper, klass: 'review-exercises')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
-                          append_to: eoc_exercises_wrapper, klass: 'practice-test')
+    %w[review-exercises practice-test].each do |klass|
+      Kitchen::Directions::MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: klass,
+        uuid_key: ".#{klass}",
+        section_selector: "section.#{klass}",
+        append_to: eoc_exercises_wrapper
+      ) do |exercise_section|
+        Kitchen::Directions::RemoveSectionTitle.v1(section: exercise_section)
+        exercise_section.search('section').each do |section|
+          section.first('h4').name = 'h5'
+        end
+      end
+    end
     BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
     # In-place bake exercises & solutions
     chapter.search('section.review-exercises').exercises.each do |exercise|
@@ -57,12 +71,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
     end
   end
 
+  book.search('div.try, section.section-exercises, section.review-exercises')\
+      .search('div[data-type="solution"]').tables.each do |table|
+    table.add_class('unnumbered')
+  end
+
   # Tables and figures must be baked after EOC sections are created to preserve number ordering
   book.pages('$:not(.appendix)').each do |page|
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table, number: table.count_in(:page))
     end
-    page.figures.each do |figure|
+    page.figures(only: :figure_to_bake?).each do |figure|
       BakeFigure.v1(figure: figure, number: figure.count_in(:page))
     end
     page.examples.each do |example|
@@ -74,7 +93,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table, number: table.count_in(:composite_page))
     end
-    page.figures('$:not(.unnumbered)').each do |figure|
+    page.figures(only: :figure_to_bake?).each do |figure|
       BakeFigure.v1(figure: figure, number: figure.count_in(:composite_page))
     end
   end
@@ -86,7 +105,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
     end
-    page.figures('$:not(.unnumbered)').each do |figure|
+    page.figures(only: :figure_to_bake?).each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
   end
@@ -100,7 +119,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
     chapter.search('section.review-exercises, section.practice-test, section.section-exercises,' \
       ' div[data-type="note"].try').exercises.each do |exercise|
       # Classes added: has-first-element; has-first-inline-list-element
-      BakeFirstElements.v1(within: exercise)
+      BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
 
     MoveSolutionsToAnswerKey.v1(
@@ -120,6 +139,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
   BakeLinkPlaceholders.v1(book: book)
 end
 
+coreq_delete = Kitchen::BookRecipe.new(book_short_name: :coreq_delete) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+
+  book.search('section.practice-perfect').each(&:trash)
+  book.search('section.coreq-skills').each(&:trash)
+end
+
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
@@ -127,6 +155,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [recipe],
+  recipes: [coreq_delete, precalculus_recipe],
   output_file: opts[:output]
 )
