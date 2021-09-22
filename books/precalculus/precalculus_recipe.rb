@@ -8,6 +8,8 @@ gemfile do
   gem 'byebug'
 end
 
+# Used in precalculus (bakes precalculus, trigonometry, and college-algebra)
+# and precalculus-coreq (bakes college-algebra-coreq)
 PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc|
   include Kitchen::Directions
 
