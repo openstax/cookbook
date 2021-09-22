@@ -5,12 +5,12 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.2.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.0.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :finance_short) do |doc|
+recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science_short) do |doc|
   include Kitchen::Directions
 
   book = doc.book
