@@ -211,6 +211,14 @@ module Kitchen
       self[:id] = value
     end
 
+    # Returns the element's data-type
+    #
+    # @return [String]
+    #
+    def data_type
+      self[:'data-type']
+    end
+
     # A way to set values and chain them
     #
     # @param property [String, Symbol] the name of the property to set

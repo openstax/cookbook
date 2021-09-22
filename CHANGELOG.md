@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix `NoteElement#title` to be more specific about finding the title (patch)
+
 ## [12.0.0] - 2021-09-21
 
 * Fixes `BakeStepwise` to skip nested lists (patch)

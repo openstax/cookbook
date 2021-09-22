@@ -96,7 +96,7 @@ RSpec.describe Kitchen::NoteElement do
       ).notes
     end
 
-    let(:note_with_non_subtitle_title) do
+    let(:notes_with_non_subtitle_title) do
       book_containing(html:
         one_chapter_with_one_page_containing(
           <<~HTML
@@ -106,9 +106,14 @@ RSpec.describe Kitchen::NoteElement do
                 <li><div data-type="title">not a subtitle</div></li>
               </ul>
             </div>
+            <div data-type="note">
+              <div data-type="list">
+                <div data-type="title">also not a subtitle</div>
+              </div>
+            </div>
           HTML
         )
-      ).notes.first
+      ).notes
     end
 
     it 'gets the subtitle' do
@@ -118,7 +123,8 @@ RSpec.describe Kitchen::NoteElement do
     end
 
     it 'does not get non subtitle titles' do
-      expect(note_with_non_subtitle_title.title).to eq(nil)
+      expect(notes_with_non_subtitle_title.first.title).to eq(nil)
+      expect(notes_with_non_subtitle_title[1].title).to eq(nil)
     end
   end
 
