@@ -3,13 +3,6 @@
 # frozen_string_literal: true
 
 require 'bundler/inline'
-
-gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.2.0'
-  gem 'slop', '4.8.2'
-  gem 'byebug'
-end
-
 require_relative '../precalculus/precalculus_recipe'
 
 coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
@@ -27,7 +20,7 @@ coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
     end
   end
 
-  book.search('section.coreq-skills').each do |coreq_section|
+  book.pages.search('section.coreq-skills').each do |coreq_section|
     coreq_section.prepend(child:
       <<~HTML
         <h3 class="os-title">
@@ -35,8 +28,14 @@ coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
         </h3>
       HTML
     )
-    coreq_section.search('table, figure, div[data-type="example"]').each do |table|
-      table.add_class('os-coreq-element')
+    coreq_section.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table, number: table.count_in(:page))
+    end
+    coreq_section.figures(only: :figure_to_bake?).each do |figure|
+      BakeFigure.v1(figure: figure, number: figure.count_in(:page))
+    end
+    coreq_section.examples.each do |example|
+      BakeExample.v1(example: example, number: example.count_in(:page), title_tag: 'h3')
     end
   end
 end
