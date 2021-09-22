@@ -20,19 +20,10 @@ def sort_attributes(element)
   end
 end
 
-# Standard: note
-
-def fix_note_titles(element)
-  return unless element[:'data-type'] == 'note'
-
-  element.search('.os-title')&.first&.name = 'h3'
-end
-
 # Legacy bakings of unnumbered tables include a bogus number, delete it
 
 def remove_bogus_number_from_unnumbered_tables(element)
-  # return unless element.name == 'table' && (element[:class] || '').include?('unnumbered')
-  return unless element.name == 'table'
+  return unless element.name == 'table' && (element[:class] || '').include?('unnumbered')
 
   element.remove_attribute('summary')
 end
@@ -87,7 +78,6 @@ def normalize(doc, args: [])
     mask_copied_id_numbers(child)
     next if child.text? || child.document?
 
-    fix_note_titles(child)
     remove_bogus_number_from_unnumbered_tables(child)
     remove_blank_classes(child)
     sort_classes_strip_whitespace(child)
