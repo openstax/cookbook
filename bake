@@ -40,5 +40,6 @@ case "${book}" in
   english-composition) $DIR/books/english-composition/bake --input $input_file --output $output_file;;
   u-physics) $DIR/books/u-physics/bake --input $input_file --output $output_file;;
   finance) $DIR/books/finance/bake --input $input_file --output $output_file;;
+  computer-science) $DIR/books/computer-science/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
