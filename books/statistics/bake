@@ -99,7 +99,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
-    exercise_selectors = '.practice, .bring-together-exercises, .free-response, .bring-together-homework'
+    exercise_selectors = 'section.practice, section.bring-together-exercises, section.free-response, section.bring-together-homework'
     chapter.search(exercise_selectors).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
