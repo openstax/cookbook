@@ -33,7 +33,8 @@ module Kitchen
           title.parent.has_class?('os-caption-container') || \
           title.parent.has_class?('os-caption') || \
           title.parent.name == 'caption' || \
-          title.parent[:'data-type'] == 'note'
+          title.parent.data_type == 'note' || \
+          title.parent.data_type == 'exercise'
         end
       )
     end

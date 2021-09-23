@@ -562,7 +562,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
               <div data-type='example' id='example-test'>
                 <span data-type="title" id="title1">example title becomes h4</span>
                 <div data-type="exercise">
-                  <span data-type="title" id="title2">exercises title becomes h4(?)</span>
+                  <span data-type="title" id="title2">exercise title is skipped</span>
                 </div>
                 <div data-type="note">
                   <h3 data-type="title" id="title3">note title is skipped</h3>
@@ -590,10 +590,8 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
 
     it 'skips titles within tables & notes' do
-      ids = %w[title1 title2]
-      example.titles_to_rename.each_with_index do |title, index|
-        expect(title.id).to eq(ids[index])
-      end
+      renamed_title_ids = example.titles_to_rename.map { |title| title.id }
+      expect(renamed_title_ids).to eq(%w[title1])
     end
   end
 end
