@@ -25,6 +25,8 @@ RSpec.describe Kitchen::BookElement do
           </nav>
           <div>This is a div</div>
           <div data-type="metadata" style="display: none;">
+            <span data-type="revised" id="revised">Revised</span>
+            <span data-type="slug" id="slug">Slug</span>
             <div class="authors" id="authors">Authors</div>
             <div class="publishers" id="publishers">Publishers</div>
             <div class="print-style" id="print-style">Print Style</div>
@@ -40,6 +42,8 @@ RSpec.describe Kitchen::BookElement do
     expect(book.metadata).to match_normalized_html(
       <<~HTML
         <div data-type="metadata" style="display: none;">
+          <span data-type="revised" id="revised">Revised</span>
+          <span data-type="slug" id="slug">Slug</span>
           <div class="authors" id="authors">Authors</div>
           <div class="publishers" id="publishers">Publishers</div>
           <div class="print-style" id="print-style">Print Style</div>

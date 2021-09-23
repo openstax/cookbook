@@ -27,7 +27,12 @@ module Kitchen
     # @return [ElementEnumerator]
     #
     def children_to_keep
-      search(%w(span[data-type='revised'] div.authors div.publishers div.print-style div.permissions
+      search(%w(span[data-type='revised']
+                span[data-type='slug']
+                div.authors
+                div.publishers
+                div.print-style
+                div.permissions
                 div[data-type='subject']))
     end
   end

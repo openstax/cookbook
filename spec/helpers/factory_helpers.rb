@@ -62,6 +62,8 @@ def metadata_element
   book_containing(html:
     <<~HTML
       <div data-type="metadata" style="display: none;">
+        <span data-type="revised" id="revised">Revised</span>
+        <span data-type="slug" id="slug">Slug</span>
         <div class="authors" id="authors">Authors</div>
         <div class="publishers" id="publishers">Publishers</div>
         <div class="print-style" id="print-style">Print Style</div>

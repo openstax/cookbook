@@ -125,6 +125,8 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary::V1 do
               </h2>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">Key Terms</h1>
+                <span data-type="revised" id="revised_copy_1">Revised</span>
+                <span data-type="slug" id="slug_copy_1">Slug</span>
                 <div class="authors" id="authors_copy_1">Authors</div>
                 <div class="publishers" id="publishers_copy_1">Publishers</div>
                 <div class="print-style" id="print-style_copy_1">Print Style</div>
@@ -170,7 +172,13 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary::V1 do
               </h3>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">Key Terms</h1>
-                <div class="authors" id="authors_copy_1">Authors</div><div class="publishers" id="publishers_copy_1">Publishers</div><div class="print-style" id="print-style_copy_1">Print Style</div><div class="permissions" id="permissions_copy_1">Permissions</div><div data-type="subject" id="subject_copy_1">Subject</div>
+                <span data-type="revised" id="revised_copy_1">Revised</span>
+                <span data-type="slug" id="slug_copy_1">Slug</span>
+                <div class="authors" id="authors_copy_1">Authors</div>
+                <div class="publishers" id="publishers_copy_1">Publishers</div>
+                <div class="print-style" id="print-style_copy_1">Print Style</div>
+                <div class="permissions" id="permissions_copy_1">Permissions</div>
+                <div data-type="subject" id="subject_copy_1">Subject</div>
               </div>
               <dl>
                 <dt>ABD</dt>
@@ -215,6 +223,8 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary::V1 do
                 </h2>
                 <div data-type="metadata" style="display: none;">
                   <h1 data-type="document-title" itemprop="name">Kluczowe pojęcia</h1>
+                  <span data-type="revised" id="revised_copy_1">Revised</span>
+                  <span data-type="slug" id="slug_copy_1">Slug</span>
                   <div class="authors" id="authors_copy_1">Authors</div>
                   <div class="publishers" id="publishers_copy_1">Publishers</div>
                   <div class="print-style" id="print-style_copy_1">Print Style</div>
@@ -263,6 +273,8 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary::V1 do
               </h2>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">Key Terms</h1>
+                <span data-type="revised" id="revised_copy_1">Revised</span>
+                <span data-type="slug" id="slug_copy_1">Slug</span>
                 <div class="authors" id="authors_copy_1">Authors</div>
                 <div class="publishers" id="publishers_copy_1">Publishers</div>
                 <div class="print-style" id="print-style_copy_1">Print Style</div>

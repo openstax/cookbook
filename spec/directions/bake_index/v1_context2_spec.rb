@@ -19,6 +19,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
     book_containing(html:
       <<~HTML
         <div data-type="metadata" style="display: none;">
+          <span data-type="revised" id="revised">Revised</span>
+          <span data-type="slug" id="slug">Slug</span>
           <div class="authors" id="authors">Authors</div>
           <div class="publishers" id="publishers">Publishers</div>
           <div class="print-style" id="print-style">Print Style</div>
@@ -79,6 +81,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
         <<~HTML
           <body>
             <div data-type="metadata" style="display: none;">
+              <span data-type="revised" id="revised">Revised</span>
+              <span data-type="slug" id="slug">Slug</span>
               <div class="authors" id="authors">Authors</div>
               <div class="publishers" id="publishers">Publishers</div>
               <div class="print-style" id="print-style">Print Style</div>
@@ -134,6 +138,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
               </h1>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">Skorowidz nazwisk</h1>
+                <span data-type="revised" id="revised_copy_1">Revised</span>
+                <span data-type="slug" id="slug_copy_1">Slug</span>
                 <div class="authors" id="authors_copy_1">Authors</div>
                 <div class="publishers" id="publishers_copy_1">Publishers</div>
                 <div class="print-style" id="print-style_copy_1">Print Style</div>
@@ -169,6 +175,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
               </h1>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">Skorowidz rzeczowy</h1>
+                <span data-type="revised" id="revised_copy_2">Revised</span>
+                <span data-type="slug" id="slug_copy_2">Slug</span>
                 <div class="authors" id="authors_copy_2">Authors</div>
                 <div class="publishers" id="publishers_copy_2">Publishers</div>
                 <div class="print-style" id="print-style_copy_2">Print Style</div>
@@ -241,6 +249,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
               </h1>
               <div data-type="metadata" style="display: none;">
                 <h1 data-type="document-title" itemprop="name">Skorowidz terminów obcojęzycznych</h1>
+                <span data-type="revised" id="revised_copy_3">Revised</span>
+                <span data-type="slug" id="slug_copy_3">Slug</span>
                 <div class="authors" id="authors_copy_3">Authors</div>
                 <div class="publishers" id="publishers_copy_3">Publishers</div>
                 <div class="print-style" id="print-style_copy_3">Print Style</div>

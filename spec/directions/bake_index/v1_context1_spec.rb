@@ -18,6 +18,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
       <<~HTML
         <div data-type="metadata" style="display: none;">
           <div class="authors" id="authors">Authors</div>
+          <span data-type="revised" id="revised">Revised</span>
+          <span data-type="slug" id="slug">Slug</span>
           <div class="publishers" id="publishers">Publishers</div>
           <div class="print-style" id="print-style">Print Style</div>
           <div class="permissions" id="permissions">Permissions</div>
@@ -71,6 +73,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             </h1>
             <div data-type="metadata" style="display: none;">
               <h1 data-type="document-title" itemprop="name">Index</h1>
+              <span data-type="revised" id="revised_copy_1">Revised</span>
+              <span data-type="slug" id="slug_copy_1">Slug</span>
               <div class="authors" id="authors_copy_1">Authors</div>
               <div class="publishers" id="publishers_copy_1">Publishers</div>
               <div class="print-style" id="print-style_copy_1">Print Style</div>
