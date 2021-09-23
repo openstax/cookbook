@@ -42,6 +42,11 @@ RSpec.describe 'books' do
   it 'bakes sociology' do
     expect('sociology').to bake_correctly
   end
+
+  it 'bakes statistics' do
+    expect('statistics').to bake_correctly
+  end
+
   it 'bakes american_government' do
     expect('american_government').to bake_correctly
   end

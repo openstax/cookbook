@@ -23,6 +23,7 @@ case "${book}" in
   biology) dest="${DIR}/data/biology/short" && script="${DIR}/books/biology/shorten";;
   calculus) dest="${DIR}/data/calculus/short" && script="${DIR}/books/calculus/shorten";;
   chemistry) dest="${DIR}/data/chemistry/short" && script="${DIR}/books/chemistry/shorten";;
+  statistics) dest="${DIR}/data/statistics/short" && script="${DIR}/books/statistics/shorten";;
   pl-psychology) dest="${DIR}/data/pl-psychology/short" && script="${DIR}/books/pl-psychology/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
   precalculus) dest="${DIR}/data/precalculus/short" && script="${DIR}/books/precalculus/shorten";;
@@ -53,7 +54,7 @@ then
     echo "Baking with legacy ..."
     ./bake_legacy -i $dest/assembled.xhtml -r legacy_recipes/$book.css -o $dest/easybaked.xhtml
     # Normalize the easybaked book
-    ruby scripts/normalize $dest/easybaked.xhtml
+    ruby scripts/normalize $dest/easybaked.xhtml --easybaked-only
 else
     echo "Cannot bake with legacy because legacy_recipes/${book}.css does not exist."
 fi
