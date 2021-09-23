@@ -63,6 +63,21 @@ RSpec.describe Kitchen::Directions::BakeFigure do
     )
   end
 
+  let(:book_with_unnumbered_with_caption) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <figure id="someId" class="unnumbered">
+            <figcaption>figure caption</figcaption>
+            <span>
+              <img src="img.jpg"/>
+            </span>
+          </figure>
+        HTML
+      )
+    )
+  end
+
   let(:book_with_problematic_figures) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -76,6 +91,9 @@ RSpec.describe Kitchen::Directions::BakeFigure do
           <figure id="fig4">
             <figure id="fig5">
             </figure>
+          </figure>
+          <figure id="fig6" class="unnumbered">
+            <figcaption>figure caption</figcaption>
           </figure>
         HTML
       )
@@ -165,6 +183,28 @@ RSpec.describe Kitchen::Directions::BakeFigure do
       end
     end
 
+    context 'when figure is unnumbered but has caption' do
+      it 'bakes' do
+        described_class.v1(figure: book_with_unnumbered_with_caption.figures.first, number: 'blah')
+        expect(book_with_unnumbered_with_caption.pages.first).to match_normalized_html(
+          <<~HTML
+            <div data-type="page">
+              <div class="os-figure">
+                <figure class="unnumbered" id="someId">
+                  <span>
+                    <img src="img.jpg" />
+                  </span>
+                </figure>
+                <div class="os-caption-container">
+                  <span class="os-caption">figure caption</span>
+                </div>
+              </div>
+            </div>
+          HTML
+        )
+      end
+    end
+
     context 'when book does not use grammatical cases' do
       it 'stores link text' do
         pantry = book1.pantry(name: :link_text)
@@ -202,7 +242,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   describe '#figure_to_bake?' do
     it 'can select what figures should be baked' do
-      expect(book_with_problematic_figures.figures.map(&:figure_to_bake?)).to eq([true, true, false, true, false])
+      expect(book_with_problematic_figures.figures.map(&:figure_to_bake?)).to eq([true, true, false, true, false, true])
     end
   end
 

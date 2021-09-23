@@ -4,10 +4,11 @@ module Kitchen
   module Directions
     module BakeFigure
       def self.v1(figure:, number:, cases: false)
-        return if figure.has_class?('unnumbered') && !figure.has_class?('splash')
+        return if figure.has_class?('unnumbered') && !figure.has_class?('splash') && !figure.caption
 
         figure.wrap(%(<div class="os-figure#{' has-splash' if figure.has_class?('splash')}">))
-        if figure.has_class?('unnumbered') && figure.has_class?('splash')
+
+        if figure.has_class?('unnumbered') && (figure.caption || figure.has_class?('splash'))
           caption = figure.caption&.cut
           figure.append(sibling:
             <<~HTML
