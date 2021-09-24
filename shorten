@@ -34,6 +34,7 @@ case "${book}" in
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
   computer-science) dest="${DIR}/data/computer-science/short" && script="${DIR}/books/computer-science/shorten";;
   political-science) dest="${DIR}/data/political-science/short" && script="${DIR}/books/political-science/shorten";;
+  ap-biology) dest="${DIR}/data/ap-biology/short" && script="${DIR}/books/ap-biology/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 

@@ -3,7 +3,7 @@
 require 'set'
 
 DUPLICATE_IDS_TO_IGNORE = %w[author-1 author-2 publisher-1 publisher-2 publisher-3 publisher-4
-                             copyright-holder-1 copyright-holder-2].freeze
+                             copyright-holder-1 copyright-holder-2 copyright-holder-3].freeze
 
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
@@ -90,6 +90,12 @@ def eoc_metadata_title(element)
   element.element_children.first.content = title
 end
 
+def pointless_links(element)
+  return unless element[:'data-type'] == 'exercise-context' && element[:'data-context-feature'].matches
+
+  child.element_children.first.content = '[link]'
+end
+
 # Main normalize function for an XML document
 
 def normalize(doc, args: [])
@@ -105,6 +111,7 @@ def normalize(doc, args: [])
     if args.include?('--easybaked-only')
       div_to_h3_note(child)
       eoc_metadata_title(child)
+      pointless_links(child)
       next unless child.name == 'table'
 
       child.remove_attribute('summary')
