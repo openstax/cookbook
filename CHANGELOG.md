@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.1.0] - 2021-09-24
+
 * Fix `BakeExample#titles_to_rename` to exclude exercise titles (patch)
 * Modify `BakeFigure` to bake unnumbered figures with caption (minor)
 * Fix `NoteElement#title` to be more specific about finding the title (patch)
