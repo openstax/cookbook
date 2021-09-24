@@ -44,6 +44,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
 
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
     # EOC sections
     eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
 
@@ -84,8 +89,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
     end
   end
 
-  notes = %w[real-application spotlight-ethics check-point link-to-learning]
+  notes = %w[real-application spotlight-ethics link-to-learning]
   BakeAutotitledNotes.v1(book: book, classes: notes)
+
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[check-point],
+    bake_exercises: true
+  )
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
