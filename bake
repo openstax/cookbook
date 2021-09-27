@@ -31,6 +31,7 @@ case "${book}" in
   statistics) $DIR/books/statistics/bake --input $input_file --output $output_file;;
   contemporary-math) $DIR/books/contemporary-math/bake --input $input_file --output $output_file;;
   precalculus) $DIR/books/precalculus/bake --input $input_file --output $output_file;;
+  precalculus-coreq) $DIR/books/precalculus-coreq/bake --input $input_file --output $output_file;;
   anthropology) $DIR/books/anthropology/bake --input $input_file --output $output_file;;
   biology) $DIR/books/biology/bake --input $input_file --output $output_file;;
   political-science) $DIR/books/political-science/bake --input $input_file --output $output_file;;
