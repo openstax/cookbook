@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Modify `BakeAutotitledNotes` to bake unnumbered exercises with solution (minor)
 ## [12.1.0] - 2021-09-24
 
 * Fix `BakeExample#titles_to_rename` to exclude exercise titles (patch)
