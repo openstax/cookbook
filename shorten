@@ -23,11 +23,19 @@ case "${book}" in
   biology) dest="${DIR}/data/biology/short" && script="${DIR}/books/biology/shorten";;
   calculus) dest="${DIR}/data/calculus/short" && script="${DIR}/books/calculus/shorten";;
   chemistry) dest="${DIR}/data/chemistry/short" && script="${DIR}/books/chemistry/shorten";;
+  statistics) dest="${DIR}/data/statistics/short" && script="${DIR}/books/statistics/shorten";;
+  pl-psychology) dest="${DIR}/data/pl-psychology/short" && script="${DIR}/books/pl-psychology/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
   precalculus) dest="${DIR}/data/precalculus/short" && script="${DIR}/books/precalculus/shorten";;
+  precalculus-coreq) dest="${DIR}/data/college-algebra-coreq/short" && script="${DIR}/books/precalculus-coreq/shorten";;
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
   economics) dest="${DIR}/data/economics/short" && script="${DIR}/books/economics/shorten";;
+  finance) dest="${DIR}/data/finance/short" && script="${DIR}/books/finance/shorten";;
+  english-composition) dest="${DIR}/data/english-composition/short" && script="${DIR}/books/english-composition/shorten";;
+  microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
+  computer-science) dest="${DIR}/data/computer-science/short" && script="${DIR}/books/computer-science/shorten";;
+  political-science) dest="${DIR}/data/political-science/short" && script="${DIR}/books/political-science/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
@@ -47,7 +55,7 @@ then
     echo "Baking with legacy ..."
     ./bake_legacy -i $dest/assembled.xhtml -r legacy_recipes/$book.css -o $dest/easybaked.xhtml
     # Normalize the easybaked book
-    ruby scripts/normalize $dest/easybaked.xhtml
+    ruby scripts/normalize $dest/easybaked.xhtml --easybaked-only
 else
     echo "Cannot bake with legacy because legacy_recipes/${book}.css does not exist."
 fi

@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '9.1.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.1.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -38,11 +38,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anthropology) do |doc|
     ) do |section|
       RemoveSectionTitle.v1(section: section)
     end
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'critical-thinking')
     exercise_selectors = 'section.critical-thinking'
-    chapter.search(exercise_selectors).exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    chapter.pages.search(exercise_selectors).injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: 'critical-thinking')
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
