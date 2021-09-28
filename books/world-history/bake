@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : 'e907691ad25a7cb956c851acb60f23227a5a7004'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -20,6 +20,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
+  # preface = book.pages('$.preface').first
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
@@ -69,14 +70,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
     end
 
     # Exercises
-    exercise_selectors = %w[section.making-connections
-                            section.thought-provokers
-                            section.source-questions]
+    exercise_selectors = 'section.making-connections,
+                          section.thought-provokers,
+                          section.source-questions'
 
-    exercise_selectors.each do |exercise_selector|
-      chapter.pages.search(exercise_selector).exercises.each do |exercise|
-        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-      end
+    chapter.pages.search(exercise_selectors).exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
     injected_exercises = %w[review-questions
@@ -91,12 +90,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
 
-    BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning
-                                                   own-words
-                                                   dueling-voices
-                                                   beyond-book
-                                                   past-present])
-
     # chapter.pages.each do |page|
     #   page.search('div[data-type="media"]').each do |media_container|
     #     if !media_container.parent[:'data-type'] == 'note'
@@ -108,7 +101,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
     #   end
     # end
 
-    BakeLearningObjectives.v1(chapter: chapter)
+    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
@@ -122,6 +115,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
 
     end
   end
+
+  BakeAutotitledNotes.v1(book: book, classes: %w[own-words
+                                                 dueling-voices
+                                                 beyond-book
+                                                 past-present])
+
+  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning], bake_subtitle: false)
 
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
