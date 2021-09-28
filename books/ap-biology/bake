@@ -18,6 +18,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
 
   book.search('cnx-pi').trash
 
+  # book.pages.injected_questions.each { |question| AddInjectedExerciseId.v1(question: question) }
+
   BakePreface.v1(book: book)
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
@@ -26,21 +28,23 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
   BakeAutotitledNotes.v1(
     book: book,
     classes: %w[visual-connection
-                interactive
-                ost-sciprac-activity
-                ost-sciprac-scithink
-                os-teacher
-                ap-science-practices],
-    # bake_subtitle: false
+                ost-sciprac-scithink],
+    bake_subtitle: false,
+    store_subtitle: false
   )
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[evolution
+    classes: %w[interactive
+                ost-sciprac-activity
+                ap-science-practices
+                os-teacher
+                evolution
                 ap-everyday
                 career
                 everyday
                 experiment
-                scientific]
+                scientific],
+    store_subtitle: false
   )
   BakeUnclassifiedNotes.v1(book: book)
 
@@ -92,10 +96,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
       RemoveSectionTitle.v1(section: section)
     end
 
-    chapter.search('div.os-eoc').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-    end
-
     chapter.figures('$:not(.unnumbered)', except: :subfigure?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
@@ -104,6 +104,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    # chapter.search('div.os-eoc').search_with(Kitchen::ExerciseElementEnumerator, Kitchen::InjectedQuestionElementEnumerator).each_with_index do |exercise, index|
+    #   if exercise.instance_of?(Kitchen::ExerciseElement)
+    #     BakeNumberedExercise.v1(exercise: exercise, number: index + 1, suppress_solution_if: true)
+    #   else
+    #     BakeInjectedExerciseQuestion.v1(question: exercise, number: index + 1)
+    #   end
+    # end
+
+    # TODO: Remove this and replace with above commented-out section
+    chapter.search('div.os-eoc').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
+      BakeFirstElements.v1(within: exercise)
     end
   end
 
@@ -115,10 +129,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
-    # page.tables('$:not(.unnumbered)').each do |table|
-    #   BakeNumberedTable.v1(table: table,
-    #                        number: "#{appendix_letter}#{table.count_in(:page)}")
-    # end
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
   end
 
   BakeMathInParagraph.v1(book: book)
