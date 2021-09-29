@@ -31,6 +31,10 @@ RSpec.describe 'books' do
     expect('trigonometry').to bake_correctly_with('precalculus')
   end
 
+  it 'bakes college algebra coreq' do
+    expect('college-algebra-coreq').to bake_correctly_with('precalculus-coreq')
+  end
+
   it 'bakes u-physics' do
     expect('u-physics').to bake_correctly
   end
@@ -38,6 +42,11 @@ RSpec.describe 'books' do
   it 'bakes sociology' do
     expect('sociology').to bake_correctly
   end
+
+  it 'bakes statistics' do
+    expect('statistics').to bake_correctly
+  end
+
   it 'bakes american_government' do
     expect('american_government').to bake_correctly
   end

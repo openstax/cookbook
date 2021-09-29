@@ -13,6 +13,15 @@ RSpec.describe 'normalize script' do
           <table class="" summary="123456">table 2</table>
           <div class=" ccccc   aaa bbb ">stuff</div>
           <div d="4" c="3" a="1"  e="5" b="2"/>
+          <div data-type="note">
+            <div class="os-title abc">Title</div>
+          </div>
+          <div class="os-eoc xyz">
+            <h2><span>Correct title</span></h2>
+            <div data-type="metadata">
+              <h1>Incorrect Title</h1>
+            </div>
+          </div>
         </body>
       HTML
     )
@@ -27,6 +36,38 @@ RSpec.describe 'normalize script' do
           <table summary="123456">table 2</table>
           <div class="aaa bbb ccccc">stuff</div>
           <div a="1" b="2" c="3" d="4" e="5"/>
+          <div data-type="note">
+            <div class="abc os-title">Title</div>
+          </div>
+          <div class="os-eoc xyz">
+            <h2><span>Correct title</span></h2>
+            <div data-type="metadata">
+              <h1>Incorrect Title</h1>
+            </div>
+          </div>
+        </body>
+      HTML
+    )
+  end
+
+  let(:expected_easybake_output) do
+    Nokogiri::XML(
+      <<~HTML
+        <body>
+          <div id="abc_copy_XXX">Hello,World!</div>
+          <table class="unnumbered">table</table>
+          <table>table 2</table>
+          <div class="aaa bbb ccccc">stuff</div>
+          <div a="1" b="2" c="3" d="4" e="5"/>
+          <div data-type="note">
+            <h3 class="abc os-title">Title</h3>
+          </div>
+          <div class="os-eoc xyz">
+            <h2><span>Correct title</span></h2>
+            <div data-type="metadata">
+              <h1>Correct title</h1>
+            </div>
+          </div>
         </body>
       HTML
     )
@@ -62,6 +103,13 @@ RSpec.describe 'normalize script' do
   it 'warns about duplicate ids' do
     expect($stdout).to receive(:puts).with('warning! duplicate id found for duplicate1').twice
     normalize(doc_with_duplicate_ids)
+  end
+
+  describe 'easybake normalization' do
+    it 'normalizes' do
+      normalize(doc, args: ['--easybaked-only'])
+      expect(doc.to_xml).to eq(expected_easybake_output.to_xml)
+    end
   end
 
   describe '#mask_term_numbers' do

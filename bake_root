@@ -72,10 +72,16 @@ case "${book}" in
   precalculus)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  bca)
+  precalculus-coreq)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   finance)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  computer-science)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  bca)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   *) echo "Baking book '${book}' with legacy baking";

@@ -29,8 +29,10 @@ case "${book}" in
   american_government) $DIR/books/american_government/bake --input $input_file --output $output_file;;
   calculus) $DIR/books/calculus/bake --input $input_file --output $output_file;;
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
+  statistics) $DIR/books/statistics/bake --input $input_file --output $output_file;;
   contemporary-math) $DIR/books/contemporary-math/bake --input $input_file --output $output_file;;
   precalculus) $DIR/books/precalculus/bake --input $input_file --output $output_file;;
+  precalculus-coreq) $DIR/books/precalculus-coreq/bake --input $input_file --output $output_file;;
   anthropology) $DIR/books/anthropology/bake --input $input_file --output $output_file;;
   biology) $DIR/books/biology/bake --input $input_file --output $output_file;;
   political-science) $DIR/books/political-science/bake --input $input_file --output $output_file;;
@@ -40,5 +42,6 @@ case "${book}" in
   english-composition) $DIR/books/english-composition/bake --input $input_file --output $output_file;;
   u-physics) $DIR/books/u-physics/bake --input $input_file --output $output_file;;
   finance) $DIR/books/finance/bake --input $input_file --output $output_file;;
+  computer-science) $DIR/books/computer-science/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
