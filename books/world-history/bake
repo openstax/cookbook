@@ -7,7 +7,9 @@ require 'bundler/inline'
 gemfile do
   gem 'openstax_kitchen',
       github: 'openstax/kitchen',
-      ref: 'e907691ad25a7cb956c851acb60f23227a5a7004'
+      ref: '2437abb8b3100f46941befffa6e541d521c2c571'
+  # gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.2.0'
+
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
