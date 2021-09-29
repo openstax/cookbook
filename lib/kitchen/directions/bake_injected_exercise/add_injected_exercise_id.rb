@@ -8,8 +8,8 @@ module Kitchen
     # In some books exercises are numbered after moving.
     # That's why this step has to be separated from BakeInjectedExerciseQuestion
     module AddInjectedExerciseId
-      def self.v1(question:)
-        question.id
+      def self.v1(book:)
+        book.pages.injected_questions.each(&:id)
       end
     end
   end

@@ -22,9 +22,7 @@ RSpec.describe Kitchen::Directions::AddInjectedExerciseId do
   end
 
   it 'bakes' do
-    book_with_injected_section.chapters.pages.injected_questions.each do |question|
-      described_class.v1(question: question)
-    end
+    described_class.v1(book: book_with_injected_section)
     expect(book_with_injected_section.search('section').first).to match_normalized_html(
       <<~HTML
         <section class="section-with-injected-exercises">
