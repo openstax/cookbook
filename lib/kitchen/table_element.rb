@@ -97,6 +97,14 @@ module Kitchen
       has_class?('column-header')
     end
 
+    # Returns true if the table is text heavy
+    #
+    # @return [Boolean]
+    #
+    def text_heavy?
+      has_class?('text-heavy')
+    end
+
     # Returns an element for the table caption, if present
     #
     # @return [Element, nil]

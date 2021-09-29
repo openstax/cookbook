@@ -49,6 +49,17 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
+  let(:text_heavy_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="text-heavy" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:other_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -137,6 +148,25 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
       <<~HTML
         <div class="os-table os-column-header-container">
           <table class="column-header" id="tId">
+        </table>
+          <div class="os-caption-container">
+            <span class="os-title-label">Table </span>
+            <span class="os-number">2.3</span>
+            <span class="os-divider"> </span>
+            <span class="os-divider"> </span>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  it 'bakes a text heavy table' do
+    described_class.new.bake(table: text_heavy_table, number: '2.3', always_caption: false)
+
+    expect(text_heavy_table.document.search('.os-table').first).to match_normalized_html(
+      <<~HTML
+        <div class="os-table os-text-heavy-container">
+          <table class="text-heavy" id="tId">
         </table>
           <div class="os-caption-container">
             <span class="os-title-label">Table </span>

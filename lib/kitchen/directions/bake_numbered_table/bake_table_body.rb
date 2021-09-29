@@ -62,6 +62,9 @@ module Kitchen
           elsif table.column_header?
             custom_table = CustomBody.new(table: table, klass: 'column-header')
             custom_table.modify_body(has_fake_title: false)
+          elsif table.text_heavy?
+            custom_table = CustomBody.new(table: table, klass: 'text-heavy')
+            custom_table.modify_body(has_fake_title: false)
           end
         end
       end

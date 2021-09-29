@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add text heavy tables to `BakeTableBody` (minor)
 * Modify `BakeAutotitledNotes` to bake unnumbered exercises with solution (minor)
 * Create `AddInjectedExerciseId` to separate creating ids from `BakeInjectedExerciseQuestion` (minor)
 
