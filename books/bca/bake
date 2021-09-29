@@ -35,6 +35,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
     }
   )
 
+  AddInjectedExerciseId.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
@@ -86,6 +88,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
           section.first('h4').name = 'h5'
         end
       end
+    end
+
+    selectors = 'section.review-questions, section.conceptual-questions,
+                 section.you-try, section.practice-exercises,
+                 section.written-exercises, section.case-exercises,
+                 section.extension-exercises'
+
+    chapter.composite_pages.search(selectors).injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
   end
 
