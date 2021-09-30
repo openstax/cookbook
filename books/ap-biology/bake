@@ -64,41 +64,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'review',
-      uuid_key: '.review',
-      section_selector: 'section.review'
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-    end
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'critical-thinking',
-      uuid_key: '.critical-thinking',
-      section_selector: 'section.critical-thinking'
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-    end
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'ap-test-prep',
-      uuid_key: '.ap-test-prep',
-      section_selector: 'section.ap-test-prep'
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-    end
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'science-practice',
-      uuid_key: '.science-practice',
-      section_selector: 'section.science-practice'
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
+    custom_sections = %w[review critical-thinking ap-test-prep science-practice]
+    custom_sections.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
     end
 
     chapter.figures('$:not(.unnumbered)', except: :subfigure?).each do |figure|
