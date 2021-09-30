@@ -27,61 +27,25 @@ done
 #       the underlying bake script.
 
 case "${book}" in
-  anthropology)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  chemistry)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  biology)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  anthropology | \
+  chemistry | \
+  biology | \
+  political-science | \
+  u-physics | \
+  microbiology | \
+  philosophy | \
+  sociology | \
+  english-composition | \
+  american_government | \
+  calculus | \
+  contemporary-math | \
+  pl-psychology | \
+  precalculus | \
+  precalculus-coreq | \
+  finance | \
+  computer-science | \
+  statistics | \
   dummy)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  political-science)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  u-physics)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  microbiology)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  philosophy)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  sociology)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  english-composition)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  american_government)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  calculus)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  contemporary-math)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  pl-psychology)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  precalculus)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  precalculus-coreq)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  finance)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  computer-science)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  statistics)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   *) echo "Baking book '${book}' with legacy baking";
