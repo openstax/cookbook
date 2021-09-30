@@ -38,7 +38,9 @@ module Kitchen::Directions::MoveSolutionsToAnswerKey
           </div>
         HTML
       )
-      strategy.bake(chapter: chapter, append_to: append_to.first("[data-uuid-key='#{uuid_key}']"))
+      strategy.bake(
+        chapter: chapter, append_to: append_to.first("div[data-uuid-key='#{uuid_key}']")
+      )
     end
     # rubocop:enable Metrics/ParameterLists
   end
