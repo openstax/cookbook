@@ -27,7 +27,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   BakeChapterTitle.v1(book: book)
   BakeNumberedNotes.v1(book: book, classes: %w[your-turn])
   BakeUnclassifiedNotes.v1(book: book)
-  note_classes = %w[people-mathematics who-knew tech-check check-point video work-out]
+  note_classes =
+    %w[people-mathematics who-knew tech-check check-point video work-out definition formula]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
   sections_with_unnumbered_tables_in_solutions = \
     'div.your-turn, section.section-exercises, section.chapter-review, section.chapter-test'
@@ -43,7 +44,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
 
   answer_key = BookAnswerKeyContainer.v1(book: book)
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
