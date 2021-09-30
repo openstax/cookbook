@@ -27,24 +27,25 @@ done
 #       the underlying bake script.
 
 case "${book}" in
+  # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
+  american_government | \
   anthropology | \
-  chemistry | \
   biology | \
-  political-science | \
-  u-physics | \
+  calculus | \
+  chemistry | \
+  computer-science | \
+  contemporary-math | \
+  english-composition | \
+  finance | \
   microbiology | \
   philosophy | \
-  sociology | \
-  english-composition | \
-  american_government | \
-  calculus | \
-  contemporary-math | \
   pl-psychology | \
+  political-science | \
   precalculus | \
   precalculus-coreq | \
-  finance | \
-  computer-science | \
+  sociology | \
   statistics | \
+  u-physics | \
   dummy)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
