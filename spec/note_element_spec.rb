@@ -111,6 +111,7 @@ RSpec.describe Kitchen::NoteElement do
                 <div data-type="title">also not a subtitle</div>
               </div>
             </div>
+            <div data-type="note"/>
           HTML
         )
       ).notes
@@ -125,6 +126,7 @@ RSpec.describe Kitchen::NoteElement do
     it 'does not get non subtitle titles' do
       expect(notes_with_non_subtitle_title.first.title).to eq(nil)
       expect(notes_with_non_subtitle_title[1].title).to eq(nil)
+      expect(notes_with_non_subtitle_title[2].title).to eq(nil)
     end
   end
 
