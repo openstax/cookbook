@@ -18,7 +18,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
 
   book.search('cnx-pi').trash
 
-  # book.pages.injected_questions.each { |question| AddInjectedExerciseId.v1(question: question) }
+  AddInjectedExerciseId.v1(book: book)
+  book.search('div[data-type="injected-exercise"]').each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
 
   BakePreface.v1(book: book)
   BakeUnitTitle.v1(book: book)
@@ -48,6 +51,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
 
   book.exercises('$.unnumbered').each do |exercise|
     exercise.problem.wrap_children(class: 'os-problem-container')
+  end
+  # Injected questions in notes should be treated as unnumbered questions
+  book.notes.injected_questions.each do |question|
+    question.wrap_children(class: 'os-problem-container')
   end
 
   book.chapters.each do |chapter|
@@ -104,18 +111,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
-    # chapter.search('div.os-eoc').search_with(Kitchen::ExerciseElementEnumerator, Kitchen::InjectedQuestionElementEnumerator).each_with_index do |exercise, index|
-    #   if exercise.instance_of?(Kitchen::ExerciseElement)
-    #     BakeNumberedExercise.v1(exercise: exercise, number: index + 1, suppress_solution_if: true)
-    #   else
-    #     BakeInjectedExerciseQuestion.v1(question: exercise, number: index + 1)
-    #   end
-    # end
-
-    # TODO: Remove this and replace with above commented-out section
-    chapter.search('div.os-eoc').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
-      BakeFirstElements.v1(within: exercise)
+    # Bake both kinds of exercise
+    chapter \
+      .search('div.os-eoc') \
+      .search_with(Kitchen::ExerciseElementEnumerator, Kitchen::InjectedQuestionElementEnumerator) \
+      .each_with_index do |exercise, index|
+      if exercise.instance_of?(Kitchen::ExerciseElement)
+        BakeNumberedExercise.v1(exercise: exercise, number: index + 1, suppress_solution_if: true)
+        BakeFirstElements.v1(within: exercise)
+      else
+        BakeInjectedExerciseQuestion.v1(question: exercise, number: index + 1)
+      end
     end
   end
 
