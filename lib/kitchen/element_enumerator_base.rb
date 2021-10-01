@@ -327,6 +327,23 @@ module Kitchen
       chain_to(ElementEnumerator, css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
+    # Searches for elements handled by a list of enumerator classes.  All element that
+    # matches one of those enumerator classes are iterated over.
+    #
+    # @param enumerator_classes [Array<ElementEnumeratorBase>]
+    # @return [TypeCastingElementEnumerator]
+    #
+    def search_with(*enumerator_classes)
+      block_error_if(block_given?)
+      raise 'must supply at least one enumerator class' if enumerator_classes.empty?
+
+      factory = enumerator_classes[0].factory
+      enumerator_classes[1..-1].each do |enumerator_class|
+        factory = factory.or_with(enumerator_class.factory)
+      end
+      factory.build_within(self)
+    end
+
     # Returns an enumerator that iterates through elements within the scope of this enumerator
     #
     # @param enumerator_class [ElementEnumeratorBase] the enumerator to use for the iteration

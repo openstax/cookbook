@@ -427,23 +427,6 @@ module Kitchen
       )
     end
 
-    # Searches for elements handled by a list of enumerator classes.  All element that
-    # matches one of those enumerator classes are iterated over.
-    #
-    # @param enumerator_classes [Array<ElementEnumeratorBase>]
-    # @return [TypeCastingElementEnumerator]
-    #
-    def search_with(*enumerator_classes)
-      block_error_if(block_given?)
-      raise 'must supply at least one enumerator class' if enumerator_classes.empty?
-
-      factory = enumerator_classes[0].factory
-      enumerator_classes[1..-1].each do |enumerator_class|
-        factory = factory.or_with(enumerator_class.factory)
-      end
-      factory.build_within(self)
-    end
-
     # Removes the element from its parent and places it on the specified clipboard
     #
     # @param to [Symbol, String, Clipboard, nil] the name of the clipboard (or a Clipboard
@@ -770,7 +753,8 @@ module Kitchen
     #   Returns a pages enumerator
     def_delegators :as_enumerator, :pages, :chapters, :terms, :figures, :notes, :tables, :examples,
                    :metadatas, :non_introduction_pages, :units, :titles, :exercises, :references,
-                   :composite_pages, :composite_chapters, :solutions, :injected_questions
+                   :composite_pages, :composite_chapters, :solutions, :injected_questions,
+                   :search_with
 
     # Returns this element as an enumerator (over only one element, itself)
     #

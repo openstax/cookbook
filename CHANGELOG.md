@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Make `ElementBase#search_with` callable from an `ElementEnumerator` (minor)
 * Support top-titled tables in `BakeUnnumberedTables` (minor)
 * Stop `NoteElement#title` from breaking for empty notes (patch)
 * Add text heavy tables to `BakeTableBody` (minor)
