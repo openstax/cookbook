@@ -15,4 +15,5 @@ en:
     case-exercises: Case Exercises
     extension-exercises: Extension Exercises
   exercises:
+    exercise: Exercise
     solution: Answer
