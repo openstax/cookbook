@@ -1,0 +1,15 @@
+en:
+  eoc_free_response: Homework
+  eoc:
+    summary: Chapter Review
+    formula-review: Formula Review
+    practice: Practice
+    bring-together-homework: 'Bringing It Together: Homework'
+    bring-together-exercises: 'Bringing It Together: Practice'
+    free-response: 'Homework'
+  notes:
+    try: 'Try It '
+    lab: 'Stats Lab '
+    collab: Collaborative Exercise
+    calculator: Using the TI-83, 83+, 84, 84+ Calculator
+    chapter-objectives: Chapter Objectives

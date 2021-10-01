@@ -3,7 +3,7 @@
 require 'set'
 
 DUPLICATE_IDS_TO_IGNORE = %w[author-1 author-2 publisher-1 publisher-2 publisher-3 publisher-4
-                             copyright-holder-1 copyright-holder-2].freeze
+                             copyright-holder-1 copyright-holder-2 copyright-holder-3].freeze
 
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
@@ -71,6 +71,25 @@ def mask_term_numbers(element)
   element[:href] = element[:href]&.gsub(/_term(\d+)$/, '_termXXX') if element[:href]
 end
 
+def div_to_h3_note(element)
+  unless element.parent[:'data-type'] == 'note' && \
+         element[:class]&.split(' ')&.include?('os-title') && element.name != 'h3'
+    return
+  end
+
+  element.name = 'h3'
+end
+
+def eoc_metadata_title(element)
+  unless element[:'data-type'] == 'metadata' && \
+         element.parent[:class]&.split(' ')&.include?('os-eoc')
+    return
+  end
+
+  title = element.parent.element_children.first.text
+  element.element_children.first.content = title
+end
+
 # Main normalize function for an XML document
 
 def normalize(doc, args: [])
@@ -83,5 +102,12 @@ def normalize(doc, args: [])
     sort_classes_strip_whitespace(child)
     sort_attributes(child)
     mask_term_numbers(child) if args.include?('--mask-terms')
+    if args.include?('--easybaked-only')
+      div_to_h3_note(child)
+      eoc_metadata_title(child)
+      next unless child.name == 'table'
+
+      child.remove_attribute('summary')
+    end
   end
 end
