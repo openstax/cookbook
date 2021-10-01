@@ -27,6 +27,7 @@ en:
   section_exercises: ! 'Section %{number} Exercises'
   iframe_link_text: Click to view content
   handbook_outline_title: Outline
+  context_lead_text: 'Refer to '
   eoc:
     glossary: Key Terms
     key-equations: Key Equations
