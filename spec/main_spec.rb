@@ -83,6 +83,10 @@ RSpec.describe 'books' do
     expect('finance').to bake_correctly
   end
 
+  it 'bakes bca' do
+    expect('bca').to bake_correctly
+  end
+
   it 'bakes ap bio' do
     expect('ap-biology').to bake_correctly
   end
