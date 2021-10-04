@@ -25,9 +25,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_history) do |doc|
   book.search('iframe').each do |iframe|
     BakeIframes.v1(outer_element: iframe.parent)
   end
-  book.search('ol[data-number-style="lower-alpha"]').each do |list|
-    list[:type] = 'a'
-  end
+  BakeAccessibilityFixes.v1(section: book)
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
