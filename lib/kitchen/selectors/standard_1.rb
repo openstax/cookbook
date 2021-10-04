@@ -29,6 +29,7 @@ module Kitchen
         self.solution                   = "div[data-type='solution'], " \
                                           "div[data-type='question-solution']"
         self.injected_question          = "div[data-type='exercise-question']"
+        self.section                    = 'section'
       end
 
     end

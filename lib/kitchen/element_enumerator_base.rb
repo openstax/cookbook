@@ -318,6 +318,24 @@ module Kitchen
                css_or_xpath: css_or_xpath, only: only, except: except)
     end
 
+    # Returns an enumerator that iterates through sections within the scope of this enumerator
+    #
+    # @param css_or_xpath [String] additional selectors to further narrow the element iterated over;
+    #   a "$" in this argument will be replaced with the default selector for the element being
+    #   iterated over.
+    # @param only [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will only be included in the
+    #   search results if the method or callable returns true
+    # @param except [Symbol, Callable] the name of a method to call on an element or a
+    #   lambda or proc that accepts an element; elements will not be included in the
+    #   search results if the method or callable returns false
+    #
+    def sections(css_or_xpath=nil, only: nil, except: nil)
+      block_error_if(block_given?)
+      chain_to(SectionElementEnumerator,
+               css_or_xpath: css_or_xpath, only: only, except: except)
+    end
+
     # Returns an enumerator that iterates within the scope of this enumerator
     #
     # @param css_or_xpath [String] additional selectors to further narrow the element iterated over

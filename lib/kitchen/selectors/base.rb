@@ -62,6 +62,9 @@ module Kitchen
       # Selector for an injected question
       # @return [String]
       attr_accessor :injected_question
+      # Selector for a section
+      # @return [String]
+      attr_accessor :section
 
       # Override specific selectors
       #

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `SectionElement` and `SectionElementEnumerator` classes (minor)
+
 ## [12.2.0] - 2021-10-1
 
 * Add `context_lead_text` to translations (minor)
