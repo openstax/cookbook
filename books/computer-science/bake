@@ -1,0 +1,122 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.0.0'
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
+  include Kitchen::Directions
+
+  # Set overrides
+  doc.selectors.override(
+    page_summary: 'section.section-summary'
+  )
+
+  book = doc.book
+  metadata = book.metadata
+
+  # Some stuff just goes away
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book, title_element: 'h1')
+  BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  BakeUnitTitle.v1(book: book)
+  BakeUnitPageTitle.v1(book: book)
+
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[concepts-practice tech-everyday global-tech link-to-learning industry-spotlight]
+  )
+
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[think-through],
+    bake_exercises: true
+  )
+
+  BakeUnclassifiedNotes.v1(book: book)
+
+  book.chapters.each do |chapter|
+    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
+    BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
+
+    eoc_sections = %w[review-questions conceptual-questions practice-exercises
+                      problem-set-a problem-set-b thought-provokers lab-assessments]
+
+    eoc_sections.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
+
+    chapter.exercises('$.your-turn').each do |exercise|
+      BakeAutotitledExercise.v1(exercise: exercise)
+    end
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    chapter.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+  end
+
+  book.pages('$.preface').each do |page|
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure, number: figure.count_in(:page))
+    end
+  end
+
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+
+    BakeAppendix.v1(page: page, number: appendix_letter)
+  end
+
+  BakeStepwise.v1(book: book)
+  BakeUnnumberedTables.v1(book: book)
+  BakeMathInParagraph.v1(book: book)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeFootnotes.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
+  BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: recipe,
+  output_file: opts[:output]
+)

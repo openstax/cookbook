@@ -27,25 +27,29 @@ done
 #       the underlying bake script.
 
 case "${book}" in
-  chemistry)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
+  american_government | \
+  anatomy | \
+  anthropology | \
+  ap-biology | \
+  bca | \
+  biology | \
+  calculus | \
+  chemistry | \
+  computer-science | \
+  contemporary-math | \
+  english-composition | \
+  finance | \
+  microbiology | \
+  philosophy | \
+  pl-psychology | \
+  political-science | \
+  precalculus | \
+  precalculus-coreq | \
+  sociology | \
+  statistics | \
+  u-physics | \
   dummy)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  political-science)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  u-physics)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  microbiology)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  sociology)
-    echo "Baking book '${book}' with kitchen" ;
-    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
-  anatomy)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
   *) echo "Baking book '${book}' with legacy baking";
