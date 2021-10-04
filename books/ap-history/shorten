@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '10.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.2.0'
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -15,8 +15,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_history_short) do |doc|
 
   book = doc.book
 
-  # trash all but first chapter
-  #book.chapters.drop(1).each(&:trash)
+  # trash all but first unit
   book.units.drop(1).each(&:trash)
   # trash all but first appendix
   book.search('div.appendix').drop(1).each(&:trash)

@@ -5,7 +5,7 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '10.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.2.0' # TODO: update version
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -14,25 +14,22 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_history) do |doc|
   include Kitchen::Directions
 
   book = doc.book
-  metadata = book.metadata
 
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
   BakeUnitTitle.v1(book: book)
-  #BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeAutotitledNotes.v1(book: book, classes: %w[os-teacher])
   BakeUnclassifiedNotes.v1(book: book)
-  book.notes('$.note').each do |note|
-    BakeNoteIFrames.v1(note: note)
+  book.search('iframe').each do |iframe|
+    BakeIframes.v1(outer_element: iframe.parent)
   end
   book.search('ol[data-number-style="lower-alpha"]').each do |list|
     list[:type] = 'a'
   end
 
   book.chapters.each do |chapter|
-    #BakePageAbstracts.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.figures(only: :figure_to_bake?).each do |figure|
@@ -45,22 +42,31 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_history) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
-    chapter.pages.search('section.review-questions').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:page))
-    end
-    chapter.pages.search('section.ap-practice').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:page))
+    # Bake & number exercises in place, within section
+    chapter.pages.sections('$[data-depth="2"]').each do |section|
+      section.exercises.each do |exercise|
+        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:section))
+      end
+      section.injected_questions.each do |question|
+        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:section))
+      end
     end
   end
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
     BakeAppendix.v1(page: page, number: appendix_letter)
+    page.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
   end
 
   BakeUnnumberedTables.v1(book: book)
 
   BakeIndex.v1(book: book)
+  # terms need to be marked up, but index itself not needed
+  book.first('div.os-index-container')&.trash
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
 end
