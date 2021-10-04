@@ -30,6 +30,7 @@ case "${book}" in
   # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
   american_government | \
   anthropology | \
+  ap-biology | \
   bca | \
   biology | \
   calculus | \

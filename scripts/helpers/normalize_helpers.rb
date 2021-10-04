@@ -3,7 +3,7 @@
 require 'set'
 
 DUPLICATE_IDS_TO_IGNORE = %w[author-1 author-2 publisher-1 publisher-2 publisher-3 publisher-4
-                             copyright-holder-1 copyright-holder-2].freeze
+                             copyright-holder-1 copyright-holder-2 copyright-holder-3].freeze
 
 # In HTML attribute order doesn't matter, but to make sure our diffs are useful resort all
 # attributes.
