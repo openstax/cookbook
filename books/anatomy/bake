@@ -14,9 +14,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
   include Kitchen::Directions
 
   # Set overrides
-  # doc.selectors.override(
-  #   reference: 'section.references'
-  # )
+  doc.selectors.override(
+    reference: 'section.references'
+  )
 
   book = doc.book
   metadata = book.metadata
@@ -40,7 +40,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[interactive everyday homeostatic disorders career]
+    classes: %w[interactive everyday homeostatic disorders career aging]
   )
 
   book.chapters.each do |chapter|
@@ -90,7 +90,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeReferences.v2(book: book, metadata_source: metadata)
+  BakeReferences.v3(book: book, metadata_source: metadata)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
