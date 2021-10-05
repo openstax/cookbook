@@ -5,10 +5,10 @@
 require 'bundler/inline'
 
 gemfile do
-  gem 'openstax_kitchen',
-      github: 'openstax/kitchen',
-      ref: '2437abb8b3100f46941befffa6e541d521c2c571'
-  # gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '11.2.0'
+  # gem 'openstax_kitchen',
+  #     github: 'openstax/kitchen',
+  #     ref: '2437abb8b3100f46941befffa6e541d521c2c571'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.0.0'
 
   gem 'slop', '4.8.2'
   gem 'byebug'
@@ -113,10 +113,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
-    chapter.figures(only: :figure_to_bake?).each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    chapter.figures(only: :figure_to_bake_and_count?).each do |figure|
+      BakeFigure.v1(
+        figure: figure,
+        number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
+      )
+    end
 
+    chapter.figures(only: :unnumbered_figure?).each do |figure|
+      BakeFigure.v1(
+        figure: figure
+      )
     end
   end
 
