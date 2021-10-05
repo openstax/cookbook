@@ -2,7 +2,7 @@
 
 module Kitchen
   module Directions
-    module EocCompositePageContainer
+    module CompositePageContainer
       # Creates a wrapper for the given content & appends it to the given element
       #
       # @param container_key [String] Appended to 'eoc.' to form the I18n key for the container title; also used as part of a class on the container.

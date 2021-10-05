@@ -31,7 +31,7 @@ module Kitchen
 
           return if summaries.none?
 
-          EocCompositePageContainer.v1(
+          CompositePageContainer.v1(
             container_key: klass,
             uuid_key: "#{uuid_prefix}#{klass}",
             metadata_source: metadata_source,

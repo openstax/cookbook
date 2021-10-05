@@ -23,7 +23,7 @@ module Kitchen::Directions::BakeChapterSolutions
 
       content = solutions_clipboard.paste
 
-      Kitchen::Directions::EocCompositePageContainer.v1(
+      Kitchen::Directions::CompositePageContainer.v1(
         container_key: 'solutions',
         uuid_key: "#{uuid_prefix}solutions",
         metadata_source: metadata_source,

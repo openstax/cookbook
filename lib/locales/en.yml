@@ -40,5 +40,8 @@ en:
   folio:
     preface: Preface
     access_for_free: Access for free at openstax.org
+  eob:
+    references: References
+    reference: References
   index:
     main: Index

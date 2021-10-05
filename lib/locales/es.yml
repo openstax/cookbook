@@ -35,5 +35,8 @@ es:
   folio:
     preface: Prefacio
     access_for_free: Acceso gratis en openstax.org
+  eob:
+    references: Referencias
+    reference: Referencias
   index:
     main: Índice

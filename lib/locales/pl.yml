@@ -67,6 +67,9 @@ pl:
     key-equations: Najważniejsze wzory
     summary: Podsumowanie
     references: Bibliografia
+  eob:
+    references: Bibliografia
+    reference: Bibliografia
   index:
     name: Skorowidz nazwisk
     term: Skorowidz rzeczowy

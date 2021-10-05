@@ -30,7 +30,7 @@ module Kitchen::Directions::MoveCustomSectionToEocContainer
           section_clipboard.paste
         end
 
-      Kitchen::Directions::EocCompositePageContainer.v1(
+      Kitchen::Directions::CompositePageContainer.v1(
         container_key: container_key,
         uuid_key: uuid_key,
         metadata_source: metadata_source,

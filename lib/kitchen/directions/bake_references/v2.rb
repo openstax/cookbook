@@ -2,14 +2,7 @@
 
 module Kitchen::Directions::BakeReferences
   class V2
-    renderable
-
     def bake(book:, metadata_source:)
-      @metadata = metadata_source.children_to_keep.copy
-      @klass = 'references'
-      @uuid_prefix = '.'
-      @title = I18n.t(:references)
-
       book.chapters.each do |chapter|
 
         chapter.references.search('h3').trash
@@ -26,10 +19,16 @@ module Kitchen::Directions::BakeReferences
           HTML
         )
       end
+
       chapter_area_references = book.chapters.search('.os-chapter-area').cut
-      @content = chapter_area_references.paste
-      book.body.append(child: render(file:
-        '../../templates/eob_section_title_template.xhtml.erb'))
+
+      Kitchen::Directions::CompositePageContainer.v1(
+        container_key: 'references',
+        uuid_key: '.references',
+        metadata_source: metadata_source,
+        content: chapter_area_references.paste,
+        append_to: book.body
+      )
     end
   end
 end

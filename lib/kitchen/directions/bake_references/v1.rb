@@ -5,11 +5,6 @@ module Kitchen::Directions::BakeReferences
     renderable
 
     def bake(book:, metadata_source:, numbered_title:)
-      @metadata = metadata_source.children_to_keep.copy
-      @klass = 'reference'
-      @uuid_prefix = '.'
-      @title = I18n.t(:references)
-
       book.chapters.each do |chapter|
         chapter.search('[data-type="cite"]').each do |link|
           link.prepend(child:
@@ -44,10 +39,16 @@ module Kitchen::Directions::BakeReferences
           HTML
         )
       end
+
       chapter_area_references = book.chapters.search('.os-chapter-area').cut
-      @content = chapter_area_references.paste
-      book.body.append(child: render(file:
-        '../../templates/eob_section_title_template.xhtml.erb'))
+
+      Kitchen::Directions::CompositePageContainer.v1(
+        container_key: 'reference',
+        uuid_key: '.reference',
+        metadata_source: metadata_source,
+        content: chapter_area_references.paste,
+        append_to: book.body
+      )
     end
   end
 end

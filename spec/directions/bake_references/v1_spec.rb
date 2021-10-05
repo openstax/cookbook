@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeReferences::V1 do
+RSpec.describe Kitchen::Directions::BakeReferences do
 
   let(:book1) do
     book_containing(html:
@@ -53,7 +53,7 @@ RSpec.describe Kitchen::Directions::BakeReferences::V1 do
   end
 
   it 'works' do
-    described_class.new.bake(book: book1, metadata_source: metadata_element, numbered_title: false)
+    described_class.v1(book: book1, metadata_source: metadata_element, numbered_title: false)
 
     expect(book1.body).to match_normalized_html(
       <<~HTML
@@ -149,7 +149,7 @@ RSpec.describe Kitchen::Directions::BakeReferences::V1 do
   end
 
   it 'add chapter number to references title' do
-    described_class.new.bake(book: book1, metadata_source: metadata_element, numbered_title: true)
+    described_class.v1(book: book1, metadata_source: metadata_element, numbered_title: true)
     expect(
       book1.body.search('div.os-reference-container').search('div.os-chapter-area > [data-type="document-title"]')
     ).to match_normalized_html(

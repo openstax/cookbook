@@ -11,7 +11,7 @@ module Kitchen::Directions::BakeChapterReferences
 
       content = chapter.pages.references.cut.paste
 
-      Kitchen::Directions::EocCompositePageContainer.v1(
+      Kitchen::Directions::CompositePageContainer.v1(
         container_key: klass,
         uuid_key: "#{uuid_prefix}#{klass}",
         metadata_source: metadata_source,
