@@ -48,6 +48,20 @@ RSpec.describe Kitchen::Directions::BakeIframes::V1 do
     )
   end
 
+  let(:book_with_baked_iframes) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <div class="os-has-iframe os-has-link" data-type="alternatives"><a class="os-is-link" href="abc" target="_window">Click to view content</a>
+            <iframe height="371.4" src="abc" width="660" class="os-is-iframe">
+          <!-- no-selfclose -->
+            </iframe>
+          </div>
+        HTML
+      )
+    )
+  end
+
   before do
     stub_locales({
       'iframe_link_text': 'Click to view content'
@@ -113,5 +127,11 @@ RSpec.describe Kitchen::Directions::BakeIframes::V1 do
           </div>
       HTML
     )
+  end
+
+  it 'doesn\'t double-bake' do
+    book_with_baked_iframes_snapshot = book_with_baked_iframes.copy
+    described_class.new.bake(outer_element: book_with_baked_iframes)
+    expect(book_with_baked_iframes).to match_normalized_html(book_with_baked_iframes_snapshot)
   end
 end

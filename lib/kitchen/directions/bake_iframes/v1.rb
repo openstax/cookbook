@@ -7,6 +7,8 @@ module Kitchen::Directions::BakeIframes
       return unless iframes.any?
 
       iframes.each do |iframe|
+        next if iframe.has_class?('os-is-iframe')
+
         iframe.wrap('<div class="os-has-iframe" data-type="alternatives">')
         iframe.add_class('os-is-iframe')
         link_ref = iframe[:src]
