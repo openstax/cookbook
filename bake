@@ -27,6 +27,7 @@ case "${book}" in
   bca) $DIR/books/bca/bake --input $input_file --output $output_file;;
   pl-psychology) $DIR/books/pl-psychology/bake --input $input_file --output $output_file;;
   american_government) $DIR/books/american_government/bake --input $input_file --output $output_file;;
+  ap-history) $DIR/books/ap-history/bake --input $input_file --output $output_file;;
   calculus) $DIR/books/calculus/bake --input $input_file --output $output_file;;
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
   statistics) $DIR/books/statistics/bake --input $input_file --output $output_file;;
@@ -39,6 +40,7 @@ case "${book}" in
   philosophy) $DIR/books/philosophy/bake --input $input_file --output $output_file;;
   microbiology) $DIR/books/microbiology/bake --input $input_file --output $output_file;;
   sociology) $DIR/books/sociology/bake --input $input_file --output $output_file;;
+  anatomy) $DIR/books/anatomy/bake --input $input_file --output $output_file;;
   english-composition) $DIR/books/english-composition/bake --input $input_file --output $output_file;;
   u-physics) $DIR/books/u-physics/bake --input $input_file --output $output_file;;
   finance) $DIR/books/finance/bake --input $input_file --output $output_file;;
