@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeLearningObjectives` v3 (minor)
 * Fix `BakeIframes` to skip already-baked iframes (patch)
 * Add `SectionElement` and `SectionElementEnumerator` classes (minor)
 * Refactor `EocCompositePageContainer` to be used by `EOB` sections as well (major)

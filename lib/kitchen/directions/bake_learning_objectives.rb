@@ -30,6 +30,19 @@ module Kitchen
           end
         end
       end
+
+      # Wraps & moves abstract under the corresponding chapter objective in the intro page
+      def self.v3(chapter:)
+        abstracts = chapter.abstracts.map do |abstract|
+          abstract.wrap('<div class="learning-objective">')
+          abstract.parent
+        end
+
+        chapter.introduction_page.search('div.os-chapter-objective') \
+               .each_with_index do |objective, index|
+          objective.append(child: abstracts[index].cut.paste)
+        end
+      end
     end
   end
 end
