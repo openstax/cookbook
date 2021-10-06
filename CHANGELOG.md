@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [13.0.0] - 2021-10-6
+
 * Add `BakeLearningObjectives` v3 (minor)
 * Fix `BakeIframes` to skip already-baked iframes (patch)
 * Add `SectionElement` and `SectionElementEnumerator` classes (minor)
