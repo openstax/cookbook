@@ -32,6 +32,7 @@ case "${book}" in
   anatomy | \
   anthropology | \
   ap-biology | \
+  ap-history | \
   bca | \
   biology | \
   calculus | \

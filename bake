@@ -27,6 +27,7 @@ case "${book}" in
   bca) $DIR/books/bca/bake --input $input_file --output $output_file;;
   pl-psychology) $DIR/books/pl-psychology/bake --input $input_file --output $output_file;;
   american_government) $DIR/books/american_government/bake --input $input_file --output $output_file;;
+  ap-history) $DIR/books/ap-history/bake --input $input_file --output $output_file;;
   calculus) $DIR/books/calculus/bake --input $input_file --output $output_file;;
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
   statistics) $DIR/books/statistics/bake --input $input_file --output $output_file;;
