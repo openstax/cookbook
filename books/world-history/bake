@@ -29,7 +29,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
   end
 
   BakePreface.v1(book: book)
-  # preface = book.pages('$.preface').first
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
@@ -104,15 +103,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
     # end
 
     # Bake both kinds of exercise
-    chapter \
-      .search('div.os-eoc') \
-      .search_with(Kitchen::ExerciseElementEnumerator, Kitchen::InjectedQuestionElementEnumerator) \
-      .each_with_index do |exercise, index|
+    chapter.composite_pages.search_with(Kitchen::ExerciseElementEnumerator,
+                                        Kitchen::InjectedQuestionElementEnumerator)
+           .each do |exercise|
       if exercise.instance_of?(Kitchen::ExerciseElement)
-        BakeNumberedExercise.v1(exercise: exercise, number: index + 1, suppress_solution_if: true)
+        BakeNumberedExercise.v1(exercise: exercise,
+                                number: exercise.count_in(:composite_page),
+                                suppress_solution_if: true)
         # BakeFirstElements.v1(within: exercise)
       else
-        BakeInjectedExerciseQuestion.v1(question: exercise, number: index + 1)
+        BakeInjectedExerciseQuestion.v1(question: exercise,
+                                        number: exercise.count_in(:composite_page))
       end
     end
 
