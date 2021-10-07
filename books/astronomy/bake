@@ -1,0 +1,129 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+require_relative '../../bake_helper'
+
+gemfile do
+  gem 'openstax_kitchen', \
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:astronomy]
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :astronomy) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  metadata = book.metadata
+
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  BakeChapterIntroductions.v1(book: book)
+
+  preface = book.pages('$.preface').first
+  preface.figures.each do |figure|
+    BakeFigure.v1(
+      figure: figure,
+      number: figure.count_in(:page)
+    )
+  end
+
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[link-to-learning astronomy-basics making-connections seeing-for-yourself voyagers-in-astronomy]
+  )
+  BakeUnclassifiedNotes.v1(book: book)
+
+  book.chapters.each do |chapter|
+    BakeNonIntroductionPages.v1(chapter: chapter)
+
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+    section_keys = %w[further-exploration group-activities]
+    section_keys.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
+    exercises_composite_chapter = \
+      ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata, klass: 'exercises')
+    exercise_section_keys = %w[review-questions thought-questions figuring-for-yourself]
+    exercise_section_keys.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}",
+        append_to: exercises_composite_chapter
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
+    exercises_composite_chapter.exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+    exercises_composite_chapter.trash if exercises_composite_chapter.sections.none?
+
+    chapter.figures.each do |figure|
+      BakeFigure.v1(
+        figure: figure,
+        number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
+      )
+    end
+    chapter.examples.each do |example|
+      BakeExample.v1(
+        example: example,
+        number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
+        title_tag: 'h3'
+      )
+    end
+    chapter.tables.each do |table|
+      BakeNumberedTable.v1(
+        table: table,
+        number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}"
+      )
+    end
+  end
+
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+    BakeAppendix.v1(page: page, number: appendix_letter)
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+  end
+
+  BakeFootnotes.v1(book: book)
+  BakeMathInParagraph.v1(book: book)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
+  BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [recipe],
+  output_file: opts[:output]
+)

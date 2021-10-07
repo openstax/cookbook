@@ -7,6 +7,7 @@ KITCHEN_VERSIONS = {
   anthropology: '11.1.0',
   ap_biology: '12.2.0',
   ap_history: '13.0.0',
+  astronomy: '13.0.0',
   bca: '12.2.0',
   biology: '9.1.0',
   calculus: '8.0.1',
