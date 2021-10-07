@@ -113,16 +113,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
+    chapter.figures(only: :figure_to_bake_without_count?).each do |figure|
+      BakeFigure.v1(
+        figure: figure
+      )
+    end
+
     chapter.figures(only: :figure_to_bake_and_count?).each do |figure|
       BakeFigure.v1(
         figure: figure,
         number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
-      )
-    end
-
-    chapter.figures(only: :unnumbered_figure?).each do |figure|
-      BakeFigure.v1(
-        figure: figure
       )
     end
   end
