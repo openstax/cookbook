@@ -37,6 +37,7 @@ case "${book}" in
   biology | \
   calculus | \
   chemistry | \
+  college-physics | \
   computer-science | \
   contemporary-math | \
   english-composition | \
