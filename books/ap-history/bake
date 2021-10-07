@@ -3,9 +3,11 @@
 # frozen_string_literal: true
 
 require 'bundler/inline'
+require_relative '../../bake_helper'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '13.0.0'
+  gem 'openstax_kitchen', \
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:ap_history]
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
