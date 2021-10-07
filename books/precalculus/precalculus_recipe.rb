@@ -5,7 +5,7 @@ require_relative '../../bake_helper'
 
 gemfile do
   gem 'openstax_kitchen', \
-      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : VERSIONS[:precalculus]
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:precalculus]
   gem 'slop', '4.8.2'
   gem 'byebug'
 end

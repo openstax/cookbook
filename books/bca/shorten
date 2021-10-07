@@ -7,7 +7,7 @@ require_relative '../../bake_helper'
 
 gemfile do
   gem 'openstax_kitchen', \
-      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : VERSIONS[:bca]
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:bca]
   gem 'slop', '4.8.2'
   gem 'byebug'
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-VERSIONS = {
+# Contains the openstax_kitchen version for each recipe
+KITCHEN_VERSIONS = {
   american_government: '7.0.0',
   anatomy: '13.0.0',
   anthropology: '11.1.0',
