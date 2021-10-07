@@ -79,7 +79,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                           section.source-questions'
 
     chapter.pages.search(exercise_selectors).exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+      BakeNumberedExercise.v1(exercise: exercise, suppress_solution_if: true, number: exercise.count_in(:chapter))
     end
 
     injected_exercises = %w[review-questions
@@ -113,13 +113,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
-    chapter.figures(only: :figure_to_bake_without_count?).each do |figure|
-      BakeFigure.v1(
-        figure: figure
-      )
-    end
+    # chapter.figures(only: :figure_to_bake_without_count?).each do |figure|
+    #   BakeFigure.v1(
+    #     figure: figure
+    #   )
+    # end
 
-    chapter.figures(only: :figure_to_bake_and_count?).each do |figure|
+    # chapter.figures(only: :figure_to_bake_and_count?).each do |figure|
+    #   BakeFigure.v1(
+    #     figure: figure,
+    #     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
+    #   )
+    # end
+
+    chapter.figures('$:not(.unnumbered)').each do |figure|
       BakeFigure.v1(
         figure: figure,
         number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
