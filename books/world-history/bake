@@ -8,7 +8,7 @@ gemfile do
   # gem 'openstax_kitchen',
   #     github: 'openstax/kitchen',
   #     ref: '2437abb8b3100f46941befffa6e541d521c2c571'
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.0.0'
+  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '13.0.0'
 
   gem 'slop', '4.8.2'
   gem 'byebug'
@@ -22,6 +22,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
+
+  AddInjectedExerciseId.v1(book: book)
+  book.search('div[data-type="injected-exercise"]').each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
 
   BakePreface.v1(book: book)
   # preface = book.pages('$.preface').first
@@ -73,25 +78,42 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
       end
     end
 
-    # Exercises
-    exercise_selectors = 'section.making-connections,
-                          section.thought-provokers,
-                          section.source-questions'
+    # # Exercises
+    # exercise_sections = %w[section.making-connections
+    #                        section.thought-provokers
+    #                        section.source-questions]
 
-    chapter.pages.search(exercise_selectors).exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, suppress_solution_if: true, number: exercise.count_in(:chapter))
-    end
+    # chapter.pages.search(exercise_sections).each do |section|
+    #   section.exercises.each do |exercise|
+    #     BakeNumberedExercise.v1(exercise: exercise,
+    #                             suppress_solution_if: true,
+    #                             number: exercise.count_in(:chapter))
+    #   end
+    # end
 
-    injected_exercises = %w[review-questions
-                            check-understanding
-                            reflection-questions
-                            visual-questions
-                            making-connections
-                            thought-provokers
-                            source-questions]
+    # injected_exercises = %w[review-questions
+    #                         check-understanding
+    #                         reflection-questions
+    #                         visual-questions
+    #                         making-connections
+    #                         thought-provokers
+    #                         source-questions]
 
-    chapter.pages.search(injected_exercises).injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    # chapter.pages.search(injected_exercises).injected_questions.each do |question|
+    #   BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    # end
+
+    # Bake both kinds of exercise
+    chapter \
+      .search('div.os-eoc') \
+      .search_with(Kitchen::ExerciseElementEnumerator, Kitchen::InjectedQuestionElementEnumerator) \
+      .each_with_index do |exercise, index|
+      if exercise.instance_of?(Kitchen::ExerciseElement)
+        BakeNumberedExercise.v1(exercise: exercise, number: index + 1, suppress_solution_if: true)
+        # BakeFirstElements.v1(within: exercise)
+      else
+        BakeInjectedExerciseQuestion.v1(question: exercise, number: index + 1)
+      end
     end
 
     # chapter.pages.each do |page|
