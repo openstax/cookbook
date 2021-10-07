@@ -3,13 +3,14 @@
 # frozen_string_literal: true
 
 require 'bundler/inline'
+require_relative '../../bake_helper'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.1.0'
+  gem 'openstax_kitchen', \
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : VERSIONS[:english_composition]
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
-
 recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition_short) do |doc|
   include Kitchen::Directions
 
