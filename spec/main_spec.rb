@@ -94,4 +94,16 @@ RSpec.describe 'books' do
   it 'bakes additive-manufacturing' do
     expect('additive-manufacturing').to bake_correctly
   end
+
+  it 'bakes ap history' do
+    expect('ap-history').to bake_correctly
+  end
+
+  it 'bakes anatomy' do
+    expect('anatomy').to bake_correctly
+  end
+
+  it 'bakes college physics' do
+    expect('college-physics').to bake_correctly
+  end
 end
