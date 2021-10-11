@@ -110,6 +110,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
     )
   end
 
+  book.pages('$.handbook').each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "H#{table.count_in(:page)}")
+    end
+  end
+
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeIndex.v1(book: book)
