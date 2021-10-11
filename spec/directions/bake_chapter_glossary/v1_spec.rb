@@ -299,4 +299,25 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary::V1 do
       )
     end
   end
+
+  context 'when no definitions are found' do
+    let(:chapter_without_definitions) do
+      book_containing(html: one_chapter_with_one_page_containing(
+        '<div>this chapter doesn\'t have definitions</div>'
+      )).chapters.first
+    end
+
+    it 'doesn\'t create an empty wrapper' do
+      described_class.new.bake(chapter: chapter_without_definitions, metadata_source: metadata_element)
+      expect(chapter_without_definitions).to match_normalized_html(
+        <<~HTML
+          <div data-type="chapter">
+            <div data-type="page">
+              <div>this chapter doesn't have definitions</div>
+            </div>
+          </div>
+        HTML
+      )
+    end
+  end
 end

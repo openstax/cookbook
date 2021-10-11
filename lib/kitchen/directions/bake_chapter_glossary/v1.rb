@@ -41,6 +41,8 @@ module Kitchen::Directions::BakeChapterGlossary
 
       content = @glossary.sort.map { |definition| definition.element.paste }.join
 
+      return if content.empty?
+
       Kitchen::Directions::CompositePageContainer.v1(
         container_key: 'glossary',
         uuid_key: "#{uuid_prefix}glossary",

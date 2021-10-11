@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 Add `BakeAutotitledExercise` V2 (minor)
+Fix `BakeChapterGlossary::V1` to stop adding an empty wrapper if there is no content (patch)
 
 ## [13.0.0] - 2021-10-6
 
