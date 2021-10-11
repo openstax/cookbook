@@ -21,6 +21,7 @@ module Kitchen
           next unless title.present?
 
           title.name = "h#{section['data-depth'].to_i + 1}"
+          section.name = 'div' if section.has_class?('column-container')
         end
       end
     end
