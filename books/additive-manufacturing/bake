@@ -37,7 +37,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |d
     }
   )
 
-  BakeUnclassifiedNotes.v1(book: book)
+  BakeUnclassifiedNotes.v1(book: book, bake_exercises: true)
+
+  AddInjectedExerciseId.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
@@ -67,6 +69,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |d
         title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
         section.prepend(child: title)
       end
+    end
+
+    selectors = 'section.review-questions, section.case-questions, section.free-response'
+
+    chapter.composite_pages.search(selectors).injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
   end
 
