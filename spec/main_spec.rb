@@ -102,4 +102,8 @@ RSpec.describe 'books' do
   it 'bakes college physics' do
     expect('college-physics').to bake_correctly
   end
+
+  it 'bakes astronomy' do
+    expect('astronomy').to bake_correctly
+  end
 end
