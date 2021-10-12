@@ -3,9 +3,9 @@
 module Kitchen
   module Directions
     module BakeAnnotationClasses
-      def self.v1(chapter:)
+      def self.v1(book:)
         V1.new.bake(
-          chapter: chapter)
+          book: book)
       end
     end
   end
