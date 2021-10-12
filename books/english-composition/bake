@@ -35,6 +35,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakeUnitTitle.v1(book: book)
   BakeUnitPageTitle.v1(book: book)
 
+  BakeAnnotationClasses.v1(book: book)
+
   # Bake EoC sections
   eoc_sections = %w[further-reading works-cited works-consulted]
   eoc_sections.each do |section_key|
@@ -76,7 +78,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
 
     end
-    BakeAnnotationClasses.v1(chapter: chapter)
+
     # Bake Custom Sections
     custom_sections_properties = {
       narrative_trailblazer: {
