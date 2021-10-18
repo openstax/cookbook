@@ -17,10 +17,10 @@ module Kitchen::Directions
               HTML
             )
             note.exercises.each do |exercise|
-              BakeNumberedNotes.bake_note_exercise(note: note, exercise: exercise, divider: '. ')
+              BakeNoteExercise.v1(note: note, exercise: exercise, divider: '. ')
             end
             note.injected_questions.each do |question|
-              BakeNumberedNotes.bake_note_injected_question(note: note, question: question)
+              BakeNoteInjectedQuestion.v1(note: note, question: question)
             end
           end
         end

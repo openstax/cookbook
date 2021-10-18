@@ -25,12 +25,12 @@ module Kitchen::Directions
 
             note.title&.trash
             note.exercises.each do |exercise|
-              BakeNumberedNotes.bake_note_exercise(
+              BakeNoteExercise.v1(
                 note: note, exercise: exercise, divider: '. ', suppress_solution: suppress_solution
               )
             end
             note.injected_questions.each do |question|
-              BakeNumberedNotes.bake_note_injected_question(note: note, question: question)
+              BakeNoteInjectedQuestion.v1(note: note, question: question)
             end
 
             note.search("div[data-type='solution']").each&.trash if suppress_solution

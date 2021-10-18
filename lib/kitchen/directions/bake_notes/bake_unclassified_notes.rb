@@ -3,15 +3,15 @@
 module Kitchen
   module Directions
     module BakeUnclassifiedNotes
-      def self.v1(book:)
+      def self.v1(book:, bake_exercises: false)
         book.notes.each do |note|
           next unless note.classes.empty?
 
-          bake_note(note: note)
+          bake_note(note: note, bake_exercises: bake_exercises)
         end
       end
 
-      def self.bake_note(note:)
+      def self.bake_note(note:, bake_exercises:)
         note.wrap_children(class: 'os-note-body')
 
         title = note.title&.cut
@@ -24,6 +24,8 @@ module Kitchen
             </h3>
           HTML
         )
+
+        BakeNoteExercise.v2(note: note) if bake_exercises
       end
     end
   end

@@ -30,32 +30,7 @@ module Kitchen
           HTML
         )
 
-        bake_unclassified_exercises(note: note) if bake_exercises
-      end
-
-      def self.bake_unclassified_exercises(note:)
-        note.exercises.each do |exercise|
-          exercise.problem.wrap_children('div', class: 'os-problem-container')
-
-          unless exercise.has_class?('unnumbered')
-            exercise.problem.prepend(child:
-              <<~HTML
-                <span class="os-title-label">#{I18n.t(:"exercises.exercise")} </span>
-                <span class="os-number">#{exercise.count_in(:note)}</span>
-              HTML
-            )
-          end
-
-          next unless exercise.solution
-
-          exercise.solution.wrap_children('div', class: 'os-solution-container')
-
-          exercise.solution.prepend(child:
-            <<~HTML
-              <span class="os-title-label">#{I18n.t(:"exercises.solution")}</span>
-            HTML
-          )
-        end
+        BakeNoteExercise.v2(note: note) if bake_exercises
       end
     end
   end

@@ -8,10 +8,10 @@ module Kitchen::Directions
           book.chapters.pages.notes("$.#{klass}").each do |note|
             bake_note(note: note, cases: cases)
             note.exercises.each do |exercise|
-              BakeNumberedNotes.bake_note_exercise(note: note, exercise: exercise)
+              BakeNoteExercise.v1(note: note, exercise: exercise)
             end
             note.injected_questions.each do |question|
-              BakeNumberedNotes.bake_note_injected_question(note: note, question: question)
+              BakeNoteInjectedQuestion.v1(note: note, question: question)
             end
           end
         end
