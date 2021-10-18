@@ -33,6 +33,7 @@ case "${book}" in
   anthropology | \
   ap-biology | \
   ap-history | \
+  ap-physics | \
   astronomy | \
   bca | \
   biology | \
