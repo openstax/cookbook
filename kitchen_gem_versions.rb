@@ -15,6 +15,7 @@ KITCHEN_VERSIONS = {
   college_physics: '13.0.0', # TODO: update
   computer_science: '12.0.0',
   contemporary_math: '12.1.0',
+  dev_math: '13.0.0', # TODO: update
   dummy: '2.0.0',
   english_composition: '13.0.0', # TODO: update
   finance: '11.2.0',
