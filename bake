@@ -48,5 +48,6 @@ case "${book}" in
   ap-biology) $DIR/books/ap-biology/bake --input $input_file --output $output_file;;
   college-physics) $DIR/books/college-physics/bake --input $input_file --output $output_file;;
   astronomy) $DIR/books/astronomy/bake --input $input_file --output $output_file;;
+  history) $DIR/books/history/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
