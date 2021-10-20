@@ -57,7 +57,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
     exercise.problem.wrap_children(class: 'os-problem-container')
     next unless exercise.solution
 
-    exercise.solution.wrap_children(class: 'os-solution-container')
+    exercise.solutions.each { |solution| solution.wrap_children(class: 'os-solution-container') }
   end
 
   book.chapters.each do |chapter|
@@ -158,6 +158,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
   BakeUnnumberedTables.v1(book: book)
   BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)
+  BakeFootnotes.v1(book: book)
+  BakeIframes.v1(outer_element: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
