@@ -127,12 +127,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeEquations.v1(book: book, number_decorator: :parentheses)
+  BakeFolio.v1(book: book)
 
   book.chapters.each do |chapter|
     BakePageAbstracts.v2(chapter: chapter)
   end
 
-  BakeFolio.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
 
 end
