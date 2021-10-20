@@ -26,7 +26,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[os-teacher learning-objectives boundless-physics worked-example virtual-physics snap-lab links-to-physics tips-for-success teacher-demonstration watch-physics work-in-physics]
+    classes: %w[os-teacher boundless-physics worked-example virtual-physics snap-lab links-to-physics tips-for-success teacher-demonstration watch-physics work-in-physics fun-in-physics misconception]
+  )
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[learning-objectives],
+    bake_subtitle: false
   )
   book.exercises('$.grasp-check').each do |exercise|
     BakeAutotitledExercise.v2(exercise: exercise, title: I18n.t(:'grasp-check'))
