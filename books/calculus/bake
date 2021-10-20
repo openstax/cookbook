@@ -132,8 +132,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
     BakePageAbstracts.v2(chapter: chapter)
   end
 
-  BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+
 end
 
 opts = Slop.parse do |slop|
