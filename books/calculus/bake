@@ -130,7 +130,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   BakeFolio.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakePageAbstracts.v2(chapter: chapter)
+    BakeLearningObjectives.v2(chapter: chapter)
   end
 
   BakeLinkPlaceholders.v1(book: book)
