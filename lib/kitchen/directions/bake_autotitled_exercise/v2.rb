@@ -12,12 +12,14 @@ module Kitchen::Directions::BakeAutotitledExercise
       # bake problem
       exercise.prepend(child:
         <<~HTML
-          <h3 class="os-title">
+          <h3 class="os-title" data-type="title">
             <span class="os-title-label">#{title}</span>
           </h3>
         HTML
       )
       exercise.problem.wrap_children(class: 'os-problem-container')
+      return unless exercise.solution
+
       exercise.solution.wrap_children(class: 'os-solution-container')
       exercise.solution.prepend(child:
         <<~HTML
