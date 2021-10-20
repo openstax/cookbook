@@ -26,7 +26,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[os-teacher boundless-physics worked-example virtual-physics snap-lab links-to-physics tips-for-success teacher-demonstration watch-physics work-in-physics fun-in-physics misconception]
+    classes: %w[os-teacher
+                boundless-physics
+                worked-example
+                virtual-physics
+                snap-lab
+                links-to-physics
+                tips-for-success
+                teacher-demonstration
+                watch-physics
+                work-in-physics
+                fun-in-physics
+                misconception]
   )
   BakeAutotitledNotes.v1(
     book: book,
@@ -37,18 +48,27 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
     BakeAutotitledExercise.v2(exercise: exercise, title: I18n.t(:'grasp-check'))
   end
   BakeUnclassifiedNotes.v1(book: book)
+  book.notes('$.worked-example').exercises.each do |exercise|
+    exercise.add_class('unnumbered')
+  end
   book.exercises('$.unnumbered').each do |exercise|
     next if exercise.has_class?('grasp-check')
 
     exercise.problem.wrap_children(class: 'os-problem-container')
+    next unless exercise.solution
+
     exercise.solution.wrap_children(class: 'os-solution-container')
   end
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
     # Check Your Understanding sections come last in a chapter section
-    chapter.search('section.check-understanding, section.practice-problems').exercises('$:not(.unnumbered)').each do |exercise| # TODO: injected also
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    chapter.search('section.check-understanding, section.practice-problems') \
+           .exercises('$:not(.unnumbered)').each do |exercise| # TODO: injected also
+      BakeNumberedExercise.v1(
+        exercise: exercise, number: exercise.count_in(:chapter),
+        solution_stays_put: true
+      )
     end
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -104,6 +124,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
     end
     chapter.search('div[data-type="composite-chapter"]').exercises.each do |exercise| # TODO: injected
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
+      BakeFirstElements.v1(within: exercise)
     end
 
     chapter.figures('$:not(.unnumbered)').each do |figure|
