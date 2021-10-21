@@ -98,4 +98,8 @@ RSpec.describe 'books' do
   it 'bakes anatomy' do
     expect('anatomy').to bake_correctly
   end
+
+  it 'bakes world-histrory' do
+    expect('world-history').to bake_correctly
+  end
 end
