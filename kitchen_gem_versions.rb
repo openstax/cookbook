@@ -10,8 +10,8 @@ KITCHEN_VERSIONS = {
   astronomy: '13.0.0', # TODO: update
   bca: '12.2.0',
   biology: '9.1.0',
-  calculus: '8.0.1',
-  chemistry: '8.0.1',
+  calculus: '11.0.0',
+  chemistry: '11.0.0',
   college_physics: '13.0.0', # TODO: update
   computer_science: '12.0.0',
   contemporary_math: '12.1.0',
