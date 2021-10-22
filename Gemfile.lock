@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    openstax_kitchen (13.0.0)
+    openstax_kitchen (14.0.0)
       activesupport
       i18n
       nokogiri
@@ -107,7 +107,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
     yard (0.9.24)
-    zeitwerk (2.4.2)
+    zeitwerk (2.5.1)
 
 PLATFORMS
   ruby
