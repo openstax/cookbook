@@ -43,34 +43,40 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
 
     eoc_sections = %w[review-questions critical-thinking]
 
-    chapter.pages.search("section.review-questions").exercises.each_with_index do |exercise, index|
-      if index.odd?
-        BakeNumberedExercise.v1(
-          exercise: exercise,
-          number: exercise.count_in(:chapter),
-          suppress_solution_if: true,
-          note_suppressed_solutions: true
-        )
-      else
-        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-      end
+    chapter.pages.search('section.review-questions').exercises.each do |exercise|
+      BakeNumberedExercise.v1(
+        exercise: exercise,
+        number: exercise.count_in(:chapter),
+        suppress_solution_if: :even?,
+        note_suppressed_solutions: true
+      )
     end
 
-    eoc_sections.each do |klass|
-      chapter.pages.search("section.#{klass}").exercises.each_with_index do |exercise|
-        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-      end
+    chapter.pages.search('section.critical-thinking').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    answer_key = BookAnswerKeyContainer.v1(book: book)
-    # Bake answer key from chapter/ move solutions from eoc into answer key
+    answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     MoveSolutionsToAnswerKey.v1(
       chapter: chapter,
       metadata_source: metadata,
-      strategy: :history,
       append_to: answer_key,
+      strategy_options: {
+        selectors: ['section.review-questions'],
+        condition: :even?
+      },
       solutions_plural: false
     )
+
+    # Strategy.new(
+    #   {
+    #     selectors: ['section.review-questions'],
+    #     condition: :even?
+    #   }
+    # ).bake(
+    #   chapter: chapter,
+    #   append_to: answer_key_inner_wrapper.first('div.os-eob.os-solution-container')
+    # )
 
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
@@ -83,16 +89,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
         RemoveSectionTitle.v1(section: section)
       end
     end
-
-  #   exercise_section_classes = %w[video-activity]
-  #   chapter.search(exercise_section_classes.prefix('section.').join(', ')).each do |element|
-  #     BakeIframes.v1(outer_element: element)
-  #   end
-
-  #   chapter.tables('$:not(.unnumbered)').each do |table|
-  #     BakeNumberedTable.v1(table: table,
-  #                          number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
-  #   end
 
     chapter.figures('$:not(.unnumbered)').each do |figure|
       BakeFigure.v1(figure: figure,
