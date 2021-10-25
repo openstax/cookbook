@@ -6,8 +6,9 @@ require 'bundler/inline'
 require_relative '../../bake_helper'
 
 gemfile do
-  gem 'openstax_kitchen', \
-     ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:english_composition]
+  # gem 'openstax_kitchen', \
+  #    ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:english_composition]
+  gem 'openstax_kitchen', github: 'openstax/kitchen', ref: '749b88010611f719d3398545682976ce14754a0a' # TODO: replace with a valid version
   gem 'slop', '4.8.2'
   gem 'byebug'
 end

@@ -16,7 +16,7 @@ KITCHEN_VERSIONS = {
   computer_science: '12.0.0',
   contemporary_math: '12.1.0',
   dummy: '2.0.0',
-  english_composition: '14.0.0',
+  english_composition: '13.0.0', #todo: update to 14.0.0
   finance: '11.2.0',
   microbiology: '7.0.0',
   philosophy: '11.2.0',
