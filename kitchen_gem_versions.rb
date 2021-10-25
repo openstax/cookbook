@@ -7,16 +7,16 @@ KITCHEN_VERSIONS = {
   anthropology: '11.1.0',
   ap_biology: '12.2.0',
   ap_history: '13.0.0',
-  astronomy: '13.0.0', # TODO: update
+  astronomy: '14.0.0',
   bca: '12.2.0',
   biology: '9.1.0',
   calculus: '11.0.0',
   chemistry: '11.0.0',
-  college_physics: '13.0.0', # TODO: update
+  college_physics: '14.0.0',
   computer_science: '12.0.0',
   contemporary_math: '12.1.0',
   dummy: '2.0.0',
-  english_composition: '13.0.0', # TODO: update after release
+  english_composition: '13.0.0', #todo: update to 14.0.0
   finance: '11.2.0',
   microbiology: '7.0.0',
   philosophy: '11.2.0',
