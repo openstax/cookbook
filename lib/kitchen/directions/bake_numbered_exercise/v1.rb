@@ -2,8 +2,9 @@
 
 module Kitchen::Directions::BakeNumberedExercise
   class V1
+    # rubocop:disable Metrics/ParameterLists
     def bake(exercise:, number:, suppress_solution_if: false,
-             note_suppressed_solutions: false, cases: false)
+             note_suppressed_solutions: false, cases: false, solution_stays_put: false)
       problem = exercise.problem
       solution = exercise.solution
 
@@ -26,8 +27,13 @@ module Kitchen::Directions::BakeNumberedExercise
           solution.trash
           exercise.add_class('os-hasSolution-trashed') if note_suppressed_solutions
         else
-          problem_number = "<a class='os-number' href='##{exercise.id}-solution'>#{number}</a>"
-          bake_solution(exercise: exercise, number: number)
+          problem_number = \
+            if solution_stays_put
+              "<span class='os-number'>#{number}</span>"
+            else
+              "<a class='os-number' href='##{exercise.id}-solution'>#{number}</a>"
+            end
+          bake_solution(exercise: exercise, number: number, solution_stays_put: solution_stays_put)
         end
       end
 
@@ -39,9 +45,22 @@ module Kitchen::Directions::BakeNumberedExercise
         HTML
       )
     end
+    # rubocop:enable Metrics/ParameterLists
 
-    def bake_solution(exercise:, number:, divider: '. ')
+    def bake_solution(exercise:, number:, solution_stays_put:, divider: '. ')
       solution = exercise.solution
+      if solution_stays_put
+        solution.wrap_children(class: 'os-solution-container')
+        solution.prepend(child:
+          <<~HTML
+            <h4 class="solution-title" data-type="title">
+              <span class="os-text">#{I18n.t(:solution)}</span>
+            </h4>
+          HTML
+        )
+        return
+      end
+
       solution.id = "#{exercise.id}-solution"
       exercise.add_class('os-hasSolution')
 

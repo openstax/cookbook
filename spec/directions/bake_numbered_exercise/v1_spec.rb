@@ -6,7 +6,8 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
 
   before do
     stub_locales({
-      'exercise': 'Exercise'
+      'exercise': 'Exercise',
+      'solution': 'Solution'
     })
   end
 
@@ -143,6 +144,33 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
           expect(pantry).to receive(:store).with('Ćwiczenia 1.1', { label: 'exercise_id' })
           described_class.v1(exercise: exercise1, number: '1', cases: true)
         end
+      end
+    end
+
+    context 'when exercises remain grouped with solutions' do
+      it 'works' do
+        described_class.v1(exercise: exercise1, number: '4', solution_stays_put: true)
+        expect(exercise1).to match_normalized_html(
+          <<~HTML
+            <div data-type="exercise" id="exercise_id">
+              <div data-type="problem" id="problem_id">
+                <span class="os-number">4</span>
+                <span class="os-divider">. </span>
+                <div class="os-problem-container">
+                  <p>example content</p>
+                </div>
+              </div>
+              <div data-type="solution" id="solution_id">
+                <h4 class="solution-title" data-type="title">
+                  <span class="os-text">Solution</span>
+                </h4>
+                <div class="os-solution-container">
+                  <p>Solution content</p>
+                </div>
+              </div>
+            </div>
+          HTML
+        )
       end
     end
 

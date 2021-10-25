@@ -6,11 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `solution_stays_put` option for `BakeNumberedExercise` (minor)
+
 ## [14.0.0] - 2021-10-22
 
-Fix `BakeAutotitledExercise` V2 to stop breaking for exercises without solutions (patch)
-Add `BakeAutotitledExercise` V2 (minor)
-Fix `BakeChapterGlossary::V1` to stop adding an empty wrapper if there is no content (patch)
+* Fix `BakeAutotitledExercise` V2 to stop breaking for exercises without solutions (patch)
+* Add `BakeAutotitledExercise` V2 (minor)
+* Fix `BakeChapterGlossary::V1` to stop adding an empty wrapper if there is no content (patch)
 * Create `BakeNoteExercise` and `BakeNoteInjectedQuestion` and support exercises in `BakeUnclassifiedNotes` (minor)
 * Add baking section with class `column header` to `BakeAppendix` (patch)
 * Expand `BakeAnnotationClasses` to book from chapter to bake also paragraphs from Preface (major)
