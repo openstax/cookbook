@@ -66,8 +66,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |d
         section_selector: "section.#{section_key}"
       ) do |section|
         RemoveSectionTitle.v1(section: section)
-        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-        section.prepend(child: title)
+        #title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        #section.prepend(child: title)
       end
     end
 
