@@ -8,7 +8,7 @@ require_relative '../../bake_helper'
 gemfile do
   # gem 'openstax_kitchen', \
   #     ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:college_physics]
-  gem 'openstax_kitchen', github: 'openstax/kitchen', ref: '36f6e957f73fbca763e21c0d8cb6185449024f8d' # TODO: replace with a valid version
+  gem 'openstax_kitchen', github: 'openstax/kitchen', ref: '249705940b4bafbea5ec9670ecc1979621d04298' # TODO: replace with a valid version
   gem 'slop', '4.8.2'
   gem 'byebug'
 end

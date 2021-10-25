@@ -34,6 +34,7 @@ case "${book}" in
   anthropology | \
   ap-biology | \
   ap-history | \
+  astronomy | \
   bca | \
   biology | \
   calculus | \
