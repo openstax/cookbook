@@ -23,6 +23,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
+  AddInjectedExerciseId.v1(book: book)
 
   BakeAutotitledNotes.v1(
     book: book,
@@ -62,14 +63,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
-    # Check Your Understanding sections come last in a chapter section
-    chapter.search('section.check-understanding, section.practice-problems') \
-           .exercises('$:not(.unnumbered)').each do |exercise| # TODO: injected also
-      BakeNumberedExercise.v1(
-        exercise: exercise, number: exercise.count_in(:chapter),
-        solution_stays_put: true
-      )
-    end
+    # Check Your Understanding + Practice Problems sections come last in a chapter section
+    BakeAllNumberedExerciseTypes.v1(
+      within: chapter.search('section.check-understanding, section.practice-problems'),
+      exercise_options: { solution_stays_put: true }
+    )
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
@@ -122,10 +120,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
         section.prepend(child: title)
       end
     end
-    chapter.search('div[data-type="composite-chapter"]').exercises.each do |exercise| # TODO: injected
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
-      BakeFirstElements.v1(within: exercise)
-    end
+    BakeAllNumberedExerciseTypes.v1(
+      within: chapter.search('div[data-type="composite-chapter"]'),
+      exercise_options: { suppress_solution_if: true }
+    )
+    BakeFirstElements.v1(within: chapter.search('div[data-type="composite-chapter"]').exercises)
 
     chapter.figures('$:not(.unnumbered)').each do |figure|
       BakeFigure.v1(
