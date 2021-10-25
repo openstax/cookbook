@@ -2,10 +2,15 @@
 
 require 'bundler/inline'
 require_relative '../../bake_helper'
+require_relative 'strategy'
 
 gemfile do
-  gem 'openstax_kitchen', \
-      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:precalculus]
+  # gem 'openstax_kitchen', \
+  #     ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:precalculus]
+
+  gem 'openstax_kitchen',
+      github: 'openstax/kitchen',
+      ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb' # TODO: replace with a valid version
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -86,7 +91,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
     page.tables('$:not(.unnumbered):not(.os-coreq-element)').each do |table|
       BakeNumberedTable.v2(table: table, number: table.count_in(:page))
     end
-    page.figures('$:not(.os-coreq-element)', only: :figure_to_bake?).each do |figure|
+    page.figures('$:not(.os-coreq-element)', only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: figure.count_in(:page))
     end
     page.examples('$:not(.os-coreq-element)').each do |example|
@@ -98,7 +103,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table, number: table.count_in(:composite_page))
     end
-    page.figures(only: :figure_to_bake?).each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: figure.count_in(:composite_page))
     end
   end
@@ -110,7 +115,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
     end
-    page.figures(only: :figure_to_bake?).each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
   end
@@ -127,9 +132,13 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
       BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
 
-    MoveSolutionsToAnswerKey.v1(
-      chapter: chapter, metadata_source: metadata, strategy: :precalculus,
-      append_to: solutions_container, solutions_plural: false
+    answer_key_inner_wrapper = MoveSolutionsToAnswerKey.v1(
+      chapter: chapter, metadata_source: metadata, append_to: solutions_container, solutions_plural: false
+    )
+
+    Strategy.new.bake(
+      chapter: chapter,
+      append_to: answer_key_inner_wrapper
     )
   end
 
