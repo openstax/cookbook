@@ -11,10 +11,16 @@ KITCHEN_VERSIONS = {
   bca: '12.2.0',
   biology: '9.1.0',
   calculus: '11.0.0',
-  chemistry: '11.0.0',
+  chemistry: {
+    github: 'openstax/kitchen',
+    ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
+  },
   college_physics: '13.0.0', # TODO: update
   computer_science: '12.0.0',
-  contemporary_math: '12.1.0',
+  contemporary_math: {
+    github: 'openstax/kitchen',
+    ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
+  },
   dummy: '2.0.0',
   english_composition: '13.0.0', # TODO: update after release
   finance: '11.2.0',
@@ -22,8 +28,14 @@ KITCHEN_VERSIONS = {
   philosophy: '11.2.0',
   pl_psychology: '11.1.0',
   political_science: '12.0.0',
-  precalculus: '12.1.0',
+  precalculus: {
+    github: 'openstax/kitchen',
+    ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
+  },
   sociology: '7.0.0',
   statistics: '12.0.0',
-  u_physics: '11.0.0'
+  u_physics: {
+    github: 'openstax/kitchen',
+    ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
+  },
 }.freeze
