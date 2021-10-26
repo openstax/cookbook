@@ -3,9 +3,12 @@
 # frozen_string_literal: true
 
 require 'bundler/inline'
+require_relative '../../bake_helper'
 
 gemfile do
-  gem 'openstax_kitchen', ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : '12.1.0'
+  # gem 'openstax_kitchen', \
+  #    ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:english_composition]
+  gem 'openstax_kitchen', github: 'openstax/kitchen', ref: '749b88010611f719d3398545682976ce14754a0a' # TODO: replace with a valid version
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -32,6 +35,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   )
   BakeUnitTitle.v1(book: book)
   BakeUnitPageTitle.v1(book: book)
+
+  BakeAnnotationClasses.v1(book: book)
 
   # Bake EoC sections
   eoc_sections = %w[further-reading works-cited works-consulted]
@@ -74,7 +79,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
 
     end
-    BakeAnnotationClasses.v1(chapter: chapter)
+
     # Bake Custom Sections
     custom_sections_properties = {
       narrative_trailblazer: {
@@ -108,6 +113,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
     )
   end
 
+  book.pages('$.handbook').each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "H#{table.count_in(:page)}")
+    end
+  end
+
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeIndex.v1(book: book)
@@ -116,6 +128,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeToc.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|

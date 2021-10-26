@@ -5,7 +5,9 @@
 # install them.
 
 require 'set'
+require_relative '../kitchen_gem_versions'
 
+# Add gems and versions from book files
 source_filenames = (Dir.glob(File.join(__dir__,"../books/**/*")) + [File.join(__dir__,"console"),File.join(__dir__,"normalize")])
                        .select{|filename| !File.directory?(filename)}
 
@@ -15,6 +17,11 @@ gem_name_to_versions_array_hash = source_filenames.each_with_object({}) do |file
   gem_names_and_versions.each do |gem_name, _, version|
     (hash[gem_name] ||= Set.new([])).add(version)
   end
+end
+
+# Add remaining kitchen versions from KITCHEN_VERSIONS
+KITCHEN_VERSIONS.each_value do |version|
+  (gem_name_to_versions_array_hash['openstax_kitchen'] ||= Set.new([])).add(version)
 end
 
 gem_name_to_versions_array_hash.each do |gem_name, versions|

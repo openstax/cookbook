@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'bundler/inline'
+require_relative '../../bake_helper'
 
 gemfile do
-  gem 'openstax_kitchen', '2.0.0'
+  gem 'openstax_kitchen', KITCHEN_VERSIONS[:dummy]
   gem 'slop', '4.8.2'
 end
 
