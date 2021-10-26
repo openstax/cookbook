@@ -79,38 +79,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
 
     end
-
-    # Bake Custom Sections
-    custom_sections_properties = {
-      narrative_trailblazer: {
-        class: 'narrative-trailblazer',
-        inject: 'title'
-      },
-      living_words: {
-        class: 'living-words',
-        inject: 'subtitle'
-      },
-      quick_launch: {
-        class: 'quick-launch',
-        inject: 'title_prefix'
-      },
-      drafting: {
-        class: 'drafting',
-        inject: 'title_prefix'
-      },
-      peer_review: {
-        class: 'peer-review',
-        inject: 'title_prefix'
-      },
-      revising: {
-        class: 'revising',
-        inject: 'title_prefix'
-      }
-    }
-    BakeCustomSections.v1(
-      chapter: chapter,
-      custom_sections_properties: custom_sections_properties
-    )
   end
 
   book.pages('$.handbook').each do |page|
@@ -129,6 +97,40 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakeLinkPlaceholders.v1(book: book)
   BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
+
+  # Bake Custom Sections
+  custom_sections_properties = {
+    narrative_trailblazer: {
+      class: 'narrative-trailblazer',
+      inject: 'title'
+    },
+    living_words: {
+      class: 'living-words',
+      inject: 'subtitle'
+    },
+    quick_launch: {
+      class: 'quick-launch',
+      inject: 'title_prefix'
+    },
+    drafting: {
+      class: 'drafting',
+      inject: 'title_prefix'
+    },
+    peer_review: {
+      class: 'peer-review',
+      inject: 'title_prefix'
+    },
+    revising: {
+      class: 'revising',
+      inject: 'title_prefix'
+    }
+  }
+  book.chapters.each do |chapter|
+    BakeCustomSections.v1(
+      chapter: chapter,
+      custom_sections_properties: custom_sections_properties
+    )
+  end
 end
 
 opts = Slop.parse do |slop|
