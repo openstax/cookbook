@@ -95,6 +95,8 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
     end
   end
 
+  BakeUnnumberedFigure.v1(book: book)
+
   book.composite_pages.each do |page|
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table, number: table.count_in(:composite_page))

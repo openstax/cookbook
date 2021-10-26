@@ -10,7 +10,10 @@ KITCHEN_VERSIONS = {
   astronomy: '14.0.0',
   bca: '12.2.0',
   biology: '9.1.0',
-  calculus: '11.0.0',
+  calculus: {
+    github: 'openstax/kitchen',
+    ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
+  },
   chemistry: {
     github: 'openstax/kitchen',
     ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
@@ -37,5 +40,5 @@ KITCHEN_VERSIONS = {
   u_physics: {
     github: 'openstax/kitchen',
     ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
-  },
+  }
 }.freeze
