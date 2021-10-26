@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require 'bundler/inline'
+require_relative '../../bake_helper'
 
 gemfile do
   gem 'openstax_kitchen', \
