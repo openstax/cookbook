@@ -63,13 +63,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     end
 
     # Bake answer key from chapter/ move solutions from eoc into answer key
-    answer_key_inner_wrapper = MoveSolutionsToAnswerKey.v1(
+    answer_key_inner_container = MoveSolutionsToAnswerKey.v1(
       chapter: chapter, metadata_source: metadata, append_to: solutions_container
     )
 
     Strategy.new.bake(
       chapter: chapter,
-      append_to: answer_key_inner_wrapper
+      append_to: answer_key_inner_container
     )
   end
 

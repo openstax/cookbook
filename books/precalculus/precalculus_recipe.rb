@@ -130,13 +130,16 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
       BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
 
-    answer_key_inner_wrapper = MoveSolutionsToAnswerKey.v1(
-      chapter: chapter, metadata_source: metadata, append_to: solutions_container, solutions_plural: false
+    answer_key_inner_container = MoveSolutionsToAnswerKey.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      append_to: solutions_container,
+      solutions_plural: false
     )
 
     Strategy.new.bake(
       chapter: chapter,
-      append_to: answer_key_inner_wrapper
+      append_to: answer_key_inner_container
     )
   end
 
