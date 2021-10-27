@@ -25,5 +25,6 @@ KITCHEN_VERSIONS = {
   precalculus: '12.1.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
-  u_physics: '11.0.0'
+  u_physics: '11.0.0',
+  world_history: '14.0.0' # TODO: update after release
 }.freeze
