@@ -40,6 +40,6 @@ KITCHEN_VERSIONS = {
   u_physics: {
     github: 'openstax/kitchen',
     ref: 'bb223dfaf4b9699d336fe9196ff658a07db21efb'
-  }
+  },
   world_history: '14.0.0' # TODO: update after release
 }.freeze
