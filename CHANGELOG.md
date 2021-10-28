@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `solution_stays_put` option for `BakeNumberedExercise` (minor)
 * Refactor: moves all `Answer key strategies` that are book-specific to the
 recipes side and keeps the `Default Strategy`in kitchen (major)
+* Adds missing spanish translations (minor)
 
 ## [14.0.0] - 2021-10-22
 
