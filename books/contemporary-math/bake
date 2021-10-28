@@ -125,7 +125,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
       BakeFirstElements.v1(within: exercise)
     end
 
-    answer_key_inner_container = MoveSolutionsToAnswerKey.v1(
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
 

@@ -130,7 +130,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
       BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
 
-    answer_key_inner_container = MoveSolutionsToAnswerKey.v1(
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
       append_to: solutions_container,

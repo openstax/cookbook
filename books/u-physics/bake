@@ -63,7 +63,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     end
 
     # Bake answer key from chapter/ move solutions from eoc into answer key
-    answer_key_inner_container = MoveSolutionsToAnswerKey.v1(
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: solutions_container
     )
 

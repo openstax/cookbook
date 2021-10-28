@@ -12,17 +12,17 @@ KITCHEN_VERSIONS = {
   biology: '9.1.0',
   calculus: {
     github: 'openstax/kitchen',
-    ref: '22f8c16641f89909b4ec08d3a52c47d5e5ac01a8'
+    ref: '5d93f343bd8ace638ca88094d4baff9e723da41d'
   },
   chemistry: {
     github: 'openstax/kitchen',
-    ref: '22f8c16641f89909b4ec08d3a52c47d5e5ac01a8'
+    ref: '5d93f343bd8ace638ca88094d4baff9e723da41d'
   },
   college_physics: '14.0.0',
   computer_science: '12.0.0',
   contemporary_math: {
     github: 'openstax/kitchen',
-    ref: '22f8c16641f89909b4ec08d3a52c47d5e5ac01a8'
+    ref: '5d93f343bd8ace638ca88094d4baff9e723da41d'
   },
   dummy: '2.0.0',
   english_composition: '13.0.0', #todo: update to 14.0.0
@@ -33,13 +33,13 @@ KITCHEN_VERSIONS = {
   political_science: '12.0.0',
   precalculus: {
     github: 'openstax/kitchen',
-    ref: '22f8c16641f89909b4ec08d3a52c47d5e5ac01a8'
+    ref: '5d93f343bd8ace638ca88094d4baff9e723da41d'
   },
   sociology: '7.0.0',
   statistics: '12.0.0',
   u_physics: {
     github: 'openstax/kitchen',
-    ref: '22f8c16641f89909b4ec08d3a52c47d5e5ac01a8'
+    ref: '5d93f343bd8ace638ca88094d4baff9e723da41d'
   },
   world_history: '14.0.0' # TODO: update after release
 }.freeze

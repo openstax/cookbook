@@ -108,7 +108,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   book_answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    answer_key_inner_container = MoveSolutionsToAnswerKey.v1(
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: book_metadata, append_to: book_answer_key
     )
 

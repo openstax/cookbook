@@ -33,14 +33,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    answer_key_inner_container = MoveSolutionsToAnswerKey.v1(
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
       append_to: answer_key,
       solutions_plural: false
     )
 
-    DefaultStrategy.v1(
+    DefaultStrategyForAnswerKeySolutions.v1(
       strategy_options: { selectors: ['section.exercises'] },
       chapter: chapter,
       append_to: answer_key_inner_container
