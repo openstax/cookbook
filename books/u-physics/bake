@@ -4,10 +4,12 @@
 
 require 'bundler/inline'
 require_relative '../../bake_helper'
+require_relative 'strategy'
 
 gemfile do
   gem 'openstax_kitchen', \
       ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:u_physics]
+
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -24,7 +26,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
   end
 
@@ -58,8 +60,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     end
 
     # Bake answer key from chapter/ move solutions from eoc into answer key
-    MoveSolutionsToAnswerKey.v1(chapter: chapter, metadata_source: metadata, strategy: :uphysics,
-                                append_to: solutions_container)
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: solutions_container
+    )
+
+    Strategy.new.bake(
+      chapter: chapter,
+      append_to: answer_key_inner_container
+    )
   end
 
   book.search('div[data-type="solution"]').each do |solution|
