@@ -29,10 +29,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
   book.notes('$.try, .be-prepared').exercises.each do |exercise|
     BakeFirstElements.v1(within: exercise, first_inline_list: true)
   end
-  BakeAutotitledNotes.v1(book: book, classes: %w[manipulative-math howto media-2])
+  BakeAutotitledNotes.v1(book: book, classes: %w[manipulative-math howto media-2 links-to-literacy])
 
   answer_key = BookAnswerKeyContainer.v1(book: book)
   book.chapters.each do |chapter|
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter_review = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
@@ -52,10 +53,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
       section.prepend(child: title)
     end
 
-    MoveExercisesToEOC.v1( # TODO: needs the title tag of the nested sections fixed up
-      chapter: chapter, metadata_source: metadata, klass: 'review-exercises',
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter, metadata_source: metadata,
+      container_key: 'review-exercises', uuid_key: '.review-exercises',
+      section_selector: 'section.review-exercises',
       append_to: exercises_composite_chapter
-    )
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      ChangeSubsectionTitleTag.v1(section: section)
+    end
     MoveExercisesToEOC.v1(
       chapter: chapter, metadata_source: metadata, klass: 'practice-test',
       append_to: exercises_composite_chapter
@@ -66,11 +72,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
       BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
     BakeChapterSectionExercises.v1(chapter: chapter)
-    MoveSolutionsToAnswerKey.v1(
-      chapter: chapter, metadata_source: metadata, strategy: :default,
-      append_to: answer_key, strategy_options: {}
+    MoveSolutionsToAnswerKey.v1( # TODO: update to new way
+      chapter: chapter, metadata_source: metadata, strategy: :dev_math,
+      append_to: answer_key
     )
-
     chapter.figures('$:not(.unnumbered)').each do |figure|
       BakeFigure.v1(
         figure: figure,
