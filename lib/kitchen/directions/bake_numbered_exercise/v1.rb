@@ -3,8 +3,8 @@
 module Kitchen::Directions::BakeNumberedExercise
   class V1
     # rubocop:disable Metrics/ParameterLists
-    def bake(exercise:, number:, suppress_solution_if: false,
-             note_suppressed_solutions: false, cases: false, solution_stays_put: false)
+    def bake(exercise:, number:, suppress_solution_if:,
+             note_suppressed_solutions:, cases:, solution_stays_put:)
       problem = exercise.problem
       solution = exercise.solution
 
