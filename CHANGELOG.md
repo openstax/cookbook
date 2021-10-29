@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change whitespace for `BakeIndex` and `BakeExample` (major)
 * Add `BakeAllNumberedExerciseTypes` direction for easier baking of compound sections (minor)
 * Add `solution_stays_put` option for `BakeNumberedExercise` (minor)
 * Refactor: moves all `Answer key strategies` that are book-specific to the

@@ -29,7 +29,7 @@ class Object
       def render(file:)
         file = File.absolute_path(file, renderable_base_dir)
         template = File.open(file, 'rb', &:read)
-        ERB.new(template).result(binding)
+        ERB.new(template, trim_mode: '-').result(binding)
       end
     end
   end

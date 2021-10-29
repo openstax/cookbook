@@ -88,18 +88,24 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <a class="os-term-section-link" href="#auto_p2_term9">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
+                <!--
+                    -->
               </div>
               <div class="os-index-item">
                 <span class="os-term" group-by="Symbols">5&#x2019; cap</span>
                 <a class="os-term-section-link" href="#auto_composite_page_term4">
                   <span class="os-term-section">2 Another EOC Section</span>
                 </a>
+                <!--
+                    -->
               </div>
               <div class="os-index-item">
                 <span class="os-term" group-by="Symbols">&#x394;E</span>
                 <a class="os-term-section-link" href="#auto_p2_term7">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
+                <!--
+                    -->
               </div>
             </div>
             <div class="group-by">
@@ -109,10 +115,14 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <a class="os-term-section-link" href="#auto_p1_term3">
                   <span class="os-term-section">Preface</span>
                 </a>
+                <!--
+                    -->
                 <span class="os-index-link-separator">, </span>
                 <a class="os-term-section-link" href="#auto_p1_term4">
                   <span class="os-term-section">Preface</span>
                 </a>
+                <!--
+                    -->
               </div>
             </div>
             <div class="group-by">
@@ -122,12 +132,16 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <a class="os-term-section-link" href="#auto_composite_page_term2">
                   <span class="os-term-section">2 Another EOC Section</span>
                 </a>
+                <!--
+                    -->
               </div>
               <div class="os-index-item">
                 <span class="os-term" group-by="c">composite page in a composite chapter</span>
                 <a class="os-term-section-link" href="#auto_composite_page_term1">
                   <span class="os-term-section">1 EOC Section Title</span>
                 </a>
+                <!--
+                    -->
               </div>
             </div>
             <div class="group-by">
@@ -137,6 +151,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <a class="os-term-section-link" href="#auto_composite_page_term3">
                   <span class="os-term-section">2 Another EOC Section</span>
                 </a>
+                <!--
+                    -->
               </div>
             </div>
             <div class="group-by">
@@ -146,14 +162,20 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <a class="os-term-section-link" href="#auto_p1_term1">
                   <span class="os-term-section">Preface</span>
                 </a>
+                <!--
+                    -->
                 <span class="os-index-link-separator">, </span>
                 <a class="os-term-section-link" href="#auto_p1_term2">
                   <span class="os-term-section">Preface</span>
                 </a>
+                <!--
+                    -->
                 <span class="os-index-link-separator">, </span>
                 <a class="os-term-section-link" href="#auto_p2_term6">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
+                <!--
+                    -->
               </div>
             </div>
             <div class="group-by">
@@ -163,6 +185,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <a class="os-term-section-link" href="#auto_p1_term5">
                   <span class="os-term-section">Preface</span>
                 </a>
+                <!--
+                    -->
               </div>
             </div>
             <div class="group-by">
@@ -172,6 +196,8 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <a class="os-term-section-link" href="#auto_p2_term8">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
+                <!--
+                    -->
               </div>
             </div>
           </div>

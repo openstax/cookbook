@@ -11,16 +11,12 @@
       <span class="group-label"><%= section.name %></span>
       <% section.items.each do |item| %>
         <div class="os-index-item">
-          <% item.terms.each_with_index do |term, ii| %>
-            <% if ii == 0 %>
+          <%- item.terms.each_with_index do |term, ii| -%>
+            <%- if ii == 0 -%>
               <span class="os-term" group-by="<%= term.group_by %>"><%= term.text %></span>
-            <% else %>
-              <span class="os-index-link-separator">, </span>
-            <% end %>
-            <a class="os-term-section-link" href="#<%= term.id %>">
-              <span class="os-term-section"><%= term.page_title %></span>
-            </a>
-          <% end %>
+            <%- else -%><span class="os-index-link-separator">, </span><% end %>
+            <a class="os-term-section-link" href="#<%= term.id %>"><span class="os-term-section"><%= term.page_title %></span></a><!--
+          --><%- end %>
         </div>
       <% end %>
     </div>

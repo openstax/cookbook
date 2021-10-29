@@ -91,7 +91,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
                 </div>
                 <div data-type="solution" id="solution_id">
                   <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution </span>
+                    <span class="os-title-label">Solution</span>
                   </h4>
                   <div class="os-solution-container">
                     <p>Solution content</p>
@@ -155,7 +155,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
                 </div>
                 <div data-type="solution" id="solution_id">
                   <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution </span>
+                    <span class="os-title-label">Solution</span>
                   </h4>
                   <div class="os-solution-container">
                     <p>Solution content</p>
@@ -220,7 +220,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
                 </div>
                 <div data-type="solution" id="solution_id_1">
                   <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution </span>
+                    <span class="os-title-label">Solution</span>
                   </h4>
                   <div class="os-solution-container">
                     <p>Solution content</p>
@@ -228,7 +228,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
                 </div>
                 <div data-type="solution" id="solution_id_2">
                   <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution </span>
+                    <span class="os-title-label">Solution</span>
                   </h4>
                   <div class="os-solution-container">
                     <p>A second solution</p>
@@ -400,7 +400,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
                 </div>
                 <div data-type="solution" id="solution_id">
                   <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution </span>
+                    <span class="os-title-label">Solution</span>
                     <span class="os-number">1</span>
                   </h4>
                   <div class="os-solution-container">
@@ -422,7 +422,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
                 </div>
                 <div data-type="solution" id="solution_id">
                   <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution </span>
+                    <span class="os-title-label">Solution</span>
                     <span class="os-number">2</span>
                   </h4>
                   <div class="os-solution-container">
@@ -509,7 +509,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
                       </div>
                       <div data-type="solution">
                         <h4 data-type="solution-title">
-                          <span class="os-title-label">Solution </span>
+                          <span class="os-title-label">Solution</span>
                         </h4>
                         <div class="os-solution-container">A</div>
                       </div>
