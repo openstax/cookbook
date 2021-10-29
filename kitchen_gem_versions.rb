@@ -25,7 +25,10 @@ KITCHEN_VERSIONS = {
     ref: 'b7c16c6afa561984025e58083ebd481294138e45'
   },
   dummy: '2.0.0',
-  english_composition: '13.0.0', #todo: update to 14.0.0
+  english_composition: {
+    github: 'openstax/kitchen',
+    ref: '749b88010611f719d3398545682976ce14754a0a'
+  },
   finance: '11.2.0',
   microbiology: '7.0.0',
   philosophy: '11.2.0',

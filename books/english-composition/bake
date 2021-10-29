@@ -6,9 +6,8 @@ require 'bundler/inline'
 require_relative '../../bake_helper'
 
 gemfile do
-  # gem 'openstax_kitchen', \
-  #    ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:english_composition]
-  gem 'openstax_kitchen', github: 'openstax/kitchen', ref: '749b88010611f719d3398545682976ce14754a0a' # TODO: replace with a valid version
+  gem 'openstax_kitchen', \
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:english_composition]
   gem 'slop', '4.8.2'
   gem 'byebug'
 end
@@ -26,13 +25,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   BakeHandbook.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v2(
-    book: book, strategy_options: {
-      strategy: :add_objectives,
-      bake_chapter_outline: true,
-      introduction_order: :v1
-    }
-  )
+  BakeChapterIntroductions.v1(book: book)
   BakeUnitTitle.v1(book: book)
   BakeUnitPageTitle.v1(book: book)
 
@@ -74,7 +67,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
 
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    chapter.figures(only: :figure_to_bake?).each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
 
