@@ -66,8 +66,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |d
         section_selector: "section.#{section_key}"
       ) do |section|
         RemoveSectionTitle.v1(section: section)
-        #title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-        #section.prepend(child: title)
       end
     end
 
@@ -76,6 +74,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |d
     chapter.composite_pages.search(selectors).injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
+
+    BakeAllChapterSolutionsTypes.v1(
+      chapter: chapter,
+      within: chapter.search(selectors),
+      metadata_source: metadata
+    )
   end
 
   BakeFootnotes.v1(book: book)
