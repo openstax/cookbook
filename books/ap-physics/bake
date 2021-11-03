@@ -106,13 +106,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |doc|
   end
 
   book.chapters.each do |chapter|
-    MoveSolutionsToAnswerKey.v1(chapter: chapter,
-                                metadata_source: metadata,
-                                strategy: :default,
-                                strategy_options: {
-                                  selectors: ['section.problems-exercises']
-                                },
-                                append_to: answer_key)
+    MoveSolutionsFromExerciseSection.v1(chapter: chapter,
+                                        append_to: answer_key,
+                                        section_class: 'problems-exercises')
   end
 
   BakeEquations.v1(book: book)
