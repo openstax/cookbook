@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Change whitespace for `BakeIndex` and `BakeExample` (major)
 * Add `BakeAllNumberedExerciseTypes` direction for easier baking of compound sections (minor)
 * Add `solution_stays_put` option for `BakeNumberedExercise` (minor)
+* Add `BakeAllChapterSolutionsTypes` direction to move injected solutions and regular ones to EOC (minor)
 * Refactor: moves all `Answer key strategies` that are book-specific to the
 recipes side and keeps the `Default Strategy`in kitchen (major)
 * Adds missing spanish translations (minor)
