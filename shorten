@@ -39,6 +39,7 @@ case "${book}" in
   computer-science) dest="${DIR}/data/computer-science/short" && script="${DIR}/books/computer-science/shorten";;
   political-science) dest="${DIR}/data/political-science/short" && script="${DIR}/books/political-science/shorten";;
   ap-biology) dest="${DIR}/data/ap-biology/short" && script="${DIR}/books/ap-biology/shorten";;
+  additive-manufacturing) dest="${DIR}/data/additive-manufacturing/short" && script="${DIR}/books/additive-manufacturing/shorten";;
   college-physics) dest="${DIR}/data/college-physics/short" && script="${DIR}/books/college-physics/shorten";;
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/books/astronomy/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;

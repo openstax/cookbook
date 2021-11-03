@@ -46,6 +46,7 @@ case "${book}" in
   finance) $DIR/books/finance/bake --input $input_file --output $output_file;;
   computer-science) $DIR/books/computer-science/bake --input $input_file --output $output_file;;
   ap-biology) $DIR/books/ap-biology/bake --input $input_file --output $output_file;;
+  additive-manufacturing) $DIR/books/additive-manufacturing/bake --input $input_file --output $output_file;;
   college-physics) $DIR/books/college-physics/bake --input $input_file --output $output_file;;
   astronomy) $DIR/books/astronomy/bake --input $input_file --output $output_file;;
   world-history) $DIR/books/world-history/bake --input $input_file --output $output_file;;
