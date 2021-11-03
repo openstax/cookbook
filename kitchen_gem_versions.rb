@@ -2,7 +2,10 @@
 
 # Contains the openstax_kitchen version for each recipe
 KITCHEN_VERSIONS = {
-  additive_manufacturing: '13.0.0',
+  additive_manufacturing: {
+    github: 'openstax/kitchen',
+    ref: 'c40acb0205fa658aa9ab42922ddb9c0db88ae5fa'
+  },
   american_government: '7.0.0',
   anatomy: '13.0.0',
   anthropology: '11.1.0',
