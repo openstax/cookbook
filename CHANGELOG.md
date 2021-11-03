@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeUnnumberedExercise` direction (minor)
 * Change whitespace for `BakeIndex` and `BakeExample` (major)
 * Add `BakeAllNumberedExerciseTypes` direction for easier baking of compound sections (minor)
 * Add `solution_stays_put` option for `BakeNumberedExercise` (minor)
