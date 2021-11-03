@@ -55,10 +55,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
   book.exercises('$.unnumbered').each do |exercise|
     next if exercise.has_class?('grasp-check')
 
-    exercise.problem.wrap_children(class: 'os-problem-container')
-    next unless exercise.solution
-
-    exercise.solutions.each { |solution| solution.wrap_children(class: 'os-solution-container') }
+    BakeUnnumberedExercise.v1(exercise: exercise)
   end
 
   book.chapters.each do |chapter|
