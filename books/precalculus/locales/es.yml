@@ -1,0 +1,13 @@
+es:
+  section_exercises: ! '%{number} Ejercicios de Sección'
+  eoc:
+    practice-test: Examen de Práctica
+    review-exercises: Ejercicios de Repaso
+    section-exercises: ! '%{number} Ejercicios de Sección'
+    exercises: Ejercicios
+    chapter-review: Revisión del Capítulo
+  notes:
+    try: "Inténtelo "
+    how-to-notitle: Cómo
+    qa: Q&amp;A
+    media-notitle: Media
