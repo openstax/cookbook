@@ -1,15 +1,17 @@
 en:
   notes:
-    your-turn: 'Your Turn'
-    concepts-practice: 'Concepts In Practice'
-    continuing-application: 'Continuing Application'
-    ethical-considerations: 'Ethical Considerations'
-    ifrs-connection: 'IFRS Connection'
-    link-to-learning: 'Link to Learning'
+    your-turn: Your Turn
+    concepts-practice: Concepts In Practice
+    continuing-application: Continuing Application
+    ethical-considerations: Ethical Considerations
+    ifrs-connection: IFRS Connection
+    link-to-learning: Link to Learning
   eoc:
-    multiple-choice: 'Multiple Choice'
-    questions: 'Questions'
-    exercise-set-a: 'Exercise Set A'
-    exercise-set-b: 'Exercise Set B'
-    problem-set-a: 'Problem Set A'
-    thought-provokers: 'Thought Provokers'
+    multiple-choice: Multiple Choice
+    questions: Questions
+    exercise-set-a: Exercise Set A
+    exercise-set-b: Exercise Set B
+    problem-set-a: Problem Set A
+    problem-set-b: Problem Set B
+    thought-provokers: Thought Provokers
+    section-summary: Summary
