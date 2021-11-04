@@ -90,6 +90,13 @@ def eoc_metadata_title(element)
   element.element_children.first.content = title
 end
 
+def add_index_comment(element)
+  return unless element[:class]&.split(' ')&.include?('os-term-section-link')
+
+  element.add_next_sibling('<!--
+    -->')
+end
+
 # Main normalize function for an XML document
 
 def normalize(doc, args: [])
@@ -105,6 +112,7 @@ def normalize(doc, args: [])
     if args.include?('--easybaked-only')
       div_to_h3_note(child)
       eoc_metadata_title(child)
+      add_index_comment(child)
       next unless child.name == 'table'
 
       child.remove_attribute('summary')
