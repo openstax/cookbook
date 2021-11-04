@@ -27,7 +27,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[click-and-explore my-story americana]
+    classes: %w[click-and-explore my-story americana defining-american]
   )
 
   # BakeNumberedNotes.v1(
@@ -57,26 +57,22 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
     end
 
     answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
-    MoveSolutionsToAnswerKey.v1(
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
       append_to: answer_key,
+      solutions_plural: false
+    )
+
+    DefaultStrategyForAnswerKeySolutions.v1(
       strategy_options: {
         selectors: ['section.review-questions'],
         condition: :even?
       },
-      solutions_plural: false
+      chapter: chapter,
+      append_to: answer_key_inner_container
     )
-
-    # Strategy.new(
-    #   {
-    #     selectors: ['section.review-questions'],
-    #     condition: :even?
-    #   }
-    # ).bake(
-    #   chapter: chapter,
-    #   append_to: answer_key_inner_wrapper.first('div.os-eob.os-solution-container')
-    # )
 
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
