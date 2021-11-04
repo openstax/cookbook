@@ -22,6 +22,13 @@ RSpec.describe 'normalize script' do
               <h1>Incorrect Title</h1>
             </div>
           </div>
+          <a class="os-term-section-link" href="#auto_page_341bd304-7a2a-45dc-b8f6-c6b8fe9bde44_term50">
+            <span class="os-term-section">1.5 Writing Process: Thinking Critically About a &#x201C;Text&#x201D;</span>
+          </a>
+          <span class="os-index-link-separator">, </span>
+          <a class="os-term-section-link" href="#auto_page_341bd304-7a2a-45dc-b8f6-c6b8fe9bde44_term54">
+            <span class="os-term-section">1.5 Writing Process: Thinking Critically About a &#x201C;Text&#x201D;</span>
+          </a>
         </body>
       HTML
     )
@@ -45,6 +52,13 @@ RSpec.describe 'normalize script' do
               <h1>Incorrect Title</h1>
             </div>
           </div>
+          <a class="os-term-section-link" href="#auto_page_341bd304-7a2a-45dc-b8f6-c6b8fe9bde44_term50">
+            <span class="os-term-section">1.5 Writing Process: Thinking Critically About a &#x201C;Text&#x201D;</span>
+          </a>
+          <span class="os-index-link-separator">, </span>
+          <a class="os-term-section-link" href="#auto_page_341bd304-7a2a-45dc-b8f6-c6b8fe9bde44_term54">
+            <span class="os-term-section">1.5 Writing Process: Thinking Critically About a &#x201C;Text&#x201D;</span>
+          </a>
         </body>
       HTML
     )
@@ -68,6 +82,15 @@ RSpec.describe 'normalize script' do
               <h1>Correct title</h1>
             </div>
           </div>
+          <a class="os-term-section-link" href="#auto_page_341bd304-7a2a-45dc-b8f6-c6b8fe9bde44_term50">
+            <span class="os-term-section">1.5 Writing Process: Thinking Critically About a &#x201C;Text&#x201D;</span>
+          </a><!--
+            -->
+          <span class="os-index-link-separator">, </span>
+          <a class="os-term-section-link" href="#auto_page_341bd304-7a2a-45dc-b8f6-c6b8fe9bde44_term54">
+            <span class="os-term-section">1.5 Writing Process: Thinking Critically About a &#x201C;Text&#x201D;</span>
+          </a><!--
+            -->
         </body>
       HTML
     )
