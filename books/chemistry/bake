@@ -32,9 +32,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
     chapter.search('section.exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
-    MoveSolutionsToAnswerKey.v1(
-      chapter: chapter, metadata_source: metadata, strategy: :default, append_to: answer_key,
-      strategy_options: { selectors: ['section.exercises'] }, solutions_plural: false
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      append_to: answer_key,
+      solutions_plural: false
+    )
+
+    DefaultStrategyForAnswerKeySolutions.v1(
+      strategy_options: { selectors: ['section.exercises'] },
+      chapter: chapter,
+      append_to: answer_key_inner_container
     )
   end
 
@@ -42,7 +51,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
   BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
