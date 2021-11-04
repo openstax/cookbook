@@ -65,6 +65,9 @@ module Kitchen
           elsif table.text_heavy?
             custom_table = CustomBody.new(table: table, klass: 'text-heavy')
             custom_table.modify_body(has_fake_title: false)
+          elsif table.unstyled?
+            custom_table = CustomBody.new(table: table, klass: 'unstyled')
+            custom_table.modify_body(has_fake_title: false)
           end
         end
       end
