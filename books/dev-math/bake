@@ -12,6 +12,7 @@ gemfile do
   gem 'byebug'
 end
 
+# used for prealgebra, intermediate-algebra, and elementary-algebra
 recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
   include Kitchen::Directions
 
@@ -72,10 +73,32 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
       BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
     BakeChapterSectionExercises.v1(chapter: chapter)
-    MoveSolutionsToAnswerKey.v1( # TODO: update to new way
-      chapter: chapter, metadata_source: metadata, strategy: :dev_math,
-      append_to: answer_key
+
+    # Make the answer key:
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
+    MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'be-prepared'
+    )
+    MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'try'
+    )
+    chapter.non_introduction_pages.each do |page|
+      number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        chapter: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        title_number: number
+      )
+    end
+    classes = %w[review-exercises practice-test]
+    classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
+
+    # Bake features
     chapter.figures('$:not(.unnumbered)').each do |figure|
       BakeFigure.v1(
         figure: figure,
@@ -101,6 +124,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
     BakeAppendix.v1(page: page, number: appendix_letter)
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
   end
 
   BakeUnnumberedTables.v1(book: book)
@@ -113,15 +140,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
   BakeLinkPlaceholders.v1(book: book)
 
   # TODO: remove cosmetic fixes
-  counter = 0
+  # counter = 0
   answer_key.search('div.os-solution-area').each do |solution_area|
-    break if counter > 1
+    # next if counter % 5 != 1
+    #byebug
+    next unless solution_area.titles.first.text.strip == 'Be Prepared' || solution_area.titles.first.text.strip == 'Try It'
 
     solution_area.solutions.each do |solution|
       divider = solution.first('span.os-divider')&.cut
       solution.prepend(child: divider.paste) if divider
     end
-    counter += 1
+    # counter += 1
   end
 end
 
