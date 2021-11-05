@@ -73,6 +73,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
       BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
     BakeChapterSectionExercises.v1(chapter: chapter)
+    chapter.sections('$.section-exercises').each do |section| # possible TODO: put in direction
+      section.search(' > h3[data-type="title"]').first&.trash
+    end
 
     # Make the answer key:
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
@@ -140,17 +143,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
   BakeLinkPlaceholders.v1(book: book)
 
   # TODO: remove cosmetic fixes
-  # counter = 0
   answer_key.search('div.os-solution-area').each do |solution_area|
-    # next if counter % 5 != 1
-    #byebug
     next unless solution_area.titles.first.text.strip == 'Be Prepared' || solution_area.titles.first.text.strip == 'Try It'
 
     solution_area.solutions.each do |solution|
       divider = solution.first('span.os-divider')&.cut
       solution.prepend(child: divider.paste) if divider
     end
-    # counter += 1
   end
 end
 
