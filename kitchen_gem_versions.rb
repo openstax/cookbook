@@ -21,7 +21,7 @@ KITCHEN_VERSIONS = {
   finance: '11.2.0',
   hs_physics: '15.0.0',
   microbiology: '7.0.0',
-  philosophy: '11.2.0',
+  philosophy: '15.0.0',
   pl_psychology: '11.1.0',
   political_science: '12.0.0',
   precalculus: '15.0.0',
