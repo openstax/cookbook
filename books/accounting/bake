@@ -87,7 +87,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
     # chapter.composite_pages.search(selectors).injected_questions.each do |question|
     #   BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
 
-
     # chapter.composite_pages.each do |composite_page|
     #   composite_page.search('section.short-answer, section.section-quiz').exercises.each do |exercise|
     #     BakeNumberedExercise.v1(exercise: exercise,
@@ -98,7 +97,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
     # end
 
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
-    BakeNonIntroductionPages.v1(chapter: chapter, add_target_label: true, iln: true)
+    BakeNonIntroductionPages.v1(chapter: chapter, add_target_label: true)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -143,6 +142,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeLOLinkLabel.v1(book: book)
   BakeToc.v1(book: book)
   # BakeFolio.v1(book: book)
 end
