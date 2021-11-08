@@ -84,7 +84,7 @@ module Kitchen
     #   @return Object
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
                    :text, :wrap, :children, :to_html, :remove_attribute,
-                   :key?, :classes, :path, :inner_html=
+                   :key?, :classes, :path, :inner_html=, :add_previous_sibling
 
     # @!method config
     #   Get the config for this element's document
