@@ -30,7 +30,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
@@ -44,7 +43,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
       section.prepend(child: title)
     end
 
-    sections = %w[references further-reading]
+    # Key terms
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+
+    chapter.pages.search('section.review-questions').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    end
+
+    sections = %w[further-reading references]
     sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -55,10 +61,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
       ) do |section|
         RemoveSectionTitle.v1(section: section)
       end
-    end
-
-    chapter.pages.search('section.review-questions').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
 
     MoveCustomSectionToEocContainer.v1(
