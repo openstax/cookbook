@@ -27,7 +27,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   BakeChapterIntroductions.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
 
-  solutions_container = BookAnswerKeyContainer.v1(book: book)
+  # solutions_container = BookAnswerKeyContainer.v1(book: book)
+  answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -44,6 +45,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
       MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: klass)
     end
 
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      append_to: answer_key,
+      solutions_plural: false
+    )
+
+    DefaultStrategyForAnswerKeySolutions.v1(
+      strategy_options: { selectors: ['section.review-questions'] },
+      chapter: chapter,
+      append_to: answer_key_inner_container
+    )
+
     chapter.figures.each do |figure|
       BakeFigure.v1(
         figure: figure,
@@ -58,15 +72,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
       )
     end
 
-    MoveSolutionsToAnswerKey.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      strategy: :default,
-      strategy_options: {
-        selectors: ['section.review-questions']
-      },
-      append_to: solutions_container
-    )
+    # MoveSolutionsToAnswerKey.v1(
+    #   chapter: chapter,
+    #   metadata_source: metadata,
+    #   strategy: :default,
+    #   strategy_options: {
+    #     selectors: ['section.review-questions']
+    #   },
+    #   append_to: solutions_container
+    # )
   end
 
   book.pages('$.appendix').each do |page|
