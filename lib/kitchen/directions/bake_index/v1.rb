@@ -165,7 +165,7 @@ module Kitchen::Directions::BakeIndex
         group_by = term_reference[0]
         content = term_reference
       else
-        group_by = I18n.transliterate(term_element.text.strip[0])
+        group_by = I18n.character_to_group(term_element.text.strip[0])
         content = term_element.text
       end
 

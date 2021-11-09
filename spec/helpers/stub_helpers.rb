@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
 module StubHelpers
-  def stub_locales(hash)
+  def stub_locales(hash, locale: nil)
     @locales_are_stubbed = true
+
+    language = locale || :test
 
     I18n.config.available_locales = %i[test en es pl]
     allow_any_instance_of(I18n::Config).to receive(:backend).and_return(
       I18n::Backend::Simple.new.tap do |backend|
-        backend.store_translations 'test', hash
+        backend.store_translations language, hash
       end
     )
 
-    assign_i18n_dot_locale(:test)
+    assign_i18n_dot_locale(language)
   end
 
   def with_locale(locale)

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add `BakeScreenreaderSpans` direction (minor)
+* Fix `BakeIndex` to group terms by character in polish books and transliterate it for others (minor)
 
 ## [15.0.0] - 2021-11-05
 

@@ -4,6 +4,10 @@ require 'twitter_cldr'
 
 # rubocop:disable Style/Documentation
 module I18n
+  def self.character_to_group(character)
+    I18n.locale == :pl ? character : I18n.transliterate(character)
+  end
+
   def self.sort_strings(first, second)
     string_sorter.compare(first, second)
   end
