@@ -22,7 +22,10 @@ KITCHEN_VERSIONS = {
   hs_physics: '15.0.0',
   microbiology: '7.0.0',
   philosophy: '15.0.0',
-  pl_psychology: '11.1.0',
+  pl_psychology: {
+    github: 'openstax/kitchen',
+    ref: '3f72d3822a76685d267e329faddd0b6a993a7786'
+  },
   political_science: '12.0.0',
   precalculus: '15.0.0',
   sociology: '7.0.0',
