@@ -31,11 +31,11 @@ KITCHEN_VERSIONS = {
   sociology: '7.0.0',
   statistics: '12.0.0',
   u_physics: '11.0.0',
-  world_history: '14.0.0' # TODO: update
-  # world_history: {
-  #   github: 'openstax/kitchen',
-  #   ref: '1ef283d59d030d98a9ef93d7fb11b866f71954de'
-  # }
+  # world_history: '14.0.0' # TODO: update
+  world_history: {
+    github: 'openstax/kitchen',
+    ref: '1ef283d59d030d98a9ef93d7fb11b866f71954de'
+  },
   u_physics: '15.0.0',
   world_history: '14.0.0'
 }.freeze
