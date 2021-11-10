@@ -91,6 +91,10 @@ RSpec.describe 'books' do
     expect('ap-biology').to bake_correctly
   end
 
+  it 'bakes additive-manufacturing' do
+    expect('additive-manufacturing').to bake_correctly
+  end
+
   it 'bakes ap history' do
     expect('ap-history').to bake_correctly
   end
@@ -109,5 +113,9 @@ RSpec.describe 'books' do
 
   it 'bakes astronomy' do
     expect('astronomy').to bake_correctly
+  end
+
+  it 'bakes hs-physics' do
+    expect('hs-physics').to bake_correctly
   end
 end

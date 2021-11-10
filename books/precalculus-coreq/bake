@@ -31,7 +31,7 @@ coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
     coreq_section.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table, number: table.count_in(:page))
     end
-    coreq_section.figures(only: :figure_to_bake?).each do |figure|
+    coreq_section.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: figure.count_in(:page))
     end
     coreq_section.examples.each do |example|
