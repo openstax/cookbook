@@ -73,7 +73,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
       BakeFirstElements.v1(within: exercise, first_inline_list: true)
     end
     BakeChapterSectionExercises.v1(chapter: chapter)
-    chapter.sections('$.section-exercises').each do |section| # possible TODO: put in direction
+    chapter.sections('$.section-exercises').each do |section|
       section.search(' > h3[data-type="title"]').first&.trash
     end
 
@@ -141,16 +141,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-
-  # TODO: remove cosmetic fixes
-  answer_key.search('div.os-solution-area').each do |solution_area|
-    next unless solution_area.titles.first.text.strip == 'Be Prepared' || solution_area.titles.first.text.strip == 'Try It'
-
-    solution_area.solutions.each do |solution|
-      divider = solution.first('span.os-divider')&.cut
-      solution.prepend(child: divider.paste) if divider
-    end
-  end
 end
 
 opts = Slop.parse do |slop|

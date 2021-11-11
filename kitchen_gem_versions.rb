@@ -28,7 +28,7 @@ KITCHEN_VERSIONS = {
     github: 'openstax/kitchen',
     ref: 'b7c16c6afa561984025e58083ebd481294138e45'
   },
-  dev_math: '13.0.0', # TODO: update
+  dev_math: '15.0.0',
   dummy: '2.0.0',
   english_composition: {
     github: 'openstax/kitchen',
