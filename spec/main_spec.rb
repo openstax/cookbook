@@ -118,4 +118,16 @@ RSpec.describe 'books' do
   it 'bakes hs-physics' do
     expect('hs-physics').to bake_correctly
   end
+
+  it 'bakes prealgebra' do
+    expect('prealgebra').to bake_correctly_with('dev-math')
+  end
+
+  it 'bakes elementary algebra' do
+    expect('elementary-algebra').to bake_correctly_with('dev-math')
+  end
+
+  it 'bakes intermediate algebra' do
+    expect('intermediate-algebra').to bake_correctly_with('dev-math')
+  end
 end

@@ -16,6 +16,7 @@ KITCHEN_VERSIONS = {
   college_physics: '14.0.0',
   computer_science: '12.0.0',
   contemporary_math: '15.0.0',
+  dev_math: '15.0.0',
   dummy: '2.0.0',
   english_composition: { github: 'openstax/kitchen', ref: '2d82d5ae4888bb98e2fb1841867f83afb3ce8184' },
   finance: '11.2.0',
