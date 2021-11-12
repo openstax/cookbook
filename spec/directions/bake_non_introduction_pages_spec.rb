@@ -20,6 +20,18 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     ).chapters.first
   end
 
+  let(:chapter2) do
+    book_containing(html:
+        <<~HTML
+          <div data-type="chapter">
+            <div data-type="page" id="page_123">
+            <div data-type="document-title" id="auto_123_0">Review of Functions</div>
+            </div>
+          </div>
+        HTML
+    ).chapters.first
+  end
+
   it 'works' do
     described_class.v1(chapter: chapter)
     expect(chapter).to match_normalized_html(
@@ -35,5 +47,13 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
         </div>
       HTML
     )
+  end
+
+  context 'when pages has added target labels' do
+    it 'stores link text' do
+      pantry = chapter2.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('1.1', { label: 'page_123' })
+      described_class.v1(chapter: chapter2, add_target_label: true)
+    end
   end
 end

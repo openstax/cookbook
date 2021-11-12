@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add target labels to chapter content module pages option in `BakeNonIntroductionPages`, create a separate directory `BakeLOLinkLabels` to add `.label-text`, `.label-counter` spans wrappers for links with `.lo-reference` class (minor)
 * Add `BakeScreenreaderSpans` direction (minor)
 * Fix `BakeIndex` to group terms by character in polish books and transliterate it for others (minor)
 * Add optional bake `exercies-context` figure_reference if there is one present in singular part exercises to `BakeInjectedExercise`,`BakeInjectedQuestion` to move it down from exercise to question problem container. (major)
