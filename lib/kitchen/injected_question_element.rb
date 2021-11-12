@@ -55,6 +55,13 @@ module Kitchen
       first("div[data-type='question-solution']")
     end
 
+    # Returns the exercise context element.
+    # @return [Element]
+    #
+    def exercise_context_in_question
+      first("div[data-type='exercise-context']")
+    end
+
     # Returns the answer correctness given an alphabet
     #
     # @return [Array]

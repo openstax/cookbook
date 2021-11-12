@@ -65,6 +65,9 @@ module Kitchen
       # Selector for a section
       # @return [String]
       attr_accessor :section
+      # Selector for an injected exercise
+      # @return [String]
+      attr_accessor :injected_exercise
 
       # Override specific selectors
       #

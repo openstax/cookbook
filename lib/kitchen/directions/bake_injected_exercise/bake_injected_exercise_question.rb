@@ -41,11 +41,15 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         end
       end
 
+      context = question.exercise_context_in_question&.cut&.paste
+
       question.prepend(child:
         <<~HTML
           #{problem_number unless only_number_solution}
           #{"<span class='os-divider'>. </span>" unless only_number_solution}
           <div class="os-problem-container">
+            #{context if context.present?}
+            #{"<span class='os-divider'>. </span>" if context.present?}
             #{question.stimulus&.cut&.paste}
             #{question.stem.cut.paste}
             #{question.answers&.cut&.paste}
