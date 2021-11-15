@@ -7,6 +7,10 @@ module Kitchen::Directions::BakeInjectedExercise
 
   class V1
     def bake(exercise:)
+      question_count = exercise.injected_questions.count
+      exercise[:'data-question-count'] = question_count
+      exercise[:'data-is-multipart'] = question_count > 1 ? 'True' : 'False'
+
       context = exercise&.exercise_context
 
       return unless context
@@ -14,12 +18,10 @@ module Kitchen::Directions::BakeInjectedExercise
       # link replacement is done by BakeLinkPlaceholders
       link = context.first('a').cut
       context.replace_children(with: "#{I18n.t(:context_lead_text)}#{link.paste}")
-      questions_amount = exercise.injected_questions.count
-      question = exercise.exercise_question
-      return unless questions_amount == 1
+      return unless question_count == 1
 
-      context_to_move = context.cut
-      question.prepend(child: context_to_move.paste)
+      question = exercise.exercise_question
+      question.prepend(child: context.cut.paste)
     end
   end
 end
