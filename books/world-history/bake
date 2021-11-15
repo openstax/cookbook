@@ -86,8 +86,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                                 suppress_solution_if: true)
       else
         BakeInjectedExerciseQuestion.v1(question: exercise,
-                                        number: exercise.count_in(:composite_page),
-                                        figure_reference: true)
+                                        number: exercise.count_in(:composite_page))
       end
     end
 
