@@ -37,7 +37,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |doc|
   answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.exercises('$[data-element-type="check-understanding"]').each do |exercise|
-    BakeAutotitledExercise.v2(exercise: exercise, title: I18n.t(:'check-understanding'))
+    BakeAutotitledExercise.v3(exercise: exercise, title: I18n.t(:'check-understanding'))
   end
 
   book.chapters.each do |chapter|
