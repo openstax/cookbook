@@ -19,7 +19,7 @@ KITCHEN_VERSIONS = {
   dummy: '2.0.0',
   english_composition: {
     github: 'openstax/kitchen',
-    ref: '7fddda2118fc14545091b2c79bf249da2f21fec8'
+    ref: '2d82d5ae4888bb98e2fb1841867f83afb3ce8184'
   },
   finance: '11.2.0',
   hs_physics: '15.0.0',
