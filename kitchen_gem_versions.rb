@@ -18,7 +18,10 @@ KITCHEN_VERSIONS = {
   contemporary_math: { github: 'openstax/kitchen', ref: '98981b93fc3122e72f74148ff691923b909af61d' },
   dev_math: '15.0.0',
   dummy: '2.0.0',
-  english_composition: { github: 'openstax/kitchen', ref: '2d82d5ae4888bb98e2fb1841867f83afb3ce8184' },
+  english_composition: {
+    github: 'openstax/kitchen',
+    ref: '2d82d5ae4888bb98e2fb1841867f83afb3ce8184'
+  },
   finance: '11.2.0',
   hs_physics: '15.0.0',
   microbiology: '7.0.0',
@@ -31,6 +34,9 @@ KITCHEN_VERSIONS = {
   precalculus: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
-  u_physics: '15.0.0',
-  world_history: '14.0.0'
+  world_history: {
+    github: 'openstax/kitchen',
+    ref: '7fddda2118fc14545091b2c79bf249da2f21fec8'
+  },
+  u_physics: '15.0.0'
 }.freeze
