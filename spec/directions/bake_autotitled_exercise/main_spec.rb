@@ -14,4 +14,10 @@ RSpec.describe Kitchen::Directions::BakeAutotitledExercise do
       .with(exercise: 'exercise1', title: 'title')
     described_class.v2(exercise: 'exercise1', title: 'title')
   end
+
+  it 'calls v3' do
+    expect_any_instance_of(Kitchen::Directions::BakeAutotitledExercise::V3).to receive(:bake)
+      .with(exercise: 'exercise1', title: 'title')
+    described_class.v3(exercise: 'exercise1', title: 'title')
+  end
 end

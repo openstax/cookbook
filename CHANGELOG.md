@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `BakeScreenreaderSpans` direction (minor)
 * Fix `BakeIndex` to group terms by character in polish books and transliterate it for others (minor)
 * Add optional bake `exercies-context` figure_reference if there is one present in singular part exercises to `BakeInjectedExercise`,`BakeInjectedQuestion` to move it down from exercise to question problem container. (major)
+* Create v3 for autotitled exercises with os-hasSolution class
+
 ## [15.0.0] - 2021-11-05
 
 * Add unstyled tables to `BakeTableBody` (minor)

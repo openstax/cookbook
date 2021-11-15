@@ -10,6 +10,10 @@ module Kitchen
       def self.v2(exercise:, title:)
         V2.new.bake(exercise: exercise, title: title)
       end
+
+      def self.v3(exercise:, title:)
+        V3.new.bake(exercise: exercise, title: title)
+      end
     end
   end
 end
