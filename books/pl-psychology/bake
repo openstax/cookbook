@@ -28,6 +28,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   BakeListsWithPara.v1(book: book)
 
   BakePreface.v1(book: book)
+  BakeUnnumberedFigure.v1(book: book)
 
   BakeChapterIntroductions.v2(
     book: book, strategy_options: {
@@ -38,7 +39,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table,
@@ -53,7 +54,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
                      cases: true)
     end
 
-    chapter.figures.each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}",
                     cases: true)
@@ -106,6 +107,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   BakeFootnotes.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
