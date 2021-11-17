@@ -22,7 +22,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
   book.search('cnx-pi').trash
 
   AddInjectedExerciseId.v1(book: book)
-  book.search('div[data-type="injected-exercise"]').each do |exercise|
+  book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(exercise: exercise)
   end
 

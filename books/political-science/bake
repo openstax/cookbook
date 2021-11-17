@@ -75,6 +75,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
                           where-engage media-video media-podcast]
   BakeAutotitledNotes.v1(book: book, classes: autotitled_classes)
 
+
+  BakeFootnotes.v1(book: book)
+
   # Eob sections
   BakeReferences.v1(book: book, metadata_source: metadata, numbered_title: true)
   BakeIndex.v1(book: book)
