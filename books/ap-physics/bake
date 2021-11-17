@@ -45,7 +45,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |doc|
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    section_keys = %w[section-summary conceptual-questions problems-exercises]
+    section_keys = %w[section-summary conceptual-questions problems-exercises ap-test-prep]
     section_keys.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -65,6 +65,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |doc|
     end
 
     chapter.sections('$.problems-exercises').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+
+    chapter.sections('$.ap-test-prep').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
@@ -106,9 +110,26 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |doc|
   end
 
   book.chapters.each do |chapter|
-    MoveSolutionsFromExerciseSection.v1(chapter: chapter,
-                                        append_to: answer_key,
-                                        section_class: 'problems-exercises')
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
+    )
+
+    classes = %w[problems-exercises ap-test-prep]
+    classes.each do |klass|
+      MoveSolutionsFromExerciseSection.v1(
+        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
+  end
+
+  book.search('section.problems-exercises',
+              'section.ap-test-prep',
+              'div.os-solutions-container').each do |within|
+    BakeFirstElements.v1(within: within)
+  end
+
+  book.composite_pages.search('div[data-type="equation"]').each do |eq|
+    eq.add_class('unnumbered')
   end
 
   BakeEquations.v1(book: book)
