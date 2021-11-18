@@ -28,7 +28,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   BakeUnclassifiedNotes.v1(book: book)
 
   # solutions_container = BookAnswerKeyContainer.v1(book: book)
-  answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
+  answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -46,10 +46,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      append_to: answer_key,
-      solutions_plural: false
+      chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: false
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
