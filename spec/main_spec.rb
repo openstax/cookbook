@@ -134,4 +134,12 @@ RSpec.describe 'books' do
   it 'bakes college success' do
     expect('college-success').to bake_correctly
   end
+
+  it 'bakes history' do
+    expect('history').to bake_correctly
+  end
+
+  it 'bakes psychology' do
+    expect('psychology').to bake_correctly
+  end
 end
