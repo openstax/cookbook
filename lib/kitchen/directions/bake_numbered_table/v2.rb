@@ -9,7 +9,8 @@ module Kitchen::Directions::BakeNumberedTable
       Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number, cases: cases)
 
       caption = ''
-      if table&.caption&.first("span[data-type='title']") && !table.top_captioned?
+      if (table&.caption&.first("span[data-type='title']") || table&.caption) \
+        && !table.top_captioned?
         caption_el = table.caption
         caption_el.add_class('os-caption')
         caption_el.name = 'span'

@@ -35,6 +35,19 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
     ).tables.first
   end
 
+  let(:table_with_simple_caption) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="some-class" id="tId">
+            <caption>Table caption</caption>
+            <tbody/>
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:top_captioned_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -85,6 +98,25 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
             <span class="os-caption">
               <span data-type="title">Secret Title</span>
             </span>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  it 'still works when caption doesn\'t have title' do
+    described_class.new.bake(table: table_with_simple_caption, number: '2')
+    expect(table_with_simple_caption.document.search('.os-table')).to match_normalized_html(
+      <<~HTML
+        <div class="os-table">
+          <table class="some-class" id="tId">
+            <tbody></tbody>
+          </table>
+          <div class="os-caption-container">
+            <span class="os-title-label">Table </span>
+            <span class="os-number">2</span>
+            <span class="os-divider"> </span>
+            <span class="os-caption">Table caption</span>
           </div>
         </div>
       HTML

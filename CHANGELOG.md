@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Broaden caption selection for `BakeNumberedTable#v2` (patch)
 * Add details of question count to injected exercises in `BakeInjectedExercise` (major)
 * Add target labels to chapter content module pages option in `BakeNonIntroductionPages`, create a separate directory `BakeLOLinkLabels` to add `.label-text`, `.label-counter` spans wrappers for links with `.lo-reference` class (minor)
 * Add `BakeScreenreaderSpans` direction (minor)
