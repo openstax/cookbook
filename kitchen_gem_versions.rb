@@ -19,8 +19,7 @@ KITCHEN_VERSIONS = {
   dev_math: '15.0.0',
   dummy: '2.0.0',
   english_composition: {
-    github: 'openstax/kitchen',
-    ref: '2d82d5ae4888bb98e2fb1841867f83afb3ce8184'
+    github: 'openstax/kitchen', ref: '98981b93fc3122e72f74148ff691923b909af61d'
   },
   finance: '11.2.0',
   history: {
@@ -36,6 +35,7 @@ KITCHEN_VERSIONS = {
   },
   political_science: '12.0.0',
   precalculus: '15.0.0',
+  psychology: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
   world_history: {

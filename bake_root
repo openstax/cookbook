@@ -50,6 +50,7 @@ case "${book}" in
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  psychology | \
   sociology | \
   statistics | \
   u-physics | \
