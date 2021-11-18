@@ -82,9 +82,13 @@ module Kitchen
     #   Set the inner HTML for this element
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Node#inner_html=-instance_method Nokogiri::XML::Node#inner_html=
     #   @return Object
+    # @!method preceded_by_text
+    #   Returns true if the immediately preceding sibling is text
+    #   @return Boolean
     def_delegators :@node, :name=, :name, :[], :[]=, :add_class, :remove_class,
                    :text, :wrap, :children, :to_html, :remove_attribute,
-                   :key?, :classes, :path, :inner_html=, :add_previous_sibling
+                   :key?, :classes, :path, :inner_html=, :add_previous_sibling,
+                   :preceded_by_text?
 
     # @!method config
     #   Get the config for this element's document
@@ -502,8 +506,8 @@ module Kitchen
       Element.new(node: raw.parent, document: document, short_type: "parent(#{short_type})")
     end
 
-    # returns previous element
-    # skips double indentations that the nokigiri sometimes picks up
+    # returns previous element sibling
+    # (only returns elements or nil)
     # nil if there's no previous sibling
     #
     def previous

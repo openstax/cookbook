@@ -74,6 +74,14 @@ module Nokogiri
         prev.text? ? prev.previous : prev
       end
 
+      def preceded_by_text?
+        prev = previous_sibling
+        while !prev.nil? && prev.blank? do prev = prev.previous_sibling end
+        return false if prev.nil?
+
+        prev.text?
+      end
+
       def self.selector_to_css_nodes(selector)
         # No need to parse the same selector more than once.
         @parsed_selectors ||= {}

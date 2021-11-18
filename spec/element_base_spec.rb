@@ -67,10 +67,39 @@ RSpec.describe Kitchen::ElementBase do
               <p>This is an example.</p>
             </div>
             <figure id="figure1">Who is my closest sibling?</figure>
-            <p>Some other Text</p>
+            <p>
+              <div data-type="note">Reference 1</div>
+              Some other Text
+              <div data-type="note" class="reference">Reference 2</div>
+            </p>
           </div>
         HTML
       )
+    )
+  end
+
+  let(:blank_space_book) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <h1 data-type="document-title" id="chapTitle1">
+            <span class="os-part-text">Chapter </span>
+            <span class="os-number">1</span>
+            <span class="os-divider"> </span>
+            <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
+          </h1>
+          <div data-type="page">
+            #{metadata_element}
+            <div class="parent">
+
+              <div data-type="note">Reference 1</div>
+              "Some Text"
+
+              <div class="text-above">Reference 1</div>
+            </div>
+          </div>
+        <div>
+      HTML
     )
   end
 
@@ -79,6 +108,12 @@ RSpec.describe Kitchen::ElementBase do
   let(:para) { book.first!('p') }
 
   let(:figure) { sibling_book.first!('figure') }
+
+  let(:reference) { sibling_book.first!('div.reference') }
+
+  let(:note) { blank_space_book.first!('div[data-type="note"]') }
+
+  let(:text_above) { blank_space_book.first!('div.text-above') }
 
   describe '#initialize' do
     it 'explodes if given a bad document type' do
@@ -134,8 +169,38 @@ RSpec.describe Kitchen::ElementBase do
       )
     end
 
+    it 'skips text belonging to a parent element' do
+      expect(reference.previous).to match_normalized_html(
+        <<~HTML
+          <div data-type="note">Reference 1</div>
+        HTML
+      )
+    end
+
     it 'returns nil when a previous sibling does not exist' do
       expect(para.previous).to eq nil
+    end
+  end
+
+  describe '#preceded_by_text?' do
+    it 'returns true if preceded by text' do
+      expect(reference.preceded_by_text?).to eq true
+    end
+
+    it 'returns false if no previous siblings' do
+      expect(example.preceded_by_text?).to eq false
+    end
+
+    it 'returns false if previous sibling is an element' do
+      expect(figure.preceded_by_text?).to eq false
+    end
+
+    it 'returns false if no previous siblings except blank space' do
+      expect(note.preceded_by_text?).to eq false
+    end
+
+    it 'returns true if preceded by blank space and then text' do
+      expect(text_above.preceded_by_text?).to eq true
     end
   end
 
