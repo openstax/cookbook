@@ -25,7 +25,7 @@ KITCHEN_VERSIONS = {
   finance: '11.2.0',
   history: {
     github: 'openstax/kitchen',
-    ref: 'b7c16c6afa561984025e58083ebd481294138e45'
+    ref: '98981b93fc3122e72f74148ff691923b909af61d'
   },
   hs_physics: '15.0.0',
   microbiology: '7.0.0',

@@ -30,10 +30,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
     classes: %w[click-and-explore my-story americana defining-american]
   )
 
-  # BakeNumberedNotes.v1(
-  #   book: book,
-  #   classes: %w[cfa-institute]
-  # )
+  answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v1(chapter: chapter)
@@ -43,20 +40,28 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
 
     eoc_sections = %w[review-questions critical-thinking]
 
-    chapter.pages.search('section.review-questions').exercises.each do |exercise|
-      BakeNumberedExercise.v1(
-        exercise: exercise,
-        number: exercise.count_in(:chapter),
-        suppress_solution_if: :even?,
-        note_suppressed_solutions: true
-      )
+    chapter.search(eoc_sections.prefix('section.')).exercises.each do |exercise|
+      if exercise.parent.has_class?('review-questions')
+        BakeNumberedExercise.v1(
+          exercise: exercise,
+          number: exercise.count_in(:chapter),
+          suppress_solution_if: :even?,
+          note_suppressed_solutions: true
+        )
+      else
+        BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+      end
     end
 
-    chapter.pages.search('section.critical-thinking').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    chapter.figures('$:not(.unnumbered)').each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
 
-    answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter,
@@ -85,11 +90,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
         RemoveSectionTitle.v1(section: section)
       end
     end
-
-    chapter.figures('$:not(.unnumbered)').each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
-    end
   end
 
   book.pages('$.appendix').each do |page|
@@ -106,15 +106,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  # BakeStepwise.v1(book: book)
-  # BakeUnnumberedTables.v1(book: book)
-  # BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
-  # BakeFootnotes.v1(book: book)
+  BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
-  # BakeLinkPlaceholders.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
