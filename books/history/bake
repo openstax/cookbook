@@ -53,7 +53,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
       end
     end
 
-    chapter.figures('$:not(.unnumbered)').each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
@@ -92,6 +92,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
     end
   end
 
+  BakeUnnumberedFigure.v1(book: book)
+
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
@@ -112,6 +114,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
