@@ -130,4 +130,8 @@ RSpec.describe 'books' do
   it 'bakes intermediate algebra' do
     expect('intermediate-algebra').to bake_correctly_with('dev-math')
   end
+
+  it 'bakes college success' do
+    expect('college-success').to bake_correctly
+  end
 end

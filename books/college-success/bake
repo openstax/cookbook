@@ -1,0 +1,111 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+require_relative '../../bake_helper'
+
+gemfile do
+  gem 'openstax_kitchen', \
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:college_success]
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :college_success) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  metadata = book.metadata
+
+  book.search('cnx-pi').trash
+
+  BakePreface.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  BakeChapterIntroductions.v2(
+    book: book,
+    strategy_options: {
+      strategy: :none,
+      introduction_order: :v1
+    }
+  )
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[
+      student-profile
+      activity
+      analysis-question
+      what-students-say
+      application
+      get-connected
+    ]
+  )
+
+  book.chapters.each do |chapter|
+    BakeNonIntroductionPages.v1(chapter: chapter)
+
+    eoc_sections = %w[summary career-connection rethinking where-go]
+    eoc_sections.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
+
+    chapter.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(
+        figure: figure,
+        number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
+      )
+    end
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(
+        table: table,
+        number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}"
+      )
+    end
+  end
+
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+    BakeAppendix.v1(page: page, number: appendix_letter)
+
+    page.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(
+        figure: figure,
+        number: "#{appendix_letter}#{figure.count_in(:page)}"
+      )
+    end
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(
+        table: table,
+        number: "#{appendix_letter}#{table.count_in(:page)}"
+      )
+    end
+  end
+
+  # convert title tags
+  book.sections('$[data-depth="3"]').each { |section| section.titles.first&.name = 'h5' }
+  BakeUnnumberedTables.v1(book: book)
+  BakeFootnotes.v1(book: book)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [recipe],
+  output_file: opts[:output]
+)
