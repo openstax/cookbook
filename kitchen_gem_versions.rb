@@ -31,6 +31,7 @@ KITCHEN_VERSIONS = {
   },
   political_science: '12.0.0',
   precalculus: '15.0.0',
+  psychology: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
   world_history: {

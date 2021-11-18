@@ -44,6 +44,7 @@ case "${book}" in
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/books/astronomy/shorten";;
   dev-math) dest="${DIR}/data/prealgebra/short" && script="${DIR}/books/dev-math/shorten";;
   hs-physics) dest="${DIR}/data/hs-physics/short" && script="${DIR}/books/hs-physics/shorten";;
+  psychology) dest="${DIR}/data/psychology/short" && script="${DIR}/books/psychology/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
