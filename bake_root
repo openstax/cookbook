@@ -54,6 +54,7 @@ case "${book}" in
   sociology | \
   statistics | \
   u-physics | \
+  history | \
   world-history | \
   dummy)
     echo "Baking book '${book}' with kitchen" ;
