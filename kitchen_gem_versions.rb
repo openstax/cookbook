@@ -14,7 +14,7 @@ KITCHEN_VERSIONS = {
   calculus: '15.0.0',
   chemistry: '15.0.0',
   college_physics: '14.0.0',
-  college_success: '15.0.0', # needs ref now
+  college_success: { github: 'openstax/kitchen', ref: '3d3989bd1d5f43bc4ca85fa31bbaeb409a9d59b0' },
   computer_science: '12.0.0',
   contemporary_math: { github: 'openstax/kitchen', ref: '98981b93fc3122e72f74148ff691923b909af61d' },
   dev_math: '15.0.0',
