@@ -53,5 +53,6 @@ case "${book}" in
   hs-physics) $DIR/books/hs-physics/bake --input $input_file --output $output_file;;
   world-history) $DIR/books/world-history/bake --input $input_file --output $output_file;;
   psychology) $DIR/books/psychology/bake --input $input_file --output $output_file;;
+  intro-business) $DIR/books/intro-business/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
