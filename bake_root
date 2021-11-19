@@ -50,9 +50,11 @@ case "${book}" in
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  psychology | \
   sociology | \
   statistics | \
   u-physics | \
+  history | \
   world-history | \
   dummy)
     echo "Baking book '${book}' with kitchen" ;
