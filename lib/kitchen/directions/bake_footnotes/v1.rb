@@ -30,7 +30,7 @@ module Kitchen::Directions::BakeFootnotes
         aside_id_to_footnote_number[aside_id] = footnote_number
         if anchor.parent.name == 'p'
           anchor.parent.add_class('has-noteref')
-        elsif anchor.parent.name == 'em' && anchor.parent.parent.name == 'p'
+        elsif anchor.parent.name != 'p' && anchor.parent.parent.name == 'p'
           anchor.parent.parent.add_class('has-noteref')
         end
       end

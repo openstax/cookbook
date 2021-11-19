@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Modify `BakeFootnotes` to be more general (minor)
 * Add `#preceded_by_text` method to element_base and the nokigiri patch (minor)
 * Broaden caption selection for `BakeNumberedTable#v2` (patch)
 * Add details of question count to injected exercises in `BakeInjectedExercise` (major)
