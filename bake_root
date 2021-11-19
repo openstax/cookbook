@@ -29,7 +29,7 @@ done
 case "${book}" in
   # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
   additive-manufacturing | \
-  american_government | \
+  american-government | \
   anatomy | \
   anthropology | \
   ap-biology | \

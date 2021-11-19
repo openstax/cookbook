@@ -3,7 +3,8 @@
 # Contains the openstax_kitchen version for each recipe
 KITCHEN_VERSIONS = {
   additive_manufacturing: '15.0.0',
-  american_government: '7.0.0',
+  american_government: { github: 'openstax/kitchen',
+                         ref: 'fad6a6a8173ede8891da0aacb05e371c73b3e8f1' },
   anatomy: '13.0.0',
   anthropology: '11.1.0',
   ap_biology: '12.2.0',
@@ -14,9 +15,11 @@ KITCHEN_VERSIONS = {
   calculus: '15.0.0',
   chemistry: '15.0.0',
   college_physics: '14.0.0',
-  college_success: { github: 'openstax/kitchen', ref: '52f9b767cc13c19eda4bebbf01f65252245d4aa0' },
+  college_success: { github: 'openstax/kitchen',
+                     ref: '52f9b767cc13c19eda4bebbf01f65252245d4aa0' },
   computer_science: '12.0.0',
-  contemporary_math: { github: 'openstax/kitchen', ref: '52f9b767cc13c19eda4bebbf01f65252245d4aa0' },
+  contemporary_math: { github: 'openstax/kitchen',
+                       ref: '52f9b767cc13c19eda4bebbf01f65252245d4aa0' },
   dev_math: '15.0.0',
   dummy: '2.0.0',
   english_composition: {
