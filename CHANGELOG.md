@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Add reference link separator to `BakeReferences.v1` (patch)
 * Modify `BakeFootnotes` to be more general (minor)
 * Add `#preceded_by_text` method to element_base and the nokigiri patch (minor)
 * Broaden caption selection for `BakeNumberedTable#v2` (patch)
@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Create v3 for autotitled exercises with os-hasSolution class
 
 ## [15.0.0] - 2021-11-05
-
 * Add unstyled tables to `BakeTableBody` (minor)
 * Add to `BakeNumberedExercises` rules for baking exercises in appendecies (minor)
 * Add `BakeUnnumberedExercise` direction (minor)

@@ -27,6 +27,12 @@ RSpec.describe Kitchen::Directions::BakeReferences do
                 Reference 2
               </div>
             </a>
+            " However, in the 2018 midterm elections, an estimated 31 percent of Americans under thirty turned out to vote, the highest level of young adult engagement in decades."
+            <a href="#auto_54322" data-type="cite">
+              <div data-type="note" class="reference" display="inline" id="auto_54322">
+                Reference 3
+              </div>
+            </a>
           </p>
         </div>
       </div>
@@ -42,7 +48,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
           <p>
             <a href="#auto_6789" data-type="cite">
               <div data-type="note" class="reference" display="inline" id="auto_6789">
-                Reference 3
+                Reference 4
               </div>
             </a>
           </p>
@@ -79,10 +85,15 @@ RSpec.describe Kitchen::Directions::BakeReferences do
                 <a data-type="cite" href="#auto_12345">
                   <sup class="os-citation-number">1</sup>
                 </a>
+                <span class="os-reference-link-separator">, </span>
                 <a data-type="cite" href="#auto_54321">
                   <sup class="os-citation-number">2</sup>
                 </a>
-              </p>
+              " However, in the 2018 midterm elections, an estimated 31 percent of Americans under thirty turned out to vote, the highest level of young adult engagement in decades."
+              <a data-type="cite" href="#auto_54322">
+                <sup class="os-citation-number">3</sup>
+              </a>
+            </p>
             </div>
           </div>
           <div data-type="chapter">
@@ -133,13 +144,16 @@ RSpec.describe Kitchen::Directions::BakeReferences do
               <div class="reference" data-type="note" display="inline" id="auto_54321"><span class="os-reference-number">2. </span>
                   Reference 2
                 </div>
+              <div class="reference" data-type="note" display="inline" id="auto_54322"><span class="os-reference-number">3. </span>
+                  Reference 3
+                </div>
             </div>
             <div class="os-chapter-area">
               <h2 data-type="document-title">
                 <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
               </h2>
               <div class="reference" data-type="note" display="inline" id="auto_6789"><span class="os-reference-number">1. </span>
-                  Reference 3
+                  Reference 4
                 </div>
             </div>
           </div>
