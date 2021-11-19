@@ -117,7 +117,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  BakeFootnotes.v1(book: book)
+  BakeFolio.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
 end
