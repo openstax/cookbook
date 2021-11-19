@@ -14,14 +14,19 @@ KITCHEN_VERSIONS = {
   calculus: '15.0.0',
   chemistry: '15.0.0',
   college_physics: '14.0.0',
+  college_success: { github: 'openstax/kitchen', ref: '52f9b767cc13c19eda4bebbf01f65252245d4aa0' },
   computer_science: '12.0.0',
-  contemporary_math: { github: 'openstax/kitchen', ref: '98981b93fc3122e72f74148ff691923b909af61d' },
+  contemporary_math: { github: 'openstax/kitchen', ref: '52f9b767cc13c19eda4bebbf01f65252245d4aa0' },
   dev_math: '15.0.0',
   dummy: '2.0.0',
   english_composition: {
-    github: 'openstax/kitchen', ref: '98981b93fc3122e72f74148ff691923b909af61d'
+    github: 'openstax/kitchen', ref: '52f9b767cc13c19eda4bebbf01f65252245d4aa0'
   },
   finance: '11.2.0',
+  history: {
+    github: 'openstax/kitchen',
+    ref: '98981b93fc3122e72f74148ff691923b909af61d'
+  },
   hs_physics: '15.0.0',
   intro_business: '15.0.0',
   microbiology: '7.0.0',
