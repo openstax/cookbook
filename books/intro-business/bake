@@ -26,7 +26,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :intro_business) do |doc|
 
   BakeChapterIntroductions.v2(
     book: book, strategy_options: {
-      strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
+      strategy: :default, bake_chapter_outline: false, introduction_order: :v1
     }
   )
 
@@ -95,6 +95,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :intro_business) do |doc|
   BakeCompositePages.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
