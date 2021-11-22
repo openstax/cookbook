@@ -47,8 +47,8 @@ RSpec.describe 'books' do
     expect('statistics').to bake_correctly
   end
 
-  it 'bakes american_government' do
-    expect('american_government').to bake_correctly
+  it 'bakes american-government' do
+    expect('american-government').to bake_correctly
   end
 
   it 'bakes microbio' do

@@ -21,13 +21,21 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakePreface.v1(book: book, title_element: 'div')
+  BakePreface.v1(book: book)
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v1(book: book)
+  BakeChapterIntroductions.v2(
+    book: book,
+    strategy_options: {
+      strategy: :add_objectives,
+      bake_chapter_outline: true,
+      introduction_order: :v2
+    }
+  )
   BakeUnclassifiedNotes.v1(book: book)
+  BakeUnnumberedFigure.v1(book: book)
 
-  solutions_container = BookAnswerKeyContainer.v1(book: book)
+  answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -44,7 +52,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
       MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: klass)
     end
 
-    chapter.figures.each do |figure|
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: true
+    )
+
+    DefaultStrategyForAnswerKeySolutions.v1(
+      strategy_options: { selectors: ['section.review-questions'] },
+      chapter: chapter,
+      append_to: answer_key_inner_container
+    )
+
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(
         figure: figure,
         number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}"
@@ -57,16 +75,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
         number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}"
       )
     end
-
-    MoveSolutionsToAnswerKey.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      strategy: :default,
-      strategy_options: {
-        selectors: ['section.review-questions']
-      },
-      append_to: solutions_container
-    )
   end
 
   book.pages('$.appendix').each do |page|
@@ -109,6 +117,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeFolio.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
 end
