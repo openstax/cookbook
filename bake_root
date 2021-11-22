@@ -45,6 +45,7 @@ case "${book}" in
   english-composition | \
   finance | \
   hs-physics | \
+  intro-business | \
   microbiology | \
   philosophy | \
   pl-psychology | \

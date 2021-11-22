@@ -23,6 +23,7 @@ KITCHEN_VERSIONS = {
   finance: '11.2.0',
   history: '16.0.0',
   hs_physics: '15.0.0',
+  intro_business: '16.0.0',
   microbiology: '7.0.0',
   philosophy: '15.0.0',
   pl_psychology: '16.0.0',
