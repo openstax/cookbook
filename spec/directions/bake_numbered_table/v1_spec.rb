@@ -71,6 +71,18 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
+  let(:text_heavy_top_titled_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="text-heavy top-titled" id="tId">
+            <thead><tr>test</tr></thead>
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:other_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -198,6 +210,27 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
         <div class="os-table os-unstyled-container">
           <table class="unstyled" id="tId">
         </table>
+          <div class="os-caption-container">
+            <span class="os-title-label">Table </span>
+            <span class="os-number">2.3</span>
+            <span class="os-divider"> </span>
+            <span class="os-divider"> </span>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  it 'bakes a text heavy top titled table' do
+    described_class.new.bake(table: text_heavy_top_titled_table, number: '2.3', always_caption: false)
+
+    expect(text_heavy_top_titled_table.document.search('.os-table').first).to match_normalized_html(
+      <<~HTML
+        <div class="os-table os-text-heavy-top-titled-container">
+          <div class="os-table-title"></div>
+          <table class="text-heavy top-titled" id="tId">
+            <thead></thead>
+          </table>
           <div class="os-caption-container">
             <span class="os-title-label">Table </span>
             <span class="os-number">2.3</span>

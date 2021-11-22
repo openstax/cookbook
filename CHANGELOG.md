@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add support for 'text-heavy-top-titled' tables in `BakeTableBody` (minor)
 * Remove `Nokigiri#previous` patch, `ElementBase#previous` now uses `#previous_element` (minor)
 
 ## [16.0.0] - 2021-11-19

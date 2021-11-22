@@ -44,8 +44,9 @@ module Kitchen
           table.target_label(label_text: 'table', custom_content: number, cases: cases)
 
           if table.top_titled?
+            klass = table.text_heavy? ? 'text-heavy-top-titled' : 'top-titled'
             custom_table = CustomBody.new(table: table,
-                                          klass: 'top-titled',
+                                          klass: klass,
                                           fake_title_class: 'os-table-title',
                                           fake_title: table.title,
                                           to_trash: table.title_row)
