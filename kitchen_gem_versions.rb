@@ -20,6 +20,7 @@ KITCHEN_VERSIONS = {
   dev_math: '15.0.0',
   dummy: '2.0.0',
   english_composition: '16.0.0',
+  entrepreneurship: { github: 'openstax/kitchen', ref: 'be6ec62c088346ca26d320bb2fc7af89ea18a9b8' },
   finance: '11.2.0',
   history: '16.0.0',
   hs_physics: '15.0.0',
