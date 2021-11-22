@@ -20,13 +20,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  # AddInjectedExerciseId.v1(book: book)
-  # book.search('div[data-type="injected-exercise"]').each do |exercise|
-  #   BakeInjectedExercise.v1(exercise: exercise)
-  # end
-
   BakePreface.v1(book: book)
   # BakeUnnumberedFigure.v1(book: book)
+  book.pages('$.preface').each do |page|
+    page.figures.each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: figure.count_in(:page).to_s)
+    end
+  end
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
@@ -83,9 +84,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
     #              section.you-try, section.practice-exercises,
     #              section.written-exercises, section.case-exercises,
     #              section.extension-exercises'
-
-    # chapter.composite_pages.search(selectors).injected_questions.each do |question|
-    #   BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
 
     # chapter.composite_pages.each do |composite_page|
     #   composite_page.search('section.short-answer, section.section-quiz').exercises.each do |exercise|
