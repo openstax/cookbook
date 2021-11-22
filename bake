@@ -26,7 +26,7 @@ case "${book}" in
   dummy) $DIR/books/dummy/bake --input $input_file --output $output_file;;
   bca) $DIR/books/bca/bake --input $input_file --output $output_file;;
   pl-psychology) $DIR/books/pl-psychology/bake --input $input_file --output $output_file;;
-  american_government) $DIR/books/american_government/bake --input $input_file --output $output_file;;
+  american-government) $DIR/books/american-government/bake --input $input_file --output $output_file;;
   ap-history) $DIR/books/ap-history/bake --input $input_file --output $output_file;;
   calculus) $DIR/books/calculus/bake --input $input_file --output $output_file;;
   chemistry) $DIR/books/chemistry/bake --input $input_file --output $output_file;;
@@ -49,9 +49,12 @@ case "${book}" in
   additive-manufacturing) $DIR/books/additive-manufacturing/bake --input $input_file --output $output_file;;
   college-physics) $DIR/books/college-physics/bake --input $input_file --output $output_file;;
   astronomy) $DIR/books/astronomy/bake --input $input_file --output $output_file;;
+  history) $DIR/books/history/bake --input $input_file --output $output_file;;
   dev-math) $DIR/books/dev-math/bake --input $input_file --output $output_file;;
   hs-physics) $DIR/books/hs-physics/bake --input $input_file --output $output_file;;
   world-history) $DIR/books/world-history/bake --input $input_file --output $output_file;;
+  college-success) $DIR/books/college-success/bake --input $input_file --output $output_file;;
+  psychology) $DIR/books/psychology/bake --input $input_file --output $output_file;;
   accounting) $DIR/books/accounting/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac

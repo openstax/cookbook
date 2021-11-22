@@ -19,7 +19,7 @@ done
 # List additional books here
 
 case "${book}" in
-  american_government) dest="${DIR}/data/american_government/short" && script="${DIR}/books/american_government/shorten";;
+  american-government) dest="${DIR}/data/american-government/short" && script="${DIR}/books/american-government/shorten";;
   ap-history) dest="${DIR}/data/ap-history/short" && script="${DIR}/books/ap-history/shorten";;
   biology) dest="${DIR}/data/biology/short" && script="${DIR}/books/biology/shorten";;
   calculus) dest="${DIR}/data/calculus/short" && script="${DIR}/books/calculus/shorten";;
@@ -42,8 +42,11 @@ case "${book}" in
   additive-manufacturing) dest="${DIR}/data/additive-manufacturing/short" && script="${DIR}/books/additive-manufacturing/shorten";;
   college-physics) dest="${DIR}/data/college-physics/short" && script="${DIR}/books/college-physics/shorten";;
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/books/astronomy/shorten";;
+  history) dest="${DIR}/data/history/short" && script="${DIR}/books/history/shorten";;
   dev-math) dest="${DIR}/data/prealgebra/short" && script="${DIR}/books/dev-math/shorten";;
   hs-physics) dest="${DIR}/data/hs-physics/short" && script="${DIR}/books/hs-physics/shorten";;
+  college-success) dest="${DIR}/data/college-success/short" && script="${DIR}/books/college-success/shorten";;
+  psychology) dest="${DIR}/data/psychology/short" && script="${DIR}/books/psychology/shorten";;
   accounting) dest="${DIR}/data/accounting-vol1/short" && script="${DIR}/books/accounting/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac

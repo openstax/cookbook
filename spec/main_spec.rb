@@ -47,8 +47,8 @@ RSpec.describe 'books' do
     expect('statistics').to bake_correctly
   end
 
-  it 'bakes american_government' do
-    expect('american_government').to bake_correctly
+  it 'bakes american-government' do
+    expect('american-government').to bake_correctly
   end
 
   it 'bakes microbio' do
@@ -129,5 +129,17 @@ RSpec.describe 'books' do
 
   it 'bakes intermediate algebra' do
     expect('intermediate-algebra').to bake_correctly_with('dev-math')
+  end
+
+  it 'bakes college success' do
+    expect('college-success').to bake_correctly
+  end
+
+  it 'bakes history' do
+    expect('history').to bake_correctly
+  end
+
+  it 'bakes psychology' do
+    expect('psychology').to bake_correctly
   end
 end

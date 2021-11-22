@@ -30,7 +30,7 @@ case "${book}" in
   # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
   accounting | \
   additive-manufacturing | \
-  american_government | \
+  american-government | \
   anatomy | \
   anthropology | \
   ap-biology | \
@@ -45,15 +45,18 @@ case "${book}" in
   contemporary-math | \
   english-composition | \
   finance | \
+  hs-physics | \
   microbiology | \
   philosophy | \
   pl-psychology | \
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  psychology | \
   sociology | \
   statistics | \
   u-physics | \
+  history | \
   world-history | \
   dummy)
     echo "Baking book '${book}' with kitchen" ;
