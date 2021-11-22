@@ -511,7 +511,7 @@ module Kitchen
     # nil if there's no previous sibling
     #
     def previous
-      prev = raw.previous
+      prev = raw.previous_element
       return prev if prev.nil?
 
       Element.new(

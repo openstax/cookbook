@@ -6,12 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove `Nokigiri#previous` patch, `ElementBase#previous` now uses `#previous_element` (minor)
 
 ## [16.0.0] - 2021-11-19
 
 * Add reference link separator to `BakeReferences.v1` (patch)
 * Modify `BakeFootnotes` to be more general (minor)
 * Add `#preceded_by_text` method to element_base and the nokigiri patch (minor)
+* Remove `Nokigiri#previous` patch, `ElementBase#previous` now uses `#previous_element` (minor)
 * Broaden caption selection for `BakeNumberedTable#v2` (patch)
 * Add details of question count to injected exercises in `BakeInjectedExercise` (major)
 * Add target labels to chapter content module pages option in `BakeNonIntroductionPages`, create a separate directory `BakeLOLinkLabels` to add `.label-text`, `.label-counter` spans wrappers for links with `.lo-reference` class (minor)

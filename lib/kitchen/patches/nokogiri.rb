@@ -67,13 +67,6 @@ module Nokogiri
         self[:class]&.split || []
       end
 
-      def previous
-        prev = previous_element
-        return nil if prev.nil?
-
-        prev.text? ? prev.previous : prev
-      end
-
       def preceded_by_text?
         prev = previous_sibling
         while !prev.nil? && prev.blank? do prev = prev.previous_sibling end
