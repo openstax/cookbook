@@ -43,10 +43,14 @@ case "${book}" in
   calculus | \
   chemistry | \
   college-physics | \
+  college-success | \
   computer-science | \
   contemporary-math | \
+  dev-math | \
   english-composition | \
+  entrepreneurship | \
   finance | \
+  history | \
   hs-physics | \
   microbiology | \
   philosophy | \
@@ -58,7 +62,6 @@ case "${book}" in
   sociology | \
   statistics | \
   u-physics | \
-  history | \
   world-history | \
   dummy)
     echo "Baking book '${book}' with kitchen" ;
