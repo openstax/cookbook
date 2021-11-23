@@ -34,39 +34,49 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc|
   )
   BakeChapterTitle.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
+  BakeIframes.v1(outer_element: book)
   BakeAutotitledNotes.v1(book: book, classes: %w[linkup bringhome clearup workout])
-  solutions_container = BookAnswerKeyContainer.v1(book: book)
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeLearningObjectives.v1(chapter: chapter)
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
-    chapter.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
-    end
-    chapter.figures.each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
-    end
+
     exercise_section_classes = %w[summary self-check-questions review-questions critical-thinking problems]
 
     chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    MoveSolutionsToAnswerKey.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      strategy: :default,
-      strategy_options: {
-        selectors: %w[self-check-questions problems ap-test-prep].prefix('section.')
-      },
-      append_to: solutions_container
-    )
-
     exercise_section_classes.each do |klass|
       MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: klass)
     end
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      append_to: answer_key,
+      solutions_plural: true
+    )
+
+    DefaultStrategyForAnswerKeySolutions.v1(
+      strategy_options: { selectors: %w[self-check-questions problems ap-test-prep].prefix('section.') },
+      chapter: chapter,
+      append_to: answer_key_inner_container
+    )
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    chapter.figures.each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+
+    #%w[self-check-questions problems ap-test-prep].prefix('section.')
 
     # MoveCustomSectionToEocContainer.v1(
     #   chapter: chapter,
@@ -86,15 +96,30 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc|
   end
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
     BakeAppendix.v1(page: page, number: appendix_letter)
     page.figures.each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+
+    page.search('section').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise,
+                              number: "#{appendix_letter}#{exercise.count_in(:page)}")
+    end
   end
+
+  BakeUnnumberedTables.v1(book: book)
   BakeReferences.v2(book: book, metadata_source: metadata)
+  BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
 end
