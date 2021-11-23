@@ -48,15 +48,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   end
 
   book.chapters.each do |chapter|
-    chapter.pages.each do |page|
-      page.search('div[data-type="media"]').each do |media_container|
-        if !media_container.parent[:'data-type'] == 'note'
-          BakeIframes.v1(outer_element: media_container)
-        end
-      end
-      page.search('section').injected_questions.each do |question|
-        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:section))
-      end
+    chapter.pages.search('section').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:section))
     end
     BakeLearningObjectives.v1(chapter: chapter)
 
@@ -81,6 +74,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
     end
   end
 
+  BakeIframes.v1(outer_element: book)
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeIndex.v1(book: book)
