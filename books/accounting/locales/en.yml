@@ -6,6 +6,7 @@ en:
     ethical-considerations: Ethical Considerations
     ifrs-connection: IFRS Connection
     link-to-learning: Link to Learning
+    think-through: Think It Through
   eoc:
     multiple-choice: Multiple Choice
     questions: Questions
@@ -15,3 +16,9 @@ en:
     problem-set-b: Problem Set B
     thought-provokers: Thought Provokers
     section-summary: Summary
+  sections_prefixed:
+    exercise-set-a: EA
+    exercise-set-b: EB
+    problem-set-a: PA
+    problem-set-b: PB
+    thought-provokers: TP

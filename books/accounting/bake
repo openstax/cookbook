@@ -21,13 +21,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
-  # BakeUnnumberedFigure.v1(book: book)
   book.pages('$.preface').each do |page|
     page.figures.each do |figure|
       BakeFigure.v1(figure: figure,
                     number: figure.count_in(:page).to_s)
     end
   end
+  # BakeUnnumberedFigure.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
@@ -74,7 +74,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
       end
       chapter.composite_pages.each do |composite_page|
         composite_page.search("section.#{section_key}").exercises.each do |exercise|
-          BakeNumberedExercise.v1(exercise: exercise,
+          BakeNumberedExercise.v2(exercise: exercise,
                                   number: exercise.count_in(:composite_page))
         end
       end
@@ -91,6 +91,41 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
     #                             number: exercise.count_in(:composite_page),
     #                             suppress_solution_if: :even?,
     #                             note_suppressed_solutions: true)
+    #   end
+    # end
+
+    # eoc_sections_prefixed = { 'exercise-set-a' => 'EA',
+    #                           'exercise-set-b' => 'EB',
+    #                           'problem-set-a' => 'PA',
+    #                           'problem-set-b' => 'PB',
+    #                           'thought-provokers' => 'TP' }
+    eoc_sections_prefixed = %w[exercise-set-a
+                               exercise-set-b
+                               problem-set-a
+                               problem-set-b
+                               thought-provokers]
+
+    BakeExercisePrefixes.v2(
+      chapter: chapter,
+      sections_prefixed: eoc_sections_prefixed
+    )
+
+    # eoc_sections_prefixed.each do |section_key, prefix|
+    #   MoveCustomSectionToEocContainer.v1(
+    #     chapter: chapter,
+    #     metadata_source: metadata,
+    #     container_key: section_key,
+    #     uuid_key: ".#{section_key}",
+    #     section_selector: "section.#{section_key}"
+    #   ) do |section|
+    #     RemoveSectionTitle.v1(section: section)
+    #   end
+    #   chapter.composite_pages.each do |composite_page|
+    #     composite_page.search("section.#{section_key}").exercises.each do |exercise|
+    #       BakeNumberedExercise.v2(exercise: exercise,
+    #                               number: exercise.count_in(:composite_page),
+    #                               prefix: prefix)
+    #     end
     #   end
     # end
 
@@ -140,7 +175,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  BakeLOLinkLabel.v1(book: book)
+  BakeLOLinkLabels.v1(book: book)
   BakeToc.v1(book: book)
   # BakeFolio.v1(book: book)
 end
