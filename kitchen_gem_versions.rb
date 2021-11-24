@@ -11,6 +11,7 @@ KITCHEN_VERSIONS = {
   astronomy: '14.0.0',
   bca: '12.2.0',
   biology: '9.1.0',
+  business_ethics: '16.0.0',
   calculus: '15.0.0',
   chemistry: '15.0.0',
   college_physics: '14.0.0',

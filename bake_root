@@ -40,6 +40,7 @@ case "${book}" in
   astronomy | \
   bca | \
   biology | \
+  business-ethics | \
   calculus | \
   chemistry | \
   college-physics | \
