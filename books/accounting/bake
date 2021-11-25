@@ -74,7 +74,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
       end
       chapter.composite_pages.each do |composite_page|
         composite_page.search("section.#{section_key}").exercises.each do |exercise|
-          BakeNumberedExercise.v2(exercise: exercise,
+          BakeNumberedExercise.v1(exercise: exercise,
                                   number: exercise.count_in(:composite_page))
         end
       end
@@ -86,7 +86,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
                                problem-set-b
                                thought-provokers]
 
-    BakeExercisePrefixes.v2(
+    BakeExercisePrefixes.v1(
       chapter: chapter,
       sections_prefixed: eoc_sections_prefixed
     )
