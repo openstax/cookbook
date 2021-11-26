@@ -28,6 +28,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
     end
   end
   # BakeUnnumberedFigure.v1(book: book)
+  answer_key = BookAnswerKeyContainer.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
@@ -90,6 +91,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
       chapter: chapter,
       sections_prefixed: eoc_sections_prefixed
     )
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: false
+    )
+
+    # DefaultStrategyForAnswerKeySolutions.v1(
+    #   strategy_options: { selectors: ['section.multiple-choice'] },
+    #   chapter: chapter,
+    #   append_to: answer_key_inner_container
+    # )
 
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter, add_target_label: true)
