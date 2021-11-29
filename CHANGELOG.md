@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Create `BakeExercisePrefixes` direction adding prefixes for exercises in selected sections (minor)
 * Add support for 'text-heavy-top-titled' tables in `BakeTableBody` (minor)
 * Remove `Nokigiri#previous` patch, `ElementBase#previous` now uses `#previous_element` (minor)
+* Modifies `BakeAnnotationClasses` for annotations wrapper to be a `span` intead of a `div` (major)
 
 ## [16.0.0] - 2021-11-19
 

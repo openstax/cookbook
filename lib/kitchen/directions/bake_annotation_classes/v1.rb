@@ -20,9 +20,18 @@ module Kitchen::Directions::BakeAnnotationClasses
                                    kinesthetic-icon]
       annotation_icon_classes.each do |annotation_icon_class|
         book.search("p.#{annotation_icon_class}").each do |annotation_with_icon_class|
-          annotation_with_icon_class.search('div.os-icons').first.append(child:
+          annotation_with_icon_class.search('div.os-icons').first&.name = 'span'
+
+          icon_title = I18n.t(:"annotation_icons.#{annotation_icon_class}.title")
+
+          annotation_with_icon_class.search('span.os-icons').first.append(child:
             <<~HTML
-              <span class = "#{annotation_icon_class}"></span>
+              <span
+                class = "#{annotation_icon_class}"
+                role="img"
+                title="#{icon_title}"
+                aria-label="#{icon_title}"
+              ></span>
             HTML
           )
         end

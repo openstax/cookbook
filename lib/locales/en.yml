@@ -46,3 +46,18 @@ en:
     reference: References
   index:
     main: Index
+  annotation_icons:
+    linguistic-icon:
+      title: Language lens icon
+    culture-icon:
+      title: Culture lens icon
+    dreaming-icon:
+      title: Generating and capturing ideas icon
+    visual-icon:
+      title: Visual learning style icon
+    speech-icon:
+      title: Voice to text icon
+    auditory-icon:
+      title: Auditory learning style icon
+    kinesthetic-icon:
+      title: Kinesthetic learning style icon
