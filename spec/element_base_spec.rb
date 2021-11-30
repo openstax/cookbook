@@ -15,6 +15,18 @@ RSpec.describe Kitchen::ElementBase do
       ))
   end
 
+  let(:book_with_link) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <div data-type="example" class="class1" id="div1">
+            <p>This is a paragraph.</p>
+            <a href="div1">This is a link.</a>
+          </div>
+        HTML
+      ))
+  end
+
   let(:header_book) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -107,6 +119,8 @@ RSpec.describe Kitchen::ElementBase do
 
   let(:para) { book.first!('p') }
 
+  let(:link) { book_with_link.first!('a') }
+
   let(:figure) { sibling_book.first!('figure') }
 
   let(:reference) { sibling_book.first!('div.reference') }
@@ -143,6 +157,19 @@ RSpec.describe Kitchen::ElementBase do
     it 'sets the element\'s ID' do
       para.id = 'para1'
       expect(para.id).to eq 'para1'
+    end
+  end
+
+  describe '#href' do
+    it 'returns the element\'s href' do
+      expect(link.href).to eq 'div1'
+    end
+  end
+
+  describe '#href=' do
+    it 'sets the element\'s href' do
+      link.href = 'para1'
+      expect(link.href).to eq 'para1'
     end
   end
 

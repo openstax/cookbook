@@ -223,6 +223,22 @@ module Kitchen
       self[:'data-type']
     end
 
+    # Returns the element's href
+    #
+    # @return [String]
+    #
+    def href
+      self[:href]
+    end
+
+    # Sets the element's href
+    #
+    # @param value [String] the new value for the href
+    #
+    def href=(value)
+      self[:href] = value
+    end
+
     # A way to set values and chain them
     #
     # @param property [String, Symbol] the name of the property to set
