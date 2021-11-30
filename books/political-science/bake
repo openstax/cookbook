@@ -28,8 +28,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
     BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
     # Eoc sections
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
-
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
@@ -41,6 +39,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
       title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
       section.prepend(child: title)
     end
+
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
     chapter.pages.search('section.review-questions').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
@@ -75,7 +75,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
                           where-engage media-video media-podcast]
   BakeAutotitledNotes.v1(book: book, classes: autotitled_classes)
 
-
   BakeFootnotes.v1(book: book)
 
   # Eob sections
@@ -84,6 +83,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :political_science) do |doc|
   BakeCompositePages.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
