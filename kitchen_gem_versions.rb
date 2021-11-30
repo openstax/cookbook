@@ -16,6 +16,10 @@ KITCHEN_VERSIONS = {
   computer_science: '12.0.0',
   contemporary_math: '12.1.0',
   dummy: '2.0.0',
+  economics: {
+    github: 'openstax/kitchen',
+    ref: '6f483788e9f4f5f011dc552542c464b11ad12764'
+  },
   english_composition: '13.0.0', #todo: update to 14.0.0
   finance: '11.2.0',
   microbiology: '7.0.0',
