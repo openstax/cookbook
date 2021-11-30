@@ -29,8 +29,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
                     number: figure.count_in(:page).to_s)
     end
   end
-  # BakeUnnumberedFigure.v1(book: book)
-  answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: :prefix)
+  BakeUnnumberedFigure.v1(book: book)
+  answer_key = BookAnswerKeyContainer.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
@@ -95,7 +95,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
     )
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: :prefix
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
 
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
@@ -127,8 +127,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
                                                  ifrs-connection
                                                  link-to-learning])
 
-  # BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning], bake_subtitle: false)
-
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   book.pages('$.appendix').each do |page|
@@ -151,7 +149,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   BakeLinkPlaceholders.v1(book: book)
   BakeLOLinkLabels.v1(book: book)
   BakeToc.v1(book: book)
-  # BakeFolio.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
