@@ -47,8 +47,8 @@ RSpec.describe 'books' do
     expect('statistics').to bake_correctly
   end
 
-  it 'bakes american_government' do
-    expect('american_government').to bake_correctly
+  it 'bakes american-government' do
+    expect('american-government').to bake_correctly
   end
 
   it 'bakes microbio' do
@@ -91,6 +91,10 @@ RSpec.describe 'books' do
     expect('ap-biology').to bake_correctly
   end
 
+  it 'bakes additive-manufacturing' do
+    expect('additive-manufacturing').to bake_correctly
+  end
+
   it 'bakes ap history' do
     expect('ap-history').to bake_correctly
   end
@@ -99,11 +103,51 @@ RSpec.describe 'books' do
     expect('anatomy').to bake_correctly
   end
 
+  it 'bakes world-histrory' do
+    expect('world-history').to bake_correctly
+  end
+
   it 'bakes college physics' do
     expect('college-physics').to bake_correctly
   end
 
   it 'bakes astronomy' do
     expect('astronomy').to bake_correctly
+  end
+
+  it 'bakes hs-physics' do
+    expect('hs-physics').to bake_correctly
+  end
+
+  it 'bakes prealgebra' do
+    expect('prealgebra').to bake_correctly_with('dev-math')
+  end
+
+  it 'bakes elementary algebra' do
+    expect('elementary-algebra').to bake_correctly_with('dev-math')
+  end
+
+  it 'bakes intermediate algebra' do
+    expect('intermediate-algebra').to bake_correctly_with('dev-math')
+  end
+
+  it 'bakes college success' do
+    expect('college-success').to bake_correctly
+  end
+
+  it 'bakes history' do
+    expect('history').to bake_correctly
+  end
+
+  it 'bakes psychology' do
+    expect('psychology').to bake_correctly
+  end
+
+  it 'bakes intro business' do
+    expect('intro-business').to bake_correctly
+  end
+
+  it 'bakes entrepreneurship' do
+    expect('entrepreneurship').to bake_correctly
   end
 end

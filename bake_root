@@ -28,7 +28,11 @@ done
 
 case "${book}" in
   # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
-  american_government | \
+
+  # Note: Add intro-business when content problem be fixed https://github.com/openstax/recipes/issues/158
+
+  additive-manufacturing | \
+  american-government | \
   anatomy | \
   anthropology | \
   ap-biology | \
@@ -39,19 +43,26 @@ case "${book}" in
   calculus | \
   chemistry | \
   college-physics | \
+  college-success | \
   computer-science | \
   contemporary-math | \
+  dev-math | \
   english-composition | \
+  entrepreneurship | \
   finance | \
+  history | \
+  hs-physics | \
   microbiology | \
   philosophy | \
   pl-psychology | \
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  psychology | \
   sociology | \
   statistics | \
   u-physics | \
+  world-history | \
   dummy)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
