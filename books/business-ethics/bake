@@ -15,6 +15,11 @@ end
 recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc|
   include Kitchen::Directions
 
+  # Set overrides
+  doc.selectors.override(
+    reference: 'section.references'
+  )
+
   book = doc.book
   metadata = book.metadata
 
@@ -22,6 +27,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc|
 
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
+  BakeUnclassifiedNotes.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
 
@@ -56,7 +62,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc|
       section.prepend(child: title)
     end
 
-    eoc_sections = %w[assessment-questions references]
+    eoc_sections = %w[assessment-questions]
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -69,7 +75,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc|
       end
     end
 
-    BakeChapterReferences.v1(
+    BakeChapterReferences.v2(
       chapter: chapter,
       metadata_source: metadata,
       uuid_prefix: '.',
