@@ -13,6 +13,9 @@ gemfile do
   gem 'byebug'
 end
 
+# spec input file contains test content from chapter 1 and 10 (needed for
+# BakeFirstElemets in the AnswerKey) from Accounting vol2
+
 recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   include Kitchen::Directions
 
