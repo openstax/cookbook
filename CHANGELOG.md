@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add more roman numbers to `Integer` class (patch)
 * Create `V2` for `BakeChapterReferences` (minor)
 * Create `BakeExercisePrefixes` direction adding prefixes for exercises in selected sections (minor)
 * Add support for 'text-heavy-top-titled' tables in `BakeTableBody` (minor)
