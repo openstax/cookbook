@@ -31,7 +31,6 @@ case "${book}" in
 
   # Note: Add intro-business when content problem be fixed https://github.com/openstax/recipes/issues/158
 
-  accounting | \
   additive-manufacturing | \
   american-government | \
   anatomy | \
