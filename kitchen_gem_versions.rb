@@ -20,6 +20,10 @@ KITCHEN_VERSIONS = {
   contemporary_math: '16.0.0',
   dev_math: '15.0.0',
   dummy: '2.0.0',
+  economics: {
+    github: 'openstax/kitchen',
+    ref: 'be48e67e77931081c268c1158a761fba57d2231b'
+  },
   english_composition: {
     github: 'openstax/kitchen',
     ref: '6f483788e9f4f5f011dc552542c464b11ad12764'
