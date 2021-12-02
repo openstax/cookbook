@@ -31,6 +31,7 @@ case "${book}" in
   precalculus-coreq) dest="${DIR}/data/college-algebra-coreq/short" && script="${DIR}/books/precalculus-coreq/shorten";;
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
+  economics) dest="${DIR}/data/economics/short" && script="${DIR}/books/economics/shorten";;
   finance) dest="${DIR}/data/finance/short" && script="${DIR}/books/finance/shorten";;
   english-composition) dest="${DIR}/data/english-composition/short" && script="${DIR}/books/english-composition/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
