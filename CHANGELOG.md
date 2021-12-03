@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create method in `Integer` class that generate roman numbers up to 100 (minor)
 * Add more roman numbers to `Integer` class (patch)
 * Create `V2` for `BakeChapterReferences` (minor)
 * Create `BakeExercisePrefixes` direction adding prefixes for exercises in selected sections (minor)

@@ -3,10 +3,22 @@
 # Monkey patches for +Integer+
 #
 class Integer
-  ROMAN_NUMERALS = %w[0 i ii iii iv v vi vii viii ix
-                      x xi xii xiii xiv xv xvi xvii xviii xix
-                      xx xxi xxii xxiii xxiv xxv xxvi xxvii xxviii xxix
-                      xxx xxxi xxxii xxxiii xxxiv xxxv xxxvi xxxvii xxxviii xxxix].freeze
+
+  @roman_numerals = {
+    100 => 'c',
+    90 => 'xc',
+    50 => 'l',
+    40 => 'xl',
+    10 => 'x',
+    9 => 'ix',
+    5 => 'v',
+    4 => 'iv',
+    1 => 'i'
+  }
+
+  class << self
+    attr_accessor :roman_numerals
+  end
 
   # Formats as different types of integers, including roman numerals.
   #
@@ -17,11 +29,25 @@ class Integer
     when :arabic
       to_s
     when :roman
-      raise 'Unknown conversion to Roman numerals' if self >= ROMAN_NUMERALS.size
+      raise 'Unknown conversion to Roman numerals' if self > self.class.roman_numerals.keys.first
 
-      ROMAN_NUMERALS[self]
+      to_roman
     else
       raise 'Unknown integer format'
     end
+  end
+
+  def to_roman
+    return 0 if zero?
+
+    roman = ''
+    integer = self
+    self.class.roman_numerals.each do |number, letter|
+      until integer < number
+        roman += letter
+        integer -= number
+      end
+    end
+    roman
   end
 end

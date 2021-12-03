@@ -11,10 +11,10 @@ RSpec.describe Integer do
 
     it 'converts to roman numerals' do
       expect(3.to_format(:roman)).to eq('iii')
-      expect(20.to_format(:roman)).to eq('xx')
-      expect(33.to_format(:roman)).to eq('xxxiii')
+      expect(54.to_format(:roman)).to eq('liv')
+      expect(96.to_format(:roman)).to eq('xcvi')
       expect {
-        40.to_format(:roman)
+        101.to_format(:roman)
       }.to raise_error('Unknown conversion to Roman numerals')
     end
 
