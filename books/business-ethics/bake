@@ -28,6 +28,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc|
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
+  BakeIframes.v1(outer_element: book)
 
   BakeChapterTitle.v1(book: book)
 
