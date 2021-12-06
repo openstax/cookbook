@@ -18,6 +18,13 @@ module Kitchen
           uuid_prefix: uuid_prefix,
           klass: klass)
       end
+
+      def self.v3(chapter:, metadata_source:, uuid_prefix: '.')
+        V3.new.bake(
+          chapter: chapter,
+          metadata_source: metadata_source,
+          uuid_prefix: uuid_prefix)
+      end
     end
   end
 end

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `V3` for `BakeChapterReferences`  which sorts references alphabetically (minor)
+
 ## [17.0.0] - 2021-12-3
 
 * Create method in `Integer` class that generate roman numbers up to 100 (minor)
