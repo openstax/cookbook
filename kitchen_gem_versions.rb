@@ -33,6 +33,7 @@ KITCHEN_VERSIONS = {
   pl_psychology: '16.0.0',
   political_science: '12.0.0',
   precalculus: '15.0.0',
+  principles_management: '16.0.0',
   psychology: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
