@@ -162,4 +162,12 @@ RSpec.describe 'books' do
   it 'bakes business ethics' do
     expect('business-ethics').to bake_correctly
   end
+
+  it 'bakes business law' do
+    expect('business-law').to bake_correctly_with('business-ethics')
+  end
+
+  it 'bakes intellectual property' do
+    expect('intellectual-property').to bake_correctly_with('business-ethics')
+  end
 end
