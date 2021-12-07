@@ -15,6 +15,11 @@ end
 recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
   include Kitchen::Directions
 
+  # Set overrides
+  doc.selectors.override(
+    reference: '.references'
+  )
+
   book = doc.book
   metadata = book.metadata
 
@@ -27,6 +32,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
       strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
     }
   )
+  BakeUnnumberedFigure.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
@@ -44,6 +50,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
     end
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterReferences.v3(chapter: chapter, metadata_source: metadata)
 
     chapter.pages.search('section.review-questions').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
@@ -62,7 +69,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
       section.prepend(child: title)
     end
 
-    sections = %w[further-reading references]
+    sections = %w[further-reading]
     sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -75,7 +82,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
       end
     end
 
-    chapter.figures.each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
@@ -100,6 +107,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
   BakeLinkPlaceholders.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
