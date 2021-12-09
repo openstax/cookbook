@@ -30,6 +30,7 @@ KITCHEN_VERSIONS = {
   intro_business: '16.0.0',
   microbiology: '7.0.0',
   philosophy: { github: 'openstax/kitchen', ref: '382fce8033867161b98cad254d05e11a087a074b' },
+  pl_economics: { github: 'openstax/kitchen', ref: '382fce8033867161b98cad254d05e11a087a074b' },
   pl_psychology: '16.0.0',
   political_science: '12.0.0',
   precalculus: '15.0.0',

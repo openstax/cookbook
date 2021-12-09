@@ -60,5 +60,6 @@ case "${book}" in
   intro-business) $DIR/books/intro-business/bake --input $input_file --output $output_file;;
   business-ethics) $DIR/books/business-ethics/bake --input $input_file --output $output_file;;
   accounting) $DIR/books/accounting/bake --input $input_file --output $output_file;;
+  pl-economics) $DIR/books/pl-economics/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac

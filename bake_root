@@ -54,6 +54,7 @@ case "${book}" in
   hs-physics | \
   microbiology | \
   philosophy | \
+  pl-economics | \
   pl-psychology | \
   political-science | \
   precalculus | \
