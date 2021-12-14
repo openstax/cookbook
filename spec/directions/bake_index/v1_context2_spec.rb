@@ -54,6 +54,11 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             <span data-type="foreign" xml:lang="en">
               <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
             </span>
+            <span data-type="term" reference="bar">Boo</span>
+            <span data-type="term" reference="Christmas, Mary (ur. 1958)" index="name" name="Christmas, Mary" born="1958">Mary Christmas</span>
+            <span data-type="foreign" xml:lang="en">
+              <span data-type="term" index="foreign">train</span>
+            </span>
           </div>
           <div data-type="composite-chapter">
             <div data-type="document-title">Chapter Review</div>
@@ -116,6 +121,11 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <span data-type="foreign" xml:lang="en">
                   <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign" id="auto_p2_term13" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
                 </span>
+                <span data-type="term" reference="bar" id="auto_p2_term14" group-by="b">Boo</span>
+                <span data-type="term" reference="Christmas, Mary (ur. 1958)" index="name" name="Christmas, Mary" born="1958" id="auto_p2_term15" group-by="C">Mary Christmas</span>
+                <span data-type="foreign" xml:lang="en">
+                  <span data-type="term" index="foreign" id="auto_p2_term16" group-by="t">train</span>
+                </span>
               </div>
               <div data-type="composite-chapter">
                 <div data-type="document-title">Chapter Review</div>
@@ -157,6 +167,14 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                     -->
                   <span class="os-index-link-separator">, </span>
                   <a class="os-term-section-link" href="#auto_p2_term11">
+                    <span class="os-term-section">1.1 First Page</span>
+                  </a>
+                  <!--
+                    -->
+                </div>
+                <div class="os-index-item">
+                  <span class="os-term" group-by="C">Christmas, Mary (ur. 1958)</span>
+                  <a class="os-term-section-link" href="#auto_p2_term15">
                     <span class="os-term-section">1.1 First Page</span>
                   </a>
                   <!--
@@ -205,6 +223,17 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <div class="os-index-item">
                   <span class="os-term" group-by="a">animag</span>
                   <a class="os-term-section-link" href="#auto_p2_term7">
+                    <span class="os-term-section">1.1 First Page</span>
+                  </a>
+                  <!--
+                    -->
+                </div>
+              </div>
+              <div class="group-by">
+                <span class="group-label">B</span>
+                <div class="os-index-item">
+                  <span class="os-term" group-by="b">bar</span>
+                  <a class="os-term-section-link" href="#auto_p2_term14">
                     <span class="os-term-section">1.1 First Page</span>
                   </a>
                   <!--
@@ -312,6 +341,17 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <div class="os-index-item">
                   <span class="os-term" group-by="s">sp3d2 orbitals</span>
                   <a class="os-term-section-link" href="#auto_p2_term13">
+                    <span class="os-term-section">1.1 First Page</span>
+                  </a>
+                  <!--
+                    -->
+                </div>
+              </div>
+              <div class="group-by">
+                <span class="group-label">T</span>
+                <div class="os-index-item">
+                  <span class="os-term" group-by="t">train</span>
+                  <a class="os-term-section-link" href="#auto_p2_term16">
                     <span class="os-term-section">1.1 First Page</span>
                   </a>
                   <!--

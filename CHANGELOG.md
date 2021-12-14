@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix problem with namespaces in `BakeLinkPlaceholders` and `BakeIndex` (minor)
 * Create `V3` for `BakeChapterReferences`  which sorts references alphabetically (minor)
 
 ## [17.0.0] - 2021-12-3

@@ -27,6 +27,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
         <a>skip this link</a>
         <a href='?other_key'>[link]</a>
         <a xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" cmlnle:case="genitive" href='?other_key'>[link]</a>
+        <a case="locative" href='?next_key'>[link]</a>
       HTML
     )
   end
@@ -53,6 +54,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
     before do
       book_with_cases.pantry(name: :nominative_link_text).store('Przykład x.y', label: 'other_key')
       book_with_cases.pantry(name: :genitive_link_text).store('Przykładu x.y', label: 'other_key')
+      book_with_cases.pantry(name: :locative_link_text).store('Przykładzie x.y', label: 'next_key')
     end
 
     it 'bakes' do
@@ -63,6 +65,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
             <a>skip this link</a>
             <a href='?other_key'>Przykład x.y</a>
             <a xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" cmlnle:case="genitive" href='?other_key'>Przykładu x.y</a>
+            <a case="locative" href='?next_key'>Przykładzie x.y</a>
           </body>
         HTML
       )

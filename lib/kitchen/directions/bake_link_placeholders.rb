@@ -9,7 +9,7 @@ module Kitchen
         book.search('a').each do |anchor|
           next unless anchor.text == '[link]'
 
-          label_case = anchor['cmlnle:case']
+          label_case = anchor['cmlnle:case'] || anchor['case']
           id = anchor[:href][1..-1]
 
           if cases

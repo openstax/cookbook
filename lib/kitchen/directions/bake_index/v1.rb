@@ -154,14 +154,14 @@ module Kitchen::Directions::BakeIndex
       type =
         if !term_element.key?('index')
           'term'
-        elsif term_element['cxlxt:index'] == 'name'
+        elsif term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name'
           'name'
-        elsif term_element['cxlxt:index'] == 'foreign'
+        elsif term_element['cxlxt:index'] == 'foreign' || term_element['index'] == 'foreign'
           'foreign'
         end
 
       if term_element.key?('reference')
-        term_reference = term_element['cmlnle:reference']
+        term_reference = term_element['cmlnle:reference'] || term_element['reference']
         group_by = term_reference[0]
         content = term_reference
       else
