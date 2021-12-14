@@ -36,6 +36,6 @@ KITCHEN_VERSIONS = {
   psychology: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
-  world_history: '16.0.0',
+  world_history: '17.0.0',
   u_physics: '15.0.0'
 }.freeze

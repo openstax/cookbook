@@ -53,6 +53,7 @@ case "${book}" in
   business-ethics) dest="${DIR}/data/business-ethics/short" && script="${DIR}/books/business-ethics/shorten";;
   accounting) dest="${DIR}/data/accounting/short" && script="${DIR}/books/accounting/shorten";;
   philosophy) dest="${DIR}/data/philosophy/short" && script="${DIR}/books/philosophy/shorten";;
+  world-history) dest="${DIR}/data/world-history/short" && script="${DIR}/books/world-history/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
