@@ -117,6 +117,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
     BakeFirstElements.v1(within: solution)
   end
 
+  book.search('div[data-type="problem"]').each do |problem|
+    BakeFirstElements.v1(within: problem)
+  end
+
   book.chapters.each do |chapter|
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
