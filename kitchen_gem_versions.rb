@@ -17,7 +17,7 @@ KITCHEN_VERSIONS = {
   chemistry: '15.0.0',
   college_physics: '14.0.0',
   college_success: '16.0.0',
-  computer_science: '12.0.0',
+  computer_science: '17.0.0',
   contemporary_math: '16.0.0',
   dev_math: '15.0.0',
   dummy: '2.0.0',
@@ -31,12 +31,11 @@ KITCHEN_VERSIONS = {
   microbiology: '7.0.0',
   philosophy: { github: 'openstax/kitchen', ref: '382fce8033867161b98cad254d05e11a087a074b' },
   pl_psychology: '16.0.0',
-  pl_u_physics: { github: 'openstax/kitchen', ref: 'c5bf5fc3c6bddab2c41a9ef6e9fd0d81268f3e7a' },
   political_science: '12.0.0',
   precalculus: '15.0.0',
   psychology: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
-  world_history: '17.0.0',
+  world_history: '16.0.0',
   u_physics: '15.0.0'
 }.freeze
