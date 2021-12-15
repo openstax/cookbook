@@ -32,6 +32,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           <span data-type="term">Bar</span>
           <span data-type="term">bar</span>
           <span data-type="term">Ötzi the Iceman</span>
+          <span data-type="term"><em data-effect="italics">Homo sapiens sapiens</em></span>
         </div>
         <div data-type="chapter">
           <div data-type="page" id="p2">
@@ -40,6 +41,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             <span data-type="term">ΔE</span>
             <span data-type="term"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
             <span data-type="term">3-PGA</span>
+            <span data-type="term"><em data-effect="italics">Homo sapiens sapiens</em></span>
           </div>
           <div data-type="composite-chapter">
             <div data-type="document-title">Chapter Review</div>
@@ -85,7 +87,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
               <span class="group-label">Symbols</span>
               <div class="os-index-item">
               <span class="os-term" group-by="Symbols">3-PGA</span>
-                <a class="os-term-section-link" href="#auto_p2_term9">
+                <a class="os-term-section-link" href="#auto_p2_term10">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
                 <!--
@@ -101,7 +103,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
               </div>
               <div class="os-index-item">
                 <span class="os-term" group-by="Symbols">&#x394;E</span>
-                <a class="os-term-section-link" href="#auto_p2_term7">
+                <a class="os-term-section-link" href="#auto_p2_term8">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
                 <!--
@@ -171,7 +173,26 @@ RSpec.describe Kitchen::Directions::BakeIndex do
                 <!--
                     -->
                 <span class="os-index-link-separator">, </span>
-                <a class="os-term-section-link" href="#auto_p2_term6">
+                <a class="os-term-section-link" href="#auto_p2_term7">
+                  <span class="os-term-section">1.1 First Page</span>
+                </a>
+                <!--
+                    -->
+              </div>
+            </div>
+            <div class="group-by">
+              <span class="group-label">H</span>
+              <div class="os-index-item">
+                <span class="os-term" group-by="H">
+                  <em data-effect="italics">Homo sapiens sapiens</em>
+                </span>
+                <a class="os-term-section-link" href="#auto_p1_term6">
+                  <span class="os-term-section">Preface</span>
+                </a>
+                <!--
+                    -->
+                <span class="os-index-link-separator">, </span>
+                <a class="os-term-section-link" href="#auto_p2_term11">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
                 <!--
@@ -193,7 +214,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
               <span class="group-label">S</span>
               <div class="os-index-item">
                 <span class="os-term" group-by="s">sp3d2 orbitals</span>
-                <a class="os-term-section-link" href="#auto_p2_term8">
+                <a class="os-term-section-link" href="#auto_p2_term9">
                   <span class="os-term-section">1.1 First Page</span>
                 </a>
                 <!--

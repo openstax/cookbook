@@ -54,7 +54,7 @@ RSpec.describe Kitchen::Directions::BakeIndex::V1 do
   end
 
   def text_only_term(text)
-    described_class::Term.new(text: text, id: nil, group_by: nil, page_title: nil)
+    described_class::Term.new(text: text, id: nil, group_by: nil, page_title: nil, italicized: nil)
   end
 
 end
