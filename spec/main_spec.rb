@@ -174,4 +174,8 @@ RSpec.describe 'books' do
   it 'bakes computer science' do
     expect('computer-science').to bake_correctly
   end
+
+  it 'bakes pl u-physics' do
+    expect('pl-u-physics').to bake_correctly
+  end
 end
