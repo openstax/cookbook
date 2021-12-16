@@ -37,6 +37,6 @@ KITCHEN_VERSIONS = {
   psychology: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
-  world_history: { github: 'openstax/kitchen', ref: 'b78c3d6d77dc13fc6c8a4b4ff6baf8ccfcc7b747' },
+  world_history: { github: 'openstax/kitchen', ref: '3fa393aeb811c0fa0dff98222208c747f4f3bf8a' },
   u_physics: '15.0.0'
 }.freeze
