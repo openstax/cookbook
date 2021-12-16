@@ -49,6 +49,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
+    # create Chapter Review EOC wrapper
     eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
