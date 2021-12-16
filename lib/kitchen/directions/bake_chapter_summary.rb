@@ -5,17 +5,18 @@ module Kitchen
     # Bake directions for eoc summary
     #
     module BakeChapterSummary
-      def self.v1(chapter:, metadata_source:, klass: 'summary', uuid_prefix: '.')
+      def self.v1(chapter:, metadata_source:, klass: 'summary', uuid_prefix: '.', append_to: nil)
         V1.new.bake(
           chapter: chapter,
           metadata_source: metadata_source,
           uuid_prefix: uuid_prefix,
-          klass: klass
+          klass: klass,
+          append_to: append_to
         )
       end
 
       class V1
-        def bake(chapter:, metadata_source:, uuid_prefix: '.', klass: 'summary')
+        def bake(chapter:, metadata_source:, uuid_prefix: '.', klass: 'summary', append_to: nil)
           summaries = Clipboard.new
 
           chapter.pages.each do |page|
@@ -36,7 +37,7 @@ module Kitchen
             uuid_key: "#{uuid_prefix}#{klass}",
             metadata_source: metadata_source,
             content: summaries.paste,
-            append_to: chapter
+            append_to: append_to || chapter
           )
         end
       end

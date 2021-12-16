@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add append_to support to `BakeChapterSummary` (minor)
 * Add support for italicized terms in index (minor)
 * Fix problem with namespaces in `BakeLinkPlaceholders` and `BakeIndex` (minor)
 * Create `V3` for `BakeChapterReferences`  which sorts references alphabetically (minor)

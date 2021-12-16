@@ -61,6 +61,22 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
     )
   end
 
+  let(:append_to) do
+    new_element(
+      <<~HTML
+        <div class="os-eoc os-chapter-review-container" data-type="composite-chapter" data-uuid-key=".chapter-review">
+          <h2 data-type="document-title" id="composite-chapter-1">
+            <span class="os-text">foo</span>
+          </h2>
+          <div data-type="metadata" style="display: none;">
+            <h1 data-type="document-title" itemprop="name">foo</h1>
+            <div>metadata</div>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   context 'when v1 is called on a chapter' do
     context 'when klass value is set to "section-summary" in book recipe bake file' do
       it 'works' do
@@ -253,5 +269,60 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
         </div>
       HTML
     )
+  end
+
+  context 'when v1 is called on a composite chapter' do
+    it 'works' do
+      metadata = metadata_element.append(child:
+        <<~HTML
+          <div data-type="random" id="subject">Random - should not be included</div>
+        HTML
+      )
+      expect(
+        described_class.v1(chapter: chapter_summary_no_bake_title, metadata_source: metadata, klass: 'section-summary', append_to: append_to)
+      ).to match_normalized_html(
+        <<~HTML
+          <div class="os-eoc os-chapter-review-container" data-type="composite-chapter" data-uuid-key=".chapter-review">
+            <h2 data-type="document-title" id="composite-chapter-1">
+              <span class="os-text">foo</span>
+            </h2>
+            <div data-type="metadata" style="display: none;">
+              <h1 data-type="document-title" itemprop="name">foo</h1>
+              <div>metadata</div>
+            </div>
+            <div class="os-eoc os-section-summary-container" data-type="composite-page" data-uuid-key=".section-summary">
+              <h3 data-type="title">
+                <span class="os-text">Summary</span>
+              </h3>
+              <div data-type="metadata" style="display: none;">
+                <h1 data-type="document-title" itemprop="name">Summary</h1>
+                <span data-type="revised" id="revised_copy_1">Revised</span>
+                <span data-type="slug" id="slug_copy_1">Slug</span>
+                <div class="authors" id="authors_copy_1">Authors</div>
+                <div class="publishers" id="publishers_copy_1">Publishers</div>
+                <div class="print-style" id="print-style_copy_1">Print Style</div>
+                <div class="permissions" id="permissions_copy_1">Permissions</div>
+                <div data-type="subject" id="subject_copy_1">Subject</div>
+              </div>
+              <section class="summary" data-element-type="section-summary">
+                <a href="#intro">
+                  <h3 data-type="document-title" id="intro_copy_1">
+                    <span class="os-number">1.1</span>
+                    <span class="os-divider"> </span>
+                    <span class="os-text" data-type="" itemprop="">Introduction page!</span>
+                  </h3>
+                </a>
+                <h3 data-type="document-title">
+                  <span class="os-number">Do not bake number</span>
+                  <span class="os-divider"> </span>
+                  <span class="os-text" data-type="" itemprop="">No Bake Title</span>
+                </h3>
+                <p>This should stay where it is.</p>
+              </section>
+            </div>
+          </div>
+        HTML
+      )
+    end
   end
 end
