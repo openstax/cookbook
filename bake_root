@@ -28,8 +28,11 @@ done
 
 case "${book}" in
   # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
+
+  # Note: Add intro-business when content problem be fixed https://github.com/openstax/recipes/issues/158
+
   additive-manufacturing | \
-  american_government | \
+  american-government | \
   anatomy | \
   anthropology | \
   ap-biology | \
@@ -41,16 +44,23 @@ case "${book}" in
   calculus | \
   chemistry | \
   college-physics | \
+  college-success | \
   computer-science | \
   contemporary-math | \
+  dev-math | \
   english-composition | \
+  entrepreneurship | \
   finance | \
+  history | \
+  hs-physics | \
   microbiology | \
   philosophy | \
   pl-psychology | \
+  pl-u-physics | \
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  psychology | \
   sociology | \
   statistics | \
   u-physics | \

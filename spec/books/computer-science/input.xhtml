@@ -1,0 +1,1886 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:epub="http://www.idpf.org/2007/ops" lang="en" xml:lang="en">
+  <head itemscope="itemscope" itemtype="http://schema.org/Book"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Computer Science Kitchen Sink Testing</title>
+    <meta itemprop="inLanguage" data-type="language" content="en" />
+
+    <!-- These are for discoverability of accessible content. -->
+    <meta itemprop="accessibilityFeature" content="MathML" />
+    <meta itemprop="accessibilityFeature" content="LaTeX" />
+    <meta itemprop="accessibilityFeature" content="alternativeText" />
+    <meta itemprop="accessibilityFeature" content="captions" />
+    <meta itemprop="accessibilityFeature" content="structuredNavigation" />
+
+
+    <meta itemprop="dateCreated" content="2021-03-22T14:06:13-05:00" />
+    <meta itemprop="dateModified" content="2021-09-16T10:14:21.613538-05:00" />
+  </head>
+  <body itemscope="itemscope" itemtype="http://schema.org/Book">
+    <div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Computer Science Kitchen Sink Testing</h1>
+      <span data-type="revised" data-value="2021-09-16T10:14:21.613538-05:00"></span>
+      <span data-type="cnx-archive-uri" data-value="5d156fc1-0080-4fbe-ac77-d147b4ceed92@7.18"></span>
+
+      <div class="authors">
+        By:
+<span id="author-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="author" data-type="author">
+            <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+          </span>
+        Edited by:
+
+        Illustrated by:
+
+        Translated by:
+
+      </div>
+      <div class="publishers">
+        Published By:
+            <span id="publisher-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="publisher" data-type="publisher">
+              <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+            </span>      </div>
+      <div class="permissions">
+        <p class="copyright">
+          Copyright:
+              <span id="copyright-holder-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="copyright-holder" data-type="copyright-holder">
+                <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+              </span>        </p>
+        <p class="license">
+          Licensed:
+          <a href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL" data-type="license">CC BY</a>
+        </p>
+      </div><div itemprop="about" data-type="subject">Science and Technology</div>    </div>
+
+   <nav id="toc"><ol><li cnx-archive-uri="5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d@5"><a href="5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d@5.xhtml">Preface</a></li><li><span>Realizations of Algorithms</span><ol><li><span>Computational Thinking and Solution Architectures</span><ol><li cnx-archive-uri="efffebd2-0588-4798-9082-cc812e660ad3@5"><a href="efffebd2-0588-4798-9082-cc812e660ad3@5.xhtml">Introduction</a></li><li cnx-archive-uri="c7a411f5-bfe5-4f2a-833f-645cb84e14ee@8"><a href="c7a411f5-bfe5-4f2a-833f-645cb84e14ee@8.xhtml">Machine-Level Information Representation</a></li><li cnx-archive-uri="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059@5"><a href="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059@5.xhtml">Processor Architecture</a></li><li cnx-archive-uri="2040a658-785c-4c4a-8e40-1404c7ab67cd@20"><a href="2040a658-785c-4c4a-8e40-1404c7ab67cd@20.xhtml">Network Edge and Core</a></li></ol></li><li><span>Networks Design Application of Algorithms</span><ol><li cnx-archive-uri="0bfffc6e-040c-484f-9058-2e4c16032490@3"><a href="0bfffc6e-040c-484f-9058-2e4c16032490@3.xhtml">Introduction</a></li><li cnx-archive-uri="10aed73e-3acd-481c-afba-c238bc5a4b46@12"><a href="10aed73e-3acd-481c-afba-c238bc5a4b46@12.xhtml">Social Media and Related Tools</a></li><li cnx-archive-uri="6969abf0-ce0a-4840-ae69-bb4255efdf49@4"><a href="6969abf0-ce0a-4840-ae69-bb4255efdf49@4.xhtml">Crypto-Currency, Privacy, TCP/IP Tracking, and Related Web Economics (Government Vs. Internet, etc.)</a></li></ol></li></ol></li><li cnx-archive-uri="6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d@3"><a href="6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d@3.xhtml">Basic Functions We Expect Could Appear in Any Appendix</a></li><li cnx-archive-uri="c3205c04-1968-4428-9a75-2a5f43a033ba@2"><a href="c3205c04-1968-4428-9a75-2a5f43a033ba@2.xhtml">Glossary</a></li></ol></nav>
+  <div data-type="page" id="page_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d" class="preface" data-cnxml-to-html-ver="2.5.0"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Preface</h1>
+      <span data-type="revised" data-value="2021/03/22 14:10:27.921 GMT-5"></span>
+      <span data-type="cnx-archive-uri" data-value="5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d@5"></span>
+
+      <div class="authors">
+        By:
+<span id="author-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="author" data-type="author">
+            <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+          </span>
+        Edited by:
+
+        Illustrated by:
+
+        Translated by:
+
+      </div>
+      <div class="publishers">
+        Published By:
+            <span id="publisher-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="publisher" data-type="publisher">
+              <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+            </span>      </div>
+      <div class="permissions">
+        <p class="copyright">
+          Copyright:
+              <span id="copyright-holder-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="copyright-holder" data-type="copyright-holder">
+                <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+              </span>        </p>
+        <p class="license">
+          Licensed:
+          <a href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL" data-type="license">CC BY</a>
+        </p>
+      </div><div itemprop="about" data-type="subject">Science and Technology</div>    </div>
+
+   <div data-type="document-title" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_0">Preface</div>
+  
+  <p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-870">Welcome to <em data-effect="italics">Introduction to Computer Science</em>, an OpenStax resource. This textbook was written to increase student access to high-quality learning materials, maintaining highest standards of academic rigor at little to no cost. 
+</p><section data-depth="1" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-623"><h3 data-type="title">About OpenStax</h3><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-800">
+OpenStax is a nonprofit based at Rice University, and it’s our mission to improve student access to education. Our first openly licensed college textbook was published in 2012, and our library has since scaled to over 30 books for college and AP® courses used by hundreds of thousands of students. OpenStax Tutor, our low-cost personalized learning tool, is being used in college courses throughout the country. Through our partnerships with philanthropic foundations and our alliance with other educational resource organizations, OpenStax is breaking down the most common barriers to learning and empowering students and instructors to succeed.
+
+</p></section><section data-depth="1" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-891"><h3 data-type="title">About OpenStax resources</h3><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-941"><h4 data-type="title">Customization</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-738">
+<em data-effect="italics">Introduction to Computer Science</em> is licensed under a Creative Commons Attribution 4.0 International (CC BY) license, which means that you can distribute, remix, and build upon the content, as long as you provide attribution to OpenStax and its content contributors.
+
+</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-929">Because our books are openly licensed, you are free to use the entire book or pick and choose the sections that are most relevant to the needs of your course. Feel free to remix the content by assigning your students certain chapters and sections in your syllabus, in the order that you prefer. You can even provide a direct link in your syllabus to the sections in the web view of your book.</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-716">Instructors also have the option of creating a customized version of their OpenStax book. The custom version can be made available to students in low-cost print or digital form through their campus bookstore. Visit the Instructor Resources section of your book page on openstax.org for more information. 
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-997"><h4 data-type="title">Art attribution in <em data-effect="italics">Introduction to Computer Science</em></h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-383">In <em data-effect="italics">Introduction to Computer Science</em>, most art contains attribution to its title, creator or rights holder, host platform, and license within the caption. For art that is openly licensed, anyone may reuse the art as long as they provide the same attribution to its original source. Some art has been provided through permissions and should only be used with the attribution or limitations provided in the credit.
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-444"><h4 data-type="title">Errata</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-19">
+All OpenStax textbooks undergo a rigorous review process. However, like any professional-grade textbook, errors sometimes occur. Since our books are web based, we can make updates periodically when deemed pedagogically necessary. If you have a correction to suggest, submit it through the link on your book page on openstax.org. Subject matter experts review all errata suggestions. OpenStax is committed to remaining transparent about all updates, so you will also find a list of past errata changes on your book page on openstax.org 
+
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-278"><h4 data-type="title">Format</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-121">
+You can access this textbook for free in web view or PDF through openstax.org, and for a low cost in print.
+
+</p></section></section><section data-depth="1" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-89"><h3 data-type="title">About <em data-effect="italics">Introduction to Computer Science</em></h3><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-261">
+<em data-effect="italics">Introduction to Computer Science</em> is designed to support a semester-length, 16-week course offered at both two-year and four-year institutions. Serving a student base of both majors and non-majors in the field, the course serves to establish a foundation of core computer science knowledge as an intriguing introduction to the discipline while providing a framework and context for deeper dives into further study in the computer science vertical space. 
+
+</p><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-921"><h4 data-type="title">Coverage and scope</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-80">
+After an introductory chapter on computer science, the text introduces the essentials of computational thinking and builds on those in each unit. Students move through a thorough coverage of problem solving and algorithms into a unit on how algorithms are realized in the key areas of languages, computer systems, networks, and operating systems. The third unit focuses on designing and developing software solutions through programming, software applications and engineering, and data management. Unit IV explores various ways computer science technologies are used to solve business and social problems in today’s world, including web-based, cloud-based, and hybrid solution models. The text closes with a chapter on society and information technology, including social media, cybersecurity and privacy, green computing, ethics, and careers in information technology. Brief appendixes provide historical context on computer science and data management, an overview of research methodology, and supporting instruction for using the text’s companion playground environment for those instructors and students who would like supplemental content in these areas.
+
+</p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-379"><li>Chapter 1: Introduction to Computer Science</li></ul><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-875"><strong>Part I: Problem Solving and Algorithms</strong></p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-443"><li>Chapter 2: Computational Thinking and Solution Architectures</li>
+<li>Chapter 3: Algorithms and Data Structures</li>
+</ul><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-242"><strong>Part II: Realizations of Algorithms</strong>
+</p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-288"><li>Chapter 4: Linguistic Realizations of Algorithms: Programming Languages</li>
+<li>Chapter 5: Hardware Realizations of Algorithms: Computer Systems Design</li>
+<li>Chapter 6: Networks Design Application of Algorithms</li>
+<li>Chapter 7: Infrastructure Abstraction Layer: Operating Systems</li>
+</ul><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-642"><strong>Part III: Designing and Developing Software Solutions</strong>
+</p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-651"><li>Chapter 8: High-Level Programming Languages (HLLs)</li>
+<li>Chapter 9: Software Applications</li>
+<li>Chapter 10: Data Management</li>
+<li>Chapter 11: Software Engineering</li>
+</ul><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-598"><strong>Part IV: Building Modern End-to-End Solutions to business and Social Problems</strong></p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-47"><li>Chapter 12: Assembling and Evolving Business Solutions Using Technology</li>
+<li>Chapter 13: Web Applications Development</li>
+<li>Chapter 14: Cloud-native Applications Development</li>
+<li>Chapter 15: building Hybrid Cloud/On-Premise Digital Solutions</li>
+</ul><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-480"><strong>Part V: Society and Information Technology</strong> </p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-158"><li>Chapter 16: Society and Information Technology Challenges</li>
+</ul><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-722"><strong>Appendixes</strong></p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-978"><li>Appendix A: Computer Science from Inception to Today</li>
+<li>Appendix B: Data Management from Inception to Today</li>
+<li>Appendix C: Computer Science Research Methodology</li>
+<li>Appendix D: Using the Book’s Playground Environment</li>
+<li>References</li>
+<li>Glossary</li>
+</ul></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-751"><h4 data-type="title">Applicability</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-540">
+The <em data-effect="italics">Introduction to Computer Science</em> textbook will realize its vision through a practical approach that focuses on the conceptual capabilities computer science provides to help build technical solutions to business problems. Manual business or social solutions typically involve processes that are applied by people at one or more locations. For example, the selling of insurance policies used to be delegated solely to insurance agents who met with customers in order to issue quotes and bind policies. Computer science has helped automate and replace manual solutions to business problems via information systems composed of applications that create or manipulate data and operate on top of technical infrastructures. Most insurance companies today have sophisticated websites that act as insurance portals where customers can obtain quotes and insurance policies on their own. When teaching intricate technical topics (such as Computer Systems Organization) that students are approaching for the first time, being able to relate to practical solutions is important to ensure that students remain engaged in the classroom and are able to identify real-world opportunities where this knowledge can be applied.
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-69"><h4 data-type="title">A foundation and a bridge</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-448">Many introductory texts in this discipline do not provide a straightforward path across the various underlying areas that make up the field. <em data-effect="italics">Introduction to Computer Science</em> will stand out by looking at the various areas as conceptual capabilities or building blocks and assembling them as a sequence that empowers students with a clear vision of computer science at the start of their academic studies. This foundation will be paired with the practical and solution-based approach highlighted across the book via chapter scenarios, features showcasing real-world examples and issues, and assessments that ask students to apply computational thinking to relevant and relatable problems.
+</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-1000">It is also essential that the text integrate with other courses in computer science that students will take. These courses include (at the very least) Data Structures and Algorithms, Computer Systems Organization, Operating Systems, Data Communications and Networks, Programming Languages, Database Systems, Software Engineering, Web Applications Development, Cloud Computing, and Society and Computer Science. Introduction to Computer Science will cover the material at a preliminary level so that students can gain additional knowledge as they take these more advanced courses. For non-majors, the resource will set the pace for a practical introduction to computer science that provides them with examples of how computational thinking can help them solve daily practical problems to prepare them for workforce experience. A goal of the book is that students—both majors and non-majors—will engage in activities and assessments that enable them to create artifacts of value that can be used to build career confidence. For example, learned skills should be relatable and translatable to opportunities with prospective employers and internship providers.</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-464"><h4 data-type="title">Currency</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-680">
+Many of the core topics of an introductory computer science course will not change drastically over the next several years, but it is important that the resource be designed to evolve as technology progresses. For example, a transition to neuromorphic computing or quantum computing in the future could drastically affect topics such as Computer Systems Organization, Operating Systems, Data Communications, and Networks. However, progress in these upcoming areas is fairly slow and can be addressed through incremental changes via maintenance or mini updates. With faster evolution, the use of Machine Learning at various levels will keep growing and the material will need to address this evolution. It is likely that the material will be best taught in the future via a flipped classroom environment due to the growing variety of topics being covered and the need to work on practical problems with students to maximize their learning. A textbook structure that allows for regular mini updates, plus companion tools such as a playground environment, will facilitate a resource that is adaptable to evolving technologies as well as resulting shifts in how the material is taught.
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-476"><h4 data-type="title">Engaging feature boxes</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-36">
+Throughout <em data-effect="italics">Introduction to Computer Science</em>, you will find features that engage students by taking selected topics a step further and challenge students to apply what they are learning. Each feature box contains either a link to a deeper exploration of the topic at hand or critical thinking questions that may be geared toward class discussion, student projects, or written essays. Our features include:
+
+</p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-922"><li><strong>Concepts in Practice.</strong> This feature box highlights how professionals and non-professionals utilize the major concept(s) of the chapter. The purpose is to help non-majors develop an interest in and appreciation for computer science and help them to understand its usefulness.</li>
+<li><strong>Think It Through.</strong> This feature box presents a scenario and has students make the call. The purpose is to teach students that, in the real world, many decisions are judgment calls and not every question has just one answer.</li>
+<li><strong>Technology in Everyday Life.</strong> This feature connects computer science related technology to everyday life, the student’s world, or current events. Some boxes include a “Your Turn” element that asks students to work through this real-world context to figure out how computer-science-related technology can help.</li>
+<li><strong>Industry Spotlight.</strong> This feature focuses on specific industry problems that technology may help solve. Some boxes may include a “Your Turn” element that asks students to further explore this industry problem to figure out how computer science and related technology can provide solutions.</li>
+<li><strong>Global Issues in Technology.</strong> This feature helps students think globally about the impact of technology on societies around the world.</li>
+<li><strong>Link to Learning.</strong> These brief boxes provide links to additional sources of learning material, such as videos, simulations, interactive content, animation, or emerging issues related to topics covered in the chapter.</li></ul></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-670"><h4 data-type="title">Module materials that reinforce key concepts</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-647">
+Every module begins with a set of clear and concise <strong>learning objectives</strong>. These objectives are designed to help the instructor decide what content to include or assign, and to guide students on what they can expect to learn. After completing the module and end-of-module exercises, students should be able to demonstrate mastery of the learning objectives. 
+</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-27">Each chapter opens and closes with a <strong>chapter scenario</strong> that is a practical life application. It gives a relevant, engaging example of how the technology covered in the chapter leads to practical application in social or business daily life.
+</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-792">Section <strong>summaries</strong> distill the information in each module for both students and instructors down to key, concise points addressed in the section. <strong>Key terms</strong> are bold and are followed by a definition in context and at the end of each section for study. 
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-194"><h4 data-type="title">End-of-chapter materials to assess and extend student learning</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-294">
+Each chapter concludes with a series of assessments covering the content and learning objectives of each section. Assessments are designed to check for both conceptual understanding, practical application, and facility with computations and tools. Additionally, assessments are designed to allow instructors options for courses taught in-person, virtually, or via a hybrid approach.
+</p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-72"><li><strong>Review Questions.</strong> Review questions are designed to check for both conceptual understanding, practical application, and facility with computations and tools.</li>
+<li><strong>Conceptual Questions.</strong> Written questions will require students to explain concepts in words or answer questions related to chapter topics.</li>
+<li><strong>Practice Exercises.</strong> These exercises ask students to solve an exercise on their own; complexity will vary based on the topic.</li>
+<li><strong>Problem Set A.</strong> Problem sets apply the concepts learned in a practical context while requiring deep thinking as well as detailed computations. Problem Set A solutions are provided in the text so students can work the problem and check their results.</li>
+<li><strong>Problem Set B.</strong> Problem sets apply the concepts learned in a practical context while requiring deep thinking as well as detailed computations. Problem Set B solutions can be assigned for homework or in-class practice; solutions will not appear in the text.</li>
+<li><strong>Thought Provokers.</strong> These questions are deeper and driven by the content.</li>
+<li><strong>Labs.</strong> Labs use specific tools that relate to the topics covered in the chapters.</li>
+</ul></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-76"><h4 data-type="title">Comprehensive art program </h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-25">
+Our art program is designed to enhance students’ understanding of concepts through clear and effective illustrations, diagrams, and photographs.
+
+</p>
+<figure id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-001"><figcaption>
+     People of the World. The figure title for this piece of art is “People of the World” and the caption follows. Captions should be written in complete sentences.
+  </figcaption>
+  <span data-type="media" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_Art1" data-alt="Alt text placeholder.">
+    <img src="00_PP_Art1.jpg" data-media-type="image/jpeg" alt="Alt text placeholder." id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_1" />
+  </span>
+  
+</figure>
+
+<figure id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-002"><figcaption>
+     Diagram from Entrepreneurship. A PEST analysis can help identify opportunities and threats that can be used in a SWOT analysis. (attribution: Copyright Rice University, OpenStax, under CC BY 4.0 license)
+  </figcaption>
+  <span data-type="media" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_Art2" data-alt="Alt text placeholder.">
+    <img src="00_PP_Art2.jpg" data-media-type="image/jpeg" alt="Alt text placeholder." id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_2" />
+  </span>
+  
+</figure>
+
+<figure id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-003"><figcaption>
+     Another figure from Entrepreneurship. A theorist problem solver identifies a problem; implements a theory, sometimes repeatedly; and eventually arrives at a solution. (attribution: Copyright Rice University, OpenStax, under CC BY 4.0 license)
+  </figcaption>
+  <span data-type="media" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_Art3" data-alt="Alt text placeholder.">
+    <img src="00_PP_Art3.jpg" data-media-type="image/jpeg" alt="Alt text placeholder." id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_3" />
+  </span>
+  
+</figure>
+
+</section></section><section data-depth="1" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-834"><h3 data-type="title">Additional resources</h3><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-440"><h4 data-type="title">Student and instructor resources</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-223">
+We’ve compiled additional resources for both students and instructors, including Getting Started Guides, companion Lecture Slides, an Instructor Solution Guide, a Student Answer Guide, and a Test Bank. Instructor resources require a verified instructor account, which you can apply for when you log in or create your account on openstax.org. 
+</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-655">Instructor and student resources are typically available within a few months after the book’s initial publication. Take advantage of these resources to supplement your OpenStax book.
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-102"><h4 data-type="title">Community hubs</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-345">
+OpenStax partners with the Institute for the Study of Knowledge Management in Education (ISKME) to offer Community Hubs on OER Commons—a platform for instructors to share community-created resources that support OpenStax books, free of charge. Through our Community Hubs, instructors can upload their own materials or download resources to use in their own courses, including additional ancillaries, teaching material, multimedia, and relevant course content. We encourage instructors to join the hubs for the subjects most relevant to your teaching and research as an opportunity both to enrich your courses and to engage with other faculty.  
+
+</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-483">To reach the Community Hubs, visit www.oercommons.org/hubs/OpenStax.
+</p></section><section data-depth="2" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-895"><h4 data-type="title">Technology partners</h4><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-105">
+As allies in making high-quality learning materials accessible, our technology partners offer optional low-cost tools that are integrated with OpenStax books. To access the technology options for your text, visit your book page on openstax.org.
+
+</p></section></section><section data-depth="1" id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-20"><h3 data-type="title">About the authors</h3><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-408">
+<strong>Senior contributing authors</strong>
+</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-944"><em data-effect="italics">Jean-Claude Franchitti, New York University</em><span data-type="newline"><br /></span>
+Dr. Jean-Claude Franchitti is a Clinical Associate Professor of Computer Science and the Associate Director of Graduate Studies for the CS Master's program in Information Systems at NYU Courant Institute. He earned his M.S. in Electrical Engineering (1985), and his M.S. and PhD. in Computer Science from the University of Colorado at Boulder (1988, 1993). He has 37 years of experience in a myriad of industry verticals, and over 27 years of teaching and training experience. He held executive positions in large US-based corporations, and was a reviewer member on several industry standards committees. Dr. Franchitti taught as an adjunct at CU-Boulder, University of Denver, Columbia University, NYU SCPS, and NYU Courant Institute. He has extensive experience with corporate training, and developed and delivered training and mentoring programs via well known corporate education providers. He conducted research as part of several NSF and DARPA funded research programs.</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-599">Dr. Franchitti's teaching and research interests include database systems and software engineering with an emphasis on large scale software architectures and business solutions. He has published articles in numerous refereed publications including the Proceedings of Third Int. Conf. on Cooperative Information Systems, Proceedings of the Sixth International Workshop on Persistent Object Systems, and the 16th International Conference on Software Engineering. Dr. Franchitti received an award for Outstanding Service from NYU’s School of Continuing and Professional Studies.</p><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-541"><strong>Contributing authors</strong></p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-749" data-bullet-style="none"><li>Christopher Bunton, Austin Community College</li>
+<li>Omar Darwish, Ferrum College</li>
+<li>Gabriel de la Cruz, North Idaho College</li>
+<li>Gabriel Ferrer, Hendrix College</li>
+<li>David Fogarty, New York University</li>
+<li>Nazli Hardy, Millersville University of Pennsylvania</li>
+</ul><p id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-392"><strong>Reviewers</strong></p><ul id="auto_5c1f0124-75ae-40e3-bd36-ff2bd10bbb6d_eip-436" data-bullet-style="none"><li>Yuexing Hao, Rutgers University-New Brunswick</li>
+<li>Kevin Lin, University of Washington</li>
+<li>Mourya Narasareddygari, Rider University</li>
+<li>Muhammad Rahman, Clayton State University</li>
+<li>Tiffanie Smith, Lincoln University</li>
+<li>Hann So, De Anza College</li>
+</ul></section>
+  </div><div data-type="unit"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Realizations of Algorithms</h1>
+      <span data-type="binding" data-value="translucent"></span>    </div>
+
+   <h1 data-type="document-title">Realizations of Algorithms</h1><div data-type="chapter"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Computational Thinking and Solution Architectures</h1>
+      <span data-type="binding" data-value="translucent"></span>    </div>
+
+   <h1 data-type="document-title">Computational Thinking and Solution Architectures</h1><div data-type="page" id="page_efffebd2-0588-4798-9082-cc812e660ad3" class="introduction" data-cnxml-to-html-ver="2.5.0"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Introduction</h1>
+      <span data-type="revised" data-value="2021/04/15 12:57:28.065 GMT-5"></span>
+      <span data-type="cnx-archive-uri" data-value="efffebd2-0588-4798-9082-cc812e660ad3@5"></span>
+
+      <div class="authors">
+        By:
+<span id="author-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="author" data-type="author">
+            <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+          </span>
+        Edited by:
+
+        Illustrated by:
+
+        Translated by:
+
+      </div>
+      <div class="publishers">
+        Published By:
+            <span id="publisher-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="publisher" data-type="publisher">
+              <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+            </span>      </div>
+      <div class="permissions">
+        <p class="copyright">
+          Copyright:
+              <span id="copyright-holder-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="copyright-holder" data-type="copyright-holder">
+                <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+              </span>        </p>
+        <p class="license">
+          Licensed:
+          <a href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL" data-type="license">CC BY</a>
+        </p>
+      </div><div itemprop="about" data-type="subject">Science and Technology</div>
+      <div data-type="resources">
+        <ul>
+<li><a href="OSX_Eship_01_00_Algae.jpg">OSX_Eship_01_00_Algae.jpg</a></li>        </ul>
+      </div>    </div>
+
+   <div data-type="document-title" id="auto_efffebd2-0588-4798-9082-cc812e660ad3_0">Introduction</div><cnx-pi data-type="cnx.flag.introduction">
+        class="introduction"
+      </cnx-pi>
+
+
+
+<figure id="auto_efffebd2-0588-4798-9082-cc812e660ad3_eip-04-00" class="splash"><figcaption>
+     Hallie’s dresser. Hallie’s dresser refinishing hobby may turn into a lucrative business.
+  </figcaption>
+  <span data-type="media" id="auto_efffebd2-0588-4798-9082-cc812e660ad3_eip-01-00-Algae" data-alt="Alt text placeholder.">
+    <img src="efffebd2-0588-4798-9082-cc812e660ad3/OSX_Eship_01_00_Algae.jpg" data-media-type="image/jpeg" alt="Alt text placeholder." id="auto_efffebd2-0588-4798-9082-cc812e660ad3_1" />
+  </span>
+  
+</figure><p id="auto_efffebd2-0588-4798-9082-cc812e660ad3_eip-986">In 2015, Doug Monahan, CEO and Founder of iBackPack of Texas, Inc. introduced a revolutionary new technology all encased in a typical backpack. The iBackPack boasted capabilities to incorporate WiFi/MiFi, a 20,000 main battery system, smart power transfer cables, and a car-charging system in addition to the ability to carry four notebook computers and the related accessories. Monahan promised it would deliver a “communication hub and corresponding electrical powerhouse for students and business professionals alike.”
+</p><p id="auto_efffebd2-0588-4798-9082-cc812e660ad3_eip-747">To bring the project to the marketplace, the startup initially sought crowdfunding through an Indiegogo campaign that raised $723,395 from 4,041 backers. An additional $76,694 was raised from 252 backers through Kickstarter. By 2017, years since its start, the iBackPack crowdfunding campaign that began with great promise failed to deliver the product promised to its investors. Fast forward to 2016. WW-test that this opener is 142 words.</p>
+
+
+
+
+  </div><div data-type="page" id="page_c7a411f5-bfe5-4f2a-833f-645cb84e14ee" data-cnxml-to-html-ver="2.5.0"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Machine-Level Information Representation</h1>
+      <span data-type="revised" data-value="2021/09/16 10:14:23.069 GMT-5"></span>
+      <span data-type="cnx-archive-uri" data-value="c7a411f5-bfe5-4f2a-833f-645cb84e14ee@8"></span>
+
+      <div class="authors">
+        By:
+<span id="author-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="author" data-type="author">
+            <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+          </span>
+        Edited by:
+
+        Illustrated by:
+
+        Translated by:
+
+      </div>
+      <div class="publishers">
+        Published By:
+            <span id="publisher-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="publisher" data-type="publisher">
+              <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+            </span>      </div>
+      <div class="permissions">
+        <p class="copyright">
+          Copyright:
+              <span id="copyright-holder-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="copyright-holder" data-type="copyright-holder">
+                <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+              </span>        </p>
+        <p class="license">
+          Licensed:
+          <a href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL" data-type="license">CC BY</a>
+        </p>
+      </div><div itemprop="about" data-type="subject">Science and Technology</div>
+      <div data-type="resources">
+        <ul>
+<li><a href="04_01_Assembly.jpg">04_01_Assembly.jpg</a></li><li><a href="04_01_DVOrg.jpg">04_01_DVOrg.jpg</a></li><li><a href="04_01_FlowofProd.jpg">04_01_FlowofProd.jpg</a></li>        </ul>
+      </div>    </div>
+
+   <div data-type="document-title" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_0">Machine-Level Information Representation</div>
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm262294304" class="learning-objectives"><h3 data-type="title">Learning Objectives</h3>
+  <p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm264376656">By the end of this section, you will be able to:</p>
+    <ul id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm256489920"><li>Define a computer system </li>
+<li>Explain how information is stored and transferred in a computer system</li>
+<li>Differentiate between  high-level and machine-level programs</li>
+
+    </ul></section><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-424">The flow of costs is generally the same for all costing systems. While the differences are in the details, product costs have material, labor, and overhead. In most production facilities, the raw materials are moved from the raw materials inventory into Work in Process (WIP) inventory.
+</p><section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-469"><h3 data-type="title">Header Level H2: WW-Test; The Quick Brown Fox Jumped over the Lazy Dog</h3><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-513">
+WW-test notes that all header levels are placed in sequence here with minimal intervening text so we can see the hierarchy of header design in one place. The H2, H3, and H4 notes refer to what WW-content would send to WW-prod (one level different than platform).
+
+</p><section data-depth="2" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-771"><h4 data-type="title">Header Level H3: WW-Test; The Quick Brown Fox Jumped over the Lazy Dog</h4><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-785">
+WW-test notes that all header levels are placed in sequence here with minimal intervening text so we can see the hierarchy of header design in one place. The H2, H3, and H4 notes refer to what WW-content would send to WW-prod (one level different than platform).
+
+</p><section data-depth="3" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-312"><h5 data-type="title">Header Level H4: WW-Test; The Quick Brown Fox Jumped over the Lazy Dog</h5><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-832">
+WW-test notes that all header levels are placed in sequence here with minimal intervening text so we can see the hierarchy of header design in one place. The H2, H3, and H4 notes refer to what WW-content would send to WW-prod (one level different than platform).
+
+</p></section></section></section>
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-3"><h3 data-type="title">Work in Process Inventory</h3><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-766">
+The WIP involves one or more production departments and is where labor and overhead convert the raw materials into finished goods. When the product is sold, the costs move from Finished Goods Inventory into Cost of Goods Sold. <a href="#auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01" class="autogenerated-content">[link]</a> illustrates the flow of costs through production.
+</p>
+
+<figure id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01"><figcaption>
+     Flow of production. The flow of production from raw materials to finished goods is shown.
+  </figcaption>
+  <span data-type="media" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01-FlowofProd" data-alt="Alt text placeholder.">
+    <img src="c7a411f5-bfe5-4f2a-833f-645cb84e14ee/04_01_FlowofProd.jpg" data-media-type="image/jpeg" alt="Alt text placeholder." id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_1" />
+  </span>
+  
+</figure><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-291">There are different <span data-type="term">cost accounting systems</span> and each system must be capable of accumulating the costs incurred and allocating the costs to the product. The best system to use depends on the product being manufactured. Each costing system also requires the ability to obtain and analyze the cost data and the more detailed the information needed, the higher the cost of collecting the data. The system used and the cost of collecting the data should not be greater than the benefit from having that information.</p>
+</section><section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-698"><h3 data-type="title">Costing Systems</h3><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-997">
+To properly capture the information necessary for decision making; there are different costing systems to <em data-effect="italics">track</em> costs in order to determine sales prices and measure profits and manufacturing efficiency.
+
+</p><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-336"><span data-type="term">Job order costing</span> (JOC) is used when individual products can be separately identified or when goods are made to order. The individual costs are easy to trace to the individual jobs and works well for companies such as: print service companies, advertising companies, building contractors, accounting services, consulting services, repair services, or movie production companies.
+</p><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-695"><span data-type="term">Process costing</span> is used when the manufacturing process is continuous, and it is difficult to establish how much of each material was used and exactly how much time was invested in each unit of finished product. With the process costing (PC) method, costs are accounted for by process or department and where it is difficult, if not impossible or not cost effective, to accurately measure the exact materials and labor in each individual product. This process works well for manufacturers of products such as golf balls, cereal, ice cream, gasoline, or paint.
+</p></section>
+
+
+
+<div data-type="note" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm256363232" class="concepts-practice"><div data-type="title" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_2">Internet of Things</div>
+  <p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm256362352">This is the description of the “Concepts in Practice” feature box from the WEG: This feature highlights how professionals and non-professionals utilize the major concept(s) of the chapter, and may profile 4–5 corresponding personas throughout the book. The purpose is to help non-majors develop an interest in and appreciation for computer science and help them to understand its usefulness. Writers should strive for fun, engaging topics when possible, including real-world examples. Security analysts can use tools such as Wireshark to monitor activities on host devices and analyze the contents of packets being received and sent as they traverse the various layers of the Internet protocol stack.
+</p>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm247247552">Rigging brig rum Letter of Marque Pieces of Eight schooner main sheet black jack salmagundi landlubber or just lubber. Ballast avast come about walk the plank Privateer boatswain Jack Tar capstan hogshead mutiny. Tack coffer bilge water gabion sheet lass case shot hearties ye Letter of Marque. </p>
+</div>
+
+
+
+<div data-type="note" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm262283696" class="think-through"><div data-type="title" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_3">Artificial Intelligence</div>
+  <p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm259644560">This is the description of the “Think It Through” feature box from the WEG: Presents a scenario and has students make the call. This could be an ethical dilemma related to the use of technology, or an error, with the “think it through” portion being to determine the impact and/or how to correct. The purpose is to teach students that, in the real world, many decisions are judgment calls and not every question has just one answer. This feature is ripe for incorporating how technology impacts all areas of the business; for instance, the scenario could be one that impacts Sales, HR or Marketing in a given company. Writers should supply an answer that will appear in the Solutions Manual (“Student answers may vary but should include ABC or XYZ”). This is the scenario part of the feature box. You have access to Wireshark and need to analyze packets being sent between a local application and a remote server.
+</p>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm264504592">Gingerbread chocolate bar toffee. Gummies cake dessert macaroon. Candy canes icing macaroon cake biscuit icing jujubes marshmallow.
+</p>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm255294784">Chocolate cake halvah pie chocolate bar dessert chocolate cupcake chocolate cake marshmallow. Sweet dessert cake. Pudding sweet tiramisu cake. Topping sweet tootsie roll carrot cake.
+</p>
+<ul id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm266535248">
+<li>What do you need to know to perform this analysis at the very minimum?</li>
+</ul>
+</div><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-200">Losses are similar to expenses in that both losses and expenses decrease the value of the organization. The primary difference, however, between losses and expenses again relates to the primary purpose of the organization. While expenses represent a decrease in organizational value from providing goods and services, losses represent a decrease in organizational value from activities that are <em data-effect="italics">“incidental or peripheral”</em> (SFAC No. 6, p. 24) to the primary purpose of the business. Let’s return to our local coffee shop example. Now assume the coffee shop sold the espresso machine for less (a more likely scenario) than it paid for the machine. Would the coffee shop be less valuable after this transaction than before it? Yes it would, because the value of the coffee shop decreased by an amount greater than the cash it received. But how should the accountant classify this transaction?
+</p>
+
+
+
+<div data-type="note" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm255704288" class="tech-everyday"><div data-type="title" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_4">Web Frameworks</div>
+  <p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm248294592">This is the description of the “Technology in Everyday Life” feature box from the WEG: This feature connects computer science related technology to everyday life, the student’s world, or current events. Some boxes may include a “Your Turn” element that asks students to work through this real-world context to figure out how computer-science-related technology can help. WW-test block quotations.
+</p>
+<blockquote id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm247427184">
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm236890976">The principal purposes of this offering are to increase our capitalization and financial flexibility and create a public market for our Class A common stock. We intend to use the net proceeds from this offering primarily for general corporate purposes, including working capital, research and development, business development, sales and marketing activities and capital expenditures
+</p>
+</blockquote>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm253244640">On September 28, 2017, Roku “went public” and exceeded expectations. Prior to the IPO, Roku estimated it would sell between $12-$14 per share, raising over $117 million for the company. The closing price per share on September 28 was $23.50, nearly doubling initial expectations for the share value (https://finance.yahoo.com/quote/ROKU/history?p=ROKU).
+</p>
+  <div data-type="exercise" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm217144640" class="your-turn">
+    <div data-type="problem" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm239489456"><ul id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm254859920"><li>You are trading stocks on the Internet; what makes you feel safe about using the web and placing real-time buy/sell orders rather than calling a stockbroker to do this for you?</li><li>Second Your Turn question goes here.</li></ul></div>
+    <div data-type="solution" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm234011824"><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm224153456">WW-test We need to finalize where the solution would appear. It can be here in the text; it can be only in a solution manual. There are other work-arounds. Discussion item. Cheesecake mascarpone queso. Monterey jack cheese slices emmental halloumi edam pecorino who moved my cheese ricotta. Brie cottage cheese monterey jack swiss dolcelatte ricotta jarlsberg camembert de normandie.
+</p></div>
+  </div>
+</div>
+
+
+
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-950">WW-test that this paragraph has a few index term functionalities, such as not including the full term to reduce duplicate entries for singular and plural terms. Consider print services and advertising. Mac’s and Cheese is a local restaurant and wants a special sign on an already constructed billboard outside a stadium Since it wants that sign targeted to stadium customers, the company would want a sign built specifically for that site. Dinosaur Vinyl, Inc. is the sign manufacturer and would use <span data-type="term">Job Order Costing</span> to account for the manufacturing costs of the sign. Now imagine Mac’s and Cheese also wanting to create flyers to place on cars in the <span data-type="term">stadium</span> during each game. Other times they want to test an index term without every letter so that <span data-type="term">stadium</span>s appears singular in the index. Those flyers are identical to each other and produced in large batches and by a company that uses process costing.
+</p>
+
+<div data-type="note" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm2455465601" class="industry-spotlight"><div data-type="title" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_5">Web Application Frameworks</div>
+  <p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm245712432">This is the description of the “Industry Spotlight” feature box from the WEG: This feature focuses on specific industry problems that technology may help solve. Industries may include Art, Banking and Global Markets, CommTech, Consulting, Consumer Goods, Education, Energy and Utilities, Healthcare, Information Services, Insurance, Law, Life Sciences, M&amp;E, Music, Real Estate, Retail, SCT&amp;L, Technology, Travel, and Hospitality. Some boxes may include a “Your Turn” element that asks students to further explore this industry problem to figure out how computer science and related technology can provide solutions. Pie pastry jelly-o candy canes powder. Sesame snaps bonbon caramels caramels soufflé. Carrot cake gummi bears gummi bears cotton candy.</p><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-887">Cake tootsie roll lollipop. Lemon drops powder jelly soufflé cake cupcake sweet soufflé muffin. Gingerbread gummies lemon drops icing.
+</p>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-697">Biscuit chupa chups candy chocolate cheesecake muffin. Lemon drops jelly beans bonbon apple pie. Toffee oat cake chupa chups bonbon muffin carrot cake chocolate caramels. Carrot cake apple pie carrot cake caramels cake chocolate bar topping.
+</p>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-618">Biscuit pie caramels candy canes gingerbread ice cream powder. Marshmallow tiramisu croissant candy. Chocolate bar pie gummi bears sugar plum powder. Liquorice cookie carrot cake biscuit biscuit fruitcake.
+</p>
+<div data-type="exercise" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm243147792" class="your-turn">
+    <div data-type="problem" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm2241534561"><ul id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm251002608"><li>You are trading stocks on the Internet; what makes you feel safe about using the web and placing real-time buy/sell orders rather than calling a stockbroker to do this for you?</li></ul></div>
+    <div data-type="solution" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm244022688"><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm240371376">Cheesecake mascarpone queso. Monterey jack cheese slices emmental halloumi edam pecorino who moved my cheese ricotta. Brie cottage cheese monterey jack swiss dolcelatte ricotta jarlsberg camembert de normandie. </p></div>
+  </div>
+</div>
+
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-485">Cupcake ipsum dolor sit amet liquorice. Ice cream chocolate cake candy pudding ice cream chocolate bar brownie gingerbread. Tart gummi bears I love donut candy. Sweet roll oat cake I love. Croissant gummies gingerbread I love. Macaroon candy bear claw gummies.
+</p>
+
+
+
+<div data-type="note" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-idm275411792" class="global-tech"><div data-type="title" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_6">HTML, CSS, Javascript and Bootstrap</div>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-idm274025280">This is the description of the “Global Issues in Technology” feature box from the WEG: This feature helps students think globally about the impact of technology on societies around the world. WW-test notes that this feature box has a figure, a table, an <span data-type="term">index term</span>, a footnote, a link to a figure, and a link to an external URL (visit <a href="https://www.openstax.org">www.openstax.org</a>).
+</p>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-idm253883344">Smartly come about topsail Arr lugger fore maroon nipperkin jack lanyard. Reef black jack jury mast belaying pin barkadeer salmagundi American Main stern yard log. Chantey spanker bucko broadside Yellow Jack cackle fruit crimp scourge of the seven seas log mutiny as shown in <a href="#auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01" class="autogenerated-content">[link]</a>.</p>
+<a href="#auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm228536976" role="doc-noteref" epub:type="noteref">[footnote]</a>
+
+<figure id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01-Assembly"><figcaption>
+     Assembly line. Building the right team is crucial. (credit: modification of “Achievement American Analysis” by “rawpixel”/Pixabay, CC0)
+  </figcaption>
+  <span data-type="media" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01-02" data-alt="Photo of people sitting around a conference table using laptops, while someone stands at a whiteboard.  ">
+    <img src="c7a411f5-bfe5-4f2a-833f-645cb84e14ee/04_01_Assembly.jpg" data-media-type="image/jpeg" alt="Photo of people sitting around a conference table using laptops, while someone stands at a whiteboard.  " id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_7" />
+  </span>
+  
+</figure>
+<p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-388">Lookout splice the main brace skysail haul wind salmagundi hearties nipperkin gun chase lugsail. Chandler chase guns gabion lookout swab spike reef sails six pounders heave to prow <a href="#auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01-Assembly" class="autogenerated-content">[link]</a>. Spanker scourge of the seven seas bilge bilged on her anchor belaying pin mutiny matey Davy Jones' Locker chandler driver.
+</p><table id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-804" summary="."><caption><span data-type="title">Table inside a Feature Box</span>This table has a caption that summarizes the point.</caption><thead>
+  <tr>
+    <th>Algorithm</th>
+    <th>Database</th>
+    <th>Language</th>
+  </tr>
+</thead><tbody>
+
+  <tr>
+    <td>Linear</td>
+    <td>SQL</td>
+    <td>Python</td>
+  </tr>
+  <tr>
+    <td>Scrambled</td>
+    <td>Access</td>
+    <td>Java</td>
+  </tr>
+  <tr>
+    <td>Hierarchical</td>
+    <td>Stack</td>
+    <td>HTML</td>
+  </tr>
+</tbody></table><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-490">Have a bash in the jacksy a reet bobbydazzler how's your father gob, middle class how's your father get away with ya, clotted cream Dalek some mothers do 'ave 'em. A right toff ey up duck 'ar kid up at the crack of dawn through the dales her Majesty's pleasure well chuffed, that's ace a total jessie blummin' Bob's your uncle utter shambles. </p>
+<aside role="doc-footnote" epub:type="footnote" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm228536976">A footnote for WW-test. Let’s make this one long so we can see how it aligns if it wraps down a line. Let’s make this one long so we can see how it aligns if it wraps down a line. Let’s make this one long so we can see how it aligns if it wraps down a line. This footnote comes from inside a feature box.</aside></div><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-720">Computer systems organization focuses on how these components work and how they affect the correctness and performance of programs. In essence, the design of the hardware provided by computer systems along with supportive system software components make it possible to implement algorithms as application programs that can outperform humans in terms of computing speed and scale at a given point in time as shown in <a href="#auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-805" class="autogenerated-content">[link]</a>.</p>
+
+<table id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-805" summary="."><caption><span data-type="title">Table outside a Feature Box</span>This table has a caption that summarizes the point.</caption><thead>
+<tr>
+    <th>Algorithm</th>
+    <th>Database</th>
+    <th>Language</th>
+  </tr>
+</thead><tbody>
+
+  <tr>
+    <td>Linear</td>
+    <td>SQL</td>
+    <td>Python</td>
+  </tr>
+  <tr>
+    <td>Scrambled</td>
+    <td>Access</td>
+    <td>Java</td>
+  </tr>
+  <tr>
+    <td>Hierarchical</td>
+    <td>Stack</td>
+    <td>HTML</td>
+  </tr>
+</tbody></table><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-407">At all points in the manufacturing process, as shown in <a href="#auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-805" class="autogenerated-content">[link]</a>, the costs assigned to that particular job are known.</p><table id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-436" summary="."><caption><span data-type="title">Programming Languages set in Default Table Style</span>This table is set as the “Default Style” table from the basic table types being used for <em data-effect="italics">Introduction to Computer Science</em>.</caption><thead><tr>
+<th>Functional</th>
+<th>Object-Oriented</th>
+<th>Procedural</th>
+</tr>
+</thead><tbody>
+  <tr>
+    <td>Users of reports</td>
+    <td>External users: stockholders, creditors, regulators.</td>
+    <td>Internal users: managers, officers, and other employees.</td>
+  </tr>
+  <tr>
+    <td>Types of Reports</td>
+    <td>Financial statements: Balance sheet, Income statement, Cash-Flow statement, etc.</td>
+    <td>Internal reports: Job Cost Sheet, Cost of Goods Manufactured, Production Cost Report, etc.</td>
+  </tr>
+  <tr>
+    <td>Frequency of reports</td>
+    <td>Quarterly; annually</td>
+    <td>As frequently as needed</td>
+  </tr>
+  <tr>
+    <td>Purpose of reports</td>
+    <td>Helps those external users make decisions: credit terms, investment and other decisions.</td>
+    <td>Assists the internal users in the planning and control decision making process.</td>
+  </tr>
+  <tr>
+    <td>Focus of reports</td>
+    <td>Pertains to company as a whole. Uses GAAP structure. Composed from a multitude or combination of other more individual data.</td>
+    <td>Pertains to departments, sections of the business. Very detailed reporting. No GAAP constraints.</td>
+  </tr>
+  <tr>
+    <td>Nature of reports</td>
+    <td>Monetary</td>
+    <td>Monetary and nonmonetary information</td>
+  </tr>
+  <tr>
+    <td>Verification of reports</td>
+    <td>Audited by CPA</td>
+    <td>No independent audits</td>
+  </tr>
+</tbody></table><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-837">We don't really know where this goes - and I'm not sure we really care. Tree trunks grow however makes them happy. See. We take the corner of the brush and let it play back-and-forth. It's amazing what you can do with a little love in your heart. Every time you practice, you learn more.
+</p>
+
+
+
+<div data-type="note" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm356375792" class="link-to-learning">
+  <p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm368773440">Do you know of a restaurant that was doing really well until it moved into a larger space? Often this happens because the owners thought their profits could handle the costs of the increased space. Unfortunately, they were not really aware of the <span data-type="term">cost</span> of their food. It’s <a href="https://www.pizzatoday.com/departments/our-experts/well-maintain-food-costs">critical to keep track of product costs</a> for pricing and cost control.
+</p>
+</div><section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-813"><h3 data-type="title">Basic Managerial Accounting Terms Used in JOC and PC</h3><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-316">
+Manufacturing companies have many similarities regardless of the costing method used, among them is the organizational chart and the flow of goods through production. The diagram in <a href="#auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01-DVOrg" class="autogenerated-content">[link]</a> below shows a partial organizational chart for Dinosaur Vinyl, a sign manufacturer. The CEO has several direct report units: Financing, Production, Information Technology, Marketing, Human Resources, and Maintenance. Each unit has a director responsible for several departments. The organizational chart also shows the departments that report to the production unit director and gives an indication as to the production arrangement. Raw materials are stored in the materials storeroom and delivered to the production department. The design department uses direct labor to create the design specifications and when completed, sends them to the production department. The production department uses the material and design specifications and adds even more labor to create the sign. The sign is transferred to the Finishing Department for final materials and labor before the sign is installed or delivered to the customer.
+</p>
+<figure id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01-DVOrg"><div data-type="title" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_8">Figure Title</div><figcaption>
+    This illustration lays out a common structure of the organization chart for DV.
+  </figcaption>
+  <span data-type="media" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-04-01-03" data-alt="Alt text placeholder">
+    <img src="c7a411f5-bfe5-4f2a-833f-645cb84e14ee/04_01_DVOrg.jpg" data-media-type="image/jpeg" alt="Alt text placeholder" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_9" />
+  </span>
+  
+</figure><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-9">The different units within DV, Inc. illustrate the two main cost categories of a manufacturing company. These two main categories are manufacturing costs versus selling and administrative costs.</p><section data-depth="2" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-141"><h4 data-type="title">Manufacturing Costs</h4><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-937">
+<span data-type="term">Manufacturing costs</span> are also called <span data-type="term"><em data-effect="italics">product</em> costs</span> and include all the expenses used to manufacture the product: direct materials, direct labor, and manufacturing overhead. The total of these costs becomes the cost of ending inventory and later becomes the cost of goods sold when the product is sold.
+
+</p><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-202">It is important to separate out the product costs from the <span data-type="term">period costs</span> and it is important to separate out the product costs themselves. The <span data-type="term">product costs</span> are direct materials, direct labor, and manufacturing overhead. Management sometimes needs additional information to make decisions and needs the costs categorized as prime costs or conversion costs. <span data-type="term">Prime costs</span> and <span data-type="term">conversion costs</span> are not included together as direct labor is included in both categories.</p><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-991">Job order costing systems assign the costs directly to the product by assigning direct material and direct labor to the work in progress inventory. Overhead is also a cost of production and applied to each product based on an activity base discussed later in the chapter. The assignment of direct material and direct labor to each production unit illustrates the job order costing system’s focus on prime costs. While process costing assigns costs to the department and focuses on conversion costs.
+</p></section><section data-depth="2" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-851"><h4 data-type="title">Selling and Administrative Costs</h4><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-321">
+Selling and administrative (S&amp;A) costs are the category of expenses that are expensed as incurred. The Selling costs are the expenses related to promotion and sale of the company’s products and the administrative costs are the expenses related to the operations of the company. The S&amp;A costs are also called period costs because they include costs of departments not directly associated with manufacturing but necessary to operate the business. WW-test a simple bulleted list in main content such as:
+
+</p><ul id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-896"><li>Network security</li>
+<li>Information security</li>
+<li>Passwords, encryption, asymmetric encryption using certificates, multi-factor authentication</li>
+</ul><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-409">A primary reason for separating the costs of production from the other expenses of the company is the <span data-type="term">expense recognition principle</span>. This principle requires the costs to be expensed when they match the revenue being earned; and separating the costs of production from the other costs results in the proper timing recognition of expenses. Period costs are expensed during the period in which they are incurred and this policy matches administrative and other expenses shown on the income statement in the same period in which the company earns income. WW-test a simple numeric list in main content such as:
+</p><ol id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-538" type="1"><li>Network security</li>
+<li>Information security</li>
+<li>Passwords, encryption, asymmetric encryption using certificates, multi-factor authentication</li>
+</ol><p id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-578">Separating the production costs and assigning them to the product results in the costs of the product staying with the inventory. If the products are not sold, the costs remain in ending inventory. When the products are sold, the cost of the inventory becomes the cost of goods sold and is expensed on the income statement.
+</p></section>
+</section>
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm243115840" class="section-summary"><h3 data-type="title">Summary</h3>
+  <ul id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_eip-979"><li>For this chapter, the scenario should illustrate how computer systems and their ability to perform high performance computing (HPC) and high throughput computing (HTC) enables the creation of next generation super society intelligent autonomous solutions (e.g., advanced robotics, autonomous cars and drones or other autonomous systems). </li>
+<li>Ongoing progress in nanotechnology, processor models (e.g., neuromorphic processors), and alternative computing models (e.g., quantum computing). </li>
+<li>As an example a 64 qubits machine is able to operate 18 billion times faster than 64 bits machine available today. WW-test this section summary includes <strong>bold</strong>, <em data-effect="italics">italic.</em> </li></ul></section>
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm323157440" class="review-questions"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="ARQ-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ARQ-C04-Q001" data-tags="book:" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response multiple-choice" data-id="163800">
+        <div data-type="question-stem">Why is entrepreneurial passion so important for success?</div>
+        <ol data-type="question-answers" type="a">
+            <li data-type="question-answer" data-id="625771" data-correctness="">
+                <div data-type="answer-content">Wrong answer</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625772" data-correctness="">
+                <div data-type="answer-content">This is also wrong</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625773" data-correctness="">
+                <div data-type="answer-content">This might be right.</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625774" data-correctness="">
+                <div data-type="answer-content">This is definitely right.</div>
+                
+            </li>
+            </ol>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="ARQ-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ARQ-C04-Q002" data-tags="" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response multiple-choice" data-id="163801">
+        <div data-type="question-stem">What factors other than passion are needed for entrepreneurs to succeed in the marketplace?</div>
+        <ol data-type="question-answers" type="a">
+            <li data-type="question-answer" data-id="625775" data-correctness="">
+                <div data-type="answer-content">Here is sample question content for generic assessment content for IntroCS. </div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625776" data-correctness="">
+                <div data-type="answer-content">This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625777" data-correctness="">
+                <div data-type="answer-content">This assessment option is shorter.</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625778" data-correctness="">
+                <div data-type="answer-content">This assessment option is shorter.</div>
+                
+            </li>
+            </ol>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm347937344" class="conceptual-questions"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="ACQ-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ACQ-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163802">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="ACQ-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ACQ-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163803">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm351007792" class="practice-exercises"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="APE-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APE-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163804">
+        <div data-type="question-stimulus">
+</div>
+        <div data-type="question-stem">How would you describe your entrepreneurial passion? How do you demonstrate that passion to others? </div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm310967232" class="problem-set-a"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163806">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163807">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q003" data-injected-from-version="2" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q003" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163824">
+        <div data-type="question-stem">WW-test notes this assessment includes index terms. Can a company use both job order costing and process costing? Why.
+</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q004" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q004" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163816">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.
+</div>
+        </div>
+    </div></section>
+
+
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm320379136" class="problem-set-b"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="APSB-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSB-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163809">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for CS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSB-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSB-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163810">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for CS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm350435616" class="thought-provokers"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="ATP-C04-Q001" data-injected-from-version="2" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ATP-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163826">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="ATP-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ATP-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163812">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm324924352" class="lab-assessments"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="AL-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:AL-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163813">
+        <div data-type="question-stem">Here is a sample question for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="AL-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:AL-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163814">
+        <div data-type="question-stem">Can a company use both job order costing and process costing? Why.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="AL-C04-Q003" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:AL-C04-Q003" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163815">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.
+</div>
+        </div>
+    </div></section>
+
+
+
+<div data-type="glossary" id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_10"><h3 data-type="glossary-title">Glossary</h3>
+  <dl id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm393817312">
+    <dt id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_11">algorithm</dt>
+    <dd id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm401941872">marshmallow oat cake biscuit sesame snaps</dd>
+  </dl>
+
+  <dl id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm402084912">
+    <dt id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_12">ALU</dt>
+    <dd id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm388470976">cookie cotton candy biscuit sweet pudding sugar plum</dd>
+  </dl>
+
+  <dl id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm372240592">
+    <dt id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_13">Amdhal's Law</dt>
+    <dd id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm379343232">cheesecake pudding chocolate bar wafer lemon drops donut cotton candy cookie cotton candy biscuit sweet pudding sugar
+</dd>
+  </dl>
+
+  <dl id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm354911280">
+    <dt id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_14">bits</dt>
+    <dd id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm402478400">gingerbread cheesecake danish</dd>
+  </dl>
+
+  <dl id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm407237360">
+    <dt id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_15">bus</dt>
+    <dd id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm389768832">chupa chups cookie
+</dd>
+  </dl>
+
+  <dl id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm406660064">
+    <dt id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_16">bytes</dt>
+    <dd id="auto_c7a411f5-bfe5-4f2a-833f-645cb84e14ee_fs-idm382627792">roll caramels candy icing cake bonbon</dd>
+  </dl>
+
+
+</div>
+  </div><div data-type="page" id="page_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059" data-cnxml-to-html-ver="2.5.0"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Processor Architecture</h1>
+      <span data-type="revised" data-value="2021/03/26 15:35:37.598 GMT-5"></span>
+      <span data-type="cnx-archive-uri" data-value="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059@5"></span>
+
+      <div class="authors">
+        By:
+<span id="author-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="author" data-type="author">
+            <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+          </span>
+        Edited by:
+
+        Illustrated by:
+
+        Translated by:
+
+      </div>
+      <div class="publishers">
+        Published By:
+            <span id="publisher-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="publisher" data-type="publisher">
+              <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+            </span>      </div>
+      <div class="permissions">
+        <p class="copyright">
+          Copyright:
+              <span id="copyright-holder-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="copyright-holder" data-type="copyright-holder">
+                <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+              </span>        </p>
+        <p class="license">
+          Licensed:
+          <a href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL" data-type="license">CC BY</a>
+        </p>
+      </div><div itemprop="about" data-type="subject">Science and Technology</div>
+      <div data-type="resources">
+        <ul>
+<li><a href="figure-04-02-BCorpLogo.jpg">figure-04-02-BCorpLogo.jpg</a></li><li><a href="figure-04-02-BICosts.jpg">figure-04-02-BICosts.jpg</a></li><li><a href="figure-04-02-BML.jpg">figure-04-02-BML.jpg</a></li><li><a href="figure-04-02-Blakely.jpg">figure-04-02-Blakely.jpg</a></li><li><a href="figure-04-02-BusStruct.jpg">figure-04-02-BusStruct.jpg</a></li><li><a href="figure-04-02-CCCosts.jpg">figure-04-02-CCCosts.jpg</a></li><li><a href="figure-04-02-Cosmic.jpg">figure-04-02-Cosmic.jpg</a></li><li><a href="figure-04-02-Drysite.jpg">figure-04-02-Drysite.jpg</a></li><li><a href="figure-04-02-JOSvsPC.jpg">figure-04-02-JOSvsPC.jpg</a></li><li><a href="figure-04-02-JPEG15.jpg">figure-04-02-JPEG15.jpg</a></li><li><a href="figure-04-02-Nintendo.jpg">figure-04-02-Nintendo.jpg</a></li><li><a href="figure-04-02-PNG2.png">figure-04-02-PNG2.png</a></li><li><a href="figure-04-02-PNG3.png">figure-04-02-PNG3.png</a></li><li><a href="figure-04-02-PNG4.png">figure-04-02-PNG4.png</a></li><li><a href="figure-04-02-PNG5.png">figure-04-02-PNG5.png</a></li><li><a href="figure-04-02-Royal.jpg">figure-04-02-Royal.jpg</a></li><li><a href="figure-04-02-SWOTPNG.png">figure-04-02-SWOTPNG.png</a></li><li><a href="figure-04-02-Test1.jpg">figure-04-02-Test1.jpg</a></li><li><a href="figure-04-02-TinyHome.jpg">figure-04-02-TinyHome.jpg</a></li>        </ul>
+      </div>    </div>
+
+   <div data-type="document-title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_0">Processor Architecture</div>
+
+<section data-depth="1" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm174515408" class="learning-objectives"><h3 data-type="title">Learning Objectives</h3>
+  <p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm201986208">By the end of this section, you will be able to:</p>
+    <ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm209797504">
+      <li>Describe binary data representation and how it’s used in machine-level code.</li>
+<li>Explain the role of the processor and Instruction Set Architectures.</li>
+<li>Explain the purpose of the operating system and name abstractions associated with it.</li>
+    </ul>
+</section>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-608">Generally there are three categories of costs included in the manufacturing processes: <span data-type="term">direct materials</span>, <span data-type="term">direct labor</span>, and <span data-type="term">overhead</span>. This is only a generalization since there are some service industries that do not have direct material, and there are some automated manufacturing companies that do not have direct labor.
+</p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-97">To illustrate the components of product costs in a <span data-type="term">job order costing system</span>, consider that Mac’s &amp; Cheese restaurant hires Dinosaur Vinyl, Inc. (DV) to manufacture the sign by the stadium. In the sign manufacturing process, materials are moved from raw materials inventory to the Production Department where the sign is printed.  When printing is complete, the sign is moved to the Finishing Department where more material is added to frame the sign before it is transferred to the Finished Goods Department. The costs are tracked and move at the same time as the actual sign.  When Mac’s &amp; Cheese has completed its production contract and the sale is complete; the costs are moved to Cost of Goods Sold. WW-test that this module is testing some different art issues. </p>
+
+<section data-depth="1" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-628"><h3 data-type="title">Direct Materials</h3><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-794">
+<span data-type="term">Direct materials</span> are the materials that can be directly traced to the product.  A company needs inventory on hand to help customers quickly so there is usually some inventory on hand in the raw materials inventory account.  The material is sent to the production department when the material will be put into production.
+
+</p>
+</section>
+
+<div data-type="note" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm201978496" class="concepts-practice"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_1">Testing How Figures Appear in the “Concepts in Practice” Feature Box
+</div>
+  <p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm218288640">Security analysts can use tools such as Wireshark to monitor activities on host devices and analyze the contents of packets being received and sent as they traverse the various layers of the Internet protocol stack.</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-Nintendo"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_2">The World's Cutest Dog</div><figcaption>
+     WW-test art size 6.0 in feature box
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-Nintendo" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-Nintendo.jpg" data-media-type="image/jpeg" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_3" />
+  </span>
+  
+</figure>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm203286576">Text between figures</p>
+
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-TinyHome"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_4">Figure Title</div><figcaption>
+     WW-test art size 5.5 in feature box
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-TinyHome" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-TinyHome.jpg" data-media-type="image/jpeg" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_5" />
+  </span>
+  
+</figure>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm207622416">Text between figures</p>
+
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-SWOTPNG"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_6">Figure Title</div><figcaption>
+     WW-test art size 5.5 PNG in feature box
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-SWOTPNG" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-SWOTPNG.png" data-media-type="image/png" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_7" />
+  </span>
+  
+</figure>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm201855888">Text between figures</p>
+
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-BML"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_8">Figure Title</div><figcaption>
+     WW-test art size 4.0 in feature box.
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-BML" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-BML.jpg" data-media-type="image/jpeg" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_9" />
+  </span>
+  
+</figure>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm220214064">Text between figures</p>
+
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-Blakely"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_10">Figure Title</div><figcaption>
+     WW-test art size 2.5 in feature box.
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-Blakely" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-Blakely.jpg" data-media-type="image/jpeg" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_11" />
+  </span>
+  
+</figure>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm208961264">Text between figures</p>
+
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-BCorpLogo"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_12">Figure Title</div><figcaption>
+     WW-test art size 1.5 in feature box.
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-BCorpLogo" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-BCorpLogo.jpg" data-media-type="image/jpeg" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_13" />
+  </span>
+  
+</figure>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm206897216">Ballast avast come about walk the plank Privateer boatswain Jack Tar capstan hogshead mutiny. Tack coffer bilge water gabion sheet lass case shot hearties ye Letter of Marque.
+</p>
+</div>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm214842144">Cupcake ipsum dolor sit amet liquorice. Ice cream chocolate cake candy pudding ice cream chocolate bar brownie gingerbread. Tart gummi bears I love donut candy. Sweet roll oat cake I love. Croissant gummies gingerbread I love. Macaroon candy bear claw gummies.
+</p>
+
+
+
+<div data-type="note" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm215800640" class="think-through"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_14">Testing PNG and long figure credits in Think It Through Box</div><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm206973712">This is the scenario part of the feature box. You have access to Wireshark and need to analyze packets being sent between a local application and a remote server.</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm222662256">Gingerbread chocolate bar toffee. Gummies cake dessert macaroon. Candy canes icing macaroon cake biscuit icing jujubes marshmallow.
+</p>
+
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-PNG2"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_15">Figure Title</div><figcaption>
+This piece of art is PNG set to 300 DPI. WW-test art size 6.0 in FB Think It Through. (WW-test long credits: credit left:modification of work “Straddling the Prime Meridian” by “pdbreen”/Flickr, https://www.flickr.com/photos/pdbreen/121402728, CC BY 2.0 Generic https://creativecommons.org/licenses/by/2.0/. Credit right: modification of work “A foot either side of the Prime Meridian” by Ben Sutherland, https://www.flickr.com/photos/bensutherland/5726416292, CC BY 2.0 Generic https://creativecommons.org/licenses/by/2.0/.)
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-PNG2" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-PNG2.png" data-media-type="image/png" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_16" />
+  </span>
+  
+</figure>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm208832528">Chocolate cake halvah pie chocolate bar dessert chocolate cupcake chocolate cake marshmallow. Sweet dessert cake. Pudding sweet tiramisu cake. Topping sweet tootsie roll carrot cake. </p><div data-type="exercise" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm397773360"><div data-type="problem" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm383803504">
+<ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm222739616"><li>What do you need to know to perform this analysis at the very minimum?</li></ul></div></div>
+</div><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm202876496">Losses are similar to expenses in that both losses and expenses decrease the value of the organization. The primary difference, however, between losses and expenses again relates to the primary purpose of the organization. While expenses represent a decrease in organizational value from providing goods and services, losses represent a decrease in organizational value from activities that are “<em data-effect="italics">incidental</em> or <em data-effect="italics">peripheral</em>” (SFAC No. 6, p. 24) to the primary purpose of the business. Let’s return to our local coffee shop example. Now assume the coffee shop sold the espresso machine for less (a more likely scenario) than it paid for the machine. Would the coffee shop be less valuable after this transaction than before it? Yes it would, because the value of the coffee shop decreased by an amount greater than the cash it received. But how should the accountant classify this transaction? </p>
+
+
+
+<div data-type="note" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm222204784" class="tech-everyday"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_17">Test Technology in Everyday Life</div>
+  <p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm220242496">WW-test box connects technology to everyday life. They might include block quotations.
+</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm216080416">The principal purposes of this offering are to increase our capitalization and financial flexibility and create a public market for our Class A common stock. We intend to use the net proceeds from this offering primarily for general corporate purposes, including working capital, research and development, business development, sales and marketing activities and capital expenditures
+</p>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm206719568">On September 28, 2017, Roku “went public” and exceeded expectations.
+</p>
+
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-01-02-PNG3"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_18">Figure Title</div><figcaption>
+This piece of art is PNG set to 300 DPI. WW-test art size 5.5 in FB Technology in Everyday Life. (credit: J.L. Dauvergne &amp; G. Hüdepohl (atacamaphoto.com)/ESO, http://www.eso.org/public/images/eso-paranal-51/, CC BY 4.0 International https://creativecommons.org/licenses/by/4.0/.
+  </figcaption>
+  <span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-01-02-PNG3" data-alt="Alt placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-PNG3.png" data-media-type="image/png" alt="Alt placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_19" />
+  </span>
+  
+</figure>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm205282032">Prior to the IPO, Roku estimated it would sell between $12-$14 per share, raising over $117 million for the company. The closing price per share on September 28 was $23.50, nearly doubling initial expectations for the share value (<a href="https://finance.yahoo.com/quote/ROKU/history?p=ROKU">https://finance.yahoo.com/quote/ROKU/history?p=ROKU</a>).</p>
+<div data-type="exercise" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm209872800" class="your-turn">
+    <div data-type="problem" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm204264064"><ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm221876880"><li>You are trading stocks on the Internet; what makes you feel safe about using the web and placing real-time buy/sell orders rather than calling a stockbroker to do this for you?</li></ul></div>
+    <div data-type="solution" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm209164480"><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm207038400">Cheesecake mascarpone queso. Monterey jack cheese slices emmental halloumi edam pecorino who moved my cheese ricotta. Brie cottage cheese monterey jack swiss dolcelatte ricotta jarlsberg camembert de normandie.</p></div>
+  </div>
+</div><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-989">Now imagine Mac’s &amp; Cheese also wanting to create flyers to place on cars in the stadium during each game. Other times they want to test an index term without every letter so that stadiums appears singular in the index. Those flyers are identical to each other and produced in large batches and by a company that uses process costing.</p><div data-type="note" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-633" class="industry-spotlight"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_20">Industry Spotlight title</div><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm381730656">Pie pastry jelly-o candy canes powder. Sesame snaps bonbon caramels caramels soufflé. Carrot cake gummi bears gummi bears cotton candy.</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm392977744">Cake tootsie roll lollipop. Lemon drops powder jelly soufflé cake cupcake sweet soufflé muffin. Gingerbread gummies lemon drops icing.</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-PNG4"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_21">This figure title is amazing. </div><figcaption>This piece of art is PNG set to 300 DPI. WW-test art size 4.0 in FB Industry Spotlight. (credit: short credit.)
+  </figcaption><span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-PNG4" data-alt="Alt text placeholder. ">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-PNG4.png" data-media-type="image/png" alt="Alt text placeholder. " id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_22" />
+  </span>
+
+</figure><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm218494816">Biscuit chupa chups candy chocolate cheesecake muffin. Lemon drops jelly beans bonbon apple pie. Toffee oat cake chupa chups bonbon muffin carrot cake chocolate caramels. Carrot cake apple pie carrot cake caramels cake chocolate bar topping.
+</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm200770272">Biscuit pie caramels candy canes gingerbread ice cream powder. Marshmallow tiramisu croissant candy. Chocolate bar pie gummi bears sugar plum powder. Liquorice cookie carrot cake biscuit biscuit fruitcake.
+</p>
+<div data-type="exercise" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm217170208" class="your-turn">
+    <div data-type="problem" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm202399344"><ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm209474432"><li>You are trading stocks on the Internet; what makes you feel safe about using the web and placing real-time buy/sell orders rather than calling a stockbroker to do this for you?
+</li></ul></div>
+    <div data-type="solution" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm205062576"><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm206717056">Cheesecake mascarpone queso. Monterey jack cheese slices emmental halloumi edam pecorino who moved my cheese ricotta. Brie cottage cheese monterey jack swiss dolcelatte ricotta jarlsberg camembert de normandie. </p></div>
+  </div>
+</div><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-666">Cupcake ipsum dolor sit amet liquorice. Ice cream chocolate cake candy pudding ice cream chocolate bar brownie gingerbread. Tart gummi bears I love donut candy. Sweet roll oat cake I love. Croissant gummies gingerbread I love. Macaroon candy bear claw gummies.</p><div data-type="note" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-216"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_23">Testing PNG figures in Global Issues in Tech title</div><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm383983424">WW-test box helps students think globally about the impact of technology on societies around the world.
+</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-PNG5"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_24">This figure title is amazing. </div><figcaption>
+Polymerase. This piece of art is PNG set to 300 DPI. WW-test art size 2.5 in FB Global Issues in Technology.
+  </figcaption>
+<span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-PNG5" data-alt="Alt text placeholder. ">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-PNG5.png" data-media-type="image/png" alt="Alt text placeholder. " id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_25" />
+  </span>
+
+</figure>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm386922800">Another thing you might have recognized when reviewing your list is all of the items were something you could touch or move.
+</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm383964128">Smartly come about topsail Arr lugger fore maroon nipperkin jack lanyard. Reef black jack jury mast belaying pin barkadeer salmagundi American Main stern yard log. Chantey spanker bucko broadside Yellow Jack cackle fruit crimp scourge of the seven seas log mutiny.
+</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm386700752">Lookout splice the main brace skysail haul wind salmagundi hearties nipperkin gun chase lugsail. Chandler chase guns gabion lookout swab spike reef sails six pounders heave to prow. Spanker scourge of the seven seas bilge bilged on her anchor belaying pin mutiny matey Davy Jones' Locker chandler driver.</p>
+</div>
+
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm380530816">Would you be able to recognize the maker of that shoe or the tractor by simply seeing the logo? Chances are you would. These are examples of intangible assets, trademarks to be precise. A trademark has value to the organization that created (or purchased) the trademark and the trademark is something the organization controls—others cannot use the trademark without permission.</p>
+
+<section data-depth="1" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm378761184"><h3 data-type="title">Header Title</h3>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm383953968">Bacon bacon bacon WW-test art size 6.5 (<a href="#auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-Royal" class="autogenerated-content">[link]</a>) shows the materials requisition form for job MAC001.  This form serves a few different functions and is sent to different offices.  The raw materials inventory department maintains a copy to document the change in inventory levels and the accounting department maintains a copy to properly assign the costs to the particular job.</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-Royal"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_26">This figure title is amazing. </div><figcaption>
+WW-test long figure title: Common structure of the organization for DV that goes and goes and goes and goes until it is 25 words long. At the internationally agreed-upon zero point of longitude at the Royal Observatory Greenwich, tourists can stand and straddle the exact line where longitude “begins.” WW-test JPEG art size 6.5. (credit: The big cheese mascarpone cream cheese. Cheese slices emmental cheesy feet mozzarella when the cheese comes out everybody's happy swiss dolcelatte roquefort.)
+  </figcaption>
+<span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-Royal" data-alt="Alt text placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-Royal.jpg" data-media-type="image/jpg" alt="Alt text placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_27" />
+  </span>
+
+</figure>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm202563808">DV already has a beginning inventory of $1,000 in raw materials – vinyl, and $300 in each of its ink inventories: raw materials – black ink, raw materials – red ink, and raw materials – gold ink.  In order to have enough inventory on hand for all of its jobs, it purchases $10,000 in vinyl and $500 in ink purchased. </p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm205929152">The beginning balances and purchases in each of these accounts are illustrated in these T accounts (<a href="#auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-Drysite" class="autogenerated-content">[link]</a>). </p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-Drysite"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_28">This figure title is amazing. </div><figcaption>
+Cerro Paranal in Chile’s Atacama Desert. Cerro Paranal, a mountain summit 2.7 kilometers above sea level in Chile’s Atacama Desert, is the site of the European Southern Observatory’s Very Large Telescope. This photograph shows the four 8-meter telescope buildings on the site and vividly illustrates that astronomers prefer high, dry sites for their instruments. The 4.1-meter Visible and Infrared Survey Telescope for Astronomy (VISTA) can be seen in the distance on the next mountain peak. WW-test JPEG art size 6.0. (credit: Cheese and wine danish fontina cow. Cow cheesy grin cheeseburger boursin cheese on toast cheese slices squirty cheese feta.)
+  </figcaption>
+<span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-Drysite" data-alt="Alt text placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-Drysite.jpg" data-media-type="image/jpg" alt="Alt text placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_29" />
+  </span>
+
+</figure>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm220762464">Traditional billboards with the design printed on vinyl include direct materials of: vinyl, printing ink, and the framing material which is wood and grommets.  The typical billboard sign is 14 feet high by 48 feet wide and DV incurs a vinyl cost of $300 per billboard.  The price for the ink varies by color.  For this job, DV needs: two units of black ink at a cost of $85 each, one unit of red ink and one unit of gold ink with a cost of $55 each, twelve grommets with a cost of $10 each, and forty units of wood at a cost of $1.50 per unit.
+</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm190924736">There are some items that are more difficult to measure per unit such as crazy glue and other materials not directly traceable to the final product. <a href="#auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-Cosmic" class="autogenerated-content">[link]</a> shows how their costs are assigned to the product as part of <span data-type="term">manufacturing overhead</span>.
+</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-Cosmic"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_30">This figure title is amazing.</div><figcaption>
+Cosmic calendar. On a cosmic calendar, where the time since the Big Bang is compressed into 1 year, creatures we would call human do not emerge on the scene until the evening of December 31. WW-test JPEG art size 5.5. (credit: long Red leicester st. agur blue cheese airedale airedale cheddar airedale cheeseburger boursin. Feta cheese on toast st. agur blue cheese cheeseburger st. agur blue cheese lancashire cut the cheese cheese strings. Goat.)
+  </figcaption>
+<span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-Cosmic" data-alt="Alt text placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-Cosmic.jpg" data-media-type="image/jpg" alt="Alt text placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_31" />
+  </span>
+
+</figure>
+</section>
+
+<section data-depth="1" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm204375136"><h3 data-type="title">Indirect Materials</h3>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm203980016"><span data-type="term">Indirect materials</span> are materials used in production but not traced to specific products because the net informational value from the time and effort to trace the cost to each individual product produced is impossible or not worth the expense. For example, a furniture factory classified the cost of glue, stain and nails as indirect materials. Nails are often used in furniture production; however, one chair may need 15 nails while another needs 18 nails. At a cost of less than one cent per nail, it is not worth keeping track of each nail.  It is much more practical to track how many pounds of nails were used for the period and allocate this cost (along with other costs) to the overhead costs of the products finished.
+</p>
+</section>
+
+<section data-depth="1" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm217934992"><h3 data-type="title">Indirect Labor</h3>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm207473296">Indirect labor is the labor costs of those employees associated with the manufacturing process, but their contributions are not directly traceable to the final product. These would include the costs of the factory floor supervisor, the factory housekeeping staff, and factory maintenance workers.</p>
+</section>
+
+<section data-depth="1" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm186100096"><h3 data-type="title">Computations</h3>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm215947248">Caerphilly cheese slices fondue. Cheesecake edam jarlsberg st. agur blue cheese cheese and biscuits when the cheese comes out everybody's happy cottage cheese feta. Melted cheese stinking bishop goat cottage cheese cow queso jarlsberg bavarian bergkase. Cheesecake ricotta cheese slices dolcelatte when the cheese comes out everybody's happy the big cheese.
+</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm191353040">Cheesecake mascarpone queso. Monterey jack cheese slices emmental halloumi edam pecorino who moved my cheese ricotta. Brie cottage cheese monterey jack swiss dolcelatte ricotta jarlsberg camembert de normandie. Cheese and biscuits emmental cheese on toast roquefort boursin stinking bishop halloumi cheese triangles. Cauliflower cheese everyone loves.</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm209636704">Cheesecake mascarpone queso. Monterey jack cheese slices emmental halloumi edam pecorino who moved my cheese ricotta. Brie cottage cheese monterey jack swiss dolcelatte ricotta jarlsberg camembert de normandie. Cheese and biscuits emmental cheese on toast roquefort boursin stinking bishop halloumi cheese triangles. Cauliflower cheese everyone loves.</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm207020864">Halloumi parmesan bavarian bergkase. Airedale danish fontina taleggio caerphilly cheeseburger cheesy feet babybel port-salut. Jarlsberg gouda edam boursin danish fontina halloumi cheese triangles brie. Feta croque monsieur cheesy grin dolcelatte cheesecake stinking bishop mascarpone bavarian bergkase. Fromage frais pecorino (<a href="#auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-BusStruct" class="autogenerated-content">[link]</a>).
+</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-BusStruct"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_32">This figure title is amazing.</div><figcaption>
+Cosmic calendar. On a cosmic calendar, where the time since the Big Bang is compressed into 1 year, creatures we would call human do not emerge on the scene until the evening of December 31. WW-test JPEG art size 4.0. (credit: long Red leicester st. agur blue cheese airedale airedale cheddar airedale cheeseburger boursin. Feta cheese on toast st. agur blue cheese cheeseburger st. agur blue cheese lancashire cut the cheese cheese strings. Goat.)
+  </figcaption>
+<span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-BusStruct" data-alt="Alt text placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-BusStruct.jpg" data-media-type="image/jpg" alt="Alt text placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_33" />
+  </span>
+
+</figure>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm203831056">Pepper jack pecorino cheese slices. Squirty cheese who moved my cheese queso squirty cheese rubber cheese squirty cheese pepper jack caerphilly. Brie stilton cheesy feet edam paneer cheese on toast bavarian bergkase cheeseburger. Cheddar cheeseburger cream cheese ricotta manchego melted cheese ricotta gouda. Swiss.
+</p>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm209844240">Roquefort the big cheese everyone loves. Rubber cheese fondue danish fontina boursin ricotta gouda mozzarella port-salut. Pecorino caerphilly cheese strings smelly cheese mozzarella everyone loves caerphilly port-salut. Cheese triangles smelly cheese babybel gouda parmesan. (<a href="#target-04-02-Test1" class="autogenerated-content">[link]</a>)
+</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-Test1"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_34">This figure title is amazing.</div><figcaption>
+Cosmic calendar Cheeseburger melted cheese cheeseburger. On a cosmic calendar, where the time since the Big Bang is compressed into 1 year, creatures we would call human do not emerge on the scene until the evening of December 31. WW-test JPEG art size 2.5. (credit: long Red leicester st. agur blue cheese airedale airedale cheddar airedale cheeseburger boursin. Feta cheese on toast st. agur blue cheese cheeseburger st. agur blue cheese lancashire cut the cheese cheese strings. Goat.)
+  </figcaption>
+<span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-Test1" data-alt="Alt text placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-Test1.jpg" data-media-type="image/jpg" alt="Alt text placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_35" />
+  </span>
+
+</figure>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm207576928">You might think of expenses as the opposite of revenue. Expenses are the costs of providing the goods or services. Expenses are formally defined as “outflows or other using up of assets or incurrences of liabilities (or a combination of both) from delivering or producing goods, rendering services, or carrying out other activities that constitute the entity’s ongoing major or central operations” (SFAC No. 6, p. 23). In other words, expenses decrease the value of the organization because the organization incurs a cost in providing goods or services. WW-test 1.5 JPEG (<a href="#auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-JPEG15" class="autogenerated-content">[link]</a>) in narrative.
+</p>
+<figure id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_figure-04-02-JPEG15"><div data-type="title" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_36">This figure title is amazing.</div><figcaption>
+Who moved my cheese bocconcini melted cheese cheeseburger say cheese smelly cheese roquefort cottage cheese. WW-test JPEG art size 1.5.
+  </figcaption>
+<span data-type="media" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-04-02-JPEG15" data-alt="Alt text placeholder.">
+    <img src="b4d3e3d4-6d81-4706-a4cd-eef55d8e6059/figure-04-02-JPEG15.jpg" data-media-type="image/jpg" alt="Alt text placeholder." id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_37" />
+  </span>
+
+</figure>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm202866752">
+What does it take to manufacture the sign outside the stadium? It starts with the production department requisitioning vinyl and ink from the raw materials inventory.  Once the raw materials are delivered to the production department, the product is considered work-in-process inventory. There, <span data-type="term">direct labor</span> is used to place the material into the printer, align the computerized design, and have it printed on the vinyl.  The direct materials and direct labor are known and recorded on the job order cost sheet. When the Production Department has completed its work, the sign and the job order cost sheet are transferred to the Finishing Department. This department requests wood for framing and grommets for attaching the sign from raw materials inventory.  This department adds direct labor, wood, and grommets to the already printed sign to finish it properly.
+</p>
+<section data-depth="2" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm219508064">
+<section data-depth="3" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-315"><h5 data-type="title">Let’s Make Some Lists</h5><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-316">
+Here is a bulleted list:
+</p><ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-294"><li>Here is the first bulleted item. </li>
+<li>Here is the second bulleted item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third bulleted item in the list.
+</li></ul><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-900">Now the list is complete and we can move onto talking more about history and how useful and important this topic is for college students.</p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-157">Here is a numeric list:</p><ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-832" type="1"><li>Here is the first enumerated item. </li>
+<li>Here is the second enumerated item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third enumerated item in the list.
+</li></ol><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-235">Now the list is complete and we can move onto talking more about history and how useful and important this topic is for college students.</p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-984">Here is an alphabetical list:</p><ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-323" type="A"><li>Here is the first alphabetical item. </li>
+<li>Here is the second alphabetical item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third alphabetical item in the list.
+</li></ol><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-392">Now the list is complete and we can move onto talking more about history and how useful and important this topic is for college students.</p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-479">Here is a numeric-alphabetical list:</p><ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-112" type="1"><li>Here is the first enumerated item. </li>
+<li>Here is the second enumerated item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.
+<ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm261738848" type="A"><li>Here is the first alphabetical item. </li>
+<li>Here is the second alphabetical item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third alphabetical item in the list.
+</li></ol></li>
+<li>Here is the third enumerated item in the list.
+</li></ol><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-379">Now the list is complete and we can move onto talking more about history and how useful and important this topic is for college students.</p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-783">Here is an alphabetical-numeric list:</p><ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-796" type="A"><li>Here is the first alphabetical item. </li>
+<li>Here is the second alphabetical item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.
+<ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm256611424" type="1"><li>Here is the first enumerated item. </li>
+<li>Here is the second enumerated item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third enumerated item in the list.
+</li></ol></li>
+<li>Here is the third alphabetical item in the list.
+</li></ol><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-974">Now the list is complete and we can move onto talking more about history and how useful and important this topic is for college students.</p></section><section data-depth="3" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-317"><h5 data-type="title">Let’s Make the Same Lists but This Time Let’s Put Them inside of Tables</h5><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-167">Here is a bulleted list in a table:
+</p><table id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-995" summary="Alt text placeholder."><caption>Here is some generic table caption content.</caption><thead>  <tr>
+    <th>Column Left Header</th>
+    <th>Column Right Header</th>
+  </tr></thead><tbody>
+
+  <tr>
+    <td><ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm278052864"><li>Here is the first bulleted item. </li>
+<li>Here is the second bulleted item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third bulleted item in the list.<a href="#auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-938" role="doc-noteref" epub:type="noteref">[footnote]</a>
+<aside role="doc-footnote" epub:type="footnote" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-938">This is a footnote. It should appear on the page. It derives from inside a table.</aside></li></ul></td>
+    <td><ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm262741232"><li>Here is the first bulleted item. </li>
+<li>Here is the second bulleted item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third bulleted item in the list.
+</li></ul></td>
+  </tr>
+</tbody></table>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-212">Now the list is complete and we can move onto talking more about history and how useful and important this topic is for college students.</p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm234511584">Here is a numeric list in a table:</p>
+<table id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm239504224" summary="Alt text placeholder."><caption>Here is some generic table caption content.</caption><thead>  <tr>
+    <th>Column Left Header</th>
+    <th>Column Right Header</th>
+  </tr></thead><tbody>
+
+  <tr>
+    <td><ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm208714272" type="1"><li>Here is the first numbered item. </li>
+<li>Here is the second numbered item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third numbered item in the list.
+</li></ol></td>
+    <td><ol id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm264387072" type="1"><li>Here is the first numbered item. </li>
+<li>Here is the second numbered item. It is much longer so we can see what happens when items in the list need to wrap onto a second or even a third or even a fourth line.</li>
+<li>Here is the third numbered item in the list.
+</li></ol></td>
+  </tr>
+</tbody></table><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-972">Now the list is complete and we can move onto talking more about history and how useful and important this topic is for college students.</p></section><section data-depth="3" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-676"><h5 data-type="title">British Naval Power (and Table Styles from OpenGuide)</h5><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-367">
+JOC is the optimal costing method for producing custom goods or when it is easy to identify the cost directly with the product. A <span data-type="term" class="no-emphasis">JOC system</span> assigns costs to each individual job as the costs are incurred. At all points in the manufacturing process, the costs assigned to that particular job are known.
+</p>
+<table id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-903" summary="Alt text placeholder"><caption><span data-type="title">Financial Accounting versus Managerial Accounting set in Default Table Style</span>This table is set as the “Default Style” table from the basic table types being used for the non-accounting books in the business series, as outlined in the document “Business (no Accounting) Table Styles Specs” from OSX.</caption><thead>
+  <tr>
+     <th>Communication through Reporting</th>
+     <th>Financial Accounting</th>
+     <th>Managerial Accounting</th>
+   </tr>
+ </thead><tbody>
+
+  <tr>
+    <td>Users of reports</td>
+    <td>External users: stockholders, creditors, regulators.</td>
+    <td>Internal users: managers, officers, and other employees.</td>
+  </tr>
+ <tr>
+    <td>Types of Reports</td>
+    <td>Financial statements: Balance sheet, Income statement, Cash-Flow statement, etc.</td>
+    <td>Internal reports: Job Cost Sheet, Cost of Goods Manufactured, Production Cost Report, etc.</td>
+  </tr>
+ <tr>
+    <td>Frequency of reports</td>
+    <td>Quarterly; annually</td>
+    <td>As frequently as needed</td>
+  </tr>
+ <tr>
+    <td>Purpose of reports</td>
+    <td>Helps those external users make decisions: credit terms, investment and other decisions.</td>
+    <td>Assists the internal users in the planning and control decision making process.</td>
+  </tr>
+ <tr>
+    <td>Focus of reports</td>
+    <td>Pertains to company as a whole. Uses GAAP structure. Composed from a multitude or combination of other more individual data.</td>
+    <td>Pertains to departments, sections of the business. Very detailed reporting. No GAAP constraints.</td>
+  </tr>
+<tr>
+    <td>Nature of reports</td>
+    <td>Monetary</td>
+    <td>Monetary and nonmonetary information</td>
+  </tr>
+<tr>
+    <td>Verification of reports</td>
+    <td>Audited by CPA</td>
+    <td>No independent audits</td>
+  </tr>
+</tbody></table>
+<p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-959">In the twentieth century, particularly after the First World War, the idea of human progress must have seemed laughable. Beginning with the assassination of the Archduke Franz Ferdinand in 1914, the world was plunged into war and the events that followed were horrifically absurd. All of the modern inventions and the spread of democratic institutions did not stop the bloody hell of trench warfare. People were more willing to question the authority of elites and religious leaders as they could be of little help once war began. Historians became more interested in the irrational aspects of the human condition, the psychology behind one’s choices. </p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-606">The counterculture of the 1960s deepened the desire to challenge existing norms. As students protested the Viet Nam war, the lack of Civil Rights, and the closed-mindedness of the previous generation, young historians developed new ideas. In their 1966 book, <em data-effect="italics">The Social Construction of Reality</em>, Peter Burger and Thomas Luckman argued our belief systems are informed by social constructs, the way society tells us to think and behave. Consider our first thought exercise. You believe education is important. Why? Who has said that to you in the past? How did you come to believe it? These constructs exist everywhere and they inform many decisions that we make, often on a subconscious level.  </p>
+<table id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm264346896" summary="Alt text placeholder"><caption><span data-type="title">Financial Accounting versus Managerial Accounting set in Text-Heavy Table Style</span>This table is set as the “Text-Heavy Style” table from the basic table types being used for the non-accounting books in the business series, as outlined in the document “Business (no Accounting) Table Styles Specs” from OSX.</caption><thead> <tr>
+    <th>Communication through Reporting</th>
+    <th>Financial Accounting</th>
+    <th>Managerial Accounting</th>
+  </tr></thead><tbody>
+
+  <tr>
+    <td>Users of reports</td>
+    <td>External users: stockholders, creditors, regulators.</td>
+    <td>Internal users: managers, officers, and other employees.</td>
+  </tr>
+ <tr>
+    <td>Types of Reports</td>
+    <td>Financial statements: Balance sheet, Income statement, Cash-Flow statement, etc.</td>
+    <td>Internal reports: Job Cost Sheet, Cost of Goods Manufactured, Production Cost Report, etc.</td>
+  </tr>
+ <tr class="header-row">
+    <td>Frequency of reports</td>
+    <td>Quarterly; annually</td>
+    <td>As frequently as needed</td>
+  </tr>
+ <tr>
+    <td>Purpose of reports</td>
+    <td>Helps those external users make decisions: credit terms, investment and other decisions.</td>
+    <td>Assists the internal users in the planning and control decision making process.</td>
+  </tr>
+ <tr>
+    <td>Focus of reports</td>
+    <td>Pertains to company as a whole. Uses GAAP structure. Composed from a multitude or combination of other more individual data.</td>
+    <td>Pertains to departments, sections of the business. Very detailed reporting. No GAAP constraints.</td>
+  </tr>
+<tr>
+    <td>Nature of reports</td>
+    <td>Monetary</td>
+    <td>Monetary and nonmonetary information</td>
+  </tr>
+<tr>
+    <td>Verification of reports</td>
+    <td>Audited by CPA</td>
+    <td>No independent audits</td>
+  </tr>
+</tbody></table><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-185">Evaluation is a critical part of any project. This involves having measures in place so you can evaluate what you have done. For example, if you want to develop an entrepreneurial vision in the next 3 months, then you should have some goals that relate to how much of the vision should be completed in week 1, week 2, week 3 and so on. Measuring your progress against your plan can keep you on track with the end goal in mind. </p>
+
+<table id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-idm251247936" summary="Alt text placeholder"><caption><span data-type="title">Financial Accounting versus Managerial Accounting set in Text-Heavy Table Style</span>This table is set as the “Text-Heavy Style” table from the basic table types being used for the non-accounting books in the business series, as outlined in the document “Business (no Accounting) Table Styles Specs” from OSX.</caption><thead> <tr>
+    <th>Communication through Reporting</th>
+    <th>Financial Accounting</th>
+    <th>Managerial Accounting</th>
+  </tr></thead><tbody>
+
+  <tr>
+    <td>Users of reports</td>
+    <td>External users: stockholders, creditors, regulators.</td>
+    <td>Internal users: managers, officers, and other employees.</td>
+  </tr>
+ <tr>
+    <td>Types of Reports</td>
+    <td>Financial statements: Balance sheet, Income statement, Cash-Flow statement, etc.</td>
+    <td>Internal reports: Job Cost Sheet, Cost of Goods Manufactured, Production Cost Report, etc.</td>
+  </tr>
+ <tr>
+    <td>Frequency of reports</td>
+    <td>Quarterly; annually</td>
+    <td>As frequently as needed</td>
+  </tr>
+ <tr>
+    <td>Purpose of reports</td>
+    <td>Helps those external users make decisions: credit terms, investment and other decisions.</td>
+    <td>Assists the internal users in the planning and control decision making process.</td>
+  </tr>
+ <tr>
+    <td>Focus of reports</td>
+    <td>Pertains to company as a whole. Uses GAAP structure. Composed from a multitude or combination of other more individual data.</td>
+    <td>Pertains to departments, sections of the business. Very detailed reporting. No GAAP constraints.</td>
+  </tr>
+<tr>
+    <td>Nature of reports</td>
+    <td>Monetary</td>
+    <td>Monetary and nonmonetary information</td>
+  </tr>
+<tr>
+    <td>Verification of reports</td>
+    <td>Audited by CPA</td>
+    <td>No independent audits</td>
+  </tr>
+</tbody></table></section><section data-depth="3" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-132"><h5 data-type="title">Isolationism</h5><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-819">
+Process Costing is the optimal system when the production process is continuous and it is difficult to trace a particular input cost with a specific individual product. Process costing systems assign costs to each department as the costs are incurred. The costs to produce one unit is calculated based on the information from the production departments. The focus of process costing systems is on measuring and assigning the conversion costs to the proper department so the cost of the individual units can be determined.
+</p></section><section data-depth="3" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-1000"><h5 data-type="title">Comparing Apples and Cheeses</h5><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-155">
+Let us look at one more example. This time it will be the broader topic of Colonial Latin America, between the Spanish conquest and the independence movements of the 1820s. How would each school of thought approach the topic? The progressive historian might look at the growth of democratic legal systems or the increase in interest in republican forms of government. The intellectual historian might consider the literature and philosophy of the period. The social historian would look at things like what people ate, how they worked, what they looked for in marriage partners. A communist historian would look at issues of unfair labor practices and moments of class conflict like rebellion or riot. The feminist historian would investigate the great power differential that existed in this highly patriarchal society. And the post-colonialist would highlight aspects of colonialism that would remain impactful after independence. All of these interpretative elements help us weave together a more complete picture of the past as will future efforts to enhance our understanding.
+</p><p id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_eip-649">This is a mutually-beneficial arrangement: the organization gets the funding it needs on a timely basis and the investor gets an ownership interest in the organization as shown in <a href="#auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_Table01_01_01" class="autogenerated-content">[link]</a>.</p>
+<table id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_Table01_01_01" summary="WW-test notes that the cells in the right column need to align right in order for the dollar amounts to show up correctly; hence we have set them up this way. We would control this in XML markup."><caption><span data-type="title">This Is a Table in Regular Chapter Content With Second Header</span></caption><thead>
+
+  <tr>
+    <th>Cheeses</th>
+    <th>Apple Varieties</th>
+    <th>Exchange Type</th>
+    <th>Trade Route</th>
+    <th data-align="right">Actual Value</th>
+  </tr>
+</thead><tbody>
+    <tr>
+    <td>Sharp cheddar</td>
+    <td>Fireside</td>
+    <td>Variable-absorption costing method</td>
+    <td>Africa</td>
+    <td data-align="right">$1,491</td>
+  </tr>
+  <tr>
+    <td>Smoked gouda</td>
+    <td>Jonagold</td>
+    <td>Sarbanes-Oxley regulations</td>
+    <td>Asia</td>
+    <td data-align="right">$17</td>
+  </tr>
+  <tr class="header-row">
+    <td>Mozzarella</td>
+    <td>Golden delicious</td>
+    <td>Securities and Exchange Commission</td>
+    <td>Americas</td>
+    <td data-align="right">$34,105</td>
+  </tr>
+  <tr>
+    <td>Romano</td>
+    <td>McIntosh</td>
+    <td>Journal and ledger entries</td>
+    <td>Asia</td>
+    <td data-align="right">$125</td>
+  </tr>
+</tbody></table></section>
+</section>
+</section>
+
+<section data-depth="1" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm262193904" class="section-summary"><h3 data-type="title">Summary</h3>
+  <ul id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm264697824"><li>Describe buses as electrical conduits that carry bytes of information back and forth between the components that make up a computer system.</li>
+<li>Explain how buses are designed to transfer fixed-sized chunks of bytes known as words and how the number of bytes in a word (i.e., word size) varies across computer systems (e.g., most machines today have a 8 bytes or 64 bits word size).</li>
+</ul>
+</section>
+
+<div data-type="glossary" id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_38"><h3 data-type="glossary-title">Glossary</h3>
+  <dl id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm206257040">
+    <dt id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_39">cache</dt>
+    <dd id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm213629376">muffin tart bonbon pie</dd>
+  </dl>
+  <dl id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm202558048">
+    <dt id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_40">compute node</dt>
+    <dd id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm219288592">cake pastry toffee icing cheesecake pudding donut cheesecake pastry</dd>
+  </dl>
+  <dl id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm204956272">
+    <dt id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_41">CPU</dt>
+    <dd id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm184172592">bear claw cake croissant dessert cake gummies jelly-o candy gummi bears dessert bear claw fruitcake caramels topping cake</dd>
+  </dl>
+  <dl id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm178183664">
+    <dt id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_42">DRAM</dt>
+    <dd id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm215757392">pie liquorice pie gummies</dd>
+  </dl>
+  <dl id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm203809568">
+    <dt id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_43">I/O</dt>
+    <dd id="auto_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059_fs-idm218065024">claw cookie fruitcake croissant biscuit halvah</dd>
+  </dl>
+</div>
+  </div><div data-type="page" id="page_2040a658-785c-4c4a-8e40-1404c7ab67cd" data-cnxml-to-html-ver="2.5.0"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Network Edge and Core</h1>
+      <span data-type="revised" data-value="2021/04/16 17:20:18.580 GMT-5"></span>
+      <span data-type="cnx-archive-uri" data-value="2040a658-785c-4c4a-8e40-1404c7ab67cd@20"></span>
+
+      <div class="authors">
+        By:
+<span id="author-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="author" data-type="author">
+            <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+          </span>
+        Edited by:
+
+        Illustrated by:
+
+        Translated by:
+
+      </div>
+      <div class="publishers">
+        Published By:
+            <span id="publisher-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="publisher" data-type="publisher">
+              <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+            </span>      </div>
+      <div class="permissions">
+        <p class="copyright">
+          Copyright:
+              <span id="copyright-holder-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="copyright-holder" data-type="copyright-holder">
+                <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+              </span>        </p>
+        <p class="license">
+          Licensed:
+          <a href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL" data-type="license">CC BY</a>
+        </p>
+      </div><div itemprop="about" data-type="subject">Science and Technology</div>
+      <div data-type="resources">
+        <ul>
+<li><a href="04_03_CostOfJobs.jpg">04_03_CostOfJobs.jpg</a></li><li><a href="04_03_DVJobsduringyear.jpg">04_03_DVJobsduringyear.jpg</a></li><li><a href="04_03_JobCostSheet.jpg">04_03_JobCostSheet.jpg</a></li><li><a href="04_03_RMCost.jpg">04_03_RMCost.jpg</a></li><li><a href="image1.jpg">image1.jpg</a></li>        </ul>
+      </div>    </div>
+
+   <div data-type="document-title" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_0">Network Edge and Core</div>
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm359275616" class="learning-objectives"><h3 data-type="title">Learning Objectives</h3>
+  <p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm338488240">By the end of this section, you will be able to:</p>
+    <ul id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm358130368"><li>Provide examples of machine abstractions and explain their uses</li>
+<li>Identify various types or levels of program languages and explain their uses </li>
+<li>Discuss examples of new disruptive computer systems</li>
+
+    </ul></section><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-154">To summarize the job order cost system, the cost of each job includes direct material, direct labor, and manufacturing overhead. While the product is in production, the direct material and direct labor costs assigned so far are included in work in progress inventory. The direct material is requested by the production department and the direct material cost is directly attached to each individual job as the materials are released from raw materials inventory. The cost of direct labor is recorded by the employees and assigned to each individual job.
+</p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-456">When the allocation base is known, usually when the product is completed, the overhead is allocated to the product on the basis of the predetermined overhead rate. This chapter will explain job order costing and how it differs from process costing. <a href="#page_c7a411f5-bfe5-4f2a-833f-645cb84e14ee" class="autogenerated-content">[link]</a> will be discussed later in the chapter.</p><section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-545"><h3 data-type="title">The Basics of Determining the Costs of an Individual Job Using Job Order Costing</h3><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-673">
+When the job is completed, the total cost of the job: the direct materials, direct labor, and manufacturing overhead are totaled and transferred to finished goods at the same time the physical product is transferred. Finally, when the product is sold, the sale is recorded at the sale price while the cost is transferred from finished goods inventory to the cost of goods sold expense account.
+
+</p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-559"><strong class="centered-text">This module tries centering text without using MathType</strong></p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-489">At all points in the process, the work in progress should include the cost of direct material and direct labor. When the job is completed and overhead assigned, the overhead allocation increases the cost of the work in progress inventory. The cost of each individual job is maintained on job cost sheets and the total of all the work in progress job cost sheets equals the work in progress inventory, and the cost of goods manufactured schedule discussed earlier.</p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-814">A job cost sheet is a subsidiary ledger that identifies the individual costs for each job. <a href="#auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-JobCostSheet" class="autogenerated-content">[link]</a> shows the job cost sheet for job MAC001.
+</p>
+<figure id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-JobCostSheet"><div data-type="title" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_1">Job cost sheet for MAC001</div>
+  <span data-type="media" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-04" data-alt="Alt text placeholder">
+    <img src="2040a658-785c-4c4a-8e40-1404c7ab67cd/04_03_JobCostSheet.jpg" data-media-type="image/jpeg" alt="Alt text placeholder" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_2" />
+  </span>
+</figure>
+</section><section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-610"><h3 data-type="title">Sample Cost Information for Our JOC Example</h3><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-951">
+Dinosaur Vinyl worked on three jobs during the month. POR143 was already in work in progress inventory with $1,000 in direct material costs. There wasn’t any direct labor as the material was received by production at the end of the month. During the current month, additional materials of $200, and $150 of direct labor were added to POR143. Overhead of $375 was applied to POR143 at the predetermined overhead rate of $2.50 per direct labor dollar. WW-test of MathType.
+</p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-95"><m:math display="inline"><m:semantics><m:mrow><m:mtext>EstimatedRTT</m:mtext><m:mo>=</m:mo><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>–</m:mo><m:mi>𝛽</m:mi><m:mo>)</m:mo><m:mo>*</m:mo><m:mtext>EstimatedRTT</m:mtext><m:mo>+</m:mo><m:mi>𝛽</m:mi><m:mo>*</m:mo><m:mtext>SampleRTT</m:mtext></m:mrow><m:annotation-xml encoding="MathML-Content"><m:mtext>EstimatedRTT</m:mtext><m:mo>=</m:mo><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>–</m:mo><m:mi>𝛽</m:mi><m:mo>)</m:mo><m:mo>*</m:mo><m:mtext>EstimatedRTT</m:mtext><m:mo>+</m:mo><m:mi>𝛽</m:mi><m:mo>*</m:mo><m:mtext>SampleRTT</m:mtext></m:annotation-xml></m:semantics></m:math></p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-925">The job is considered complete and was transferred to finished goods inventory awaiting its sale. WW-test of Python colored code in narrative without output. Coding colors are indicated with font colors.
+</p><pre id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-idm219077040" data-display="block"><span class="purple-code"># Python program to find the SHA-1 message digest of a file</span>
+
+<span class="purple-code"># importing the hashlib module</span>
+<span class="red-code">import</span> hashlib
+
+<span class="green-code">def</span> hash_file(filename):
+   <span class="blue-code"># This function returns the SHA-1 hash of the file passed into it</span>
+
+  <span class="purple-code"> # make a hash object</span>
+   h = hashlib.sha1()
+
+   <span class="purple-code"># open file for reading in binary mode</span>
+   with open(filename,'rb') as file:
+
+      <span class="purple-code"> # loop till the end of the file</span>
+       <span class="brown-code">chunk</span> = 0
+       while <span class="brown-code">chunk</span> != b'':
+           <span class="purple-code"># read only 1024 bytes at a time</span>
+           chunk = file.read(1024)
+           h.update(chunk)
+
+   <span class="purple-code"># return the hex representation of digest</span>
+   <span class="gray-code">return</span> h.hexdigest()
+
+message = hash_file("track1.mp3")
+<span class="red-code">print</span>(message)
+</pre><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-325">Job MAC001 was started during the month and had $700 in direct materials, $66 in direct labor, and $165 of overhead was applied to the job before it was transferred to finished goods and sold for $2,000. As you recall from <a href="#page_b4d3e3d4-6d81-4706-a4cd-eef55d8e6059" class="autogenerated-content">[link]</a>, you learned about the foundation for this already. WW-test of Python colored code in narrative without output. Coding colors are indicated with bracketed directions in code.</p><pre id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-idm417633056" data-display="block"><span class="green-code"># Python program to find the SHA-1 message digest of a file</span>
+
+# importing the hashlib module
+import hashlib
+
+def hash_file(filename):
+  <span class="purple-code"># This function returns the SHA-1 hash</span> of the file passed into it
+
+   # make a <span class="red-code">hash</span> object 
+   <span class="blue-code">h = hashlib.sha1()</span>
+
+   # open file for reading in binary mode
+   with open(filename,'rb') as file:
+
+       # <span class="brown-code">loop</span> till the end of the file 
+       chunk = 0
+       while chunk != b'':
+           # read only 1024 bytes at a time
+           chunk = file.read(1024)
+           h.update(chunk)
+
+   # return the hex representation of digest
+   <span class="gray-code">return</span> h.hexdigest() 
+
+message = hash_file("track1.mp3")
+print(message)
+
+
+</pre><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-296">Job TRJ441 was started and not finished during the month. Its costs consists of direct material of $500, $150 in direct labor expenses, and $375 in applied overhead. The job remains in work in progress inventory awaiting assembly.
+<a href="#auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-idm359220512" role="doc-noteref" epub:type="noteref">[footnote]</a></p><aside role="doc-footnote" epub:type="footnote" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-idm359220512"> This module contains footnotes, like this one in the main text.</aside><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-392">At the beginning of the month, Job SWM505 was already in Finished Goods inventory at a cost of $1,531. It was sold during the month for $3,500 and the cost was transferred to cost of goods sold.
+</p></section><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm231153824">The cost of raw materials used is calculated as shown in <a href="#auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-RMCost" class="autogenerated-content">[link]</a>.</p>
+
+<figure id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-RMCost"><div data-type="title" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_3">Figure Title</div><figcaption>
+     Caption goes here
+  </figcaption>
+  <span data-type="media" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-05" data-alt="Alt text placeholder.">
+    <img src="2040a658-785c-4c4a-8e40-1404c7ab67cd/04_03_RMCost.jpg" data-media-type="image/jpeg" alt="Alt text placeholder." id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_4" />
+  </span>
+  
+</figure>
+
+<p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm249820816">WW-test of Python colored code without output.
+</p><pre id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm275269728" class="python" data-lang="python" data-display="block"># Python program to find the SHA-1 message digest of a file
+
+# importing the hashlib module
+import hashlib
+
+def hash_file(filename):
+   # This function returns the SHA-1 hash of the file passed into it
+
+   # make a hash object
+   h = hashlib.sha1()
+
+   # open file for reading in binary mode
+   with open(filename,'rb') as file:
+
+       # loop till the end of the file
+       chunk = 0
+       while chunk != b'':
+           # read only 1024 bytes at a time
+           chunk = file.read(1024)
+           h.update(chunk)
+
+   # return the hex representation of digest
+   return h.hexdigest()
+
+message = hash_file("track1.mp3")
+print(message)
+
+</pre><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm271782432">Notice the costs for job TJR441 are included in work in progress inventory while the costs for Port143 and MAC001 (see <a href="#auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-CostOfJobs" class="autogenerated-content">[link]</a>) were transferred to the cost of goods manufactured.
+</p>
+
+<figure id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-CostOfJobs"><div data-type="title" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_5">Figure Title</div><figcaption>
+     Caption goes here
+  </figcaption>
+  <span data-type="media" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-06" data-alt="Alt text placeholder.">
+    <img src="2040a658-785c-4c4a-8e40-1404c7ab67cd/04_03_CostOfJobs.jpg" data-media-type="image/jpeg" alt="Alt text placeholder." id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_6" />
+  </span>
+  
+</figure><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-347">WW-test that this paragraph has a few index term functionalities, such as not including the full term to reduce duplicate entries for singular and plural terms. Consider print services and advertising. Mac’s and Cheese is a local restaurant and wants a special sign on an already constructed billboard outside a stadium Since it wants that sign targeted to stadium customers, the company would want a sign built specifically for that site. Dinosaur Vinyl, Inc. is the sign manufacturer and would use <span data-type="term">Job Order Costing</span> to account for the manufacturing costs of the sign. Now imagine Mac’s &amp; Cheese also wanting to create flyers to place on cars in the <span data-type="term">stadium</span> during each game. Other times they want to test an index term without every letter so that <span data-type="term">stadium</span>s appears singular in the index. Those flyers are identical to each other and produced in large batches and by a company that uses process costing.</p><section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-521"><h3 data-type="title">Mechanics of the Determination of Our Example’s Costs Under JOC</h3><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-156">
+The amounts in raw material, work in process, and finished goods inventory maintain the total cost for each account while the job cost sheets contain the costs for each individual job as shown in <a href="#auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-DVJobsduringyear" class="autogenerated-content">[link]</a>. A summary of the jobs for Dinosaur Vinyl show:
+</p>
+<figure id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-DVJobsduringyear"><div data-type="title" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_7">Figure title</div><figcaption>
+     Summary of DV's jobs during the year.
+  </figcaption>
+  <span data-type="media" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-04-03-07" data-alt="Alt text placeholder">
+    <img src="2040a658-785c-4c4a-8e40-1404c7ab67cd/image1.jpg" data-media-type="image/jpeg" alt="Alt text placeholder" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_8" />
+  </span>
+  
+</figure>
+</section>
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-218"><h3 data-type="title">Test color MathML and inline code</h3><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-215"><m:math display="inline"><m:semantics><m:mrow>
+<m:mtext color="green" fontsize="9pt" fontfamily="Courier Prime">This should be green and Courier Prime! (specified font in the text tag)</m:mtext>
+</m:mrow><m:annotation-xml encoding="MathML-Content"><m:mtext color="green" fontsize="9pt" fontfamily="Courier Prime">This should be green and Courier Prime! (specified font in the text tag)</m:mtext></m:annotation-xml></m:semantics></m:math>
+</p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-216"><m:math display="inline"><m:semantics><m:mrow>
+<m:mstyle fontfamily="Courier Prime"><m:mtext color="blue">This should be blue and Courier Prime! (specified font in a style tag around the text tag)</m:mtext></m:mstyle>
+</m:mrow><m:annotation-xml encoding="MathML-Content"><m:mstyle fontfamily="Courier Prime"><m:mtext color="blue">This should be blue and Courier Prime! (specified font in a style tag around the text tag)</m:mtext></m:mstyle></m:annotation-xml></m:semantics></m:math>
+</p><p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-217"><m:math display="inline"><m:semantics><m:mrow>
+<m:mtext color="blue">blue!</m:mtext><m:mtext color="green">green!</m:mtext><m:mtext color="red">red!</m:mtext>
+</m:mrow><m:annotation-xml encoding="MathML-Content"><m:mtext color="blue">blue!</m:mtext><m:mtext color="green">green!</m:mtext><m:mtext color="red">red!</m:mtext></m:annotation-xml></m:semantics></m:math>
+</p><pre id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-138" data-display="block"><span class="blue-code">#</span> <span class="purple-code">This</span> <span class="green-code">program</span> <span class="red-code">prints</span> Hello, <span class="brown-code">world</span>!
+
+<span class="gray-code">print</span>('Hello, world!') </pre>
+<p id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_eip-idm265244912">Testing the inline code with the code tag. <code id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_9"><span class="blue-code">#</span> <span class="purple-code">This</span> <span class="green-code">program</span> <span class="red-code">prints</span> Hello, <span class="brown-code">world</span>!</code></p></section><section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm330570464" class="section-summary"><h3 data-type="title">Summary</h3>
+  <ul id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm360649728">
+<li>Explain that while using decimal notation (i.e., base 10) is natural for 10-fingered humans, binary values are better when building machines that store and process information. </li>
+<li>This is due to the fact that two-valued signals can readily be represented, stored, and transmitted (e.g., presence or absence of a hole in a punched card, high or low voltage on a wire, magnetic domain oriented clockwise or counterclockwise). </li>
+<li>The electronic circuitry required to store and perform computations on two-valued signals is very simple and reliable as manufacturers can integrate billions of such circuits on a single silicon chip using nanotechnology.</li>
+</ul>
+</section>
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm348586096" class="review-questions"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="ARQ-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ARQ-C04-Q001" data-tags="book:" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response multiple-choice" data-id="163800">
+        <div data-type="question-stem">Why is entrepreneurial passion so important for success?</div>
+        <ol data-type="question-answers" type="a">
+            <li data-type="question-answer" data-id="625771" data-correctness="">
+                <div data-type="answer-content">Wrong answer</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625772" data-correctness="">
+                <div data-type="answer-content">This is also wrong</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625773" data-correctness="">
+                <div data-type="answer-content">This might be right.</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625774" data-correctness="">
+                <div data-type="answer-content">This is definitely right.</div>
+                
+            </li>
+            </ol>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="ARQ-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ARQ-C04-Q002" data-tags="" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response multiple-choice" data-id="163801">
+        <div data-type="question-stem">What factors other than passion are needed for entrepreneurs to succeed in the marketplace?</div>
+        <ol data-type="question-answers" type="a">
+            <li data-type="question-answer" data-id="625775" data-correctness="">
+                <div data-type="answer-content">Here is sample question content for generic assessment content for IntroCS. </div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625776" data-correctness="">
+                <div data-type="answer-content">This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625777" data-correctness="">
+                <div data-type="answer-content">This assessment option is shorter.</div>
+                
+            </li>
+            <li data-type="question-answer" data-id="625778" data-correctness="">
+                <div data-type="answer-content">This assessment option is shorter.</div>
+                
+            </li>
+            </ol>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm347883856" class="conceptual-questions"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="ACQ-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ACQ-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163802">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="ACQ-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ACQ-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163803">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm325302432" class="practice-exercises"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="APE-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APE-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163804">
+        <div data-type="question-stimulus">
+</div>
+        <div data-type="question-stem">How would you describe your entrepreneurial passion? How do you demonstrate that passion to others? </div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm334269376" class="problem-set-a"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163806">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163807">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q003" data-injected-from-version="2" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q003" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163824">
+        <div data-type="question-stem">WW-test notes this assessment includes index terms. Can a company use both job order costing and process costing? Why.
+</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSA-C04-Q004" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSA-C04-Q004" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163816">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.
+</div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm351112288" class="problem-set-b"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="APSB-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSB-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163809">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for CS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="APSB-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:APSB-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163810">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for CS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm349197840" class="thought-provokers"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="ATP-C04-Q001" data-injected-from-version="2" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ATP-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163826">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="ATP-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:ATP-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163812">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.</div>
+        </div>
+    </div></section>
+
+
+
+<section data-depth="1" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm320216224" class="lab-assessments"><h3 data-type="title">Questions</h3>
+<div data-type="injected-exercise" data-injected-from-nickname="AL-C04-Q001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:AL-C04-Q001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163813">
+        <div data-type="question-stem">Here is a sample question for IntroCS.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="AL-C04-Q002" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:AL-C04-Q002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163814">
+        <div data-type="question-stem">Can a company use both job order costing and process costing? Why.</div>
+        </div>
+    </div><div data-type="injected-exercise" data-injected-from-nickname="AL-C04-Q003" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:AL-C04-Q003" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="163815">
+        <div data-type="question-stem">Here is sample question content for generic assessment content for IntroCS. This assessment item is longer than the first and takes up more space. This assessment item is longer than the first and takes up more space.
+</div>
+        </div>
+    </div></section>
+
+
+
+<div data-type="glossary" id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_10"><h3 data-type="glossary-title">Glossary</h3>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm262000624">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_11">conversion costs</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm262063456">Sample definition</dd>
+  </dl>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm257071584">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_12">direct labor</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm266487872">another sample definition</dd>
+  </dl>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm272557152">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_13">direct materials</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm264121936">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</dd>
+  </dl>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm275068704">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_14">expense recognition principle</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm273094160">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+</dd>
+  </dl>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm260489168">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_15">indirect labor</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm259607648">Galleon rum gibbet lass jolly boat grog crow's nest clipper dance the hempen jig scuppers
+</dd>
+  </dl>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm274926784">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_16">indirect materials</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm272829472">apstan league Jolly Roger marooned salmagundi boom hardtack Corsair sutler haul wind. Chain Shot Sail ho Nelsons folly swing the lead Buccaneer sutler lee Yellow Jack red ensign topsail
+</dd>
+  </dl>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm264469856">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_17">job order costing</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm263061952">Black jack pillage careen landlubber or just lubber bounty haul wind clap of thunder pirate boom scourge of the seven seas</dd>
+  </dl>
+  <dl id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm264511120">
+    <dt id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_18">manufacturing costs</dt>
+    <dd id="auto_2040a658-785c-4c4a-8e40-1404c7ab67cd_fs-idm262983136">hardtack killick carouser warp scuttle Spanish Main topmast Blimey ahoy jury mast
+</dd>
+  </dl>
+</div>
+  </div></div></div><div data-type="page" id="page_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d" class="appendix" data-cnxml-to-html-ver="2.5.0"><div data-type="metadata" style="display: none;">
+      <h1 data-type="document-title" itemprop="name">Basic Functions We Expect Could Appear in Any Appendix</h1>
+      <span data-type="revised" data-value="2021/03/22 15:07:02.157 GMT-5"></span>
+      <span data-type="cnx-archive-uri" data-value="6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d@3"></span>
+
+      <div class="authors">
+        By:
+<span id="author-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="author" data-type="author">
+            <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+          </span>
+        Edited by:
+
+        Illustrated by:
+
+        Translated by:
+
+      </div>
+      <div class="publishers">
+        Published By:
+            <span id="publisher-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="publisher" data-type="publisher">
+              <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+            </span>      </div>
+      <div class="derived-from">
+        Derived from:
+        <a href="https://legacy-content03.cnx.org/content/m10030/1.4/" itemprop="isDerivedFromURL" data-type="derived-from">None</a>
+      </div>
+      <div class="permissions">
+        <p class="copyright">
+          Copyright:
+              <span id="copyright-holder-1" itemscope="itemscope" itemtype="http://schema.org/Person" itemprop="copyright-holder" data-type="copyright-holder">
+                <a href="manager" itemprop="url" data-type="cnx-id">manager</a>
+              </span>        </p>
+        <p class="license">
+          Licensed:
+          <a href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL" data-type="license">CC BY</a>
+        </p>
+      </div><div itemprop="about" data-type="subject">Science and Technology</div>
+      <div data-type="resources">
+        <ul>
+<li><a href="Figure00_BB_TestFigure.png">Figure00_BB_TestFigure.png</a></li><li><a href="Figure00_BB_TestFigure_img.png">Figure00_BB_TestFigure_img.png</a></li>        </ul>
+      </div>    </div>
+
+   <div data-type="document-title" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_0">Basic Functions We Expect Could Appear in Any Appendix</div>
+  
+  <p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-736">WW-test notes that this appendix content includes index terms (length, mass, time), tables, tables with captions, a figure, an image, a footnote, centered text, one very long header, and LO icons. In the American system of measurement (originally developed in England), the fundamental units of length, weight, and time are the foot, pound, and second, respectively. There are also larger and smaller units, which include the ton (2240 lb), the mile (5280 ft), the rod (16 1/2 ft), the yard (3 ft), the inch (1/12 ft), the ounce (1/16 lb), and so on. Such units, whose origins in decisions by British royalty have been forgotten by most people, are quite inconvenient for conversion or doing calculations.</p><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-958">Calculations can be centered WW-test without MathType<span data-type="newline"><br /></span>
+
+<strong class="centered-text">In science, therefore, it is more usual to use the <em data-effect="italics">metric system</em>, which has been adopted in virtually all countries except the United States. Its great advantage is that every unit increases by a factor of ten, instead of the strange factors in the American system. The fundamental units of the metric system are:</strong>
+</p><ul id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-856"><li><span data-type="term" class="no-emphasis">length</span>: 1 meter (m)</li>
+<li><span data-type="term" class="no-emphasis">mass</span>: 1 kilogram (kg)</li>
+<li><span data-type="term" class="no-emphasis">time</span>: 1 second (s)
+</li></ul><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-394">A meter was originally intended to be 1 ten-millionth of the distance from the equator to the North Pole along the surface of Earth. It is about 1.1 yd. A kilogram is the mass that on Earth results in a weight of about 2.2 lb. The second is the same in metric and American units as shown in <a href="#auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_Figure00_AA_TestFigure" class="autogenerated-content">[link]</a>.</p>
+
+<figure id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_Figure00_AA_TestFigure"><div data-type="title" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_1">Routes of Something.</div><figcaption>The Iberian countries of Spain and Portugal led the way in the European Age of Exploration and the creation of maritime empires. Spanish shipping routes are shown in white and Portuguese routes in blue.
+  </figcaption><span data-type="media" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_fs-idm244814128" data-alt="A map shows shipping routes for Spain and Portugal.">
+    <img src="6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d/Figure00_BB_TestFigure.png" data-media-type="image/png" alt="A map shows shipping routes for Spain and Portugal." id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_2" />
+  </span>
+
+</figure><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_fs-idm260306512">And here is some intervening text. Although we don't make the distinction very carefully in everyday life on Earth, strictly speaking the kilogram is a unit of mass (measuring the quantity of matter in a body, roughly how many atoms it has) while the pound is a unit of weight (measuring how strongly Earth's gravity pulls on a body).</p>
+  
+  <span data-type="media" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_fs-idm262771920" data-alt="Alt text placeholder.">
+    <img src="6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d/Figure00_BB_TestFigure_img.png" data-media-type="image/png" alt="Alt text placeholder." id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_3" />
+  </span>
+
+<p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_fs-idm267574416">And here is some text. WW-test notes that the “image” version here should have no figure number, no figure title, and no caption.</p><section data-depth="1" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-640"><h3 data-type="title">Length</h3><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-649">
+The most commonly used quantities of length of the metric system are the following.
+</p>
+<table id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-903" summary="Alt text placeholder"><caption><span data-type="title">
+Financial Accounting versus Managerial Accounting set in Default Table Style
+</span>
+This table is set as the “Default Style” table from the basic table types being used for the non-accounting books in the business series, as outlined in the document “Business (no Accounting) Table Styles Specs” from OSX.
+</caption><thead>
+    <tr>
+    <th>Communication through Reporting</th>
+    <th>Financial Accounting</th>
+    <th>Managerial Accounting</th>
+    </tr>
+  </thead><tbody>
+
+<tr>
+<td>Users of reports</td>
+<td>
+External users: stockholders, creditors, regulators.
+</td>
+<td>
+Internal users: managers, officers, and other employees.
+</td>
+</tr>
+<tr>
+<td>Types of Reports</td>
+<td>
+Financial statements: Balance sheet, Income statement, Cash-Flow statement, etc.
+</td>
+<td>
+Internal reports: Job Cost Sheet, Cost of Goods Manufactured, Production Cost Report, etc.
+</td>
+</tr>
+<tr>
+<td>Frequency of reports</td>
+<td>Quarterly; annually</td>
+<td>As frequently as needed</td>
+</tr>
+<tr>
+<td>Purpose of reports</td>
+<td>
+Helps those external users make decisions: credit terms, investment and other decisions.
+</td>
+<td>
+Assists the internal users in the planning and control decision making process.
+</td>
+</tr>
+<tr>
+<td>Focus of reports</td>
+<td>
+Pertains to company as a whole. Uses GAAP structure. Composed from a multitude or combination of other more individual data.
+</td>
+<td>
+Pertains to departments, sections of the business. Very detailed reporting. No GAAP constraints.
+</td>
+</tr>
+<tr>
+<td>Nature of reports</td>
+<td>Monetary</td>
+<td>Monetary and nonmonetary information</td>
+</tr>
+<tr>
+<td>Verification of reports</td>
+<td>Audited by CPA</td>
+<td>No independent audits</td>
+</tr>
+</tbody></table><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-261">To convert from the American system, here are a few helpful factors:</p><ul id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-614"><li>1 mile = 1.61 km </li>
+<li>1 inch = 2.54 cm
+</li></ul></section><section data-depth="1" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-501"><h3 data-type="title">Mass</h3><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-743">
+Although we don't make the distinction very carefully in everyday life on Earth, strictly speaking the kilogram is a unit of mass (measuring the quantity of matter in a body, roughly how many atoms it has) while the pound is a unit of weight (measuring how strongly Earth's gravity pulls on a body).
+</p>
+<p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-idm269631600">The most commonly used quantities of mass of the metric system are the following.</p>
+<table id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-idm271604320" summary="Alt text placeholder"><caption><span data-type="title">Financial Accounting versus Managerial Accounting set in Default Table Style </span>This table is set as the “Text-Heavy Style” table from the basic table types being used for the non-accounting books in the business series, as outlined in the document “Business (no Accounting) Table Styles Specs” from OSX.</caption><tbody>
+<tr>
+<td>Communication through Reporting</td>
+<td>Financial Accounting</td>
+<td>Managerial Accounting</td>
+</tr>
+<tr>
+<td>Users of reports</td>
+<td>
+External users: stockholders, creditors, regulators.
+</td>
+<td>
+Internal users: managers, officers, and other employees.
+</td>
+</tr>
+<tr>
+<td>Types of Reports</td>
+<td>
+Financial statements: Balance sheet, Income statement, Cash-Flow statement, etc.
+</td>
+<td>
+Internal reports: Job Cost Sheet, Cost of Goods Manufactured, Production Cost Report, etc.
+</td>
+</tr>
+<tr>
+<td>Frequency of reports</td>
+<td>Quarterly; annually</td>
+<td>As frequently as needed</td>
+</tr>
+<tr>
+<td>Purpose of reports</td>
+<td>
+Helps those external users make decisions: credit terms, investment and other decisions.
+</td>
+<td>
+Assists the internal users in the planning and control decision making process.
+</td>
+</tr>
+<tr>
+<td>Focus of reports</td>
+<td>
+Pertains to company as a whole. Uses GAAP structure. Composed from a multitude or combination of other more individual data.
+</td>
+<td>
+Pertains to departments, sections of the business. Very detailed reporting. No GAAP constraints.
+</td>
+</tr>
+<tr>
+<td>Nature of reports</td>
+<td>Monetary</td>
+<td>Monetary and nonmonetary information</td>
+</tr>
+<tr>
+<td>Verification of reports</td>
+<td>Audited by CPA</td>
+<td>No independent audits</td>
+</tr>
+</tbody></table><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-449">A weight of 1 lb is equivalent on Earth to a mass of 0.4536 kg, while a weight of 1 oz is produced by a mass of 28.35 g.</p></section><section data-depth="1" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-912"><h3 data-type="title">WW-test Notes That from Time to Time, Depending on the Title and the Specific Content, Headers Can Be Concise, or They Can Occasionally Be Very Wordy and Long</h3><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-625">
+The most commonly used quantities of length of the metric system are the following.
+</p></section><section data-depth="1" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-486"><h3 data-type="title">Temperature</h3><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-658">
+Three temperature scales are in general use:
+</p><ul id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-844"><li>Fahrenheit (F); water freezes at 32 °F and boils at 212 °F.</li>
+<li>Celsius or centigrade<a href="#auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-285" role="doc-noteref" epub:type="noteref">[footnote]</a>  (C); water freezes at 0 °C and boils at 100 °C.<aside role="doc-footnote" epub:type="footnote" id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-285">Celsius is now the name used for centigrade temperature; it has a more modern standardization but differs from the old centigrade scale by less than 0.1°. WW-test notes that this is a footnote.</aside></li>
+<li>Kelvin or absolute (K); water freezes at 273 K and boils at 373 K.
+</li></ul><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-721">All molecular motion ceases at about –459 °F = –273 °C = 0 K, a temperature called <em data-effect="italics">absolute zero</em>. Kelvin temperature is measured from this lowest possible temperature, and it is the temperature scale most often used in astronomy. Kelvins have the same value as centigrade or Celsius degrees, since the difference between the freezing and boiling points of water is 100 degrees in each. (Note that we just say “Kelvins,” not Kelvin degrees.) </p><p id="auto_6f2e1cb9-9e82-40a4-9b3d-6143ad421e4d_eip-774">On the Fahrenheit scale, the difference between the freezing and boiling points of water is 180 degrees. Thus, to convert Celsius degrees or Kelvins to Fahrenheit degrees, it is necessary to multiply by 180/100 = 9/5. To convert from Fahrenheit degrees to Celsius degrees or Kelvins, it is necessary to multiply by 100/180 = 5/9.</p></section>
+  </div></body>
+</html>

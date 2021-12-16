@@ -2,8 +2,9 @@
 
 # Contains the openstax_kitchen version for each recipe
 KITCHEN_VERSIONS = {
+  accounting: '17.0.0',
   additive_manufacturing: '15.0.0',
-  american_government: '7.0.0',
+  american_government: '16.0.0',
   anatomy: '13.0.0',
   anthropology: '11.1.0',
   ap_biology: '12.2.0',
@@ -12,26 +13,31 @@ KITCHEN_VERSIONS = {
   astronomy: '14.0.0',
   bca: '12.2.0',
   biology: '9.1.0',
+  business_ethics: '17.0.0',
   calculus: '15.0.0',
   chemistry: '15.0.0',
   college_physics: '14.0.0',
+  college_success: '16.0.0',
   computer_science: '12.0.0',
-  contemporary_math: '15.0.0',
+  contemporary_math: '16.0.0',
   dev_math: '15.0.0',
   dummy: '2.0.0',
-  english_composition: { github: 'openstax/kitchen', ref: '2d82d5ae4888bb98e2fb1841867f83afb3ce8184' },
+  economics: '17.0.0',
+  english_composition: '17.0.0',
+  entrepreneurship: '17.0.0',
   finance: '11.2.0',
+  history: '16.0.0',
   hs_physics: '15.0.0',
+  intro_business: '16.0.0',
   microbiology: '7.0.0',
-  philosophy: '15.0.0',
-  pl_psychology: {
-    github: 'openstax/kitchen',
-    ref: '3f72d3822a76685d267e329faddd0b6a993a7786'
-  },
+  philosophy: { github: 'openstax/kitchen', ref: '382fce8033867161b98cad254d05e11a087a074b' },
+  pl_psychology: '16.0.0',
+  pl_u_physics: { github: 'openstax/kitchen', ref: 'c5bf5fc3c6bddab2c41a9ef6e9fd0d81268f3e7a' },
   political_science: '12.0.0',
   precalculus: '15.0.0',
+  psychology: '15.0.0',
   sociology: '7.0.0',
   statistics: '12.0.0',
-  u_physics: '15.0.0',
-  world_history: '14.0.0'
+  world_history: '17.0.0',
+  u_physics: '15.0.0'
 }.freeze

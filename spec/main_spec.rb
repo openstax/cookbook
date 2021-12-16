@@ -47,8 +47,8 @@ RSpec.describe 'books' do
     expect('statistics').to bake_correctly
   end
 
-  it 'bakes american_government' do
-    expect('american_government').to bake_correctly
+  it 'bakes american-government' do
+    expect('american-government').to bake_correctly
   end
 
   it 'bakes microbio' do
@@ -129,5 +129,53 @@ RSpec.describe 'books' do
 
   it 'bakes intermediate algebra' do
     expect('intermediate-algebra').to bake_correctly_with('dev-math')
+  end
+
+  it 'bakes college success' do
+    expect('college-success').to bake_correctly
+  end
+
+  it 'bakes history' do
+    expect('history').to bake_correctly
+  end
+
+  it 'bakes psychology' do
+    expect('psychology').to bake_correctly
+  end
+
+  it 'bakes intro business' do
+    expect('intro-business').to bake_correctly
+  end
+
+  it 'bakes entrepreneurship' do
+    expect('entrepreneurship').to bake_correctly
+  end
+
+  it 'bakes accounting' do
+    expect('accounting').to bake_correctly
+  end
+
+  it 'bakes economics' do
+    expect('economics').to bake_correctly
+  end
+
+  it 'bakes business ethics' do
+    expect('business-ethics').to bake_correctly
+  end
+
+  it 'bakes business law' do
+    expect('business-law').to bake_correctly_with('business-ethics')
+  end
+
+  it 'bakes intellectual property' do
+    expect('intellectual-property').to bake_correctly_with('business-ethics')
+  end
+
+  it 'bakes computer science' do
+    expect('computer-science').to bake_correctly
+  end
+
+  it 'bakes pl u-physics' do
+    expect('pl-u-physics').to bake_correctly
   end
 end

@@ -19,7 +19,7 @@ done
 # List additional books here
 
 case "${book}" in
-  american_government) dest="${DIR}/data/american_government/short" && script="${DIR}/books/american_government/shorten";;
+  american-government) dest="${DIR}/data/american-government/short" && script="${DIR}/books/american-government/shorten";;
   ap-history) dest="${DIR}/data/ap-history/short" && script="${DIR}/books/ap-history/shorten";;
   biology) dest="${DIR}/data/biology/short" && script="${DIR}/books/biology/shorten";;
   calculus) dest="${DIR}/data/calculus/short" && script="${DIR}/books/calculus/shorten";;
@@ -31,6 +31,7 @@ case "${book}" in
   precalculus-coreq) dest="${DIR}/data/college-algebra-coreq/short" && script="${DIR}/books/precalculus-coreq/shorten";;
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
+  economics) dest="${DIR}/data/economics/short" && script="${DIR}/books/economics/shorten";;
   finance) dest="${DIR}/data/finance/short" && script="${DIR}/books/finance/shorten";;
   english-composition) dest="${DIR}/data/english-composition/short" && script="${DIR}/books/english-composition/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
@@ -43,8 +44,18 @@ case "${book}" in
   college-physics) dest="${DIR}/data/college-physics/short" && script="${DIR}/books/college-physics/shorten";;
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/books/astronomy/shorten";;
   ap-physics) dest="${DIR}/data/ap-physics/short" && script="${DIR}/books/ap-physics/shorten";;
+  history) dest="${DIR}/data/history/short" && script="${DIR}/books/history/shorten";;
   dev-math) dest="${DIR}/data/prealgebra/short" && script="${DIR}/books/dev-math/shorten";;
   hs-physics) dest="${DIR}/data/hs-physics/short" && script="${DIR}/books/hs-physics/shorten";;
+  college-success) dest="${DIR}/data/college-success/short" && script="${DIR}/books/college-success/shorten";;
+  psychology) dest="${DIR}/data/psychology/short" && script="${DIR}/books/psychology/shorten";;
+  entrepreneurship) dest="${DIR}/data/entrepreneurship/short" && script="${DIR}/books/entrepreneurship/shorten";;
+  intro-business) dest="${DIR}/data/intro-business/short" && script="${DIR}/books/intro-business/shorten";;
+  business-ethics) dest="${DIR}/data/business-ethics/short" && script="${DIR}/books/business-ethics/shorten";;
+  accounting) dest="${DIR}/data/accounting/short" && script="${DIR}/books/accounting/shorten";;
+  philosophy) dest="${DIR}/data/philosophy/short" && script="${DIR}/books/philosophy/shorten";;
+  pl-u-physics) dest="${DIR}/data/pl-u-physics/short" && script="${DIR}/books/pl-u-physics/shorten";;
+  world-history) dest="${DIR}/data/world-history/short" && script="${DIR}/books/world-history/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
