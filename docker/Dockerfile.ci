@@ -1,4 +1,4 @@
-FROM ruby:2.7-buster AS runtime-env
+FROM ruby:2.6.6-buster AS runtime-env
 
 RUN gem install bundler --no-document && \
     gem install byebug --no-document && \
