@@ -29,14 +29,14 @@ KITCHEN_VERSIONS = {
   hs_physics: '15.0.0',
   intro_business: '16.0.0',
   microbiology: '17.0.0',
-  philosophy: { github: 'openstax/kitchen', ref: '382fce8033867161b98cad254d05e11a087a074b' },
+  philosophy: '17.1.0',
   pl_psychology: '16.0.0',
-  pl_u_physics: { github: 'openstax/kitchen', ref: 'c5bf5fc3c6bddab2c41a9ef6e9fd0d81268f3e7a' },
+  pl_u_physics: '17.1.0',
   political_science: '17.0.0',
   precalculus: '15.0.0',
   psychology: '15.0.0',
   sociology: '17.0.0',
   statistics: '12.0.0',
-  world_history: { github: 'openstax/kitchen', ref: 'b78c3d6d77dc13fc6c8a4b4ff6baf8ccfcc7b747' },
+  world_history: '17.1.0',
   u_physics: '15.0.0'
 }.freeze
