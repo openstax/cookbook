@@ -23,7 +23,6 @@ RUN apt-get update && \
     && \
     gem install bundler --no-document && \
     gem install byebug --no-document && \
-    gem install activesupport -v 6.1.4.4 && \
     bundle config set no-cache 'true' && \
     bundle config set silence_root_warning 'true' && \
     rm -rf /var/lib/apt/lists/*
