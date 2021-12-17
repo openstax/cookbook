@@ -53,7 +53,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
     eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
+    BakeChapterSummary.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      klass: 'section-summary',
+      append_to: eoc_wrapper
+    )
 
     eoc_sections = %w[review-questions conceptual-questions practice-exercises
                       problem-set-a problem-set-b thought-provokers lab-assessments]
