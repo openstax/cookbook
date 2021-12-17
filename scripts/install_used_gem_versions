@@ -7,6 +7,9 @@
 require 'set'
 require_relative '../kitchen_gem_versions'
 
+# Install non-kitchen gems
+puts `gem install activesupport -v '< 6.1'`
+
 # Add gems and versions from book files
 source_filenames = (Dir.glob(File.join(__dir__,"../books/**/*")) + [File.join(__dir__,"console"),File.join(__dir__,"normalize")])
                        .select{|filename| !File.directory?(filename)}

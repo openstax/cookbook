@@ -27,7 +27,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anthropology) do |doc|
                     media-video]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
