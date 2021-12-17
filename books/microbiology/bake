@@ -33,7 +33,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
 
   book_answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
@@ -61,15 +61,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
     end
 
     # Bake answer key from chapter/ move solutions from eoc into answer key
-    MoveSolutionsToAnswerKey.v1(
+    inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
-      strategy: :default,
       append_to: book_answer_key,
-      strategy_options: {
-        selectors: exercise_section_classes.prefix('section.')
-      },
       solutions_plural: false
+    )
+    DefaultStrategyForAnswerKeySolutions.v1(
+      strategy_options: { selectors: exercise_section_classes.prefix('section.') },
+      chapter: chapter, append_to: inner_container
     )
 
     chapter.tables('$:not(.unnumbered)').each do |table|

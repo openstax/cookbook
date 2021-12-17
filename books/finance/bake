@@ -41,7 +41,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
   )
 
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
