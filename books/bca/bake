@@ -22,13 +22,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
-
-  book.pages('$.preface').each do |page|
-    page.figures.each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: figure.count_in(:page).to_s)
-    end
-  end
+  BakeUnnumberedFigure.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
@@ -43,7 +37,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    chapter.figures.each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
@@ -118,7 +112,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
     end
-    page.figures(only: :figure_to_bake?).each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
   end
