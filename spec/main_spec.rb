@@ -178,4 +178,8 @@ RSpec.describe 'books' do
   it 'bakes world-histrory' do
     expect('world-history').to bake_correctly
   end
+
+  # ATTENTION: SPECS ARE NOW ALPHABETIZED
+  # pls add future specs into the alphabet instead of here (unless the book starts with x-z)
+  # thanks <3
 end
