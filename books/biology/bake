@@ -27,7 +27,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :biology) do |doc|
   BakeAutotitledNotes.v1(book: book, classes: %w[visual-connection interactive evolution career
                                                  scientific everyday])
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)

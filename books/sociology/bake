@@ -64,18 +64,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
   if edition_symbol == '3e'
     solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
-      MoveSolutionsToAnswerKey.v1(chapter: chapter,
-                                  metadata_source: metadata,
-                                  strategy: :default,
-                                  strategy_options: { selectors: %w[section-quiz]
-                                                      .prefix('section.') },
-                                  append_to: solution_container,
-                                  solutions_plural: false)
+      inner_container = AnswerKeyInnerContainer.v1(
+        chapter: chapter, metadata_source: metadata, append_to: solution_container, solutions_plural: false
+      )
+      DefaultStrategyForAnswerKeySolutions.v1(
+        strategy_options: { selectors: %w[section-quiz].prefix('section.') },
+        chapter: chapter, append_to: inner_container
+      )
     end
   end
 
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
