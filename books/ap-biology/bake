@@ -21,7 +21,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
   book.search('cnx-pi').trash
 
   AddInjectedExerciseId.v1(book: book)
-  book.search('div[data-type="injected-exercise"]').each do |exercise|
+  book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(exercise: exercise)
   end
 
@@ -90,17 +90,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
     end
 
     # Bake both kinds of exercise
-    chapter \
-      .search('div.os-eoc') \
-      .search_with(Kitchen::ExerciseElementEnumerator, Kitchen::InjectedQuestionElementEnumerator) \
-      .each_with_index do |exercise, index|
-      if exercise.instance_of?(Kitchen::ExerciseElement)
-        BakeNumberedExercise.v1(exercise: exercise, number: index + 1, suppress_solution_if: true)
-        BakeFirstElements.v1(within: exercise)
-      else
-        BakeInjectedExerciseQuestion.v1(question: exercise, number: index + 1)
-      end
-    end
+    BakeAllNumberedExerciseTypes.v1(
+      within: chapter.search('div.os-eoc'),
+      exercise_options: { suppress_solution_if: true }
+    )
   end
 
   book.pages('$.appendix').each do |page|
