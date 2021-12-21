@@ -79,10 +79,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
           <table class="some-class" id="tId">
             <thead>
               <tr>
-                <th>A title</th>
+                <th scope="col">A title</th>
               </tr>
               <tr>
-                <th>Another heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>
@@ -133,8 +133,8 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
           <table class="top-captioned">
             <thead>
               <tr>
-                <th>Heading cell</th>
-                <th>Another heading cell</th>
+                <th scope="col">Heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>

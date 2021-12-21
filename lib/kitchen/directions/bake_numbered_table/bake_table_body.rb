@@ -40,6 +40,10 @@ module Kitchen
           table.remove_attribute('summary')
           table.wrap(%(<div class="os-table">))
 
+          table.search('th').each do |header|
+            header[:scope] = 'col'
+          end
+
           # Store label information
           table.target_label(label_text: 'table', custom_content: number, cases: cases)
 

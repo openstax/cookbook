@@ -57,10 +57,10 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
           <table class="unnumbered unstyled" id="tableId">
             <thead>
               <tr>
-                <th colspan="1" data-align="center">The Title</th>
+                <th colspan="1" data-align="center" scope="col">The Title</th>
               </tr>
               <tr valign="top">
-                <th data-align="left">Heading</th>
+                <th data-align="left" scope="col">Heading</th>
               </tr>
             </thead>
             <tbody>

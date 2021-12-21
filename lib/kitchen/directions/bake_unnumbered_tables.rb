@@ -10,6 +10,10 @@ module Kitchen
           table.parent.add_class('os-unstyled-container') if table.unstyled?
           table.parent.add_class('os-column-header-container') if table.column_header?
           table.parent.add_class('os-top-titled-container') if table.top_titled?
+
+          table.search('th').each do |header|
+            header[:scope] = 'col'
+          end
         end
       end
     end

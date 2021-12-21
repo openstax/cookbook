@@ -21,10 +21,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
             #{caption}
             <thead>
               <tr>
-                <th>A title</th>
+                <th scope="col">A title</th>
               </tr>
               <tr>
-                <th>Another heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>
@@ -91,10 +91,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
             #{caption}
             <thead>
               <tr>
-                <th>A title</th>
+                <th scope="col">A title</th>
               </tr>
               <tr>
-                <th>Another heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>
@@ -116,10 +116,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
             #{caption_with_title}
             <thead>
               <tr>
-                <th>A title</th>
+                <th scope="col">A title</th>
               </tr>
               <tr>
-                <th>Another heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>
@@ -143,7 +143,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
           <table class="top-titled">
             <thead>
               <tr>
-                <th>Another heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>
@@ -251,10 +251,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
           <table class="some-class" id="tId">
             <thead>
               <tr>
-                <th>A title</th>
+                <th scope="col">A title</th>
               </tr>
               <tr>
-                <th>Another heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>
@@ -284,10 +284,10 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
           <table class="some-class" id="tId">
             <thead>
               <tr>
-                <th>A title</th>
+                <th scope="col">A title</th>
               </tr>
               <tr>
-                <th>Another heading cell</th>
+                <th scope="col">Another heading cell</th>
               </tr>
             </thead>
             <tbody>
