@@ -23,6 +23,9 @@ RSpec.describe Kitchen::Directions::BakeUnitPageTitle::V1 do
         <div data-type="unit">
           <div data-type="page">
             <h2 data-type="document-title" id="id1">
+              <span class="os-part-text">Unit </span>
+              <span class="os-number">1</span>
+              <span class="os-divider"> </span>
               <span data-type="" itemprop="" class="os-text">Title holder for unit</span>
             </h2>
           </div>

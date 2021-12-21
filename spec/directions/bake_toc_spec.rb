@@ -29,6 +29,9 @@ RSpec.describe Kitchen::Directions::BakeToc do
           </h1>
           <div data-type="page" id="p2">
             <h2 data-type="document-title">
+              <span class="os-part-text">Unit </span>
+              <span class="os-number">1</span>
+              <span class="os-divider"> </span>
               <span data-type="" itemprop="" class="os-text">Title holder for unit</span>
             </h2>
           </div>
@@ -344,6 +347,8 @@ RSpec.describe Kitchen::Directions::BakeToc do
               <ol class="os-unit">
                 <li class="os-toc-unit-page" cnx-archive-shortid="" cnx-archive-uri="p2">
                   <a href="#p2">
+                    <span class="os-number"><span class="os-part-text">Unit </span>1</span>
+                    <span class="os-divider"> </span>
                     <span data-type="" itemprop="" class="os-text">Title holder for unit</span>
                   </a>
                 </li>
