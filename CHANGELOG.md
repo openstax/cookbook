@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix links in `BakeHanbook` outline to point sections (patch)
 * Add unit title prefix with number to `BakeUnitPageTitle` (patch)
 * Add `scope="col"` attribute to `BakeTableBody` and `BakeUnnumberedTables` (major)
 

@@ -17,8 +17,8 @@ RSpec.describe Kitchen::Directions::BakeHandbook::V1 do
             <h1 data-type="document-title" itemprop="name">Handbook</h1>
           </div>
           <div data-type="document-title">Handbook</div>
-          <section data-depth="1">
-            <h3 id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-001" data-type="title">Paragraphs and Transitions</h3>
+          <section id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-001" data-depth="1">
+            <h3 data-type="title">Paragraphs and Transitions</h3>
             <p>Text</p>
             <section data-depth="2">
               <h4 data-type="title">Effective Paragraphs</h4>
@@ -45,8 +45,8 @@ RSpec.describe Kitchen::Directions::BakeHandbook::V1 do
               </section>
             </section>
           </section>
-          <section data-depth="1">
-            <h3 id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-002" data-type="title">Another First Section Title</h3>
+          <section data-depth="1" id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-002">
+            <h3 data-type="title">Another First Section Title</h3>
             <p>Text</p>
             <section data-depth="2">
               <h4 data-type="title">Second Section Title</h4>
@@ -92,8 +92,8 @@ RSpec.describe Kitchen::Directions::BakeHandbook::V1 do
               </a>
             </div>
           </div>
-          <section data-depth="1">
-            <h2 data-type="title" id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-001">
+          <section data-depth="1" id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-001">
+            <h2 data-type="title">
               <span class="os-part-text">H</span>
               <span class="os-number">1</span>
               <span class="os-divider">. </span>
@@ -125,8 +125,8 @@ RSpec.describe Kitchen::Directions::BakeHandbook::V1 do
               </section>
             </section>
           </section>
-          <section data-depth="1">
-            <h2 data-type="title" id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-002">
+          <section data-depth="1" id="auto_2075f23e-ddf7-4a36-84dc-7d988ec136c6_sec-002">
+            <h2 data-type="title">
               <span class="os-part-text">H</span>
               <span class="os-number">2</span>
               <span class="os-divider">. </span>

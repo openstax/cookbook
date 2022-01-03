@@ -43,7 +43,7 @@ module Kitchen::Directions::BakeHandbook
 
         outline_item_html = <<~HTML
           <div class="os-handbook-objective">
-            <a class="os-handbook-objective" href="##{first_section_title[:id]}">
+            <a class="os-handbook-objective" href="##{section[:id]}">
               #{first_section_title.children}
             </a>
           </div>
