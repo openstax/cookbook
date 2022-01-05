@@ -183,7 +183,18 @@ As with kitchen, legacy recipes can be mounted within the devcontainer if you pu
 
 "Legacy recipes" refers to [this folder](https://github.com/openstax/cnx-recipes/tree/master/recipes/output) in the cnx-recipes repository.
 
-## Creating a new recipe
+## Starting a recipe
+
+The `create_new_recipe` script offers a quickstart way to generate many of the initial files for recipe development, like the locale files and the boilerplate for the bake script. It also adds the relevante line to main `bake`. Call it with `ruby scripts/create_new_recipe --recipe <recipe-name>`.
+
+Devs will still need to edit/create:
+- `kitchen_gem_versions.rb`
+- `bake_root`
+- `shorten`
+- `main_spec`
+- test data for specs
+
+## Creating a new recipe manually
 
 New recipes files are created in `books/{book-name}`.
 
