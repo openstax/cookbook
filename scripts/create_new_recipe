@@ -80,18 +80,12 @@ lines = File.readlines("#{Dir.pwd}/bake")
 recipes_names = lines.select { |line| line.match(/[a-z|-]+\)(\s\$DIR.*);;/) } \
                      .map { |line| line.match(/((\w|-)*)\)/).values_at(1)[0] }
 recipes_names.append(recipe).sort!
-lines_count_before_case = lines.reject { |line| line.match(/[a-z|-]+\)(\s\$DIR.*);;/) }.count - 2
+lines_count_before_case = lines.find_index("case \"${book}\" in\n") + 1
 insert_index = recipes_names.find_index(recipe) + lines_count_before_case
 lines.insert(
   insert_index,
   "  #{recipe}) $DIR/books/#{recipe}/bake --input $input_file --output $output_file;;\n"
 )
 lines.each { |line| temp << line }
-
 temp.rewind
 File.write("#{Dir.pwd}/bake", temp.read)
-
-# TODO: Add to kitchen_gem_versions (alphabetically)
-# TODO: Add to bake_root (alphabetically)
-# TODO: Add to main_spec (alphabetically)
-# TODO: Create empty test files
