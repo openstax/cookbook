@@ -43,11 +43,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :principles_management) do |do
                 catching-spirit]
   )
 
+  BakeReferences.v1(book: book, metadata_source: metadata)
+
   book.chapters.each do |chapter|
     BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
+
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: metadata)
 
     eoc_sections = %w[section-summary chapter-review manage-skills
                       manage-exercises critical-thinking]
@@ -92,7 +96,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :principles_management) do |do
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeReferences.v1(book: book, metadata_source: metadata)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
