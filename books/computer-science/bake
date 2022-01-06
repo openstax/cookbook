@@ -48,8 +48,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
+
+    # create Chapter Review EOC wrapper
+    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
+
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
+    BakeChapterSummary.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      klass: 'section-summary',
+      append_to: eoc_wrapper
+    )
 
     eoc_sections = %w[review-questions conceptual-questions practice-exercises
                       problem-set-a problem-set-b thought-provokers lab-assessments]
@@ -60,7 +69,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
         metadata_source: metadata,
         container_key: section_key,
         uuid_key: ".#{section_key}",
-        section_selector: "section.#{section_key}"
+        section_selector: "section.#{section_key}",
+        append_to: eoc_wrapper
       ) do |section|
         RemoveSectionTitle.v1(section: section)
       end

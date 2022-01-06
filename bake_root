@@ -55,6 +55,7 @@ case "${book}" in
   microbiology | \
   philosophy | \
   pl-psychology | \
+  pl-u-physics | \
   political-science | \
   precalculus | \
   precalculus-coreq | \

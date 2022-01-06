@@ -1,0 +1,24 @@
+en:
+  notes:
+    your-turn: Your Turn
+    concepts-practice: Concepts In Practice
+    continuing-application: Continuing Application
+    ethical-considerations: Ethical Considerations
+    ifrs-connection: IFRS Connection
+    link-to-learning: Link to Learning
+    think-through: Think It Through
+  eoc:
+    multiple-choice: Multiple Choice
+    questions: Questions
+    exercise-set-a: Exercise Set A
+    exercise-set-b: Exercise Set B
+    problem-set-a: Problem Set A
+    problem-set-b: Problem Set B
+    thought-provokers: Thought Provokers
+    section-summary: Summary
+  sections_prefixed:
+    exercise-set-a: EA
+    exercise-set-b: EB
+    problem-set-a: PA
+    problem-set-b: PB
+    thought-provokers: TP

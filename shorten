@@ -31,6 +31,7 @@ case "${book}" in
   precalculus-coreq) dest="${DIR}/data/college-algebra-coreq/short" && script="${DIR}/books/precalculus-coreq/shorten";;
   sociology) dest="${DIR}/data/sociology/short" && script="${DIR}/books/sociology/shorten";;
   u-physics) dest="${DIR}/data/u-physics/short" && script="${DIR}/books/u-physics/shorten";;
+  economics) dest="${DIR}/data/economics/short" && script="${DIR}/books/economics/shorten";;
   finance) dest="${DIR}/data/finance/short" && script="${DIR}/books/finance/shorten";;
   english-composition) dest="${DIR}/data/english-composition/short" && script="${DIR}/books/english-composition/shorten";;
   microbiology) dest="${DIR}/data/microbiology/short" && script="${DIR}/books/microbiology/shorten";;
@@ -50,6 +51,11 @@ case "${book}" in
   entrepreneurship) dest="${DIR}/data/entrepreneurship/short" && script="${DIR}/books/entrepreneurship/shorten";;
   intro-business) dest="${DIR}/data/intro-business/short" && script="${DIR}/books/intro-business/shorten";;
   principles-management) dest="${DIR}/data/principles-management/short" && script="${DIR}/books/principles-management/shorten";;
+  business-ethics) dest="${DIR}/data/business-ethics/short" && script="${DIR}/books/business-ethics/shorten";;
+  accounting) dest="${DIR}/data/accounting/short" && script="${DIR}/books/accounting/shorten";;
+  philosophy) dest="${DIR}/data/philosophy/short" && script="${DIR}/books/philosophy/shorten";;
+  pl-u-physics) dest="${DIR}/data/pl-u-physics/short" && script="${DIR}/books/pl-u-physics/shorten";;
+  world-history) dest="${DIR}/data/world-history/short" && script="${DIR}/books/world-history/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 

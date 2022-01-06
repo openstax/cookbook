@@ -27,6 +27,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book, title_element: 'h1')
+
+  book.pages('$.preface').each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: table.count_in(:page).to_s)
+    end
+  end
+
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
 
@@ -41,7 +49,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
   )
 
   book.chapters.each do |chapter|
-    BakePageAbstracts.v1(chapter: chapter)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
