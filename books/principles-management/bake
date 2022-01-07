@@ -56,16 +56,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :principles_management) do |do
     eoc_sections = %w[section-summary chapter-review manage-skills
                       manage-exercises critical-thinking]
 
-    chapter.figures(only: :figure_to_number?).each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
-    end
-
-    chapter.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v2(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
-    end
-
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
@@ -76,6 +66,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :principles_management) do |do
       ) do |section|
         RemoveSectionTitle.v1(section: section)
       end
+    end
+
+    chapter.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
   end
 

@@ -59,12 +59,12 @@ case "${book}" in
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  principles-management | \
   psychology | \
   sociology | \
   statistics | \
   u-physics | \
   world-history | \
-  principles-management | \
   dummy)
     echo "Baking book '${book}' with kitchen" ;
     "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;

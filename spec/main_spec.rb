@@ -3,131 +3,131 @@
 require 'spec_helper'
 
 RSpec.describe 'books' do
-  xit 'bakes dummy' do
+  it 'bakes dummy' do
     expect('dummy').to bake_correctly
   end
 
-  xit 'bakes accounting' do
+  it 'bakes accounting' do
     expect('accounting').to bake_correctly
   end
 
-  xit 'bakes additive-manufacturing' do
+  it 'bakes additive-manufacturing' do
     expect('additive-manufacturing').to bake_correctly
   end
 
-  xit 'bakes american-government' do
+  it 'bakes american-government' do
     expect('american-government').to bake_correctly
   end
 
-  xit 'bakes anatomy' do
+  it 'bakes anatomy' do
     expect('anatomy').to bake_correctly
   end
 
-  xit 'bakes anthropology' do
+  it 'bakes anthropology' do
     expect('anthropology').to bake_correctly
   end
 
-  xit 'bakes ap bio' do
+  it 'bakes ap bio' do
     expect('ap-biology').to bake_correctly
   end
 
-  xit 'bakes ap history' do
+  it 'bakes ap history' do
     expect('ap-history').to bake_correctly
   end
 
-  xit 'bakes astronomy' do
+  it 'bakes astronomy' do
     expect('astronomy').to bake_correctly
   end
 
-  xit 'bakes bca' do
+  it 'bakes bca' do
     expect('bca').to bake_correctly
   end
 
-  xit 'bakes biology' do
+  it 'bakes biology' do
     expect('biology').to bake_correctly
   end
 
-  xit 'bakes business ethics' do
+  it 'bakes business ethics' do
     expect('business-ethics').to bake_correctly
   end
 
-  xit 'bakes business law' do
+  it 'bakes business law' do
     expect('business-law').to bake_correctly_with('business-ethics')
   end
 
-  xit 'bakes calculus' do
+  it 'bakes calculus' do
     expect('calculus').to bake_correctly
   end
 
-  xit 'bakes chemistry' do
+  it 'bakes chemistry' do
     expect('chemistry').to bake_correctly
   end
 
-  xit 'bakes college algebra' do
+  it 'bakes college algebra' do
     expect('college-algebra').to bake_correctly_with('precalculus')
   end
 
-  xit 'bakes college algebra coreq' do
+  it 'bakes college algebra coreq' do
     expect('college-algebra-coreq').to bake_correctly_with('precalculus-coreq')
   end
 
-  xit 'bakes college physics' do
+  it 'bakes college physics' do
     expect('college-physics').to bake_correctly
   end
 
-  xit 'bakes college success' do
+  it 'bakes college success' do
     expect('college-success').to bake_correctly
   end
 
-  xit 'bakes computer science' do
+  it 'bakes computer science' do
     expect('computer-science').to bake_correctly
   end
 
-  xit 'bakes contemporary-math' do
+  it 'bakes contemporary-math' do
     expect('contemporary-math').to bake_correctly
   end
 
-  xit 'bakes economics' do
+  it 'bakes economics' do
     expect('economics').to bake_correctly
   end
 
-  xit 'bakes elementary algebra' do
+  it 'bakes elementary algebra' do
     expect('elementary-algebra').to bake_correctly_with('dev-math')
   end
 
-  xit 'bakes english-composition' do
+  it 'bakes english-composition' do
     expect('english-composition').to bake_correctly
   end
 
-  xit 'bakes entrepreneurship' do
+  it 'bakes entrepreneurship' do
     expect('entrepreneurship').to bake_correctly
   end
 
-  xit 'bakes finance' do
+  it 'bakes finance' do
     expect('finance').to bake_correctly
   end
 
-  xit 'bakes history' do
+  it 'bakes history' do
     expect('history').to bake_correctly
   end
 
-  xit 'bakes hs-physics' do
+  it 'bakes hs-physics' do
     expect('hs-physics').to bake_correctly
   end
 
-  xit 'bakes intellectual property' do
+  it 'bakes intellectual property' do
     expect('intellectual-property').to bake_correctly_with('business-ethics')
   end
 
-  xit 'bakes intermediate algebra' do
+  it 'bakes intermediate algebra' do
     expect('intermediate-algebra').to bake_correctly_with('dev-math')
   end
 
-  xit 'bakes intro business' do
+  it 'bakes intro business' do
     expect('intro-business').to bake_correctly
   end
 
-  xit 'bakes microbio' do
+  it 'bakes microbio' do
     expect('microbiology').to bake_correctly
   end
 
@@ -135,27 +135,27 @@ RSpec.describe 'books' do
     expect('organizational-behavior').to bake_correctly_with('principles-management')
   end
 
-  xit 'bakes philosophy' do
+  it 'bakes philosophy' do
     expect('philosophy').to bake_correctly
   end
 
-  xit 'bakes pl-psychology' do
+  it 'bakes pl-psychology' do
     expect('pl-psychology').to bake_correctly
   end
 
-  xit 'bakes pl u-physics' do
+  it 'bakes pl u-physics' do
     expect('pl-u-physics').to bake_correctly
   end
 
-  xit 'bakes political science' do
+  it 'bakes political science' do
     expect('political-science').to bake_correctly
   end
 
-  xit 'bakes prealgebra' do
+  it 'bakes prealgebra' do
     expect('prealgebra').to bake_correctly_with('dev-math')
   end
 
-  xit 'bakes precalculus' do
+  it 'bakes precalculus' do
     expect('precalculus').to bake_correctly
   end
 
@@ -163,27 +163,27 @@ RSpec.describe 'books' do
     expect('principles-management').to bake_correctly
   end
 
-  xit 'bakes psychology' do
+  it 'bakes psychology' do
     expect('psychology').to bake_correctly
   end
 
-  xit 'bakes sociology' do
+  it 'bakes sociology' do
     expect('sociology').to bake_correctly
   end
 
-  xit 'bakes statistics' do
+  it 'bakes statistics' do
     expect('statistics').to bake_correctly
   end
 
-  xit 'bakes trigonometry' do
+  it 'bakes trigonometry' do
     expect('trigonometry').to bake_correctly_with('precalculus')
   end
 
-  xit 'bakes u-physics' do
+  it 'bakes u-physics' do
     expect('u-physics').to bake_correctly
   end
 
-  xit 'bakes world-histrory' do
+  it 'bakes world-histrory' do
     expect('world-history').to bake_correctly
   end
 
