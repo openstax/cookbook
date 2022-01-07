@@ -40,7 +40,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :principles_management) do |do
     classes: %w[exploring-manager-careers concept-check
                 sustainability-responsible managerial-leadership
                 ethics-in-practice managing-change
-                catching-spirit]
+                catching-spirit expanding-around-globe customer-satisfaction]
   )
 
   BakeReferences.v1(book: book, metadata_source: metadata)
