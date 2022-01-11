@@ -1,16 +1,16 @@
 es:
-  eoc_free_response: Tarea
+  eoc_free_response: 'Tarea para la casa'
   eoc:
-    summary: Revisión del Capítulo
-    formula-review: Revisión de Fórmulas
-    practice: Práctica
-    bring-together-homework: 'Uniéndolo todo: Tarea'
+    summary: 'Repaso del capítulo'
+    formula-review: 'Repaso de fórmulas'
+    practice: 'Práctica'
+    bring-together-homework: 'Resúmalo todo: tarea para la casa'
     bring-together-exercises: 'Uniéndolo todo: Práctica'
-    free-response: 'Tarea'
+    free-response: 'Tarea para la casa'
     solutions: 'Soluciones'
   notes:
     try: 'Inténtelo '
     lab: 'Laboratorio de estadísticas '
-    collab: Ejercicio Colaborativo
-    calculator: Uso de la calculadora TI-83, 83+, 84, 84+
-    chapter-objectives: Objetivos del Capítulo
+    collab: 'Ejercicio Colaborativo'
+    calculator: 'Uso de la calculadora TI-83, 83+, 84, 84+'
+    chapter-objectives: 'Objetivos del Capítulo'

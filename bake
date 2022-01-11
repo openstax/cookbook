@@ -56,6 +56,7 @@ case "${book}" in
   political-science) $DIR/books/political-science/bake --input $input_file --output $output_file;;
   precalculus) $DIR/books/precalculus/bake --input $input_file --output $output_file;;
   precalculus-coreq) $DIR/books/precalculus-coreq/bake --input $input_file --output $output_file;;
+  principles-management) $DIR/books/principles-management/bake --input $input_file --output $output_file;;
   psychology) $DIR/books/psychology/bake --input $input_file --output $output_file;;
   sociology) $DIR/books/sociology/bake --input $input_file --output $output_file;;
   statistics) $DIR/books/statistics/bake --input $input_file --output $output_file;;
