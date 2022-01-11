@@ -60,6 +60,7 @@ case "${book}" in
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  principles-management | \
   psychology | \
   sociology | \
   statistics | \
