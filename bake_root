@@ -29,8 +29,6 @@ done
 case "${book}" in
   # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
 
-  # Note: Add intro-business when content problem be fixed https://github.com/openstax/recipes/issues/158
-
   additive-manufacturing | \
   american-government | \
   anatomy | \
@@ -50,6 +48,7 @@ case "${book}" in
   english-composition | \
   entrepreneurship | \
   finance | \
+  intro-business | \
   history | \
   hs-physics | \
   microbiology | \
