@@ -48,6 +48,7 @@ case "${book}" in
   computer-science | \
   contemporary-math | \
   dev-math | \
+  economics | \
   english-composition | \
   entrepreneurship | \
   finance | \
@@ -60,6 +61,7 @@ case "${book}" in
   political-science | \
   precalculus | \
   precalculus-coreq | \
+  principles-management | \
   psychology | \
   sociology | \
   statistics | \

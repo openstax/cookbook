@@ -131,6 +131,10 @@ RSpec.describe 'books' do
     expect('microbiology').to bake_correctly
   end
 
+  it 'bakes organizational-behavior' do
+    expect('organizational-behavior').to bake_correctly_with('principles-management')
+  end
+
   it 'bakes philosophy' do
     expect('philosophy').to bake_correctly
   end
@@ -153,6 +157,10 @@ RSpec.describe 'books' do
 
   it 'bakes precalculus' do
     expect('precalculus').to bake_correctly
+  end
+
+  it 'bakes principles-management' do
+    expect('principles-management').to bake_correctly
   end
 
   it 'bakes psychology' do
