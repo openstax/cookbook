@@ -2,6 +2,7 @@
 
 # Contains the openstax_kitchen version for each recipe
 KITCHEN_VERSIONS = {
+  current: '17.1.0',
   accounting: { github: 'openstax/kitchen', ref: '8e31efa479f1f78e637827ee23fd71a1716d037f' },
   additive_manufacturing: { github: 'openstax/kitchen', ref: '8e31efa479f1f78e637827ee23fd71a1716d037f' },
   american_government: { github: 'openstax/kitchen', ref: '8e31efa479f1f78e637827ee23fd71a1716d037f' },
