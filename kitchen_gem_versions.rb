@@ -15,7 +15,7 @@ KITCHEN_VERSIONS = {
   business_ethics: '17.0.0',
   calculus: '17.1.0',
   chemistry: '17.1.0',
-  college_physics: '17.1.0',
+  college_physics: { github: 'openstax/kitchen', ref: '8e31efa479f1f78e637827ee23fd71a1716d037f' },
   college_success: '17.1.0',
   computer_science: { github: 'openstax/kitchen', ref: '8e31efa479f1f78e637827ee23fd71a1716d037f' },
   contemporary_math: '17.1.0',
