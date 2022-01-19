@@ -39,6 +39,7 @@ case "${book}" in
   astronomy | \
   bca | \
   biology | \
+  business-ethics | \
   calculus | \
   chemistry | \
   college-physics | \
@@ -50,9 +51,9 @@ case "${book}" in
   english-composition | \
   entrepreneurship | \
   finance | \
-  intro-business | \
   history | \
   hs-physics | \
+  intro-business | \
   microbiology | \
   philosophy | \
   pl-psychology | \
