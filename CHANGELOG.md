@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Changes to `BakeScreenreaderSpans` behavior (major)
 
 ## [18.0.0] - 2022-01-14
 

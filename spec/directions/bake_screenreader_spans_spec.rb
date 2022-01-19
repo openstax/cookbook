@@ -26,7 +26,7 @@ RSpec.describe Kitchen::Directions::BakeScreenreaderSpans do
     expect(book1.pages.first).to match_normalized_html(
       <<~HTML
         <div data-type="page">
-          <div>hello <span data-screenreader-only="true">double underline</span><u data-effect="double-underline">world</u>. <span data-screenreader-only="true">underline</span><u data-effect="underline">aaaaah</u></div>
+          <div>hello <u data-effect="double-underline"><span data-screenreader-only="true">double underline</span>world<span data-screenreader-only="true">end double underline</span></u>. <u data-effect="underline"><span data-screenreader-only="true">underline</span>aaaaah<span data-screenreader-only="true">end underline</span></u></div>
         </div>
       HTML
     )
