@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Changes to `BakeScreenreaderSpans` behavior (major)
+* Changes to `BakeToc` to improve error messaging by including `page.id` (minor)
 
 ## [18.0.0] - 2022-01-14
 

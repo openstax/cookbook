@@ -100,7 +100,8 @@ module Kitchen
                   page.has_ancestor?(:composite_chapter)
               'os-toc-unit-page'
             else
-              raise "do not know what TOC class to use for page with classes #{page.classes}"
+              raise "could not detect which page type class to apply for page.id `#{page.id}`
+               during baking the TOC. The classes on the page are: `#{page.classes}`"
             end
           when CompositePageElement
             if page.is_index? || page.is_index_of_type?
@@ -112,10 +113,12 @@ module Kitchen
             elsif page.has_ancestor?(:composite_chapter) || page.has_ancestor?(:chapter)
               'os-toc-chapter-composite-page'
             else
-              raise "do not know what TOC class to use for page with classes #{page.classes}"
+              raise "could not detect which composite page type class to apply to TOC for page id \
+              `#{page.id}` during baking the TOC. The classes on the page are: `#{page.classes}`"
             end
           else
-            raise(ArgumentError, "don't know how to put `#{page.class}` into the TOC")
+            raise(ArgumentError, "could not detect any page type class to apply for `#{page.id}` \
+            during baking TOC")
           end
 
         title = page.title.copy
