@@ -6,7 +6,7 @@ KITCHEN_VERSIONS = {
   accounting: '18.0.0',
   additive_manufacturing: '18.0.0',
   american_government: { github: 'openstax/kitchen',
-                         ref: 'fd3e10ed129d65f05bb5d345f3635aaec162ba0b' },
+                         ref: 'e680f0dd2254a8648b27a4ca1f05d1c28f3bff29' },
   anatomy: '18.0.0',
   anthropology: '18.0.0',
   ap_biology: '18.0.0',
