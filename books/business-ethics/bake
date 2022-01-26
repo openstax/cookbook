@@ -116,6 +116,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc|
     end
   end
 
+  AnswerKeyCleaner.v1(book: book)
   BakeFootnotes.v1(book: book, number_format: :roman)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
