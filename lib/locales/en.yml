@@ -61,3 +61,10 @@ en:
       title: Auditory learning style icon
     kinesthetic-icon:
       title: Kinesthetic learning style icon
+  screenreader:
+    end: end
+    underline: underline
+    double-underline: double underline
+    public-domain: public domain text
+    student-sample: student sample text
+    annotation-text: annotated text

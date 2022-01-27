@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add features to `BakeScreenreaderSpans` & use translations instead of plaintext (minor)
 * Create `AnswerKeyCleaner` to remove empty chapter containers (minor)
 * Change markup to `span` with `sup` for reference link separator `BakeReferences.v1` plus remove whitespaces and new lines (patch)
 * Changes to `BakeScreenreaderSpans` behavior (major)
