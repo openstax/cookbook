@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    openstax_kitchen (18.0.0)
+    openstax_kitchen (19.0.0)
       activesupport
       i18n
       nokogiri
@@ -99,7 +99,7 @@ GEM
       tins (~> 1.0)
     tins (1.26.0)
       sync
-    twitter_cldr (6.11.0)
+    twitter_cldr (6.11.1)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.1)
       tzinfo
@@ -107,7 +107,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
     yard (0.9.24)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
