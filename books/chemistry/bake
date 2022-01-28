@@ -47,6 +47,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
     )
   end
 
+  book.search('div[data-type="solution"]').each do |solution|
+    BakeFirstElements.v1(within: solution)
+  end
+
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
 
