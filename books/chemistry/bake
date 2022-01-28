@@ -47,10 +47,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
     )
   end
 
-  book.search('div[data-type="solution"]').each do |solution|
-    BakeFirstElements.v1(within: solution)
-  end
-
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
 
@@ -95,11 +91,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :chemistry) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  BakeUnnumberedTables.v1(book: book)
+
+  book.search('div[data-type="solution"]').each do |solution|
+    BakeFirstElements.v1(within: solution)
+  end
+
   note_classes = %w[link-to-learning everyday-life chemist-portrait sciences-interconnect]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
   BakeUnclassifiedNotes.v1(book: book)
   BakeStepwise.v1(book: book)
-  BakeUnnumberedTables.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
