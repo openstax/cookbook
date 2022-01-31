@@ -51,6 +51,7 @@ case "${book}" in
   psychology) dest="${DIR}/data/psychology/short" && script="${DIR}/books/psychology/shorten";;
   entrepreneurship) dest="${DIR}/data/entrepreneurship/short" && script="${DIR}/books/entrepreneurship/shorten";;
   intro-business) dest="${DIR}/data/intro-business/short" && script="${DIR}/books/intro-business/shorten";;
+  principles-management) dest="${DIR}/data/principles-management/short" && script="${DIR}/books/principles-management/shorten";;
   business-ethics) dest="${DIR}/data/business-ethics/short" && script="${DIR}/books/business-ethics/shorten";;
   accounting) dest="${DIR}/data/accounting/short" && script="${DIR}/books/accounting/shorten";;
   philosophy) dest="${DIR}/data/philosophy/short" && script="${DIR}/books/philosophy/shorten";;
