@@ -43,6 +43,7 @@ case "${book}" in
   additive-manufacturing) dest="${DIR}/data/additive-manufacturing/short" && script="${DIR}/books/additive-manufacturing/shorten";;
   college-physics) dest="${DIR}/data/college-physics/short" && script="${DIR}/books/college-physics/shorten";;
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/books/astronomy/shorten";;
+  ap-physics) dest="${DIR}/data/ap-physics/short" && script="${DIR}/books/ap-physics/shorten";;
   history) dest="${DIR}/data/history/short" && script="${DIR}/books/history/shorten";;
   dev-math) dest="${DIR}/data/prealgebra/short" && script="${DIR}/books/dev-math/shorten";;
   hs-physics) dest="${DIR}/data/hs-physics/short" && script="${DIR}/books/hs-physics/shorten";;
