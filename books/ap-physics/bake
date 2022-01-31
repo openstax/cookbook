@@ -15,6 +15,8 @@ end
 recipe = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |doc|
   include Kitchen::Directions
 
+  # NOTE: recipe is not finished. Waiting for the content fixes for math.
+
   book = doc.book
   metadata = book.metadata
 
