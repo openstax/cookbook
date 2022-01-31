@@ -35,8 +35,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :entrepreneurship) do |doc|
     ]
   )
 
-  BakeFootnotes.v1(book: book) # TODO: move after chapter baking
-
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
 
@@ -99,7 +97,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :entrepreneurship) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  # BakeFootnotes.v1(book: book) # TODO: put back here
+  BakeFootnotes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeToc.v1(book: book)

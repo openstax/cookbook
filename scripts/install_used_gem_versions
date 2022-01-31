@@ -7,6 +7,12 @@
 require 'set'
 require_relative '../kitchen_gem_versions'
 
+# Install non-kitchen gems
+puts `gem install i18n -v '< 1.9.0'`
+puts `gem install activesupport -v '< 6.1'`
+puts `gem install nokogiri -v 1.11.1`
+puts `gem install nokogiri -v 1.11.1-x86_64-linux`
+
 # Add gems and versions from book files
 source_filenames = (Dir.glob(File.join(__dir__,"../books/**/*")) + [File.join(__dir__,"console"),File.join(__dir__,"normalize")])
                        .select{|filename| !File.directory?(filename)}

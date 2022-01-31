@@ -1,0 +1,98 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  gem 'byebug'
+end
+
+# Create locales directory and en.yml file with test data
+def create_initial_locales(recipe_dir)
+  File.write(
+    "#{recipe_dir}/locales/en.yml",
+    <<~YML
+      en:
+        sample: Text # remove this later
+    YML
+  )
+end
+
+# Create bake file
+def create_initial_bake_script(recipe_dir, recipe)
+  recipe_underscores = recipe.gsub('-', '_')
+  File.write(
+    "#{recipe_dir}/bake",
+    <<~RUBY
+      #!/usr/bin/env ruby
+
+      # frozen_string_literal: true
+
+      require 'bundler/inline'
+      require_relative '../../bake_helper'
+
+      gemfile do
+        gem 'openstax_kitchen', \\
+            ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:#{recipe_underscores}]
+        gem 'slop', '4.8.2'
+        gem 'byebug'
+      end
+
+      recipe = Kitchen::BookRecipe.new(book_short_name: :#{recipe_underscores}) do |doc|
+        include Kitchen::Directions
+
+        book = doc.book
+        metadata = book.metadata
+
+        book.search('cnx-pi').trash
+
+        # Your recipe code goes here
+
+        BakeFolio.v1(book: book)
+      end
+
+      opts = Slop.parse do |slop|
+        slop.string '--input', 'Assembled XHTML input file', required: true
+        slop.string '--output', 'Baked XHTML output file', required: true
+      end
+
+      puts Kitchen::Oven.bake(
+        input_file: opts[:input],
+        recipes: [recipe],
+        output_file: opts[:output]
+      )
+    RUBY
+  )
+  FileUtils.chmod('+x', "#{recipe_dir}/bake")
+end
+
+# Add to bake script at root (alphabetically)
+def insert_to_bake_script(recipe)
+  lines = File.readlines("#{Dir.pwd}/bake")
+  # ... a bunch of logic for parsing the file & figuring out where to insert the new line ...
+  recipes_names = lines.select { |line| line.match(/[a-z|-]+\)(\s\$DIR.*);;/) } \
+                      .map { |line| line.match(/((\w|-)*)\)/).values_at(1)[0] }
+  recipes_names.append(recipe).sort!
+  lines_count_before_case = lines.find_index("case \"${book}\" in\n") + 1
+  insert_index = recipes_names.find_index(recipe) + lines_count_before_case
+  lines.insert(
+    insert_index,
+    "  #{recipe}) $DIR/books/#{recipe}/bake --input $input_file --output $output_file;;\n"
+  )
+  bake_file = File.open("#{Dir.pwd}/bake", 'w')
+  lines.each do |line|
+    bake_file << line
+  end
+  bake_file.close
+end
+
+ARGV.each do |recipe|
+  recipe_dir = "#{Dir.pwd}/books/#{recipe}"
+  Dir.mkdir(recipe_dir)
+  Dir.mkdir("#{recipe_dir}/locales")
+
+  create_initial_locales(recipe_dir)
+  create_initial_bake_script(recipe_dir, recipe)
+  insert_to_bake_script(recipe)
+end
