@@ -1,0 +1,23 @@
+en:
+  unit: Part
+  notes:
+    think-through: Think It Through
+    tech-everyday: Technology in Everyday Life
+    concepts-practice: Concepts In Practice
+    global-tech: Global Issues in Technology
+    link-to-learning: Link to Learning
+    industry-spotlight: Industry Spotlight
+  eoc:
+    chapter-review: Chapter Review
+    review-questions: Review Questions
+    conceptual-questions: Conceptual Questions
+    practice-exercises: Practice Exercises
+    problem-set-a: Problem Set A
+    problem-set-b: Problem Set B
+    thought-provokers: Thought Provokers
+    lab-assessments: Labs
+    section-summary: Summary
+  exercises:
+    your-turn: Your Turn
+    solution: Solution
+    exercise: Exercise

@@ -1,0 +1,22 @@
+es:
+  unit: Parte
+  notes:
+    think-through: Piénsalo
+    tech-everyday: Tecnología en la Vida Cotidiana
+    concepts-practice: Conceptos en Práctica
+    global-tech: Problemas Globales de Tecnología
+    link-to-learning: Enlace al Aprendizaje
+    industry-spotlight: Destacado en la Industria
+  eoc:
+    review-questions: Preguntas de Revisión
+    conceptual-questions: Preguntas Conceptuales
+    practice-exercises: Ejercicios de Práctica
+    problem-set-a: Serie de Problemas A
+    problem-set-b: Serie de Problemas B
+    thought-provokers: Provocadores del Pensamiento
+    lab-assessments: Laboratorios
+    section-summary: Resumen
+  exercises:
+    your-turn: Tu Turno
+    solution: Solución
+    exercise: Ejercicio

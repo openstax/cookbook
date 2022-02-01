@@ -1,3 +1,5 @@
+# TODO: merge conflicts
+
 name: Tests
 
 on:
@@ -13,12 +15,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+<<<<<<< HEAD
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
+=======
+>>>>>>> remote-recipes/main
       - name: Build docker image and run specs within it
         # See https://docs.codecov.io/docs/testing-with-docker
         run: |

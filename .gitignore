@@ -1,3 +1,6 @@
+# TODO: merge conflicts
+
+<<<<<<< HEAD
 /.bundle/
 /.yardoc
 /_yardoc/
@@ -18,3 +21,21 @@ tutorial/outputs/*.html
 
 tutorials/**/actual_baked.*html
 tutorials/**/my_recipe.rb
+=======
+.html
+.xhtml
+.xml
+.byebug_history
+.DS_Store
+
+# locally mounted repos in the devcontainer
+kitchen
+legacy_recipes
+
+# file that contains the unique-to-a-dev absolute path to repos
+.devcontainer/kitchen_path
+.devcontainer/legacy_recipes_path
+
+# a folder for test data
+data
+>>>>>>> remote-recipes/main

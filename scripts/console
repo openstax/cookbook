@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "bundler/inline"
+
+gemfile do
+  gem 'openstax_kitchen', '2.0.0'
+end
+
+require "irb"
+IRB.start(__FILE__)

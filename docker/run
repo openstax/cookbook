@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
+# TODO: merge conflicts
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 docker run -it \
            -v $DIR/..:/code \
            -w /code \
+<<<<<<< HEAD
            openstax/kitchen:latest \
+=======
+           openstax/recipes:latest \
+>>>>>>> remote-recipes/main
            "$@"

@@ -1,6 +1,11 @@
+# TODO: merge conflicts
+
+<<<<<<< HEAD
 AllCops:
   TargetRubyVersion: 2.4
 
+=======
+>>>>>>> remote-recipes/main
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
@@ -9,7 +14,10 @@ Layout/EmptyLinesAroundBlockBody:
 
 Layout/LineLength:
   Max: 100
+<<<<<<< HEAD
   IgnoredPatterns: ['(\A|\s)#']
+=======
+>>>>>>> remote-recipes/main
 
 Metrics/AbcSize:
   Max: 50
@@ -25,11 +33,18 @@ Metrics/MethodLength:
   Max: 50
   CountAsOne: ['heredoc']
 
+<<<<<<< HEAD
 Metrics/BlockLength:
   CountAsOne: ['heredoc']
   Max: 30
   Exclude:
     - 'openstax_kitchen.gemspec'
+=======
+# Recipes have long blocks on purpose
+Metrics/BlockLength:
+  Enabled: false
+  CountAsOne: ['heredoc']
+>>>>>>> remote-recipes/main
 
 Metrics/ModuleLength:
   CountAsOne: ['heredoc']
@@ -60,6 +75,9 @@ Style/SymbolProc:
 
 Layout/ClosingParenthesisIndentation:
   Enabled: false # when true hanging parens look weird
+<<<<<<< HEAD
 
 Layout/MultilineMethodCallBraceLayout:
   Enabled: false
+=======
+>>>>>>> remote-recipes/main

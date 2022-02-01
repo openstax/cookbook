@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/inline'
+require_relative '../../bake_helper'
+
+gemfile do
+  gem 'openstax_kitchen', \
+      ENV['USE_LOCAL_KITCHEN'] ? { path: '/code/kitchen' } : KITCHEN_VERSIONS[:pl_psychology]
+  gem 'slop', '4.8.2'
+  gem 'byebug'
+end
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology_short) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  # trash all but first chapter
+  book.chapters.drop(3).each(&:trash)
+  # trash all but first appendix
+  book.search('div.appendix').drop(1).each(&:trash)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Shortened assembled XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: recipe,
+  output_file: opts[:output]
+)

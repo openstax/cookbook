@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
+# TODO: merge conflicts
+
+<<<<<<< HEAD
 TAG="docker tag openstax/kitchen:latest openstax/kitchen:$1"
 PUSH="docker push openstax/kitchen:$1"
+=======
+TAG="docker tag openstax/recipes:latest openstax/recipes:$1"
+PUSH="docker push openstax/recipes:$1"
+>>>>>>> remote-recipes/main
 
 echo "About to run the following:"
 echo $TAG

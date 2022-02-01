@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+usage="bake -b <bookname> -r <legacy_recipes_dir> -i <inputfile> -o <outputfile>"
+
+# Get command line arguments
+
+while getopts b:i:o:r:h flag
+do
+  case "${flag}" in
+    b) book=${OPTARG} ;;
+    i) input_file=${OPTARG} ;;
+    o) output_file=${OPTARG} ;;
+    r) legacy_recipes_dir=${OPTARG} ;;
+    h) echo "$usage"; exit 0 ;;
+    *) echo "Unknown flag '${flag}'"; exit 1 ;;
+  esac
+done
+
+# Known supported books will use the kitchen baking, all others will fallback
+# to legacy.
+
+# NOTE: The dummy recipe is a temporary placeholder until there's a recipe that
+#       is ready for release. At that point, the case statement can be updated
+#       accordingly and the dummy recipe removed altogether both here and in
+#       the underlying bake script.
+
+case "${book}" in
+  # Please add newly finished books to the case statement in ALPHABETICAL ORDER!
+
+  accounting | \
+  additive-manufacturing | \
+  american-government | \
+  anatomy | \
+  anthropology | \
+  ap-biology | \
+  ap-history | \
+  astronomy | \
+  bca | \
+  biology | \
+  business-ethics | \
+  calculus | \
+  chemistry | \
+  college-physics | \
+  college-success | \
+  computer-science | \
+  contemporary-math | \
+  dev-math | \
+  economics | \
+  english-composition | \
+  entrepreneurship | \
+  finance | \
+  history | \
+  hs-physics | \
+  intro-business | \
+  microbiology | \
+  philosophy | \
+  pl-economics | \
+  pl-psychology | \
+  pl-u-physics | \
+  political-science | \
+  precalculus | \
+  precalculus-coreq | \
+  principles-management | \
+  psychology | \
+  sociology | \
+  statistics | \
+  u-physics | \
+  world-history | \
+  dummy)
+    echo "Baking book '${book}' with kitchen" ;
+    "${DIR}/bake" -b "$book" -i "$input_file" -o "$output_file";;
+  *) echo "Baking book '${book}' with legacy baking";
+    "${DIR}/bake_legacy" -i "$input_file" -o "$output_file" -r "${legacy_recipes_dir}/${book}.css";;
+esac
