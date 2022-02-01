@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: merge conflicts
-
-<<<<<<< HEAD
 ENV['TESTING'] = 'true'
 
 if ENV['ENABLE_CODECOV']
@@ -44,8 +41,3 @@ RSpec.configure do |config|
     Nokogiri::XML.print_profile_data if ENV['PROFILE']
   end
 end
-=======
-require 'helpers/match_helper'
-require 'nokogiri'
-require 'byebug'
->>>>>>> remote-recipes/main
