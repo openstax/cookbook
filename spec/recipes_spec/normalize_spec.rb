@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../scripts/helpers/normalize_helpers'
+require_relative '../../scripts/helpers/normalize_helpers'
 
 RSpec.describe 'normalize script' do
   let(:doc) do

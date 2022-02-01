@@ -17,7 +17,7 @@ RSpec::Matchers.define :bake_correctly_with do |recipe|
   match do |book|
     actual_file = Tempfile.new(book)
 
-    cmd = `#{__dir__}/../../bake -b #{recipe} -i #{__dir__}/../../spec/books/#{book}/input.xhtml \
+    cmd = `#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
       -o #{actual_file.path}`
 
     if ENV['USE_LOCAL_KITCHEN']
@@ -28,11 +28,11 @@ RSpec::Matchers.define :bake_correctly_with do |recipe|
 
     `ruby scripts/normalize #{actual_file.path}`
     normalized_path = "#{actual_file.path}.normalized"
-    FileUtils.cp(normalized_path, "spec/books/#{book}/actual_output.xhtml")
-    expect("spec/books/#{book}/expected_output.xhtml").to be_same_file_as(normalized_path)
+    FileUtils.cp(normalized_path, "spec/recipes_spec/books/#{book}/actual_output.xhtml")
+    expect("spec/recipes_spec/books/#{book}/expected_output.xhtml").to be_same_file_as(normalized_path)
 
     File.delete(normalized_path)
-    File.delete("spec/books/#{book}/actual_output.xhtml")
+    File.delete("spec/recipes_spec/books/#{book}/actual_output.xhtml")
   end
 end
 
