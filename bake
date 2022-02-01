@@ -51,6 +51,7 @@ case "${book}" in
   intro-business) $DIR/books/intro-business/bake --input $input_file --output $output_file;;
   microbiology) $DIR/books/microbiology/bake --input $input_file --output $output_file;;
   philosophy) $DIR/books/philosophy/bake --input $input_file --output $output_file;;
+  pl-economics) $DIR/books/pl-economics/bake --input $input_file --output $output_file;;
   pl-psychology) $DIR/books/pl-psychology/bake --input $input_file --output $output_file;;
   pl-u-physics) $DIR/books/pl-u-physics/bake --input $input_file --output $output_file;;
   political-science) $DIR/books/political-science/bake --input $input_file --output $output_file;;

@@ -56,6 +56,7 @@ case "${book}" in
   intro-business | \
   microbiology | \
   philosophy | \
+  pl-economics | \
   pl-psychology | \
   pl-u-physics | \
   political-science | \

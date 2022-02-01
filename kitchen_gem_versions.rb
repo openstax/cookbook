@@ -32,6 +32,7 @@ KITCHEN_VERSIONS = {
   intro_business: '18.0.0',
   microbiology: '18.0.0',
   philosophy: '18.0.0',
+  pl_economics: '19.0.0',
   pl_psychology: '18.0.0',
   pl_u_physics: '18.0.0',
   political_science: '18.0.0',
