@@ -25,7 +25,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
+  # Lines from below removing attributes with certain namespaces
+  # need to be removed after content fixes
+  book.search('span[data-type="term"]').each do |term|
+    next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
+
+    term.raw.attributes.each do |key, val|
+      val.remove if val&.namespace&.prefix == 'cxlxt'
+    end
+
+  end
+
   BakePreface.v1(book: book, title_element: 'h1')
+  BakeUnnumberedFigure.v1(book: book)
   BakeChapterIntroductions.v2(
     book: book,
     strategy_options: {
@@ -70,12 +82,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}",
+                           cases: true)
     end
 
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
-                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}",
+                    cases: true)
     end
 
     chapter.exercises.each do |exercise|
@@ -83,26 +97,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
     end
 
     BakeNonIntroductionPages.v1(chapter: chapter)
-  end
-  book.pages('$.appendix').each do |page|
-    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
-
-    BakeAppendix.v1(page: page, number: appendix_letter)
-    page.figures(only: :figure_to_number?).each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{appendix_letter}#{figure.count_in(:page)}")
-    end
-
-    page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                           number: "#{appendix_letter}#{table.count_in(:page)}")
-    end
-
-    page.search('section').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise,
-                              number: "#{appendix_letter}#{exercise.count_in(:page)}")
-      BakeFirstElements.v1(within: exercise)
-    end
   end
 
   BakeUnnumberedTables.v1(book: book)
@@ -112,7 +106,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   end
 
   BakeReferences.v2(book: book, metadata_source: metadata)
-  BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.')
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
