@@ -1,6 +1,3 @@
-# TODO: merge conflicts
-
-<<<<<<< HEAD
 # Use non-slim to have git and build tools installed (faster for lots of runs
 # on CI)
 FROM ruby:2.6
@@ -11,18 +8,3 @@ RUN gem install bundler --no-document --version $bundler_version
 
 WORKDIR /code
 COPY . /code/
-=======
-FROM ruby:2.6.6-buster AS runtime-env
-
-RUN gem install bundler --no-document && \
-    gem install byebug --no-document && \
-    gem install rspec --no-document && \
-    bundle config set no-cache 'true' && \
-    bundle config set silence_root_warning 'true' && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install gems which are needed to run each recipe
-COPY . /code
-RUN /code/scripts/install_used_gem_versions
-WORKDIR /code
->>>>>>> remote-recipes/main

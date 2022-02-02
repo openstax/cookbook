@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: merge conflicts
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # See https://docs.codecov.io/docs/testing-with-docker, also note that it is
@@ -10,16 +8,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # https://github.com/codecov/codecov-ruby/blob/484767f1c3d7992a9d7fedd6dc72d35a80d04f70/lib/codecov.rb#L68-L69
 
 docker run $CI_ENV \
-<<<<<<< HEAD
            -e ENABLE_CODECOV=1 -e CI=true \
            -v $DIR/..:/code \
            -w /code \
-           openstax/kitchen.ci:latest \
+           openstax/cookbook.ci:latest \
            /bin/bash -c "bundle config path vendor/bundle; bundle install; bundle exec rspec"
-=======
-           -e CI=true \
-           -v $DIR/..:/code \
-           -w /code \
-           openstax/recipes.ci:latest \
-           /bin/bash -c "rspec"
->>>>>>> remote-recipes/main

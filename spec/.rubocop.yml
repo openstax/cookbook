@@ -45,3 +45,7 @@ RSpec/NestedGroups:
 
 RSpec/MultipleExpectations:
   Max: 4
+
+RSpec/ExpectActual:
+  Exclude:
+    - 'recipes_spec/main_spec.rb'

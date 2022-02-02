@@ -1,17 +1,10 @@
 #!/usr/bin/env bash
 
-# TODO: merge conflicts
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ "$1" == "--ci" ]; then SUFFIX=".ci"; else SUFFIX=""; fi
 
 docker build -f $DIR/Dockerfile$SUFFIX \
-<<<<<<< HEAD
-             -t openstax/kitchen$SUFFIX:latest \
+             -t openstax/cookbook$SUFFIX:latest \
              --build-arg bundler_version=2.2.4 \
-=======
-             -t openstax/recipes$SUFFIX:latest \
-             --target runtime-env \
->>>>>>> remote-recipes/main
              $DIR/..

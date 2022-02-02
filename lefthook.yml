@@ -1,13 +1,6 @@
-# TODO: merge conflicts
-
 pre-push:
   commands:
     rubocop:
       files: git diff --name-only main
-<<<<<<< HEAD
       glob: "*.rb"
       run: bundle exec rubocop {files} --disable-pending-cops
-=======
-      glob: "**/{bake,console,normalize}"
-      run: rubocop {files} --disable-pending-cops
->>>>>>> remote-recipes/main

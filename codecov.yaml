@@ -30,3 +30,4 @@ ignore:
   - "docker"
   - "books"
   - "lib/kitchen/patches/nokogiri_profiling"
+  - "scripts"
