@@ -22,7 +22,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   book.search('span[data-type="term"]').each do |term|
     next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
 
-    term.raw.attributes.each do |key, val|
+    term.raw.attributes.each do |_key, val|
       val.remove if val&.namespace&.prefix == 'cxlxt'
     end
 
@@ -41,7 +41,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   BakeChapterTitle.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(outer_element: book)
-  BakeAutotitledNotes.v1(book: book, classes: %w[linkup bringhome clearup workout])
+  BakeAutotitledNotes.v1(book: book, classes: %w[linkup bringhome clearup workout], cases: true)
   answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
@@ -53,7 +53,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
                                   critical-thinking problems]
 
     chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), cases: true)
     end
 
     exercise_section_classes.each do |klass|
@@ -68,10 +68,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
-      strategy_options: { selectors: %w[self-check-questions problems ap-test-prep].prefix('section.') },
+      strategy_options:
+        { selectors: %w[self-check-questions problems ap-test-prep].prefix('section.') },
       chapter: chapter,
       append_to: answer_key_inner_container
     )
+
+    # Temporary fix for top-captioned tables breaking the baking (to be removed after content update)
+    chapter.tables(only: :top_captioned?).each do |table|
+      table.remove_attribute('class') unless table.first('caption')
+    end
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
