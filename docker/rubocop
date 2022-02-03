@@ -19,6 +19,6 @@ if [[ -z "${changed_ruby_files// }" ]]; then
 else
   docker run -v $DIR/..:/code \
              -w /code \
-             openstax/kitchen.ci:latest \
+             openstax/cookbook.ci:latest \
              /bin/bash -c "bundle config path vendor/bundle; bundle install; bundle exec rubocop $changed_ruby_files --disable-pending-cops"
 fi
