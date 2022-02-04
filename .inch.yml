@@ -3,4 +3,4 @@ files:
   excluded:
     - lib/kitchen/directions/**/*.rb # may want to add this in later in a limited way
     - lib/kitchen/debug/**/*.rb
-    - lib/cookbook_kitchen.rb
+    - lib/openstax_cookbook.rb
