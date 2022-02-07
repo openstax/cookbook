@@ -83,6 +83,28 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
+  let(:timeline_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="timeline-table" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
+  let(:data_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="data-table" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:other_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -231,6 +253,44 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
           <table class="text-heavy top-titled" id="tId">
             <thead></thead>
           </table>
+          <div class="os-caption-container">
+            <span class="os-title-label">Table </span>
+            <span class="os-number">2.3</span>
+            <span class="os-divider"> </span>
+            <span class="os-divider"> </span>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  it 'bakes a timeline table' do
+    described_class.new.bake(table: data_table, number: '2.3', always_caption: false)
+
+    expect(timeline_table.document.search('.os-table').first).to match_normalized_html(
+      <<~HTML
+        <div class="os-table timeline-table-container">
+          <table class="timeline-table" id="tId">
+        </table>
+          <div class="os-caption-container">
+            <span class="os-title-label">Table </span>
+            <span class="os-number">2.3</span>
+            <span class="os-divider"> </span>
+            <span class="os-divider"> </span>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  it 'bakes a data table' do
+    described_class.new.bake(table: data_table, number: '2.3', always_caption: false)
+
+    expect(data_table.document.search('.os-table').first).to match_normalized_html(
+      <<~HTML
+        <div class="os-table os-data-table-container">
+          <table class="data-table" id="tId">
+        </table>
           <div class="os-caption-container">
             <span class="os-title-label">Table </span>
             <span class="os-number">2.3</span>

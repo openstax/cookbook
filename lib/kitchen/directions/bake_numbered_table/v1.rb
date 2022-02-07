@@ -39,7 +39,7 @@ module Kitchen::Directions::BakeNumberedTable
         HTML
       )
 
-      table.parent.add_class('os-timeline-table-container') if table.has_class?('timeline-table')
+      # table.parent.add_class('os-timeline-table-container') if table.has_class?('timeline-table')
     end
   end
 end
