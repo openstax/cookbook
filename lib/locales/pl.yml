@@ -70,6 +70,9 @@ pl:
   eob:
     references: Bibliografia
     reference: Bibliografia
+  folio:
+    preface: Przedmowa
+    access_for_free: Podręcznik dostępny na openstax.org
   index:
     name: Skorowidz nazwisk
     term: Skorowidz rzeczowy
