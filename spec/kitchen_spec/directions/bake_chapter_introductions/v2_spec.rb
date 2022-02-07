@@ -103,6 +103,32 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     )
   end
 
+  let(:book_with_unit_opener) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <h1 data-type="document-title">Chapter 1 Title</h1>
+          <div class="introduction" data-type="page">
+            <div data-type="document-title">Introduction</div>
+            <div data-type="note" class="unit-opener">
+              <div data-type="title">Understanding the Marketplace</div>
+              <p>Welcome to Part II of Principles of Marketing...</p>
+            </div>
+            <figure class="splash">
+              <div data-type="title">Blood Pressure</div>
+              <figcaption>A proficiency in anatomy and physiology... (credit: Bryan Mason/flickr)</figcaption>
+              <span data-type="media" data-alt="This photo shows a nurse taking a woman’s...">
+              <img src="ccc4ed14-6c87-408b-9934-7a0d279d853a/100_Blood_Pressure.jpg" data-media-type="image/jpg" alt="This photo shows a nurse taking..." />
+              </span>
+            </figure>
+            <p id="123">Though you may approach a course in anatomy and physiology...</p>
+            <p id="123">This chapter begins with an overview of anatomy and...</p>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   context 'when v2 called on book with chapter objectives' do
     it 'with chapter outline' do
       described_class.v2(
@@ -230,6 +256,47 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       expect {
         described_class.v2(book: book_with_intro_objectives, strategy_options: { strategy: :hello })
       }.to raise_error('No such strategy')
+    end
+  end
+
+  context 'when v2 called on book with unit opener' do
+    it 'bakes' do
+      described_class.v2(
+        book: book_with_unit_opener,
+        strategy_options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v3 }
+      )
+      expect(book_with_unit_opener.body).to match_normalized_html(
+        <<~HTML
+          <body>
+            <div data-type="chapter">
+              <h1 data-type="document-title">Chapter 1 Title</h1>
+              <div class="introduction" data-type="page">
+                <figure class="splash">
+                  <div data-type="title">Blood Pressure</div>
+                  <figcaption>A proficiency in anatomy and physiology... (credit: Bryan Mason/flickr)</figcaption>
+                  <span data-type="media" data-alt="This photo shows a nurse taking a woman&#x2019;s...">
+                  <img src="ccc4ed14-6c87-408b-9934-7a0d279d853a/100_Blood_Pressure.jpg" data-media-type="image/jpg" alt="This photo shows a nurse taking..."/>
+                  </span>
+                </figure>
+                <div class="intro-body">
+                  <div data-type="note" class="unit-opener">
+                    <div data-type="title">Understanding the Marketplace</div>
+                    <p>Welcome to Part II of Principles of Marketing...</p>
+                  </div>
+                  <div class="os-chapter-outline">
+                    <h3 class="os-title">Chapter Outline</h3>
+                  </div>
+                  <div class="intro-text">
+                    <h2 data-type="document-title"><span data-type="" itemprop="" class="os-text">Introduction</span></h2>
+                    <p id="123">Though you may approach a course in anatomy and physiology...</p>
+                    <p id="123_copy_1">This chapter begins with an overview of anatomy and...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        HTML
+      )
     end
   end
 
