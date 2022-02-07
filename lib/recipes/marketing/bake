@@ -102,8 +102,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
 
   notes = %w[marketing-practice companies-conscience]
   BakeAutotitledNotes.v1(book: book, classes: notes)
-
   BakeAutotitledNotes.v1(book: book, classes: %w[marketing-dashboard], bake_exercises: true)
+  BakeCustomTitledNotes.v1(book: book, classes: %w[unit-opener word-document])
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
