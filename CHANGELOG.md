@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `BakeCustomTitledNotes` for notes with classes that have custom title (minor)
 * Modify `BakeChapterIntroductions` to bake intro with unit opener note (minor)
 * Add more updates to `pl-economics` recipe bake file. Fix `shorten` script paths, change kitchen.ci to cookbook in docker run `rubocop` file (patch)
 
