@@ -20,23 +20,38 @@ module Kitchen::Directions::BakeChapterIntroductions
             )
         end
 
-        case strategy_options[:introduction_order]
-        when :v1
-          v1_introduction_order(
-            introduction_page: introduction_page,
-            chapter_intro_html: chapter_intro_html,
-            title: title
-          )
-        when :v2
-          v2_introduction_order(
-            introduction_page: introduction_page,
-            chapter_intro_html: chapter_intro_html,
-            title: title
-          )
-        end
+        order(
+          strategy_options: strategy_options,
+          introduction_page: introduction_page,
+          chapter_intro_html: chapter_intro_html,
+          title: title
+        )
       end
 
       Kitchen::Directions::BakeChapterIntroductions.v1_update_selectors(book)
+    end
+
+    def order(strategy_options:, introduction_page:, chapter_intro_html:, title:)
+      case strategy_options[:introduction_order]
+      when :v1
+        v1_introduction_order(
+          introduction_page: introduction_page,
+          chapter_intro_html: chapter_intro_html,
+          title: title
+        )
+      when :v2
+        v2_introduction_order(
+          introduction_page: introduction_page,
+          chapter_intro_html: chapter_intro_html,
+          title: title
+        )
+      when :v3
+        v3_introduction_order(
+          introduction_page: introduction_page,
+          chapter_intro_html: chapter_intro_html,
+          title: title
+        )
+      end
     end
 
     def v1_introduction_order(introduction_page:, chapter_intro_html:, title:)
@@ -72,6 +87,27 @@ module Kitchen::Directions::BakeChapterIntroductions
             <div class="intro-text">
               #{title.paste}
               #{extra_content.paste}
+            </div>
+          </div>
+        HTML
+      )
+    end
+
+    def v3_introduction_order(introduction_page:, chapter_intro_html:, title:)
+      intro_content = introduction_page.search(
+        "> :not([data-type='metadata']):not(.splash):not(.has-splash):not(.unit-opener)"
+      ).cut
+
+      unit_opener_note = introduction_page.search('[data-type="note"].unit-opener').cut
+
+      introduction_page.append(child:
+        <<~HTML
+          <div class="intro-body">
+            #{unit_opener_note.paste}
+            #{chapter_intro_html}
+            <div class="intro-text">
+              #{title.paste}
+              #{intro_content.paste}
             </div>
           </div>
         HTML

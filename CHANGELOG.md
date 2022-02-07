@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-* Update locales file, specs for pl microeconomics (patch)
+* Update locales files, specs for pl microeconomics, pl-u-physics, pl-psychology (patch)
+* Create `BakeCustomTitledNotes` for notes with classes that have custom title (minor)
+* Modify `BakeChapterIntroductions` to bake intro with unit opener note (minor)
 * Add more updates to `pl-economics` recipe bake file. Fix `shorten` script paths, change kitchen.ci to cookbook in docker run `rubocop` file (patch)
 
 ## [19.0.0] - 2022-1-28
