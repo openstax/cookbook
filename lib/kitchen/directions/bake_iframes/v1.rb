@@ -14,11 +14,15 @@ module Kitchen::Directions::BakeIframes
         link_ref = iframe[:src]
         next unless link_ref
 
+        resource_link = link_ref.match(/..\/resources\/.*\/index.html/)
+        next if resource_link # TODO: behavior for resource links
+
         iframe = iframe.parent
         iframe.add_class('os-has-link')
+
         iframe.prepend(child:
           <<~HTML
-            <a class="os-is-link" href="#{link_ref}" target="_window">#{I18n.t(:iframe_link_text)}</a>
+            <a class="os-is-link" href="#{link_ref}" target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)} (#{link_ref})</a>
           HTML
         )
       end
