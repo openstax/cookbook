@@ -3,6 +3,10 @@
 module Kitchen
   module Directions
     module BakeCustomTitledNotes
+      # These notes are baked in a similar way to BakeUnclassifiedNotes.
+      # They can use existing title or none.
+      # Only difference is that they contain classes.
+
       def self.v1(book:, classes:)
         book.notes.each do |note|
           next unless (note.classes & classes).any?
