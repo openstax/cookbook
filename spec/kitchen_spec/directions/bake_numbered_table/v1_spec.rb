@@ -265,11 +265,11 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
   end
 
   it 'bakes a timeline table' do
-    described_class.new.bake(table: data_table, number: '2.3', always_caption: false)
+    described_class.new.bake(table: timeline_table, number: '2.3', always_caption: false)
 
     expect(timeline_table.document.search('.os-table').first).to match_normalized_html(
       <<~HTML
-        <div class="os-table timeline-table-container">
+        <div class="os-table os-timeline-table-container">
           <table class="timeline-table" id="tId">
         </table>
           <div class="os-caption-container">
