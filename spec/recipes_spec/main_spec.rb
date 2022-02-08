@@ -139,6 +139,10 @@ RSpec.describe 'books' do
     expect('philosophy').to bake_correctly
   end
 
+  it 'bakes pl-microeconomics' do
+    expect('pl-microeconomics').to bake_correctly_with('pl-economics')
+  end
+
   it 'bakes pl-psychology' do
     expect('pl-psychology').to bake_correctly
   end
