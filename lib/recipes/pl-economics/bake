@@ -46,7 +46,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v1(chapter: chapter)
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, has_para: true)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
     exercise_section_classes = %w[summary self-check-questions review-questions
