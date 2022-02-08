@@ -54,12 +54,6 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
               </iframe>
             </div>
           </div>
-          <div class="interactive" data-has-label="true" data-label="" data-type="note" id="iframenote">
-            <div data-alt="atoms_isotopes" data-type="media">
-              <iframe height="371.4" width="660"><!-- no-selfclose -->
-              </iframe>
-            </div>
-          </div>
           <div class="interactive interactive-long" data-has-label="true" data-label="" data-type="note" id="iframenote3">
             <ul>
               <li>1: The evolution from fish to earliest tetrapod<span data-type="newline"><br /></span>
@@ -202,22 +196,8 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
             </h3>
             <div class="os-note-body">
               <div data-alt="atoms_isotopes" data-type="media">
-                <div class="os-has-iframe os-has-link" data-type="alternatives"><a class="os-is-link" href="https://openstax.org/l/atoms_isotopes" target="_window">Click to view content</a>
+                <div class="os-has-iframe os-has-link" data-type="alternatives"><a class="os-is-link" href="https://openstax.org/l/atoms_isotopes" rel="noopener nofollow" target="_blank">Click to view content (https://openstax.org/l/atoms_isotopes)</a>
                   <iframe class="os-is-iframe" height="371.4" src="https://openstax.org/l/atoms_isotopes" width="660"><!-- no-selfclose -->
-                  </iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="interactive" data-has-label="true" data-label="" data-type="note" id="iframenote">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label">Link to Learning</span>
-            </h3>
-            <div class="os-note-body">
-              <div data-alt="atoms_isotopes" data-type="media">
-                <div class="os-has-iframe" data-type="alternatives">
-                  <iframe class="os-is-iframe" height="371.4" width="660">
-        <!-- no-selfclose -->
                   </iframe>
                 </div>
               </div>
@@ -231,7 +211,7 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
               <ul>
                 <li>1: The evolution from fish to earliest tetrapod<span data-type="newline"><br /></span>
               <div data-alt="tetrapod_evol1" data-type="media">
-                <div class="os-has-iframe os-has-link" data-type="alternatives"><a class="os-is-link" href="url1" target="_window">Click to view content</a>
+                <div class="os-has-iframe os-has-link" data-type="alternatives"><a class="os-is-link" href="url1" rel="noopener nofollow" target="_blank">Click to view content (url1)</a>
                   <iframe class="os-is-iframe" height="371.4" src="url1" width="660"><!-- no-selfclose -->
                   </iframe>
                 </div>
@@ -239,7 +219,7 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
             </li>
                 <li>2: The discovery of coelacanth and <em data-effect="italics">Acanthostega</em> fossils<span data-type="newline"><br /></span>
               <div data-alt="tetrapod_evol2" data-type="media">
-                <div class="os-has-iframe os-has-link" data-type="alternatives"><a class="os-is-link" href="url2" target="_window">Click to view content</a>
+                <div class="os-has-iframe os-has-link" data-type="alternatives"><a class="os-is-link" href="url2" rel="noopener nofollow" target="_blank">Click to view content (url2)</a>
                   <iframe class="os-is-iframe" height="371.4" src="url2" width="660"><!-- no-selfclose -->
                   </iframe>
                 </div>
