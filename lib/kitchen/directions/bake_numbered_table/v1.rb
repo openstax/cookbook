@@ -38,8 +38,6 @@ module Kitchen::Directions::BakeNumberedTable
           </div>
         HTML
       )
-
-      table.parent.add_class('os-timeline-table-container') if table.has_class?('timeline-table')
     end
   end
 end
