@@ -105,6 +105,14 @@ module Kitchen
       has_class?('text-heavy')
     end
 
+    # Returns true if the table is data table
+    #
+    # @return [Boolean]
+    #
+    def data_table?
+      has_class?('data-table')
+    end
+
     # Returns an element for the table caption, if present
     #
     # @return [Element, nil]

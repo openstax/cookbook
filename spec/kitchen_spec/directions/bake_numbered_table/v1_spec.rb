@@ -71,6 +71,17 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
+  let(:data_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="data-table" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:text_heavy_top_titled_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -209,6 +220,25 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
       <<~HTML
         <div class="os-table os-unstyled-container">
           <table class="unstyled" id="tId">
+        </table>
+          <div class="os-caption-container">
+            <span class="os-title-label">Table </span>
+            <span class="os-number">2.3</span>
+            <span class="os-divider"> </span>
+            <span class="os-divider"> </span>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
+  it 'bakes a data table' do
+    described_class.new.bake(table: data_table, number: '2.3')
+
+    expect(data_table.document.search('.os-table').first).to match_normalized_html(
+      <<~HTML
+        <div class="os-table os-data-table-container">
+          <table class="data-table" id="tId">
         </table>
           <div class="os-caption-container">
             <span class="os-title-label">Table </span>

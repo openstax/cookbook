@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `data-table` to `BakeNumberedTable` (minor)
 * Change iframes behavior to include the (url...) in link (major)
 * Create `BakeCustomTitledNotes` for notes with classes that have custom title (minor)
 * Modify `BakeChapterIntroductions` to bake intro with unit opener note (minor)
