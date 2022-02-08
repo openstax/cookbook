@@ -20,6 +20,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
 
   BakePreface.v1(book: book)
 
+  book.pages('$.preface').each do |page|
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: table.count_in(:page).to_s)
+    end
+  end
+
   BakeChapterIntroductions.v2(
     book: book, strategy_options: {
       strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v3
