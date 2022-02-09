@@ -80,6 +80,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |d
   BakeLinkPlaceholders.v1(book: book)
   BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
+  BakeLinks.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
