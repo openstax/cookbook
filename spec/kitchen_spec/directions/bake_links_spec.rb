@@ -11,7 +11,9 @@ RSpec.describe Kitchen::Directions::BakeLinks do
         <a href='skip//2'>text</a>
         <a href='https://some-url'>text</a>
         <a href='http://some-url'>text</a>
-        <a href='//some-url'>text</a>
+        <a href='//some-url' target='_window'>text</a>
+        <a href='../resources/whatever.html'>text</a>
+        <a href='../resources/whatever2.html' rel='something'>text</a>
       HTML
     )
   end
@@ -27,6 +29,8 @@ RSpec.describe Kitchen::Directions::BakeLinks do
           <a href="https://some-url" rel="noopener nofollow" target="_blank">text</a>
           <a href="http://some-url" rel="noopener nofollow" target="_blank">text</a>
           <a href="//some-url" rel="noopener nofollow" target="_blank">text</a>
+          <a href='../resources/whatever.html' target="_blank">text</a>
+          <a href='../resources/whatever2.html' target="_blank">text</a>
         </body>
       HTML
     )

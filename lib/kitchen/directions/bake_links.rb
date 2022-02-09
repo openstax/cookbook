@@ -9,10 +9,12 @@ module Kitchen
         book.search('a').each do |anchor|
           # Add attributes to links that start with https://, http://, or //
           # For Rex
-          #byebug
           if anchor&.[](:href)&.match(/^https:\/\/|^http:\/\/|^\/\//)
             anchor[:target] = '_blank'
             anchor[:rel] = 'noopener nofollow'
+          elsif anchor&.[](:href)&.match(/^\.\.\//)
+            anchor[:target] = '_blank'
+            anchor.remove_attribute('rel')
           end
         end
       end
