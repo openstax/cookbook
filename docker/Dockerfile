@@ -40,10 +40,10 @@ WORKDIR /code
 COPY . /code/
 
 RUN gem install bundler --no-document --version $bundler_version && \
+    bundle install && \
     gem install solargraph && \
     gem install lefthook && \
     bundle config set no-cache 'true' && \
     bundle config set silence_root_warning 'true' && \
-    bundle install && \
     echo "Generating YARD documentation for gems (this can be slow)..." && \
     bundle exec yard gems --quiet
