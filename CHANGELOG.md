@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 * Update locales files, specs for pl microeconomics, pl-u-physics, pl-psychology (patch)
 * Add support for tables wioth classes `data-table`, `timeline-table` to `BakeNumberedTable.v1`
 * Change iframes behavior to include the (url...) in link (major)
