@@ -109,6 +109,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
   BakeCompositePages.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|

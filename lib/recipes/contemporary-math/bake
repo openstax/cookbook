@@ -135,6 +135,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeFolio.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
