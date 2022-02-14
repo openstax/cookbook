@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Update all recipes to contain `BakeLinkPlaceholder` and `BakeFolio` (patch)
 * Creeate `BakeLinks` and add to all recipes, for Rex (major)
 * Update locales files, specs for pl microeconomics, pl-u-physics, pl-psychology (patch)
 * Add support for tables wioth classes `data-table`, `timeline-table` to `BakeNumberedTable.v1`
