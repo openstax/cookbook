@@ -40,6 +40,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc|
     classes: %w[cfa-institute]
   )
 
+  BakeCustomTitledNotes.v1(book: book, classes: %w[excel-spreadsheet])
+
   book.chapters.each do |chapter|
     BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
