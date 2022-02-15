@@ -58,6 +58,7 @@ case "${book}" in
   pl-economics) dest="${DIR}/data/pl-economics/short" && script="${DIR}/lib/recipes/pl-economics/shorten";;
   pl-u-physics) dest="${DIR}/data/pl-u-physics/short" && script="${DIR}/lib/recipes/pl-u-physics/shorten";;
   world-history) dest="${DIR}/data/world-history/short" && script="${DIR}/lib/recipes/world-history/shorten";;
+  marketing) dest="${DIR}/data/marketing/short" && script="${DIR}/lib/recipes/marketing/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
