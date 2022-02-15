@@ -131,6 +131,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc|
   end
 
   BakeLinkPlaceholders.v1(book: book)
+  BakeLinks.v1(book: book)
 
 end
 
