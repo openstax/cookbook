@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create recipe for `marketing` (major)
 * Update all recipes to contain `BakeLinkPlaceholder` and `BakeFolio` (patch)
 * Creeate `BakeLinks` and add to all recipes, for Rex (major)
 * Update locales files, specs for pl microeconomics, pl-u-physics, pl-psychology (patch)
@@ -13,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Change iframes behavior to include the (url...) in link (major)
 * Create `BakeCustomTitledNotes` for notes with classes that have custom title (minor)
 * Modify `BakeChapterIntroductions` to bake intro with unit opener note (minor)
-* Create recipe for `marketing` (major)
 * Add more updates to `pl-economics` recipe bake file. Fix `shorten` script paths, change kitchen.ci to cookbook in docker run `rubocop` file (patch)
 * Modify how `recipes_helper` requires `imports_for_recipes`
 
