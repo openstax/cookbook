@@ -125,8 +125,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
 
-    # puts answer_key_inner_container
-
     Strategy.new.bake(
       chapter: chapter,
       append_to: answer_key_inner_container
