@@ -3,16 +3,33 @@
 module Kitchen
   module Directions
     module BakeNonIntroductionPages
-      def self.v1(chapter:, add_target_label: false)
+      def self.v1(chapter:, add_custom_modules_target_label: false, cases: false)
         chapter.non_introduction_pages.each do |page|
           number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
 
           page.search("div[data-type='description']").each(&:trash)
           page.add_class('chapter-content-module')
 
-          page.target_label(custom_content: number) if add_target_label
-
           title = page.title
+          title_label = title.children
+
+          # page.target_label(custom_content: number) if add_target_label
+          if add_custom_modules_target_label
+            if cases
+              page.target_label_for_modules(label_text: 'module', custom_title_content: title_label,
+                                            custom_number_content: number, cases: cases)
+            else
+              page.target_label_for_modules(custom_title_content: title_label,
+                                            custom_number_content: number, cases: cases)
+            end
+          else
+            if cases
+              page.target_label(label_text: 'module', custom_content: " #{number} #{title_label}", cases: cases)
+            else
+              page.target_label(custom_content: " #{number} #{title_label}")
+            end
+          end
+
           title.name = 'h2'
           title.replace_children(with:
             <<~HTML

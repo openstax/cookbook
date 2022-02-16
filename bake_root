@@ -66,6 +66,7 @@ case "${book}" in
   psychology | \
   sociology | \
   statistics | \
+  testing-anchor | \
   u-physics | \
   world-history | \
   dummy)

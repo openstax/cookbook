@@ -39,10 +39,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   )
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter, add_target_label: true)
+    BakeNonIntroductionPages.v1(chapter: chapter, add_custom_modules_target_label: true)
     chapter.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+      # BakeNumberedTable.v1(table: table,
+      #                      number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(
@@ -131,8 +131,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
                     number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
     page.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                           number: "#{appendix_letter}#{table.count_in(:page)}")
+      # BakeNumberedTable.v1(table: table,
+      #                      number: "#{appendix_letter}#{table.count_in(:page)}")
     end
   end
   BakeIndex.v1(book: book)
@@ -140,7 +140,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  BakeLOLinkLabels.v1(book: book)
+  # BakeLOLinkLabels.v1(book: book)
   BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)

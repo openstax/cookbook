@@ -737,7 +737,7 @@ module Kitchen
     end
 
     # Creates labels for links to inside elements
-    # like Figures, Tables, Equations, Exercises, Notes.
+    # like Figures, Tables, Equations, Exercises, Notes, Appendices.
     #
     # @param label_text [String] label of the element defined in yml file.
     #   (e.g. "Figure", "Table", "Equation")
@@ -764,6 +764,57 @@ module Kitchen
                           "#{I18n.t(label_text.to_s)} #{custom_content}"
                         else
                           custom_content
+                        end
+        pantry(name: :link_text).store element_label, label: id if id
+      end
+    end
+
+    # Creates labels for links to modules
+    # @param label_text [String] label of the element defined in yml file.
+    #   (e.g. "Module")
+    # @param custom_title_content [String] title text
+    #   copied from content (module title)
+    # @param custom_number_content [String] title text
+    #   copied from content (module title)
+    # @param cases [Boolean] true if labels should use grammatical cases
+    #   (used in Polish books)
+    # @return [Pantry]
+    #
+    def target_label_for_modules(label_text: nil, custom_title_content: nil,
+                                 custom_number_content: nil, cases: false)
+      if cases
+        cases = %w[nominative genitive dative accusative instrumental locative vocative]
+        element_labels = {}
+
+        cases.each do |label_case|
+          # element_labels[label_case] = "#{I18n.t("#{label_text}.#{label_case}")} #{custom_content}"
+
+          # element_label_case = element_labels[label_case]
+
+          element_label_case[label_case] = <<~HTML
+            <span class="os-part-text">"#{I18n.t("#{label_text}.#{label_case}")}</span>
+            <span class="os-number">#{custom_number_content}</span>
+            <span class="os-divider"> </span>
+            <span data-type="" itemprop="" class="os-text">#{custom_title_content}</span>
+          HTML
+          element_label_case = element_labels[label_case]
+
+          pantry(name: "#{label_case}_link_text").store element_label_case, label: id if id
+        end
+      else
+        element_label = if label_text
+                          <<~HTML
+                            <span class="os-part-text">"#{I18n.t(label_text)}</span>
+                            <span class="os-number">#{custom_number_content}</span>
+                            <span class="os-divider"> </span>
+                            <span data-type="" itemprop="" class="os-text">#{custom_title_content}</span>
+                          HTML
+                        else
+                          <<~HTML
+                            <span class="os-number">#{custom_number_content}</span>
+                            <span class="os-divider"> </span>
+                            <span data-type="" itemprop="" class="os-text">#{custom_title_content}</span>
+                          HTML
                         end
         pantry(name: :link_text).store element_label, label: id if id
       end

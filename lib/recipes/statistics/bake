@@ -123,7 +123,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
                            always_caption: false)
     end
 
-    BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter, add_target_label: true)
 
     chapter.figures(except: :subfigure?).each do |figure|
       BakeFigure.v1(figure: figure,
@@ -145,7 +145,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
                            always_caption: true)
     end
 
-    BakeAppendix.v1(page: page, number: appendix_letter)
+    BakeAppendix.v1(page: page, number: appendix_letter, add_target_label: true)
   end
 
   book.search('section.section-exercises',
