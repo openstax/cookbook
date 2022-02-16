@@ -54,6 +54,7 @@ case "${book}" in
   history | \
   hs-physics | \
   intro-business | \
+  marketing | \
   microbiology | \
   philosophy | \
   pl-economics | \

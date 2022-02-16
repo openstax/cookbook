@@ -127,6 +127,10 @@ RSpec.describe 'books' do
     expect('intro-business').to bake_correctly
   end
 
+  it 'bakes marketing' do
+    expect('marketing').to bake_correctly
+  end
+
   it 'bakes microbio' do
     expect('microbiology').to bake_correctly
   end
