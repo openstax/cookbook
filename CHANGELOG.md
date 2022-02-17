@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change way of baking exercises in `marketing` after content changes (patch)
 * Bake `excel-spreadsheet` note in `finance` (patch)
 * Create recipe for `marketing` (major)
 * Update all recipes to contain `BakeLinkPlaceholder` and `BakeFolio` (patch)

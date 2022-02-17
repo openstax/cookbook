@@ -72,7 +72,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
 
     eoc_sections = %w[marketing-discussion critical-thinking building-brand
                       marketers-do marketing-plan company-case]
+
     eoc_sections.each do |section_key|
+      BakeAllNumberedExerciseTypes.v1(
+        within: chapter.pages.search("section.#{section_key}")
+      )
+
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
         metadata_source: metadata,
@@ -90,12 +95,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
       uuid_prefix: '.',
       klass: 'references'
     )
-
-    eoc_sections.each do |klass|
-      BakeAllNumberedExerciseTypes.v1(
-        within: chapter.search("section.#{klass}")
-      )
-    end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: false
