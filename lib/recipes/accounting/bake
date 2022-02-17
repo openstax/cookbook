@@ -39,7 +39,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   )
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter, add_custom_modules_target_label: true)
+    BakeNonIntroductionPages.v1(chapter: chapter, custom_target_label: true)
     chapter.tables('$:not(.unnumbered)').each do |table|
       # BakeNumberedTable.v1(table: table,
       #                      number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
@@ -140,7 +140,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  # BakeLOLinkLabels.v1(book: book)
+  BakeLOLinkLabels.v1(book: book)
   BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)

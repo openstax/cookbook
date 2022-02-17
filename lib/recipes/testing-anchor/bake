@@ -25,7 +25,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :testing_anchor) do |doc|
   )
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter, custom_target_label: true)
     BakeLearningObjectives.v1(chapter: chapter)
   end
 

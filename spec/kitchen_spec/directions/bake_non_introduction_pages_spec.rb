@@ -25,7 +25,7 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
         <<~HTML
           <div data-type="chapter">
             <div data-type="page" id="page_123">
-            <div data-type="document-title" id="auto_123_0">Review of Functions</div>
+              <div data-type="document-title" id="auto_123_0">Review of Functions</div>
             </div>
           </div>
         HTML
@@ -49,11 +49,40 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     )
   end
 
-  context 'when pages has added target labels' do
+  context 'when book does not use grammatical cases' do
     it 'stores link text' do
       pantry = chapter2.pantry(name: :link_text)
-      expect(pantry).to receive(:store).with('1.1', { label: 'page_123' })
-      described_class.v1(chapter: chapter2, add_target_label: true)
+      expect(pantry).to receive(:store).with('1.1 Review of Functions', { label: 'page_123' })
+      described_class.v1(chapter: chapter2)
     end
   end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'module': {
+            'nominative': 'Moduł',
+            'genitive': 'Modułu'
+          }
+        })
+
+        pantry = chapter2.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Moduł 1.1 Review of Functions', { label: 'page_123' })
+
+        pantry = chapter2.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Modułu 1.1 Review of Functions', { label: 'page_123' })
+        described_class.v1(chapter: chapter2, cases: true)
+      end
+    end
+  end
+
+  context 'when pages has added custom target labels' do
+    it 'stores link text' do
+      pantry = chapter2.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('<span class="label-counter">1.1</span><span class="title-label-text"> Review of Functions</span>', { label: 'page_123' })
+      described_class.v1(chapter: chapter2, custom_target_label: true)
+    end
+  end
+
 end
