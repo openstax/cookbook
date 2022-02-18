@@ -11,13 +11,15 @@ module Kitchen
 
       def self.v2(
         book:,
+        cases: false,
         strategy_options: {
           strategy: :default, bake_chapter_outline: false, introduction_order: :v1
         }
       )
         V2.new.bake(
           book: book,
-          strategy_options: strategy_options
+          strategy_options: strategy_options,
+          cases: cases
         )
       end
 

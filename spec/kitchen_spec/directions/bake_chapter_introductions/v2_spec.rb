@@ -7,8 +7,9 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     stub_locales({
       'chapter_outline': 'Chapter Outline',
       'notes': {
-        'chapter-objectives': 'Chapter Objectives'
-      }
+        'chapter-objectives': 'Chapter Objectives',
+      },
+      'chapter': 'Chapter'
     })
   end
 
@@ -17,7 +18,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       <<~HTML
         <div data-type="chapter">
           <h1 data-type="document-title">Chapter 1 Title</h1>
-          <div class="introduction" data-type="page">
+          <div class="introduction" data-type="page" id="ipId">
             <div data-type="document-title">Introduction 1</div>
             <div data-type="description">trash this</div>
             <div data-type="abstract">and this</div>
@@ -82,6 +83,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     book_containing(html:
       <<~HTML
         <div data-type="chapter">
+        <h1 data-type="document-title">Chapter 1 Title</h1>
           <div class="introduction" data-type="page">
             <div data-type="document-title">Introduction 1</div>
             <div data-type="description">trash this</div>
@@ -226,6 +228,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         <<~HTML
           <body>
             <div data-type="chapter">
+              <h1 data-type="document-title">Chapter 1 Title</h1>
               <div class="introduction" data-type="page">
                 <div data-type="metadata">don't touch this</div>
                 <figure class="splash">can't touch this (stop! hammer time)</figure>
@@ -314,7 +317,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
           <body>
             <div data-type="chapter">
               <h1 data-type="document-title">Chapter 1 Title</h1>
-              <div class="introduction" data-type="page">
+              <div class="introduction" data-type="page" id="ipId">
                 <div data-type="metadata">don't touch this</div>
                 <figure class="splash">can't touch this (stop! hammer time)</figure>
                 <div class="intro-body">
@@ -380,6 +383,42 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
           </body>
         HTML
       )
+    end
+  end
+
+  context 'when book does not use grammatical cases' do
+    it 'stores link text' do
+      pantry = book_v1.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
+      described_class.v2(book: book_v1, strategy_options: {
+        strategy: :add_objectives,
+        bake_chapter_outline: true,
+        introduction_order: :v1
+      })
+    end
+  end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'chapter': {
+            'nominative': 'Rozdział',
+            'genitive': 'Rozdziału'
+          }
+        })
+
+        pantry = book_v1.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Rozdział 1 Chapter 1 Title', { label: 'ipId' })
+
+        pantry = book_v1.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Rozdziału 1 Chapter 1 Title', { label: 'ipId' })
+        described_class.v2(book: book_v1, strategy_options: {
+          strategy: :add_objectives,
+          bake_chapter_outline: true,
+          introduction_order: :v1
+        }, cases: true)
+      end
     end
   end
 end
