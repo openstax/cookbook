@@ -51,7 +51,7 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyEquations do
       ).to match_normalized_html(
         <<~HTML
           <div data-type="chapter">
-            <div data-type="page">
+            <div data-type="page" id="apId">
           </div>
             <div class="os-eoc os-key-equations-container" data-type="composite-page" data-uuid-key=".key-equations">
               <h2 data-type="document-title">

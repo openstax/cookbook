@@ -14,7 +14,7 @@ module Kitchen
 
         title.replace_children(with:
           <<~HTML
-            <span class="os-part-text">#{I18n.t(:appendix)} </span>
+            <span class="os-part-text">#{I18n.t("appendix#{'.nominative' if cases}")} </span>
             <span class="os-number">#{number}</span>
             <span class="os-divider"> </span>
             <span data-type="" itemprop="" class="os-text">#{title.children}</span>

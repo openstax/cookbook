@@ -3,13 +3,13 @@
 module Kitchen
   module Directions
     module BakeToc
-      def self.v1(book:)
+      def self.v1(book:, cases: false)
         li_tags = book.body.element_children.map do |element|
           case element
           when UnitElement
             li_for_unit(element)
           when ChapterElement
-            li_for_chapter(element)
+            li_for_chapter(element, cases: cases)
           when PageElement, CompositePageElement
             li_for_page(element)
           when CompositeChapterElement
@@ -60,14 +60,15 @@ module Kitchen
         HTML
       end
 
-      def self.li_for_chapter(chapter)
+      def self.li_for_chapter(chapter, cases: @cases)
         pages = chapter.element_children.only(PageElement, CompositePageElement)
         inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
 
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
             <a href="##{chapter.title.id}">
-              <span class="os-number"><span class="os-part-text">#{I18n.t(:chapter)} </span>#{chapter.count_in(:book)}</span>
+              <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
+              if cases}")} </span>#{chapter.count_in(:book)}</span>
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
             </a>

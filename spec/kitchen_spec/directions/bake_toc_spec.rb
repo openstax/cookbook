@@ -630,6 +630,56 @@ RSpec.describe Kitchen::Directions::BakeToc do
     )
   end
 
+  context 'when book uses grammatical cases' do
+    it 'uses nominative case in chapter title' do
+      with_locale(:pl) do
+        stub_locales({
+          'toc_title': 'Spis Treści',
+          'chapter': {
+            'nominative': 'Rozdział',
+            'genitive': 'Rozdziału'
+          }
+        })
+        described_class.v1(book: book_with_eoc_composite_chapter, cases: true)
+        expect(book_with_eoc_composite_chapter.search('nav').to_s).to match_normalized_html(
+          <<~HTML
+            <nav id="toc">
+              <h1 class="os-toc-title">Spis Treści</h1>
+              <ol>
+                <li class="os-toc-preface" cnx-archive-shortid="" cnx-archive-uri="p1">
+                  <a href="#p1">
+                  <span data-type="" itemprop="" class="os-text">Preface</span>
+                  </a>
+                </li>
+                <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+                  <a href="#composite-chapter-1">
+                  <span class="os-number"><span class="os-part-text">Rozdział </span>1</span>
+                  <span class="os-divider"> </span>
+                  <span class="os-text" data-type="" itemprop="">Answer Key</span>
+                  </a>
+                  <ol class="os-chapter">
+                    <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+                      <a href="#composite-chapter-1">
+                      <span class="os-text">Chapter 1</span>
+                      </a>
+                      <ol class="os-chapter">
+                        <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p8">
+                          <a href="#p8">
+                          <span class="os-text">Chapter 1</span>
+                          </a>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </nav>
+          HTML
+        )
+      end
+    end
+  end
+
   describe 'raises error' do
     it 'Page element classes not found' do
       expect {

@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeUnitPageTitle::V1 do
+
   let(:book1) do
     book_containing(html:
       <<~HTML

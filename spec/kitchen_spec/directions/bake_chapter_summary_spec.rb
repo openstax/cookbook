@@ -233,7 +233,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
     ).to match_normalized_html(
       <<~HTML
         <div data-type="chapter">
-          <div data-type="page">
+          <div data-type="page" id="apId">
             <h1 data-type="document-title" id="intro" itemprop="name">Introduction page!</h1>
           </div>
           <div class="os-eoc os-section-summary-container" data-type="composite-page" data-uuid-key=".section-summary">

@@ -24,7 +24,7 @@ module FactoryHelpers
   end
 
   def page_element(page_children_html)
-    book_containing(html: "<div data-type='page'>#{page_children_html}</div>").pages.first
+    book_containing(html: "<div data-type='page' id='apId'>#{page_children_html}</div>").pages.first
   end
 
   def new_element(html)
