@@ -4,39 +4,39 @@ es:
   appendix: Apéndice
   theorem: Teorema
   solution: Solución
-  chapter_outline: Esquema Del Capitulo
+  chapter_outline: Esquema del Capítulo
   toc_title: Contenido
   example: Ejemplo
   exercise: Ejercicio
   equation: Ecuación
   chapter: Capítulo
   unit: Unidad
-  checkpoint: Punto De Control
-  chapter_review: Revisión Del Capítulo
-  learning_objectives: Objetivos De Aprendizaje
+  checkpoint: Punto de control
+  chapter_review: Revisión del capítulo
+  learning_objectives: Objetivos de aprendizaje
   stepwise_step_label: Paso
   references: Referencias
-  answer_key_title: Clave de Respuestas
-  eoc_chapter_review: Revisión Del Capítulo
+  answer_key_title: Clave de respuestas
+  eoc_chapter_review: Revisión del capítulo
   eoc_exercises_title: Ejercicios
-  eoc_composite_metadata_title: Revisión Del Capítulo
+  eoc_composite_metadata_title: Revisión del capítulo
   eoc_solutions_title: Soluciones
-  eoc_suggested_reading: Sugerencias Para Estudios Adicionales
+  eoc_suggested_reading: Sugerencias para estudios adicionales
   eob_index_symbols_group: Símbolos
-  review_exercises: Ejercicios De Repaso
-  section_exercises: ! 'Sección %{number} Ejercicios'
-  iframe_link_text: Haga Clic Para Ver El Contenido
+  review_exercises: Ejercicios de repaso
+  section_exercises: ! 'Sección %{number} ejercicios'
+  iframe_link_text: Haga clic para ver el contenido
   handbook_outline_title: Esquema
   context_lead_text: 'Referirse a '
   eoc:
-    glossary: Términos Clave
-    key-equations: Ecuaciones Clave
+    glossary: Términos clave
+    key-equations: Ecuaciones clave
     summary: Resumen
-    further-research: Investigación Adicional
-    key-concepts: Conceptos Clave
+    further-research: Investigación adicional
+    key-concepts: Conceptos clave
     references: Referencias
     solutions: Soluciones
-    section-exercises: ! 'Sección %{number} Ejercicios'
+    section-exercises: ! 'Sección %{number} ejercicios'
   folio:
     preface: Prefacio
     access_for_free: Acceso gratis en openstax.org
