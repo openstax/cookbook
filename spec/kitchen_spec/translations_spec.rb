@@ -7,8 +7,8 @@ RSpec.describe 'Translations' do
     it 'spanish' do
       with_locale(:es) do
         expect(I18n.t(:equation)).to match('Ecuación')
-        expect(I18n.t(:chapter_review)).to match('Revisión Del Capítulo')
-        expect(I18n.t(:learning_objectives)).to match('Objetivos De Aprendizaje')
+        expect(I18n.t(:chapter_review)).to match('Revisión del capítulo')
+        expect(I18n.t(:learning_objectives)).to match('Objetivos de aprendizaje')
       end
     end
 
