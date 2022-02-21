@@ -5,11 +5,11 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
   before do
     stub_locales({
+      'chapter': 'Chapter',
       'chapter_outline': 'Chapter Outline',
       'notes': {
-        'chapter-objectives': 'Chapter Objectives',
-      },
-      'chapter': 'Chapter'
+        'chapter-objectives': 'Chapter Objectives'
+      }
     })
   end
 

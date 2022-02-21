@@ -3,6 +3,12 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeAppendix do
+  before do
+    stub_locales({
+      'appendix': 'Appendix'
+    })
+  end
+
   let(:page) do
     page_element(
       <<~HTML

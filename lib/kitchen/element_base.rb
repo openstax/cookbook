@@ -780,8 +780,8 @@ module Kitchen
     #   (used in Polish books)
     # @return [Pantry]
     #
-    def target_label_for_modules(label_text: nil, custom_title_content: nil,
-                                 custom_number_content: nil, cases: false)
+    def target_label_for_modules(custom_title_content: nil,
+                                 custom_number_content: nil)
       # if cases
       #   cases = %w[nominative genitive dative accusative instrumental locative vocative]
       #   element_labels = {}

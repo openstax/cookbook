@@ -3,6 +3,13 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
+
+  before do
+    stub_locales({
+      'module': 'Module'
+    })
+  end
+
   let(:chapter) do
     book_containing(html:
       one_chapter_with_one_page_containing(

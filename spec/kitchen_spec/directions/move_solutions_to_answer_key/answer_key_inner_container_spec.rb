@@ -4,14 +4,14 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
 
-  # before do
-    # stub_locales({
-    #   'chapter': 'Chapter',
-    #   'eob': {
-    #         'answer-key': 'Answer Key'
-    #     }
-    # })
-  # end
+  before do
+    stub_locales({
+      'chapter': 'Chapter',
+      'eob': {
+            'answer-key': 'Answer Key'
+        }
+    })
+  end
 
   let(:book) do
     book_containing(html:
