@@ -16,10 +16,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   BakePreface.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  BakeNumberedNotes.v1(book: book, classes: %w[your-turn])
   BakeUnclassifiedNotes.v1(book: book)
   note_classes =
-    %w[people-mathematics who-knew tech-check check-point video work-out definition formula]
+    %w[people-mathematics who-knew tech-check check-point video work-out definition formula your-turn]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
   sections_with_unnumbered_tables_in_solutions = \
     'div.your-turn, section.section-exercises, section.chapter-review, section.chapter-test'
@@ -54,6 +53,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
     end
     chapter.pages.search('section.chapter-test').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    end
+    chapter.pages.notes('$.your-turn').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter), only_number_solution: false)
     end
 
     chapter_summary = \
@@ -135,6 +137,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
+  BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
 

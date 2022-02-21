@@ -1,12 +1,12 @@
 es:
-  section_exercises: ! '%{number} Ejercicios de Sección'
-  coreq-skills: Habilidades de Correquisito
+  section_exercises: ! '%{number} Ejercicios de sección'
+  coreq-skills: Habilidades de correquisito
   eoc:
-    practice-test: Examen de Práctica
-    review-exercises: Ejercicios de Repaso
-    section-exercises: ! '%{number} Ejercicios de Sección'
+    practice-test: Examen de práctica
+    review-exercises: Ejercicios de repaso
+    section-exercises: ! '%{number} ejercicios de sección'
     exercises: Ejercicios
-    chapter-review: Revisión del Capítulo
+    chapter-review: Revisión del capítulo
   notes:
     try: "Inténtelo "
     how-to-notitle: Cómo

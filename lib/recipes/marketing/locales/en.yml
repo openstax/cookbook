@@ -1,0 +1,18 @@
+en:
+  notes:
+    marketing-dashboard: Marketing Dashboard
+    marketing-practice: Marketing in Practice
+    companies-conscience: Companies with a Conscience
+    link-to-learning: Link to Learning
+  eoc:
+    knowledge-check: ! '%{number} Knowledge Check'
+    chapter-summary: Chapter Summary
+    marketing-discussion: 'Applied Marketing Knowledge: Discussion Questions'
+    critical-thinking: Critical Thinking Exercises
+    building-brand: Building Your Personal Brand
+    marketers-do: What Do Marketers Do?
+    marketing-plan: Marketing Plan Exercise
+    company-case: Closing Company Case
+    references: Endnotes
+  exercises:
+    solution: Solution

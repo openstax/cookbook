@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change Spanish titles to title case (patch)
+* Add `link-to-learning` note to `marketing` (patch)
+* Change way of baking exercises in `marketing` after content changes (patch)
+* Bake `excel-spreadsheet` note in `finance` (patch)
+* Create recipe for `marketing` (major)
+* Update all recipes to contain `BakeLinkPlaceholder` and `BakeFolio` (patch)
 * Creeate `BakeLinks` and add to all recipes, for Rex (major)
 * Update locales files, specs for pl microeconomics, pl-u-physics, pl-psychology (patch)
 * Add support for tables wioth classes `data-table`, `timeline-table` to `BakeNumberedTable.v1`
@@ -14,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Modify `BakeChapterIntroductions` to bake intro with unit opener note (minor)
 * Add more updates to `pl-economics` recipe bake file. Fix `shorten` script paths, change kitchen.ci to cookbook in docker run `rubocop` file (patch)
 * Modify how `recipes_helper` requires `imports_for_recipes`
+* Remove hacky numbering part from `contemporary-math's strategy` (minor)
 
 ## [19.0.0] - 2022-1-28
 
