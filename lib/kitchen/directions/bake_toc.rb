@@ -26,7 +26,7 @@ module Kitchen
         )
       end
 
-      def self.li_for_unit(unit)
+      def self.li_for_unit(unit, cases: cases)
         chapters = unit.element_children.only(ChapterElement)
         pages = unit.element_children.only(PageElement)
 
@@ -39,7 +39,7 @@ module Kitchen
             </a>
             <ol class="os-unit">
               #{pages.map { |page| li_for_page(page) }.join("\n")}
-              #{chapters.map { |chapter| li_for_chapter(chapter) }.join("\n")}
+              #{chapters.map { |chapter| li_for_chapter(chapter, cases: cases) }.join("\n")}
             </ol>
           </li>
         HTML
@@ -60,7 +60,7 @@ module Kitchen
         HTML
       end
 
-      def self.li_for_chapter(chapter, cases: @cases)
+      def self.li_for_chapter(chapter, cases: cases)
         pages = chapter.element_children.only(PageElement, CompositePageElement)
         inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
 
