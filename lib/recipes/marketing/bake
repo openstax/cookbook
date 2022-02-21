@@ -106,7 +106,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
     )
   end
 
-  notes = %w[marketing-practice companies-conscience]
+  notes = %w[marketing-practice companies-conscience link-to-learning]
   BakeAutotitledNotes.v1(book: book, classes: notes)
   BakeAutotitledNotes.v1(book: book, classes: %w[marketing-dashboard], bake_exercises: true)
   BakeCustomTitledNotes.v1(book: book, classes: %w[unit-opener word-document])
