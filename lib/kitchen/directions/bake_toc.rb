@@ -26,7 +26,7 @@ module Kitchen
         )
       end
 
-      def self.li_for_unit(unit, cases: cases)
+      def self.li_for_unit(unit, cases:)
         chapters = unit.element_children.only(ChapterElement)
         pages = unit.element_children.only(PageElement)
 
@@ -60,7 +60,7 @@ module Kitchen
         HTML
       end
 
-      def self.li_for_chapter(chapter, cases: cases)
+      def self.li_for_chapter(chapter, cases:)
         pages = chapter.element_children.only(PageElement, CompositePageElement)
         inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
 
