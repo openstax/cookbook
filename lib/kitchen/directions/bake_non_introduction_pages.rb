@@ -14,8 +14,8 @@ module Kitchen
           title_label = title.children
 
           if custom_target_label
-            page.target_label_for_modules(custom_title_content: " #{title_label}",
-                                          custom_number_content: number)
+            page.custom_target_label_for_modules(custom_title_content: " #{title_label}",
+                                                 custom_number_content: number)
           elsif cases
             page.target_label(label_text: 'module', custom_content: "#{number} #{title_label}", cases: cases)
           else

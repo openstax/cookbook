@@ -7,7 +7,7 @@ module Kitchen
         li_tags = book.body.element_children.map do |element|
           case element
           when UnitElement
-            li_for_unit(element)
+            li_for_unit(element, cases: cases)
           when ChapterElement
             li_for_chapter(element, cases: cases)
           when PageElement, CompositePageElement

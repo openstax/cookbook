@@ -41,8 +41,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter, custom_target_label: true)
     chapter.tables('$:not(.unnumbered)').each do |table|
-      # BakeNumberedTable.v1(table: table,
-      #                      number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(

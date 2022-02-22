@@ -769,43 +769,19 @@ module Kitchen
       end
     end
 
-    # Creates labels for links to modules (used only in accounting where LO labels are also present)
-    # @param label_text [String] label of the element defined in yml file.
-    #   (e.g. "Module")
+    # Creates labels for links to modules (used only in accounting where LO link labels are also present and utilizes only the number)
     # @param custom_title_content [String] title text
     #   copied from content (module title)
-    # @param custom_number_content [String] title text
-    #   copied from content (module title)
-    # @param cases [Boolean] true if labels should use grammatical cases
-    #   (used in Polish books)
+    # @param custom_number_content [String] numbering
+    #   copied from content (module number)
     # @return [Pantry]
     #
-    def target_label_for_modules(custom_title_content: nil,
-                                 custom_number_content: nil)
-      # if cases
-      #   cases = %w[nominative genitive dative accusative instrumental locative vocative]
-      #   element_labels = {}
-
-      #   cases.each do |label_case|
-      #     # element_labels[label_case] = "#{I18n.t("#{label_text}.#{label_case}")} #{custom_content}"
-
-      #     # element_label_case = element_labels[label_case]
-
-      #     element_label_case[label_case] = <<~HTML
-      #       <span class="label-text">"#{I18n.t("#{label_text}.#{label_case}")}</span>
-      #       <span class="label-counter">" #{custom_number_content}</span>
-      #       <span class="title-label-text">" #{custom_title_content}"</span>
-      #     HTML
-      #     element_label_case = element_labels[label_case]
-
-      #     pantry(name: "#{label_case}_link_text").store element_label_case, label: id if id
-      #   end
-      # else
+    def custom_target_label_for_modules(custom_title_content: nil,
+                                        custom_number_content: nil)
       element_label = <<~HTML.chomp
         <span class="label-counter">#{custom_number_content}</span><span class="title-label-text">#{custom_title_content}</span>
       HTML
       pantry(name: :link_text).store element_label, label: id if id
-      # end
     end
 
     # @!method pages
