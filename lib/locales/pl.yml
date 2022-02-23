@@ -54,7 +54,7 @@ pl:
     accusative: Dodatek
     instrumental: Dodatkiem
     locative: Dodatku
-    vocative: Dodatek
+    vocative: Dodatku
   theorem: Twierdzenie
   solution: Rozwiązanie
   chapter_outline: Treść rozdziału
@@ -65,16 +65,16 @@ pl:
     dative: Rozdziałowi
     accusative: Rozdział
     instrumental: Rozdziałem
-    locative: Rozdziału
-    vocative: Rozdział
+    locative: Rozdziale
+    vocative: Rozdziale
   module:
     nominative: Moduł
     genitive: Modułu
     dative: Modułowi
     accusative: Moduł
     instrumental: Modułem
-    locative: Modułu
-    vocative: Moduł
+    locative: Module
+    vocative: Module
   unit: Część
   chapter_review: Podsumowanie rozdziału
   learning_objectives: Cel dydaktyczny

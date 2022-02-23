@@ -12,14 +12,13 @@ module Kitchen
 
           title = page.title
           title_label = title.children
+          label_text_value = 'module' if cases
 
           if custom_target_label
             page.custom_target_label_for_modules(custom_title_content: " #{title_label}",
                                                  custom_number_content: number)
-          elsif cases
-            page.target_label(label_text: 'module', custom_content: "#{number} #{title_label}", cases: cases)
           else
-            page.target_label(custom_content: "#{number} #{title_label}")
+            page.target_label(label_text: label_text_value, custom_content: "#{number} #{title_label}", cases: cases)
           end
 
           title.name = 'h2'
