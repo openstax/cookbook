@@ -87,7 +87,7 @@ RSpec.describe Kitchen::Directions::BakeCustomSections::V1 do
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">Literacy Narrative Trailblazer</span>
             </h2>
-            <h3 class="os-subtitle" id="id1">Tara Westover (b. 1986)</h3>
+            <h3 class="os-subtitle" data-type="document-subtitle" id="id1">Tara Westover (b. 1986)</h3>
             <section class="peer-review" data-depth="1">
               <h3 data-type="title">Peer Review: Giving Specific Praise and Constructive Feedback</h3>
             </section>
