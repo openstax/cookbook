@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add more updates to `pl-economics` recipe bake file. Fix `shorten` script paths, change kitchen.ci to cookbook in docker run `rubocop` file (patch)
 * Modify how `recipes_helper` requires `imports_for_recipes`
 * Remove hacky numbering part from `contemporary-math's strategy` (minor)
+* Remove extra link being added in content text inside iframes (`BakeIframes.v1`) (major)
 
 ## [19.0.0] - 2022-1-28
 
