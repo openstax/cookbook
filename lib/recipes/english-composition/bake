@@ -83,7 +83,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   custom_sections_properties = {
     narrative_trailblazer: {
       class: 'narrative-trailblazer',
-      inject: 'title'
+      inject: 'title_document_subtitle'
     },
     living_words: {
       class: 'living-words',
