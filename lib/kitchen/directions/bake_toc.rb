@@ -39,7 +39,7 @@ module Kitchen
             </a>
             <ol class="os-unit">
               #{pages.map { |page| li_for_page(page) }.join("\n")}
-              #{chapters.map { |chapter| li_for_chapter(chapter)}.join("\n")}
+              #{chapters.map { |chapter| li_for_chapter(chapter) }.join("\n")}
             </ol>
           </li>
         HTML
