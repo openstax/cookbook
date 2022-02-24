@@ -4,15 +4,6 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
 
-  before do
-    stub_locales({
-      'chapter': 'Chapter',
-      'eob': {
-            'answer-key': 'Answer Key'
-        }
-    })
-  end
-
   let(:book) do
     book_containing(html:
       <<~HTML
@@ -83,39 +74,4 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
       HTML
     )
   end
-
-  context 'when book uses grammatical cases' do
-    it 'uses nominative case in title' do
-      with_locale(:pl) do
-        stub_locales({
-          'chapter': {
-            'nominative': 'Rozdział',
-            'genitive': 'Rozdziału'
-          }
-        })
-        expect(
-          described_class.v1(chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, cases: true)
-        ).to match_normalized_html(
-          <<~HTML
-            <div class="os-eob os-solutions-container" data-type="composite-page" data-uuid-key=".solutions1">
-              <h2 data-type="document-title">
-                <span class="os-text">Rozdział 1</span>
-              </h2>
-              <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">Rozdział 1</h1>
-                <span data-type="revised" id="revised_copy_1">Revised</span>
-                <span data-type="slug" id="slug_copy_1">Slug</span>
-                <div class="authors" id="authors_copy_1">Authors</div>
-                <div class="publishers" id="publishers_copy_1">Publishers</div>
-                <div class="print-style" id="print-style_copy_1">Print Style</div>
-                <div class="permissions" id="permissions_copy_1">Permissions</div>
-                <div data-type="subject" id="subject_copy_1">Subject</div>
-              </div>
-            </div>
-          HTML
-        )
-      end
-    end
-  end
-
 end

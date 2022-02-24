@@ -16,7 +16,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
 
   BakePreface.v1(book: book)
 
-  BakeChapterTitle.v1(book: book, cases: true)
+  BakeChapterTitle.v1(book: book)
   BakeUnitTitle.v1(book: book)
 
   BakeUnnumberedFigure.v1(book: book)
@@ -25,8 +25,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   BakeChapterIntroductions.v2(
     book: book, strategy_options: {
       strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
-    },
-    cases: true
+    }
   )
 
   # Notes
@@ -38,7 +37,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   solutions_container = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter, cases: true)
+    BakeNonIntroductionPages.v1(chapter: chapter)
     BakeLearningObjectives.v1(chapter: chapter)
 
     # EOC
@@ -96,7 +95,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
     end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter, metadata_source: metadata, append_to: solutions_container, cases: true
+      chapter: chapter, metadata_source: metadata, append_to: solutions_container
     )
 
     Strategy.new.bake(
@@ -136,7 +135,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
-    BakeAppendix.v1(page: page, number: appendix_letter, cases: true )
+    BakeAppendix.v1(page: page, number: appendix_letter, cases: true)
 
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -151,7 +150,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
-  BakeToc.v1(book: book, cases: true)
+  BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)

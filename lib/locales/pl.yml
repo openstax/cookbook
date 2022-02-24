@@ -59,22 +59,7 @@ pl:
   solution: Rozwiązanie
   chapter_outline: Treść rozdziału
   toc_title: Spis treści
-  chapter:
-    nominative: Rozdział
-    genitive: Rozdziału
-    dative: Rozdziałowi
-    accusative: Rozdział
-    instrumental: Rozdziałem
-    locative: Rozdziale
-    vocative: Rozdziale
-  module:
-    nominative: Moduł
-    genitive: Modułu
-    dative: Modułowi
-    accusative: Moduł
-    instrumental: Modułem
-    locative: Module
-    vocative: Module
+  chapter: Rozdział
   unit: Część
   chapter_review: Podsumowanie rozdziału
   learning_objectives: Cel dydaktyczny

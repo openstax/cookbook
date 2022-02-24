@@ -3,7 +3,7 @@
 module Kitchen
   module Directions
     module BakeNonIntroductionPages
-      def self.v1(chapter:, custom_target_label: false, cases: false)
+      def self.v1(chapter:, custom_target_label: false)
         chapter.non_introduction_pages.each do |page|
           number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
 
@@ -12,13 +12,12 @@ module Kitchen
 
           title = page.title
           title_label = title.children
-          label_text_value = 'module' if cases
 
           if custom_target_label
             page.custom_target_label_for_modules(custom_title_content: " #{title_label}",
                                                  custom_number_content: number)
           else
-            page.target_label(label_text: label_text_value, custom_content: "#{number} #{title_label}", cases: cases)
+            page.target_label(custom_content: "#{number} #{title_label}")
           end
 
           title.name = 'h2'

@@ -386,7 +386,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     end
   end
 
-  context 'when book does not use grammatical cases' do
+  context 'when book uses label text' do
     it 'stores link text' do
       pantry = book_v1.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
@@ -398,27 +398,19 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     end
   end
 
-  context 'when book uses grammatical cases' do
+  context 'when book does not use label text (pl books recipes)' do
     it 'stores link text' do
-      with_locale(:pl) do
-        stub_locales({
-          'chapter': {
-            'nominative': 'Rozdział',
-            'genitive': 'Rozdziału'
-          }
-        })
-
-        pantry = book_v1.pantry(name: :nominative_link_text)
-        expect(pantry).to receive(:store).with('Rozdział 1 Chapter 1 Title', { label: 'ipId' })
-
-        pantry = book_v1.pantry(name: :genitive_link_text)
-        expect(pantry).to receive(:store).with('Rozdziału 1 Chapter 1 Title', { label: 'ipId' })
-        described_class.v2(book: book_v1, strategy_options: {
+      pantry = book_v1.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('1 Chapter 1 Title', { label: 'ipId' })
+      described_class.v2(
+        book: book_v1,
+        strategy_options: {
           strategy: :add_objectives,
           bake_chapter_outline: true,
           introduction_order: :v1
-        }, cases: true)
-      end
+        },
+        target_label_without_label_text: true
+    )
     end
   end
 end

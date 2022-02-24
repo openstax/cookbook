@@ -3,8 +3,8 @@
 module Kitchen
   module Directions
     module BakeChapterTitle
-      def self.v1(book:, cases: false)
-        V1.new.bake(book: book, cases: cases)
+      def self.v1(book:)
+        V1.new.bake(book: book)
       end
     end
   end

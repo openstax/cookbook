@@ -36,10 +36,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       strategy: :default,
       bake_chapter_outline: false,
       introduction_order: :v1
-    },
-    cases: true
+    }
   )
-  BakeChapterTitle.v1(book: book, cases: true)
+  BakeChapterTitle.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(outer_element: book)
   BakeAutotitledNotes.v1(book: book, classes: %w[linkup bringhome clearup workout], cases: true)
@@ -66,7 +65,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       metadata_source: metadata,
       append_to: answer_key,
       solutions_plural: true,
-      cases: true
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
@@ -97,7 +95,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       BakeFirstElements.v1(within: exercise)
     end
 
-    BakeNonIntroductionPages.v1(chapter: chapter, cases: true)
+    BakeNonIntroductionPages.v1(chapter: chapter)
   end
 
   BakeUnnumberedTables.v1(book: book)
@@ -111,7 +109,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
-  BakeToc.v1(book: book, cases: true)
+  BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeLinks.v1(book: book)

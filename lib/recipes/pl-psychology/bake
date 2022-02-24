@@ -25,11 +25,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   BakeChapterIntroductions.v2(
     book: book, strategy_options: {
       strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
-    },
-    cases: true
+    }
   )
 
-  BakeChapterTitle.v1(book: book, cases: true)
+  BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v1(chapter: chapter)
@@ -53,7 +52,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
                     cases: true)
     end
 
-    BakeNonIntroductionPages.v1(chapter: chapter, cases: true)
+    BakeNonIntroductionPages.v1(chapter: chapter)
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata, has_para: true)
 
@@ -98,7 +97,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.')
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
-  BakeToc.v1(book: book, cases: true)
+  BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)

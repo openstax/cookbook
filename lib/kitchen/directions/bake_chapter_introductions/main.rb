@@ -11,7 +11,7 @@ module Kitchen
 
       def self.v2(
         book:,
-        cases: false,
+        target_label_without_label_text: false,
         strategy_options: {
           strategy: :default, bake_chapter_outline: false, introduction_order: :v1
         }
@@ -19,7 +19,7 @@ module Kitchen
         V2.new.bake(
           book: book,
           strategy_options: strategy_options,
-          cases: cases
+          target_label_without_label_text: target_label_without_label_text
         )
       end
 
