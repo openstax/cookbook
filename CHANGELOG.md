@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeCustomSection` behavior for specific document subtitles (minor)
 * Change Spanish titles to title case (patch)
 * Add `link-to-learning` note to `marketing` (patch)
 * Change way of baking exercises in `marketing` after content changes (patch)
