@@ -47,14 +47,7 @@ pl:
     instrumental: Ramką
     locative: Ramce
     vocative: Ramko
-  appendix:
-    nominative: Dodatek
-    genitive: Dodatku
-    dative: Dodatkowi
-    accusative: Dodatek
-    instrumental: Dodatkiem
-    locative: Dodatku
-    vocative: Dodatku
+  appendix: Dodatek
   theorem: Twierdzenie
   solution: Rozwiązanie
   chapter_outline: Treść rozdziału

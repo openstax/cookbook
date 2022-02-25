@@ -386,7 +386,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     end
   end
 
-  context 'when book uses label text' do
+  context 'when book has added targt labels for introduction pages' do
     it 'stores link text' do
       pantry = book_v1.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
@@ -394,22 +394,20 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         strategy: :add_objectives,
         bake_chapter_outline: true,
         introduction_order: :v1
-      })
+      }
+    )
     end
   end
 
-  context 'when book does not use label text (pl books recipes)' do
-    it 'stores link text' do
+  context 'when book has blocked adding target labels for introduction pages' do
+    it 'doesn not stores link text for introduction pages' do
       pantry = book_v1.pantry(name: :link_text)
-      expect(pantry).to receive(:store).with('1 Chapter 1 Title', { label: 'ipId' })
-      described_class.v2(
-        book: book_v1,
-        strategy_options: {
-          strategy: :add_objectives,
-          bake_chapter_outline: true,
-          introduction_order: :v1
-        },
-        target_label_without_label_text: true
+      expect(pantry).not_to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
+      described_class.v2(book: book_v1, strategy_options: {
+        strategy: :add_objectives,
+        bake_chapter_outline: true,
+        introduction_order: :v1
+      }, block_target_label: true
     )
     end
   end

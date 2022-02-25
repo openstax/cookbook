@@ -36,7 +36,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       strategy: :default,
       bake_chapter_outline: false,
       introduction_order: :v1
-    }
+    }, block_target_label: true
   )
   BakeChapterTitle.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
@@ -95,7 +95,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       BakeFirstElements.v1(within: exercise)
     end
 
-    BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter, block_target_label: true)
   end
 
   BakeUnnumberedTables.v1(book: book)

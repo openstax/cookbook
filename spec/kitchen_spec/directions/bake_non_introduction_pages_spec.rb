@@ -50,10 +50,12 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     )
   end
 
-  it 'stores module link text' do
-    pantry = chapter2.pantry(name: :link_text)
-    expect(pantry).to receive(:store).with('1.1 Review of Functions', { label: 'page_123' })
-    described_class.v1(chapter: chapter2)
+  context 'when book has added target lables for modules' do
+    it 'stores module link text' do
+      pantry = chapter2.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('1.1 Review of Functions', { label: 'page_123' })
+      described_class.v1(chapter: chapter2)
+    end
   end
 
   context 'when module pages has added custom target labels' do
@@ -61,6 +63,14 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
       pantry = chapter2.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('<span class="label-counter">1.1</span><span class="title-label-text"> Review of Functions</span>', { label: 'page_123' })
       described_class.v1(chapter: chapter2, custom_target_label: true)
+    end
+  end
+
+  context 'when book has blocked adding target lables for modules' do
+    it 'does not store module link text' do
+      pantry = chapter2.pantry(name: :link_text)
+      expect(pantry).not_to receive(:store).with('1.1 Review of Functions', { label: 'page_123' })
+      described_class.v1(chapter: chapter2, block_target_label: true)
     end
   end
 

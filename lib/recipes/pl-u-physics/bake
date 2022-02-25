@@ -25,7 +25,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   BakeChapterIntroductions.v2(
     book: book, strategy_options: {
       strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
-    }
+    }, block_target_label: true
   )
 
   # Notes
@@ -37,7 +37,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   solutions_container = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter, block_target_label: true)
     BakeLearningObjectives.v1(chapter: chapter)
 
     # EOC
@@ -135,7 +135,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
-    BakeAppendix.v1(page: page, number: appendix_letter, cases: true)
+    BakeAppendix.v1(page: page, number: appendix_letter, block_target_label: true)
 
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,

@@ -3,7 +3,7 @@
 module Kitchen
   module Directions
     module BakeNonIntroductionPages
-      def self.v1(chapter:, custom_target_label: false)
+      def self.v1(chapter:, custom_target_label: false, block_target_label: false)
         chapter.non_introduction_pages.each do |page|
           number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
 
@@ -16,7 +16,7 @@ module Kitchen
           if custom_target_label
             page.custom_target_label_for_modules(custom_title_content: " #{title_label}",
                                                  custom_number_content: number)
-          else
+          elsif !block_target_label
             page.target_label(custom_content: "#{number} #{title_label}")
           end
 
