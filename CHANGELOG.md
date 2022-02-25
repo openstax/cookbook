@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [20.0.0] - 2022-2-25
+## [v1.2.0] - 2022-2-25
 
 * Add `BakeCustomSection` behavior for specific document subtitles (minor)
 * Remove eoc subheading in finance (patch)
