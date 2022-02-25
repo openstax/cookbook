@@ -8,8 +8,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :finance_short) do |doc|
   include Kitchen::Directions
 
   book = doc.book
-  # trash all but first chapter
-  book.chapters.drop(1).each(&:trash)
+  # trash all but first two chapters, since ch2 has additional eoc sections
+  book.chapters.drop(2).each(&:trash)
   # trash all but first appendix
   book.search('div.appendix').drop(1).each(&:trash)
 end

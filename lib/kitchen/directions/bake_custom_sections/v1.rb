@@ -18,7 +18,7 @@ module Kitchen::Directions::BakeCustomSections
             custom_section_title_sibling.trash
             custom_section_title.append(sibling:
               <<~HTML
-                <h3 class="os-subtitle" id="#{div_id}">#{custom_section_title_os_text.text}</h3>
+                <h3 class="os-subtitle" data-type="document-subtitle" id="#{div_id}">#{custom_section_title_os_text.text}</h3>
               HTML
             )
             custom_section_title_os_text.replace_children(with: title_text)
