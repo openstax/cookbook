@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-* Add target labels (with option for pl translation) to Introduction and Non Introduction modules, Appendixes (patch). 
+* Add target labels to Introduction and Non Introduction modules, Appendixes (patch).
 * Change Spanish titles to title case (patch)
 * Add `link-to-learning` note to `marketing` (patch)
 * Change way of baking exercises in `marketing` after content changes (patch)
