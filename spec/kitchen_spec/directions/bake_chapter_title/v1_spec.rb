@@ -50,5 +50,4 @@ RSpec.describe Kitchen::Directions::BakeChapterTitle::V1 do
       HTML
     )
   end
-
 end

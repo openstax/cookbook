@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
+
   let(:book) do
     book_containing(html:
       <<~HTML

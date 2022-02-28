@@ -3,9 +3,15 @@
 module Kitchen
   module Directions
     module BakeAppendix
-      def self.v1(page:, number:)
+      def self.v1(page:, number:, block_target_label: false)
         title = page.title
         title.name = 'h1'
+
+        # Store label information
+        title_label = title.children
+
+        page.target_label(label_text: 'appendix', custom_content: "#{number} #{title_label}") unless block_target_label
+
         title.replace_children(with:
           <<~HTML
             <span class="os-part-text">#{I18n.t(:appendix)} </span>

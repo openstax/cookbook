@@ -737,7 +737,7 @@ module Kitchen
     end
 
     # Creates labels for links to inside elements
-    # like Figures, Tables, Equations, Exercises, Notes.
+    # like Figures, Tables, Equations, Exercises, Notes, Appendices.
     #
     # @param label_text [String] label of the element defined in yml file.
     #   (e.g. "Figure", "Table", "Equation")
@@ -767,6 +767,21 @@ module Kitchen
                         end
         pantry(name: :link_text).store element_label, label: id if id
       end
+    end
+
+    # Creates labels for links to modules (used only in accounting where LO link labels are also present and utilizes only the number)
+    # @param custom_title_content [String] title text
+    #   copied from content (module title)
+    # @param custom_number_content [String] numbering
+    #   copied from content (module number)
+    # @return [Pantry]
+    #
+    def custom_target_label_for_modules(custom_title_content: nil,
+                                        custom_number_content: nil)
+      element_label = <<~HTML.chomp
+        <span class="label-counter">#{custom_number_content}</span><span class="title-label-text">#{custom_title_content}</span>
+      HTML
+      pantry(name: :link_text).store element_label, label: id if id
     end
 
     # @!method pages

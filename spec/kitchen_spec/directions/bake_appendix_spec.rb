@@ -3,10 +3,11 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeAppendix do
+
   let(:page) do
     page_element(
       <<~HTML
-        <div data-type="document-title">zzzzzzz</div>
+        <div data-type="document-title">Appendix Title</div>
         <section data-depth="1">
           <div data-type="title">hello</div>
           <section data-depth="2">
@@ -29,7 +30,7 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
   let(:page_appendix_with_section_column_container) do
     page_element(
       <<~HTML
-        <div data-type="document-title">zzzzzzz</div>
+        <div data-type="document-title">Appendix Title</div>
         <section data-depth="1" class="column-container">
           <div data-type="title">hello</div>
           <section data-depth="2">
@@ -44,12 +45,12 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
     described_class.v1(page: page, number: 3)
     expect(page).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="apId">
           <h1 data-type="document-title">
             <span class="os-part-text">Appendix </span>
             <span class="os-number">3</span>
             <span class="os-divider"> </span>
-            <span class="os-text" data-type="" itemprop="">zzzzzzz</span>
+            <span class="os-text" data-type="" itemprop="">Appendix Title</span>
           </h1>
           <section data-depth="1">
             <h2 data-type="title">hello</h2>
@@ -66,7 +67,7 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
     described_class.v1(page: page_appendix_no_title, number: 3)
     expect(page_appendix_no_title).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="apId">
           <h1 data-type="document-title">
             <span class="os-part-text">Appendix </span>
             <span class="os-number">3</span>
@@ -83,12 +84,12 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
     described_class.v1(page: page_appendix_with_section_column_container, number: 3)
     expect(page_appendix_with_section_column_container).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="apId">
           <h1 data-type="document-title">
             <span class="os-part-text">Appendix </span>
             <span class="os-number">3</span>
             <span class="os-divider"> </span>
-            <span class="os-text" data-type="" itemprop="">zzzzzzz</span>
+            <span class="os-text" data-type="" itemprop="">Appendix Title</span>
           </h1>
           <div data-depth="1" class="column-container">
             <h2 data-type="title">hello</h2>
@@ -99,5 +100,21 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
         </div>
       HTML
     )
+  end
+
+  context 'when book has added has adde target labels for appendices' do
+    it 'stores link text' do
+      pantry = page.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Appendix 3 Appendix Title', { label: 'apId' })
+      described_class.v1(page: page, number: '3')
+    end
+  end
+
+  context 'when book has blocked adding target labels for appendices' do
+    it 'stores link text' do
+      pantry = page.pantry(name: :link_text)
+      expect(pantry).not_to receive(:store).with('Appendix 3 Appendix Title', { label: 'apId' })
+      described_class.v1(page: page, number: '3', block_target_label: true)
+    end
   end
 end

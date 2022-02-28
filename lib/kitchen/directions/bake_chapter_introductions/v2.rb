@@ -2,9 +2,15 @@
 
 module Kitchen::Directions::BakeChapterIntroductions
   class V2
-    def bake(book:, strategy_options:)
+    def bake(book:, strategy_options:, block_target_label: false)
       book.chapters.each do |chapter|
         introduction_page = chapter.introduction_page
+        number = chapter.count_in(:book)
+        title_label = chapter.title.search('.os-text').first&.text
+        title_label = chapter.title.text if title_label.nil?
+
+        introduction_page.target_label(label_text: 'chapter', custom_content: "#{number} #{title_label}") unless block_target_label
+
         title = bake_title(introduction_page: introduction_page)
 
         chapter_intro_html =

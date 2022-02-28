@@ -25,7 +25,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   BakeChapterIntroductions.v2(
     book: book, strategy_options: {
       strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
-    }
+    }, block_target_label: true
   )
 
   BakeChapterTitle.v1(book: book)
@@ -52,7 +52,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
                     cases: true)
     end
 
-    BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeNonIntroductionPages.v1(chapter: chapter, block_target_label: true)
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: book.metadata, has_para: true)
 
