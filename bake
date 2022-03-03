@@ -64,6 +64,7 @@ case "${book}" in
   u-physics) $DIR/lib/recipes/u-physics/bake --input $input_file --output $output_file;;
   world-history) $DIR/lib/recipes/world-history/bake --input $input_file --output $output_file;;
   ap-physics) $DIR/lib/recipes/ap-physics/bake --input $input_file --output $output_file;;
+  ap-physics-2e) $DIR/lib/recipes/ap-physics-2e/bake --input $input_file --output $output_file;;
   testing-anchor)$DIR/lib/recipes/testing-anchor/bake --input $input_file --output $output_file;;
   marketing) $DIR/lib/recipes/marketing/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
