@@ -35,6 +35,14 @@ RSpec.describe 'books' do
     expect('ap-history').to bake_correctly
   end
 
+  it 'bakes ap physics' do
+    expect('ap-physics').to bake_correctly
+  end
+
+  it 'bakes ap physics 2e' do
+    expect('ap-physics-2e').to bake_correctly
+  end
+
   it 'bakes astronomy' do
     expect('astronomy').to bake_correctly
   end
