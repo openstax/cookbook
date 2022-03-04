@@ -3,7 +3,16 @@
 # frozen_string_literal: true
 
 require_relative '../recipes_helper'
-require_relative 'ap_physics_recipe'
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :ap_physics_2e_short) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  # trash all but first chapter
+  book.chapters.drop(1).each(&:trash)
+  # trash all but first appendix
+  book.search('div.appendix').drop(1).each(&:trash)
+end
 
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
@@ -12,6 +21,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [AP_PHYSICS_RECIPE],
+  recipes: recipe,
   output_file: opts[:output]
 )

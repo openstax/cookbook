@@ -44,6 +44,7 @@ case "${book}" in
   college-physics) dest="${DIR}/data/college-physics/short" && script="${DIR}/lib/recipes/college-physics/shorten";;
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/lib/recipes/astronomy/shorten";;
   ap-physics) dest="${DIR}/data/ap-physics/short" && script="${DIR}/lib/recipes/ap-physics/shorten";;
+  ap-physics-2e) dest="${DIR}/data/ap-physics-2e/short" && script="${DIR}/lib/recipes/ap-physics-2e/shorten";;
   history) dest="${DIR}/data/history/short" && script="${DIR}/lib/recipes/history/shorten";;
   dev-math) dest="${DIR}/data/prealgebra/short" && script="${DIR}/lib/recipes/dev-math/shorten";;
   hs-physics) dest="${DIR}/data/hs-physics/short" && script="${DIR}/lib/recipes/hs-physics/shorten";;

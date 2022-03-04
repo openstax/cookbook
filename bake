@@ -30,6 +30,8 @@ case "${book}" in
   anthropology) $DIR/lib/recipes/anthropology/bake --input $input_file --output $output_file;;
   ap-biology) $DIR/lib/recipes/ap-biology/bake --input $input_file --output $output_file;;
   ap-history) $DIR/lib/recipes/ap-history/bake --input $input_file --output $output_file;;
+  ap-physics) $DIR/lib/recipes/ap-physics/bake --input $input_file --output $output_file;;
+  ap-physics-2e) $DIR/lib/recipes/ap-physics-2e/bake --input $input_file --output $output_file;;
   astronomy) $DIR/lib/recipes/astronomy/bake --input $input_file --output $output_file;;
   bca) $DIR/lib/recipes/bca/bake --input $input_file --output $output_file;;
   biology) $DIR/lib/recipes/biology/bake --input $input_file --output $output_file;;
@@ -49,6 +51,7 @@ case "${book}" in
   history) $DIR/lib/recipes/history/bake --input $input_file --output $output_file;;
   hs-physics) $DIR/lib/recipes/hs-physics/bake --input $input_file --output $output_file;;
   intro-business) $DIR/lib/recipes/intro-business/bake --input $input_file --output $output_file;;
+  marketing) $DIR/lib/recipes/marketing/bake --input $input_file --output $output_file;;
   microbiology) $DIR/lib/recipes/microbiology/bake --input $input_file --output $output_file;;
   philosophy) $DIR/lib/recipes/philosophy/bake --input $input_file --output $output_file;;
   pl-economics) $DIR/lib/recipes/pl-economics/bake --input $input_file --output $output_file;;
@@ -61,10 +64,8 @@ case "${book}" in
   psychology) $DIR/lib/recipes/psychology/bake --input $input_file --output $output_file;;
   sociology) $DIR/lib/recipes/sociology/bake --input $input_file --output $output_file;;
   statistics) $DIR/lib/recipes/statistics/bake --input $input_file --output $output_file;;
+  testing-anchor)$DIR/lib/recipes/testing-anchor/bake --input $input_file --output $output_file;;
   u-physics) $DIR/lib/recipes/u-physics/bake --input $input_file --output $output_file;;
   world-history) $DIR/lib/recipes/world-history/bake --input $input_file --output $output_file;;
-  ap-physics) $DIR/lib/recipes/ap-physics/bake --input $input_file --output $output_file;;
-  testing-anchor)$DIR/lib/recipes/testing-anchor/bake --input $input_file --output $output_file;;
-  marketing) $DIR/lib/recipes/marketing/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac

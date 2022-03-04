@@ -3,7 +3,7 @@
 # frozen_string_literal: true
 
 require_relative '../recipes_helper'
-require_relative 'ap_physics_recipe'
+require_relative '../ap-physics/ap_physics_recipe'
 
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
