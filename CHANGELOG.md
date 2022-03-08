@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 * Add target labels to Introduction and Non Introduction modules, Appendixes (patch).
+* Remove extra whitespace between exercise numbers and divider(patch)
 * Do `AP_PHYSICS_RECIPE` re usable for 2e (minor).
 
 ## [v1.2.0] - 2022-2-25

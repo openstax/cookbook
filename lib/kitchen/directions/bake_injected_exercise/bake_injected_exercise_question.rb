@@ -45,8 +45,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
 
       question.prepend(child:
         <<~HTML
-          #{problem_number unless only_number_solution}
-          #{"<span class='os-divider'>. </span>" unless only_number_solution}
+          #{problem_number unless only_number_solution}#{"<span class='os-divider'>. </span>" unless only_number_solution}
           <div class="os-problem-container">
             #{context if context.present?}
             #{"<span class='os-divider'>. </span>" if context.present?}
