@@ -10,7 +10,7 @@ college_physics_2e = Kitchen::BookRecipe.new(book_short_name: :college_physics_2
 
   book = doc.book
 
-  # book.search('section.ap-test-prep').each(&:trash)
+  book.search('section.ap-test-prep').each(&:trash)
 
   book.chapters.sections('$.authentic-assessment').each do |section|
     section.prepend(child: 
