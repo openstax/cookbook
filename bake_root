@@ -45,6 +45,7 @@ case "${book}" in
   calculus | \
   chemistry | \
   college-physics | \
+  college-physics-2e | \
   college-success | \
   computer-science | \
   contemporary-math | \
