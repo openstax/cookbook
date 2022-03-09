@@ -5,6 +5,26 @@
 require_relative '../recipes_helper'
 require_relative '../college-physics/college_physics_recipe'
 
+college_physics_2e = Kitchen::BookRecipe.new(book_short_name: :college_physics_2e_delete) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+
+  # book.search('section.ap-test-prep').each(&:trash)
+
+  book.chapters.sections('$.authentic-assessment').each do |section|
+    section.prepend(child: 
+      <<~HTML
+        <h3 data-type="title">#{I18n.t(:"exercises.authentic-assessment")}</h3>
+      HTML
+    )
+    section.exercises.each do |exercise|
+      BakeNumberedExercise.v1(
+       exercise: exercise, number: exercise.count_in(:section))
+    end
+  end
+end
+
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Shortened assembled XHTML output file', required: true
@@ -12,6 +32,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: COLLEGE_PHYSICS_RECIPE,
+  recipes: [college_physics_2e, COLLEGE_PHYSICS_RECIPE],
   output_file: opts[:output]
 )
