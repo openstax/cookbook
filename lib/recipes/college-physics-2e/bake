@@ -11,6 +11,18 @@ college_physics_2e = Kitchen::BookRecipe.new(book_short_name: :college_physics_2
   book = doc.book
 
   book.search('section.ap-test-prep').each(&:trash)
+
+  book.chapters.sections('$.authentic-assessment').each do |section|
+    section.prepend(child: 
+      <<~HTML
+        <h3 data-type="title">#{I18n.t(:"exercises.authentic-assessment")}</h3>
+      HTML
+    )
+    section.exercises.each do |exercise|
+      BakeNumberedExercise.v1(
+       exercise: exercise, number: exercise.count_in(:section))
+    end
+  end
 end
 
 opts = Slop.parse do |slop|

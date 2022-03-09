@@ -5,5 +5,9 @@ en:
     section-summary: Section Summary
     conceptual-questions: Conceptual Questions
     problems-exercises: Problems &amp; Exercises
+    exercises:
+      authentic-assessment: 'Authentic Assessment'
   notes:
     interactive: PhET Explorations
+  exercises:
+    authentic-assessment: 'Authentic Assessment'
