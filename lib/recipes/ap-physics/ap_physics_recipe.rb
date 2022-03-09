@@ -135,14 +135,3 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [AP_PHYSICS_RECIPE],
-  output_file: opts[:output]
-)

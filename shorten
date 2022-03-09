@@ -42,6 +42,7 @@ case "${book}" in
   ap-biology) dest="${DIR}/data/ap-biology/short" && script="${DIR}/lib/recipes/ap-biology/shorten";;
   additive-manufacturing) dest="${DIR}/data/additive-manufacturing/short" && script="${DIR}/lib/recipes/additive-manufacturing/shorten";;
   college-physics) dest="${DIR}/data/college-physics/short" && script="${DIR}/lib/recipes/college-physics/shorten";;
+  college-physics-2e) dest="${DIR}/data/college-physics-2e/short" && script="${DIR}/lib/recipes/college-physics-2e/shorten";;
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/lib/recipes/astronomy/shorten";;
   ap-physics) dest="${DIR}/data/ap-physics/short" && script="${DIR}/lib/recipes/ap-physics/shorten";;
   ap-physics-2e) dest="${DIR}/data/ap-physics-2e/short" && script="${DIR}/lib/recipes/ap-physics-2e/shorten";;

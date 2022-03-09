@@ -33,7 +33,10 @@ module Kitchen
 
       # Wraps & moves abstract under the corresponding chapter objective in the intro page
       def self.v3(chapter:)
-        abstracts = chapter.abstracts.map do |abstract|
+        learning_objectives =
+          chapter.abstracts.any? ? chapter.abstracts : chapter.learning_objectives
+
+        abstracts = learning_objectives.map do |abstract|
           abstract.wrap('<div class="learning-objective">')
           abstract.parent
         end

@@ -39,6 +39,7 @@ case "${book}" in
   calculus) $DIR/lib/recipes/calculus/bake --input $input_file --output $output_file;;
   chemistry) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
   college-physics) $DIR/lib/recipes/college-physics/bake --input $input_file --output $output_file;;
+  college-physics-2e) $DIR/lib/recipes/college-physics-2e/bake --input $input_file --output $output_file;;
   college-success) $DIR/lib/recipes/college-success/bake --input $input_file --output $output_file;;
   computer-science) $DIR/lib/recipes/computer-science/bake --input $input_file --output $output_file;;
   contemporary-math) $DIR/lib/recipes/contemporary-math/bake --input $input_file --output $output_file;;
