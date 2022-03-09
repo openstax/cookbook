@@ -46,10 +46,12 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
     end
 
     chapter.sections('$.conceptual-questions').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
+      BakeNumberedExercise.v1(
+        exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
     end
     chapter.sections('$.problems-exercises').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
+      BakeNumberedExercise.v1(
+        exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
     end
 
     chapter.figures.each do |figure|
