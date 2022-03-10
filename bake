@@ -65,7 +65,6 @@ case "${book}" in
   psychology) $DIR/lib/recipes/psychology/bake --input $input_file --output $output_file;;
   sociology) $DIR/lib/recipes/sociology/bake --input $input_file --output $output_file;;
   statistics) $DIR/lib/recipes/statistics/bake --input $input_file --output $output_file;;
-  testing-anchor)$DIR/lib/recipes/testing-anchor/bake --input $input_file --output $output_file;;
   u-physics) $DIR/lib/recipes/u-physics/bake --input $input_file --output $output_file;;
   world-history) $DIR/lib/recipes/world-history/bake --input $input_file --output $output_file;;
   *) echo "Unknown book '${book}'"; exit 1;;
