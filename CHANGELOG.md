@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Do `AP_PHYSICS_RECIPE` re usable for 2e (minor).
 * Do `COLLEGE_PHYSICS_RECIPE` re usable for 2e (minor).
 * Add specific baking for `authentic-assessment` sections in `college-physics-2e` (minor).
+* Restore `Answer Key` for `college-physics-2e` (minor).
 
 ## [v1.2.0] - 2022-2-25
 
