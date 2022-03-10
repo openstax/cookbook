@@ -195,10 +195,6 @@ RSpec.describe 'books' do
     expect('statistics').to bake_correctly
   end
 
-  it 'bakes testing-anchor' do
-    expect('testing-anchor').to bake_correctly
-  end
-
   it 'bakes trigonometry' do
     expect('trigonometry').to bake_correctly_with('precalculus')
   end
