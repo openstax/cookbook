@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+data_dir = "#{Dir.pwd}/spec/recipes_spec/books"
+
+Dir.each_child(data_dir) do |child|
+  actual_output = "#{data_dir}/#{child}/actual_output.xhtml"
+  if File.exist?(actual_output)
+    `cp #{actual_output} #{data_dir}/#{child}/expected_output.xhtml`
+    `rm #{actual_output}`
+  end
+end
