@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Remove `testing-anchor` recipe (minor)
 * Add `script/update_recipes_spec_data`
 * Add target labels to Introduction and Non Introduction modules, Appendixes (patch).
 * Remove extra whitespace between exercise numbers and divider(patch)
