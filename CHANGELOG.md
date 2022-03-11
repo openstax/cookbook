@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v1.3.0] - 2022-3-11
+
 * Remove `testing-anchor` recipe (minor)
 * Add `script/update_recipes_spec_data`
 * Add target labels to Introduction and Non Introduction modules, Appendixes (patch).
@@ -12,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Do `AP_PHYSICS_RECIPE` re usable for 2e (minor).
 * Do `COLLEGE_PHYSICS_RECIPE` re usable for 2e (minor).
 * Add specific baking for `authentic-assessment` sections in `college-physics-2e` (minor).
+* Restore `Answer Key` for `college-physics-2e` (minor).
 
 ## [v1.2.0] - 2022-2-25
 
