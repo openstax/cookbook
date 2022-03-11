@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove extra space between os-number and divider in solutions (patch)
+
 ## [v1.3.0] - 2022-3-11
 
 * Remove `testing-anchor` recipe (minor)

@@ -56,8 +56,7 @@ module Kitchen::Directions::BakeNumberedExercise
       problem.replace_children(with:
         <<~HTML
           #{title_label}
-          #{problem_number}
-          #{problem_divider}
+          #{problem_number}#{problem_divider}
           <div class="os-problem-container">#{problem.children}</div>
         HTML
       )
@@ -88,8 +87,7 @@ module Kitchen::Directions::BakeNumberedExercise
 
       solution.replace_children(with:
         <<~HTML
-          <a class='os-number' href='##{exercise.id}'>#{number}</a>
-          <span class='os-divider'>#{divider}</span>
+          <a class='os-number' href='##{exercise.id}'>#{number}</a><span class='os-divider'>#{divider}</span>
           <div class="os-solution-container">#{solution.children}</div>
         HTML
       )
