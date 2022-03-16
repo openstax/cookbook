@@ -15,9 +15,7 @@ module Kitchen
             HTML
         end
 
-        title_copied_id = page.title.copied_id
-
-        title_copied_id = "id=\"#{title_copied_id}\"" unless title_copied_id.empty?
+        title_copied_id = "id=\"#{page.title.copied_id}\"" unless page.title.copied_id.empty?
 
         title_snippet = <<~HTML
           <#{title_tag} data-type="document-title" #{title_copied_id}>
