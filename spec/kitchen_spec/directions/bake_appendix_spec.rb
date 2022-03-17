@@ -43,63 +43,17 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
 
   it 'works' do
     described_class.v1(page: page, number: 3)
-    expect(page).to match_normalized_html(
-      <<~HTML
-        <div data-type="page" id="apId">
-          <h1 data-type="document-title">
-            <span class="os-part-text">Appendix </span>
-            <span class="os-number">3</span>
-            <span class="os-divider"> </span>
-            <span class="os-text" data-type="" itemprop="">Appendix Title</span>
-          </h1>
-          <section data-depth="1">
-            <h2 data-type="title">hello</h2>
-            <section data-depth="2">
-              <h3 data-type="title">world</h3>
-            </section>
-          </section>
-        </div>
-      HTML
-    )
+    expect(page).to match_snapshot_auto
   end
 
   it 'does not explode if title not present in appendix section' do
     described_class.v1(page: page_appendix_no_title, number: 3)
-    expect(page_appendix_no_title).to match_normalized_html(
-      <<~HTML
-        <div data-type="page" id="apId">
-          <h1 data-type="document-title">
-            <span class="os-part-text">Appendix </span>
-            <span class="os-number">3</span>
-            <span class="os-divider"> </span>
-            <span class="os-text" data-type="" itemprop="">Hi</span>
-          </h1>
-          <section data-depth="1"></section>
-        </div>
-      HTML
-    )
+    expect(page_appendix_no_title).to match_snapshot_auto
   end
 
   it 'bakes section.column-container in appendix page' do
     described_class.v1(page: page_appendix_with_section_column_container, number: 3)
-    expect(page_appendix_with_section_column_container).to match_normalized_html(
-      <<~HTML
-        <div data-type="page" id="apId">
-          <h1 data-type="document-title">
-            <span class="os-part-text">Appendix </span>
-            <span class="os-number">3</span>
-            <span class="os-divider"> </span>
-            <span class="os-text" data-type="" itemprop="">Appendix Title</span>
-          </h1>
-          <div data-depth="1" class="column-container">
-            <h2 data-type="title">hello</h2>
-            <section data-depth="2">
-              <h3 data-type="title">world</h3>
-            </section>
-          </div>
-        </div>
-      HTML
-    )
+    expect(page_appendix_with_section_column_container).to match_snapshot_auto
   end
 
   context 'when book has added has adde target labels for appendices' do

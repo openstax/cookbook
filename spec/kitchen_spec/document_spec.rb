@@ -24,22 +24,14 @@ RSpec.describe Kitchen::Document do
   end
 
   it 'creates element' do
-    expect(instance.create_element('div', class: 'foo')).to match_normalized_html(
-      <<~HTML
-        <div class="foo"/>
-      HTML
-    )
+    expect(instance.create_element('div', class: 'foo')).to match_snapshot_auto
   end
 
   describe('#create_element_from_string') do
     it 'creates a simple element' do
       expect(
         instance.create_element_from_string("<div class='foo'>bar</div>")
-      ).to match_normalized_html(
-        <<~HTML
-          <div class="foo">bar</div>
-        HTML
-      )
+      ).to match_snapshot_auto
     end
 
     it 'returns an element in the document that receives the call' do
@@ -49,13 +41,7 @@ RSpec.describe Kitchen::Document do
     it 'creates an element with child elements' do
       expect(
         instance.create_element_from_string("<div class='foo'><span>bar</span></div>")
-      ).to match_normalized_html(
-        <<~HTML
-          <div class="foo">
-            <span>bar</span>
-          </div>
-        HTML
-      )
+      ).to match_snapshot_auto
     end
 
     it 'raises when the string has more than one top-level element' do

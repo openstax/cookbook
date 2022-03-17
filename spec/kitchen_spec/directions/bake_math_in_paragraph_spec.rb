@@ -60,67 +60,20 @@ RSpec.describe Kitchen::Directions::BakeMathInParagraph do
     described_class.v1(book: book1)
     expect(
       book1.body.children.to_s
-    ).to match_normalized_html(
-      <<~HTML
-        <div>
-          <p>
-            <span class="os-math-in-para">
-              <math>
-                <msup>
-                  <mn>10</mn>
-                  <mn>3</mn>
-                </msup>
-              </math>
-            </span>
-          </p>
-        </div>
-      HTML
-    )
+    ).to match_snapshot_auto
   end
 
   it 'works with m tags' do
     described_class.v1(book: book2)
     expect(
       book2.body.children.to_s
-    ).to match_normalized_html(
-      <<~HTML
-        <div>
-          <p>
-            <span class="os-math-in-para">
-              <m>
-                <msup>
-                  <mn>10</mn>
-                  <mn>3</mn>
-                </msup>
-              </m>
-            </span>
-          </p>
-        </div>
-      HTML
-    )
+    ).to match_snapshot_auto
   end
 
   it 'works with math tags wrapped by 2 elements' do
     described_class.v1(book: book3)
     expect(
       book3.body.children.to_s
-    ).to match_normalized_html(
-      <<~HTML
-        <div>
-          <p>
-            <span>
-              <span class="os-math-in-para">
-                <math>
-                  <msup>
-                    <mn>10</mn>
-                    <mn>3</mn>
-                  </msup>
-                </math>
-              </span>
-            </span>
-          </p>
-        </div>
-      HTML
-    )
+    ).to match_snapshot_auto
   end
 end

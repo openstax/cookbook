@@ -34,21 +34,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
   it 'works' do
     described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
-    expect(example).to match_normalized_html(
-      <<~HTML
-        <div data-type="example" id="example-test">
-          <title-tag-name class="os-title">
-            <span class="os-title-label">Example </span>
-            <span class="os-number">4</span>
-            <span class="os-divider"> </span>
-          </title-tag-name>
-          <div class="body">
-            <h4 data-type="title">example title becomes h4</h4>
-            <p>content</p>
-          </div>
-        </div>
-      HTML
-    )
+    expect(example).to match_snapshot_auto
   end
 
   context 'when there is an exercise' do
@@ -71,42 +57,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
     it 'works' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
-      expect(example).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" id="example-test">
-            <title-tag-name class="os-title">
-              <span class="os-title-label">Example </span>
-              <span class="os-number">4</span>
-              <span class="os-divider"> </span>
-            </title-tag-name>
-            <div class="body">
-              <h4 data-type="title">example title becomes h4</h4>
-              <p>content</p>
-              <div data-type="exercise" id="exercise_id" class="unnumbered">
-                <div data-type="problem" id="problem_id">
-                  <div class="os-problem-container">
-                    <h4 data-type="title" id="title_id">Evaluating Functions</h4>
-                    <p>example content</p>
-                  </div>
-                </div>
-                <div data-type="solution" id="solution_id">
-                  <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution</span>
-                  </h4>
-                  <div class="os-solution-container">
-                    <p>Solution content</p>
-                  </div>
-                </div>
-                <div data-type="commentary" id="commentary_id">
-                  <h4 data-type="commentary-title" id="title_id">
-                    <span class="os-title-label">Analysis</span>
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(example).to match_snapshot_auto
     end
   end
 
@@ -135,45 +86,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
     it 'works' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
-      expect(example).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" id="example-test">
-            <title-tag-name class="os-title">
-              <span class="os-title-label">Example </span>
-              <span class="os-number">4</span>
-              <span class="os-divider"> </span>
-            </title-tag-name>
-            <div class="body">
-              <h4 data-type="title">example title becomes h4</h4>
-              <p>content</p>
-              <div data-type="exercise" id="exercise_id" class="unnumbered">
-                <div data-type="problem" id="problem_id">
-                  <div class="os-problem-container">
-                    <h4 data-type="title" id="title_id">Evaluating Functions</h4>
-                    <p>example content</p>
-                  </div>
-                </div>
-                <div data-type="solution" id="solution_id">
-                  <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution</span>
-                  </h4>
-                  <div class="os-solution-container">
-                    <p>Solution content</p>
-                  </div>
-                </div>
-                <div data-type="commentary" id="commentary_id">
-                  <div data-type="list" id="list_id">
-                    <h4 data-type="title" id="title_id">List Title</h4>
-                    <ul>
-                      <li>List Item</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(example).to match_snapshot_auto
     end
   end
 
@@ -200,50 +113,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
     it 'works' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
-      expect(example).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" id="example-test">
-            <title-tag-name class="os-title">
-              <span class="os-title-label">Example </span>
-              <span class="os-number">4</span>
-              <span class="os-divider"> </span>
-            </title-tag-name>
-            <div class="body">
-              <h4 data-type="title">example title becomes h4</h4>
-              <p>content</p>
-              <div data-type="exercise" id="exercise_id" class="unnumbered">
-                <div data-type="problem" id="problem_id">
-                  <div class="os-problem-container">
-                    <h4 data-type="title" id="title_id">Evaluating Functions</h4>
-                    <p>example content</p>
-                  </div>
-                </div>
-                <div data-type="solution" id="solution_id_1">
-                  <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution</span>
-                  </h4>
-                  <div class="os-solution-container">
-                    <p>Solution content</p>
-                  </div>
-                </div>
-                <div data-type="solution" id="solution_id_2">
-                  <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution</span>
-                  </h4>
-                  <div class="os-solution-container">
-                    <p>A second solution</p>
-                  </div>
-                </div>
-                <div data-type="commentary" id="commentary_id">
-                  <h4 data-type="commentary-title" id="title_id">
-                    <span class="os-title-label">Analysis</span>
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(example).to match_snapshot_auto
     end
   end
 
@@ -280,22 +150,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
     it 'doesn\'t affect the baked table' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
-      expect(example).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" id="example-test">
-            <title-tag-name class="os-title">
-              <span class="os-title-label">Example </span>
-              <span class="os-number">4</span>
-              <span class="os-divider"> </span>
-            </title-tag-name>
-            <div class="body">
-              <h4 data-type="title">example title becomes h4</h4>
-              <p>content</p>
-              #{table}
-            </div>
-          </div>
-        HTML
-      )
+      expect(example).to match_snapshot_auto
     end
   end
 
@@ -327,22 +182,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
     it 'doesn\'t affect the unbaked table' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
-      expect(example).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" id="example-test">
-            <title-tag-name class="os-title">
-              <span class="os-title-label">Example </span>
-              <span class="os-number">4</span>
-              <span class="os-divider"> </span>
-            </title-tag-name>
-            <div class="body">
-              <h4 data-type="title">example title becomes h4</h4>
-              <p>content</p>
-              #{table}
-            </div>
-          </div>
-        HTML
-      )
+      expect(example).to match_snapshot_auto
     end
   end
 
@@ -380,60 +220,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
         title_tag: 'title-tag-name',
         numbered_solutions: true
       )
-      expect(example).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" id="example-test">
-            <title-tag-name class="os-title">
-              <span class="os-title-label">Example </span>
-              <span class="os-number">4</span>
-              <span class="os-divider"> </span>
-            </title-tag-name>
-            <div class="body">
-              <h4 data-type="title">example title becomes h4</h4>
-              <p>content</p>
-              <div data-type="exercise" id="exercise_id" class="unnumbered">
-                <div data-type="problem" id="problem_id">
-                  <div class="os-problem-container">
-                    <h4 data-type="title" id="title_id">Evaluating Functions</h4>
-                    <p>example content</p>
-                  </div>
-                </div>
-                <div data-type="solution" id="solution_id">
-                  <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution</span>
-                    <span class="os-number">1</span>
-                  </h4>
-                  <div class="os-solution-container">
-                    <p>Solution One Content</p>
-                  </div>
-                </div>
-                <div data-type="commentary" id="commentary_id">
-                  <h4 data-type="commentary-title" id="title_id">
-                    <span class="os-title-label">Analysis</span>
-                  </h4>
-                </div>
-              </div>
-              <div class="unnumbered" data-type="exercise" id="exercise_id">
-                <div data-type="problem" id="problem_id">
-                  <div class="os-problem-container">
-                    <h4 data-type="title" id="title_id">Evaluating Functions</h4>
-                    <p>example content</p>
-                  </div>
-                </div>
-                <div data-type="solution" id="solution_id">
-                  <h4 data-type="solution-title">
-                    <span class="os-title-label">Solution</span>
-                    <span class="os-number">2</span>
-                  </h4>
-                  <div class="os-solution-container">
-                    <p>Solution Two Content</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(example).to match_snapshot_auto
     end
   end
 
@@ -446,21 +233,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
     it 'works' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
-      expect(example).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" id="example-test">
-            <title-tag-name class="os-title">
-              <span class="os-title-label">Example </span>
-              <span class="os-number">4</span>
-              <span class="os-divider"> </span>
-            </title-tag-name>
-            <div class="body">
-              <h4 data-type="title">also works on divs</h4>
-              <p>content</p>
-            </div>
-          </div>
-        HTML
-      )
+      expect(example).to match_snapshot_auto
     end
   end
 
@@ -486,41 +259,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
       book_with_nested_examples.examples.each do |example|
         described_class.v1(example: example, number: 5, title_tag: 'h5')
       end
-      expect(book_with_nested_examples.pages.first).to match_normalized_html(
-        <<~HTML
-          <div data-type="page">
-            <div data-type="example" id="example-test">
-              <h5 class="os-title">
-                <span class="os-title-label">Example </span>
-                <span class="os-number">5</span>
-                <span class="os-divider"> </span>
-              </h5>
-              <div class="body">
-                <div data-type="example" id="example-test2">
-                  <h5 class="os-title">
-                    <span class="os-title-label">Example </span>
-                    <span class="os-number">5</span>
-                    <span class="os-divider"> </span>
-                  </h5>
-                  <div class="body">
-                    <div class="unnumbered" data-type="exercise">
-                      <div data-type="problem">
-                        <div class="os-problem-container">Q</div>
-                      </div>
-                      <div data-type="solution">
-                        <h4 data-type="solution-title">
-                          <span class="os-title-label">Solution</span>
-                        </h4>
-                        <div class="os-solution-container">A</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(book_with_nested_examples.pages.first).to match_snapshot_auto
     end
   end
 

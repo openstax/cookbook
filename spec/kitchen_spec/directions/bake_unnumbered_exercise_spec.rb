@@ -20,23 +20,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedExercise do
 
   it 'works' do
     described_class.v1(exercise: book_with_unnumbered_exercise.exercises.first)
-    expect(book_with_unnumbered_exercise.pages.first).to match_normalized_html(
-      <<~HTML
-        <div data-type="page">
-          <div class="unnumbered" data-type="exercise">
-            <div data-type="problem">
-              <div class="os-problem-container">problem</div>
-            </div>
-            <div data-type="solution">
-              <div class="os-solution-container">solution 1</div>
-            </div>
-            <div data-type="solution">
-              <div class="os-solution-container">solution 2</div>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(book_with_unnumbered_exercise.pages.first).to match_snapshot_auto
   end
 
 end

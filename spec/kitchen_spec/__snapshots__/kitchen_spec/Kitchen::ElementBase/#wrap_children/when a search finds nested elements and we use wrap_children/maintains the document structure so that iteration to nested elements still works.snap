@@ -1,0 +1,5 @@
+<outer>
+  <div class="bar foo">
+    <div>something <div class="bar foo"><div>internal</div></div></div>
+  </div>
+</outer>

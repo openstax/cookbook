@@ -175,33 +175,17 @@ RSpec.describe Kitchen::ElementBase do
 
   describe '#parent' do
     it 'returns the element\'s parent' do
-      expect(para.parent).to match_normalized_html(
-        <<~HTML
-          <div class="class1" data-type="example" id="div1">
-            <p>This is a paragraph.</p>
-          </div>
-        HTML
-      )
+      expect(para.parent).to match_snapshot_auto
     end
   end
 
   describe '#previous' do
     it 'returns the element\'s immediately previous sibling' do
-      expect(figure.previous).to match_normalized_html(
-        <<~HTML
-          <div data-type="example" class="class1" id="example1">
-            <p>This is an example.</p>
-          </div>
-        HTML
-      )
+      expect(figure.previous).to match_snapshot_auto
     end
 
     it 'skips text belonging to a parent element' do
-      expect(reference.previous).to match_normalized_html(
-        <<~HTML
-          <div data-type="note">Reference 1</div>
-        HTML
-      )
+      expect(reference.previous).to match_snapshot_auto
     end
 
     it 'returns nil when a previous sibling does not exist' do
@@ -367,12 +351,7 @@ RSpec.describe Kitchen::ElementBase do
     context 'when sibling argument is given' do
       it 'prepends as a sibling to the element' do
         para.prepend(sibling: sibling)
-        expect(example.children.to_s).to match_normalized_html(
-          <<~HTML
-            <div>Sibling</div>
-            <p>This is a paragraph.</p>
-          HTML
-        )
+        expect(example.children.to_s).to match_snapshot_auto
       end
     end
 
@@ -415,12 +394,7 @@ RSpec.describe Kitchen::ElementBase do
     context 'when sibling argument is given' do
       it 'appends as a sibling to the element' do
         para.append(sibling: sibling)
-        expect(example.children.to_s).to match_normalized_html(
-          <<~HTML
-            <p>This is a paragraph.</p>
-            <div>Sibling</div>
-          HTML
-        )
+        expect(example.children.to_s).to match_snapshot_auto
       end
     end
 
@@ -437,21 +411,15 @@ RSpec.describe Kitchen::ElementBase do
     let(:element) { new_element('<div>something <i>awesome</i></div>') }
 
     it 'wraps with no arguments' do
-      expect(element.wrap_children).to match_normalized_html(
-        '<div><div>something <i>awesome</i></div></div>'
-      )
+      expect(element.wrap_children).to match_snapshot_auto
     end
 
     it 'can set attributes on the wrapper' do
-      expect(element.wrap_children(class: 'foo')).to match_normalized_html(
-        '<div><div class="foo">something <i>awesome</i></div></div>'
-      )
+      expect(element.wrap_children(class: 'foo')).to match_snapshot_auto
     end
 
     it 'works with a different name' do
-      expect(element.wrap_children('span')).to match_normalized_html(
-        '<div><span>something <i>awesome</i></span></div>'
-      )
+      expect(element.wrap_children('span')).to match_snapshot_auto
     end
 
     it 'accepts a block to do extra work on the wrapper' do
@@ -459,28 +427,20 @@ RSpec.describe Kitchen::ElementBase do
         wrapper.wrap_children(class: 'inner')
       end
 
-      expect(element).to match_normalized_html(
-        '<div><div class="outer"><div class="inner">something <i>awesome</i></div></div></div>'
-      )
+      expect(element).to match_snapshot_auto
     end
 
     it 'returns self for chaining' do
       element.wrap_children.add_class('foo')
-      expect(element).to match_normalized_html(
-        '<div class="foo"><div>something <i>awesome</i></div></div>'
-      )
+      expect(element).to match_snapshot_auto
     end
 
     it 'converts underscores to dashes in attribute keys' do
-      expect(element.wrap_children(data_type: 'foo')).to match_normalized_html(
-        '<div><div data-type="foo">something <i>awesome</i></div></div>'
-      )
+      expect(element.wrap_children(data_type: 'foo')).to match_snapshot_auto
     end
 
     it 'converts double underscores to single underscores in attribute keys' do
-      expect(element.wrap_children(data__type: 'foo')).to match_normalized_html(
-        '<div><div data_type="foo">something <i>awesome</i></div></div>'
-      )
+      expect(element.wrap_children(data__type: 'foo')).to match_snapshot_auto
     end
 
     context 'when a search finds nested elements and we use wrap_children' do
@@ -492,9 +452,7 @@ RSpec.describe Kitchen::ElementBase do
           match.wrap_children('div')
         end
 
-        expect(element).to match_normalized_html(
-          '<outer><div class="bar foo"><div>something <div class="bar foo"><div>internal</div></div></div></div></outer>'
-        )
+        expect(element).to match_snapshot_auto
       end
 
     end
@@ -502,7 +460,7 @@ RSpec.describe Kitchen::ElementBase do
 
   describe '#content' do
     it 'gets the children matching the provided selector' do
-      expect(book.content('.class1')).to match_normalized_html('<p>This is a paragraph.</p>')
+      expect(book.content('.class1')).to match_snapshot_auto
     end
   end
 

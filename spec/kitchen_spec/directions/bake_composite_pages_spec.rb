@@ -23,18 +23,6 @@ RSpec.describe Kitchen::Directions::BakeCompositePages do
     described_class.v1(book: book1)
     expect(
       book1.body.children.to_s
-    ).to match_normalized_html(
-      <<~HTML
-        <div data-type="composite-page" id="composite-page-1">
-          <p>Text 1</p>
-        </div>
-        <div data-type="page">
-          <p>Text 2</p>
-        </div>
-        <div data-type="composite-page" id="composite-page-2">
-          <p>Text 3</p>
-        </div>
-      HTML
-    )
+    ).to match_snapshot_auto
   end
 end

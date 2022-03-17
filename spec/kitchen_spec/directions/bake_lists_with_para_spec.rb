@@ -35,22 +35,7 @@ RSpec.describe Kitchen::Directions::BakeListsWithPara do
 
   it 'works' do
     described_class.v1(book: book)
-    expect(book.body).to match_normalized_html(
-      <<~HTML
-        <body>
-          <ol>
-            <li>blah1</li>
-            <li>blah2</li>
-            <li><span>random term</span> blah3</li>
-          </ol>
-          <ul>
-            <li>foo1</li>
-            <li>foo2</li>
-            <li><span>random term2</span> foo3</li>
-          </ul>
-        </body>
-      HTML
-    )
+    expect(book.body).to match_snapshot_auto
   end
 
 end

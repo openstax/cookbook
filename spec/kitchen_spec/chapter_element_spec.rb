@@ -30,7 +30,7 @@ RSpec.describe Kitchen::ChapterElement do
     end
 
     it 'gets the correct elements' do
-      expect(sample_chapter.abstracts.first).to match_normalized_html('<div data-type="abstract">abstract 1</div>')
+      expect(sample_chapter.abstracts.first).to match_snapshot_auto
     end
   end
 

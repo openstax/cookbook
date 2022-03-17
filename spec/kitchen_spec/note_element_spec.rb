@@ -118,9 +118,9 @@ RSpec.describe Kitchen::NoteElement do
     end
 
     it 'gets the subtitle' do
-      expect(notes_with_subtitle.first.title).to match_normalized_html('<div data-type="title">valid subtitle</div>')
-      expect(notes_with_subtitle[1].title).to match_normalized_html('<div data-type="title">also valid subtitle</div>')
-      expect(notes_with_subtitle[2].title).to match_normalized_html('<div data-type="title">subtitles can be in a paragraph element</div>')
+      expect(notes_with_subtitle.first.title).to match_snapshot_auto
+      expect(notes_with_subtitle[1].title).to match_snapshot_auto('2')
+      expect(notes_with_subtitle[2].title).to match_snapshot_auto('3')
     end
 
     it 'does not get non subtitle titles' do

@@ -14,12 +14,6 @@ RSpec.describe Kitchen::Directions::MoveTitleTextIntoSpan do
 
   it 'works' do
     described_class.v1(title: title)
-    expect(title).to match_normalized_html(
-      <<~HTML
-        <h1 data-type="document-title">
-          <span data-type="" itemprop="" class="os-text">foo</span>
-        </h1>
-      HTML
-    )
+    expect(title).to match_snapshot_auto
   end
 end

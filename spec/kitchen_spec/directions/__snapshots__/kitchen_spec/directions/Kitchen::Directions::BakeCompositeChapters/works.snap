@@ -1,0 +1,12 @@
+
+    <div data-type="composite-chapter">
+  <p data-type="document-title" id="composite-chapter-1">Text 1</p>
+</div>
+<div data-type="chapter">
+  <h1 data-type="document-title">Text 2</h1>
+</div>
+<div data-type="composite-chapter">
+  <h2 data-type="document-title" id="composite-chapter-2">Text 3</h2>
+</div>
+
+  

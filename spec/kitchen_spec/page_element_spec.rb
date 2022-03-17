@@ -128,28 +128,12 @@ RSpec.describe Kitchen::PageElement do
   end
 
   it 'returns the metadata' do
-    expect(page1.metadata).to match_normalized_html(metadata)
+    expect(page1.metadata).to match_snapshot_auto
   end
 
   describe '#exercises' do
     it 'returns the exercises element' do
-      expect(page_with_exercises.exercises).to match_normalized_html(
-        <<~HTML
-          <section data-depth="1" id="auto_m68764_fs-idm81325184" class="exercises">
-            <h3 data-type="title">Section Title</h3>
-            <div data-type="exercise" id="auto_m68764_fs-idm178529488">
-              <div data-type="problem" id="auto_m68764_fs-idp20517968">
-                <p id="auto_m68764_fs-idm197064800">Problem 1</p>
-              </div>
-            </div>
-            <div data-type="exercise" id="auto_m68764_fs-idm82765632">
-              <div data-type="problem" id="auto_m68764_fs-idp7685184">
-                <p id="auto_m68764_fs-idm164104512">Problem 2</p>
-              </div>
-            </div>
-          </section>
-        HTML
-      )
+      expect(page_with_exercises.exercises).to match_snapshot_auto
     end
   end
 

@@ -4,7 +4,7 @@ require 'rspec/snapshot'
 
 # Automatically generate a snapshot filename
 # Source: https://github.com/levinmr/rspec-snapshot/issues/6#issuecomment-1048145790
-def match_snapshot_auto()
+def match_snapshot_auto(suffix='')
   example = RSpec.current_example
 
   # get the description (name) or the scoped id (like 1:2:4:8)
@@ -26,7 +26,7 @@ def match_snapshot_auto()
 
   # path_data is ['renders_component', 'when rating is > 0', 'StarRatingComponent', 'components']
   name = path_data.reverse.join('/')
-  match_snapshot(name)
+  match_snapshot(name + suffix)
 end
 
 module MatchHelpers

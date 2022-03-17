@@ -57,15 +57,6 @@ RSpec.describe Kitchen::Directions::DefaultStrategyForAnswerKeySolutions do
       )
     end
 
-    expect(append_to).to match_normalized_html(
-      <<~HTML
-        <div class="bleepbloop">
-          <div data-type="solution">a</div>
-          <div data-type="solution">b</div>
-          <div data-type="solution">c</div>
-          <div data-type="solution">d</div>
-        </div>
-      HTML
-    )
+    expect(append_to).to match_snapshot_auto
   end
 end
