@@ -16,6 +16,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
 
   # Some stuff just goes away
   book.search('cnx-pi').trash
+  BakeListsWithPara.v1(book: book)
 
   # Lines from below removing attributes with certain namespaces
   # need to be removed after content fixes
