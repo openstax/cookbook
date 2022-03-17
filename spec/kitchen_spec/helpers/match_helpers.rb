@@ -2,6 +2,33 @@
 
 require 'rspec/snapshot'
 
+# Automatically generate a snapshot filename
+# Source: https://github.com/levinmr/rspec-snapshot/issues/6#issuecomment-1048145790
+def match_snapshot_auto()
+  example = RSpec.current_example
+
+  # get the description (name) or the scoped id (like 1:2:4:8)
+  path_data = [example.metadata[:description] || example.metadata[:scoped_id]]
+  parent = example.example_group
+
+  base_path = ''
+  while parent != RSpec::ExampleGroups
+    base_path = File.dirname(parent.file_path.gsub('./spec/', ''))
+
+    path_data << parent.metadata[:description]
+    parent = parent.module_parent
+  end
+
+  path_data << base_path if base_path.present?
+
+  # Need to do this differently since it's a Rails thing
+  # path_data = path_data.map { ActiveStorage::Filename.new(_1).sanitized }
+
+  # path_data is ['renders_component', 'when rating is > 0', 'StarRatingComponent', 'components']
+  name = path_data.reverse.join('/')
+  match_snapshot(name)
+end
+
 module MatchHelpers
   RSpec::Matchers.define :match_html_strict do |expected|
     match do |actual|

@@ -17,7 +17,7 @@ RSpec.describe Kitchen::BookElement do
   end
 
   it 'returns the body' do
-    expect(book.body).to match_snapshot('my-snapshot-name')
+    expect(book.body).to match_snapshot_auto
   end
 
   it 'returns the metadata' do
