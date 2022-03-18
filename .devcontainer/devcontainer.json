@@ -7,9 +7,7 @@
       "bundler_version": "2.2.4"
     }
   },
-  "initializeCommand": "./docker/symlink_dependencies_in_tmp",
   "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",
-  "mounts": ["source=/tmp/legacy_recipes,target=/code/legacy_recipes,type=bind,consistency=default"],
   "workspaceFolder": "/code",
   "extensions": [
     "castwide.solargraph",

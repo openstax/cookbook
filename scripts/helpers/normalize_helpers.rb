@@ -20,39 +20,13 @@ def sort_attributes(element)
   end
 end
 
-# Legacy bakings of unnumbered tables include a bogus number, delete it
-
-def remove_bogus_number_from_unnumbered_tables(element)
-  return unless element.name == 'table' && (element[:class] || '').include?('unnumbered')
-
-  element.remove_attribute('summary')
-end
-
-# Sometimes there is `class=' '`, get rid of these
-
-def remove_blank_classes(element)
-  element.attributes.each do |key, value|
-    element.remove_attribute(key) if key == 'class' && value.to_s.strip == ''
-  end
-end
-
 # Strips trailing whitespace from class names
 
 def sort_classes_strip_whitespace(element)
   element[:class] = element[:class].split(' ').sort.join(' ') if element[:class]
 end
 
-# The index of copied elements (the number in _copy_23) isn't meaningful so
-# hide it.
-
-def mask_copied_id_numbers(element)
-  return unless element[:id]
-
-  warn_if_already_seen(element[:id])
-  element[:id] = element[:id].gsub(/_copy_(\d+)$/, '_copy_XXX')
-end
-
-# Check for duplicate IDs before masking copy numbers
+# Check for duplicate IDs
 
 def warn_if_already_seen(id)
   @already_seen_ids ||= Set.new
@@ -62,60 +36,14 @@ def warn_if_already_seen(id)
   @already_seen_ids.add(id)
 end
 
-# The order of term baking/numbering differs between Kitchen and Easybake, so mask the term numbers
-
-def mask_term_numbers(element)
-  return unless element[:'data-type'] == 'term' || element[:class]&.split(' ')&.include?('os-term-section-link')
-
-  element[:id] = element[:id]&.gsub(/_term(\d+)$/, '_termXXX') if element[:id]
-  element[:href] = element[:href]&.gsub(/_term(\d+)$/, '_termXXX') if element[:href]
-end
-
-def div_to_h3_note(element)
-  unless element.parent[:'data-type'] == 'note' && \
-         element[:class]&.split(' ')&.include?('os-title') && element.name != 'h3'
-    return
-  end
-
-  element.name = 'h3'
-end
-
-def eoc_metadata_title(element)
-  unless element[:'data-type'] == 'metadata' && \
-         element.parent[:class]&.split(' ')&.include?('os-eoc')
-    return
-  end
-
-  title = element.parent.element_children.first.text
-  element.element_children.first.content = title
-end
-
-def add_index_comment(element)
-  return unless element[:class]&.split(' ')&.include?('os-term-section-link')
-
-  element.add_next_sibling('<!--
-    -->')
-end
-
 # Main normalize function for an XML document
 
-def normalize(doc, args: [])
+def normalize(doc)
   doc.traverse do |child|
-    mask_copied_id_numbers(child)
     next if child.text? || child.document?
 
-    remove_bogus_number_from_unnumbered_tables(child)
-    remove_blank_classes(child)
     sort_classes_strip_whitespace(child)
     sort_attributes(child)
-    mask_term_numbers(child) if args.include?('--mask-terms')
-    if args.include?('--easybaked-only')
-      div_to_h3_note(child)
-      eoc_metadata_title(child)
-      add_index_comment(child)
-      next unless child.name == 'table'
-
-      child.remove_attribute('summary')
-    end
+    warn_if_already_seen(child[:id]) if child[:id]
   end
 end
