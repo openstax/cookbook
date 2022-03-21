@@ -48,9 +48,7 @@ module Kitchen::Directions::MoveSolutionsFromNumberedNote
         return if solutions_clipboard.items.empty?
 
         title = <<~HTML
-          <h4 data-type="title">
-            <span class="os-number">#{number}</span>
-          </h4>
+          <span class="os-note-number">#{number}</span>
         HTML
 
         append_to.append(child:
