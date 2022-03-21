@@ -55,14 +55,6 @@ module Kitchen
       first("div[data-type='question-solution']")
     end
 
-    # Returns the solutions elements.
-    #
-    # @return [Element]
-    #
-    def solutions
-      search("div[data-type='question-solution']")
-    end
-
     # Returns the exercise context element.
     # @return [Element]
     #
