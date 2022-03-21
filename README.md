@@ -599,16 +599,6 @@ If you'd still like the huge stack trace, you can set the `VERBOSE` environment 
 $> VERBOSE=1 ./my_work/test.rb
 ```
 
-### Comparing old recipe output to new
-
-When comparing new baking output to legacy baking output, I have found it useful to prepare the files before applying a standard diff:
-
-1. Parse the documents ignoring blank elements. (this one may not be that important actually)
-2. Traverse the documents, sorting their attributes alphabetically by attribute name.
-3. Writing the output back out with a standardized indentation scheme.
-
-I have some code to do this, I'll try to get it into this repo.
-
 ### Releases
 
 To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
@@ -794,25 +784,17 @@ Normal big Ruby projects have a `Gemfile` that is processed by the `bundler` gem
 
 There's a top-level `bake` Bash script that calls the right scripts in the `books` folder based on the book slug.  E.g. if you call `./bake -b chemistry -i in.xhtml -o out.xhtml` this script will turn around and call `./books/chemistry/bake --input in.xhtml --output out.xhtml`.  Every time we add a new recipe, we'll need to update this top-level bake script so it knows how to call it.  This is also why the names of the scripts inside `/books` don't really matter, because the top-level `bake` script knows the names of the lower-level scripts.
 
-## The `bake_legacy` script
-
-This script can be used to build a book using legacy baking (e.g. `cnx-easybake`) given an old style CSS recipe file (an example of how to run this script with Docker can be found below).
-
-Within the devcontainer, provided that [the legacy recipes](https://github.com/openstax/cnx-recipes/tree/master/recipes/output) have been [properly mounted](#using-legacy-recipes-within-the-recipes-devcontainer), this script can be called with `./bake_legacy -i {input-file} -r legacy_recipes/{book-name}.css -o {output-file}`.
-
 ## The `bake_root` script
 
-This script can be used if you don't want to invoke `bake` (kitchen baking) or `bake_legacy` (`cnx-easybake` baking) directly, and instead want to use a single script that will adopt the appropriate process for the given book. When kitchen support is added for a book, this script should be updated accordingly (it will fallback to legacy baking for all unknown books). Also, this is the script that will be utilized by build pipelines (e.g. CORGI, web hosting, etc.), so it controls when a book is ready to switchover from legacy to kitchen baking in those environments.
+This script can be used if you don't want to invoke `bake` directly, and instead want to use a single script to call `bake` for the given book. This is the script that is utilized by build pipelines (e.g. CORGI, web hosting, etc.).
 
 ## The `shorten` script
 
-This script generates shortened content for a book. It calls the book-specific shorten script in `books/{book-name}/shorten` to generate a shortened version of the assembled file, then bakes this file with both legacy and kitchen, and normalizes both. Essentially, it bundles calls to four other scripts: the book-specific `shorten`, `bake_legacy`, the book-specific `bake`, and `normalize`. The output files are written to the `data/{book-name}/short/` directory.
-
-The call to `bake_legacy` within this script assumes the recipe for the book is present in the legacy_recipes folder.
+This script generates shortened content for a book. It calls the book-specific shorten script in `books/{book-name}/shorten` to generate a shortened version of the assembled file, then bakes this file with kitchen, and normalizes. Essentially, it bundles calls to three other scripts: the book-specific `shorten`, the book-specific `bake`, and `normalize`. The output files are written to the `data/{book-name}/short/` directory.
 
 Call this script with `./shorten -b <bookname> -i <inputfile>`. Add `USE_LOCAL_KITCHEN=1` at the beginning to bake with the local version of kitchen.
 
-It is assumed that the given `<bookname>` will match both the folder name for the book in the `/books/` directory and the filename of the recipe in `/legacy_recipes/` (not including the `.css` extension).
+It is assumed that the given `<bookname>` will match the folder name for the book in the `/books/` directory.
 
 As with the main `bake` script, new books must be added to [the case statement](/shorten#L21), ex:
 
@@ -840,8 +822,6 @@ $> ./docker/build
 ```
 
 Note this builds the runtime environment, suitable for running in production and some development work.  If you want a more full development environment, use VS Code using the remote containers extension.  This will build the development environment with a nice terminal, VS Code Live Share for pairing, etc.  To install the remote containers extension, visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser.
-
-This image includes all of the versions of gems used in each recipe so that they are available when used to bake files.  Notably, if you change the version of a gem in one of the executable recipes, you'll need to either rebuild the Docker image or call the `./scripts/install_used_gem_versions` script which scans through all of the recipes, installing the gem versions they specify in their inline gem file declarations.
 
 To drop into the Docker container:
 
@@ -882,16 +862,6 @@ Bake:  13.600444227 s
 Write: 0.298500043 s
 ```
 
-If you want to bake a book with legacy baking which `bake_root` would otherwise route to `bake`, then you can utilize the `bake_legacy` script directly and pass the specific recipe file you desire:
-
-```bash
->$ docker run --rm \
-    -v $PWD:/files \                                                                         # Mount the current directory as /files
-    -v /home/user/cnx-recipes/recipes/output:/recipes \                                      # Mount the directory with old style recipes as /recipes
-    openstax/recipes:latest \
-    /code/bake_legacy -i /files/input.xhtml -r /recipes/chemistry.css -o /files/baked.xhtml  # Invoke the `bake_legacy` script
-```
-
 ## Rubocop
 
 Rubocop is available inside the VSCode dev container.  Moreover, the `lefthook` gem enforces that Rubocop linting passes on modified files before pushes are allowed.  To test this without pushing run `lefthook run pre-push`.
@@ -927,12 +897,6 @@ $ /code> USE_LOCAL_KITCHEN=1 ./books/chemistry2e/bake ...
 ```
 
 then your recipe will use your local kitchen folder.  You can leave the `gem` line as is when you commit it, and in production runs since the `USE_LOCAL_KITCHEN` environment variable isn't set, the version number at the end will be used.
-
-## Using legacy recipes within the recipes devcontainer
-
-As with kitchen, legacy recipes can be mounted within the devcontainer if you put the absolute path in a `.devcontainer/legacy_recipes_path` file.
-
-"Legacy recipes" refers to [this folder](https://github.com/openstax/cnx-recipes/tree/master/recipes/output) in the cnx-recipes repository.
 
 ## Starting a recipe
 

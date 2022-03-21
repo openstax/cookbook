@@ -73,18 +73,6 @@ then
 fi
 $script --input $input_file --output $dest/assembled.xhtml
 
-# Bake shortened book with legacy
-
-if [ -e legacy_recipes/$book.css ]
-then
-    echo "Baking with legacy ..."
-    ./bake_legacy -i $dest/assembled.xhtml -r legacy_recipes/$book.css -o $dest/easybaked.xhtml
-    # Normalize the easybaked book
-    ruby scripts/normalize $dest/easybaked.xhtml --easybaked-only
-else
-    echo "Cannot bake with legacy because legacy_recipes/${book}.css does not exist."
-fi
-
 # Bake shortened book with kitchen
 
 if [ -e $DIR/lib/recipes/$book/bake ]
