@@ -2,11 +2,7 @@
 
 # frozen_string_literal: true
 
-require 'bundler/inline'
-
-gemfile do
-  gem 'byebug'
-end
+require 'fileutils'
 
 # Create locales directory and en.yml file with test data
 def create_initial_locales(recipe_dir)
@@ -51,7 +47,7 @@ def create_initial_bake_script(recipe_dir, recipe)
 
       puts Kitchen::Oven.bake(
         input_file: opts[:input],
-        recipes: [recipe],
+        recipes: [recipe, VALIDATE_OUTPUT],
         output_file: opts[:output]
       )
     RUBY
@@ -64,13 +60,13 @@ def insert_to_bake_script(recipe)
   lines = File.readlines("#{Dir.pwd}/bake")
   # ... a bunch of logic for parsing the file & figuring out where to insert the new line ...
   recipes_names = lines.select { |line| line.match(/[a-z|-]+\)(\s\$DIR.*);;/) } \
-                      .map { |line| line.match(/((\w|-)*)\)/).values_at(1)[0] }
+                       .map { |line| line.match(/((\w|-)*)\)/).values_at(1)[0] }
   recipes_names.append(recipe).sort!
   lines_count_before_case = lines.find_index("case \"${book}\" in\n") + 1
   insert_index = recipes_names.find_index(recipe) + lines_count_before_case
   lines.insert(
     insert_index,
-    "  #{recipe}) $DIR/books/#{recipe}/bake --input $input_file --output $output_file;;\n"
+    "  #{recipe}) $DIR/lib/recipes/#{recipe}/bake --input $input_file --output $output_file;;\n"
   )
   bake_file = File.open("#{Dir.pwd}/bake", 'w')
   lines.each do |line|
