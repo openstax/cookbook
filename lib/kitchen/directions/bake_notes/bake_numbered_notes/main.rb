@@ -3,8 +3,8 @@
 module Kitchen
   module Directions
     module BakeNumberedNotes
-      def self.v1(book:, classes:, cases: false)
-        V1.new.bake(book: book, classes: classes, cases: cases)
+      def self.v1(book:, classes:, cases: false, bake_exercises: true)
+        V1.new.bake(book: book, classes: classes, cases: cases, bake_exercises: bake_exercises)
       end
 
       def self.v2(book:, classes:)

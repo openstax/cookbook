@@ -3,10 +3,13 @@
 module Kitchen::Directions
   module BakeNumberedNotes
     class V1
-      def bake(book:, classes:, cases: false)
+      def bake(book:, classes:, bake_exercises:, cases: false)
         classes.each do |klass|
           book.chapters.pages.notes("$.#{klass}").each do |note|
             bake_note(note: note, cases: cases)
+
+            next unless bake_exercises
+
             note.exercises.each do |exercise|
               BakeNoteExercise.v1(note: note, exercise: exercise)
             end
