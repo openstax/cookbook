@@ -11,11 +11,6 @@ RUN apt-get update && \
     build-essential \
     wget \
     software-properties-common \
-    python3 \
-    python-dev \
-    python-setuptools \
-    python-pip \
-    python-wheel \
     zlib1g-dev \
     libicu-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -31,10 +26,6 @@ RUN git clone https://github.com/nojhan/liquidprompt.git ~/liquidprompt && \
 
 # VSCode Live Share libraries
 RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vsls-reqs && ~/vsls-reqs
-
-# Install cnx-easybake (if for any reason we end up using more python
-# dependencies this can get pulled out into a requirements.txt)
-RUN pip install cnx-easybake==${EASYBAKE_VERSION}
 
 WORKDIR /code
 COPY . /code/

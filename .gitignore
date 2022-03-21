@@ -19,11 +19,5 @@ tutorial/outputs/*.html
 tutorials/**/actual_baked.*html
 tutorials/**/my_recipe.rb
 
-# locally mounted repos in the devcontainer
-legacy_recipes
-
-# file that contains the unique-to-a-dev absolute path to repos
-.devcontainer/legacy_recipes_path
-
 # a folder for test data
 data

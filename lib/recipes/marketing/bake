@@ -138,6 +138,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [recipe],
+  recipes: [recipe, VALIDATE_OUTPUT],
   output_file: opts[:output]
 )

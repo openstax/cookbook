@@ -46,6 +46,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [PRECALCULUS_RECIPE, coreq],
+  recipes: [PRECALCULUS_RECIPE, coreq, VALIDATE_OUTPUT],
   output_file: opts[:output]
 )

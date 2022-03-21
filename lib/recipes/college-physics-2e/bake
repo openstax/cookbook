@@ -17,7 +17,7 @@ college_physics_2e = Kitchen::BookRecipe.new(book_short_name: :college_physics_2
 
   book.chapters.each do |chapter|
     chapter.sections('$.authentic-assessment').each do |section|
-      section.prepend(child: 
+      section.prepend(child:
         <<~HTML
           <h3 data-type="title">#{I18n.t(:"exercises.authentic-assessment")}</h3>
         HTML
@@ -53,6 +53,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [college_physics_2e, COLLEGE_PHYSICS_RECIPE],
+  recipes: [college_physics_2e, COLLEGE_PHYSICS_RECIPE, VALIDATE_OUTPUT],
   output_file: opts[:output]
 )
