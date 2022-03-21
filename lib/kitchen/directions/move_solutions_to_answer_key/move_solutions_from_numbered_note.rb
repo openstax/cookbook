@@ -43,9 +43,8 @@ module Kitchen::Directions::MoveSolutionsFromNumberedNote
       # group multiple solutions per exercise
       chapter.notes("$.#{note_class}").each do |note|
         number = "#{chapter.count_in(:book)}.#{note.count_in(:chapter)}"
-
         solutions_clipboard = note.solutions.cut
-        return if solutions_clipboard.items.empty?
+        next if solutions_clipboard.items.empty?
 
         title = <<~HTML
           <span class="os-note-number">#{number}</span>
