@@ -27,6 +27,6 @@ end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [COLLEGE_PHYSICS_RECIPE, college_physics],
+  recipes: [COLLEGE_PHYSICS_RECIPE, college_physics, VALIDATE_OUTPUT],
   output_file: opts[:output]
 )

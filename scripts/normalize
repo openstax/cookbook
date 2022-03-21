@@ -2,24 +2,10 @@
 
 # frozen_string_literal: true
 
-require 'bundler/inline'
-require_relative 'helpers/normalize_helpers'
-
-gemfile do
-  gem 'nokogiri', '>=1.7.0'
-  gem 'byebug'
-end
-
-def process(input_file:, output_file:)
-  read_and_write(input_file: input_file, output_file: output_file) do |doc|
-    normalize(doc)
-  end
-end
+require_relative '../lib/recipes/recipes_helper'
 
 def read_and_write(input_file:, output_file:)
   doc = Nokogiri::XML(File.open(input_file)) { |config| config.noblanks }
-
-  yield(doc) if block_given?
 
   File.open(output_file, 'w') do |f|
     f.write doc.to_xhtml(indent: 2)
@@ -34,7 +20,7 @@ ARGV.each do |input_file|
       "#{input_file}.normalized"
     end
 
-  process(input_file: input_file, output_file: output_file)
+  read_and_write(input_file: input_file, output_file: output_file)
 
   puts "Normalized '#{input_file}' to '#{output_file}'"
 end
