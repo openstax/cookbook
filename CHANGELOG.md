@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Remove extra space between os-number and divider in solutions (patch)
+* Created a `v2`in `MoveSolutionsFromNumberedNote` for multiple responses in `your-turn` notes
+exercises with different numbering (minor)
 
 ## [v1.3.0] - 2022-3-11
 
