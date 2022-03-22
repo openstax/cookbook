@@ -782,11 +782,9 @@ Normal big Ruby projects have a `Gemfile` that is processed by the `bundler` gem
 
 ## The main `bake` script
 
-There's a top-level `bake` Bash script that calls the right scripts in the `books` folder based on the book slug.  E.g. if you call `./bake -b chemistry -i in.xhtml -o out.xhtml` this script will turn around and call `./books/chemistry/bake --input in.xhtml --output out.xhtml`.  Every time we add a new recipe, we'll need to update this top-level bake script so it knows how to call it.  This is also why the names of the scripts inside `/books` don't really matter, because the top-level `bake` script knows the names of the lower-level scripts.
+The top-level `bake` Bash script calls the right scripts in the `books` folder based on the book slug.  E.g. if you call `./bake -b chemistry -i in.xhtml -o out.xhtml` this script will call `./books/chemistry/bake --input in.xhtml --output out.xhtml`.  Every time we add a new recipe, we'll need to update this top-level bake script so it knows how to call it.  This is also why the names of the scripts inside `/books` don't really matter, because the top-level `bake` script knows the names of the lower-level scripts.
 
-## The `bake_root` script
-
-This script can be used if you don't want to invoke `bake` directly, and instead want to use a single script to call `bake` for the given book. This is the script that is utilized by build pipelines (e.g. CORGI, web hosting, etc.).
+The main pipeline (`enki`) calls `bake` in the `git-bake` (or `archive-bake`) step.
 
 ## The `shorten` script
 
@@ -843,25 +841,6 @@ The above runs the baking in the latest (or some tagged) image.  If you want to 
 
 Want to run the recipes and do interactive debugging?  Add the `-it` flags to the `docker run` call above.
 
-### Other examples of using baking scripts with Docker
-
-Given a directory with old style recipe files, the `bake_root` script can be invoked via Docker per the following example (this assumes you have `cnx-recipes` cloned to `/home/user`, but you can replace the path to wherever your style files are):
-
-```bash
->$ docker run --rm \
-    -v $PWD:/files \                                                                        # Mount the current directory as /files
-    -v /home/user/cnx-recipes/recipes/output:/recipes \                                     # Mount the directory with old style recipes as /recipes
-    openstax/recipes:latest \
-    /code/bake_root -b chemistry -i /files/input.xhtml -r /recipes -o /files/baked.xhtml  # Invoke the `bake_root` script
-
-Baking book 'chemistry' with kitchen
-warning! could not find a replacement for '[link]' on an element with ID 'auto_f7224d2a-76cb-49f8-91ba-915271b912af_fs-idp283136'
-Open:  0.000516647 s
-Parse: 0.458909273 s
-Bake:  13.600444227 s
-Write: 0.298500043 s
-```
-
 ## Rubocop
 
 Rubocop is available inside the VSCode dev container.  Moreover, the `lefthook` gem enforces that Rubocop linting passes on modified files before pushes are allowed.  To test this without pushing run `lefthook run pre-push`.
@@ -903,15 +882,13 @@ then your recipe will use your local kitchen folder.  You can leave the `gem` li
 The `create_new_recipe` script offers a quickstart way to generate many of the initial files for recipe development, like the locale files and the boilerplate for the bake script. It also adds the relevante line to main `bake`. Call it with `ruby scripts/create_new_recipe <recipe-name> <...>`.
 
 Devs will still need to edit/create:
-- `kitchen_gem_versions.rb`
-- `bake_root`
 - `shorten`
 - `main_spec`
 - test data for specs
 
 ## Creating a new recipe manually
 
-New recipes files are created in `books/{book-name}`.
+New recipes files are created in `lib/recipes/{book-name}`.
 
 In order to run the new recipe via the bake script, the recipe must be added to [the `case` statement](https://github.com/openstax/recipes/blob/main/bake#L25), i.e.:
 

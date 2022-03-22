@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove `bake_root`
+
 ## [v1.3.1] - 2022-03-21
 
 * Replace normalization with validation
