@@ -31,6 +31,8 @@ module Kitchen::Directions::MoveSolutionsFromNumberedNote
 
   class V2
     def bake(chapter:, append_to:, note_class:)
+      return unless chapter.notes("$.#{note_class}").solutions.any?
+
       notes_title = <<~HTML
         <h3 data-type="title">
           <span class="os-title-label">#{I18n.t(:"notes.#{note_class}")}</span>
@@ -43,8 +45,7 @@ module Kitchen::Directions::MoveSolutionsFromNumberedNote
       # group multiple solutions per exercise
       chapter.notes("$.#{note_class}").each do |note|
         number = "#{chapter.count_in(:book)}.#{note.count_in(:chapter)}"
-        solutions_clipboard = note.solutions.cut
-        next if solutions_clipboard.items.empty?
+        solutions_clipboard = note.solutions&.cut
 
         title = <<~HTML
           <span class="os-note-number">#{number}</span>

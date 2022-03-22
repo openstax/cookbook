@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Remove `bake_root`
+* Added a skip for chapters with no solutions in `your-turn` notes inside `MoveSolutionsFromNumberedNote` (minor)
 
 ## [v1.3.1] - 2022-03-21
 
