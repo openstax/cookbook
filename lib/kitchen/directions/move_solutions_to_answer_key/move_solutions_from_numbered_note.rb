@@ -31,7 +31,7 @@ module Kitchen::Directions::MoveSolutionsFromNumberedNote
 
   class V2
     def bake(chapter:, append_to:, note_class:)
-      return if chapter.notes("$.#{note_class}").solutions.empty?
+      return unless chapter.notes("$.#{note_class}").solutions.any?
 
       notes_title = <<~HTML
         <h3 data-type="title">
