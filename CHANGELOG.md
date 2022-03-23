@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Update recipes with `BakeUnnumberedFigure`. Allow baking all unnumbered figures (even without caption and title) within `BakeUnnumberedFigure` (patch)
 * Remove `bake_root`
 * Added a skip for chapters with no solutions in `your-turn` notes inside `MoveSolutionsFromNumberedNote` (minor)
 
@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `BakeListsWithPara` `pl-economics` recipe (minor)
 * Remove extra space between os-number and divider in solutions (patch)
 * Created a `v2`in `MoveSolutionsFromNumberedNote` for multiple responses in `your-turn` notes
-exercises with different numbering (minor)
+exercises with different numbering (major)
 
 ## [v1.3.0] - 2022-3-11
 
