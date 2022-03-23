@@ -1,1 +1,18 @@
-#<Kitchen::ReferenceElementEnumerator: #<Enumerator::Generator:0x000055ea61ed6d80>:each>
+<section class="reference" id="ref2">
+  <h2 data-type="document-title">
+    <span class="os-number">1.1</span>
+    <span class="os-divider"> </span>
+    <span class="os-text" data-type="" itemprop="">1.1 Page</span>
+  </h2>
+  <p>Stern, P. Focus issue: getting excited about glia.</p>
+</section><section class="reference" id="ref1">
+  <h2 data-type="document-title">
+    <span class="os-number">2.1</span>
+    <span class="os-divider"> </span>
+    <span class="os-text" data-type="" itemprop="">2.1 Page</span>
+  </h2>
+  <p>Kolata, G. Severe diet doesn&#x2019;t prolong life</p>
+  <p id="auto_7d5ecac2-a4c4-4167-b952-c3a9bde54252_fs-id1056868">
+    <a href="">link</a>
+  </p>
+</section>
