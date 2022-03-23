@@ -46,7 +46,7 @@ module Kitchen::Directions::BakeReferences
         chapter.append(child:
           <<~HTML
             <div class="os-chapter-area">
-              <h2 data-type="document-title" data-rex-keep=true>#{chapter_title}</h2>
+              <h2 data-type="document-title" data-rex-keep="true">#{chapter_title}</h2>
               #{chapter_references.paste}
             </div>
           HTML
