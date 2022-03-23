@@ -4,7 +4,7 @@ require 'rspec/snapshot'
 
 # Automatically generate a snapshot filename
 # Source: https://github.com/levinmr/rspec-snapshot/issues/6#issuecomment-1048145790
-def match_snapshot_auto()
+def match_snapshot_auto
   example = RSpec.current_example
 
   # get the description (name) or the scoped id (like 1:2:4:8)
