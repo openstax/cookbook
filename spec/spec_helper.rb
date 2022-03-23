@@ -34,6 +34,8 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.snapshot_dir = 'spec/snapshots'
+
   config.include StubHelpers
   config.include FactoryHelpers
   config.include MatchHelpers
