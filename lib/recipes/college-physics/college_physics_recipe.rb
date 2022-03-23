@@ -10,6 +10,7 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
 
   book.search('cnx-pi').trash
 
+  BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
@@ -48,7 +49,7 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
         exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
     end
 
-    chapter.figures.each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
