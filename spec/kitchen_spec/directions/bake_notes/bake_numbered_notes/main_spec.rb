@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Kitchen::Directions::BakeNumberedNotes do
   it 'calls v1' do
     expect_any_instance_of(Kitchen::Directions::BakeNumberedNotes::V1).to receive(:bake)
-      .with(book: 'book1', classes: 'class1', cases: false)
+      .with(book: 'book1', classes: 'class1', cases: false, bake_exercises: true)
     described_class.v1(book: 'book1', classes: 'class1', cases: false)
   end
 

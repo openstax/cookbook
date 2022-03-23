@@ -39,7 +39,7 @@ module Kitchen
     # @!method encoding
     #   @see https://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Document#encoding-instance_method Nokogiri::XML::Document#encoding
     #   @return [String] the document as an HTML string
-    def_delegators :@nokogiri_document, :to_xhtml, :to_s, :to_xml, :to_html, :encoding
+    def_delegators :@nokogiri_document, :to_xhtml, :to_s, :to_xml, :to_html, :encoding, :traverse
 
     # Return a new instance of Document
     #

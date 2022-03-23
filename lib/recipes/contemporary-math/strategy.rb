@@ -3,7 +3,8 @@
 # Contemporary answer key strategy
 class Strategy
   def bake(chapter:, append_to:)
-    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+    # Hacky numbering fix
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v2(
       chapter: chapter, append_to: append_to, note_class: 'your-turn'
     )
 
