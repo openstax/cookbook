@@ -15,6 +15,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
+  BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
@@ -66,7 +67,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    chapter.figures.each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
@@ -86,7 +87,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    page.figures.each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
 

@@ -18,6 +18,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
+  BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book, title_element: 'h1')
   BakeChapterIntroductions.v1(book: book)
   AddInjectedExerciseId.v1(book: book)
@@ -88,14 +89,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
-    chapter.figures('$:not(.unnumbered)').each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
   end
 
   book.pages('$.preface').each do |page|
-    page.figures.each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: figure.count_in(:page))
     end
   end
@@ -103,7 +104,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    page.figures.each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
 

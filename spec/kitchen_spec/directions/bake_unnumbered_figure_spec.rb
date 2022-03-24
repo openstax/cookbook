@@ -79,17 +79,19 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
     )
   end
 
-  context 'when figure is unnumbered without splash class' do
-    it 'does not change the original figure' do
+  context 'when figure is unnumbered' do
+    it 'bakes' do
       described_class.v1(book: book_with_unnumbered_figure)
       expect(book_with_unnumbered_figure.pages.first).to match_normalized_html(
         <<~HTML
           <div data-type="page">
-            <figure class="unnumbered" id="someId">
-              <span>
-                <img src="img.jpg" />
-              </span>
-            </figure>
+            <div class="os-figure">
+              <figure class="unnumbered" id="someId">
+                <span>
+                  <img src="img.jpg" />
+                </span>
+              </figure>
+            </div>
           </div>
         HTML
       )

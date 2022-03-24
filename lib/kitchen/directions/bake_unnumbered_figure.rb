@@ -5,9 +5,10 @@ module Kitchen
     module BakeUnnumberedFigure
       def self.v1(book:)
         book.figures(only: :unnumbered?).each do |figure|
-          next unless figure.caption || figure.title
 
           figure.wrap(%(<div class="os-figure#{' has-splash' if figure.has_class?('splash')}">))
+          next unless figure.caption || figure.title
+
           title = figure.title&.cut
           caption = figure.caption&.cut
           figure.append(sibling:
