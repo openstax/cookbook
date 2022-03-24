@@ -137,7 +137,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
               <div data-type="subject" id="subject_copy_1">Subject</div>
             </div>
             <div class="os-chapter-area">
-              <h2 data-type="document-title">
+              <h2 data-type="document-title" data-rex-keep="true">
                 <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
               </h2>
               <div class="reference" data-type="note" display="inline" id="auto_12345"><span class="os-reference-number">1. </span>
@@ -151,7 +151,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
                 </div>
             </div>
             <div class="os-chapter-area">
-              <h2 data-type="document-title">
+              <h2 data-type="document-title" data-rex-keep="true">
                 <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
               </h2>
               <div class="reference" data-type="note" display="inline" id="auto_6789"><span class="os-reference-number">1. </span>
@@ -170,12 +170,12 @@ RSpec.describe Kitchen::Directions::BakeReferences do
       book1.body.search('div.os-reference-container').search('div.os-chapter-area > [data-type="document-title"]')
     ).to match_normalized_html(
       <<~HTML
-        <h2 data-type="document-title">
+        <h2 data-type="document-title" data-rex-keep="true">
           <span class="os-number">1</span>
           <span class="os-divider"> </span>
           <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
         </h2>
-        <h2 data-type="document-title">
+        <h2 data-type="document-title" data-rex-keep="true">
           <span class="os-number">2</span>
           <span class="os-divider"> </span>
           <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>

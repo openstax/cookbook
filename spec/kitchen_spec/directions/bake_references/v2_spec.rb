@@ -77,7 +77,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
             <div data-type="subject" id="subject_copy_1">Subject</div>
           </div>
           <div class="os-chapter-area">
-            <h2 data-type="document-title">
+            <h2 data-type="document-title" data-rex-keep="true">
               <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
             </h2>
             <section data-depth="1" id="1" class="reference">
@@ -85,7 +85,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
             </section>
           </div>
           <div class="os-chapter-area">
-            <h2 data-type="document-title">
+            <h2 data-type="document-title" data-rex-keep="true">
               <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
             </h2>
             <section data-depth="1" id="2" class="reference">
