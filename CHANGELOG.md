@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeCompositeChapters` to `college-physics-2e` (minor)
+
 ## [v1.4.0] - 2022-03-24
 
 * Update recipes with `BakeUnnumberedFigure`. Allow baking all unnumbered figures (even without caption and title) within `BakeUnnumberedFigure` (patch)
