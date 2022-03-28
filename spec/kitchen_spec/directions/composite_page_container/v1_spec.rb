@@ -123,4 +123,18 @@ RSpec.describe Kitchen::Directions::CompositePageContainer do
       HTML
     )
   end
+
+  it 'serializes namespaced elements properly' do
+    some_math = book_containing(html:
+      <<~HTML
+        <m:math class="mymath"/>
+      HTML
+    ).first('$.mymath')
+
+    expect(some_math.raw.namespace.prefix).to eq('m')
+    expect(some_math.raw.namespace.href).to eq('http://www.w3.org/1998/Math/MathML')
+
+    # Something like this occurs implicitly in lib/kitchen/directions/composite_page_container/v1.rb
+    expect(some_math.to_s).to eq('<m:math class="mymath" xmlns:m="http://www.w3.org/1998/Math/MathML"/>')
+  end
 end
