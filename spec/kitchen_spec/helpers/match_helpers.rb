@@ -22,8 +22,14 @@ def match_snapshot_auto
   path_data << base_path if base_path.present?
 
   # path_data is ['renders_component', 'when rating is > 0', 'StarRatingComponent', 'components']
-  name = path_data.reverse.join('___')
-  match_snapshot(name)
+  name = path_data.reverse.join('/')
+  # hash = name.hash.abs.to_s[0, 5]
+  sanitized = name
+              .gsub(/\/$/, '')
+              .gsub('/', '_')
+              .gsub(/[^\w]+/, '_')
+  # sanitized = "#{sanitized}.#{hash}"
+  match_snapshot(sanitized)
 end
 
 module MatchHelpers
