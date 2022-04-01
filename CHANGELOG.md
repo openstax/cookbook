@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Fix adding unnecesary dividers in `BakeFigure` when no title, caption (patch)
 * Add `BakeCompositeChapters` to `college-physics-2e` (minor)
 
 ## [v1.4.0] - 2022-03-24
