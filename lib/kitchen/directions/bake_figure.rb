@@ -17,10 +17,10 @@ module Kitchen
             <div class="os-caption-container">
               <span class="os-title-label">#{I18n.t("figure#{'.nominative' if cases}")} </span>
               <span class="os-number">#{number}</span>
-              <span class="os-divider"> </span>
-              #{"<span class=\"os-title\" data-type=\"title\" id=\"#{title.id}\">#{title.children}</span>" if title}
-              <span class="os-divider"> </span>
-              #{"<span class=\"os-caption\">#{caption.children}</span>" if caption}
+              #{"<span class=\'os-divider\'> </span>" if title}
+              #{"<span class=\'os-title\' data-type=\'title\' id=\"#{title.id}\">#{title.children}</span>" if title}
+              #{"<span class=\'os-divider\'> </span>" if caption}
+              #{"<span class=\'os-caption\'>#{caption.children}</span>" if caption}
             </div>
           HTML
         )
