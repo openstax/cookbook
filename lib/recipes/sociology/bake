@@ -24,6 +24,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     book.body.search('div[data-type="metadata"] > div[data-type="description"]').trash
   end
 
+  BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
 
   # Bake NumberedTable in Preface
@@ -76,7 +77,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
 
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    chapter.figures(except: :subfigure?).each do |figure|
+    chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
 

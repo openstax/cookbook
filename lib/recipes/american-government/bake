@@ -72,7 +72,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    page.figures.each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
 

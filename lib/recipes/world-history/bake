@@ -116,7 +116,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
     BakeAppendix.v1(page: page, number: appendix_letter)
 
-    page.figures('$:not(.unnumbered)').each do |figure|
+    page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}")
     end

@@ -13,7 +13,7 @@ module Kitchen::Directions::BakeReferences
         chapter.append(child:
           <<~HTML
             <div class="os-chapter-area">
-              <h2 data-type="document-title">#{chapter_title_no_num}</h2>
+              <h2 data-type="document-title" data-rex-keep="true">#{chapter_title_no_num}</h2>
               #{chapter_references.paste}
             </div>
           HTML
