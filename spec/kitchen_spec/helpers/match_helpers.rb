@@ -24,6 +24,11 @@ def match_snapshot_auto
   # path_data is ['renders_component', 'when rating is > 0', 'StarRatingComponent', 'components']
   name = path_data.reverse.join('/')
   # hash = name.hash.abs.to_s[0, 5]
+
+  # If a path component starts with Kitchen:: then remove the string before it
+  index_of_kitchen = name.index('/Kitchen::')
+  name = name[index_of_kitchen + 1..] unless index_of_kitchen.nil?
+
   sanitized = name
               .gsub(/\/$/, '')
               .gsub('/', '_')
@@ -32,6 +37,7 @@ def match_snapshot_auto
   match_snapshot(sanitized)
 end
 
+# Matchers that compare HTML
 module MatchHelpers
   RSpec::Matchers.define :match_html_strict do |expected|
     match do |actual|
