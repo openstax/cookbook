@@ -35,7 +35,7 @@ module Kitchen::Directions::BakeChapterIntroductions
       chapter.non_introduction_pages.map do |page|
         <<~HTML
           <div class="os-chapter-objective">
-            <a class="os-chapter-objective" href="##{page.title[:id]}">
+            <a class="os-chapter-objective" href="##{page.id}">
               <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
               <span class="os-divider"> </span>
               <span data-type="" itemprop="" class="os-text">#{page.title.children[0].text}</span>

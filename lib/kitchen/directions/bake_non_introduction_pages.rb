@@ -21,6 +21,7 @@ module Kitchen
           end
 
           title.name = 'h2'
+          title.id = "#{page.id}_titlecreatedbycookbook"
           title.replace_children(with:
             <<~HTML
               <span class="os-number">#{number}</span>

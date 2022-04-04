@@ -88,64 +88,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
         described_class.v1(chapter: chapter, metadata_source: metadata, klass: 'section-summary')
         expect(
           chapter
-        ).to match_normalized_html(
-          <<~HTML
-            <div data-type="chapter">
-              <div data-type='page' id="00" class="introduction">
-                <h1 data-type="document-title" id="intro" itemprop="name">Introduction page!</h1>
-              </div>
-              <div data-type="page" id="01">
-                <h1 data-type="document-title" id="first" itemprop="name">First Title</h1>
-              </div>
-              <div data-type="page" id="02">
-                <h1 data-type="document-title" id="second" itemprop="name">Second Title</h1>
-              </div>
-              <div class="os-eoc os-section-summary-container" data-type="composite-page" data-uuid-key=".section-summary">
-                <h2 data-type="document-title">
-                  <span class="os-text">#{I18n.t(:eoc_summary_title)}</span>
-                </h2>
-                <div data-type="metadata" style="display: none;">
-                  <h1 data-type="document-title" itemprop="name">Summary</h1>
-                  <span data-type="revised" id="revised_copy_1">Revised</span>
-                  <span data-type="slug" id="slug_copy_1">Slug</span>
-                  <div class="authors" id="authors_copy_1">Authors</div>
-                  <div class="publishers" id="publishers_copy_1">Publishers</div>
-                  <div class="print-style" id="print-style_copy_1">Print Style</div>
-                  <div class="permissions" id="permissions_copy_1">Permissions</div>
-                  <div data-type="subject" id="subject_copy_1">Subject</div>
-                </div>
-                <section class="summary" data-element-type="section-summary">
-                  <a href="#intro">
-                    <h3 data-type="document-title" id="intro_copy_1">
-                      <span class="os-text" data-type="" itemprop="">Introduction page!</span>
-                    </h3>
-                  </a>
-                  <p>This moves too!</p>
-                </section>
-                <section class="summary" data-element-type="section-summary">
-                  <a href="#first">
-                    <h3 data-type="document-title" id="first_copy_1">
-                      <span class="os-number">1.1</span>
-                      <span class="os-divider"> </span>
-                      <span class="os-text" data-type="" itemprop="">First Title</span>
-                    </h3>
-                  </a>
-                  <p>Many paragraphs provide a good summary.</p>
-                </section>
-                <section class="summary" data-element-type="section-summary">
-                  <a href="#second">
-                    <h3 data-type="document-title" id="second_copy_1">
-                      <span class="os-number">1.2</span>
-                      <span class="os-divider"> </span>
-                      <span class="os-text" data-type="" itemprop="">Second Title</span>
-                    </h3>
-                  </a>
-                  <p>Ooh, it's another bit of text.</p>
-                </section>
-              </div>
-            </div>
-          HTML
-        )
+        ).to match_snapshot_auto
       end
     end
 
@@ -159,64 +102,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
         described_class.v1(chapter: chapter, metadata_source: metadata)
         expect(
           chapter
-        ).to match_normalized_html(
-          <<~HTML
-            <div data-type="chapter">
-              <div data-type='page' id="00" class="introduction">
-                <h1 data-type="document-title" id="intro" itemprop="name">Introduction page!</h1>
-              </div>
-              <div data-type="page" id="01">
-                <h1 data-type="document-title" id="first" itemprop="name">First Title</h1>
-              </div>
-              <div data-type="page" id="02">
-                <h1 data-type="document-title" id="second" itemprop="name">Second Title</h1>
-              </div>
-              <div class="os-eoc os-summary-container" data-type="composite-page" data-uuid-key=".summary">
-                <h2 data-type="document-title">
-                  <span class="os-text">#{I18n.t(:eoc_summary_title)}</span>
-                </h2>
-                <div data-type="metadata" style="display: none;">
-                  <h1 data-type="document-title" itemprop="name">Summary</h1>
-                  <span data-type="revised" id="revised_copy_1">Revised</span>
-                  <span data-type="slug" id="slug_copy_1">Slug</span>
-                  <div class="authors" id="authors_copy_1">Authors</div>
-                  <div class="publishers" id="publishers_copy_1">Publishers</div>
-                  <div class="print-style" id="print-style_copy_1">Print Style</div>
-                  <div class="permissions" id="permissions_copy_1">Permissions</div>
-                  <div data-type="subject" id="subject_copy_1">Subject</div>
-                </div>
-                <section class="summary" data-element-type="section-summary">
-                  <a href="#intro">
-                    <h3 data-type="document-title" id="intro_copy_1">
-                      <span class="os-text" data-type="" itemprop="">Introduction page!</span>
-                    </h3>
-                  </a>
-                  <p>This moves too!</p>
-                </section>
-                <section class="summary" data-element-type="section-summary">
-                  <a href="#first">
-                    <h3 data-type="document-title" id="first_copy_1">
-                      <span class="os-number">1.1</span>
-                      <span class="os-divider"> </span>
-                      <span class="os-text" data-type="" itemprop="">First Title</span>
-                    </h3>
-                  </a>
-                  <p>Many paragraphs provide a good summary.</p>
-                </section>
-                <section class="summary" data-element-type="section-summary">
-                  <a href="#second">
-                    <h3 data-type="document-title" id="second_copy_1">
-                      <span class="os-number">1.2</span>
-                      <span class="os-divider"> </span>
-                      <span class="os-text" data-type="" itemprop="">Second Title</span>
-                    </h3>
-                  </a>
-                  <p>Ooh, it's another bit of text.</p>
-                </section>
-              </div>
-            </div>
-          HTML
-        )
+        ).to match_snapshot_auto
       end
     end
   end
@@ -230,45 +116,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
     described_class.v1(chapter: chapter_summary_no_bake_title, metadata_source: metadata, klass: 'section-summary')
     expect(
       chapter_summary_no_bake_title
-    ).to match_normalized_html(
-      <<~HTML
-        <div data-type="chapter">
-          <div data-type="page" id="apId">
-            <h1 data-type="document-title" id="intro" itemprop="name">Introduction page!</h1>
-          </div>
-          <div class="os-eoc os-section-summary-container" data-type="composite-page" data-uuid-key=".section-summary">
-            <h2 data-type="document-title">
-              <span class="os-text">Summary</span>
-            </h2>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">Summary</h1>
-              <span data-type="revised" id="revised_copy_1">Revised</span>
-              <span data-type="slug" id="slug_copy_1">Slug</span>
-              <div class="authors" id="authors_copy_1">Authors</div>
-              <div class="publishers" id="publishers_copy_1">Publishers</div>
-              <div class="print-style" id="print-style_copy_1">Print Style</div>
-              <div class="permissions" id="permissions_copy_1">Permissions</div>
-              <div data-type="subject" id="subject_copy_1">Subject</div>
-            </div>
-            <section class="summary" data-element-type="section-summary">
-              <a href="#intro">
-                <h3 data-type="document-title" id="intro_copy_1">
-                  <span class="os-number">1.1</span>
-                  <span class="os-divider"> </span>
-                  <span class="os-text" data-type="" itemprop="">Introduction page!</span>
-                </h3>
-              </a>
-              <h3 data-type="document-title">
-                <span class="os-number">Do not bake number</span>
-                <span class="os-divider"> </span>
-                <span class="os-text" data-type="" itemprop="">No Bake Title</span>
-              </h3>
-              <p>This should stay where it is.</p>
-            </section>
-          </div>
-        </div>
-      HTML
-    )
+    ).to match_snapshot_auto
   end
 
   context 'when v1 is called on a composite chapter' do
@@ -280,49 +128,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
       )
       expect(
         described_class.v1(chapter: chapter_summary_no_bake_title, metadata_source: metadata, klass: 'section-summary', append_to: append_to)
-      ).to match_normalized_html(
-        <<~HTML
-          <div class="os-eoc os-chapter-review-container" data-type="composite-chapter" data-uuid-key=".chapter-review">
-            <h2 data-type="document-title" id="composite-chapter-1">
-              <span class="os-text">foo</span>
-            </h2>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">foo</h1>
-              <div>metadata</div>
-            </div>
-            <div class="os-eoc os-section-summary-container" data-type="composite-page" data-uuid-key=".section-summary">
-              <h3 data-type="title">
-                <span class="os-text">Summary</span>
-              </h3>
-              <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">Summary</h1>
-                <span data-type="revised" id="revised_copy_1">Revised</span>
-                <span data-type="slug" id="slug_copy_1">Slug</span>
-                <div class="authors" id="authors_copy_1">Authors</div>
-                <div class="publishers" id="publishers_copy_1">Publishers</div>
-                <div class="print-style" id="print-style_copy_1">Print Style</div>
-                <div class="permissions" id="permissions_copy_1">Permissions</div>
-                <div data-type="subject" id="subject_copy_1">Subject</div>
-              </div>
-              <section class="summary" data-element-type="section-summary">
-                <a href="#intro">
-                  <h3 data-type="document-title" id="intro_copy_1">
-                    <span class="os-number">1.1</span>
-                    <span class="os-divider"> </span>
-                    <span class="os-text" data-type="" itemprop="">Introduction page!</span>
-                  </h3>
-                </a>
-                <h3 data-type="document-title">
-                  <span class="os-number">Do not bake number</span>
-                  <span class="os-divider"> </span>
-                  <span class="os-text" data-type="" itemprop="">No Bake Title</span>
-                </h3>
-                <p>This should stay where it is.</p>
-              </section>
-            </div>
-          </div>
-        HTML
-      )
+      ).to match_snapshot_auto
     end
   end
 end
