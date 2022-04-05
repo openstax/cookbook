@@ -17,7 +17,7 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
 
   BakeUnclassifiedNotes.v1(book: book)
   BakeAutotitledNotes.v1(book: book, classes: %w[interactive])
-  BakeIframes.v1(outer_element: book)
+  BakeIframes.v1(book: book)
   BakeMathInParagraph.v1(book: book)
 
   # Check Your Understanding exercises: titled unnumbered exercises

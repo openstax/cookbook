@@ -125,6 +125,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                            number: "#{appendix_letter}#{table.count_in(:page)}")
     end
   end
+
+  BakeIframes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)

@@ -148,7 +148,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |doc|
   BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeFootnotes.v1(book: book)
-  BakeIframes.v1(outer_element: book)
+  BakeIframes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)

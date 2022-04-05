@@ -67,7 +67,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   end
 
   BakeScreenreaderSpans.v1(book: book)
-  BakeIframes.v1(outer_element: book)
+  BakeIframes.v1(book: book)
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeIndex.v1(book: book)

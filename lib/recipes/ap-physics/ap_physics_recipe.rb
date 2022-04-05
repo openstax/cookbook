@@ -26,7 +26,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
   )
 
   BakeUnclassifiedNotes.v1(book: book)
-  BakeIframes.v1(outer_element: book)
+  BakeIframes.v1(book: book)
   BakeMathInParagraph.v1(book: book)
 
   answer_key = BookAnswerKeyContainer.v1(book: book)

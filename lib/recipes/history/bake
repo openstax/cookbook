@@ -100,6 +100,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  BakeIframes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)

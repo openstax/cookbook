@@ -29,7 +29,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc|
   )
   BakeChapterTitle.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
-  BakeIframes.v1(outer_element: book)
+  BakeIframes.v1(book: book)
   BakeAutotitledNotes.v1(book: book, classes: %w[linkup bringhome clearup workout])
   answer_key = BookAnswerKeyContainer.v1(book: book)
 

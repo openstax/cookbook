@@ -109,6 +109,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
     end
   end
 
+  BakeIframes.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeIndex.v1(book: book)

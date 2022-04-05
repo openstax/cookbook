@@ -2,8 +2,8 @@
 
 module Kitchen::Directions::BakeIframes
   class V1
-    def bake(outer_element:)
-      iframes = outer_element.search('iframe')
+    def bake(book:)
+      iframes = book.search('iframe')
       return unless iframes.any?
 
       iframes.each do |iframe|

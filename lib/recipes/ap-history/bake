@@ -17,7 +17,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_history) do |doc|
   BakeChapterTitle.v1(book: book)
   BakeAutotitledNotes.v1(book: book, classes: %w[os-teacher])
   BakeUnclassifiedNotes.v1(book: book)
-  BakeIframes.v1(outer_element: book)
+  BakeIframes.v1(book: book)
   BakeAccessibilityFixes.v1(section: book)
 
   book.chapters.each do |chapter|
