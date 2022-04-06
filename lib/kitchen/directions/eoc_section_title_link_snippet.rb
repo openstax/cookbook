@@ -16,7 +16,7 @@ module Kitchen
         end
 
         title_snippet = <<~HTML
-          <#{title_tag} data-type="document-title" id="#{page.title.copied_id}">
+          <#{title_tag} data-type="document-title">
             #{os_number}
             <span class="os-text" data-type="" itemprop="">#{page.title_text}</span>
           </#{title_tag}>
@@ -25,7 +25,7 @@ module Kitchen
         case wrapper
         when 'link'
           <<~HTML
-            <a href="##{page.title.id}">
+            <a href="##{page.id}_titlecreatedbycookbook">
               #{title_snippet}
             </a>
           HTML

@@ -92,6 +92,20 @@ RSpec.describe Kitchen::Directions::BakeFigure do
     )
   end
 
+  let(:book_with_figure_without_caption_title) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <figure id="someId">
+            <span>
+              <img src="img.jpg"/>
+            </span>
+          </figure>
+        HTML
+      )
+    )
+  end
+
   let(:book1_figure) { book1.chapters.figures.first }
 
   describe 'v1' do
@@ -179,6 +193,13 @@ RSpec.describe Kitchen::Directions::BakeFigure do
           described_class.v1(figure: book1_figure, number: '1.2', cases: true)
         end
       end
+    end
+  end
+
+  context 'when figure does not have title or caption text' do
+    it 'bakes figure label, number without unnnecessary dividers' do
+      described_class.v1(figure: book_with_figure_without_caption_title.chapters.figures.first, number: '1.2')
+      expect(book_with_figure_without_caption_title.chapters.figures.search('.os-divider').first).to be nil
     end
   end
 

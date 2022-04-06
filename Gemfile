@@ -8,6 +8,7 @@ gemspec
 gem 'rake', '~> 12.0'
 gem 'rspec', '~> 3.0'
 gem 'slop', '4.8.2'
+gem 'rspec-snapshot'
 
 gem 'codecov', require: false
 

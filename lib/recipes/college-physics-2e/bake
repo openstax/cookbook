@@ -44,6 +44,8 @@ college_physics_2e = Kitchen::BookRecipe.new(book_short_name: :college_physics_2
       )
     end
   end
+
+  BakeCompositeChapters.v1(book: book)
 end
 
 opts = Slop.parse do |slop|

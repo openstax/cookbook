@@ -1,5 +1,43 @@
 # frozen_string_literal: true
 
+require 'rspec/snapshot'
+
+# Automatically generate a snapshot filename
+# Source: https://github.com/levinmr/rspec-snapshot/issues/6#issuecomment-1048145790
+def match_snapshot_auto
+  example = RSpec.current_example
+
+  # get the description (name) or the scoped id (like 1:2:4:8)
+  path_data = [example.metadata[:description] || example.metadata[:scoped_id]]
+  parent = example.example_group
+
+  base_path = ''
+  while parent != RSpec::ExampleGroups
+    base_path = File.dirname(parent.file_path.gsub('./spec/', ''))
+
+    path_data << parent.metadata[:description]
+    parent = parent.module_parent
+  end
+
+  path_data << base_path if base_path.present?
+
+  # path_data is ['renders_component', 'when rating is > 0', 'StarRatingComponent', 'components']
+  name = path_data.reverse.join('/')
+  # hash = name.hash.abs.to_s[0, 5]
+
+  # If a path component starts with Kitchen:: then remove the string before it
+  index_of_kitchen = name.index('/Kitchen::')
+  name = name[index_of_kitchen + 1..] unless index_of_kitchen.nil?
+
+  sanitized = name
+              .gsub(/\/$/, '')
+              .gsub('/', '_')
+              .gsub(/[^\w]+/, '_')
+  # sanitized = "#{sanitized}.#{hash}"
+  match_snapshot(sanitized)
+end
+
+# Matchers that compare HTML
 module MatchHelpers
   RSpec::Matchers.define :match_html_strict do |expected|
     match do |actual|

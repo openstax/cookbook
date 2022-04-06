@@ -35,19 +35,7 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
 
   it 'works' do
     described_class.v1(chapter: chapter)
-    expect(chapter).to match_normalized_html(
-      <<~HTML
-        <div data-type="chapter">
-          <div data-type="page" class="chapter-content-module">
-            <div data-type="metadata" style="display: none;">\n  \n</div>
-            <h2 data-type="document-title" id="anId"><span class="os-number">1.1</span>
-              <span class="os-divider"> </span>
-              <span data-type="" itemprop="" class="os-text">Review of Functions</span>
-            </h2>
-          </div>
-        </div>
-      HTML
-    )
+    expect(chapter).to match_snapshot_auto
   end
 
   context 'when book has added target lables for modules' do
