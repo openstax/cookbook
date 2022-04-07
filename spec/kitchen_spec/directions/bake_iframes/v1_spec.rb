@@ -6,24 +6,29 @@ RSpec.describe Kitchen::Directions::BakeIframes::V1 do
   let(:book_with_iframes_in_note_and_list) do
     book_containing(html:
       <<~HTML
-        <div data-type="chapter"><div data-type="page" id="page_1234">
-          <div class="interactive" data-has-label="true" data-label="" data-type="note" id="iframenote">
-            <div data-alt="atoms_isotopes" data-type="media">
-              <iframe height="371.4" src="https://openstax.org/l/atoms_isotopes" width="660"><!-- no-selfclose -->
-                </iframe>
+        <span data-type="slug" data-value="the-book-slug">
+        <div data-type="chapter">
+          <div data-type="page" class="introduction"></div>
+          <div data-type="page" id="page_1234">
+            <h1 data-type="document-title">The Document: Title!</h1>
+            <div class="interactive" data-has-label="true" data-label="" data-type="note" id="iframenote">
+              <div data-alt="atoms_isotopes" data-type="media" id="media1">
+                <iframe height="371.4" src="https://openstax.org/l/atoms_isotopes" width="660"><!-- no-selfclose -->
+                  </iframe>
+              </div>
+            </div>
+            <div class="interactive interactive-long" data-has-label="true" data-label="" data-type="note" id="iframenote3">
+              <ul>
+                <li>1: The evolution from fish to earliest tetrapod<span data-type="newline"><br /></span>
+                  <div data-alt="tetrapod_evol1" data-type="media" id="media2"><iframe height="371.4" src="url1" width="660"><!-- no-selfclose --></iframe></div>
+                </li>
+                <li>2: The discovery of coelacanth and <em data-effect="italics">Acanthostega</em> fossils<span data-type="newline"><br /></span>
+                  <div data-alt="tetrapod_evol2" data-type="media" id="media3"><iframe height="371.4" src="url2" width="660"><!-- no-selfclose --></iframe></div>
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="interactive interactive-long" data-has-label="true" data-label="" data-type="note" id="iframenote3">
-            <ul>
-              <li>1: The evolution from fish to earliest tetrapod<span data-type="newline"><br /></span>
-                <div data-alt="tetrapod_evol1" data-type="media"><iframe height="371.4" src="url1" width="660"><!-- no-selfclose --></iframe></div>
-              </li>
-              <li>2: The discovery of coelacanth and <em data-effect="italics">Acanthostega</em> fossils<span data-type="newline"><br /></span>
-                <div data-alt="tetrapod_evol2" data-type="media"><iframe height="371.4" src="url2" width="660"><!-- no-selfclose --></iframe></div>
-              </li>
-            </ul>
-          </div>
-        </div></div>
+        </div>
       HTML
     )
   end

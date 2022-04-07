@@ -3,15 +3,17 @@
 module Kitchen::Directions::BakeIframes
   class V1
     def bake(book:)
-      iframes = book.pages.search('iframe')
+      iframes = book.search_with(Kitchen::PageElementEnumerator, \
+                                 Kitchen::CompositePageElementEnumerator).search('iframe')
       return unless iframes.any?
 
       iframes.each do |iframe|
         next if iframe.has_class?('os-is-iframe') # don't double-bake
 
+        iframe_link = iframe.parent.rex_link # TODO: backup default to src attribute
         iframe.wrap('<div class="os-has-iframe" data-type="alternatives">')
         iframe.add_class('os-is-iframe')
-        iframe_link = "/contents/#{iframe.ancestor(:page).id[5..]}"
+
         iframe = iframe.parent
         iframe.add_class('os-has-link')
 
