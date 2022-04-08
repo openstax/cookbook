@@ -645,5 +645,9 @@ RSpec.describe Kitchen::ElementBase do
       expect(book_rex_linkable.first('div#element3').rex_link).to \
         eq('https://openstax.org/books/test-book-slug/pages/2-summary')
     end
+
+    it 'raises error for element without id' do
+      expect { book_rex_linkable.chapters.first.rex_link }.to raise_error('Cannot create rex link to an element without an ID')
+    end
   end
 end

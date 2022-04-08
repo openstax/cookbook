@@ -800,10 +800,11 @@ module Kitchen
     end
 
     def rex_link
+      raise 'Cannot create rex link to an element without an ID' unless id
+
       element_with_ancestors = document.book.chapters.search_with(
         Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
       ).search("##{id}").first
-      # TODO: raise error if element doesn't have id
 
       book_slug = document.search('span[data-type="slug"]').first[:'data-value']
       chapter_count = element_with_ancestors.ancestor(:chapter).count_in(:book)

@@ -10,7 +10,13 @@ module Kitchen::Directions::BakeIframes
       iframes.each do |iframe|
         next if iframe.has_class?('os-is-iframe') # don't double-bake
 
-        iframe_link = iframe.parent.rex_link # TODO: backup default to src attribute
+        iframe_link = \
+          begin
+            iframe.parent.rex_link
+          rescue StandardError
+            warn "Unable to find rex link for iframe with src #{iframe[:src]}"
+            iframe[:src]
+          end
         iframe.wrap('<div class="os-has-iframe" data-type="alternatives">')
         iframe.add_class('os-is-iframe')
 
