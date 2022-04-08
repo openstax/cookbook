@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Fix adding unnecessary dividers in `BakeFigure` when no title, caption (patch)
-* Add `BakeCompositeChapters` to `college-physics-2e` (minor)
 * Remove iframe baking from `BakeAutotitledNotes`
 * Define rex_link on `ElementBase`
 * Link to rex from iframe in `BakeIframes`
+
+## [v1.5.0] - 2022-4-08
+
+* Add `BakeFootnotes` to ap physics
+* Fix adding unnecessary dividers in `BakeFigure` when no title, caption (patch)
+* Add `BakeCompositeChapters` to `college-physics-2e` (minor)
 
 ## [v1.4.0] - 2022-03-24
 

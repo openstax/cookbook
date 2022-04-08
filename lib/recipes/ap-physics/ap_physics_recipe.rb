@@ -127,6 +127,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
     eq.add_class('unnumbered')
   end
 
+  BakeFootnotes.v1(book: book)
   BakeEquations.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
