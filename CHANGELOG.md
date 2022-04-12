@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix bug introduced in #40 by adding ids to introduction pages
+
 ## [v1.5.0] - 2022-4-08
 
 * Add `BakeFootnotes` to ap physics

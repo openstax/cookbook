@@ -617,7 +617,9 @@ Use the `inch` gem to get feedback on where documentation is lacking `bundle exe
 
 Run `bundle exec rspec` to run the specs.  `rake rspec` probably does the same thing.
 
-Spec offer two ways to compare expected XML output to actual output.
+Spec offers 3 ways to compare expected XML output to actual output.
+
+`match_snapshot_auto` generates a snapshot file and compares the test output to it using [rspec-snapshot](https://github.com/levinmr/rspec-snapshot). To update the snapshots, run `UPDATE_SNAPSHOTS=true rspec`
 
 `match_normalized_html` gets rid of extra blanks, sorts all tag attributes alphabetically by attribute name (e.g. sorts "<a href='blah' class='foo'>" to "<a class='foo' href='blah'>" so that attribute order doesn't impact a match), prints the HTML back out with a standard indent, and then does a normal string diff.
 

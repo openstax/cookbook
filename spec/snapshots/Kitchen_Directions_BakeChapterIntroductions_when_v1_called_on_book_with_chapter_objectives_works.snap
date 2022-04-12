@@ -30,7 +30,7 @@
 </div>
 
   <div class="intro-text">
-    <h2 data-type="document-title"><span data-type="" itemprop="" class="os-text">Introduction 1</span>
+    <h2 data-type="document-title" id="_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction 1</span>
 </h2>
     <figure>move this</figure><div>content</div>
   </div>
@@ -64,7 +64,7 @@
 </div>
 
   <div class="intro-text">
-    <h2 data-type="document-title"><span data-type="" itemprop="" class="os-text">Introduction 2</span>
+    <h2 data-type="document-title" id="_titlecreatedbycookbook_copy_1"><span data-type="" itemprop="" class="os-text">Introduction 2</span>
 </h2>
     <div>content</div>
   </div>
