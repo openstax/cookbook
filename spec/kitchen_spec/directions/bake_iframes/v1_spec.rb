@@ -47,23 +47,6 @@ RSpec.describe Kitchen::Directions::BakeIframes::V1 do
     )
   end
 
-  let(:book_with_error_prone_iframe) do
-    book_containing(html:
-      <<~HTML
-        <div data-type="chapter">
-          <div data-type="page" class="introduction"></div>
-          <div data-type="page" id="page_1234">
-            <h1 data-type="document-title">The Document: Title!</h1>
-            <div data-alt="atoms_isotopes" data-type="media">
-              <iframe height="371.4" src="https://openstax.org/l/atoms_isotopes" width="660"><!-- no-selfclose -->
-                </iframe>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
-  end
-
   before do
     stub_locales({
       'iframe_link_text': 'Click to view content'
@@ -81,10 +64,54 @@ RSpec.describe Kitchen::Directions::BakeIframes::V1 do
     expect(book_with_baked_iframes).to match_normalized_html(book_with_baked_iframes_snapshot)
   end
 
-  it 'handles rex link exceptions' do
-    expect(Warning).to receive(:warn).with(
-      "Unable to find rex link for iframe with src https://openstax.org/l/atoms_isotopes\n"
-    )
-    described_class.new.bake(book: book_with_error_prone_iframe)
+  context 'with exceptions' do
+    let(:book_with_iframe_no_slug) do
+      book_containing(html:
+        <<~HTML
+          <div data-type="chapter">
+            <div data-type="page" class="introduction"></div>
+            <div data-type="page" id="page_1234">
+              <h1 data-type="document-title">The Document: Title!</h1>
+              <div data-alt="atoms_isotopes" data-type="media" id="1234">
+                <iframe height="371.4" src="https://openstax.org/l/atoms_isotopes" width="660"><!-- no-selfclose -->
+                  </iframe>
+              </div>
+            </div>
+          </div>
+        HTML
+      )
+    end
+
+    let(:book_with_iframe_no_id_on_media) do
+      book_containing(html:
+        <<~HTML
+          <span data-type="slug" data-value="the-book-slug">
+          <div data-type="chapter">
+            <div data-type="page" class="introduction"></div>
+            <div data-type="page" id="page_1234">
+              <h1 data-type="document-title">The Document: Title!</h1>
+              <div data-alt="atoms_isotopes" data-type="media">
+                <iframe height="371.4" src="https://openstax.org/l/atoms_isotopes" width="660"><!-- no-selfclose -->
+                  </iframe>
+              </div>
+            </div>
+          </div>
+        HTML
+      )
+    end
+
+    it 'warns when rex link can\'t be made - no slug' do
+      expect(Warning).to receive(:warn).with(
+        "Unable to find rex link for iframe with parent id=1234\n"
+      )
+      described_class.new.bake(book: book_with_iframe_no_slug)
+    end
+
+    it 'warns when rex link can\'t be made - no id' do
+      expect(Warning).to receive(:warn).with(
+        "Unable to find rex link for iframe with parent id=\n"
+      )
+      described_class.new.bake(book: book_with_iframe_no_id_on_media)
+    end
   end
 end

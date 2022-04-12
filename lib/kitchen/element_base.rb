@@ -806,6 +806,10 @@ module Kitchen
         Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
       ).search("##{id}").first
 
+      unless element_with_ancestors
+        raise "Cannot create rex link to element with ID #{id} - needs ancestors of both types chapter & page/composite_page"
+      end
+
       book_slug = document.search('span[data-type="slug"]').first[:'data-value']
       chapter_count = element_with_ancestors.ancestor(:chapter).count_in(:book)
       page_string = ''
@@ -818,7 +822,7 @@ module Kitchen
         page_title = page.title_text.downcase.gsub(/[^(\w\s)]/, '').gsub(/\s/, '-')
       else
         page = element_with_ancestors.ancestor(:composite_page)
-        page_title = page.title.text.strip.downcase
+        page_title = page.title.text.strip.downcase.gsub(/[^(\w\s)]/, '').gsub(/\s/, '-')
       end
 
       "https://openstax.org/books/#{book_slug}/pages/#{chapter_count}-#{page_string}#{page_title}"
