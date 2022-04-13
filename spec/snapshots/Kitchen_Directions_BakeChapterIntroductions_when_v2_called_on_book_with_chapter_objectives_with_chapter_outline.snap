@@ -1,7 +1,7 @@
 <body>
     <div data-type="chapter">
   <h1 data-type="document-title">Chapter 1 Title</h1>
-  <div class="introduction" data-type="page">
+  <div class="introduction" data-type="page" id="testid1">
     
     <figure class="splash">
       <div data-type="title">Blood Pressure</div>
@@ -29,7 +29,7 @@
 </div>
 
   <div class="intro-text">
-    <h2 data-type="document-title" id="_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction</span>
+    <h2 data-type="document-title" id="testid1_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction</span>
 </h2>
     <p id="123">Though you may approach a course in anatomy and physiology...</p><p id="123_copy_1">This chapter begins with an overview of anatomy and...</p>
   </div>

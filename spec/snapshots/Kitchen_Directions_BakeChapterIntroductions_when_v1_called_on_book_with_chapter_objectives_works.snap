@@ -1,7 +1,7 @@
 <body>
     <div data-type="chapter">
   <h1 data-type="document-title">Chapter 1 Title</h1>
-  <div class="introduction" data-type="page">
+  <div class="introduction" data-type="page" id="testid1">
     
     
     
@@ -30,7 +30,7 @@
 </div>
 
   <div class="intro-text">
-    <h2 data-type="document-title" id="_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction 1</span>
+    <h2 data-type="document-title" id="testid1_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction 1</span>
 </h2>
     <figure>move this</figure><div>content</div>
   </div>
@@ -45,7 +45,7 @@
 </div>
 <div data-type="chapter">
   <h1 data-type="document-title">Chapter 2 Title</h1>
-  <div class="introduction" data-type="page">
+  <div class="introduction" data-type="page" id="testid2">
     
     
     
@@ -54,7 +54,7 @@
   <div class="os-chapter-outline">
   <h3 class="os-title">Chapter Outline</h3>
   <div class="os-chapter-objective">
-  <a class="os-chapter-objective" href="#">
+  <a class="os-chapter-objective" href="#testid3">
     <span class="os-number">2.1</span>
     <span class="os-divider"> </span>
     <span data-type="" itemprop="" class="os-text">should be objective 2.1</span>
@@ -64,13 +64,13 @@
 </div>
 
   <div class="intro-text">
-    <h2 data-type="document-title" id="_titlecreatedbycookbook_copy_1"><span data-type="" itemprop="" class="os-text">Introduction 2</span>
+    <h2 data-type="document-title" id="testid2_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction 2</span>
 </h2>
     <div>content</div>
   </div>
 </div>
 </div>
-  <div data-type="page">
+  <div data-type="page" id="testid3">
     <div data-type="document-title">should be objective 2.1</div>
   </div>
 </div>

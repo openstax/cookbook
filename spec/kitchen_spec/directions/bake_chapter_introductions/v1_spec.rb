@@ -15,7 +15,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       <<~HTML
         <div data-type="chapter">
           <h1 data-type="document-title">Chapter 1 Title</h1>
-          <div class="introduction" data-type="page">
+          <div class="introduction" data-type="page" id="testid1">
             <div data-type="document-title">Introduction 1</div>
             <div data-type="description">trash this</div>
             <div data-type="abstract">and this</div>
@@ -33,13 +33,13 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         </div>
         <div data-type="chapter">
           <h1 data-type="document-title">Chapter 2 Title</h1>
-          <div class="introduction" data-type="page">
+          <div class="introduction" data-type="page" id="testid2">
             <div data-type="document-title">Introduction 2</div>
             <div data-type="description">trash this</div>
             <div data-type="abstract">and this</div>
             <div>content</div>
           </div>
-          <div data-type="page">
+          <div data-type="page" id="testid3">
             <div data-type="document-title">should be objective 2.1</div>
           </div>
         </div>
