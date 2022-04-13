@@ -1,0 +1,30 @@
+<body>
+    <div data-type="chapter">
+<h1 data-type="document-title">Chapter 1 Title</h1>
+  <div class="introduction" data-type="page">
+    
+    
+    
+    <div data-type="metadata">don't touch this</div>
+    <figure class="splash">can't touch this (stop! hammer time)</figure>
+    
+    
+    
+  <div class="intro-body">
+  <div data-type="note" data-has-label="true" id="1" class="chapter-objectives">
+      <div data-type="title">Chapter Objectives</div>
+      <p>Some Text</p>
+      <ul>
+        <li>Some List</li>
+      </ul>
+    </div>
+  <div class="intro-text">
+    <h2 data-type="document-title" id="_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction 1</span>
+</h2>
+    <figure>move this</figure><div>content</div>
+  </div>
+</div>
+</div>
+</div>
+
+  </body>

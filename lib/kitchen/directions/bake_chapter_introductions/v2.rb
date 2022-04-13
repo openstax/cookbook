@@ -65,7 +65,6 @@ module Kitchen::Directions::BakeChapterIntroductions
         "> :not([data-type='metadata']):not(.splash):not(.has-splash)"
       ).cut
 
-      title.id = "#{introduction_page.id}_titlecreatedbycookbook"
       introduction_page.append(child:
         <<~HTML
           <div class="intro-body">
@@ -128,6 +127,7 @@ module Kitchen::Directions::BakeChapterIntroductions
 
       title = introduction_page.title.cut
       title.name = 'h2'
+      title.id = "#{introduction_page.id}_titlecreatedbycookbook"
       Kitchen::Directions::MoveTitleTextIntoSpan.v1(title: title)
     end
   end
