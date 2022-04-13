@@ -14,6 +14,12 @@ Layout/LineLength:
 Metrics/AbcSize:
   Max: 50
 
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrix/PerceivedComplexity:
+  Enabled: false
+
 Naming/PredicateName:
   Enabled: false
 

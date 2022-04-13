@@ -3,8 +3,8 @@
 module Kitchen
   module Directions
     module BakeIframes
-      def self.v1(outer_element:)
-        V1.new.bake(outer_element: outer_element)
+      def self.v1(book:)
+        V1.new.bake(book: book)
       end
     end
   end

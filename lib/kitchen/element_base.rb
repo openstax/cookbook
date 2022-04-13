@@ -799,6 +799,35 @@ module Kitchen
       enumerator_class.new(search_query: search_query_that_found_me) { |block| block.yield(self) }
     end
 
+    def rex_link
+      raise 'Cannot create rex link to an element without an ID' unless id
+
+      element_with_ancestors = document.book.chapters.search_with(
+        Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
+      ).search("##{id}").first
+
+      unless element_with_ancestors
+        raise "Cannot create rex link to element with ID #{id} - needs ancestors of both types chapter & page/composite_page"
+      end
+
+      book_slug = document.search('span[data-type="slug"]').first[:'data-value']
+      chapter_count = element_with_ancestors.ancestor(:chapter).count_in(:book)
+      page_string = ''
+      page_title = ''
+      page = element_with_ancestors.ancestor(:page) if element_with_ancestors.has_ancestor?(:page)
+      if page && page&.is_introduction?
+        page_title = page.first('[data-type="document-title"]').text.strip.downcase
+      elsif page
+        page_string = "#{page.count_in(:chapter) - 1}-"
+        page_title = page.title_text.downcase.gsub(/[^(\w\s)]/, '').gsub(/\s/, '-')
+      else
+        page = element_with_ancestors.ancestor(:composite_page)
+        page_title = page.title.text.strip.downcase.gsub(/[^(\w\s)]/, '').gsub(/\s/, '-')
+      end
+
+      "https://openstax.org/books/#{book_slug}/pages/#{chapter_count}-#{page_string}#{page_title}"
+    end
+
     protected
 
     # The wrapped Nokogiri node

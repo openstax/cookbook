@@ -583,4 +583,77 @@ RSpec.describe Kitchen::ElementBase do
       expect { para.count_in(:foo) }.to raise_error(/No ancestor/)
     end
   end
+
+  describe '#rex_link' do
+    let(:book_rex_linkable) do
+      book_containing(html:
+        <<~HTML
+          <div data-type="metadata" style="display: none;">
+            <h1 data-type="document-title" itemprop="name">Title Of The Book</h1>
+            <span data-type="slug" data-value="test-book-slug"></span>
+          </div>
+          <div data-type="page" id="not-in-chapter"></div>
+          <div data-type="chapter">
+            <div data-type="page" class="introduction">
+              <div data-type="metadata" style="display: none;">
+                <h1 data-type="document-title" itemprop="name">Introduction</h1>
+              </div>
+              <div class="intro-text">
+                <h2 data-type="document-title">
+                  <span data-type="" itemprop="" class="os-text">Introduction</span>
+                </h2>
+              </div>
+              <div id="element1"></div>
+            </div>
+            <div data-type="page">
+              <div data-type="metadata" style="display: none;">
+                <h1 data-type="document-title" itemprop="name">Test Page: Where's, The, Beef</h1>
+              </div>
+              <h2 data-type="document-title">
+                <span class="os-number">1.1</span>
+                <span class="os-divider"> </span>
+                <span data-type="" itemprop="" class="os-text">Test Page: Where's, The, Beef</span>
+              </h2>
+              <div id="element2"></div>
+            </div>
+          </div>
+          <div data-type="chapter">
+            <div class="os-eoc os-summary-container" data-type="composite-page" data-uuid-key=".summary" id="composite-page-1">
+              <h2 data-type="document-title">
+                <span class="os-text">Summary Or Something</span>
+              </h2>
+              <div data-type="metadata" style="display: none;">
+                <h1 data-type="document-title" itemprop="name">Summary</h1>
+                <span data-type="slug" data-value="introduction-political-science"></span>
+              </div>
+              <div id="element3"></div>
+          </div>
+        HTML
+      )
+    end
+
+    it 'returns rex link for element in section page' do
+      expect(book_rex_linkable.first('div#element2').rex_link).to \
+        eq('https://openstax.org/books/test-book-slug/pages/1-1-test-page-wheres-the-beef')
+    end
+
+    it 'returns rex link for element in intro page' do
+      expect(book_rex_linkable.first('div#element1').rex_link).to \
+        eq('https://openstax.org/books/test-book-slug/pages/1-introduction')
+    end
+
+    it 'returns rex link for element in composite page' do
+      expect(book_rex_linkable.first('div#element3').rex_link).to \
+        eq('https://openstax.org/books/test-book-slug/pages/2-summary-or-something')
+    end
+
+    it 'raises error for element without id' do
+      expect { book_rex_linkable.chapters.first.rex_link }.to raise_error('Cannot create rex link to an element without an ID')
+    end
+
+    it 'raises error when ancestors can\'t be found' do
+      expect { book_rex_linkable.pages('$#not-in-chapter').first.rex_link }.to \
+        raise_error('Cannot create rex link to element with ID not-in-chapter - needs ancestors of both types chapter & page/composite_page')
+    end
+  end
 end

@@ -13,7 +13,6 @@ module Kitchen
       end
 
       def self.bake_note(note:, bake_subtitle:, cases:, bake_exercises:)
-        Kitchen::Directions::BakeIframes.v1(outer_element: note)
         note.wrap_children(class: 'os-note-body')
 
         if bake_subtitle
