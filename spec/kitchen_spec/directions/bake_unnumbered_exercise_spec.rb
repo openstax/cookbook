@@ -22,7 +22,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedExercise do
     described_class.v1(exercise: book_with_unnumbered_exercise.exercises.first)
     expect(book_with_unnumbered_exercise.pages.first).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <div class="unnumbered" data-type="exercise">
             <div data-type="problem">
               <div class="os-problem-container">problem</div>

@@ -312,7 +312,7 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary::V1 do
       expect(chapter_without_definitions).to match_normalized_html(
         <<~HTML
           <div data-type="chapter">
-            <div data-type="page">
+            <div data-type="page" id="testidOne">
               <div>this chapter doesn't have definitions</div>
             </div>
           </div>

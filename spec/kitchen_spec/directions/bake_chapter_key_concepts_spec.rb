@@ -15,7 +15,7 @@ RSpec.describe Kitchen::Directions::BakeChapterKeyConcepts do
   let(:chapter) do
     chapter_element(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <h1 data-type="document-title" id="page1TitleId">Page 1</h1>
           <section id="sectionId1" class="key-concepts">
             <h3 data-type="title">WWF History</h3>
