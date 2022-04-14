@@ -94,6 +94,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc|
     end
   end
 
+  BakeIframes.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
   BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)

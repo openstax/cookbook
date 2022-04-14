@@ -2,27 +2,30 @@
 
 module Kitchen::Directions::BakeIframes
   class V1
-    def bake(outer_element:)
-      iframes = outer_element.search('iframe')
+    def bake(book:)
+      iframes = book.search_with(Kitchen::PageElementEnumerator, \
+                                 Kitchen::CompositePageElementEnumerator).search('iframe')
       return unless iframes.any?
 
       iframes.each do |iframe|
-        next if iframe.has_class?('os-is-iframe')
+        next if iframe.has_class?('os-is-iframe') # don't double-bake
 
+        iframe_link = \
+          begin
+            iframe.parent.rex_link
+          rescue StandardError
+            warn "Unable to find rex link for iframe with parent id=#{iframe.parent.id}"
+            iframe[:src]
+          end
         iframe.wrap('<div class="os-has-iframe" data-type="alternatives">')
         iframe.add_class('os-is-iframe')
-        link_ref = iframe[:src]
-        next unless link_ref
-
-        resource_link = link_ref.match(/..\/resources\/.*\/index.html/)
-        next if resource_link # TODO: behavior for resource links
 
         iframe = iframe.parent
         iframe.add_class('os-has-link')
 
         iframe.prepend(child:
           <<~HTML
-            <a class="os-is-link" href="#{link_ref}" target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)}</a>
+            <a class="os-is-link" href=#{iframe_link} target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)}</a>
           HTML
         )
       end

@@ -144,6 +144,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
     end
   end
 
+  BakeIframes.v1(book: book)
   BakeEquations.v1(book: book, cases: true)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.')
