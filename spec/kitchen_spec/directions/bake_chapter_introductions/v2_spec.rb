@@ -188,6 +188,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     it 'stores link text' do
       pantry = book_v1.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
+      expect(pantry).to receive(:store).with('Chapter 2 Chapter 2 Title', { label: 'testid2' })
       described_class.v2(book: book_v1, strategy_options: {
         strategy: :add_objectives,
         bake_chapter_outline: true,
