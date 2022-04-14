@@ -115,7 +115,7 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
     described_class.v1(book: book_with_notes, classes: %w[foo baz project media-2 interactive])
     expect(book_with_notes.body.pages.first).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <div class="foo" data-type="note" id="noteId">
             <h3 class="os-title" data-type="title">
               <span class="os-title-label">Bar</span>

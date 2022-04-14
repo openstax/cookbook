@@ -7,7 +7,7 @@ RSpec.describe Kitchen::Directions::BakeFootnotes::V1 do
   let(:book1) do
     book_containing(html:
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <p><a href="#aside1" role="doc-noteref">[footnote]</a> Blah.</p>
           <aside id="aside1" type="footnote">Footnote content 1</aside>
         </div>
@@ -52,7 +52,7 @@ RSpec.describe Kitchen::Directions::BakeFootnotes::V1 do
 
     expect(book1.body.children.to_s).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <p class="has-noteref"><a href="#aside1" role="doc-noteref">1</a> Blah.</p>
           <aside id="aside1" type="footnote"><div data-type="footnote-number">1</div>Footnote content 1</aside>
         </div>
@@ -97,7 +97,7 @@ RSpec.describe Kitchen::Directions::BakeFootnotes::V1 do
 
     expect(book1.body.children.to_s).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <p class="has-noteref"><a href="#aside1" role="doc-noteref">i</a> Blah.</p>
           <aside id="aside1" type="footnote"><div data-type="footnote-number">i</div>Footnote content 1</aside>
         </div>

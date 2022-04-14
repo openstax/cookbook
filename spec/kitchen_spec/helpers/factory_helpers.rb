@@ -16,7 +16,7 @@ module FactoryHelpers
   def one_chapter_with_one_page_containing(html)
     <<~HTML
       <div data-type="chapter">
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           #{html}
         </div>
       </div>

@@ -57,7 +57,7 @@ RSpec.describe Kitchen::Directions::BakeUnclassifiedNotes do
     described_class.v1(book: book_with_notes)
     expect(book_with_notes.body.pages.first).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <div data-type="note" id="titlednote">
             <h3 class="os-title" data-type="title">
               <span class="os-title-label" data-type="" id="titleId">note <em data-effect="italics">title</em></span>

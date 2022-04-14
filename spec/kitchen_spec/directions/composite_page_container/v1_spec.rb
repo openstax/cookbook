@@ -91,36 +91,6 @@ RSpec.describe Kitchen::Directions::CompositePageContainer do
 
   it 'works for EOB sections' do
     described_class.v1(container_key: 'eob-section', uuid_key: '.eob-section', metadata_source: metadata_element, content: some_content, append_to: book.body)
-    expect(book.body).to match_normalized_html(
-      <<~HTML
-        <body>
-          <div data-type="chapter">
-            <div data-type="page">
-              <div data-type="example" class="class1" id="div1">
-                <p>This is a paragraph.</p>
-              </div>
-            </div>
-          </div>
-          <div class="os-eob os-eob-section-container" data-type="composite-page" data-uuid-key=".eob-section">
-            <h1 data-type="document-title">
-              <span class="os-text">EOB SECTION</span>
-            </h1>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">EOB SECTION</h1>
-              <span data-type="revised" id="revised_copy_1">Revised</span><span data-type="slug" id="slug_copy_1">Slug</span>
-              <div class="authors" id="authors_copy_1">Authors</div>
-              <div class="publishers" id="publishers_copy_1">Publishers</div>
-              <div class="print-style" id="print-style_copy_1">Print Style</div>
-              <div class="permissions" id="permissions_copy_1">Permissions</div>
-              <div data-type="subject" id="subject_copy_1">Subject</div>
-            </div>
-            <div class="content">
-              <p>here is some content</p>
-              <div>do <span>nested</span> elements do okay?</div>
-            </div>
-          </div>
-        </body>
-      HTML
-    )
+    expect(book.body).to match_snapshot_auto
   end
 end

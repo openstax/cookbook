@@ -84,7 +84,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
       described_class.v1(book: book_with_unnumbered_figure)
       expect(book_with_unnumbered_figure.pages.first).to match_normalized_html(
         <<~HTML
-          <div data-type="page">
+          <div data-type="page" id="testidOne">
             <div class="os-figure">
               <figure class="unnumbered" id="someId">
                 <span>
@@ -103,7 +103,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
       described_class.v1(book: book_with_unnumbered_figure_with_splash)
       expect(book_with_unnumbered_figure_with_splash.pages.first).to match_normalized_html(
         <<~HTML
-          <div data-type="page">
+          <div data-type="page" id="testidOne">
             <div class="os-figure has-splash">
               <figure class="unnumbered splash" id="someId">
                 <span>
@@ -125,7 +125,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
       described_class.v1(book: book_with_unnumbered_figure_with_caption)
       expect(book_with_unnumbered_figure_with_caption.pages.first).to match_normalized_html(
         <<~HTML
-          <div data-type="page">
+          <div data-type="page" id="testidOne">
             <div class="os-figure">
               <figure class="unnumbered" id="someId">
                 <span>
@@ -147,7 +147,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
       described_class.v1(book: book_with_unnumbered_figure_with_title)
       expect(book_with_unnumbered_figure_with_title.pages.first).to match_normalized_html(
         <<~HTML
-          <div data-type="page">
+          <div data-type="page" id="testidOne">
             <div class="os-figure">
               <figure class="unnumbered" id="someId">
                 <span>
@@ -169,7 +169,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
       described_class.v1(book: book_with_unnumbered_figure_with_title_and_caption)
       expect(book_with_unnumbered_figure_with_title_and_caption.pages.first).to match_normalized_html(
         <<~HTML
-          <div data-type="page">
+          <div data-type="page" id="testidOne">
             <div class="os-figure">
               <figure class="unnumbered" id="someId">
                 <span>
