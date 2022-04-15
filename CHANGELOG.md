@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `qa` note title label translation for precalculo
 * Fix bug introduced in #40 by adding ids to introduction pages
 * Remove iframe baking from `BakeAutotitledNotes`
 * Define rex_link on `ElementBase`
