@@ -27,7 +27,7 @@ RSpec.describe Kitchen::PageElement do
   let(:page_with_multiple_titles) do
     book_containing(html:
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <div data-type="document-title">Title</div>
           <div data-type="metadata">
             <div data-type="document-title">Title MetaData</div>

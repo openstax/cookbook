@@ -211,7 +211,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
       expect(chapter_without_references).to match_normalized_html(
         <<~HTML
           <div data-type="chapter">
-            <div data-type="page">
+            <div data-type="page" id="testidOne">
               <div>this chapter doesn't have references</div>
             </div>
           </div>

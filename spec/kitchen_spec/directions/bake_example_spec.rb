@@ -488,7 +488,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
       end
       expect(book_with_nested_examples.pages.first).to match_normalized_html(
         <<~HTML
-          <div data-type="page">
+          <div data-type="page" id="testidOne">
             <div data-type="example" id="example-test">
               <h5 class="os-title">
                 <span class="os-title-label">Example </span>
@@ -557,7 +557,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
       book_containing(html:
         <<~HTML
           <div data-type="chapter">
-            <div data-type="page">
+            <div data-type="page" id="testidOne">
               <div data-type="document-title" id="auto_m68761_72010">Page 1 Title</div>
               <div data-type='example' id='example-test'>
                 <span data-type="title" id="title1">example title becomes h4</span>

@@ -36,13 +36,13 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         </div>
         <div data-type="chapter">
           <h1 data-type="document-title">Chapter 2 Title</h1>
-          <div class="introduction" data-type="page">
+          <div class="introduction" data-type="page" id="testid2">
             <div data-type="document-title">Introduction 2</div>
             <div data-type="description">trash this</div>
             <div data-type="abstract">and this</div>
             <div>content</div>
           </div>
-          <div data-type="page">
+          <div data-type="page" id="testid3">
             <div data-type="document-title">should be objective 2.1</div>
           </div>
         </div>
@@ -55,8 +55,8 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       <<~HTML
         <div data-type="chapter">
           <h1 data-type="document-title">Chapter 1 Title</h1>
-          <div class="introduction" data-type="page">
-            <div data-type="document-title">Introduction</div>
+          <div class="introduction" data-type="page" id="testid1">
+            <div data-type="document-title" id="testid">Introduction</div>
             <figure class="splash">
               <div data-type="title">Blood Pressure</div>
               <figcaption>A proficiency in anatomy and physiology... (credit: Bryan Mason/flickr)</figcaption>
@@ -84,7 +84,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       <<~HTML
         <div data-type="chapter">
         <h1 data-type="document-title">Chapter 1 Title</h1>
-          <div class="introduction" data-type="page">
+          <div class="introduction" data-type="page" id="testid">
             <div data-type="document-title">Introduction 1</div>
             <div data-type="description">trash this</div>
             <div data-type="abstract">and this</div>
@@ -110,7 +110,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       <<~HTML
         <div data-type="chapter">
           <h1 data-type="document-title">Chapter 1 Title</h1>
-          <div class="introduction" data-type="page">
+          <div class="introduction" data-type="page" id="testid1">
             <div data-type="document-title">Introduction</div>
             <div data-type="note" class="unit-opener">
               <div data-type="title">Understanding the Marketplace</div>
@@ -137,85 +137,12 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         book: book_with_diff_order,
         strategy_options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v2 }
       )
-      expect(book_with_diff_order.body).to match_normalized_html(
-        <<~HTML
-          <body>
-            <div data-type="chapter">
-              <h1 data-type="document-title">Chapter 1 Title</h1>
-              <div class="introduction" data-type="page">
-                <figure class="splash">
-                  <div data-type="title">Blood Pressure</div>
-                  <figcaption>A proficiency in anatomy and physiology... (credit: Bryan Mason/flickr)</figcaption>
-                  <span data-type="media" data-alt="This photo shows a nurse taking a woman&#x2019;s...">
-                  <img src="ccc4ed14-6c87-408b-9934-7a0d279d853a/100_Blood_Pressure.jpg" data-media-type="image/jpg" alt="This photo shows a nurse taking..."/>
-                  </span>
-                </figure>
-                <div class="intro-body">
-                  <div class="os-chapter-outline">
-                    <h3 class="os-title">Chapter Outline</h3>
-                    <div data-type="note" class="chapter-objectives">
-                      <h3 class="os-title" data-type="title">
-                        <span class="os-title-label">Chapter Objectives</span>
-                      </h3>
-                      <div class="os-note-body">
-                        <p>After studying this chapter, you will be able to:</p>
-                        <ul>
-                          <li>Distinguish between anatomy and physiology, and identify several branches of each</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="intro-text">
-                    <h2 data-type="document-title"><span data-type="" itemprop="" class="os-text">Introduction</span></h2>
-                    <p id="123">Though you may approach a course in anatomy and physiology...</p>
-                    <p id="123_copy_1">This chapter begins with an overview of anatomy and...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </body>
-        HTML
-      )
+      expect(book_with_diff_order.body).to match_snapshot_auto
     end
 
     it 'without chapter outline' do
       described_class.v2(book: book_with_diff_order)
-      expect(book_with_diff_order.body).to match_normalized_html(
-        <<~HTML
-          <body>
-            <div data-type="chapter">
-              <h1 data-type="document-title">Chapter 1 Title</h1>
-              <div class="introduction" data-type="page">
-                <figure class="splash">
-                  <div data-type="title">Blood Pressure</div>
-                  <figcaption>A proficiency in anatomy and physiology... (credit: Bryan Mason/flickr)</figcaption>
-                  <span data-type="media" data-alt="This photo shows a nurse taking a woman&#x2019;s...">
-                  <img src="ccc4ed14-6c87-408b-9934-7a0d279d853a/100_Blood_Pressure.jpg" data-media-type="image/jpg" alt="This photo shows a nurse taking..."/>
-                  </span>
-                </figure>
-                <div class="intro-body">
-                  <div data-type="note" class="chapter-objectives">
-                    <h3 class="os-title" data-type="title">
-                      <span class="os-title-label">Chapter Objectives</span>
-                    </h3>
-                    <div class="os-note-body">
-                      <p>After studying this chapter, you will be able to:</p>
-                      <ul>
-                        <li>Distinguish between anatomy and physiology, and identify several branches of each</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="intro-text">
-                    <h2 data-type="document-title"><span data-type="" itemprop="" class="os-text">Introduction</span></h2>
-                    <p id="123">Though you may approach a course in anatomy and physiology...</p>
-                    <p id="123_copy_1">This chapter begins with an overview of anatomy and...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </body>
-        HTML
-      )
+      expect(book_with_diff_order.body).to match_snapshot_auto
     end
   end
 
@@ -224,35 +151,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       described_class.v2(
         book: book_with_intro_objectives, strategy_options: { strategy: :none, introduction_order: :v2 }
       )
-      expect(book_with_intro_objectives.body).to match_normalized_html(
-        <<~HTML
-          <body>
-            <div data-type="chapter">
-              <h1 data-type="document-title">Chapter 1 Title</h1>
-              <div class="introduction" data-type="page">
-                <div data-type="metadata">don't touch this</div>
-                <figure class="splash">can't touch this (stop! hammer time)</figure>
-                <div class="intro-body">
-                <div class="chapter-objectives" data-has-label="true" data-type="note" id="1">
-                  <div data-type="title">Chapter Objectives</div>
-                  <p>Some Text</p>
-                  <ul>
-                    <li>Some List</li>
-                  </ul>
-                </div>
-                <div class="intro-text">
-                    <h2 data-type="document-title">
-                      <span class="os-text" data-type="" itemprop="">Introduction 1</span>
-                    </h2>
-                    <figure>move this</figure>
-                    <div>content</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </body>
-        HTML
-      )
+      expect(book_with_intro_objectives.body).to match_snapshot_auto
     end
 
     it 'unknown strategy raises' do
@@ -268,38 +167,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         book: book_with_unit_opener,
         strategy_options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v3 }
       )
-      expect(book_with_unit_opener.body).to match_normalized_html(
-        <<~HTML
-          <body>
-            <div data-type="chapter">
-              <h1 data-type="document-title">Chapter 1 Title</h1>
-              <div class="introduction" data-type="page">
-                <figure class="splash">
-                  <div data-type="title">Blood Pressure</div>
-                  <figcaption>A proficiency in anatomy and physiology... (credit: Bryan Mason/flickr)</figcaption>
-                  <span data-type="media" data-alt="This photo shows a nurse taking a woman&#x2019;s...">
-                  <img src="ccc4ed14-6c87-408b-9934-7a0d279d853a/100_Blood_Pressure.jpg" data-media-type="image/jpg" alt="This photo shows a nurse taking..."/>
-                  </span>
-                </figure>
-                <div class="intro-body">
-                  <div data-type="note" class="unit-opener">
-                    <div data-type="title">Understanding the Marketplace</div>
-                    <p>Welcome to Part II of Principles of Marketing...</p>
-                  </div>
-                  <div class="os-chapter-outline">
-                    <h3 class="os-title">Chapter Outline</h3>
-                  </div>
-                  <div class="intro-text">
-                    <h2 data-type="document-title"><span data-type="" itemprop="" class="os-text">Introduction</span></h2>
-                    <p id="123">Though you may approach a course in anatomy and physiology...</p>
-                    <p id="123_copy_1">This chapter begins with an overview of anatomy and...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </body>
-        HTML
-      )
+      expect(book_with_unit_opener.body).to match_snapshot_auto
     end
   end
 
@@ -320,6 +188,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     it 'stores link text' do
       pantry = book_v1.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
+      expect(pantry).to receive(:store).with('Chapter 2 Chapter 2 Title', { label: 'testid2' })
       described_class.v2(book: book_v1, strategy_options: {
         strategy: :add_objectives,
         bake_chapter_outline: true,

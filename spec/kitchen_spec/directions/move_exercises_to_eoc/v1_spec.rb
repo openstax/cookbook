@@ -98,40 +98,7 @@ RSpec.describe Kitchen::Directions::MoveExercisesToEOC::V1 do
   context 'when append_to is null' do
     it 'works' do
       described_class.new.bake(chapter: book_with_review_exercises.chapters.first, metadata_source: metadata_element, klass: 'review-exercises')
-      expect(book_with_review_exercises.chapters.first).to match_normalized_html(
-        <<~HTML
-          <div data-type="chapter">
-            <div data-type="page">
-              <h2 data-type="document-title" id="first" itemprop="name">First Title</h2>
-            </div>
-            <div class="os-eoc os-review-exercises-container" data-type="composite-page" data-uuid-key=".review-exercises">
-              <h2 data-type="document-title">
-                <span class="os-text">foo</span>
-              </h2>
-              <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">foo</h1>
-                <span data-type="revised" id="revised_copy_1">Revised</span>
-                <span data-type="slug" id="slug_copy_1">Slug</span>
-                <div class="authors" id="authors_copy_1">Authors</div>
-                <div class="publishers" id="publishers_copy_1">Publishers</div>
-                <div class="print-style" id="print-style_copy_1">Print Style</div>
-                <div class="permissions" id="permissions_copy_1">Permissions</div>
-                <div data-type="subject" id="subject_copy_1">Subject</div>
-              </div>
-              <section id="sectionId1" class="review-exercises">
-                <div data-type="exercise" id="exercise_id1">
-                    <div data-type="problem" id="problem_id1">
-                      <p>exercise content 1</p>
-                    </div>
-                    <div data-type="solution" id="solution_id1">
-                      <p>Solution content</p>
-                    </div>
-                </div>
-              </section>
-            </div>
-          </div>
-        HTML
-      )
+      expect(book_with_review_exercises.chapters.first).to match_snapshot_auto
     end
   end
 end

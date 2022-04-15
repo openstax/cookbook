@@ -40,7 +40,7 @@ RSpec.describe Kitchen::Directions::BakeAccessibilityFixes do
       expect(type_a.chapters.first).to match_normalized_html(
         <<~HTML
           <div data-type="chapter">
-            <div data-type="page">
+            <div data-type="page" id="testidOne">
               <section data-depth="1" class="multiple-choice">
                 <h3 data-type="title">Multiple Choice</h3>
                 <div data-type="exercise">

@@ -24,7 +24,7 @@ RSpec.describe Kitchen::Directions::BakeCustomTitledNotes do
     described_class.v1(book: book_with_notes, classes: %w[foo bar])
     expect(book_with_notes.body.pages.first).to match_normalized_html(
       <<~HTML
-        <div data-type="page">
+        <div data-type="page" id="testidOne">
           <div data-type="note" id="untitlednote" class="foo">
             <div class="os-note-body">
               <p>content</p>
