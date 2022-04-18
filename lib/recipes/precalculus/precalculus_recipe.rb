@@ -52,7 +52,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
       ) do |exercise_section|
         Kitchen::Directions::RemoveSectionTitle.v1(section: exercise_section)
         exercise_section.search('section').each do |section|
-          section.first('h4').name = 'h5'
+          section.first('h4')&.name = 'h5'
         end
       end
     end
