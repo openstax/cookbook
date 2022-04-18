@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove choice level feedback from answers in injected questions
 * Switch kitchen tests over to snapshots
 
 ## [v1.5.0] - 2022-04-18
