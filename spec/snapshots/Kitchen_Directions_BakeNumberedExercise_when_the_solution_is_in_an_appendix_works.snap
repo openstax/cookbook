@@ -1,0 +1,11 @@
+<div data-type="exercise" id="exercise_id" class="os-hasSolution">
+      <div data-type="problem" id="problem_id"><span class="os-title-label">Exercise</span>
+<span class="os-number">A1</span>
+<div class="os-problem-container">
+        <p>example content</p>
+      </div>
+</div>
+      <div data-type="solution" id="exercise_id-solution"><div class="os-solution-container">
+        <p>Solution content</p>
+      </div></div>
+    </div>

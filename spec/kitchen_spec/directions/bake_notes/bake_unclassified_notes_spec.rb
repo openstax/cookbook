@@ -55,56 +55,13 @@ RSpec.describe Kitchen::Directions::BakeUnclassifiedNotes do
 
   it 'bakes' do
     described_class.v1(book: book_with_notes)
-    expect(book_with_notes.body.pages.first).to match_normalized_html(
-      <<~HTML
-        <div data-type="page" id="testidOne">
-          <div data-type="note" id="titlednote">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label" data-type="" id="titleId">note <em data-effect="italics">title</em></span>
-            </h3>
-            <div class="os-note-body">
-              <p>content</p>
-            </div>
-          </div>
-          <div data-type="note" id="untitlednote">
-            <div class="os-note-body">
-              <p>content</p>
-            </div>
-          </div>
-          <div data-type="note" id="untitlednote" class="foo">
-            <p>content</p>
-          </div>
-        </div>
-      HTML
-    )
+    expect(book_with_notes.body.pages.first).to match_snapshot_auto
   end
 
   context 'when unclassified notes have numbered exercise within' do
     it 'bakes' do
       described_class.v1(book: numbered_exercise_within_note, bake_exercises: true)
-      expect(numbered_exercise_within_note.body.pages.first.notes).to match_normalized_html(
-        <<~HTML
-          <div data-type="note" id="unclassifiednote">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label" data-type="" id="titleId">note title</span>
-            </h3>
-            <div class="os-note-body">
-              <p>this is a note</p>
-              <div data-type="exercise" id="3360">
-                <div data-type="problem" id="504">
-                  <span class="os-title-label">Exercise </span>
-                  <span class="os-number">1</span>
-                  <div class="os-problem-container">
-                    <ul>
-                      <li>What do you need to know to perform this analysis at the very minimum?</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(numbered_exercise_within_note.body.pages.first.notes.to_s).to match_snapshot_auto
     end
   end
 end

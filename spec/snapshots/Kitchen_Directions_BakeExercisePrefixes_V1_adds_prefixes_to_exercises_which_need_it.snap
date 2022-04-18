@@ -1,0 +1,71 @@
+<div data-type="chapter"><div class="os-eoc os-exercise-set-a-container" data-type="composite-page" data-uuid-key=".exercise-set-a" id="composite-page-1">
+  <section class="exercise-set-a">
+    <div data-type="exercise" id="exercise_id">
+      <div data-type="problem" id="problem_id"><span class="os-text">EA</span>
+
+        <span class="os-number">1.1</span>
+        <span class="os-divider">. </span>
+        <div class="os-problem-container">
+          <p>example content</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="os-eoc os-exercise-set-b-container" data-type="composite-page" data-uuid-key=".exercise-set-b" id="composite-page-2">
+  <section class="exercise-set-b">
+    <div data-type="exercise" id="exercise_id">
+      <div data-type="problem" id="problem_id"><span class="os-text">EB</span>
+
+        <span class="os-number">1.1</span>
+        <span class="os-divider">. </span>
+        <div class="os-problem-container">
+          <p>example content</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="os-eoc os-problem-set-a-container" data-type="composite-page" data-uuid-key=".problem-set-a" id="composite-page-3">
+  <section class="problem-set-a">
+    <div data-type="exercise" id="exercise_id">
+      <div data-type="problem" id="problem_id"><span class="os-text">PA</span>
+
+        <span class="os-number">1.1</span>
+        <span class="os-divider">. </span>
+        <div class="os-problem-container">
+          <p>example content</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="os-eoc os-problem-set-b-container" data-type="composite-page" data-uuid-key=".problem-set-b" id="composite-page-4">
+  <section class="problem-set-b">
+    <div data-type="exercise" id="exercise_id">
+      <div data-type="problem" id="problem_id"><span class="os-text">PB</span>
+
+        <span class="os-number">1.1</span>
+        <span class="os-divider">. </span>
+        <div class="os-problem-container">
+          <p>example content</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="os-eoc os-thought-provokers-container" data-type="composite-page" data-uuid-key=".thought-provokers" id="composite-page-5">
+  <section class="thought-provokers">
+    <div data-type="exercise" id="exercise_id">
+      <div data-type="problem" id="problem_id"><span class="os-text">TP</span>
+
+        <span class="os-number">1.1</span>
+        <span class="os-divider">. </span>
+        <div class="os-problem-container">
+          <p>example content</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>

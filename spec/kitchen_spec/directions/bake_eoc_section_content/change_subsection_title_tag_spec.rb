@@ -20,17 +20,6 @@ RSpec.describe Kitchen::Directions::ChangeSubsectionTitleTag do
 
   it 'changes subsection headers from h4 to h5' do
     described_class.v1(section: section_with_subsection)
-    expect(section_with_subsection).to match_normalized_html(
-      <<~HTML
-        <section class="whatever">
-          <section>
-            <h5>This title should be an h5</h5>
-          </section>
-          <section>
-            <h5>And this</h5>
-          </section>
-        </section>
-      HTML
-    )
+    expect(section_with_subsection).to match_snapshot_auto
   end
 end

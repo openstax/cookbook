@@ -73,36 +73,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
       )
       expect(
         described_class.new.bake(chapter: chapter, metadata_source: metadata)
-      ).to match_normalized_html(
-        <<~HTML
-          <div data-type="chapter">
-            <div class="os-eoc os-references-container" data-type="composite-page" data-uuid-key=".references">
-              <h2 data-type="document-title">
-                <span class="os-text">References</span>
-              </h2>
-              <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">References</h1>
-                <span data-type="revised" id="revised_copy_1">Revised</span>
-                <span data-type="slug" id="slug_copy_1">Slug</span>
-                <div class="authors" id="authors_copy_1">Authors</div>
-                <div class="publishers" id="publishers_copy_1">Publishers</div>
-                <div class="print-style" id="print-style_copy_1">Print Style</div>
-                <div class="permissions" id="permissions_copy_1">Permissions</div>
-                <div data-type="subject" id="subject_copy_1">Subject</div>
-              </div>
-              <p>
-              ABD
-            </p>
-              <p>
-              Achoo
-            </p>
-              <p>
-              ZzZ
-            </p>
-            </div>
-          </div>
-        HTML
-      )
+      ).to match_snapshot_auto
     end
   end
 
@@ -110,43 +81,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
     it 'works' do
       expect(
         described_class.new.bake(chapter: chapter, metadata_source: metadata_element, append_to: append_to)
-      ).to match_normalized_html(
-        <<~HTML
-          <div class="os-eoc os-chapter-review-container" data-uuid-key=".chapter-review" data-type="composite-chapter">
-            <h2 data-type="document-title" id="composite-chapter-1">
-              <span class="os-text">foo</span>
-            </h2>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">foo</h1>
-              <div>metadata</div>
-            </div>
-            <div class="os-eoc os-references-container" data-type="composite-page" data-uuid-key=".references">
-              <h3 data-type="title">
-                <span class="os-text">References</span>
-              </h3>
-              <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">References</h1>
-                <span data-type="revised" id="revised_copy_1">Revised</span>
-                <span data-type="slug" id="slug_copy_1">Slug</span>
-                <div class="authors" id="authors_copy_1">Authors</div>
-                <div class="publishers" id="publishers_copy_1">Publishers</div>
-                <div class="print-style" id="print-style_copy_1">Print Style</div>
-                <div class="permissions" id="permissions_copy_1">Permissions</div>
-                <div data-type="subject" id="subject_copy_1">Subject</div>
-              </div>
-              <p>
-              ABD
-            </p>
-              <p>
-              Achoo
-            </p>
-              <p>
-              ZzZ
-            </p>
-            </div>
-          </div>
-        HTML
-      )
+      ).to match_snapshot_auto
     end
   end
 
@@ -165,36 +100,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
         )
         expect(
           described_class.new.bake(chapter: chapter_with_pl_diacritics, metadata_source: metadata)
-        ).to match_normalized_html(
-          <<~HTML
-            <div data-type="chapter">
-              <div class="os-eoc os-references-container" data-type="composite-page" data-uuid-key=".references">
-                <h2 data-type="document-title">
-                  <span class="os-text">Bibliografia</span>
-                </h2>
-                <div data-type="metadata" style="display: none;">
-                  <h1 data-type="document-title" itemprop="name">Bibliografia</h1>
-                  <span data-type="revised" id="revised_copy_1">Revised</span>
-                  <span data-type="slug" id="slug_copy_1">Slug</span>
-                  <div class="authors" id="authors_copy_1">Authors</div>
-                  <div class="publishers" id="publishers_copy_1">Publishers</div>
-                  <div class="print-style" id="print-style_copy_1">Print Style</div>
-                  <div class="permissions" id="permissions_copy_1">Permissions</div>
-                  <div data-type="subject" id="subject_copy_1">Subject</div>
-                </div>
-                <p>
-                ABD
-              </p>
-                <p>
-                ĄBD
-              </p>
-                <p>
-                ZzZ
-              </p>
-              </div>
-            </div>
-          HTML
-        )
+        ).to match_snapshot_auto
       end
     end
   end

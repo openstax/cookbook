@@ -1,0 +1,11 @@
+<body>
+    <a>text</a>
+<a href="skip">text</a>
+<a href="skip//2">text</a>
+<a href="https://some-url" target="_blank" rel="noopener nofollow">text</a>
+<a href="http://some-url" target="_blank" rel="noopener nofollow">text</a>
+<a href="//some-url" target="_blank" rel="noopener nofollow">text</a>
+<a href="../resources/whatever.html" target="_blank">text</a>
+<a href="../resources/whatever2.html" target="_blank">text</a>
+
+  </body>

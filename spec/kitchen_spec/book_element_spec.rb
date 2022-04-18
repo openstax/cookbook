@@ -17,41 +17,11 @@ RSpec.describe Kitchen::BookElement do
   end
 
   it 'returns the body' do
-    expect(book.body).to match_normalized_html(
-      <<~HTML
-        <body>
-          <nav id="toc">
-            <h1 class="os-toc-title">Contents</h1>
-          </nav>
-          <div>This is a div</div>
-          <div data-type="metadata" style="display: none;">
-            <span data-type="revised" id="revised">Revised</span>
-            <span data-type="slug" id="slug">Slug</span>
-            <div class="authors" id="authors">Authors</div>
-            <div class="publishers" id="publishers">Publishers</div>
-            <div class="print-style" id="print-style">Print Style</div>
-            <div class="permissions" id="permissions">Permissions</div>
-            <div data-type="subject" id="subject">Subject</div>
-          </div>
-        </body>
-      HTML
-    )
+    expect(book.body).to match_snapshot_auto
   end
 
   it 'returns the metadata' do
-    expect(book.metadata).to match_normalized_html(
-      <<~HTML
-        <div data-type="metadata" style="display: none;">
-          <span data-type="revised" id="revised">Revised</span>
-          <span data-type="slug" id="slug">Slug</span>
-          <div class="authors" id="authors">Authors</div>
-          <div class="publishers" id="publishers">Publishers</div>
-          <div class="print-style" id="print-style">Print Style</div>
-          <div class="permissions" id="permissions">Permissions</div>
-          <div data-type="subject" id="subject">Subject</div>
-        </div>
-      HTML
-    )
+    expect(book.metadata).to match_snapshot_auto
   end
 
   it 'returns the toc' do

@@ -22,24 +22,6 @@ RSpec.describe Kitchen::Directions::BakeCustomTitledNotes do
 
   it 'bakes' do
     described_class.v1(book: book_with_notes, classes: %w[foo bar])
-    expect(book_with_notes.body.pages.first).to match_normalized_html(
-      <<~HTML
-        <div data-type="page" id="testidOne">
-          <div data-type="note" id="untitlednote" class="foo">
-            <div class="os-note-body">
-              <p>content</p>
-            </div>
-          </div>
-          <div data-type="note" id="titlednote" class="bar">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label" id="titleId">note title</span>
-            </h3>
-            <div class="os-note-body">
-              <p>content</p>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(book_with_notes.body.pages.first).to match_snapshot_auto
   end
 end

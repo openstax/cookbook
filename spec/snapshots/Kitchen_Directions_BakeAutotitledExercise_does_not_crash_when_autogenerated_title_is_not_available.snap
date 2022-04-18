@@ -1,0 +1,14 @@
+<div data-type="exercise" id="1" class="homework unnumbered">
+  <div data-type="problem" id="456"><h4 class="exercise-title" data-type="title">unknown title for exercise with classes ["homework", "unnumbered"]</h4>
+<div class="os-problem-container">
+    <ul id="920">
+      <li>This is a list</li>
+    </ul>
+  </div></div>
+  <div data-type="solution" id="24"><h4 class="solution-title" data-type="title">
+  <span class="os-text">Solution</span>
+</h4>
+<div class="os-solution-container">
+    <p id="456">answer</p>
+  </div></div>
+</div>

@@ -1,0 +1,21 @@
+<div class="os-table os-top-captioned-container"><div class="os-top-caption">Top Caption Title</div>
+<table class="top-captioned">
+  
+  <thead>
+    <tr>
+      <th scope="col">Heading cell</th>
+      <th scope="col">Another heading cell</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One lonely cell</td>
+    </tr>
+  </tbody>
+</table><div class="os-caption-container">
+  <span class="os-title-label">Table </span>
+  <span class="os-number">2.3</span>
+  <span class="os-divider"> </span>
+  
+</div>
+</div>

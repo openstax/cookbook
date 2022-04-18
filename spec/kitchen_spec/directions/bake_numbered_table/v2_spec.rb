@@ -73,84 +73,18 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
 
   it 'another way of table captioning' do
     described_class.new.bake(table: table_with_only_caption_title, number: 'S')
-    expect(table_with_only_caption_title.document.search('.os-table').first).to match_normalized_html(
-      <<~HTML
-        <div class="os-table">
-          <table class="some-class" id="tId">
-            <thead>
-              <tr>
-                <th scope="col">A title</th>
-              </tr>
-              <tr>
-                <th scope="col">Another heading cell</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>One lonely cell</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="os-caption-container">
-            <span class="os-title-label">Table </span>
-            <span class="os-number">S</span>
-            <span class="os-divider"> </span>
-            <span class="os-caption">
-              <span data-type="title">Secret Title</span>
-            </span>
-          </div>
-        </div>
-      HTML
-    )
+    expect(table_with_only_caption_title.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'still works when caption doesn\'t have title' do
     described_class.new.bake(table: table_with_simple_caption, number: '2')
-    expect(table_with_simple_caption.document.search('.os-table')).to match_normalized_html(
-      <<~HTML
-        <div class="os-table">
-          <table class="some-class" id="tId">
-            <tbody></tbody>
-          </table>
-          <div class="os-caption-container">
-            <span class="os-title-label">Table </span>
-            <span class="os-number">2</span>
-            <span class="os-divider"> </span>
-            <span class="os-caption">Table caption</span>
-          </div>
-        </div>
-      HTML
-    )
+    expect(table_with_simple_caption.document.search('.os-table').to_s).to match_snapshot_auto
   end
 
   it 'bakes a top-captioned table' do
     described_class.new.bake(table: top_captioned_table, number: '2.3')
 
-    expect(top_captioned_table.document.search('.os-table').first).to match_normalized_html(
-      <<~HTML
-        <div class="os-table os-top-captioned-container">
-          <div class="os-top-caption">Top Caption Title</div>
-          <table class="top-captioned">
-            <thead>
-              <tr>
-                <th scope="col">Heading cell</th>
-                <th scope="col">Another heading cell</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>One lonely cell</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="os-caption-container">
-            <span class="os-title-label">Table </span>
-            <span class="os-number">2.3</span>
-            <span class="os-divider"> </span>
-          </div>
-        </div>
-      HTML
-    )
+    expect(top_captioned_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   context 'when book does not use grammatical cases' do

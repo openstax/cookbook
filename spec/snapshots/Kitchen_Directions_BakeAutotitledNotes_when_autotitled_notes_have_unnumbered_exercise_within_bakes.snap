@@ -1,0 +1,17 @@
+<div data-type="note" id="untitlednote2" class="blah"><h3 class="os-title" data-type="title">
+  <span class="os-title-label">Blah</span>
+</h3>
+<div class="os-note-body">
+  <p>this is a note</p>
+  <div class="unnumbered" data-type="exercise" id="3361">
+    <div data-type="problem" id="505"><div class="os-problem-container">
+      <ul>
+        <li>What do you need to know to perform this analysis at the very minimum?</li>
+      </ul>
+    </div></div>
+    <div data-type="solution" id="506"><span class="os-title-label">Answer</span>
+<div class="os-solution-container">
+      <p>Something</p>
+    </div></div>
+  </div>
+</div></div>

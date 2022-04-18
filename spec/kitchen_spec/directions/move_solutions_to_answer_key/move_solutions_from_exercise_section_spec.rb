@@ -57,41 +57,11 @@ RSpec.describe Kitchen::Directions::MoveSolutionsFromExerciseSection do
 
   it 'bakes' do
     described_class.v1(chapter: section_with_exercises, append_to: append_element, section_class: 'exercise-section')
-    expect(append_element).to match_normalized_html(
-      <<~HTML
-        <div class="top-level">
-          <div class="os-solution-area">
-            <h3 data-type="title">
-              <span class="os-title-label">Exercise Section</span>
-            </h3>
-            <div data-type="solution">
-              <div class="os-solution-container">Solution 1</div>
-            </div>
-            <div data-type="solution">Solution 2</div>
-            <div data-type="question-solution">
-              <div class="os-solution-container">injected solution</div>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(append_element).to match_snapshot_auto
   end
 
   it 'bakes a numbered section' do
     described_class.v1(chapter: section_with_exercises, append_to: append_element, section_class: 'another-exercise-section', title_number: '3.4')
-    expect(append_element).to match_normalized_html(
-      <<~HTML
-        <div class="top-level">
-          <div class="os-solution-area">
-            <h3 data-type="title">
-              <span class="os-title-label">Another Exercise 3.4 Section</span>
-            </h3>
-            <div data-type="solution">
-              <div class="os-solution-container">Solution 1</div>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(append_element).to match_snapshot_auto
   end
 end

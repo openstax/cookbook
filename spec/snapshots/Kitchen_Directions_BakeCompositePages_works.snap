@@ -1,0 +1,12 @@
+
+    <div data-type="composite-page" id="composite-page-1">
+  <p>Text 1</p>
+</div>
+<div data-type="page">
+  <p>Text 2</p>
+</div>
+<div data-type="composite-page" id="composite-page-2">
+  <p>Text 3</p>
+</div>
+
+  

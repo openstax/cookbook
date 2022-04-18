@@ -142,19 +142,6 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
   it 'works without first_inline_list' do
     section = book.first('[id="bla9"]')
     described_class.v1(within: section)
-    expect(section).to match_normalized_html(
-      <<~HTML
-        <div data-type="exercise" id="bla9">
-          <div data-type="solution">
-            <div class="os-solution-container">
-              <ol class="circled" id="" type="1">
-                <li><span class="token">&#x24D0;</span> yes</li>
-                <li><span class="token">&#x24D1;</span> yes. (Note: If two players had been tied for, say, 4th place, then the name would not have been a function of rank.)</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(section).to match_snapshot_auto
   end
 end

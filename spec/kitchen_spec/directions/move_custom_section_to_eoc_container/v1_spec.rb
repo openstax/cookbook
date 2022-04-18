@@ -76,43 +76,7 @@ RSpec.describe Kitchen::Directions::MoveCustomSectionToEocContainer do
         section_selector: 'section.some-eoc-section',
         append_to: append_to
       )
-      expect(append_to).to match_normalized_html(
-        <<~HTML
-          <div class="os-eoc os-top-level-container" data-type="composite-chapter" data-uuid-key=".top-level">
-            <h2 data-type="document-title" id="composite-chapter-1">
-              <span class="os-text">Top Level Container</span>
-            </h2>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">Top Level Container</h1>
-              <div>metadata</div>
-            </div>
-            <div class="os-eoc os-some-eoc-section-container" data-type="composite-page" data-uuid-key=".some-eoc-section">
-              <h3 data-type="title">
-                <span class="os-text">Some Eoc Section</span>
-              </h3>
-              <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">Some Eoc Section</h1>
-                <span data-type="revised" id="revised_copy_1">Revised</span>
-                <span data-type="slug" id="slug_copy_1">Slug</span>
-                <div class="authors" id="authors_copy_1">Authors</div>
-                <div class="publishers" id="publishers_copy_1">Publishers</div>
-                <div class="print-style" id="print-style_copy_1">Print Style</div>
-                <div class="permissions" id="permissions_copy_1">Permissions</div>
-                <div data-type="subject" id="subject_copy_1">Subject</div>
-              </div>
-              <section class="some-eoc-section" id="sectionId1">
-                <p>content</p>
-              </section>
-              <section class="some-eoc-section" id="sectionId2">
-                <p>content</p>
-              </section>
-              <section class="some-eoc-section" id="sectionId3">
-                <p>content</p>
-              </section>
-            </div>
-          </div>
-        HTML
-      )
+      expect(append_to).to match_snapshot_auto
     end
 
     it 'adds a section-level wrapper' do
@@ -125,40 +89,7 @@ RSpec.describe Kitchen::Directions::MoveCustomSectionToEocContainer do
         append_to: append_to,
         wrap_section: true
       )
-      expect(append_to.first('$.os-some-eoc-section-container')).to match_normalized_html(
-        <<~HTML
-          <div class="os-eoc os-some-eoc-section-container" data-type="composite-page" data-uuid-key=".some-eoc-section">
-            <h3 data-type="title">
-              <span class="os-text">Some Eoc Section</span>
-            </h3>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">Some Eoc Section</h1>
-              <span data-type="revised" id="revised_copy_1">Revised</span>
-              <span data-type="slug" id="slug_copy_1">Slug</span>
-              <div class="authors" id="authors_copy_1">Authors</div>
-              <div class="publishers" id="publishers_copy_1">Publishers</div>
-              <div class="print-style" id="print-style_copy_1">Print Style</div>
-              <div class="permissions" id="permissions_copy_1">Permissions</div>
-              <div data-type="subject" id="subject_copy_1">Subject</div>
-            </div>
-            <div class="os-section-area">
-              <section class="some-eoc-section" id="sectionId1">
-                <p>content</p>
-              </section>
-            </div>
-            <div class="os-section-area">
-              <section class="some-eoc-section" id="sectionId2">
-                <p>content</p>
-              </section>
-            </div>
-            <div class="os-section-area">
-              <section class="some-eoc-section" id="sectionId3">
-                <p>content</p>
-              </section>
-            </div>
-          </div>
-        HTML
-      )
+      expect(append_to.first('$.os-some-eoc-section-container')).to match_snapshot_auto
     end
 
     it 'adds a content-level wrapper' do
@@ -172,42 +103,7 @@ RSpec.describe Kitchen::Directions::MoveCustomSectionToEocContainer do
         wrap_section: true,
         wrap_content: true
       )
-      expect(append_to.first('$.os-some-eoc-section-container')).to match_normalized_html(
-        <<~HTML
-          <div class="os-eoc os-some-eoc-section-container" data-type="composite-page" data-uuid-key=".some-eoc-section">
-            <h3 data-type="title">
-              <span class="os-text">Some Eoc Section</span>
-            </h3>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">Some Eoc Section</h1>
-              <span data-type="revised" id="revised_copy_1">Revised</span>
-              <span data-type="slug" id="slug_copy_1">Slug</span>
-              <div class="authors" id="authors_copy_1">Authors</div>
-              <div class="publishers" id="publishers_copy_1">Publishers</div>
-              <div class="print-style" id="print-style_copy_1">Print Style</div>
-              <div class="permissions" id="permissions_copy_1">Permissions</div>
-              <div data-type="subject" id="subject_copy_1">Subject</div>
-            </div>
-            <div class="os-some-eoc-section">
-              <div class="os-section-area">
-                <section class="some-eoc-section" id="sectionId1">
-                  <p>content</p>
-                </section>
-              </div>
-              <div class="os-section-area">
-                <section class="some-eoc-section" id="sectionId2">
-                  <p>content</p>
-                </section>
-              </div>
-              <div class="os-section-area">
-                <section class="some-eoc-section" id="sectionId3">
-                  <p>content</p>
-                </section>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(append_to.first('$.os-some-eoc-section-container')).to match_snapshot_auto
     end
   end
 
@@ -220,34 +116,7 @@ RSpec.describe Kitchen::Directions::MoveCustomSectionToEocContainer do
         uuid_key: '.some-eoc-section',
         section_selector: 'section.some-eoc-section'
       )
-      expect(book_with_section_to_move.chapters.search('.os-eoc').first).to match_normalized_html(
-        <<~HTML
-          <div class="os-eoc os-some-eoc-section-container" data-type="composite-page" data-uuid-key=".some-eoc-section">
-            <h2 data-type="document-title">
-              <span class="os-text">Some Eoc Section</span>
-            </h2>
-            <div data-type="metadata" style="display: none;">
-              <h1 data-type="document-title" itemprop="name">Some Eoc Section</h1>
-              <span data-type="revised" id="revised_copy_1">Revised</span>
-              <span data-type="slug" id="slug_copy_1">Slug</span>
-              <div class="authors" id="authors_copy_1">Authors</div>
-              <div class="publishers" id="publishers_copy_1">Publishers</div>
-              <div class="print-style" id="print-style_copy_1">Print Style</div>
-              <div class="permissions" id="permissions_copy_1">Permissions</div>
-              <div data-type="subject" id="subject_copy_1">Subject</div>
-            </div>
-            <section class="some-eoc-section" id="sectionId1">
-              <p>content</p>
-            </section>
-            <section class="some-eoc-section" id="sectionId2">
-              <p>content</p>
-            </section>
-            <section class="some-eoc-section" id="sectionId3">
-              <p>content</p>
-            </section>
-          </div>
-        HTML
-      )
+      expect(book_with_section_to_move.chapters.search('.os-eoc').first).to match_snapshot_auto
     end
   end
 

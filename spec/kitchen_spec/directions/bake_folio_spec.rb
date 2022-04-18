@@ -14,17 +14,7 @@ RSpec.describe Kitchen::Directions::BakeFolio do
   describe 'folio pdf translations' do
     it 'works in english' do
       described_class.v1(book: book)
-      expect(book).to match_normalized_html(
-        <<~HTML
-          <html xmlns:m="http://www.w3.org/1998/Math/MathML"
-            data-pdf-folio-preface-message="Preface"
-            data-pdf-folio-access-message="Access for free at openstax.org">
-            <body>
-              <div class="hi">Howdy</div>
-            </body>
-          </html>
-        HTML
-      )
+      expect(book).to match_snapshot_auto
     end
 
     it 'works in spanish' do
@@ -32,17 +22,7 @@ RSpec.describe Kitchen::Directions::BakeFolio do
         described_class.v1(book: book)
       end
 
-      expect(book).to match_normalized_html(
-        <<~HTML
-          <html xmlns:m="http://www.w3.org/1998/Math/MathML"
-            data-pdf-folio-preface-message="Prefacio"
-            data-pdf-folio-access-message="Acceso gratis en openstax.org">
-            <body>
-              <div class="hi">Howdy</div>
-            </body>
-          </html>
-        HTML
-      )
+      expect(book).to match_snapshot_auto
     end
   end
 end

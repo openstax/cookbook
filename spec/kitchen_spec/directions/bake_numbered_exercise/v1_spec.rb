@@ -51,25 +51,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
     it 'works' do
       described_class.v1(exercise: exercise1, number: '1.1')
 
-      expect(exercise1).to match_normalized_html(
-        <<~HTML
-          <div data-type="exercise" id="exercise_id" class="os-hasSolution">
-            <div data-type="problem" id="problem_id">
-              <a class="os-number" href="#exercise_id-solution">1.1</a>
-              <span class="os-divider">. </span>
-              <div class="os-problem-container">
-                <p>example content</p>
-              </div>
-            </div>
-            <div data-type="solution" id="exercise_id-solution"><a class="os-number" href="#exercise_id">1.1</a>
-              <span class="os-divider">. </span>
-              <div class="os-solution-container">
-                <p>Solution content</p>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(exercise1).to match_snapshot_auto
     end
   end
 
@@ -77,19 +59,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
     it 'works' do
       described_class.v1(exercise: exercise1, number: '1.1', suppress_solution_if: true)
 
-      expect(exercise1).to match_normalized_html(
-        <<~HTML
-          <div data-type="exercise" id="exercise_id">
-            <div data-type="problem" id="problem_id">
-              <span class='os-number'>1.1</span>
-              <span class="os-divider">. </span>
-              <div class="os-problem-container">
-                <p>example content</p>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(exercise1).to match_snapshot_auto
     end
   end
 
@@ -97,44 +67,14 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
     context 'when number is odd' do
       it 'works' do
         described_class.v1(exercise: exercise1, number: 1, suppress_solution_if: :even?, note_suppressed_solutions: true)
-        expect(exercise1).to match_normalized_html(
-          <<~HTML
-            <div data-type="exercise" id="exercise_id" class="os-hasSolution">
-              <div data-type="problem" id="problem_id">
-                <a class="os-number" href="#exercise_id-solution">1</a>
-                <span class="os-divider">. </span>
-                <div class="os-problem-container">
-                  <p>example content</p>
-                </div>
-              </div>
-              <div data-type="solution" id="exercise_id-solution"><a class="os-number" href="#exercise_id">1</a>
-                <span class="os-divider">. </span>
-                <div class="os-solution-container">
-                  <p>Solution content</p>
-                </div>
-              </div>
-            </div>
-          HTML
-        )
+        expect(exercise1).to match_snapshot_auto
       end
     end
 
     context 'when number is even' do
       it 'works' do
         described_class.v1(exercise: exercise1, number: 2, suppress_solution_if: :even?, note_suppressed_solutions: true)
-        expect(exercise1).to match_normalized_html(
-          <<~HTML
-            <div data-type="exercise" id="exercise_id" class="os-hasSolution-trashed">
-              <div data-type="problem" id="problem_id">
-                <span class="os-number">2</span>
-                <span class="os-divider">. </span>
-                <div class="os-problem-container">
-                  <p>example content</p>
-                </div>
-              </div>
-            </div>
-          HTML
-        )
+        expect(exercise1).to match_snapshot_auto
       end
     end
 
@@ -169,27 +109,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
     context 'when exercises remain grouped with solutions' do
       it 'works' do
         described_class.v1(exercise: exercise1, number: '4', solution_stays_put: true)
-        expect(exercise1).to match_normalized_html(
-          <<~HTML
-            <div data-type="exercise" id="exercise_id">
-              <div data-type="problem" id="problem_id">
-                <span class="os-number">4</span>
-                <span class="os-divider">. </span>
-                <div class="os-problem-container">
-                  <p>example content</p>
-                </div>
-              </div>
-              <div data-type="solution" id="solution_id">
-                <h4 class="solution-title" data-type="title">
-                  <span class="os-text">Solution</span>
-                </h4>
-                <div class="os-solution-container">
-                  <p>Solution content</p>
-                </div>
-              </div>
-            </div>
-          HTML
-        )
+        expect(exercise1).to match_snapshot_auto
       end
     end
   end
@@ -198,24 +118,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
     it 'works' do
       described_class.v1(exercise: appendix_exercise, number: 'A1')
 
-      expect(appendix_exercise).to match_normalized_html(
-        <<~HTML
-          <div data-type="exercise" id="exercise_id" class="os-hasSolution">
-            <div data-type="problem" id="problem_id">
-              <span class="os-title-label">Exercise</span>
-              <span class="os-number">A1</a>
-              <div class="os-problem-container">
-                <p>example content</p>
-              </div>
-            </div>
-            <div data-type="solution" id="exercise_id-solution">
-              <div class="os-solution-container">
-                <p>Solution content</p>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(appendix_exercise).to match_snapshot_auto
     end
   end
 

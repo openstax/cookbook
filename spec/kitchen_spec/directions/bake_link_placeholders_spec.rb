@@ -59,16 +59,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
 
     it 'bakes' do
       described_class.v1(book: book_with_cases, cases: true)
-      expect(book_with_cases.body).to match_normalized_html(
-        <<~HTML
-          <body>
-            <a>skip this link</a>
-            <a href='?other_key'>Przykład x.y</a>
-            <a xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" cmlnle:case="genitive" href='?other_key'>Przykładu x.y</a>
-            <a case="locative" href='?next_key'>Przykładzie x.y</a>
-          </body>
-        HTML
-      )
+      expect(book_with_cases.body).to match_snapshot_auto
     end
   end
 
