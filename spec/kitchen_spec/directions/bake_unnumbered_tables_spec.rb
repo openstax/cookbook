@@ -51,27 +51,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
     described_class.v1(book: book1)
     expect(
       book1.body.children.to_s
-    ).to match_normalized_html(
-      <<~HTML
-        <div class="os-table os-unstyled-container">
-          <table class="unnumbered unstyled" id="tableId">
-            <thead>
-              <tr>
-                <th colspan="1" data-align="center" scope="col">The Title</th>
-              </tr>
-              <tr valign="top">
-                <th data-align="left" scope="col">Heading</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr valign="top">
-                <td data-align="left">Bar</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      HTML
-    )
+    ).to match_snapshot_auto
   end
 
   it 'bakes column header table' do

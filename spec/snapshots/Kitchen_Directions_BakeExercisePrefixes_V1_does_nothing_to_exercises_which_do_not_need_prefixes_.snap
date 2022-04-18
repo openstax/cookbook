@@ -1,0 +1,27 @@
+<div data-type="chapter"><div class="os-eoc os-multiple-choice-container" data-type="composite-page" data-uuid-key=".multiple-choice" id="composite-page-1">
+  <section class="multiple-choice">
+    <div data-type="exercise" id="exercise_id" class="os-hasSolution">
+      <div data-type="problem" id="problem_id">
+        <a class="os-number" href="#exercise_id-solution">1.1</a>
+        <span class="os-divider">. </span>
+        <div class="os-problem-container">
+          <p>example content</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="os-eoc os-questions-container" data-type="composite-page" data-uuid-key=".questions" id="composite-page-2">
+  <section class="questions">
+    <div data-type="exercise" id="exercise_id" class="os-hasSolution">
+      <div data-type="problem" id="problem_id">
+        <a class="os-number" href="#exercise_id-solution">1.1</a>
+        <span class="os-divider">. </span>
+        <div class="os-problem-container">
+          <p>example content</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>

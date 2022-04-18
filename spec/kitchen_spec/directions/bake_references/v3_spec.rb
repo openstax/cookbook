@@ -45,7 +45,7 @@ RSpec.describe Kitchen::Directions::BakeReferences do
     )
   end
 
-  it 'works' do
+  it 'v3 works' do
     described_class.v3(book: book1, metadata_source: metadata_element)
     book1.references.each
     expect(normalized_xml_doc_string(book1.references)).to match_snapshot_auto

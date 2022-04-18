@@ -1,0 +1,126 @@
+<body>
+    <div data-type="chapter">
+  <div data-type="page" id="page_1">
+    <div data-type="note" id="123" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+      <p>foo content #1</p>
+    </div></div>
+    <div data-type="note" id="111" class="hello"><h3 class="os-title">
+  <span class="os-title-label">Hello World</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+      <p>hello content #1</p>
+    </div></div>
+    <div data-type="note" id="666" class="hello"><h3 class="os-title">
+  <span class="os-title-label">Hello World</span>
+  <span class="os-number">#2</span>
+</h3>
+<div class="os-note-body">
+      <p>hello content #2</p>
+    </div></div>
+  </div>
+  <div data-type="page" id="page_2">
+    <div data-type="note" id="222" class="hello"><h3 class="os-title">
+  <span class="os-title-label">Hello World</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+      <p>hello content #1</p>
+    </div></div>
+  </div>
+</div>
+<div data-type="chapter">
+  <div data-type="page" id="page_3">
+    <div data-type="note" id="456" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+      <p>content 2.1</p>
+    </div></div>
+    <div data-type="note" id="789" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#2</span>
+</h3>
+<div class="os-note-body">
+      <p>content 2.2</p>
+      <div data-type="exercise" class="unnumbered">
+        <div data-type="problem"><div class="os-problem-container">what is your quest?</div></div>
+      </div>
+    </div></div>
+    <div data-type="note" id="333" class="hello"><h3 class="os-title">
+  <span class="os-title-label">Hello World</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+      <p>content 2.1</p>
+      <div data-type="exercise" id="abcde" class="unnumbered os-hasSolution">
+        <div data-type="problem" id="unchanged"><div class="os-problem-container">what is your favorite color?</div></div>
+        <div data-type="solution" id="abcde-solution"><a class="os-number" href="#abcde">1</a><span class="os-divider">. </span>
+<div class="os-solution-container">
+          <p>chartreuse</p>
+        </div>
+</div>
+      </div>
+    </div></div>
+    <div data-type="note" id="000" class=":/">
+      <p>don't bake me</p>
+    </div>
+    <div data-type="note" id="4" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#3</span>
+</h3>
+<div class="os-note-body">
+      <p>A title 4</p>
+      <div data-type="exercise" id="123" class="unnumbered os-hasSolution">
+        <div data-type="problem" id="456"><div class="os-problem-container">Problem content</div></div>
+        <div data-type="solution" id="123-solution"><a class="os-number" href="#123">3</a><span class="os-divider">. </span>
+<div class="os-solution-container">
+          <p>solution content</p>
+        </div>
+</div>
+        
+      </div>
+      <div data-type="exercise" id="2_123" class="unnumbered os-hasSolution">
+        <div data-type="problem" id="2_456"><div class="os-problem-container">a second exercise</div></div>
+        <div data-type="solution" id="2_123-solution"><a class="os-number" href="#2_123">3</a><span class="os-divider">. </span>
+<div class="os-solution-container">
+          <p>second solution content</p>
+        </div>
+</div>
+      </div>
+    </div></div>
+    <div data-type="note" id="123" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#4</span>
+</h3>
+<div class="os-note-body">
+      <p>note with injected exercise</p>
+      <div data-type="injected-exercise">
+        <div data-type="exercise-question" data-id="26" class="unnumbered os-hasSolution" id="auto_3_26">
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">a question stem</div>
+  
+</div>
+
+          
+          <div data-type="question-solution" id="auto_3_26-solution"><a class="os-number" href="#auto_3_26">4</a>
+<span class="os-divider">. </span>
+<div class="os-solution-container">
+            some solution
+          </div>
+</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+  </body>

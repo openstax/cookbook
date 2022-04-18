@@ -1,0 +1,14 @@
+<div data-type="page" id="testidOne">
+    <div class="os-figure"><figure id="someId" class="unnumbered">
+
+<span>
+  <img src="img.jpg"/>
+</span>
+</figure><div class="os-caption-container">
+  <span class="os-title" data-type="title" id="someId">Title</span>
+  
+  
+</div>
+</div>
+
+  </div>

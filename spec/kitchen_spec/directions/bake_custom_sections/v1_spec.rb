@@ -78,35 +78,6 @@ RSpec.describe Kitchen::Directions::BakeCustomSections::V1 do
 
   it 'works' do
     described_class.new.bake(chapter: chapter, custom_sections_properties: custom_sections_properties)
-    expect(chapter).to match_normalized_html(
-      <<~HTML
-        <div data-type="chapter">
-          <div class="chapter-content-module narrative-trailblazer" data-type="page">
-            <h2 data-type="document-title">
-              <span class="os-number">1.2</span>
-              <span class="os-divider"> </span>
-              <span class="os-text" data-type="" itemprop="">Literacy Narrative Trailblazer</span>
-            </h2>
-            <h3 class="os-subtitle" data-type="document-subtitle" id="id1">Tara Westover (b. 1986)</h3>
-            <section class="peer-review" data-depth="1">
-              <h3 data-type="title">Peer Review: Giving Specific Praise and Constructive Feedback</h3>
-            </section>
-            <section class="quick-launch" data-depth="1">
-              <h3 data-type="title">Quick Launch: Defining Your Rhetorical Situation, Generating Ideas, and Organizing</h3>
-            </section>
-            <section class="living-words" data-depth="1">
-              <h3 class="os-title">Living by Their Own Words</h3>
-              <h4 data-type="title">Literacy from Unexpected Sources</h4>
-            </section>
-            <section class="drafting" data-depth="1">
-              <h3 data-type="title">Drafting: Writing from Personal Experience and Observation</h3>
-            </section>
-            <section class="revising" data-depth="1">
-              <h3 data-type="title">Revising: Adding and Deleting Information</h3>
-            </section>
-          </div>
-        </div>
-      HTML
-    )
+    expect(chapter).to match_snapshot_auto
   end
 end

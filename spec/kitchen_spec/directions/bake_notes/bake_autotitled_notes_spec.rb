@@ -113,130 +113,20 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
 
   it 'bakes' do
     described_class.v1(book: book_with_notes, classes: %w[foo baz project media-2 interactive])
-    expect(book_with_notes.body.pages.first).to match_normalized_html(
-      <<~HTML
-        <div data-type="page" id="testidOne">
-          <div class="foo" data-type="note" id="noteId">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label">Bar</span>
-            </h3>
-            <div class="os-note-body">
-              <p>content</p>
-            </div>
-          </div>
-          <div class="baz" data-type="note" id="noteId">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label">Baaa</span>
-            </h3>
-            <div class="os-note-body">
-              <h4 class="os-subtitle" data-type="title" id="titleId">
-                <span class="os-subtitle-label">note <em data-effect="italics">title</em></span>
-              </h4>
-              <p>content</p>
-            <div>
-              <h3 data-type="title">Subsection title</h3>
-            </div>
-            </div>
-          </div>
-          <div data-type="note" id="untitlednote" class="123">
-            <p>content</p>
-            <div class="foo" data-type="note" id="untitlednote">
-              <h3 class="os-title" data-type="title">
-                <span class="os-title-label">Bar</span>
-              </h3>
-              <div class="os-note-body">
-                <p>this is a nested note</p>
-              </div>
-            </div>
-          </div>
-          <div class="project" data-type="note" id="parent-note-1">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label">Project</span>
-            </h3>
-            <div class="os-note-body">
-              <h4 class="os-subtitle" data-type="title">
-                <span class="os-subtitle-label">Resonance</span>
-              </h4>
-              <p>Consider an undamped system exhibiting...</p>
-              <ol>
-                <li>Consider the differential equation</li>
-                <li>Graph the solution. What happens to the behavior of the system over time?</li>
-                <li>
-              In the real world... <span class="no-emphasis" data-type="term">Tacoma Narrows Bridge</span>
-              <div class="media-2" data-type="note" id="child-note-1"><h3 class="os-title" data-type="title"><span class="os-title-label">Media</span></h3><div class="os-note-body"><p>blah</p></div></div>
-              <div class="media-2" data-type="note" id="child-note-2"><h3 class="os-title" data-type="title"><span class="os-title-label">Media</span></h3><div class="os-note-body"><p><a href="http://www.openstax.org/l/20_TacomaNarro2">video</a> blah</p></div></div>
-            </li>
-                <li>
-              Another real-world example of resonance is a singer...
-              <div class="media-2" data-type="note" id="child-note-3"><h3 class="os-title" data-type="title"><span class="os-title-label">Media</span></h3><div class="os-note-body"><p>video</p></div></div>
-            </li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(book_with_notes.body.pages.first).to match_snapshot_auto
   end
 
   context 'when autotitled notes have numbered exercise within' do
     it 'bakes' do
       described_class.v1(book: numbered_exercise_within_note, classes: %w[foo], bake_exercises: true)
-      expect(numbered_exercise_within_note.body.pages.first.notes).to match_normalized_html(
-        <<~HTML
-          <div class="foo" data-type="note" id="untitlednote">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label">Bar</span>
-            </h3>
-            <div class="os-note-body">
-              <p>this is a note</p>
-              <div data-type="exercise" id="3360">
-                <div data-type="problem" id="504">
-                  <span class="os-title-label">Exercise </span>
-                  <span class="os-number">1</span>
-                  <div class="os-problem-container">
-                    <ul>
-                      <li>What do you need to know to perform this analysis at the very minimum?</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(numbered_exercise_within_note.body.pages.first.notes.to_s).to match_snapshot_auto
     end
   end
 
   context 'when autotitled notes have unnumbered exercise within' do
     it 'bakes' do
       described_class.v1(book: unnumbered_exercise_within_note, classes: %w[blah], bake_exercises: true)
-      expect(unnumbered_exercise_within_note.body.pages.first.notes).to match_normalized_html(
-        <<~HTML
-          <div class="blah" data-type="note" id="untitlednote2">
-            <h3 class="os-title" data-type="title">
-              <span class="os-title-label">Blah</span>
-            </h3>
-            <div class="os-note-body">
-              <p>this is a note</p>
-              <div class="unnumbered" data-type="exercise" id="3361">
-                <div data-type="problem" id="505">
-                  <div class="os-problem-container">
-                    <ul>
-                      <li>What do you need to know to perform this analysis at the very minimum?</li>
-                    </ul>
-                  </div>
-                </div>
-                <div data-type="solution" id="506">
-                  <span class="os-title-label">Answer</span>
-                  <div class="os-solution-container">
-                    <p>Something</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        HTML
-      )
+      expect(unnumbered_exercise_within_note.body.pages.first.notes.to_s).to match_snapshot_auto
     end
   end
 

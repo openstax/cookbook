@@ -19,19 +19,6 @@ RSpec.describe Kitchen::Directions::BakeUnitPageTitle::V1 do
   it 'works' do
     described_class.new.bake(book: book1)
 
-    expect(book1.body.children.to_s).to match_normalized_html(
-      <<~HTML
-        <div data-type="unit">
-          <div data-type="page">
-            <h2 data-type="document-title" id="id1">
-              <span class="os-part-text">Unit </span>
-              <span class="os-number">1</span>
-              <span class="os-divider"> </span>
-              <span data-type="" itemprop="" class="os-text">Title holder for unit</span>
-            </h2>
-          </div>
-        </div>
-      HTML
-    )
+    expect(book1.body.children.to_s).to match_snapshot_auto
   end
 end

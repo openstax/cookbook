@@ -1,0 +1,10 @@
+<section class="section-with-injected-exercises">
+    <div data-type="injected-exercise" data-injected-from-nickname="multiFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="1" id="auto_abc123_1">
+        <div data-type="question-stem">Question 1</div>
+      </div>
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="2" id="auto_abc123_2">
+        <div data-type="question-stem">Question 2</div>
+      </div>
+    </div>
+  </section>

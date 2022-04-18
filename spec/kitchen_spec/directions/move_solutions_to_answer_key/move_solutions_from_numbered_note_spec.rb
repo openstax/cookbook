@@ -96,46 +96,13 @@ RSpec.describe Kitchen::Directions::MoveSolutionsFromNumberedNote do
 
   it 'works' do
     described_class.v1(chapter: chapter_with_numbered_notes, append_to: append_element, note_class: 'some-note')
-    expect(append_element).to match_normalized_html(
-      <<~HTML
-        <div class="top-level">
-          <div class="os-solution-area">
-            <h3 data-type="title">
-              <span class="os-title-label">Some Note</span>
-            </h3>
-            <div data-type="solution">Solution 1</div>
-            <div data-type="question-solution">
-              <span class="os-number">1.</div>
-              <div class="os-solution-container">injected solution</div>
-            </div>
-            <div data-type="solution">
-              <span class="os-number">1.1</span>
-              <div class="os-solution-container">Solution 1</div>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(append_element).to match_snapshot_auto
   end
 
   it 'works with your turn notes' do
     described_class.v2(chapter: chapter_with_your_turn_notes.chapters.first,
                        append_to: append_element, note_class: 'your-turn')
 
-    expect(append_element).to match_normalized_html(
-      <<~HTML
-        <div class="top-level">
-          <h3 data-type="title">
-            <span class="os-title-label">Your Turn</span>
-          </h3>
-          <div class="os-solution-area">
-            <span class="os-note-number">1.1</span>
-            <div data-type="question-solution">
-              <span data-math="some math"/>
-            </div>
-          </div>
-        </div>
-      HTML
-    )
+    expect(append_element).to match_snapshot_auto
   end
 end
