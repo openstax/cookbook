@@ -3,7 +3,7 @@ es:
   eoc:
     practice-test: Examen de práctica
     review-exercises: Ejercicios de repaso
-    section-exercises: ! '%{number} ejercicios de sección'
+    section-exercises: ! '%{number} Ejercicios de sección'
     exercises: Ejercicios
     chapter-review: Revisión del capítulo
   notes:
