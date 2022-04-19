@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Remove choice level feedback from answers in injected questions
+* Change string for section exercises in `Precalculo`
 * Switch kitchen tests over to snapshots
+* Patch Precalculus recipe for precalculo
 
 ## [v1.5.0] - 2022-04-18
 
