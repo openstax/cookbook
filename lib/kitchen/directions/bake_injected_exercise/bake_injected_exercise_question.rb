@@ -69,6 +69,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
           <div class="os-solution-container">#{solution.children}</div>
         HTML
       )
+      question.search('div[data-type="answer-feedback"]').each(&:trash)
     end
   end
 end
