@@ -99,6 +99,27 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
     BakeNonIntroductionPages.v1(chapter: chapter, block_target_label: true)
   end
 
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
+    BakeAppendix.v1(page: page, number: appendix_letter)
+    page.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+
+    page.search('section').exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise,
+                              number: "#{appendix_letter}#{exercise.count_in(:page)}")
+      BakeFirstElements.v1(within: exercise)
+    end
+  end
+
   BakeUnnumberedTables.v1(book: book)
 
   book.search('div.os-solutions-container').solutions.each do |solution|
