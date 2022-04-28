@@ -32,7 +32,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
           HTML
         )
       elsif letter_answers.present?
-        question.solution.append(child: "<span>#{letter_answers.join(', ')}</span>")
+        question.solution.prepend(child: "<span>#{letter_answers.join(', ')}</span>")
       end
 
       # Bake question
