@@ -10,4 +10,8 @@ class String
   def uncapitalize
     sub(/^[A-Z]/, &:downcase)
   end
+
+  def kebab_case
+    strip.downcase.gsub(/[^(\w\s)]/, '').gsub(/\s/, '-')
+  end
 end
