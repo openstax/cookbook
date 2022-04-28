@@ -25,12 +25,14 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         end
         letter_answers = question.correct_answer_letters(alphabet)
       end
-      if letter_answers.present?
+      if letter_answers.present? && !question.solution
         question.append(child:
           <<~HTML
             <div data-type="question-solution">#{letter_answers.join(', ')}</div>
           HTML
         )
+      elsif letter_answers.present?
+        question.solution.append(child: "<span>#{letter_answers.join(', ')}</span>")
       end
 
       # Bake question
