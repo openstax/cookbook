@@ -11,6 +11,11 @@ class String
     sub(/^[A-Z]/, &:downcase)
   end
 
+  # Transform self to kebab case, returning a new string
+  # Example: "Star Wars: The Empire Strikes Back" -> "star-wars-the-empire-strikes-back"
+  #
+  # @return [String]
+  #
   def kebab_case
     strip.downcase.gsub(/[^(\w\s)]/, '').gsub(/\s/, '-')
   end
