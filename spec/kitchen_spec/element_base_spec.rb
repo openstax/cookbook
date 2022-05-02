@@ -596,7 +596,7 @@ RSpec.describe Kitchen::ElementBase do
           <div data-type="chapter">
             <div data-type="page" class="introduction">
               <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">Introduction</h1>
+                <h1 data-type="document-title" itemprop="name">Introduction: Fre Sha Vocado</h1>
               </div>
               <div class="intro-text">
                 <h2 data-type="document-title">
@@ -607,12 +607,12 @@ RSpec.describe Kitchen::ElementBase do
             </div>
             <div data-type="page">
               <div data-type="metadata" style="display: none;">
-                <h1 data-type="document-title" itemprop="name">Test Page: Where's, The, Beef</h1>
+                <h1 data-type="document-title" itemprop="name">Test Page: It's, An, Avocado</h1>
               </div>
               <h2 data-type="document-title">
                 <span class="os-number">1.1</span>
                 <span class="os-divider"> </span>
-                <span data-type="" itemprop="" class="os-text">Test Page: Where's, The, Beef</span>
+                <span data-type="" itemprop="" class="os-text">Test Page: It's, An, Avocado</span>
               </h2>
               <div id="element2"></div>
             </div>
@@ -634,12 +634,12 @@ RSpec.describe Kitchen::ElementBase do
 
     it 'returns rex link for element in section page' do
       expect(book_rex_linkable.first('div#element2').rex_link).to \
-        eq('https://openstax.org/books/test-book-slug/pages/1-1-test-page-wheres-the-beef')
+        eq('https://openstax.org/books/test-book-slug/pages/1-1-test-page-its-an-avocado')
     end
 
     it 'returns rex link for element in intro page' do
       expect(book_rex_linkable.first('div#element1').rex_link).to \
-        eq('https://openstax.org/books/test-book-slug/pages/1-introduction')
+        eq('https://openstax.org/books/test-book-slug/pages/1-introduction-fre-sha-vocado')
     end
 
     it 'returns rex link for element in composite page' do

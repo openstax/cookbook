@@ -65,6 +65,28 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
                 </ol>
               </div>
             </div>
+            <div data-type="injected-exercise" data-injected-from-nickname="singleMCWithDetailed" data-injected-from-version="2" data-injected-from-url="url" data-tags="tags" data-is-vocab="False">
+              <div data-type="exercise-question" data-is-answer-order-important="True" data-formats="multiple-choice test-format" data-id="5">
+                <div data-type="question-stimulus">i'm a question stimulus</div>
+                <div data-type="question-stem">Testing a multiple choice question</div>
+                <ol data-type="question-answers" type="a">
+                  <li data-type="question-answer" data-correctness="0.0" data-id="668496">
+                    <div data-type="answer-content">mean - i'm distractor</div>
+                    <div data-type="answer-feedback">choice level feedback</div>
+                  </li>
+                  <li data-type="question-answer" data-correctness="0.0" data-id="668497">
+                    <div data-type="answer-content">median - distractor</div>
+                  </li>
+                  <li data-type="question-answer" data-correctness="1.0" data-id="668498">
+                    <div data-type="answer-content">mode - correct answer</div>
+                    <div data-type="answer-feedback">choice level feedback</div>
+                  </li>
+                </ol>
+                <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">
+                  detailed solution for MC
+                </div>
+              </div>
+            </div>
             <div data-type="injected-exercise" data-injected-from-nickname="singleFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
               <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="6">
                 <div data-type="question-stem">question without solution</div>
