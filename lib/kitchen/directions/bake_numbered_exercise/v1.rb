@@ -13,7 +13,7 @@ module Kitchen::Directions::BakeNumberedExercise
       # Store label information
       if in_appendix
         label_number = number
-        title_label = "<span class=\"os-title-label\">#{I18n.t('exercise')}</span>"
+        title_label = "<span class=\"os-title-label\">#{I18n.t("exercise#{'.nominative' if cases}")}</span>"
         problem_divider = ''
       else
         label_number = "#{exercise.ancestor(:chapter).count_in(:book)}.#{number}"
