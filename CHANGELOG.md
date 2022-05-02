@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeAppoendix` direction to pl-economics recipe
+
 ## [v1.6.0] - 2022-04-22
 
 * Remove choice level feedback from answers in injected questions
