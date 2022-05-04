@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeAppoendix` direction to `pl-economics` recipe
 * Add `String#kebab_case`
 * Fix `ElementBase#rex_link` so that all title strings get kebabified
 * Fix injected exercises to bake mcqs with detailed solutions
