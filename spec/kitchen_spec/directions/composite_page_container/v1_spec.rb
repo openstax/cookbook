@@ -124,17 +124,49 @@ RSpec.describe Kitchen::Directions::CompositePageContainer do
     )
   end
 
-  it 'serializes namespaced elements properly' do
-    some_math = book_containing(html:
+  # Passes
+  it 'keeps the namespace prefix when a string with an escaped ampersand is added' do
+    doc = Nokogiri.XML('<root xmlns="url1" />', nil, 'utf-8')
+    doc.children.first.children = '<m:math xmlns:m="url2">Escaped &amp;</m:math>'
+
+    expect(doc.to_s).to match_normalized_html(
       <<~HTML
-        <m:math class="mymath"/>
+        <?xml version="1.0" encoding="utf-8"?>
+        <root xmlns="url1">
+          <m:math xmlns:m="url2">Escaped &amp;</m:math>
+        </root>
       HTML
-    ).first('$.mymath')
-
-    expect(some_math.raw.namespace.prefix).to eq('m')
-    expect(some_math.raw.namespace.href).to eq('http://www.w3.org/1998/Math/MathML')
-
-    # Something like this occurs implicitly in lib/kitchen/directions/composite_page_container/v1.rb
-    expect(some_math.to_s).to eq('<m:math class="mymath" xmlns:m="http://www.w3.org/1998/Math/MathML"/>')
+    )
   end
+
+  # FAILS!!!! because the actual XML contains `<math` instead of `<m:math`
+  it 'unescaped with math prefix' do
+    doc = Nokogiri.XML('<root xmlns="url1" />', nil, 'utf-8')
+    doc.children.first.children = '<m:math xmlns:m="url2">Unescaped &</m:math>'
+
+    expect(doc.to_s).to match_normalized_html(
+      <<~HTML
+        <?xml version="1.0" encoding="utf-8"?>
+        <root xmlns="url1">
+          <m:math xmlns:m="url2">Unescaped &amp;</m:math>
+        </root>
+      HTML
+    )
+  end
+
+  # Fails also
+  it 'should error when invalid XML is being appended but does not' do
+    doc = Nokogiri.XML('<root xmlns="url1" />') { |config| config.strict }
+    doc.children.first.children = '<m:math xmlns:m="url2">Unescaped &</m:math>'
+
+    expect(doc.to_s).to match_normalized_html(
+      <<~HTML
+        <?xml version="1.0" encoding="utf-8"?>
+        <root xmlns="url1">
+          <m:math xmlns:m="url2">Unescaped &amp;</m:math>
+        </root>
+      HTML
+    )
+  end
+
 end
