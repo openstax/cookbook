@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix bad encoding in AP physics locales
+
 ## [v1.7.0] - 2022-05-06
 
 * Add `BakeAppoendix` direction to `pl-economics` recipe
