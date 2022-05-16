@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add support for baking injected exercises/solutions in appendices
 ## [v1.7.0] - 2022-05-06
 
 * Add `BakeAppoendix` direction to `pl-economics` recipe
