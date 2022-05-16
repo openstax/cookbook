@@ -1,0 +1,12 @@
+<div class="top-level"><div class="os-solution-area">
+  <h3 data-type="title">
+  <span class="os-title-label">Exercise Section</span>
+</h3>
+
+  <div data-type="solution">
+      <div class="os-solution-container">Solution 1</div>
+    </div><div data-type="solution">Solution 2</div><div data-type="question-solution">
+        <div class="os-solution-container">injected solution</div>
+      </div>
+</div>
+</div>

@@ -16,3 +16,7 @@ en:
     references: Endnotes
   exercises:
     solution: Solution
+  appendix_sections:
+    knowledge-check: Knowledge Check
+    summary: Summary
+
