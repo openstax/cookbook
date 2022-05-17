@@ -7,7 +7,7 @@ module Kitchen::Directions::BakeAppendixFeatureTitles
       section.first('[data-type="title"]')&.trash
       title = <<~HTML
         <h2 data-type="title">
-          #{I18n.t(:"appendix_sections.#{selector}")}
+          <span class="os-text">#{I18n.t(:"appendix_sections.#{selector}")}</span>
         </h2>
       HTML
 
