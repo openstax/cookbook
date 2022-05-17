@@ -9,10 +9,17 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
     def bake(question:, number:, only_number_solution:)
       id = question.id
 
+      in_appendix = question.has_ancestor?(:page) && question.ancestor(:page).has_class?('appendix')
+
       # Store label in pantry
       unless only_number_solution
-        label_number = "#{question.ancestor(:chapter).count_in(:book)}.#{number}"
+        label_number = if in_appendix
+                         "#{question.ancestor(:page).count_in(:book)}.#{number}"
+                       else
+                         "#{question.ancestor(:chapter).count_in(:book)}.#{number}"
+                       end
         question.target_label(label_text: 'exercise', custom_content: label_number)
+
       end
 
       # Synthesize multiple choice solution

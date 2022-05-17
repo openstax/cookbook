@@ -55,6 +55,21 @@ RSpec.describe Kitchen::Directions::MoveSolutionsFromExerciseSection do
     )
   end
 
+  context 'when in appendix it adds dynamic title for exercises/solution sections in appendices' do
+    before do
+      stub_locales({
+        'appendix_sections': {
+          'exercise-section': 'Exercise Section'
+        }
+      })
+    end
+
+    it 'bakes' do
+      described_class.v1(chapter: section_with_exercises, append_to: append_element, section_class: 'exercise-section', in_appendix: true)
+      expect(append_element).to match_snapshot_auto
+    end
+  end
+
   it 'bakes' do
     described_class.v1(chapter: section_with_exercises, append_to: append_element, section_class: 'exercise-section')
     expect(append_element).to match_snapshot_auto

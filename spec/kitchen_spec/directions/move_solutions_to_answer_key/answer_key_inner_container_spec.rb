@@ -17,6 +17,17 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
     )
   end
 
+  let(:book_with_appendix) do
+    book_containing(html:
+      <<~HTML
+        #{metadata_element}
+        <div class ="appendix" data-type="page">
+          This is a page
+        </div>
+      HTML
+    )
+  end
+
   let(:append_to) do
     new_element(
       <<~HTML
@@ -37,5 +48,13 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
         chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, solutions_plural: false
       )
     ).to match_snapshot_auto
+  end
+
+  context 'when in appendix' do
+    it 'changes the title to appendix and adds appendix prefix to uuid' do
+      expect(
+        described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, in_appendix: true)
+      ).to match_snapshot_auto
+    end
   end
 end
