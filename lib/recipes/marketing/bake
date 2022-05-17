@@ -121,6 +121,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
                     number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
 
+    feature_sections_selectors = %w[references chapter-summary knowledge-check]
+    feature_sections_selectors.each do |selector|
+      page.search("section.#{selector}").each do |section|
+        BakeAppendixFeatureTitles.v1(section: section, selector: selector)
+      end
+    end
+
     page.search('section.knowledge-check').injected_exercises.each do |exercise|
       BakeInjectedExercise.v1(exercise: exercise)
     end
