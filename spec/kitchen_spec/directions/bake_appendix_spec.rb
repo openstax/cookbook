@@ -41,6 +41,17 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
     )
   end
 
+  let(:page_appendix_with_section_learning_objectives) do
+    page_element(
+      <<~HTML
+        <div data-type="document-title">Appendix Title</div>
+        <section data-depth="1" class="learning-objectives">
+          <h3 data-type="title">hello</h3>
+        </section>
+      HTML
+    )
+  end
+
   it 'works' do
     described_class.v1(page: page, number: 3)
     expect(page).to match_snapshot_auto
@@ -54,6 +65,11 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
   it 'bakes section.column-container in appendix page' do
     described_class.v1(page: page_appendix_with_section_column_container, number: 3)
     expect(page_appendix_with_section_column_container).to match_snapshot_auto
+  end
+
+  it 'does not change leaning objectives section title' do
+    described_class.v1(page: page_appendix_with_section_learning_objectives, number: 3)
+    expect(page_appendix_with_section_learning_objectives).to match_snapshot_auto
   end
 
   context 'when book has added has adde target labels for appendices' do
