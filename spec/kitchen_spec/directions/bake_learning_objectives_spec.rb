@@ -68,6 +68,24 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
     ).chapters.first
   end
 
+  let(:appendix_page_with_lo) do
+    book_containing(html:
+      <<~HTML
+        <div class="appendix" data-type="page">
+          <h1 data-type="document-title">Appendix Test</h1>
+          <section class="learning-objectives">
+            <h2 data-type="title">Learning Outcomes</h2>
+            <p>By the end of this module, you will be able to</p>
+              <ul>
+                <li>Describe ethical issues related to consumer buying behavior.</li>
+                <li>Identify the characteristics of an ethical consumer</li>
+              </ul>
+          </section>
+        </div>
+      HTML
+    ).pages.first
+  end
+
   it 'adds Learning Objectives h3' do
     described_class.v1(chapter: chapter)
     expect(chapter).to match_snapshot_auto
@@ -81,5 +99,24 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
   it 'works for v3' do
     described_class.v3(chapter: chapter_with_more_data)
     expect(chapter_with_more_data).to match_snapshot_auto
+  end
+
+  it 'bakes lo in appendices' do
+    described_class.v2(chapter: appendix_page_with_lo, li_numbering: :in_appendix)
+    expect(appendix_page_with_lo).to match_snapshot_auto
+  end
+
+  context 'when only li need to be counted' do
+    it 'works' do
+      described_class.v2(chapter: chapter, li_numbering: :count_only_li)
+      expect(chapter).to match_snapshot_auto
+    end
+  end
+
+  context 'when only li need to be counted in appendix' do
+    it 'works' do
+      described_class.v2(chapter: appendix_page_with_lo, li_numbering: :count_only_li_in_appendix)
+      expect(chapter).to match_snapshot_auto
+    end
   end
 end

@@ -42,7 +42,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
-    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
+    BakeLearningObjectives.v2(chapter: chapter, add_title: false, li_numbering: :count_only_li)
 
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
@@ -120,6 +120,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
+
+    BakeLearningObjectives.v2(
+      chapter: page, add_title: false, li_numbering: :count_only_li_in_appendix
+    )
 
     feature_sections_selectors = %w[references chapter-summary knowledge-check]
     feature_sections_selectors.each do |selector|
