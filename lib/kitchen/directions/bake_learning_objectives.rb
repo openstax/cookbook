@@ -10,11 +10,12 @@ module Kitchen
       end
 
       def self.v2(chapter:, add_title: true, li_numbering: false)
-        learning_objectives = if %i[in_appendix count_only_li_in_appendix].include?(li_numbering)
-                                chapter.search('section.learning-objectives')
-                              else
-                                chapter.abstracts.any? ? chapter.abstracts : chapter.learning_objectives
-                              end
+        learning_objectives =
+          if %i[in_appendix count_only_li_in_appendix].include?(li_numbering)
+            chapter.search('section.learning-objectives')
+          else
+            chapter.abstracts.any? ? chapter.abstracts : chapter.learning_objectives
+          end
 
         learning_objectives.each do |abstract|
           if add_title
@@ -24,16 +25,17 @@ module Kitchen
           ul = abstract.first!('ul')
           ul.add_class('os-abstract')
           ul.search('li').each_with_index do |li, index|
-            numbering_type = case li_numbering
-                             when :in_appendix
-                               "#{chapter.count_in(:book)}.#{abstract.count_in(:page)}.#{index + 1}"
-                             when :count_only_li
-                               "#{index + 1}"
-                             when :count_only_li_in_appendix
-                               "#{index + 1}"
-                             when false
-                               "#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}"
-                             end
+            numbering_type =
+              case li_numbering
+              when :in_appendix
+                "#{chapter.count_in(:book)}.#{abstract.count_in(:page)}.#{index + 1}"
+              when :count_only_li
+                index + 1
+              when :count_only_li_in_appendix
+                index + 1
+              when false
+                "#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}"
+              end
 
             li.replace_children(with:
               <<~HTML
