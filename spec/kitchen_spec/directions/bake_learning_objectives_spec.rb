@@ -30,6 +30,27 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
     ).chapters.first
   end
 
+  let(:chapter_with_learning_objectives) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <h1 data-type="document-title">Chapter 1 title</h1>
+          <div data-type="page" class="introduction">Chapter intro</div>
+          <div data-type="page" class="chapter-content-module">
+            <h2 data-type="document-title">Module 1.1 title</div>
+            <section data-type="learnin-objectives">
+              By the end of this module, you will be able to:
+                <ul>
+                  <li>Outline the historical development of chemistry</li>
+                  <li>Provide examples of the importance of chemistry in everyday life</li>
+                </ul>
+              </section>
+          </div>
+        </div>
+      HTML
+    ).chapters.first
+  end
+
   let(:chapter_with_more_data) do
     book_containing(html:
       <<~HTML
@@ -94,6 +115,11 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
   it 'adds abstract-token and abstract-content' do
     described_class.v2(chapter: chapter)
     expect(chapter.non_introduction_pages.to_s).to match_snapshot_auto
+  end
+
+  it 'works if chapter for chapter with learning objctives' do
+    described_class.v2(chapter: chapter_with_learning_objectives)
+    expect(chapter_with_learning_objectives.non_introduction_pages.to_s).to match_snapshot_auto
   end
 
   it 'works for v3' do
