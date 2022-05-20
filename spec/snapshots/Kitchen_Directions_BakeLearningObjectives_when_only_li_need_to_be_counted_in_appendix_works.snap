@@ -1,14 +1,15 @@
-<div data-type="chapter">
-  <h1 data-type="document-title">Chapter 1 title</h1>
-  <div data-type="page" class="introduction">Chapter intro</div>
-  <div data-type="page" class="chapter-content-module">
-    <h2 data-type="document-title">Module 1.1 title</h2>
-    <div data-type="abstract">
-      By the end of this module, you will be able to:
-        <ul>
-          <li>Outline the historical development of chemistry</li>
-          <li>Provide examples of the importance of chemistry in everyday life</li>
-        </ul>
-      </div>
-  </div>
+<div class="appendix" data-type="page">
+  <h1 data-type="document-title">Appendix Test</h1>
+  <section class="learning-objectives"><h3 data-type="title">Learning Objectives</h3>
+    <h2 data-type="title">Learning Outcomes</h2>
+    <p>By the end of this module, you will be able to</p>
+      <ul class="os-abstract">
+        <li><span class="os-abstract-token">1</span>
+<span class="os-abstract-content">Describe ethical issues related to consumer buying behavior.</span>
+</li>
+        <li><span class="os-abstract-token">2</span>
+<span class="os-abstract-content">Identify the characteristics of an ethical consumer</span>
+</li>
+      </ul>
+  </section>
 </div>

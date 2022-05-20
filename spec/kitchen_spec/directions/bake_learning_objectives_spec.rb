@@ -116,7 +116,7 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
   context 'when only li need to be counted in appendix' do
     it 'works' do
       described_class.v2(chapter: appendix_page_with_lo, li_numbering: :count_only_li_in_appendix)
-      expect(chapter).to match_snapshot_auto
+      expect(appendix_page_with_lo).to match_snapshot_auto
     end
   end
 end
