@@ -117,6 +117,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
     end
   end
 
+  book.examples.exercises.each do |exercise|
+    BakeFirstElements.v1(within: exercise, first_inline_list: true)
+  end
+
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
     BakeAppendix.v1(page: page, number: appendix_letter)
