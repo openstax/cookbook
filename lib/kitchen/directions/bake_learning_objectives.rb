@@ -13,8 +13,10 @@ module Kitchen
         learning_objectives =
           if %i[in_appendix count_only_li_in_appendix].include?(li_numbering)
             chapter.search('section.learning-objectives')
+          elsif chapter.abstracts.any?
+            chapter.abstracts
           else
-            chapter.abstracts.any? ? chapter.abstracts : chapter.learning_objectives
+            chapter.learning_objectives
           end
 
         learning_objectives.each do |abstract|
