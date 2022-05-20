@@ -9,7 +9,7 @@ module Kitchen
         end
       end
 
-      def self.v2(chapter:, add_title: true, li_numbering: false)
+      def self.v2(chapter:, add_title: true, li_numbering: nil)
         learning_objectives =
           if %i[in_appendix count_only_li_in_appendix].include?(li_numbering)
             chapter.search('section.learning-objectives')
@@ -29,11 +29,9 @@ module Kitchen
               case li_numbering
               when :in_appendix
                 "#{chapter.count_in(:book)}.#{abstract.count_in(:page)}.#{index + 1}"
-              when :count_only_li
+              when :count_only_li, :count_only_li_in_appendix
                 index + 1
-              when :count_only_li_in_appendix
-                index + 1
-              when false
+              else
                 "#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}"
               end
 
