@@ -24,13 +24,15 @@ college_physics_2e = Kitchen::BookRecipe.new(book_short_name: :college_physics_2
       )
       section.exercises.each do |exercise|
         BakeNumberedExercise.v1(
-         exercise: exercise, number: exercise.count_in(:section))
+          exercise: exercise, number: exercise.count_in(:section))
+        BakeFirstElements.v1(within: exercise)
       end
     end
 
     chapter.sections('$.problems-exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(
         exercise: exercise, number: exercise.count_in(:chapter))
+      BakeFirstElements.v1(within: exercise)
     end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(

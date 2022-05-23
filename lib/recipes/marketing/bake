@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require_relative 'strategy'
+require_relative 'appendix_strategy'
 require_relative '../recipes_helper'
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
@@ -35,6 +36,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
   BakeChapterTitle.v1(book: book)
 
   BakeUnnumberedFigure.v1(book: book)
+  AddInjectedExerciseId.v1(book: book)
 
   answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
 
@@ -99,7 +101,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: false
     )
-
     Strategy.new.bake(
       chapter: chapter,
       append_to: answer_key_inner_container
@@ -119,6 +120,31 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
+
+    feature_sections_selectors = %w[references chapter-summary knowledge-check]
+    feature_sections_selectors.each do |selector|
+      page.search("section.#{selector}").each do |section|
+        BakeAppendixFeatureTitles.v1(section: section, selector: selector)
+      end
+    end
+
+    page.search('section.knowledge-check').injected_exercises.each do |exercise|
+      BakeInjectedExercise.v1(exercise: exercise)
+    end
+
+    page.search('section.knowledge-check').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: "#{appendix_letter}#{question.count_in(:page)}")
+    end
+
+    answer_key_appendix_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: page, metadata_source: metadata, append_to: answer_key, solutions_plural: false,
+      in_appendix: true
+    )
+
+    AppendixStrategy.new.bake(
+      page: page,
+      append_to: answer_key_appendix_inner_container
+    )
   end
 
   BakeIframes.v1(book: book)

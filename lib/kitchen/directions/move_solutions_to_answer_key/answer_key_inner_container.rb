@@ -1,24 +1,33 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::AnswerKeyInnerContainer
-  def self.v1(chapter:, metadata_source:, append_to:, solutions_plural: true)
+  def self.v1(chapter:, metadata_source:, append_to:, solutions_plural: true, in_appendix: false)
     V1.new.bake(
       chapter: chapter,
       metadata_source: metadata_source,
       append_to: append_to,
-      solutions_plural: solutions_plural
+      solutions_plural: solutions_plural,
+      in_appendix: in_appendix
     )
   end
 
   class V1
     renderable
 
-    def bake(chapter:, metadata_source:, append_to:, solutions_plural:)
+    def bake(chapter:, metadata_source:, append_to:, solutions_plural:, in_appendix:)
       @solutions_or_solution = solutions_plural ? 'solutions' : 'solution'
-      @uuid_key = "#{@solutions_or_solution}#{chapter.count_in(:book)}"
+      @uuid_key = if in_appendix
+                    "appendix#{@solutions_or_solution}#{chapter.count_in(:book)}"
+                  else
+                    @uuid_key = "#{@solutions_or_solution}#{chapter.count_in(:book)}"
+                  end
       @metadata = metadata_source.children_to_keep.copy
       @composite_element = 'composite-page'
-      @title = "#{I18n.t(:chapter)} #{chapter.count_in(:book)}"
+      @title = if in_appendix
+                 "#{I18n.t(:appendix)} #{[*('A'..'Z')][chapter.count_in(:book) - 1]}"
+               else
+                 "#{I18n.t(:chapter)} #{chapter.count_in(:book)}"
+               end
       @main_title_tag = 'h2'
 
       append_to.append(

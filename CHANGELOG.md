@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Fix bad encoding in AP physics locales
+* Add `BakeFirstElements` to examples in `dev-math`
+* Change `references title` from `Endnotes` to `References` for `marketing`
+* Create `BakeAppendixFeatureTitles` direction to allow appendices feature sections titles be dynamic
+* Add `BakeFirstElements` direction to `college-physics`, `college-physics-2e` recipes
+* Add support for baking injected exercises/solutions in appendices
 
 ## [v1.7.0] - 2022-05-06
 

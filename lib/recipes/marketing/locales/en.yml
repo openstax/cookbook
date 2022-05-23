@@ -13,6 +13,15 @@ en:
     marketers-do: What Do Marketers Do?
     marketing-plan: Marketing Plan Exercise
     company-case: Closing Company Case
-    references: Endnotes
+    references: References
   exercises:
     solution: Solution
+  appendix_sections:
+    references: References
+    chapter-summary: Summary
+    knowledge-check: Knowledge Check
+    learning-objectives: Learning Outcomes
+
+
+
+
