@@ -9,7 +9,7 @@ module Kitchen
         end
       end
 
-      def self.v2(chapter:, add_title: true, li_numbering: nil)
+      def self.v2(chapter:, add_title: true, li_numbering: :in_chapter)
         learning_objectives =
           if %i[in_appendix count_only_li_in_appendix].include?(li_numbering)
             chapter.search('section.learning-objectives')
