@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
 require_relative '../recipes_helper'
@@ -19,11 +17,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
   BakePreface.v1(book: book)
 
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v2(
-    book: book, strategy_options: {
-      strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
-    }
-  )
+  BakeChapterIntroductions.v1(book: book)
 
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
