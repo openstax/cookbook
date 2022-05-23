@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.8.0] - 2022-23-06
+
 * Fix bad encoding in AP physics locales
 * Add `BakeFirstElements` to examples in `dev-math`
 * Change `references title` from `Endnotes` to `References` for `marketing`
