@@ -37,14 +37,14 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
           <h1 data-type="document-title">Chapter 1 title</h1>
           <div data-type="page" class="introduction">Chapter intro</div>
           <div data-type="page" class="chapter-content-module">
-            <h2 data-type="document-title">Module 1.1 title</div>
-            <section data-type="learnin-objectives">
+            <h2 data-type="document-title">Module 1.1 title</h2>
+            <section class="learning-objectives">
               By the end of this module, you will be able to:
                 <ul>
                   <li>Outline the historical development of chemistry</li>
                   <li>Provide examples of the importance of chemistry in everyday life</li>
                 </ul>
-              </section>
+            </section>
           </div>
         </div>
       HTML
