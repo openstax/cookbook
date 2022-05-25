@@ -9,9 +9,15 @@ module Kitchen
         end
       end
 
-      def self.v2(chapter:, add_title: true)
+      def self.v2(chapter:, add_title: true, li_numbering: :in_chapter)
         learning_objectives =
-          chapter.abstracts.any? ? chapter.abstracts : chapter.learning_objectives
+          if %i[in_appendix count_only_li_in_appendix].include?(li_numbering)
+            chapter.search('section.learning-objectives')
+          elsif chapter.abstracts.any?
+            chapter.abstracts
+          else
+            chapter.learning_objectives
+          end
 
         learning_objectives.each do |abstract|
           if add_title
@@ -21,9 +27,19 @@ module Kitchen
           ul = abstract.first!('ul')
           ul.add_class('os-abstract')
           ul.search('li').each_with_index do |li, index|
+            numbering_type =
+              case li_numbering
+              when :in_appendix
+                "#{chapter.count_in(:book)}.#{abstract.count_in(:page)}.#{index + 1}"
+              when :count_only_li, :count_only_li_in_appendix
+                index + 1
+              else
+                "#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}"
+              end
+
             li.replace_children(with:
               <<~HTML
-                <span class="os-abstract-token">#{chapter.count_in(:book)}.#{abstract.count_in(:chapter)}.#{index + 1}</span>
+                <span class="os-abstract-token">#{numbering_type}</span>
                 <span class="os-abstract-content">#{li.children}</span>
               HTML
             )

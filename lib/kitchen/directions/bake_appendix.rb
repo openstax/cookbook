@@ -22,7 +22,7 @@ module Kitchen
         )
 
         # Make a section with data-depth of X have a header level of X+1
-        page.search('section').each do |section|
+        page.search('section:not(.learning-objectives)').each do |section|
           title = section.titles.first
           next unless title.present?
 
