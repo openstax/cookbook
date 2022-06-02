@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Create `BakeExampleProblemTitle` direction for `statistics`
 * Add `BakeFirstElements` to examples in `dev-math`
 * Change `references title` from `Endnotes` to `References` for `marketing`
 * Create `BakeAppendixFeatureTitles` direction to allow appendices feature sections titles be dynamic
