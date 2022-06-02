@@ -5,7 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 * Create `BakeExampleProblemTitle` direction for `statistics`
+* Add support for baking learning objectives in appendices (`BakeLearningObjectives`) for `marketing`
+
+## [v1.8.0] - 2022-23-06
+
+* Fix bad encoding in AP physics locales
 * Add `BakeFirstElements` to examples in `dev-math`
 * Change `references title` from `Endnotes` to `References` for `marketing`
 * Create `BakeAppendixFeatureTitles` direction to allow appendices feature sections titles be dynamic
