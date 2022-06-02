@@ -35,7 +35,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :biology) do |doc|
       'section.visual-exercise, section.multiple-choice, section.critical-thinking'
     chapter.search(exercise_selectors).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter),
-                              suppress_solution_if: true)
+                              options: { suppress_solution_if: true })
     end
 
     chapter.figures(only: :figure_to_number?).each do |figure|

@@ -78,9 +78,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                                         Kitchen::InjectedQuestionElementEnumerator)
            .each do |exercise|
       if exercise.instance_of?(Kitchen::ExerciseElement)
-        BakeNumberedExercise.v1(exercise: exercise,
-                                number: exercise.count_in(:composite_page),
-                                suppress_solution_if: true)
+        BakeNumberedExercise.v1(
+          exercise: exercise, number: exercise.count_in(:composite_page),
+          options: { suppress_solution_if: true }
+        )
       else
         BakeInjectedExerciseQuestion.v1(question: exercise,
                                         number: exercise.count_in(:composite_page))

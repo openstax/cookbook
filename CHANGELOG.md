@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `options` parameter to pass options to `BakeNumberedExercise`
 * Add optional baking exercise problem title to `BakeExample` direction for `statistics`
 * Add support for baking learning objectives in appendices (`BakeLearningObjectives`) for `marketing`
 

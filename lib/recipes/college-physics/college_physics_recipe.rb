@@ -46,7 +46,9 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
 
     chapter.sections('$.conceptual-questions').exercises.each do |exercise|
       BakeNumberedExercise.v1(
-        exercise: exercise, number: exercise.count_in(:chapter), suppress_solution_if: true)
+        exercise: exercise, number: exercise.count_in(:chapter),
+        options: { suppress_solution_if: true }
+      )
       BakeFirstElements.v1(within: exercise)
     end
 
