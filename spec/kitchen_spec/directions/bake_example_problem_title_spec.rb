@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeExampleTitle do
+RSpec.describe Kitchen::Directions::BakeExampleProblemTitle do
 
   before do
     stub_locales({

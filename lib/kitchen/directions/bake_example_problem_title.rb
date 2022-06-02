@@ -2,7 +2,7 @@
 
 module Kitchen
   module Directions
-    module BakeExampleTitle
+    module BakeExampleProblemTitle
       def self.v1(example:)
         example.exercises.each do |exercise|
           problem = exercise.problem
