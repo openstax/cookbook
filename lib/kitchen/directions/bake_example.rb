@@ -3,7 +3,9 @@
 module Kitchen
   module Directions
     module BakeExample
-      def self.v1(example:, number:, title_tag:, numbered_solutions: false, cases: false)
+      # rubocop:disable Metrics/ParameterLists
+      def self.v1(example:, number:, title_tag:, numbered_solutions: false, cases: false,
+                  add_problem_title: false)
         example.wrap_children(class: 'body')
 
         example.prepend(child:
@@ -28,6 +30,15 @@ module Kitchen
 
           if (problem = exercise.problem)
             problem.wrap_children(class: 'os-problem-container')
+            if add_problem_title
+              problem.prepend(child:
+                <<~HTML
+                  <h4 data-type="problem-title">
+                    <span class="os-title-label">#{I18n.t(:problem)}</span>
+                  </h4>
+                HTML
+              )
+            end
           end
 
           exercise.solutions.each do |solution|
@@ -60,6 +71,7 @@ module Kitchen
           commentary_title.wrap_children('span', class: 'os-title-label')
         end
       end
+      # rubocop:enable Metrics/ParameterLists
     end
   end
 end

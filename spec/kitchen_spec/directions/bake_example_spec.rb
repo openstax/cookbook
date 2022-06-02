@@ -7,7 +7,8 @@ RSpec.describe Kitchen::Directions::BakeExample do
   before do
     stub_locales({
       'example': 'Example',
-      'solution': 'Solution'
+      'solution': 'Solution',
+      'problem': 'Problem'
     })
   end
 
@@ -57,6 +58,30 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
     it 'works' do
       described_class.v1(example: example, number: 4, title_tag: 'title-tag-name')
+      expect(example).to match_snapshot_auto
+    end
+  end
+
+  context 'when problem title needs to be added in exercise' do
+    let(:exercise) do
+      <<~HTML
+        <div data-type="exercise" id="exercise_id">
+          <div data-type="problem" id="problem_id">
+            <div data-type="title" id="title_id">Evaluating Functions</div>
+            <p>example content</p>
+          </div>
+          <div data-type="solution" id="solution_id">
+            <p>Solution content</p>
+          </div>
+          <div data-type="commentary" id="commentary_id">
+            <div data-type="title" id="title_id">Analysis</div>
+          </div>
+        </div>
+      HTML
+    end
+
+    it 'works' do
+      described_class.v1(example: example, number: 4, title_tag: 'title-tag-name', add_problem_title: true)
       expect(example).to match_snapshot_auto
     end
   end
