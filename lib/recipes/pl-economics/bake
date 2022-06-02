@@ -18,17 +18,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   book.search('cnx-pi').trash
   BakeListsWithPara.v1(book: book)
 
-  # Lines from below removing attributes with certain namespaces
-  # need to be removed after content fixes
-  book.search('span[data-type="term"]').each do |term|
-    next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
-
-    term.raw.attributes.each do |_key, val|
-      val.remove if val&.namespace&.prefix == 'cxlxt'
-    end
-
-  end
-
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnnumberedFigure.v1(book: book)
   BakeChapterIntroductions.v2(
