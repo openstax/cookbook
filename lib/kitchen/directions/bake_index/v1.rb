@@ -114,13 +114,14 @@ module Kitchen::Directions::BakeIndex
       end
     end
 
-    def bake(book:, types: %w[main], uuid_prefix: '')
+    def bake(book:, types: %w[main], uuid_prefix: '', use_name_as_reference: false)
       @metadata_elements = book.metadata.children_to_keep.copy
       @uuid_prefix = uuid_prefix
       @indexes = types.each.with_object({}) do |type, hash|
         index_name = type == 'main' ? 'term' : type
         hash[index_name] = Index.new
       end
+      # @use_name_as_reference = use_name_as_reference
 
       # Numbering of IDs doesn't depend on term type
 
@@ -129,7 +130,7 @@ module Kitchen::Directions::BakeIndex
         term_element.id = "auto_#{page.id}_term#{term_element.count_in(:book)}"
         page_title = page.title.text
         term_italicized = term_element&.first("em[data-effect='italics']")
-        add_term_to_index(term_element, page_title, term_italicized)
+        add_term_to_index(term_element, page_title, term_italicized, use_name_as_reference)
       end
 
       book.chapters.composite_pages.terms.each do |term_element|
@@ -139,7 +140,7 @@ module Kitchen::Directions::BakeIndex
         chapter_number = chapter.count_in(:book)
         page_title = "#{chapter_number} #{page.title.text.strip}".strip
         term_italicized = term_element&.first("em[data-effect='italics']")
-        add_term_to_index(term_element, page_title, term_italicized)
+        add_term_to_index(term_element, page_title, term_italicized, use_name_as_reference)
       end
 
       types.each do |type|
@@ -154,7 +155,7 @@ module Kitchen::Directions::BakeIndex
       end
     end
 
-    def add_term_to_index(term_element, page_title, term_italicized)
+    def add_term_to_index(term_element, page_title, term_italicized, use_name_as_reference)
       type =
         if !term_element.key?('index')
           'term'
@@ -166,6 +167,10 @@ module Kitchen::Directions::BakeIndex
 
       if term_element.key?('reference')
         term_reference = term_element['cmlnle:reference'] || term_element['reference']
+        group_by = term_reference[0]
+        content = term_reference
+      elsif use_name_as_reference && term_element['cxlxt:index'] == 'name'
+        term_reference = term_element['cxlxt:name']
         group_by = term_reference[0]
         content = term_reference
       else

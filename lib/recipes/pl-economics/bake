@@ -20,14 +20,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
 
   # Lines from below removing attributes with certain namespaces
   # need to be removed after content fixes
-  book.search('span[data-type="term"]').each do |term|
-    next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
+  # book.search('span[data-type="term"]').each do |term|
+  #   next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
 
-    term.raw.attributes.each do |_key, val|
-      val.remove if val&.namespace&.prefix == 'cxlxt'
-    end
+  #   term.raw.attributes.each do |_key, val|
+  #     val.remove if val&.namespace&.prefix == 'cxlxt'
+  #   end
 
-  end
+  # end
 
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnnumberedFigure.v1(book: book)
@@ -130,7 +130,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   end
 
   BakeReferences.v2(book: book, metadata_source: metadata)
-  BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.')
+  BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.', use_name_as_reference: true)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
