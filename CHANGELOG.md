@@ -6,10 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.9.0] - 2022-06-03
+
 * Add optional baking exercise problem title to `BakeExample` direction for `statistics`
 * Add support for baking learning objectives in appendices (`BakeLearningObjectives`) for `marketing`
 
-## [v1.8.0] - 2022-23-06
+## [v1.8.0] - 2022-05-23
 
 * Fix bad encoding in AP physics locales
 * Add `BakeFirstElements` to examples in `dev-math`
@@ -40,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Define rex_link on `ElementBase`
 * Link to rex from iframe in `BakeIframes`
 
-## [v1.5.0] - 2022-4-08
+## [v1.5.0] - 2022-04-08
 
 * Add `BakeFootnotes` to ap physics
 * Fix adding unnecessary dividers in `BakeFigure` when no title, caption (patch)
