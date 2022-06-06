@@ -118,14 +118,14 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
 
   context 'when autotitled notes have numbered exercise within' do
     it 'bakes' do
-      described_class.v1(book: numbered_exercise_within_note, classes: %w[foo], bake_exercises: true)
+      described_class.v1(book: numbered_exercise_within_note, classes: %w[foo], options: { bake_exercises: true })
       expect(numbered_exercise_within_note.body.pages.first.notes.to_s).to match_snapshot_auto
     end
   end
 
   context 'when autotitled notes have unnumbered exercise within' do
     it 'bakes' do
-      described_class.v1(book: unnumbered_exercise_within_note, classes: %w[blah], bake_exercises: true)
+      described_class.v1(book: unnumbered_exercise_within_note, classes: %w[blah], options: { bake_exercises: true })
       expect(unnumbered_exercise_within_note.body.pages.first.notes.to_s).to match_snapshot_auto
     end
   end
@@ -156,7 +156,7 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
         pantry = book_with_notes.pantry(name: :genitive_link_text)
         expect(pantry).to receive(:store).with('Ramki Resonance', { label: 'parent-note-1' })
         expect(pantry).to receive(:store).with('Ramki note <em data-effect="italics">title</em>', { label: 'noteId' })
-        described_class.v1(book: book_with_notes, classes: %w[foo baz project media-2 interactive], cases: true)
+        described_class.v1(book: book_with_notes, classes: %w[foo baz project media-2 interactive], options: { cases: true })
       end
     end
   end

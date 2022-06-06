@@ -109,7 +109,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
 
   notes = %w[marketing-practice companies-conscience link-to-learning]
   BakeAutotitledNotes.v1(book: book, classes: notes)
-  BakeAutotitledNotes.v1(book: book, classes: %w[marketing-dashboard], bake_exercises: true)
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[marketing-dashboard],
+    options: { bake_exercises: true }
+  )
   BakeCustomTitledNotes.v1(book: book, classes: %w[unit-opener word-document])
 
   book.pages('$.appendix').each do |page|

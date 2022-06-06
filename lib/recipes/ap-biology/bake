@@ -27,7 +27,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc|
     book: book,
     classes: %w[visual-connection
                 ost-sciprac-scithink],
-    bake_subtitle: false
+    options: { bake_subtitle: false }
   )
   BakeAutotitledNotes.v1(
     book: book,

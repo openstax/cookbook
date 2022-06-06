@@ -30,7 +30,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
 
   # Notes
   notes = %w[media-2 problem-solving]
-  BakeAutotitledNotes.v1(book: book, classes: notes, cases: true)
+  BakeAutotitledNotes.v1(book: book, classes: notes, options: { cases: true })
   BakeUnclassifiedNotes.v1(book: book)
   BakeNumberedNotes.v1(book: book, classes: %w[check-understanding], cases: true)
 

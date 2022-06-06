@@ -25,7 +25,7 @@ module Kitchen::Directions::BakeChapterIntroductions
       Kitchen::Directions::BakeAutotitledNotes.v1(
         book: chapter,
         classes: %w[chapter-objectives],
-        bake_subtitle: false
+        options: { bake_subtitle: false }
       )
 
       chapter_objectives_note.cut.paste
