@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-* Add support for creating name term content form name attribute instead for reference for pl books.
+* Add support for creating index name term content from name attribute instead of reference if they don't have it for `pl-economics`.
+
+## [v1.9.0] - 2022-06-03
+
 * Add optional baking exercise problem title to `BakeExample` direction for `statistics`
 * Add support for baking learning objectives in appendices (`BakeLearningObjectives`) for `marketing`
 
