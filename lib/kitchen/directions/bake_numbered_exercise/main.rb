@@ -3,7 +3,12 @@
 module Kitchen
   module Directions
     module BakeNumberedExercise
-      def self.v1(exercise:, number:, options: {})
+      def self.v1(exercise:, number:, options: {
+        suppress_solution_if: false,
+        note_suppressed_solutions: false,
+        cases: false,
+        solution_stays_put: false
+      })
         # any option that is passed in will override the defaults,
         # but if some options not given, default will be used.
         options.reverse_merge!(
