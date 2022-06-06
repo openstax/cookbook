@@ -13,7 +13,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
     })
   end
 
-  let(:book_name_term_without_reference) do
+  let(:book_with_name_terms_without_reference) do
     book_containing(html:
       <<~HTML
         <div data-type="metadata" style="display: none;">
@@ -28,10 +28,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
         <div data-type="chapter">
           <div data-type="page" id="p1">
             <div data-type="document-title"><span>1.1</span> First Page</div>
-            <span data-type="term">czosnek</span>
-            <span data-type="term">ćma</span>
             <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="name" cxlxt:name="Smith, Adam" id="auto_0a934714-8033-4bfb-9ebc-b83eeeb9ca1f_UUIDd3bc560b-d240-4014-72d2-a9efe31b0906">Adam Smith</span>
-            <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" data-type="term" cmlnle:reference="ćwiczenie">ćwiczeniu</span>
             <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="name" cxlxt:name="Keynes, John Maynard">John Maynard Keynes</span>
             <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Ćwierkowski, Wilhelm (1832-1920)" cxlxt:index="name" cxlxt:name="Ćwierkowskiego, Wilhelma" cxlxt:born="1832" cxlxt:died="1920">Wilhelma Ćwierkowskiego</span>
             <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928">Noama Chomsky'ego</span>
@@ -41,18 +38,17 @@ RSpec.describe Kitchen::Directions::BakeIndex do
     )
   end
 
-  context 'when v1 has multiple types in polish books and use term name as reference' do
-    it 'bakes names terms without reference' do
+  context 'when there are name terms without reference present in pl-books' do
+    it 'creates term content for such terms from name instead of reference' do
       with_locale(:pl) do
         stub_locales({
           'index': {
-            'name': 'Skorowidz nazwisk',
-            'term': 'Skorowidz rzeczowy'
+            'name': 'Skorowidz nazwisk'
           }
         }, locale: :pl)
 
-        described_class.v1(book: book_name_term_without_reference, types: %w[name term], uuid_prefix: '.', use_name_as_reference: true)
-        expect(book_name_term_without_reference.body).to match_snapshot_auto
+        described_class.v1(book: book_with_name_terms_without_reference, types: %w[name], uuid_prefix: '.')
+        expect(book_with_name_terms_without_reference.body).to match_snapshot_auto
       end
     end
   end
