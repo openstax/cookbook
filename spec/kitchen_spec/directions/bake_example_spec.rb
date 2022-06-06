@@ -81,7 +81,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
 
     it 'works' do
-      described_class.v1(example: example, number: 4, title_tag: 'title-tag-name', add_problem_title: true)
+      described_class.v1(example: example, number: 4, title_tag: 'title-tag-name', options: { add_problem_title: true })
       expect(example).to match_snapshot_auto
     end
   end
@@ -243,7 +243,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
         example: example,
         number: 4,
         title_tag: 'title-tag-name',
-        numbered_solutions: true
+        options: { numbered_solutions: true }
       )
       expect(example).to match_snapshot_auto
     end
@@ -311,7 +311,7 @@ RSpec.describe Kitchen::Directions::BakeExample do
 
         pantry = example.pantry(name: :genitive_link_text)
         expect(pantry).to receive(:store).with('Przykładu 4', { label: 'example-test' })
-        described_class.v1(example: example, number: 4, title_tag: 'title-tag-name', cases: true)
+        described_class.v1(example: example, number: 4, title_tag: 'title-tag-name', options: { cases: true })
       end
     end
   end
