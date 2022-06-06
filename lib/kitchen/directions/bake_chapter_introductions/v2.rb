@@ -2,24 +2,24 @@
 
 module Kitchen::Directions::BakeChapterIntroductions
   class V2
-    def bake(book:, strategy_options:, block_target_label: false)
+    def bake(book:, options:)
       book.chapters.each do |chapter|
         introduction_page = chapter.introduction_page
         number = chapter.count_in(:book)
         title_label = chapter.title.search('.os-text').first&.text
         title_label = chapter.title.text if title_label.nil?
 
-        introduction_page.target_label(label_text: 'chapter', custom_content: "#{number} #{title_label}") unless block_target_label
+        introduction_page.target_label(label_text: 'chapter', custom_content: "#{number} #{title_label}") unless options[:block_target_label]
 
         title = bake_title(introduction_page: introduction_page)
 
         chapter_intro_html =
           Kitchen::Directions::BakeChapterIntroductions.bake_chapter_objectives(
             chapter: chapter,
-            strategy: strategy_options[:strategy]
+            strategy: options[:strategy]
           )
 
-        if strategy_options[:bake_chapter_outline]
+        if options[:bake_chapter_outline]
           chapter_intro_html =
             Kitchen::Directions::BakeChapterIntroductions.bake_chapter_outline(
               chapter_objectives_html: chapter_intro_html
@@ -27,7 +27,7 @@ module Kitchen::Directions::BakeChapterIntroductions
         end
 
         order(
-          strategy_options: strategy_options,
+          options: options,
           introduction_page: introduction_page,
           chapter_intro_html: chapter_intro_html,
           title: title
@@ -37,8 +37,8 @@ module Kitchen::Directions::BakeChapterIntroductions
       Kitchen::Directions::BakeChapterIntroductions.v1_update_selectors(book)
     end
 
-    def order(strategy_options:, introduction_page:, chapter_intro_html:, title:)
-      case strategy_options[:introduction_order]
+    def order(options:, introduction_page:, chapter_intro_html:, title:)
+      case options[:introduction_order]
       when :v1
         v1_introduction_order(
           introduction_page: introduction_page,
