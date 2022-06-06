@@ -123,7 +123,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3',
-                     cases: true)
+                     options: { cases: true })
     end
 
     chapter.figures(only: :figure_to_number?).each do |figure|

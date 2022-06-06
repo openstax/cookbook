@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `options` parameter to pass options to `BakeExample`
+
 ## [v1.9.0] - 2022-06-03
 
 * Add optional baking exercise problem title to `BakeExample` direction for `statistics`
