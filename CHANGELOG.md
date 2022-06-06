@@ -43,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Define rex_link on `ElementBase`
 * Link to rex from iframe in `BakeIframes`
 
-## [v1.5.0] - 2022-4-08
+## [v1.5.0] - 2022-04-08
 
 * Add `BakeFootnotes` to ap physics
 * Fix adding unnecessary dividers in `BakeFigure` when no title, caption (patch)
