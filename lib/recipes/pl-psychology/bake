@@ -83,10 +83,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
 
     selectors = 'section.review-questions, section.critical-thinking, section.personal-application'
     chapter.search(selectors).exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise,
-                              number: exercise.count_in(:chapter),
-                              suppress_solution_if: true,
-                              cases: true)
+      BakeNumberedExercise.v1(
+        exercise: exercise, number: exercise.count_in(:chapter),
+        options: { suppress_solution_if: true, cases: true }
+      )
     end
   end
 

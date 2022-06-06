@@ -10,9 +10,9 @@ module Kitchen
           next if exercise.has_class?('unnumbered')
 
           if exercise.instance_of?(ExerciseElement)
-            exercise_options[:exercise] = exercise
-            exercise_options[:number] = exercise_counter
-            BakeNumberedExercise.v1(exercise_options)
+            BakeNumberedExercise.v1(
+              exercise: exercise, number: exercise_counter, options: exercise_options
+            )
           else
             question_options[:number] = exercise_counter
             question_options[:question] = exercise

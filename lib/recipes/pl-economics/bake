@@ -54,7 +54,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
                                   critical-thinking problems]
 
     chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), cases: true)
+      BakeNumberedExercise.v1(
+        exercise: exercise, number: exercise.count_in(:chapter),
+        options: { cases: true }
+      )
     end
 
     exercise_section_classes.each do |klass|
@@ -116,9 +119,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
     end
 
     page.search('section').exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise,
-                              number: "#{appendix_letter}#{exercise.count_in(:page)}",
-                              cases: true)
+      BakeNumberedExercise.v1(
+        exercise: exercise, number: "#{appendix_letter}#{exercise.count_in(:page)}",
+        options: { cases: true }
+      )
       BakeFirstElements.v1(within: exercise)
     end
   end

@@ -37,8 +37,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
         BakeNumberedExercise.v1(
           exercise: exercise,
           number: exercise.count_in(:chapter),
-          suppress_solution_if: :even?,
-          note_suppressed_solutions: true
+          options: {
+            suppress_solution_if: :even?,
+            note_suppressed_solutions: true
+          }
         )
       else
         BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
