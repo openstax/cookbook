@@ -108,8 +108,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3',
-                     numbered_solutions: true,
-                     add_problem_title: true)
+                     options: { numbered_solutions: true, add_problem_title: true })
     end
   end
 

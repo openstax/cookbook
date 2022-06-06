@@ -3,15 +3,23 @@
 module Kitchen
   module Directions
     module BakeExample
-      # rubocop:disable Metrics/ParameterLists
-      def self.v1(example:, number:, title_tag:, numbered_solutions: false, cases: false,
-                  add_problem_title: false)
+      def self.v1(example:, number:, title_tag:, options: {
+        numbered_solutions: false,
+        cases: false,
+        add_problem_title: false
+      })
+        options.reverse_merge!(
+          numbered_solutions: false,
+          cases: false,
+          add_problem_title: false
+        )
+
         example.wrap_children(class: 'body')
 
         example.prepend(child:
           <<~HTML
             <#{title_tag} class="os-title">
-              <span class="os-title-label">#{I18n.t("example#{'.nominative' if cases}")} </span>
+              <span class="os-title-label">#{I18n.t("example#{options[:cases] ? '.nominative' : ''}")} </span>
               <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
             </#{title_tag}>
@@ -19,7 +27,7 @@ module Kitchen
         )
 
         # Store label information
-        example.target_label(label_text: 'example', custom_content: number, cases: cases)
+        example.target_label(label_text: 'example', custom_content: number, cases: options[:cases])
 
         example.titles_to_rename.each do |title|
           title.name = 'h4'
@@ -30,7 +38,7 @@ module Kitchen
 
           if (problem = exercise.problem)
             problem.wrap_children(class: 'os-problem-container')
-            if add_problem_title
+            if options[:add_problem_title]
               problem.prepend(child:
                 <<~HTML
                   <h4 data-type="problem-title">
@@ -42,7 +50,7 @@ module Kitchen
           end
 
           exercise.solutions.each do |solution|
-            solution_number = if numbered_solutions
+            solution_number = if options[:numbered_solutions]
                                 "<span class=\"os-number\">#{solution.count_in(:example)}</span>"
                               else
                                 ''
@@ -71,7 +79,6 @@ module Kitchen
           commentary_title.wrap_children('span', class: 'os-title-label')
         end
       end
-      # rubocop:enable Metrics/ParameterLists
     end
   end
 end
