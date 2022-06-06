@@ -3,7 +3,11 @@
 module Kitchen
   module Directions
     module BakeExample
-      def self.v1(example:, number:, title_tag:, options: {})
+      def self.v1(example:, number:, title_tag:, options: {
+        numbered_solutions: false,
+        cases: false,
+        add_problem_title: false
+      })
         options.reverse_merge!(
           numbered_solutions: false,
           cases: false,
