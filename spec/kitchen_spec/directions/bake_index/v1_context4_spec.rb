@@ -32,6 +32,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="name" cxlxt:name="Keynes, John Maynard">John Maynard Keynes</span>
             <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Ćwierkowski, Wilhelm (1832-1920)" cxlxt:index="name" cxlxt:name="Ćwierkowskiego, Wilhelma" cxlxt:born="1832" cxlxt:died="1920">Wilhelma Ćwierkowskiego</span>
             <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928">Noama Chomsky'ego</span>
+            <span data-type="term" index="name" name="Doe, John">John Doe</span>
           </div>
         </div>
       HTML

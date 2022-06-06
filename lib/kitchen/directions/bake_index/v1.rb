@@ -168,8 +168,8 @@ module Kitchen::Directions::BakeIndex
         term_reference = term_element['cmlnle:reference'] || term_element['reference']
         group_by = term_reference[0]
         content = term_reference
-      elsif term_element['cxlxt:index'] == 'name'
-        term_reference = term_element['cxlxt:name']
+      elsif term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name'
+        term_reference = term_element['cxlxt:name'] || term_element['name']
         group_by = term_reference[0]
         content = term_reference
       else
