@@ -3,7 +3,11 @@
 module Kitchen
   module Directions
     module BakeAutotitledNotes
-      def self.v1(book:, classes:, options: {})
+      def self.v1(book:, classes:, options: {
+        bake_subtitle: true,
+        cases: false,
+        bake_exercises: false
+      })
         options.reverse_merge!(
           bake_subtitle: true,
           cases: false,
