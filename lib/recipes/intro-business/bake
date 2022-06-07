@@ -17,11 +17,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :intro_business) do |doc|
 
   BakeChapterTitle.v1(book: book)
 
-  BakeChapterIntroductions.v2(
-    book: book, strategy_options: {
-      strategy: :default, bake_chapter_outline: false, introduction_order: :v1
-    }
-  )
+  BakeChapterIntroductions.v2(book: book)
 
   book.chapters.each do |chapter|
 

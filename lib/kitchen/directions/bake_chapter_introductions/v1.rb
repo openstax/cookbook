@@ -5,10 +5,9 @@ module Kitchen::Directions::BakeChapterIntroductions
     def bake(book:)
       Kitchen::Directions::BakeChapterIntroductions.v2(
         book: book,
-        strategy_options: {
+        options: {
           strategy: :add_objectives,
-          bake_chapter_outline: true,
-          introduction_order: :v1
+          bake_chapter_outline: true
         }
       )
     end

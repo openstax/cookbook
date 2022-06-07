@@ -24,7 +24,7 @@ module Kitchen
         )
         V2.new.bake(
           book: book,
-          options: options,
+          options: options
         )
       end
 
