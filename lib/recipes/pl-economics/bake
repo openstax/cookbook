@@ -42,7 +42,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   BakeChapterTitle.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
-  BakeAutotitledNotes.v1(book: book, classes: %w[linkup bringhome clearup workout], cases: true)
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[linkup bringhome clearup workout],
+    options: { cases: true }
+  )
   answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|

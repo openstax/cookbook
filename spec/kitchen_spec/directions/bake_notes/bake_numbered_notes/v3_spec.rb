@@ -127,7 +127,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
     described_class.new.bake(
       book: book_with_notes,
       classes: %w[foo hello theorem],
-      suppress_solution: true
+      options: { suppress_solution: true }
     )
     expect(book_with_notes.body).to match_snapshot_auto
   end

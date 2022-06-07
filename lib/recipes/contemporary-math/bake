@@ -21,7 +21,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   note_classes =
     %w[people-mathematics who-knew tech-check check-point video work-out definition formula]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
-  BakeNumberedNotes.v1(book: book, classes: %w[your-turn], bake_exercises: false)
+  BakeNumberedNotes.v1(book: book, classes: %w[your-turn], options: { bake_exercises: false })
   sections_with_unnumbered_tables_in_solutions = \
     'div.your-turn, section.section-exercises, section.chapter-review, section.chapter-test'
   book.search(sections_with_unnumbered_tables_in_solutions).solutions.each do |solution|

@@ -94,7 +94,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
   BakeAutotitledNotes.v1(
     book: book,
     classes: %w[check-point],
-    bake_exercises: true
+    options: { bake_exercises: true }
   )
 
   book.pages('$.appendix').each do |page|

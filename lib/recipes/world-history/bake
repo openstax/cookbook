@@ -109,7 +109,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
                                                  beyond-book
                                                  past-present])
 
-  BakeAutotitledNotes.v1(book: book, classes: %w[link-to-learning], bake_subtitle: false)
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[link-to-learning],
+    options: { bake_subtitle: false }
+  )
 
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)

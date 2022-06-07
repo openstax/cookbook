@@ -37,7 +37,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc|
   BakeAutotitledNotes.v1(
     book: book,
     classes: %w[think-through],
-    bake_exercises: true
+    options: { bake_exercises: true }
   )
 
   BakeUnclassifiedNotes.v1(book: book)

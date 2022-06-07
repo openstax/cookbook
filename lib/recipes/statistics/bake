@@ -112,9 +112,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
     end
   end
 
-  BakeNumberedNotes.v3(book: book, classes: %w[try], suppress_solution: true)
+  BakeNumberedNotes.v3(book: book, classes: %w[try], options: { suppress_solution: true })
   BakeAutotitledNotes.v1(book: book, classes: %w[lab calculator])
-  BakeAutotitledNotes.v1(book: book, classes: %w[collab], bake_subtitle: false)
+  BakeAutotitledNotes.v1(book: book, classes: %w[collab], options: { bake_subtitle: false })
 
   book.chapters.each do |chapter|
 

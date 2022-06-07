@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `options` parameter to pass options to `BakeNumberedNotes`
+* Add `options` parameter to pass options to `BakeAutotitledNotes`
 * Add `options` parameter to pass options to `BakeNumberedExercise`
 * Add `options` parameter to pass options to `BakeExample`
 
