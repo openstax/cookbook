@@ -2,9 +2,7 @@
 
 module Kitchen::Directions::BakeNumberedExercise
   class V1
-    # rubocop:disable Metrics/ParameterLists
-    def bake(exercise:, number:, suppress_solution_if:,
-             note_suppressed_solutions:, cases:, solution_stays_put:)
+    def bake(exercise:, number:, options:)
       problem = exercise.problem
       solution = exercise.solution
 
@@ -14,7 +12,9 @@ module Kitchen::Directions::BakeNumberedExercise
       if in_appendix
         label_number = number
         title_label =
-          "<span class=\"os-title-label\">#{I18n.t("exercise#{'.nominative' if cases}")}</span>"
+          "<span class=\"os-title-label\">#{I18n.t("exercise#{
+            options[:cases] ? '.nominative' : ''
+          }")}</span>"
         problem_divider = ''
       else
         label_number = "#{exercise.ancestor(:chapter).count_in(:book)}.#{number}"
@@ -22,25 +22,27 @@ module Kitchen::Directions::BakeNumberedExercise
         problem_divider = "<span class='os-divider'>. </span>"
       end
 
-      exercise.target_label(label_text: 'exercise', custom_content: label_number, cases: cases)
+      exercise.target_label(
+        label_text: 'exercise', custom_content: label_number, cases: options[:cases]
+      )
 
       problem_number = "<span class='os-number'>#{number}</span>"
 
       suppress_solution =
-        case suppress_solution_if
-        when Symbol
-          number.send(suppress_solution_if)
+        case options[:suppress_solution_if]
+        when :even?, :odd?
+          number.send(options[:suppress_solution_if])
         else
-          suppress_solution_if
+          options[:suppress_solution_if]
         end
 
       if solution.present?
         if suppress_solution
           solution.trash
-          exercise.add_class('os-hasSolution-trashed') if note_suppressed_solutions
+          exercise.add_class('os-hasSolution-trashed') if options[:note_suppressed_solutions]
         else
           problem_number = \
-            if solution_stays_put || in_appendix
+            if options[:solution_stays_put] || in_appendix
               "<span class='os-number'>#{number}</span>"
             else
               "<a class='os-number' href='##{exercise.id}-solution'>#{number}</a>"
@@ -48,7 +50,7 @@ module Kitchen::Directions::BakeNumberedExercise
           bake_solution(
             exercise: exercise,
             number: number,
-            solution_stays_put: solution_stays_put,
+            solution_stays_put: options[:solution_stays_put],
             in_appendix: in_appendix
           )
         end
@@ -62,7 +64,6 @@ module Kitchen::Directions::BakeNumberedExercise
         HTML
       )
     end
-    # rubocop:enable Metrics/ParameterLists
 
     def bake_solution(exercise:, number:, solution_stays_put:, divider: '. ', in_appendix: false)
       solution = exercise.solution

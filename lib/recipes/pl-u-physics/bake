@@ -91,7 +91,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
     exercise_selectors = 'section.review-conceptual-questions, section.review-problems, ' \
                          'section.review-additional-problems, section.review-challenge'
     chapter.search(exercise_selectors).exercises.each do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter), cases: true)
+      BakeNumberedExercise.v1(
+        exercise: exercise, number: exercise.count_in(:chapter),
+        options: { cases: true }
+      )
     end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
@@ -123,7 +126,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3',
-                     cases: true)
+                     options: { cases: true })
     end
 
     chapter.figures(only: :figure_to_number?).each do |figure|

@@ -57,7 +57,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
 
   context 'when solutions are suppressed' do
     it 'works' do
-      described_class.v1(exercise: exercise1, number: '1.1', suppress_solution_if: true)
+      described_class.v1(exercise: exercise1, number: '1.1', options: { suppress_solution_if: true })
 
       expect(exercise1).to match_snapshot_auto
     end
@@ -66,14 +66,14 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
   context 'when even solutions are suppressed' do
     context 'when number is odd' do
       it 'works' do
-        described_class.v1(exercise: exercise1, number: 1, suppress_solution_if: :even?, note_suppressed_solutions: true)
+        described_class.v1(exercise: exercise1, number: 1, options: { suppress_solution_if: :even?, note_suppressed_solutions: true })
         expect(exercise1).to match_snapshot_auto
       end
     end
 
     context 'when number is even' do
       it 'works' do
-        described_class.v1(exercise: exercise1, number: 2, suppress_solution_if: :even?, note_suppressed_solutions: true)
+        described_class.v1(exercise: exercise1, number: 2, options: { suppress_solution_if: :even?, note_suppressed_solutions: true })
         expect(exercise1).to match_snapshot_auto
       end
     end
@@ -101,14 +101,14 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
 
           pantry = exercise1.pantry(name: :genitive_link_text)
           expect(pantry).to receive(:store).with('Ćwiczenia 1.1', { label: 'exercise_id' })
-          described_class.v1(exercise: exercise1, number: '1', cases: true)
+          described_class.v1(exercise: exercise1, number: '1', options: { cases: true })
         end
       end
     end
 
     context 'when exercises remain grouped with solutions' do
       it 'works' do
-        described_class.v1(exercise: exercise1, number: '4', solution_stays_put: true)
+        described_class.v1(exercise: exercise1, number: '4', options: { solution_stays_put: true })
         expect(exercise1).to match_snapshot_auto
       end
     end
