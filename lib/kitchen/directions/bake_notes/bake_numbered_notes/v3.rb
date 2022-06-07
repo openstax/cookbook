@@ -4,7 +4,7 @@ module Kitchen::Directions
   module BakeNumberedNotes
     class V3
       # for the try it notes, must be called AFTER bake_exercises
-      def bake(book:, classes:, suppress_solution: true)
+      def bake(book:, classes:, options:)
         classes.each do |klass|
           book.chapters.pages.notes("$.#{klass}").each do |note|
             note.wrap_children(class: 'os-note-body')
@@ -26,14 +26,17 @@ module Kitchen::Directions
             note.title&.trash
             note.exercises.each do |exercise|
               BakeNoteExercise.v1(
-                note: note, exercise: exercise, divider: '. ', suppress_solution: suppress_solution
+                note: note,
+                exercise: exercise,
+                divider: '. ',
+                suppress_solution: options[:suppress_solution]
               )
             end
             note.injected_questions.each do |question|
               BakeNoteInjectedQuestion.v1(note: note, question: question)
             end
 
-            note.search("div[data-type='solution']").each&.trash if suppress_solution
+            note.search("div[data-type='solution']").each&.trash if options[:suppress_solution]
           end
         end
       end

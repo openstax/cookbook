@@ -3,8 +3,15 @@
 module Kitchen
   module Directions
     module BakeNumberedNotes
-      def self.v1(book:, classes:, cases: false, bake_exercises: true)
-        V1.new.bake(book: book, classes: classes, cases: cases, bake_exercises: bake_exercises)
+      def self.v1(book:, classes:, options: {
+        cases: false,
+        bake_exercises: true
+      })
+        options.reverse_merge!(
+          cases: false,
+          bake_exercises: true
+        )
+        V1.new.bake(book: book, classes: classes, options: options)
       end
 
       def self.v2(book:, classes:)
@@ -14,8 +21,9 @@ module Kitchen
       # V3 bakes notes tied to an example immediately previous ("Try It" notes)
       # Must be called AFTER BakeExercises
       #
-      def self.v3(book:, classes:, suppress_solution: true)
-        V3.new.bake(book: book, classes: classes, suppress_solution: suppress_solution)
+      def self.v3(book:, classes:, options: { suppress_solution: true })
+        options.reverse_merge!(suppress_solution: true)
+        V3.new.bake(book: book, classes: classes, options: options)
       end
     end
   end

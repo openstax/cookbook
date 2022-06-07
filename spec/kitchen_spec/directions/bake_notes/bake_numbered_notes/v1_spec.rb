@@ -115,7 +115,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
 
         pantry = book_with_notes.pantry(name: :genitive_link_text)
         expect(pantry).to receive(:store).with('Ramki Two Important Limits', { label: 'note_id15' })
-        described_class.v1(book: book_with_notes, classes: %w[foo hello theorem], cases: true)
+        described_class.v1(book: book_with_notes, classes: %w[foo hello theorem], options: { cases: true })
       end
     end
   end
