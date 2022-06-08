@@ -23,8 +23,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
   BakeUnitTitle.v1(book: book)
   BakeChapterIntroductions.v2(
     book: book,
-    strategy_options: {
-      strategy: :default,
+    options: {
       bake_chapter_outline: false,
       introduction_order: :v2
     }

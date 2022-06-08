@@ -23,9 +23,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc|
   BakeUnnumberedFigure.v1(book: book)
 
   BakeChapterIntroductions.v2(
-    book: book, strategy_options: {
-      strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
-    }, block_target_label: true
+    book: book, options: {
+      strategy: :add_objectives, bake_chapter_outline: true, block_target_label: true
+    }
   )
 
   BakeChapterTitle.v1(book: book)
