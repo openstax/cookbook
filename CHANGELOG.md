@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `.careers-marketing` to marketing recipe
+
 ## [v1.10.0] - 2022-06-21
 
 * Add support for creating index name term content from name attribute instead of reference if they don't have it for `pl-economics`.
