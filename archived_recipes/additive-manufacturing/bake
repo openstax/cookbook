@@ -2,6 +2,8 @@
 
 # frozen_string_literal: true
 
+# ARCHIVED. NO LONGER IN PRODUCTION
+
 require_relative '../recipes_helper'
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |doc|
