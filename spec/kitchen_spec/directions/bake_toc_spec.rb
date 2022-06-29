@@ -21,7 +21,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
           </h1>
         </div>
         <div data-type="unit">
-          <h1 data-type="document-title">
+          <h1 data-type="document-title" id="unitTitle1">
             <span class="os-part-text">Unit </span>
             <span class="os-number">1</span>
             <span class="os-divider"> </span>
@@ -86,7 +86,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
           </div>
         </div>
         <div data-type="unit">
-          <h1 data-type="document-title">Unit 2 Title</h1>
+          <h1 data-type="document-title" id="unitTitle2">Unit 2 Title</h1>
           <div data-type="chapter">
             <h1 data-type="document-title" id="chapTitle3">
               <span class="os-part-text">Chapter </span>
