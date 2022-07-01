@@ -10,7 +10,6 @@ module Kitchen::Directions::BakeUnitTitle
 
     def compose_unit_title(unit:)
       heading = unit.title
-      heading[:id] = "unitTitle#{unit.count_in(:book)}"
       heading.replace_children(with:
         <<~HTML
           <span class="os-part-text">#{I18n.t(:unit)} </span>

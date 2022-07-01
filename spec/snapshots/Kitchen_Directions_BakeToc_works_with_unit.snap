@@ -7,7 +7,7 @@
 </li>
 
 <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit">
-  <a href="#unitTitle1">
+  <a href="#">
     <span class="os-number"><span class="os-part-text">Unit </span>1</span>
     <span class="os-divider"> </span>
     <span data-type="" itemprop="" class="os-text">Unit 1 Title</span>
@@ -75,7 +75,7 @@
 </li>
 
 <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit">
-  <a href="#unitTitle2">
+  <a href="#">
     <span class="os-number"><span class="os-part-text">Unit </span>2</span>
     <span class="os-divider"> </span>
     <span data-type="" itemprop="" class="os-text">Unit 2 Title</span>
