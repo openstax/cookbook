@@ -160,8 +160,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
-  BakeToc.v1(book: book)
   BakeUnitTitle.v1(book: book)
+  BakeUnitPageTitle.v1(book: book)
+  BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
 end
