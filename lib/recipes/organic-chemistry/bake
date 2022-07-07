@@ -68,6 +68,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
 
   BakeUnnumberedTables.v1(book: book)
 
+  note_classes = %w[why-chapter something-extra working-problems]
+  BakeAutotitledNotes.v1(book: book, classes: note_classes)
+
   BakeUnclassifiedNotes.v1(book: book)
   BakeStepwise.v1(book: book)
   BakeMathInParagraph.v1(book: book)
