@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix `college-physics-2e` link text (call `BakeLinkPlaceholders` in both recipes)
 * Add locales to `organic-chemistry`
 * Create basic `organic-chemistry` recipe
 * Add `BakeUnitPageTitle` in `marketing` recipe
