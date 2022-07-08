@@ -143,6 +143,10 @@ RSpec.describe 'books' do
     expect('microbiology').to bake_correctly
   end
 
+  it 'bakes organic-chemistry' do
+    expect('organic-chemistry').to bake_correctly
+  end
+
   it 'bakes organizational-behavior' do
     expect('organizational-behavior').to bake_correctly_with('principles-management')
   end
