@@ -48,6 +48,10 @@ college_physics_2e = Kitchen::BookRecipe.new(book_short_name: :college_physics_2
   end
 
   BakeCompositeChapters.v1(book: book)
+  # Some target labels are created in this stage, but many won't be, so we silence the warning
+  silenced do
+    BakeLinkPlaceholders.v1(book: book)
+  end
 end
 
 opts = Slop.parse do |slop|
