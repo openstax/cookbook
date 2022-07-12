@@ -828,6 +828,18 @@ module Kitchen
       "https://openstax.org/books/#{book_slug}/pages/#{chapter_count}-#{page_string}#{page_title}"
     end
 
+    def add_platform_media(format)
+      valid_formats = %w[screen print screenreader]
+      raise "Media format invalid; valid formats are #{valid_formats}" unless valid_formats.include?(format)
+
+      self[:'data-media'] = \
+        if self[:'data-media']
+          self[:'data-media'] = self[:'data-media'].split.to_set.add(format).to_a.join(' ')
+        else
+          format
+        end
+    end
+
     protected
 
     # The wrapped Nokogiri node
