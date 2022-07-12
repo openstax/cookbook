@@ -17,7 +17,7 @@ module Kitchen::Directions::BakeIframes
             warn "Unable to find rex link for iframe with parent id=#{iframe.parent.id}"
             iframe[:src]
           end
-        iframe.wrap('<div class="os-has-iframe" data-type="alternatives">')
+        iframe.wrap('<div class="os-has-iframe" data-type="switch">')
         iframe.add_class('os-is-iframe')
 
         iframe = iframe.parent
@@ -28,6 +28,9 @@ module Kitchen::Directions::BakeIframes
             <a class="os-is-link" href=#{iframe_link} target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)}</a>
           HTML
         )
+
+        iframe.first('a.os-is-link').add_platform_media('print')
+        iframe.first('iframe').add_platform_media('screen')
       end
     end
   end

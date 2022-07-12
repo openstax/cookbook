@@ -834,7 +834,7 @@ module Kitchen
 
       self[:'data-media'] = \
         if self[:'data-media']
-          self[:'data-media'] = self[:'data-media'].split.to_set.add(format).to_a.join(' ')
+          self[:'data-media'].split.to_set.add(format).to_a.join(' ')
         else
           format
         end
