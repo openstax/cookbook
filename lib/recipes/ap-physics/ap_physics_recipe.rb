@@ -20,6 +20,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
   BakeChapterIntroductions.v1(book: book)
 
   BakeUnclassifiedNotes.v1(book: book)
+  BakeAutotitledNotes.v1(book: book, classes: %w[interactive])
   BakeIframes.v1(book: book)
   BakeMathInParagraph.v1(book: book)
 
