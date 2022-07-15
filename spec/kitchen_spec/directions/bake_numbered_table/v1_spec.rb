@@ -105,6 +105,17 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
+  let(:narrow_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="narrow-table" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:other_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -193,6 +204,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
 
   it 'bakes a data table' do
     described_class.new.bake(table: data_table, number: '2.3', always_caption: false)
+
+    expect(data_table.document.search('.os-table').first).to match_snapshot_auto
+  end
+
+  it 'bakes a narrow table' do
+    described_class.new.bake(table: narrow_table, number: '2.3', always_caption: false)
 
     expect(data_table.document.search('.os-table').first).to match_snapshot_auto
   end
