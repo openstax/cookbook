@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Specify header to remove form EOC in `Marketing`
 * Change EOC title in `Marketing`
 * Add baking for `.interactive` note on ap-physics
 * Add notes to `organic-chemistry`
