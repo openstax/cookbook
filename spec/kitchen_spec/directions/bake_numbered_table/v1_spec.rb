@@ -211,7 +211,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
   it 'bakes a narrow table' do
     described_class.new.bake(table: narrow_table, number: '2.3', always_caption: false)
 
-    expect(data_table.document.search('.os-table').first).to match_snapshot_auto
+    expect(narrow_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'bakes another kind of table' do
