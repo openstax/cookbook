@@ -135,7 +135,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     it 'with chapter outline' do
       described_class.v2(
         book: book_with_diff_order,
-        strategy_options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v2 }
+        options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v2 }
       )
       expect(book_with_diff_order.body).to match_snapshot_auto
     end
@@ -149,14 +149,14 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
   context 'when v2 is called on a book without chapter-objectives' do
     it 'works' do
       described_class.v2(
-        book: book_with_intro_objectives, strategy_options: { strategy: :none, introduction_order: :v2 }
+        book: book_with_intro_objectives, options: { strategy: :none, introduction_order: :v2 }
       )
       expect(book_with_intro_objectives.body).to match_snapshot_auto
     end
 
     it 'unknown strategy raises' do
       expect {
-        described_class.v2(book: book_with_intro_objectives, strategy_options: { strategy: :hello })
+        described_class.v2(book: book_with_intro_objectives, options: { strategy: :hello })
       }.to raise_error('No such strategy')
     end
   end
@@ -165,7 +165,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     it 'bakes' do
       described_class.v2(
         book: book_with_unit_opener,
-        strategy_options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v3 }
+        options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v3 }
       )
       expect(book_with_unit_opener.body).to match_snapshot_auto
     end
@@ -174,7 +174,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
   context 'when v2 is called with strategy: add_objectives' do
     it 'works' do
       described_class.v2(
-        book: book_v1, strategy_options: {
+        book: book_v1, options: {
           strategy: :add_objectives,
           bake_chapter_outline: true,
           introduction_order: :v1
@@ -189,7 +189,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       pantry = book_v1.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
       expect(pantry).to receive(:store).with('Chapter 2 Chapter 2 Title', { label: 'testid2' })
-      described_class.v2(book: book_v1, strategy_options: {
+      described_class.v2(book: book_v1, options: {
         strategy: :add_objectives,
         bake_chapter_outline: true,
         introduction_order: :v1
@@ -202,11 +202,12 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     it 'doesn not stores link text for introduction pages' do
       pantry = book_v1.pantry(name: :link_text)
       expect(pantry).not_to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
-      described_class.v2(book: book_v1, strategy_options: {
+      described_class.v2(book: book_v1, options: {
         strategy: :add_objectives,
         bake_chapter_outline: true,
-        introduction_order: :v1
-      }, block_target_label: true
+        introduction_order: :v1,
+        block_target_label: true
+      }
     )
     end
   end

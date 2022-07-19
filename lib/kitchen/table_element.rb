@@ -121,6 +121,14 @@ module Kitchen
       has_class?('data-table')
     end
 
+    # Returns true if the table is narrow-table
+    #
+    # @return [Boolean]
+    #
+    def narrow_table?
+      has_class?('narrow-table')
+    end
+
     # Returns an element for the table caption, if present
     #
     # @return [Element, nil]

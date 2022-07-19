@@ -79,6 +79,9 @@ module Kitchen
           elsif table.data_table?
             custom_table = CustomBody.new(table: table, klass: 'data-table')
             custom_table.modify_body(has_fake_title: false)
+          elsif table.narrow_table?
+            custom_table = CustomBody.new(table: table, klass: 'narrow-table')
+            custom_table.modify_body(has_fake_title: false)
           end
         end
       end

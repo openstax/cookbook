@@ -24,7 +24,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 case "${book}" in
   accounting) $DIR/lib/recipes/accounting/bake --input $input_file --output $output_file;;
-  additive-manufacturing) $DIR/lib/recipes/additive-manufacturing/bake --input $input_file --output $output_file;;
   american-government) $DIR/lib/recipes/american-government/bake --input $input_file --output $output_file;;
   anatomy) $DIR/lib/recipes/anatomy/bake --input $input_file --output $output_file;;
   anthropology) $DIR/lib/recipes/anthropology/bake --input $input_file --output $output_file;;
@@ -54,6 +53,7 @@ case "${book}" in
   intro-business) $DIR/lib/recipes/intro-business/bake --input $input_file --output $output_file;;
   marketing) $DIR/lib/recipes/marketing/bake --input $input_file --output $output_file;;
   microbiology) $DIR/lib/recipes/microbiology/bake --input $input_file --output $output_file;;
+  organic-chemistry) $DIR/lib/recipes/organic-chemistry/bake --input $input_file --output $output_file;;
   philosophy) $DIR/lib/recipes/philosophy/bake --input $input_file --output $output_file;;
   pl-economics) $DIR/lib/recipes/pl-economics/bake --input $input_file --output $output_file;;
   pl-psychology) $DIR/lib/recipes/pl-psychology/bake --input $input_file --output $output_file;;

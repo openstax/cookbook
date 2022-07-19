@@ -20,8 +20,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc|
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(
-    book: book, strategy_options: {
-      strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v1
+    book: book, options: {
+      strategy: :add_objectives, bake_chapter_outline: true
     }
   )
   BakeUnnumberedFigure.v1(book: book)

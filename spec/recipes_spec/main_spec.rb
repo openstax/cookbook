@@ -11,10 +11,6 @@ RSpec.describe 'books' do
     expect('accounting').to bake_correctly
   end
 
-  it 'bakes additive-manufacturing' do
-    expect('additive-manufacturing').to bake_correctly
-  end
-
   it 'bakes american-government' do
     expect('american-government').to bake_correctly
   end
@@ -145,6 +141,10 @@ RSpec.describe 'books' do
 
   it 'bakes microbio' do
     expect('microbiology').to bake_correctly
+  end
+
+  it 'bakes organic-chemistry' do
+    expect('organic-chemistry').to bake_correctly
   end
 
   it 'bakes organizational-behavior' do

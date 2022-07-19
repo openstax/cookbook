@@ -11,15 +11,20 @@ module Kitchen
 
       def self.v2(
         book:,
-        block_target_label: false,
-        strategy_options: {
-          strategy: :default, bake_chapter_outline: false, introduction_order: :v1
+        options: {
+          strategy: :default, bake_chapter_outline: false, introduction_order: :v1,
+          block_target_label: false
         }
       )
+        options.reverse_merge!(
+          strategy: :default,
+          bake_chapter_outline: false,
+          introduction_order: :v1,
+          block_target_label: false
+        )
         V2.new.bake(
           book: book,
-          strategy_options: strategy_options,
-          block_target_label: block_target_label
+          options: options
         )
       end
 

@@ -40,7 +40,6 @@ case "${book}" in
   computer-science) dest="${DIR}/data/computer-science/short" && script="${DIR}/lib/recipes/computer-science/shorten";;
   political-science) dest="${DIR}/data/political-science/short" && script="${DIR}/lib/recipes/political-science/shorten";;
   ap-biology) dest="${DIR}/data/ap-biology/short" && script="${DIR}/lib/recipes/ap-biology/shorten";;
-  additive-manufacturing) dest="${DIR}/data/additive-manufacturing/short" && script="${DIR}/lib/recipes/additive-manufacturing/shorten";;
   college-physics) dest="${DIR}/data/college-physics/short" && script="${DIR}/lib/recipes/college-physics/shorten";;
   college-physics-2e) dest="${DIR}/data/college-physics-2e/short" && script="${DIR}/lib/recipes/college-physics-2e/shorten";;
   astronomy) dest="${DIR}/data/astronomy/short" && script="${DIR}/lib/recipes/astronomy/shorten";;
@@ -61,6 +60,7 @@ case "${book}" in
   pl-u-physics) dest="${DIR}/data/pl-u-physics/short" && script="${DIR}/lib/recipes/pl-u-physics/shorten";;
   world-history) dest="${DIR}/data/world-history/short" && script="${DIR}/lib/recipes/world-history/shorten";;
   marketing) dest="${DIR}/data/marketing/short" && script="${DIR}/lib/recipes/marketing/shorten";;
+  organic-chemistry) dest="${DIR}/data/organic-chemistry/short" && script="${DIR}/lib/recipes/organic-chemistry/shorten";;
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 

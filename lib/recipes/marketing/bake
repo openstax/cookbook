@@ -29,7 +29,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
   end
 
   BakeChapterIntroductions.v2(
-    book: book, strategy_options: {
+    book: book, options: {
       strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v3
     }
   )
@@ -87,7 +87,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
         uuid_key: ".#{section_key}",
         section_selector: "section.#{section_key}"
       ) do |section|
-        RemoveSectionTitle.v1(section: section)
+        RemoveSectionTitle.v1(section: section, selector: 'h3')
       end
     end
 
@@ -107,7 +107,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
     )
   end
 
-  notes = %w[marketing-practice companies-conscience link-to-learning]
+  notes = %w[marketing-practice companies-conscience link-to-learning careers-marketing]
   BakeAutotitledNotes.v1(book: book, classes: notes)
   BakeAutotitledNotes.v1(
     book: book,
@@ -160,8 +160,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
-  BakeToc.v1(book: book)
   BakeUnitTitle.v1(book: book)
+  BakeUnitPageTitle.v1(book: book)
+  BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
 end

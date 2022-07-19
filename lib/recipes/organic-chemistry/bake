@@ -4,13 +4,8 @@
 
 require_relative '../recipes_helper'
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
+recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   include Kitchen::Directions
-
-  # Set overrides
-  doc.selectors.override(
-    reference: 'section.references'
-  )
 
   book = doc.book
   metadata = book.metadata
@@ -19,49 +14,30 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
   book.search('cnx-pi').trash
 
   BakeUnnumberedFigure.v1(book: book)
-  BakePreface.v1(book: book, title_element: 'h1')
-  BakeUnitTitle.v1(book: book)
-  BakeChapterIntroductions.v2(
-    book: book,
-    options: {
-      bake_chapter_outline: false,
-      introduction_order: :v2
-    }
-  )
+  BakePreface.v1(book: book)
+
+  book.chapters.each do |chapter|
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+  end
+
+  BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
-
-  book.notes('$.homeostatic').each { |note| note['use-subtitle'] = true }
-
-  BakeAutotitledNotes.v1(
-    book: book,
-    classes: %w[interactive everyday homeostatic disorders career aging]
-  )
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
-
-    exercise_section_classes = %w[interactive-exercise multiple-choice free-response]
-
-    exercise_section_classes.each do |klass|
-      MoveExercisesToEOC.v1(
-        chapter: chapter,
-        metadata_source: metadata,
-        klass: klass
-      )
-    end
-
-    chapter.search(exercise_section_classes.prefix('section.').join(', ')).exercises
-           .each do |exercise|
-      exercise.solution.trash
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-    end
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    chapter.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
+                     title_tag: 'h3')
     end
 
     chapter.figures(only: :figure_to_number?).each do |figure|
@@ -81,13 +57,26 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
       BakeNumberedTable.v1(table: table, number: "#{appendix_letter}#{table.count_in(:page)}")
     end
 
+    page.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{appendix_letter}#{example.count_in(:page)}",
+                     title_tag: 'div')
+    end
+
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeReferences.v3(book: book, metadata_source: metadata)
+  BakeUnnumberedTables.v1(book: book)
+
+  note_classes = %w[why-chapter something-extra working-problems]
+  BakeAutotitledNotes.v1(book: book, classes: note_classes)
+
+  BakeUnclassifiedNotes.v1(book: book)
+  BakeStepwise.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)

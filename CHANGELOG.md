@@ -5,8 +5,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-* Add support for creating index name term content from name attribute instead of reference if they don't have it for `pl-economics`.
 
+* Bake `narrow-table`
+
+## [v.1.12.0] - 2022-07-18
+
+* Specify header to remove form EOC in `Marketing`
+* Change EOC title in `Marketing`
+* Add baking for `.interactive` note on ap-physics
+* Add notes to `organic-chemistry`
+* Fix `college-physics-2e` link text (call `BakeLinkPlaceholders` in both recipes)
+* Add locales to `organic-chemistry`
+* Create basic `organic-chemistry` recipe
+* Add `BakeUnitPageTitle` in `marketing` recipe
+
+## [v1.11.0] - 2022-06-30
+
+* Add `.careers-marketing` to marketing recipe
+* Archive `additive-manufacturing`
+
+## [v1.10.0] - 2022-06-21
+
+* Add support for creating index name term content from name attribute instead of reference if they don't have it for `pl-economics`.
 * Add `options` parameter to pass options to `BakeNumberedNotes`
 * Add `options` parameter to pass options to `BakeAutotitledNotes`
 * Add `options` parameter to pass options to `BakeNumberedExercise`
