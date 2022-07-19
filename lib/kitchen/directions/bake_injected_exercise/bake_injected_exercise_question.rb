@@ -1,15 +1,20 @@
 # frozen_string_literal: true
+require "byebug"
 
 module Kitchen::Directions::BakeInjectedExerciseQuestion
   def self.v1(question:, number:, only_number_solution: false)
-    V1.new.bake(question: question, number: number, only_number_solution: only_number_solution)
+    V1.new.bake(
+      question: question,
+      number: number,
+      only_number_solution: only_number_solution,
+    )
   end
 
   class V1
     def bake(question:, number:, only_number_solution:)
       id = question.id
-
       in_appendix = question.has_ancestor?(:page) && question.ancestor(:page).has_class?('appendix')
+      alphabetical_multipart = question.search('.alphabetical-multipart')&.present?
 
       # Store label in pantry
       unless only_number_solution
@@ -19,7 +24,6 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
                          "#{question.ancestor(:chapter).count_in(:book)}.#{number}"
                        end
         question.target_label(label_text: 'exercise', custom_content: label_number)
-
       end
 
       # Synthesize multiple choice solution
@@ -59,7 +63,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
             #{context if context.present?}
             #{"<span class='os-divider'>. </span>" if context.present?}
             #{question.stimulus&.cut&.paste}
-            #{question.stem.cut.paste}
+            #{question.stem&.cut&.paste unless alphabetical_multipart}#{question.search(".alphabetical-multipart")&.cut&.paste if alphabetical_multipart}
             #{question.answers&.cut&.paste}
           </div>
         HTML
