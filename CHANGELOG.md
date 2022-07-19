@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `narrow-table`
+
 ## [v.1.12.0] - 2022-07-18
 
 * Specify header to remove form EOC in `Marketing`
