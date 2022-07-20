@@ -1,12 +1,12 @@
 pl:
   figure:
-    nominative: Rysunek
-    genitive: Rysunku
-    dative: Rysunkowi
-    accusative: Rysunek
-    instrumental: Rysunkiem
-    locative: Rysunku
-    vocative: Rysunku
+    nominative: Ilustracja
+    genitive: Ilustracji
+    dative: Ilustracji
+    accusative: Ilustrację
+    instrumental: Ilustracją
+    locative: Ilustracji
+    vocative: Ilustracjo
   table:
     nominative: Tabela
     genitive: Tabeli
