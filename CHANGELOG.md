@@ -6,7 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change figure title to `Ilustracja` in Polish books
+* Bake `narrow-table`
 * Add `ElementBase#add_platform_media`
+* Update `BakeIframes` and `BakeScreenreaderSpans` to use new media switch markup
+
+## [v.1.12.0] - 2022-07-18
+
+* Specify header to remove form EOC in `Marketing`
+* Change EOC title in `Marketing`
+* Add baking for `.interactive` note on ap-physics
 * Add notes to `organic-chemistry`
 * Fix `college-physics-2e` link text (call `BakeLinkPlaceholders` in both recipes)
 * Add locales to `organic-chemistry`
