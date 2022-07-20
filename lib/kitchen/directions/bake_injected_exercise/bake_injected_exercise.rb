@@ -25,7 +25,6 @@ module Kitchen::Directions::BakeInjectedExercise
           question.set(:'data-type', 'alphabetical-question-multipart')
           question.add_class('alphabetical-multipart')
           problem_letter = "(#{alphabet[index]})"
-          # I HAVE TO CHANGE THE DATA TYPE OF QUEStiON STEMS???
 
           question.prepend(child:
             <<~HTML

@@ -63,7 +63,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
             #{context if context.present?}
             #{"<span class='os-divider'>. </span>" if context.present?}
             #{question.stimulus&.cut&.paste}
-            #{question.stem&.cut&.paste unless alphabetical_multipart}#{question.search(".alphabetical-multipart")&.cut&.paste if alphabetical_multipart}
+            #{alphabetical_multipart ? question.search('.alphabetical-multipart').cut.paste : question.stem.cut.paste}
             #{question.answers&.cut&.paste}
           </div>
         HTML

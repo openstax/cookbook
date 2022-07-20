@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Bake `narrow-table`
+* Add EOC to `organic-chemistry`
+* Add option for alphabetical multipart questions in `Bake_Injected_Exercises`
 
 ## [v.1.12.0] - 2022-07-18
 
