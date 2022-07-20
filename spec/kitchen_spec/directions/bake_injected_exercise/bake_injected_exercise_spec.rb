@@ -82,4 +82,9 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
     described_class.v1(exercise: injected_exercise_full_with_two_questions)
     expect(injected_exercise_full_with_two_questions).to match_snapshot_auto
   end
+
+  it 'bakes an alphabetical multipart question' do
+    described_class.v1(exercise: injected_exercise_full_with_two_questions, alphabetical_multiparts: true)
+    expect(injected_exercise_full_with_two_questions).to match_snapshot_auto
+  end
 end

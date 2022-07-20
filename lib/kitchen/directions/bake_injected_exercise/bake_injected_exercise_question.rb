@@ -14,7 +14,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
     def bake(question:, number:, only_number_solution:)
       id = question.id
       in_appendix = question.has_ancestor?(:page) && question.ancestor(:page).has_class?('appendix')
-      alphabetical_multipart = question.search('.alphabetical-multipart')&.present?
+      alphabetical_multipart = question.search('.alphabetical-multipart')&.first&.present?
 
       # Store label in pantry
       unless only_number_solution
