@@ -43,7 +43,9 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       if letter_answers.present? && !question.solution
         question.append(child:
           <<~HTML
-            <div data-type="question-solution">#{letter_answers.join(', ')}</div>
+            <div data-type="question-solution">
+              #{letter_answers.join(', ')}#{'.' if options[:add_dot]}
+            </div>
           HTML
         )
       elsif letter_answers.present?

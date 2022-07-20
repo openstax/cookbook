@@ -92,7 +92,7 @@
             <div data-type="answer-content">mode - correct answer</div>
             
           </li>
-          <li data-type="question-answer" data-correctness="0.0" data-id="668499">
+          <li data-type="question-answer" data-correctness="1.0" data-id="668499">
             <div data-type="answer-content">all of the above - distractor</div>
             
           </li>
@@ -104,7 +104,9 @@
         
       <div data-type="question-solution" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">5</a>
 <span class="os-divider">. </span>
-<div class="os-solution-container">c</div>
+<div class="os-solution-container">
+  c, d.
+</div>
 </div>
 </div>
     </div>
@@ -120,7 +122,7 @@
             <div data-type="answer-content">mean - i'm distractor</div>
             
           </li>
-          <li data-type="question-answer" data-correctness="0.0" data-id="668497">
+          <li data-type="question-answer" data-correctness="1.0" data-id="668497">
             <div data-type="answer-content">median - distractor</div>
           </li>
           <li data-type="question-answer" data-correctness="1.0" data-id="668498">
@@ -135,7 +137,7 @@
         
         <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">6</a>
 <span class="os-divider">. </span>
-<div class="os-solution-container"><span>c.</span>
+<div class="os-solution-container"><span>b, c.</span>
           detailed solution for MC
         </div>
 </div>

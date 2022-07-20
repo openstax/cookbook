@@ -58,7 +58,7 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
                     <div data-type="answer-content">mode - correct answer</div>
                     <div data-type="answer-feedback">choice level feedback</div>
                   </li>
-                  <li data-type="question-answer" data-correctness="0.0" data-id="668499">
+                  <li data-type="question-answer" data-correctness="1.0" data-id="668499">
                     <div data-type="answer-content">all of the above - distractor</div>
                     <div data-type="answer-feedback">choice level feedback</div>
                   </li>
@@ -74,7 +74,7 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
                     <div data-type="answer-content">mean - i'm distractor</div>
                     <div data-type="answer-feedback">choice level feedback</div>
                   </li>
-                  <li data-type="question-answer" data-correctness="0.0" data-id="668497">
+                  <li data-type="question-answer" data-correctness="1.0" data-id="668497">
                     <div data-type="answer-content">median - distractor</div>
                   </li>
                   <li data-type="question-answer" data-correctness="1.0" data-id="668498">
