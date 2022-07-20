@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add option `add_dot` to `BakeInjectedExerciseQuestion` for question answers
 * Change figure title to `Ilustracja` in Polish books
 * Bake `narrow-table`
 

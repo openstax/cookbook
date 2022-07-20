@@ -148,8 +148,15 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
     expect(book_with_injected_section.search('section').first).to match_snapshot_auto
   end
 
+  it 'bakes with dot after answer' do
+    book_with_injected_section.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: question.count_in(:page), options: { add_dot: true })
+    end
+    expect(book_with_injected_section.search('section').first).to match_snapshot_auto
+  end
+
   it 'bakes without question number' do
-    described_class.v1(question: exercise_no_question_number.injected_questions.first, number: 4, only_number_solution: true)
+    described_class.v1(question: exercise_no_question_number.injected_questions.first, number: 4, options: { only_number_solution: true })
     expect(exercise_no_question_number).to match_snapshot_auto
   end
 
