@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Change figure title to `Ilustracja` in Polish books
 * Bake `narrow-table`
+* Add `ElementBase#add_platform_media`
+* Update `BakeIframes` and `BakeScreenreaderSpans` to use new media switch markup
 
 ## [v.1.12.0] - 2022-07-18
 
