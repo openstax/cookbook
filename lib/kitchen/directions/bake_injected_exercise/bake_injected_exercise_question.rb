@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "byebug"
 
 module Kitchen::Directions::BakeInjectedExerciseQuestion
   def self.v1(question:, number:, only_number_solution: false)

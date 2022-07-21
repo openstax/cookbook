@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "byebug"
 
 module Kitchen::Directions::BakeInjectedExercise
   def self.v1(exercise:, alphabetical_multiparts: false)
@@ -10,6 +11,11 @@ module Kitchen::Directions::BakeInjectedExercise
       question_count = exercise.injected_questions.count
       exercise[:'data-question-count'] = question_count
       exercise[:'data-is-multipart'] = question_count > 1 ? 'True' : 'False'
+
+      # TODO:
+      # Use options for alphbetical multipliers?
+      # Change question count to 1 and is-multipart to false
+      #
 
       context = exercise&.exercise_context
       stimulus = exercise&.first("div[data-type='exercise-stimulus']")
@@ -51,15 +57,16 @@ module Kitchen::Directions::BakeInjectedExercise
           question&.cut(to: questions_clipboard)
         end
 
-        stimulus.set(:id, wrapper_id)
-        stimulus.set(:'data-type', 'exercise-question')
+        stimulus.set(:'data-type', 'question-stimulus')
 
-        stimulus&.replace_children(with:
+        exercise&.prepend(child:
           <<~HTML
-            <div data-type="question-stimulus">#{stimulus.children}</div>
-            #{questions_clipboard.paste}
-            <div data-type="question-solution" id='##{wrapper_id}-solution'>
-            #{solutions_clipboard.paste}
+            <div data-type='exercise-question' id='#{wrapper_id}'>
+              #{stimulus&.cut&.paste}
+              #{questions_clipboard.paste}
+              <div data-type="question-solution" id='#{wrapper_id}-solution'>
+                #{solutions_clipboard.paste}
+              </div>
             </div>
           HTML
         )
