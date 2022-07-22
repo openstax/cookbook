@@ -9,8 +9,6 @@ module Kitchen::Directions::BakeInjectedExercise
   class V1
     def bake(exercise:, alphabetical_multiparts:)
       question_count = exercise.injected_questions.count
-      exercise[:'data-question-count'] = question_count
-      exercise[:'data-is-multipart'] = question_count > 1 ? 'True' : 'False'
 
       # TODO:
       # Use options for alphbetical multipliers?
@@ -22,6 +20,7 @@ module Kitchen::Directions::BakeInjectedExercise
 
       # To handle alphabetical multipart questions without interrupting numbering
       if alphabetical_multiparts && stimulus
+        question_count = 1
         solutions_clipboard = Kitchen::Clipboard.new
         questions_clipboard = Kitchen::Clipboard.new
         alphabet = *('a'..'z')
@@ -32,10 +31,13 @@ module Kitchen::Directions::BakeInjectedExercise
           question.add_class('alphabetical-multipart')
           problem_letter = "(#{alphabet[index]})"
 
+          solution = question.solution
+          solution_id = "#{question.id}-solution" if solution.present?
+
           question.prepend(child:
             <<~HTML
               <div class="os-problem-container">
-                <a class='problem-letter' #{"href=##{question.id}-solution" if question.id.present?}>#{problem_letter}</a>
+                <a class='problem-letter' #{"href=##{solution_id}" if solution.present?}>#{problem_letter}</a>
                 <span class='os-divider'> </span>
                 #{question.stimulus&.cut&.paste}
                 #{question.stem&.cut&.paste}
@@ -43,35 +45,46 @@ module Kitchen::Directions::BakeInjectedExercise
             HTML
           )
 
-          solution = question.solution
-          solution_id = "#{question.id}-solution"
-          solution&.replace_children(with:
+          question&.cut(to: questions_clipboard)
+
+          byebug if solution&.id == "auto_0202c868-bb8e-4fd4-a878-dd57c5ba7fe5_264771-wrapper-solution"
+
+          next unless solution
+
+          solution.replace_children(with:
             <<~HTML
               <a class='problem-letter' href='##{solution_id}'>#{problem_letter}</a>
               <span class='os-divider'> </span>
               <div class="os-solution-container">#{question.solution&.children}</div>
             HTML
           )
-          solution&.set(:'data-type', 'solution-part')
-          solution&.cut(to: solutions_clipboard)
-          question&.cut(to: questions_clipboard)
+          solution.set(:'data-type', 'solution-part')
+          solution.cut(to: solutions_clipboard)
         end
 
         stimulus.set(:'data-type', 'question-stimulus')
+        solution_block =  if solutions_clipboard.any?
+                            <<~HTML
+                              <div data-type="question-solution" id='#{wrapper_id}-solution'>
+                                #{solutions_clipboard.paste}
+                              </div>
+                            HTML
+                          end
 
         exercise&.prepend(child:
           <<~HTML
             <div data-type='exercise-question' id='#{wrapper_id}'>
               #{stimulus&.cut&.paste}
               #{questions_clipboard.paste}
-              <div data-type="question-solution" id='#{wrapper_id}-solution'>
-                #{solutions_clipboard.paste}
-              </div>
+              #{solution_block}
             </div>
           HTML
         )
 
       end
+
+      exercise[:'data-question-count'] = question_count
+      exercise[:'data-is-multipart'] = question_count > 1 ? 'True' : 'False'
 
       return unless context
 
