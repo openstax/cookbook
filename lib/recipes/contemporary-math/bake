@@ -57,7 +57,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
     chapter.pages.notes('$.your-turn').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:note), only_number_solution: false)
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:note),
+        options: { only_number_solution: false }
+      )
     end
 
     chapter_summary = \

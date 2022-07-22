@@ -5,10 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Change `Example` title to `Worked Example` for `organic-chemistry`
+* Add option `add_dot` to `BakeInjectedExerciseQuestion` for question answers
+* Change figure title to `Ilustracja` in Polish books
 * Bake `narrow-table`
 * Add EOC to `organic-chemistry`
 * Add option for alphabetical multipart questions in `Bake_Injected_Exercises`
+* Add `ElementBase#add_platform_media`
+* Update `BakeIframes` and `BakeScreenreaderSpans` to use new media switch markup
 
 ## [v.1.12.0] - 2022-07-18
 

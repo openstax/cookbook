@@ -9,7 +9,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing_short) do |doc|
 
   book = doc.book
   # trash all but first chapter
-  book.chapters.drop(2).each(&:trash)
+  book.chapters.drop(3).each(&:trash)
   # trash all but first appendix
   book.search('div.appendix').drop(1).each(&:trash)
 end

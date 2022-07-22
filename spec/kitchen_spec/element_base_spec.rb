@@ -656,4 +656,47 @@ RSpec.describe Kitchen::ElementBase do
         raise_error('Cannot create rex link to element with ID not-in-chapter - needs ancestors of both types chapter & page/composite_page')
     end
   end
+
+  describe '#add_platform_media' do
+    let(:no_media) do
+      book_containing(html:
+        <<~HTML
+          <div>
+            <span>book only content</span>
+          </div>
+        HTML
+      ).first('span')
+    end
+
+    let(:some_media) do
+      book_containing(html:
+        <<~HTML
+          <div>
+            <span data-media="screen">already has media attribute</span>
+          </div>
+        HTML
+      ).first('span')
+    end
+
+    it 'adds media when no preexisting media' do
+      no_media.add_platform_media('print')
+      expect(no_media[:'data-media']).to eq('print')
+    end
+
+    it 'adds media when some media is there' do
+      some_media.add_platform_media('print')
+      expect(some_media[:'data-media']).to eq('screen print')
+    end
+
+    it 'doesn\'t add media twice' do
+      some_media.add_platform_media('screen')
+      expect(some_media[:'data-media']).to eq('screen')
+    end
+
+    it 'throws when given invalid output' do
+      expect do
+        some_media.add_platform_media('metaverse')
+      end.to raise_error('Media format invalid; valid formats are ["screen", "print", "screenreader"]') # TODO: specify exception
+    end
+  end
 end

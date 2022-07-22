@@ -1,0 +1,159 @@
+<section class="section-with-injected-exercises">
+    <div data-type="injected-exercise" data-injected-from-nickname="multiFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
+      <div data-type="exercise-stimulus">Exercise stimulus</div>
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="1" id="auto_abc123_1" class="os-hasSolution"><a class="os-number" href="#auto_abc123_1-solution">1</a><span class="os-divider">. </span>
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">Question 1</div>
+  
+</div>
+
+        
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_1-solution"><a class="os-number" href="#auto_abc123_1">1</a>
+<span class="os-divider">. </span>
+<div class="os-solution-container">
+          solution 1
+        </div>
+</div>
+      </div>
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="2" id="auto_abc123_2" class="os-hasSolution"><a class="os-number" href="#auto_abc123_2-solution">2</a><span class="os-divider">. </span>
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">Question 2</div>
+  
+</div>
+
+        
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_2-solution"><a class="os-number" href="#auto_abc123_2">2</a>
+<span class="os-divider">. </span>
+<div class="os-solution-container">
+          solution 2
+        </div>
+</div>
+      </div>
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="3" id="auto_abc123_3" class="os-hasSolution"><a class="os-number" href="#auto_abc123_3-solution">3</a><span class="os-divider">. </span>
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">Question 3</div>
+  
+</div>
+
+        
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_3-solution"><a class="os-number" href="#auto_abc123_3">3</a>
+<span class="os-divider">. </span>
+<div class="os-solution-container">
+          solution 3
+        </div>
+</div>
+      </div>
+    </div>
+    <div data-type="injected-exercise" data-injected-from-nickname="singleFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="4" id="auto_abc123_4" class="os-hasSolution"><a class="os-number" href="#auto_abc123_4-solution">4</a><span class="os-divider">. </span>
+<div class="os-problem-container">
+  
+  
+  <div data-type="question-stimulus">Question 1 stimulus</div>
+  <div data-type="question-stem">Question 1</div>
+  
+</div>
+
+        
+        
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_4-solution"><a class="os-number" href="#auto_abc123_4">4</a>
+<span class="os-divider">. </span>
+<div class="os-solution-container">
+          solution 1
+        </div>
+</div>
+      </div>
+    </div>
+    <div data-type="injected-exercise" data-injected-from-nickname="singleMC" data-injected-from-version="2" data-injected-from-url="url" data-tags="tags" data-is-vocab="False">
+      <div data-type="exercise-question" data-is-answer-order-important="True" data-formats="multiple-choice test-format" data-id="5" id="auto_abc123_5" class="os-hasSolution"><a class="os-number" href="#auto_abc123_5-solution">5</a><span class="os-divider">. </span>
+<div class="os-problem-container">
+  
+  
+  <div data-type="question-stimulus">i'm a question stimulus</div>
+  <div data-type="question-stem">Testing a multiple choice question</div>
+  <ol data-type="question-answers" type="a">
+          <li data-type="question-answer" data-correctness="0.0" data-id="668496">
+            <div data-type="answer-content">mean - i'm distractor</div>
+            
+          </li>
+          <li data-type="question-answer" data-correctness="0.0" data-id="668497">
+            <div data-type="answer-content">median - distractor</div>
+          </li>
+          <li data-type="question-answer" data-correctness="1.0" data-id="668498">
+            <div data-type="answer-content">mode - correct answer</div>
+            
+          </li>
+          <li data-type="question-answer" data-correctness="1.0" data-id="668499">
+            <div data-type="answer-content">all of the above - distractor</div>
+            
+          </li>
+        </ol>
+</div>
+
+        
+        
+        
+      <div data-type="question-solution" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">5</a>
+<span class="os-divider">. </span>
+<div class="os-solution-container">
+  c, d.
+</div>
+</div>
+</div>
+    </div>
+    <div data-type="injected-exercise" data-injected-from-nickname="singleMCWithDetailed" data-injected-from-version="2" data-injected-from-url="url" data-tags="tags" data-is-vocab="False">
+      <div data-type="exercise-question" data-is-answer-order-important="True" data-formats="multiple-choice test-format" data-id="5" id="auto_abc123_5" class="os-hasSolution"><a class="os-number" href="#auto_abc123_5-solution">6</a><span class="os-divider">. </span>
+<div class="os-problem-container">
+  
+  
+  <div data-type="question-stimulus">i'm a question stimulus</div>
+  <div data-type="question-stem">Testing a multiple choice question</div>
+  <ol data-type="question-answers" type="a">
+          <li data-type="question-answer" data-correctness="0.0" data-id="668496">
+            <div data-type="answer-content">mean - i'm distractor</div>
+            
+          </li>
+          <li data-type="question-answer" data-correctness="1.0" data-id="668497">
+            <div data-type="answer-content">median - distractor</div>
+          </li>
+          <li data-type="question-answer" data-correctness="1.0" data-id="668498">
+            <div data-type="answer-content">mode - correct answer</div>
+            
+          </li>
+        </ol>
+</div>
+
+        
+        
+        
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">6</a>
+<span class="os-divider">. </span>
+<div class="os-solution-container"><span>b, c.</span>
+          detailed solution for MC
+        </div>
+</div>
+      </div>
+    </div>
+    <div data-type="injected-exercise" data-injected-from-nickname="singleFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="6" id="auto_abc123_6"><span class="os-number">7</span><span class="os-divider">. </span>
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">question without solution</div>
+  
+</div>
+
+        
+      </div>
+    </div>
+  </section>

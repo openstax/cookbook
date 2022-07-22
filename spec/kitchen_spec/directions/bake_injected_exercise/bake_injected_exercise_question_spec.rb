@@ -58,7 +58,7 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
                     <div data-type="answer-content">mode - correct answer</div>
                     <div data-type="answer-feedback">choice level feedback</div>
                   </li>
-                  <li data-type="question-answer" data-correctness="0.0" data-id="668499">
+                  <li data-type="question-answer" data-correctness="1.0" data-id="668499">
                     <div data-type="answer-content">all of the above - distractor</div>
                     <div data-type="answer-feedback">choice level feedback</div>
                   </li>
@@ -74,7 +74,7 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
                     <div data-type="answer-content">mean - i'm distractor</div>
                     <div data-type="answer-feedback">choice level feedback</div>
                   </li>
-                  <li data-type="question-answer" data-correctness="0.0" data-id="668497">
+                  <li data-type="question-answer" data-correctness="1.0" data-id="668497">
                     <div data-type="answer-content">median - distractor</div>
                   </li>
                   <li data-type="question-answer" data-correctness="1.0" data-id="668498">
@@ -148,8 +148,15 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
     expect(book_with_injected_section.search('section').first).to match_snapshot_auto
   end
 
+  it 'bakes with dot after answer' do
+    book_with_injected_section.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: question.count_in(:page), options: { add_dot: true })
+    end
+    expect(book_with_injected_section.search('section').first).to match_snapshot_auto
+  end
+
   it 'bakes without question number' do
-    described_class.v1(question: exercise_no_question_number.injected_questions.first, number: 4, only_number_solution: true)
+    described_class.v1(question: exercise_no_question_number.injected_questions.first, number: 4, options: { only_number_solution: true })
     expect(exercise_no_question_number).to match_snapshot_auto
   end
 

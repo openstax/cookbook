@@ -56,7 +56,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
 
     chapter.pages.each do |page|
       BakeAllNumberedExerciseTypes.v1(
-        within: page.search('section.knowledge-check')
+        within: page.search('section.knowledge-check'),
+        question_options: { options: { add_dot: true } }
       )
     end
 

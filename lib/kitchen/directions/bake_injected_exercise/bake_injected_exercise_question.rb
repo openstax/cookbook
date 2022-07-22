@@ -1,22 +1,26 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::BakeInjectedExerciseQuestion
-  def self.v1(question:, number:, only_number_solution: false)
-    V1.new.bake(
-      question: question,
-      number: number,
-      only_number_solution: only_number_solution
+  def self.v1(question:, number:, options: {
+    only_number_solution: false,
+    add_dot: false
+  })
+    options.reverse_merge!(
+      only_number_solution: false,
+      add_dot: false
     )
+
+    V1.new.bake(question: question, number: number, options: options)
   end
 
   class V1
-    def bake(question:, number:, only_number_solution:)
+    def bake(question:, number:, options:)
       id = question.id
       in_appendix = question.has_ancestor?(:page) && question.ancestor(:page).has_class?('appendix')
       alphabetical_multipart = question.search('.alphabetical-multipart')&.first&.present?
 
       # Store label in pantry
-      unless only_number_solution
+      unless options[:only_number_solution]
         label_number = if in_appendix
                          "#{question.ancestor(:page).count_in(:book)}.#{number}"
                        else
@@ -38,15 +42,18 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       if letter_answers.present? && !question.solution
         question.append(child:
           <<~HTML
-            <div data-type="question-solution">#{letter_answers.join(', ')}</div>
+            <div data-type="question-solution">
+              #{letter_answers.join(', ')}#{'.' if options[:add_dot]}
+            </div>
           HTML
         )
       elsif letter_answers.present?
-        question.solution.prepend(child: "<span>#{letter_answers.join(', ')}</span>")
+        question.solution.prepend(child:
+          "<span>#{letter_answers.join(', ')}#{'.' if options[:add_dot]}</span>")
       end
 
       # Bake question
-      unless only_number_solution
+      unless options[:only_number_solution]
         problem_number = "<span class='os-number'>#{number}</span>"
         if question.solution
           problem_number = "<a class='os-number' href='##{id}-solution'>#{number}</a>"
@@ -57,7 +64,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
 
       question.prepend(child:
         <<~HTML
-          #{problem_number unless only_number_solution}#{"<span class='os-divider'>. </span>" unless only_number_solution}
+          #{problem_number unless options[:only_number_solution]}#{"<span class='os-divider'>. </span>" unless options[:only_number_solution]}
           <div class="os-problem-container">
             #{context if context.present?}
             #{"<span class='os-divider'>. </span>" if context.present?}
