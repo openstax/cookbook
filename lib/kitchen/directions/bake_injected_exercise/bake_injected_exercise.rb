@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "byebug"
 
 module Kitchen::Directions::BakeInjectedExercise
   def self.v1(exercise:, alphabetical_multiparts: false)
@@ -55,13 +56,13 @@ module Kitchen::Directions::BakeInjectedExercise
         end
 
         stimulus.set(:'data-type', 'question-stimulus')
-        solution_block =  if solutions_clipboard.any?
-                            <<~HTML
-                              <div data-type="question-solution" id='#{wrapper_id}-solution'>
-                                #{solutions_clipboard.paste}
-                              </div>
-                            HTML
-                          end
+        solution_block = if solutions_clipboard.any?
+                           <<~HTML
+                             <div data-type="question-solution" id='#{wrapper_id}-solution'>
+                               #{solutions_clipboard.paste}
+                             </div>
+                           HTML
+                         end
 
         exercise&.prepend(child:
           <<~HTML
@@ -77,6 +78,8 @@ module Kitchen::Directions::BakeInjectedExercise
 
       exercise[:'data-question-count'] = question_count
       exercise[:'data-is-multipart'] = question_count > 1 ? 'True' : 'False'
+
+      byebug
 
       return unless context
 
