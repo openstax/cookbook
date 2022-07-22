@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require "byebug"
 
 module Kitchen::Directions::BakeInjectedExercise
   def self.v1(exercise:, alphabetical_multiparts: false)
@@ -46,8 +45,6 @@ module Kitchen::Directions::BakeInjectedExercise
           )
 
           question&.cut(to: questions_clipboard)
-
-          byebug if solution&.id == "auto_0202c868-bb8e-4fd4-a878-dd57c5ba7fe5_264771-wrapper-solution"
 
           next unless solution
 
