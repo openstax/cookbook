@@ -9,11 +9,6 @@ module Kitchen::Directions::BakeInjectedExercise
     def bake(exercise:, alphabetical_multiparts:)
       question_count = exercise.injected_questions.count
 
-      # TODO:
-      # Use options for alphbetical multipliers?
-      # Change question count to 1 and is-multipart to false
-      #
-
       context = exercise&.exercise_context
       stimulus = exercise&.first("div[data-type='exercise-stimulus']")
 
