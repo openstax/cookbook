@@ -17,7 +17,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
     def bake(question:, number:, options:)
       id = question.id
       in_appendix = question.has_ancestor?(:page) && question.ancestor(:page).has_class?('appendix')
-      alphabetical_multipart = question.search('div.alphabetical-multipart')&.first&.present?
+      alphabetical_multipart = question.search("div[data-type='alphabetical-question-multipart']")&.first&.present?
 
       # Store label in pantry
       unless options[:only_number_solution]
@@ -69,7 +69,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
             #{context if context.present?}
             #{"<span class='os-divider'>. </span>" if context.present?}
             #{question.stimulus&.cut&.paste}
-            #{alphabetical_multipart ? question.search('div.alphabetical-multipart').cut.paste : question.stem.cut.paste}
+            #{alphabetical_multipart ? question.search("div[data-type='alphabetical-question-multipart']").cut.paste : question.stem.cut.paste}
             #{question.answers&.cut&.paste}
           </div>
         HTML
