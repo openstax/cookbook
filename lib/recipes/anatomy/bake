@@ -34,7 +34,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[interactive everyday homeostatic disorders career aging]
+    classes: %w[interactive everyday homeostatic disorders career aging diseases]
   )
 
   book.chapters.each do |chapter|
