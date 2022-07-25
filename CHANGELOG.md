@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add option for alphabetical multipart questions in `Bake_Injected_Exercises`
 * Add `ElementBase#add_platform_media`
 * Update `BakeIframes` and `BakeScreenreaderSpans` to use new media switch markup
+* Translations added for Organic Chemistry eoc sections
 
 ## [v.1.12.0] - 2022-07-18
 
