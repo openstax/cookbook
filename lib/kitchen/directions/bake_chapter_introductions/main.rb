@@ -13,14 +13,16 @@ module Kitchen
         book:,
         options: {
           strategy: :default, bake_chapter_outline: false, introduction_order: :v1,
-          block_target_label: false
+          block_target_label: false,
+          cases: false
         }
       )
         options.reverse_merge!(
           strategy: :default,
           bake_chapter_outline: false,
           introduction_order: :v1,
-          block_target_label: false
+          block_target_label: false,
+          cases: false
         )
         V2.new.bake(
           book: book,

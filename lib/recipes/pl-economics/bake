@@ -18,13 +18,17 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   book.search('cnx-pi').trash
   BakeListsWithPara.v1(book: book)
 
+  book.search('span[data-type="term"]').each do |term|
+    next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
+
+    term.raw.attributes.each do |_key, val|
+      val.remove if val&.namespace&.prefix == 'cxlxt'
+    end
+  end
 
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnnumberedFigure.v1(book: book)
-  BakeChapterIntroductions.v2(
-    book: book,
-    options: { block_target_label: true }
-  )
+  BakeChapterIntroductions.v2(book: book)
   BakeChapterTitle.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
@@ -89,13 +93,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       BakeFirstElements.v1(within: exercise)
     end
 
-    BakeNonIntroductionPages.v1(chapter: chapter, block_target_label: true)
+    BakeNonIntroductionPages.v1(chapter: chapter)
   end
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    BakeAppendix.v1(page: page, number: appendix_letter, block_target_label: true)
+    BakeAppendix.v1(page: page, number: appendix_letter)
     page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}",
