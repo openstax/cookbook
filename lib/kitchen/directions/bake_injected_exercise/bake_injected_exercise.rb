@@ -41,11 +41,11 @@ module Kitchen::Directions::BakeInjectedExercise
 
           question&.cut(to: questions_clipboard)
 
-          next unless solution
+          next unless solution.present?
 
           solution.replace_children(with:
             <<~HTML
-              <a class='problem-letter' href='##{solution_id}'>#{problem_letter}</a>
+              <a class='problem-letter' id='#{solution_id}'>#{problem_letter}</a>
               <span class='os-divider'> </span>
               <div class="os-solution-container">#{question.solution&.children}</div>
             HTML
