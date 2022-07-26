@@ -3,7 +3,6 @@
 # frozen_string_literal: true
 
 require_relative '../recipes_helper'
-require 'byebug'
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   include Kitchen::Directions
