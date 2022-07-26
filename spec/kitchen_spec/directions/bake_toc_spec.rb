@@ -362,5 +362,21 @@ RSpec.describe Kitchen::Directions::BakeToc do
         described_class.li_for_page(page1)
       end.to raise_error(ArgumentError, /could not detect any page type class/)
     end
+
+    context 'when book uses grammatical cases' do
+      it 'uses nominative case in chapter title' do
+        with_locale(:pl) do
+          stub_locales({
+            'toc_title': 'Spis Treści',
+            'chapter': {
+              'nominative': 'Rozdział',
+              'genitive': 'Rozdziału'
+            }
+          })
+          described_class.v1(book: book_with_eoc_composite_chapter, cases: true)
+          expect(book_with_eoc_composite_chapter.search('nav').to_s).to match_snapshot_auto
+        end
+      end
+    end
   end
 end
