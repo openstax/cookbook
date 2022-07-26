@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require_relative '../recipes_helper'
+require 'byebug'
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   include Kitchen::Directions
@@ -20,6 +21,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(exercise: exercise, alphabetical_multiparts: true)
   end
+
+  answer_key_wrapper = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -42,6 +45,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
 
     chapter.search(exercise_selectors).injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    end
+
+    # Bake answer key sections
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key_wrapper
+    )
+    exercise_classes = exercise_selectors.split(', ').map do |selector|
+      selector.gsub('section.', '')
+    end
+    exercise_classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
     end
   end
 
@@ -67,8 +83,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
-
-
   end
 
   book.pages('$.appendix').each do |page|
