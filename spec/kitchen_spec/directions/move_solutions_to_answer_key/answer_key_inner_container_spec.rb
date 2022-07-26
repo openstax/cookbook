@@ -52,7 +52,7 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
   it 'v1 works for solution (singular)' do
     expect(
       described_class.v1(
-        chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, solutions_plural: false
+        chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, options: { solutions_plural: false }
       )
     ).to match_snapshot_auto
   end
@@ -60,7 +60,7 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
   context 'when in appendix' do
     it 'changes the title to appendix and adds appendix prefix to uuid' do
       expect(
-        described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, in_appendix: true)
+        described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, options: { in_appendix: true })
       ).to match_snapshot_auto
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
           }
         })
         expect(
-          described_class.v1(chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, cases: true)
+          described_class.v1(chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, options: { cases: true })
         ).to match_normalized_html(
           <<~HTML
             <div class="os-eob os-solutions-container" data-type="composite-page" data-uuid-key=".solutions1">
@@ -107,7 +107,7 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
           }
         })
         expect(
-          described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, in_appendix: true, cases: true)
+          described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, options: {in_appendix: true, cases: true })
         ).to match_normalized_html(
           <<~HTML
             <div class="os-eob os-solutions-container" data-type="composite-page" data-uuid-key=".appendixsolutions1">

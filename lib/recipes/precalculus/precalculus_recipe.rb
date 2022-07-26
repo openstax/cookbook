@@ -126,7 +126,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
       chapter: chapter,
       metadata_source: metadata,
       append_to: solutions_container,
-      solutions_plural: false
+      options: { solutions_plural: false }
     )
 
     Strategy.new.bake(

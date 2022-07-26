@@ -9,8 +9,6 @@ module Kitchen
           when UnitElement
             li_for_unit(element, cases: cases)
           when ChapterElement
-          #   li_for_chapter(element)
-          # when ChapterElement && cases
             li_for_chapter(element, cases: cases)
           when PageElement, CompositePageElement
             li_for_page(element)

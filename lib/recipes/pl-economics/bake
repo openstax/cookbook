@@ -54,8 +54,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       chapter: chapter,
       metadata_source: metadata,
       append_to: answer_key,
-      solutions_plural: true,
-      cases: true
+      options: { cases: true }
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(

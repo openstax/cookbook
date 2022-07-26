@@ -101,7 +101,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
     end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter, metadata_source: metadata, append_to: solutions_container, cases: true
+      chapter: chapter, metadata_source: metadata, append_to: solutions_container,
+      options: { cases: true }
     )
 
     Strategy.new.bake(
