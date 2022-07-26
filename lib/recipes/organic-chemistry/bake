@@ -16,10 +16,52 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
 
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise, alphabetical_multiparts: true)
+  end
+
+  answer_key_wrapper = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+
+    eoc_exercises = ChapterReviewContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata
+    )
+
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_exercises,
+                          klass: 'visualizing-chemistry')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_exercises,
+                          klass: 'additional-problems')
+    BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+
+    exercise_selectors = 'section.section-exercises, section.visualizing-chemistry, ' \
+                         'section.additional-problems'
+
+    chapter.search(exercise_selectors).injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+    end
+
+    # Bake answer key sections
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key_wrapper
+    )
+    chapter.search('div.os-eos.os-section-exercises-container').each do |section_wrapper|
+      number = "#{chapter.count_in(:book)}.#{section_wrapper.count_in(:chapter)}"
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        chapter: section_wrapper, append_to: answer_key_inner_container,
+        section_class: 'section-exercises', title_number: number
+      )
+    end
+    %w[visualizing-chemistry additional-problems].each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   BakeChapterIntroductions.v1(book: book)
