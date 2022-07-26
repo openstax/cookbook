@@ -18,18 +18,18 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   book.search('cnx-pi').trash
   BakeListsWithPara.v1(book: book)
 
-  book.search('span[data-type="term"]').each do |term|
-    next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
+  # book.search('span[data-type="term"]').each do |term|
+  #   next if !term['cxlxt:index'] == 'name' || !term['cxlxt:index'] == 'foreign'
 
-    term.raw.attributes.each do |_key, val|
-      val.remove if val&.namespace&.prefix == 'cxlxt'
-    end
-  end
+  #   term.raw.attributes.each do |_key, val|
+  #     val.remove if val&.namespace&.prefix == 'cxlxt'
+  #   end
+  # end
 
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnnumberedFigure.v1(book: book)
-  BakeChapterIntroductions.v2(book: book)
-  BakeChapterTitle.v1(book: book)
+  BakeChapterIntroductions.v2(book: book, options: { cases: true })
+  BakeChapterTitle.v1(book: book, cases: true)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
   BakeAutotitledNotes.v1(
@@ -63,6 +63,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       metadata_source: metadata,
       append_to: answer_key,
       solutions_plural: true,
+      cases: true
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
@@ -99,7 +100,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    BakeAppendix.v1(page: page, number: appendix_letter)
+    BakeAppendix.v1(page: page, number: appendix_letter, cases: true)
     page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}",
@@ -132,7 +133,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
-  BakeToc.v1(book: book)
+  BakeToc.v1(book: book, cases: true)
   BakeFolio.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeLinks.v1(book: book)
