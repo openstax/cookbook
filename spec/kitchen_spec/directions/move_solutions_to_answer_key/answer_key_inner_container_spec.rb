@@ -4,6 +4,13 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
 
+  before do
+    stub_locales({
+      'chapter': 'Chapter',
+      'appendix': 'Appendix'
+    })
+  end
+
   let(:book) do
     book_containing(html:
       <<~HTML

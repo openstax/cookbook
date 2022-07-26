@@ -3,6 +3,11 @@
 require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::BakeAppendix do
+  before do
+    stub_locales({
+      'appendix': 'Appendix'
+    })
+  end
 
   let(:page) do
     page_element(
@@ -99,24 +104,7 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
         })
 
         described_class.v1(page: page, number: 3, cases: true)
-        expect(page).to match_normalized_html(
-          <<~HTML
-            <div data-type="page" id="apId">
-              <h1 data-type="document-title">
-                <span class="os-part-text">Dodatek </span>
-                <span class="os-number">3</span>
-                <span class="os-divider"> </span>
-                <span class="os-text" data-type="" itemprop="">Appendix Title</span>
-              </h1>
-              <section data-depth="1">
-                <h2 data-type="title">hello</h2>
-                <section data-depth="2">
-                  <h3 data-type="title">world</h3>
-                </section>
-              </section>
-            </div>
-          HTML
-        )
+        expect(page).to match_snapshot_auto
       end
     end
 
