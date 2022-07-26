@@ -8,6 +8,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy_short) do |doc|
   include Kitchen::Directions
 
   book = doc.book
+  # trash all but first unit
+  book.units.drop(1).each(&:trash)
   # trash all but first chapter
   book.chapters.drop(3).each(&:trash)
   # trash all but first appendix

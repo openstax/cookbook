@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+* Add answer key to `organic-chemistry`
+* Add `diseases` note to `anatomy`
 * Change `Example` title to `Worked Example` for `organic-chemistry`
 * Add option `add_dot` to `BakeInjectedExerciseQuestion` for question answers
 * Change figure title to `Ilustracja` in Polish books
