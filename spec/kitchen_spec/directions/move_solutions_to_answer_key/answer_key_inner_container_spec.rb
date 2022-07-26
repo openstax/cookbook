@@ -107,7 +107,7 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
           }
         })
         expect(
-          described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, options: {in_appendix: true, cases: true })
+          described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, options: { in_appendix: true, cases: true })
         ).to match_normalized_html(
           <<~HTML
             <div class="os-eob os-solutions-container" data-type="composite-page" data-uuid-key=".appendixsolutions1">
