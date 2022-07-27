@@ -19,6 +19,8 @@ RSpec.describe Kitchen::Directions::BakeChapterSectionExercises::V1 do
                 </div>
               </div>
             </section>
+          </div>
+          <div data-type="page">
             <section id="sectionId2" class="section-exercises">
               <div data-type="exercise" id="exercise_id2">
                 <div data-type="problem" id="problem_id2">
@@ -80,7 +82,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSectionExercises::V1 do
   context 'without deleting title' do
     it 'bakes & keeps in the title' do
       described_class.new.bake(chapter: book_with_section_exercises.chapters.first, trash_title: false)
-      expect(book_with_section_exercises.chapters.first).to match_normalized_html(expected_result)
+      expect(book_with_section_exercises.chapters.first).to match_snapshot_auto
     end
   end
 
@@ -89,7 +91,7 @@ RSpec.describe Kitchen::Directions::BakeChapterSectionExercises::V1 do
 
     it 'bakes & removes the title' do
       described_class.new.bake(chapter: book_with_section_exercises.chapters.first, trash_title: true)
-      expect(book_with_section_exercises.chapters.first).to match_normalized_html(expected_result)
+      expect(book_with_section_exercises.chapters.first).to match_snapshot_auto
     end
   end
 end
