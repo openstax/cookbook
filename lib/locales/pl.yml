@@ -91,3 +91,11 @@ pl:
       instrumental: Rozdziałem
       locative: Rozdziale
       vocative: Rozdziale
+  module:
+      nominative: Podrozdział
+      genitive: Podrozdziału
+      dative: Podrozdziałowi
+      accusative: Podrozdział
+      instrumental: Podrozdziałem
+      locative: Podrozdziale
+      vocative: Podrozdziale
