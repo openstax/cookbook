@@ -28,16 +28,37 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
-    eoc_exercises = ChapterReviewContainer.v1(
+    MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
-      metadata_source: metadata
-    )
+      metadata_source: metadata,
+      container_key: 'summary-reactions',
+      uuid_key: '.summary-reactions',
+      section_selector: 'section.summary-reactions'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
+    end
 
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_exercises,
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          klass: 'section-exercises')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'visualizing-chemistry')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_exercises,
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'additional-problems')
     BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'practice-scientific',
+      uuid_key: '.practice-scientific',
+      section_selector: 'section.practice-scientific'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
+    end
 
     exercise_selectors = 'section.section-exercises, section.visualizing-chemistry, ' \
                          'section.additional-problems'
