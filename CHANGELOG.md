@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-* Enable target labels with cases for Introduction(`BakeChapterIntroductions.v2`), Non-Intro Modules (`BakeNonIntroductionPages`), Appendixes (`BakeAppendix`) for `pl-economics`, adjust `BakeChapterTitle`, `BakeToC`, and `AnswerKeyInnerContainer`to use `chapter title` cases for pl books which utilizes them
+
+* Enable `target labels with cases` for Introduction(`BakeChapterIntroductions.v2`), Non-Intro Modules (`BakeNonIntroductionPages`), Appendixes (`BakeAppendix`) for `pl-economics`, adjust `BakeChapterTitle`, `BakeToC`, and `AnswerKeyInnerContainer` to use `chapter title` cases for pl books which utilizes them
+
+## [v.1.13.0] - 2022-07-28
+
 * Add answer key to `organic-chemistry`
 * Add `diseases` note to `anatomy`
 * Change `Example` title to `Worked Example` for `organic-chemistry`
