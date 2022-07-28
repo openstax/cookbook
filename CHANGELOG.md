@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add more selectors to `BakeFirstElements`
 * Change the way of baking title in `BakeChapterSectionExercises`
 * Add answer key to `organic-chemistry`
 * Add `diseases` note to `anatomy`
