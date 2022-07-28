@@ -29,4 +29,20 @@ RSpec.describe Kitchen::Directions::BakeChapterTitle::V1 do
 
     expect(book1.body.children.to_s).to match_snapshot_auto
   end
+
+  context 'when book uses grammatical cases' do
+    it 'uses nominative case in title' do
+      with_locale(:pl) do
+        stub_locales({
+          'chapter': {
+            'nominative': 'Rozdział',
+            'genitive': 'Rozdziału'
+          }
+        })
+        described_class.new.bake(book: book1, cases: true)
+
+        expect(book1.body.children.to_s).to match_snapshot_auto
+      end
+    end
+  end
 end

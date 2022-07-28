@@ -44,8 +44,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc|
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
-      append_to: answer_key,
-      solutions_plural: true
+      append_to: answer_key
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(

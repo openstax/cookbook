@@ -58,7 +58,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc|
     solution_container = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
     book.chapters.each do |chapter|
       inner_container = AnswerKeyInnerContainer.v1(
-        chapter: chapter, metadata_source: metadata, append_to: solution_container, solutions_plural: false
+        chapter: chapter, metadata_source: metadata, append_to: solution_container,
+        options: { solutions_plural: false }
       )
       DefaultStrategyForAnswerKeySolutions.v1(
         strategy_options: { selectors: %w[section-quiz].prefix('section.') },

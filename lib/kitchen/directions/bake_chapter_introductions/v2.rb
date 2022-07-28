@@ -9,7 +9,7 @@ module Kitchen::Directions::BakeChapterIntroductions
         title_label = chapter.title.search('.os-text').first&.text
         title_label = chapter.title.text if title_label.nil?
 
-        introduction_page.target_label(label_text: 'chapter', custom_content: "#{number} #{title_label}") unless options[:block_target_label]
+        introduction_page.target_label(label_text: 'chapter', custom_content: "#{number} #{title_label}", cases: options[:cases]) unless options[:block_target_label]
 
         title = bake_title(introduction_page: introduction_page)
 

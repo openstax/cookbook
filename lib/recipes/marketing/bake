@@ -100,7 +100,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
     )
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: false
+      chapter: chapter, metadata_source: metadata, append_to: answer_key,
+      options: { solutions_plural: false }
     )
     Strategy.new.bake(
       chapter: chapter,
@@ -146,8 +147,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
     end
 
     answer_key_appendix_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: page, metadata_source: metadata, append_to: answer_key, solutions_plural: false,
-      in_appendix: true
+      chapter: page, metadata_source: metadata, append_to: answer_key,
+      options: { solutions_plural: false, in_appendix: true }
     )
 
     AppendixStrategy.new.bake(

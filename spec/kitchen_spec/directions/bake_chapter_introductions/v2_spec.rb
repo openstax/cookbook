@@ -184,7 +184,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     end
   end
 
-  context 'when book has added targt labels for introduction pages' do
+  context 'when book has added targt labels for introduction pages and does not use gramatical cases' do
     it 'stores link text' do
       pantry = book_v1.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('Chapter 1 Chapter 1 Title', { label: 'ipId' })
@@ -209,6 +209,34 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         block_target_label: true
       }
     )
+    end
+  end
+
+  context 'when book uses grammatical cases' do
+    it 'stores link text' do
+      with_locale(:pl) do
+        stub_locales({
+          'chapter': {
+            'nominative': 'Rozdział',
+            'genitive': 'Rozdziału'
+          }
+        })
+
+        pantry = book_v1.pantry(name: :nominative_link_text)
+        expect(pantry).to receive(:store).with('Rozdział 1 Chapter 1 Title', { label: 'ipId' })
+        expect(pantry).to receive(:store).with('Rozdział 2 Chapter 2 Title', { label: 'testid2' })
+
+        pantry = book_v1.pantry(name: :genitive_link_text)
+        expect(pantry).to receive(:store).with('Rozdziału 1 Chapter 1 Title', { label: 'ipId' })
+        expect(pantry).to receive(:store).with('Rozdziału 2 Chapter 2 Title', { label: 'testid2' })
+
+        described_class.v2(book: book_v1, options: {
+          strategy: :add_objectives,
+          bake_chapter_outline: true,
+          introduction_order: :v1,
+          cases: true
+          })
+      end
     end
   end
 end

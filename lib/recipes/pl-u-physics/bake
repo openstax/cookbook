@@ -16,7 +16,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
 
   BakePreface.v1(book: book)
 
-  BakeChapterTitle.v1(book: book)
+  BakeChapterTitle.v1(book: book, cases: true)
   BakeUnitTitle.v1(book: book)
 
   BakeUnnumberedFigure.v1(book: book)
@@ -24,8 +24,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
 
   BakeChapterIntroductions.v2(
     book: book, options: {
-      strategy: :add_objectives, bake_chapter_outline: true,
-      block_target_label: true
+      strategy: :add_objectives,
+      bake_chapter_outline: true,
+      block_target_label: true,
+      cases: true
     }
   )
 
@@ -38,7 +40,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   solutions_container = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter, block_target_label: true)
+    BakeNonIntroductionPages.v1(chapter: chapter, options: { block_target_label: true })
     BakeLearningObjectives.v1(chapter: chapter)
 
     # EOC
@@ -99,7 +101,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
     end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter, metadata_source: metadata, append_to: solutions_container
+      chapter: chapter, metadata_source: metadata, append_to: solutions_container,
+      options: { cases: true }
     )
 
     Strategy.new.bake(
@@ -139,7 +142,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
-    BakeAppendix.v1(page: page, number: appendix_letter, block_target_label: true)
+    BakeAppendix.v1(page: page,
+                    number: appendix_letter,
+                    options: {
+                      block_target_label: true,
+                      cases: true
+                    }
+    )
 
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
@@ -155,7 +164,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeFootnotes.v1(book: book)
-  BakeToc.v1(book: book)
+  BakeToc.v1(book: book, options: { cases: true })
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
