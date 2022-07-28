@@ -158,10 +158,21 @@ module Kitchen::Directions::BakeIndex
       type =
         if !term_element.key?('index')
           'term'
+        elsif term_element.key?('index') && !(term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name' ||
+        term_element['cxlxt:index'] == 'foreign' ||
+        term_element['index'] == 'foreign')
+          'term'
         elsif term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name'
           'name'
         elsif term_element['cxlxt:index'] == 'foreign' || term_element['index'] == 'foreign'
           'foreign'
+        end
+
+        if term_element.key?('index') && !(term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name' ||
+          term_element['cxlxt:index'] == 'foreign' ||
+          term_element['index'] == 'foreign')
+            warn 'warning: term with worng index value:' 
+            puts term_element 
         end
 
       if term_element.key?('reference')
