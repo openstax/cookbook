@@ -56,7 +56,7 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     it 'stores link text' do
       pantry = chapter2.pantry(name: :link_text)
       expect(pantry).to receive(:store).with('<span class="label-counter">1.1</span><span class="title-label-text"> Review of Functions</span>', { label: 'page_123' })
-      described_class.v1(chapter: chapter2, custom_target_label: true)
+      described_class.v1(chapter: chapter2, options: { custom_target_label: true })
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     it 'does not store module link text' do
       pantry = chapter2.pantry(name: :link_text)
       expect(pantry).not_to receive(:store).with('1.1 Review of Functions', { label: 'page_123' })
-      described_class.v1(chapter: chapter2, block_target_label: true)
+      described_class.v1(chapter: chapter2, options: { block_target_label: true })
     end
   end
 
@@ -83,7 +83,7 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
 
         pantry = chapter2.pantry(name: :genitive_link_text)
         expect(pantry).to receive(:store).with('Podrozdziału 1.1 Review of Functions', { label: 'page_123' })
-        described_class.v1(chapter: chapter2, cases: true)
+        described_class.v1(chapter: chapter2, options: { cases: true })
       end
     end
   end

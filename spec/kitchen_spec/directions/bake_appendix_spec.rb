@@ -89,7 +89,7 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
     it 'stores link text' do
       pantry = page.pantry(name: :link_text)
       expect(pantry).not_to receive(:store).with('Appendix 3 Appendix Title', { label: 'apId' })
-      described_class.v1(page: page, number: '3', block_target_label: true)
+      described_class.v1(page: page, number: '3', options: { block_target_label: true })
     end
   end
 
@@ -103,7 +103,7 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
           }
         })
 
-        described_class.v1(page: page, number: 3, cases: true)
+        described_class.v1(page: page, number: 3, options: { cases: true })
         expect(page).to match_snapshot_auto
       end
     end
@@ -122,7 +122,7 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
 
         pantry = page.pantry(name: :genitive_link_text)
         expect(pantry).to receive(:store).with('Dodatku 3 Appendix Title', { label: 'apId' })
-        described_class.v1(page: page, number: '3', cases: true)
+        described_class.v1(page: page, number: '3', options: { cases: true })
       end
     end
   end
