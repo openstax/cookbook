@@ -373,7 +373,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
               'genitive': 'Rozdziału'
             }
           })
-          described_class.v1(book: book_with_eoc_composite_chapter, cases: true)
+          described_class.v1(book: book_with_eoc_composite_chapter, options: { cases: true })
           expect(book_with_eoc_composite_chapter.search('nav').to_s).to match_snapshot_auto
         end
       end

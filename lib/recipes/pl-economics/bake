@@ -124,7 +124,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
-  BakeToc.v1(book: book, cases: true)
+  BakeToc.v1(book: book, options: { cases: true })
   BakeFolio.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeLinks.v1(book: book)
