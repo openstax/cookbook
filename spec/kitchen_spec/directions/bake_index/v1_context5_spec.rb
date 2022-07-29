@@ -51,9 +51,10 @@ RSpec.describe Kitchen::Directions::BakeIndex do
   end
 
   context 'when book contains terms with indexes with invalid values' do
-    it 'logs a warning' do
+    it 'logs a warning with term name' do
       allow($stdout).to receive(:puts)
-      expect(Warning).to receive(:warn).with(/warning! term with invalid index value:/).at_least(:once)
+      expect($stdout).to receive(:puts).with("warning! term with invalid index value: 'czosnek id=auto_p1_term1'")
+      expect($stdout).to receive(:puts).with("warning! term with invalid index value: 'czarownica id=auto_p1_term3'")
       described_class.v1(book: book_with_terms_with_invalid_index_values, types: %w[name term foreign], uuid_prefix: '.'
       )
     end

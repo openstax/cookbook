@@ -168,8 +168,7 @@ module Kitchen::Directions::BakeIndex
       term_element['index'] == 'name' ||
       term_element['cxlxt:index'] == 'foreign' ||
       term_element['index'] == 'foreign')
-        warn 'warning! term with invalid index value:'
-        puts term_element
+        puts "warning! term with invalid index value: '#{term_element.text} id=#{term_element.id}'"
       end
 
       if term_element.key?('reference')
