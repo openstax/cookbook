@@ -3,7 +3,7 @@
 module Kitchen::Directions::BakeChapterSectionExercises
   class V1
     def bake(chapter:, trash_title:)
-      chapter.pages.each do |page|
+      chapter.non_introduction_pages.each do |page|
         page.search('section.section-exercises').each do |section|
           section.first('h3[data-type="title"]')&.trash if trash_title
           section.wrap(
@@ -13,7 +13,7 @@ module Kitchen::Directions::BakeChapterSectionExercises
 
           section_title = I18n.t(
             :section_exercises,
-            number: "#{chapter.count_in(:book)}.#{section.count_in(:chapter)}")
+            number: "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}")
 
           section.prepend(sibling:
             <<~HTML
