@@ -63,6 +63,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
 
     chapter.search(exercise_selectors).injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
     end
 
     # Bake answer key sections
@@ -130,6 +131,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   end
 
   BakeUnnumberedTables.v1(book: book)
+
+  book.search('div[data-type="question-solution"]').each do |solution|
+    BakeFirstElements.v1(within: solution)
+  end
 
   note_classes = %w[why-chapter something-extra working-problems]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
