@@ -158,8 +158,8 @@ module Kitchen::Directions::BakeIndex
       type =
         if !term_element.key?('index')
           'term'
-        elsif term_element.key?('index') && !(term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name' ||
-        term_element['cxlxt:index'] == 'foreign' ||
+        elsif term_element.key?('index') && !(term_element['cxlxt:index'] == 'name' ||
+        term_element['index'] == 'name' || term_element['cxlxt:index'] == 'foreign' ||
         term_element['index'] == 'foreign')
           'term'
         elsif term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name'
@@ -168,12 +168,13 @@ module Kitchen::Directions::BakeIndex
           'foreign'
         end
 
-        if term_element.key?('index') && !(term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name' ||
-          term_element['cxlxt:index'] == 'foreign' ||
-          term_element['index'] == 'foreign')
-            warn 'warning: term with worng index value:' 
-            puts term_element 
-        end
+      if term_element.key?('index') && !(term_element['cxlxt:index'] == 'name' ||
+      term_element['index'] == 'name' ||
+      term_element['cxlxt:index'] == 'foreign' ||
+      term_element['index'] == 'foreign')
+        warn 'warning! term with invalid index value:'
+        puts term_element
+      end
 
       if term_element.key?('reference')
         term_reference = term_element['cmlnle:reference'] || term_element['reference']
