@@ -156,13 +156,20 @@ module Kitchen::Directions::BakeIndex
 
     def add_term_to_index(term_element, page_title, term_italicized)
       type =
-        if !term_element.key?('index')
-          'term'
-        elsif term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name'
+        if term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name'
           'name'
         elsif term_element['cxlxt:index'] == 'foreign' || term_element['index'] == 'foreign'
           'foreign'
+        else
+          'term'
         end
+
+      if term_element.key?('index') && !(term_element['cxlxt:index'] == 'name' ||
+      term_element['index'] == 'name' ||
+      term_element['cxlxt:index'] == 'foreign' ||
+      term_element['index'] == 'foreign')
+        puts "warning! term with invalid index value: '#{term_element.text} id=#{term_element.id}'"
+      end
 
       if term_element.key?('reference')
         term_reference = term_element['cmlnle:reference'] || term_element['reference']
