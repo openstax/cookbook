@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Enable `target labels with cases` for Introduction(`BakeChapterIntroductions.v2`), Non-Intro Modules (`BakeNonIntroductionPages`), Appendixes (`BakeAppendix`) for `pl-economics`, adjust `BakeChapterTitle`, `BakeToC`, and `AnswerKeyInnerContainer` to use `chapter title` cases for pl books which utilizes them
+* Add more selectors to `BakeFirstElements`
+* Change the way of baking title in `BakeChapterSectionExercises`
 
 ## [v.1.13.0] - 2022-07-28
 

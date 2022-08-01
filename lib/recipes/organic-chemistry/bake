@@ -41,8 +41,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     end
 
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
-                          klass: 'section-exercises')
-    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'visualizing-chemistry')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'additional-problems')
@@ -65,18 +63,21 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
 
     chapter.search(exercise_selectors).injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
     end
 
     # Bake answer key sections
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key_wrapper
     )
-    chapter.search('div.os-eos.os-section-exercises-container').each do |section_wrapper|
-      number = "#{chapter.count_in(:book)}.#{section_wrapper.count_in(:chapter)}"
-      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: section_wrapper, append_to: answer_key_inner_container,
-        section_class: 'section-exercises', title_number: number
-      )
+    chapter.non_introduction_pages.each do |page|
+      page.search('div.os-eos.os-section-exercises-container').each do |section_wrapper|
+        number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+        Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+          chapter: section_wrapper, append_to: answer_key_inner_container,
+          section_class: 'section-exercises', title_number: number
+        )
+      end
     end
     %w[visualizing-chemistry additional-problems].each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
@@ -130,6 +131,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   end
 
   BakeUnnumberedTables.v1(book: book)
+
+  book.search('div[data-type="question-solution"]').each do |solution|
+    BakeFirstElements.v1(within: solution)
+  end
 
   note_classes = %w[why-chapter something-extra working-problems]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
