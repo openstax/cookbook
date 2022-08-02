@@ -13,7 +13,7 @@
         <div class="os-index-item">
           <%- item.terms.each_with_index do |term, ii| -%>
             <%- if ii == 0 -%>
-              <span class="os-term" group-by="<%= term.group_by %>"><%- if term.italicized -%><em data-effect="italics"><%= term.text %></em><%- else -%><%= term.text %><% end %></span>
+              <span class="os-term" group-by="<%= term.group_by %>"><%= term.children %></span>
             <%- else -%><span class="os-index-link-separator">, </span><% end %>
             <a class="os-term-section-link" href="#<%= term.id %>"><span class="os-term-section"><%= term.page_title %></span></a><!--
           --><%- end %>
