@@ -36,7 +36,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeLearningObjectives.v1(chapter: chapter)
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, has_para: true)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
