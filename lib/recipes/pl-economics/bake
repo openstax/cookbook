@@ -30,13 +30,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   BakeIframes.v1(book: book)
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[linkup bringhome clearup workout],
+    classes: %w[linkup bringhome clearup workout learning-objectives],
     options: { cases: true }
   )
   answer_key = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeLearningObjectives.v1(chapter: chapter)
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, has_para: true)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
