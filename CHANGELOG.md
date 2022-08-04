@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `learning-objectives` note to `pl-economics`
+* Change text in folio for Polish books
 * Add more selectors to `BakeFirstElements`
 * Change the way of baking title in `BakeChapterSectionExercises`
 ## [v.1.13.0] - 2022-07-28
