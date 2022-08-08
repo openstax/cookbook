@@ -1,0 +1,13 @@
+<div class="os-caption-container">
+    <span class="os-title-label"><%= @title_label %></span>
+    <span class="os-number"><%= @number %></span>
+    <%- if @title %>
+      <span class='os-divider'> </span>
+      <span class='os-title' data-type='title' id=<%= @title.id %>><%= @title.children %></span>
+    <% end %>
+    <%- if @caption %>
+      <span class='os-divider'> </span>
+      <span class='os-caption'><%= @caption.children %></span>
+    <% end %>
+</div>
+

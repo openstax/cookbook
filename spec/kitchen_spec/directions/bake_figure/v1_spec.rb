@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeFigure do
+RSpec.describe Kitchen::Directions::BakeFigure::V1 do
 
   before do
     stub_locales({
@@ -128,34 +128,15 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   describe 'v1' do
     it 'works' do
-      described_class.v1(figure: book1_figure, number: '1.2')
-
-      expect(book1.search('.os-figure').first).to match_html_nodes(
-        <<~HTML
-          <div class="os-figure">
-            <figure id="someId" class="">
-              <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
-                <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
-              </span>
-            </figure>
-            <div class="os-caption-container">
-              <span class="os-title-label">Figure </span>
-              <span class="os-number">1.2</span>
-              <span class="os-divider"> </span>
-              <span class="os-title" data-type="title" id="">This Is A Title</span>
-              <span class="os-divider"> </span>
-              <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
-            </div>
-          </div>
-        HTML
-      )
+      described_class.new.bake(figure: book1_figure, number: '1.2')
+      expect(book1.search('.os-figure').first).to match_snapshot_auto
     end
 
     context 'without a caption' do
       let(:figure_caption) { '' }
 
       it 'works without a caption' do
-        described_class.v1(figure: book1_figure, number: '1.2')
+        described_class.new.bake(figure: book1_figure, number: '1.2')
         expect(book1.search('.os-caption').first).to be nil
       end
     end
@@ -164,7 +145,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
       let(:figure_title) { '' }
 
       it 'works without a title' do
-        described_class.v1(figure: book1_figure, number: '1.2')
+        described_class.new.bake(figure: book1_figure, number: '1.2')
         expect(book1.search('.os-title').first).to be nil
       end
     end
@@ -173,14 +154,14 @@ RSpec.describe Kitchen::Directions::BakeFigure do
       let(:figure_classes) { 'splash' }
 
       it "gets a 'has-splash' class" do
-        described_class.v1(figure: book1_figure, number: '1.2')
+        described_class.new.bake(figure: book1_figure, number: '1.2')
         expect(book1.search('.os-figure').first.has_class?('has-splash')).to be true
       end
     end
 
     context 'when figure does not have splash class' do
       it "does not get a 'has-splash' class" do
-        described_class.v1(figure: book1_figure, number: '1.2')
+        described_class.new.bake(figure: book1_figure, number: '1.2')
         expect(book1.search('.os-figure').first.has_class?('has-splash')).to be false
       end
     end
@@ -189,7 +170,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
       it 'stores link text' do
         pantry = book1.pantry(name: :link_text)
         expect(pantry).to receive(:store).with('Figure 1.2', { label: 'someId' })
-        described_class.v1(figure: book1_figure, number: '1.2')
+        described_class.new.bake(figure: book1_figure, number: '1.2')
       end
     end
 
@@ -208,7 +189,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
           pantry = book1.pantry(name: :genitive_link_text)
           expect(pantry).to receive(:store).with('Rysunku 1.2', { label: 'someId' })
-          described_class.v1(figure: book1_figure, number: '1.2', cases: true)
+          described_class.new.bake(figure: book1_figure, number: '1.2', cases: true)
         end
       end
     end
@@ -216,14 +197,14 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   context 'when there are other nested children elements (eg. span, strong) in figure caption' do
     it 'does not add new lines when they are moved to span.os-caption' do
-      described_class.v1(figure: book3_figure_with_spans_strongs_in_caption, number: '1.2')
+      described_class.new.bake(figure: book3_figure_with_spans_strongs_in_caption, number: '1.2')
       expect(book3.search('.os-figure').first).to match_snapshot_auto
     end
   end
 
   context 'when figure does not have title or caption text' do
     it 'bakes figure label, number without unnnecessary dividers' do
-      described_class.v1(figure: book_with_figure_without_caption_title.chapters.figures.first, number: '1.2')
+      described_class.new.bake(figure: book_with_figure_without_caption_title.chapters.figures.first, number: '1.2')
       expect(book_with_figure_without_caption_title.chapters.figures.search('.os-divider').first).to be nil
     end
   end
@@ -248,7 +229,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   it 'logs a warning' do
     expect(Warning).to receive(:warn).with(/warning! exclude unnumbered figures from `BakeFigure` loop/)
-    described_class.v1(figure: book_with_unnumbered_splash.figures.first, number: 'blah')
+    described_class.new.bake(figure: book_with_unnumbered_splash.figures.first, number: 'blah')
   end
 
 end
