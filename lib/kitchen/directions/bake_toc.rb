@@ -3,13 +3,17 @@
 module Kitchen
   module Directions
     module BakeToc
-      def self.v1(book:)
+      def self.v1(book:, options: { cases: false })
+        options.reverse_merge!(
+          cases: false
+        )
+
         li_tags = book.body.element_children.map do |element|
           case element
           when UnitElement
-            li_for_unit(element)
+            li_for_unit(element, options)
           when ChapterElement
-            li_for_chapter(element)
+            li_for_chapter(element, options)
           when PageElement, CompositePageElement
             li_for_page(element)
           when CompositeChapterElement
@@ -26,7 +30,7 @@ module Kitchen
         )
       end
 
-      def self.li_for_unit(unit)
+      def self.li_for_unit(unit, options)
         chapters = unit.element_children.only(ChapterElement)
         pages = unit.element_children.only(PageElement)
 
@@ -39,7 +43,7 @@ module Kitchen
             </a>
             <ol class="os-unit">
               #{pages.map { |page| li_for_page(page) }.join("\n")}
-              #{chapters.map { |chapter| li_for_chapter(chapter) }.join("\n")}
+              #{chapters.map { |chapter| li_for_chapter(chapter, options) }.join("\n")}
             </ol>
           </li>
         HTML
@@ -60,14 +64,15 @@ module Kitchen
         HTML
       end
 
-      def self.li_for_chapter(chapter)
+      def self.li_for_chapter(chapter, options)
         pages = chapter.element_children.only(PageElement, CompositePageElement)
         inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
 
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
             <a href="##{chapter.title.id}">
-              <span class="os-number"><span class="os-part-text">#{I18n.t(:chapter)} </span>#{chapter.count_in(:book)}</span>
+              <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
+              if options[:cases]}")} </span>#{chapter.count_in(:book)}</span>
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
             </a>

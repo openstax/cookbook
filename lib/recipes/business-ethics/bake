@@ -85,7 +85,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc|
     )
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter, metadata_source: metadata, append_to: answer_key, solutions_plural: false
+      chapter: chapter, metadata_source: metadata, append_to: answer_key,
+      options: { solutions_plural: false }
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(

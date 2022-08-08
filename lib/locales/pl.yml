@@ -47,12 +47,10 @@ pl:
     instrumental: Ramką
     locative: Ramce
     vocative: Ramko
-  appendix: Dodatek
   theorem: Twierdzenie
   solution: Rozwiązanie
   chapter_outline: Treść rozdziału
   toc_title: Spis treści
-  chapter: Rozdział
   unit: Część
   chapter_review: Podsumowanie rozdziału
   learning_objectives: Cel dydaktyczny
@@ -77,3 +75,27 @@ pl:
     name: Skorowidz nazwisk
     term: Skorowidz rzeczowy
     foreign: Skorowidz terminów obcojęzycznych
+  appendix:
+      nominative: Dodatek
+      genitive: Dodatku
+      dative: Dodatkowi
+      accusative: Dodatek
+      instrumental: Dodatkiem
+      locative: Dodatku
+      vocative: Dodatku
+  chapter:
+      nominative: Rozdział
+      genitive: Rozdziału
+      dative: Rozdziałowi
+      accusative: Rozdział
+      instrumental: Rozdziałem
+      locative: Rozdziale
+      vocative: Rozdziale
+  module:
+      nominative: Podrozdział
+      genitive: Podrozdziału
+      dative: Podrozdziałowi
+      accusative: Podrozdział
+      instrumental: Podrozdziałem
+      locative: Podrozdziale
+      vocative: Podrozdziale
