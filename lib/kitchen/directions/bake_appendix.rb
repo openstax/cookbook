@@ -3,18 +3,28 @@
 module Kitchen
   module Directions
     module BakeAppendix
-      def self.v1(page:, number:, block_target_label: false)
+      def self.v1(page:, number:, options: {
+        block_target_label: false,
+        cases: false
+      })
+
+        options.reverse_merge!(
+          block_target_label: false,
+          cases: false
+        )
+
         title = page.title
         title.name = 'h1'
 
         # Store label information
         title_label = title.children
 
-        page.target_label(label_text: 'appendix', custom_content: "#{number} #{title_label}") unless block_target_label
+        page.target_label(label_text: 'appendix', custom_content: "#{number} #{title_label}", cases: options[:cases]) unless options[:block_target_label]
 
         title.replace_children(with:
           <<~HTML
-            <span class="os-part-text">#{I18n.t(:appendix)} </span>
+            <span class="os-part-text">#{I18n.t("appendix#{'.nominative' \
+            if options[:cases]}")} </span>
             <span class="os-number">#{number}</span>
             <span class="os-divider"> </span>
             <span data-type="" itemprop="" class="os-text">#{title.children}</span>

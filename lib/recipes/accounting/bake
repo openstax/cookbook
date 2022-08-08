@@ -33,12 +33,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   BakeChapterIntroductions.v2(
     book: book, options: {
       strategy: :add_objectives,
-      bake_chapter_outline: true,
+      bake_chapter_outline: true
     }
   )
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter, custom_target_label: true)
+    BakeNonIntroductionPages.v1(chapter: chapter, options: { custom_target_label: true })
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")

@@ -61,7 +61,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :history) do |doc|
       chapter: chapter,
       metadata_source: metadata,
       append_to: answer_key,
-      solutions_plural: false
+      options: { solutions_plural: false }
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
