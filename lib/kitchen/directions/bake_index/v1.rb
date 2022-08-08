@@ -8,17 +8,17 @@ module Kitchen::Directions::BakeIndex
 
     class Term
       attr_reader :text
+      attr_reader :children
       attr_reader :id
       attr_reader :group_by
       attr_reader :page_title
-      attr_reader :italicized
 
-      def initialize(text:, id:, group_by:, page_title:, italicized:)
+      def initialize(text:, children:, id:, group_by:, page_title:)
         @text = text.strip
+        @children = children
         @id = id
         @group_by = group_by
         @page_title = page_title
-        @italicized = italicized
       end
     end
 
@@ -128,8 +128,7 @@ module Kitchen::Directions::BakeIndex
         page = term_element.ancestor(:page)
         term_element.id = "auto_#{page.id}_term#{term_element.count_in(:book)}"
         page_title = page.title.text
-        term_italicized = term_element&.first("em[data-effect='italics']")
-        add_term_to_index(term_element, page_title, term_italicized)
+        add_term_to_index(term_element, page_title)
       end
 
       book.chapters.composite_pages.terms.each do |term_element|
@@ -138,8 +137,7 @@ module Kitchen::Directions::BakeIndex
         term_element.id = "auto_composite_page_term#{term_element.count_in(:book)}"
         chapter_number = chapter.count_in(:book)
         page_title = "#{chapter_number} #{page.title.text.strip}".strip
-        term_italicized = term_element&.first("em[data-effect='italics']")
-        add_term_to_index(term_element, page_title, term_italicized)
+        add_term_to_index(term_element, page_title)
       end
 
       types.each do |type|
@@ -154,7 +152,7 @@ module Kitchen::Directions::BakeIndex
       end
     end
 
-    def add_term_to_index(term_element, page_title, term_italicized)
+    def add_term_to_index(term_element, page_title)
       type =
         if term_element['cxlxt:index'] == 'name' || term_element['index'] == 'name'
           'name'
@@ -175,13 +173,16 @@ module Kitchen::Directions::BakeIndex
         term_reference = term_element['cmlnle:reference'] || term_element['reference']
         group_by = term_reference[0]
         content = term_reference
+        children = content
       elsif term_element.key?('name')
         term_reference = term_element['cxlxt:name'] || term_element['name']
         group_by = term_reference[0]
         content = term_reference
+        children = content
       else
         group_by = I18n.character_to_group(term_element.text.strip[0])
         content = term_element.text
+        children = term_element.children
       end
 
       group_by = I18n.t(:eob_index_symbols_group) unless group_by.match?(/[[:alpha:]]/)
@@ -190,8 +191,8 @@ module Kitchen::Directions::BakeIndex
       # Add it to our index object
       @indexes[type].add_term(
         Term.new(
-          italicized: term_italicized,
           text: content,
+          children: children,
           id: term_element.id,
           group_by: group_by,
           page_title: page_title.gsub(/\n/, '')
