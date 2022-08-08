@@ -13,7 +13,7 @@ module Kitchen
         title = figure.title&.cut
         caption = figure.caption&.wrap_children('span', class: 'os-caption')&.cut
         figure.append(sibling:
-          <<~HTML
+          <<~HTML.chomp
             <div class="os-caption-container">
               <span class="os-title-label">#{I18n.t("figure#{'.nominative' if cases}")} </span>
               <span class="os-number">#{number}</span>
