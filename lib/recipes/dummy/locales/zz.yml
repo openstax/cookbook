@@ -1,3 +1,0 @@
-# The dummy recipe does not actually inject text but cookbook requires a locale file
-zz:
-  test: Just a placeholder
