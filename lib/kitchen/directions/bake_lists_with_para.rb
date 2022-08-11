@@ -8,7 +8,7 @@ module Kitchen
     module BakeListsWithPara
       def self.v1(book:)
         book.search('li').each do |item|
-          item_para = item.first('p')&.cut
+          item_para = item.first('p:only-child')&.cut
           item.replace_children with: item_para.children unless item_para.nil?
         end
       end
