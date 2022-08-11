@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+* Change organic chemistry locale of `Chapter Outline` to `Chapter Contents`
 
 ## [v1.14.0] - 2022-08-11
 
@@ -15,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Change text in folio for Polish books
 * Add more selectors to `BakeFirstElements`
 * Change the way of baking title in `BakeChapterSectionExercises`
-* Change organic chemistry locale of `Chapter Outline` to `Chapter Exercises`
 
 ## [v1.13.0] - 2022-07-28
 
