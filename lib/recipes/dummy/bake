@@ -2,8 +2,15 @@
 
 require_relative '../recipes_helper'
 
-# Hardcode this because CNX books contain other languages (vi, af, ru, de, ...) and no text is injected when baking them.
-I18n.locale = 'en'
+# Hardcode locale = 'en' because CNX books contain other languages (vi, af, ru, de, ...) and no text is injected when baking them.
+module Kitchen
+  # Monkeypatched
+  class Document
+    def locale
+      'en'
+    end
+  end
+end
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
   include Kitchen::Directions
