@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v1.14.0] - 2022-08-11
+## [v.1.14.0] - 2022-08-11
 
 * Modify `BakeListsWithPara` to change `only-child` paragraphs
 * Modify `BakeIndex` to display all children of term not just text
