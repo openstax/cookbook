@@ -2,6 +2,8 @@
 
 require_relative '../recipes_helper'
 
+I18n.locale = 'zz'
+
 recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
   include Kitchen::Directions
 
