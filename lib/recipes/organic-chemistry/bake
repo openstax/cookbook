@@ -44,7 +44,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
                           klass: 'visualizing-chemistry')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'additional-problems')
-    BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+    BakeChapterSectionExercises.v1(
+      chapter: chapter,
+      options: {
+        trash_title: true,
+        create_title: false
+      }
+    )
 
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,

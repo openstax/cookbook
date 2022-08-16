@@ -80,17 +80,24 @@ RSpec.describe Kitchen::Directions::BakeChapterSectionExercises::V1 do
   end
 
   context 'without deleting title' do
-    it 'bakes & keeps in the title' do
-      described_class.new.bake(chapter: book_with_section_exercises.chapters.first, trash_title: false)
+    it 'bakes, keeps in the title & create new one' do
+      described_class.new.bake(chapter: book_with_section_exercises.chapters.first, options: {})
       expect(book_with_section_exercises.chapters.first).to match_snapshot_auto
     end
   end
 
   context 'with title deleted' do
+    it 'bakes & removes the title' do
+      described_class.new.bake(chapter: book_with_section_exercises.chapters.first, options: { trash_title: true, create_title: false })
+      expect(book_with_section_exercises.chapters.first).to match_snapshot_auto
+    end
+  end
+
+  context 'with title deleted and created new one' do
     let(:extra_title) { '' }
 
-    it 'bakes & removes the title' do
-      described_class.new.bake(chapter: book_with_section_exercises.chapters.first, trash_title: true)
+    it 'bakes, removes the title & create new one' do
+      described_class.new.bake(chapter: book_with_section_exercises.chapters.first, options: { trash_title: true })
       expect(book_with_section_exercises.chapters.first).to match_snapshot_auto
     end
   end
