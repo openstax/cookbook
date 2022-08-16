@@ -2,14 +2,16 @@
 
 module Kitchen::Directions::BakeChapterSectionExercises
   class V1
-    def bake(chapter:, trash_title:)
+    def bake(chapter:, options:)
       chapter.non_introduction_pages.each do |page|
         page.search('section.section-exercises').each do |section|
-          section.first('h3[data-type="title"]')&.trash if trash_title
+          section.first('h3[data-type="title"]')&.trash if options[:trash_title]
           section.wrap(
             %(<div class="os-eos os-section-exercises-container"
               data-uuid-key=".section-exercises">)
           )
+
+          next unless options[:create_title]
 
           section_title = I18n.t(
             :section_exercises,
