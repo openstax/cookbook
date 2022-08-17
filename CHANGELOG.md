@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Add support for figures with class `mechanism-figure` to `BakeFigure` for `organic-chemistry`
 * Fix eoc title in `organic-chemistry`
 * Change organic chemistry locale of `Chapter Outline` to `Chapter Contents`
 
