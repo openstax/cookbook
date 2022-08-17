@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 * Add support for figures with class `mechanism-figure` to `BakeFigure` for `organic-chemistry`
+* Remove title from section exercises in `organic-chemistry`
 * Fix eoc title in `organic-chemistry`
 * Change organic chemistry locale of `Chapter Outline` to `Chapter Contents`
 
