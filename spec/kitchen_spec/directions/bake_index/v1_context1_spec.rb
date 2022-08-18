@@ -27,7 +27,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
         </div>
         <div data-type="page" id="p1">
           <div data-type="document-title">Preface</div>
-          <span data-type="term">foo</span>
+          <span data-type="term" id="replace-me-not">foo</span>
           <span data-type="term">Foo</span>
           <span data-type="term">Bar</span>
           <span data-type="term">bar</span>
@@ -55,7 +55,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           <div data-type="page" id="p4"/>
           <div data-type="composite-page">
             <h2 data-type="document-title">Another EOC Section</h2>
-            <span data-type="term">composite page at the top level</span>
+            <span data-type="term" id="replace-me-not-2">composite page at the top level</span>
             <span data-type="term">éblahblah</span>
             <span data-type="term">5’ cap</span>
           </div>

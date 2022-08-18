@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `BakeIndex` so that `terms` only change their `ids` if an `id` is not already present
 * Remove title from section exercises in `organic-chemistry`
 * Fix eoc title in `organic-chemistry`
 * Change organic chemistry locale of `Chapter Outline` to `Chapter Contents`
