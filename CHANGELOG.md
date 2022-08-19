@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix adding additional white spaces inside figure caption children in `BakeFigure`
 * Fix additional whitespeces after solution number in `BakeInjectedExerciseQuestion`
 * Change `BakeIndex` so that `terms` only change their `ids` if an `id` is not already present
 * Remove title from section exercises in `organic-chemistry`
@@ -21,7 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Change text in folio for Polish books
 * Add more selectors to `BakeFirstElements`
 * Change the way of baking title in `BakeChapterSectionExercises`
-
 ## [v1.13.0] - 2022-07-28
 
 * Add answer key to `organic-chemistry`
