@@ -11,7 +11,12 @@ module Kitchen
         figure.target_label(label_text: 'figure', custom_content: number, cases: cases)
 
         title = figure.title&.cut
-        caption = figure.caption&.wrap_children('span', class: 'os-caption')&.cut
+        # caption = figure.caption&.wrap_children('span', class: 'os-caption')&.cut
+        caption = figure.caption&.cut
+        caption&.name = 'span'
+        caption&.add_class('os-caption')
+        caption&.remove_attribute('id') # only needed for pl books, where captions have id
+
         figure.append(sibling:
           <<~HTML.chomp
             <div class="os-caption-container">
@@ -20,7 +25,7 @@ module Kitchen
               #{"<span class=\'os-divider\'> </span>" if title}
               #{"<span class=\'os-title\' data-type=\'title\' id=\"#{title.id}\">#{title.children}</span>" if title}
               #{"<span class=\'os-divider\'> </span>" if caption}
-              #{caption.children if caption}
+              #{caption}
             </div>
           HTML
         )

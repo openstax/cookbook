@@ -13,6 +13,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
   let(:figure_classes) { '' }
   let(:figure_caption) { '<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>' }
   let(:figure_caption_with_spans_and_strongs) { '<figcaption><strong><span class="green-text"><em data-effect="italics">sp</em><sup>3</sup> hybrid orbitals</span></strong>, oriented toward the corners of a regular tetrahedron, are formed by the combination of an <strong><span class="magenta-text"><em data-effect="italics">s</em> orbital</span></strong> and three <strong><span class="cyan-text"><em data-effect="italics">p</em> orbitals</span></strong> (<strong><span class="magenta-text">red</span></strong>/<strong><span class="cyan-text">blue</span></strong>). The <em data-effect="italics">sp</em><sup>3</sup> hybrids have two lobes and are unsymmetrical about the nucleus, giving them a directionality and allowing them to form strong bonds to other atoms.</figcaption>' }
+  let(:figure_caption_with_id) { '<figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>' }
   let(:figure_title) { "<div data-type='title'>This Is A Title</div>" }
 
   let(:book1) do
@@ -55,6 +56,22 @@ RSpec.describe Kitchen::Directions::BakeFigure do
         <<~HTML
           <figure id="someId" class="#{figure_classes}">
             #{figure_caption_with_spans_and_strongs}
+            #{figure_title}
+            <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+              <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
+            </span>
+          </figure>
+        HTML
+      )
+    )
+  end
+
+  let(:book4) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <figure id="someId" class="#{figure_classes}">
+            #{figure_caption_with_id}
             #{figure_title}
             <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
               <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
@@ -125,6 +142,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
   let(:book1_figure) { book1.chapters.figures.first }
   let(:book3_figure_with_spans_strongs_in_caption) { book3.chapters.figures.first }
+  let(:book4_figure_id_in_caption) { book4.chapters.figures.first }
 
   describe 'v1' do
     it 'works' do
@@ -218,6 +236,13 @@ RSpec.describe Kitchen::Directions::BakeFigure do
     it 'does not add new lines when they are moved to span.os-caption' do
       described_class.v1(figure: book3_figure_with_spans_strongs_in_caption, number: '1.2')
       expect(book3.search('.os-figure').first).to match_snapshot_auto
+    end
+  end
+
+  context 'when figure caption has id' do
+    it 'does not keep the id when bake figure caption' do
+      described_class.v1(figure: book4_figure_id_in_caption, number: '1.2')
+      expect(book4.search('.os-figure').first).to match_snapshot_auto
     end
   end
 
