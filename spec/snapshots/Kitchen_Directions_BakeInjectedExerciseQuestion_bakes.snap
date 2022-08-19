@@ -11,7 +11,8 @@
 </div>
 
         
-        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_1-solution"><a class="os-number" href="#auto_abc123_1">1</a><span class="os-divider">. </span>
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_1-solution"><a class="os-number" href="#auto_abc123_1">1</a>
+<span class="os-divider">. </span>
 <div class="os-solution-container">
           solution 1
         </div>
@@ -27,7 +28,8 @@
 </div>
 
         
-        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_2-solution"><a class="os-number" href="#auto_abc123_2">2</a><span class="os-divider">. </span>
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_2-solution"><a class="os-number" href="#auto_abc123_2">2</a>
+<span class="os-divider">. </span>
 <div class="os-solution-container">
           solution 2
         </div>
@@ -43,7 +45,8 @@
 </div>
 
         
-        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_3-solution"><a class="os-number" href="#auto_abc123_3">3</a><span class="os-divider">. </span>
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_3-solution"><a class="os-number" href="#auto_abc123_3">3</a>
+<span class="os-divider">. </span>
 <div class="os-solution-container">
           solution 3
         </div>
@@ -62,7 +65,8 @@
 
         
         
-        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_4-solution"><a class="os-number" href="#auto_abc123_4">4</a><span class="os-divider">. </span>
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_4-solution"><a class="os-number" href="#auto_abc123_4">4</a>
+<span class="os-divider">. </span>
 <div class="os-solution-container">
           solution 1
         </div>
@@ -98,7 +102,8 @@
         
         
         
-      <div data-type="question-solution" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">5</a><span class="os-divider">. </span>
+      <div data-type="question-solution" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">5</a>
+<span class="os-divider">. </span>
 <div class="os-solution-container">
   c, d
 </div>
@@ -130,7 +135,8 @@
         
         
         
-        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">6</a><span class="os-divider">. </span>
+        <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="auto_abc123_5-solution"><a class="os-number" href="#auto_abc123_5">6</a>
+<span class="os-divider">. </span>
 <div class="os-solution-container"><span>b, c</span>
           detailed solution for MC
         </div>
