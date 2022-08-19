@@ -11,7 +11,6 @@ module Kitchen
         figure.target_label(label_text: 'figure', custom_content: number, cases: cases)
 
         title = figure.title&.cut
-        # caption = figure.caption&.wrap_children('span', class: 'os-caption')&.cut
         caption = figure.caption&.cut
         caption&.name = 'span'
         caption&.add_class('os-caption')
