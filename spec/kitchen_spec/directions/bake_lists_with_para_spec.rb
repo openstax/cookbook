@@ -17,6 +17,14 @@ RSpec.describe Kitchen::Directions::BakeListsWithPara do
           <li>
             <p><span>random term</span> blah3</p>
           </li>
+          <li>
+            <p>blah3</p>
+            <figure id="someId">
+              <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+                <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
+              </span>
+            </figure>
+          </li>
         </ol>
         <ul>
           <li>
@@ -27,6 +35,14 @@ RSpec.describe Kitchen::Directions::BakeListsWithPara do
           </li>
           <li>
             <p><span>random term2</span> foo3</p>
+          </li>
+          <li>
+            <p>foo3</p>
+            <figure id="someId2">
+              <span data-type="media" id="otherId2" data-alt="This figure shows pieces of a ...">
+                <img src="foo.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id4" />
+              </span>
+            </figure>
           </li>
         </ul>
       HTML

@@ -18,14 +18,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   book.search('cnx-pi').trash
   BakeListsWithPara.v1(book: book)
 
-
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnnumberedFigure.v1(book: book)
-  BakeChapterIntroductions.v2(
-    book: book,
-    options: { block_target_label: true }
-  )
-  BakeChapterTitle.v1(book: book)
+  BakeChapterIntroductions.v2(book: book, options: { cases: true })
+  BakeChapterTitle.v1(book: book, cases: true)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
   BakeAutotitledNotes.v1(
@@ -57,7 +53,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       chapter: chapter,
       metadata_source: metadata,
       append_to: answer_key,
-      solutions_plural: true,
+      options: { cases: true }
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
@@ -88,13 +84,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
       BakeFirstElements.v1(within: exercise)
     end
 
-    BakeNonIntroductionPages.v1(chapter: chapter, block_target_label: true)
+    BakeNonIntroductionPages.v1(chapter: chapter, options: { cases: true })
   end
 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    BakeAppendix.v1(page: page, number: appendix_letter, block_target_label: true)
+    BakeAppendix.v1(page: page, number: appendix_letter, options: { cases: true } )
     page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}",
@@ -127,7 +123,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc|
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
-  BakeToc.v1(book: book)
+  BakeToc.v1(book: book, options: { cases: true })
   BakeFolio.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeLinks.v1(book: book)

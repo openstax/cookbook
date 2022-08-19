@@ -4,6 +4,13 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
 
+  before do
+    stub_locales({
+      'chapter': 'Chapter',
+      'appendix': 'Appendix'
+    })
+  end
+
   let(:book) do
     book_containing(html:
       <<~HTML
@@ -45,7 +52,7 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
   it 'v1 works for solution (singular)' do
     expect(
       described_class.v1(
-        chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, solutions_plural: false
+        chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, options: { solutions_plural: false }
       )
     ).to match_snapshot_auto
   end
@@ -53,8 +60,40 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
   context 'when in appendix' do
     it 'changes the title to appendix and adds appendix prefix to uuid' do
       expect(
-        described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, in_appendix: true)
+        described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, options: { in_appendix: true })
       ).to match_snapshot_auto
     end
   end
+
+  context 'when book uses grammatical cases' do
+    it 'uses nominative case in title' do
+      with_locale(:pl) do
+        stub_locales({
+          'chapter': {
+            'nominative': 'Rozdział',
+            'genitive': 'Rozdziału'
+          }
+        })
+        expect(
+          described_class.v1(chapter: book.chapters.first, metadata_source: metadata_element, append_to: append_to, options: { cases: true })
+        ).to match_snapshot_auto
+      end
+    end
+
+    it 'uses nominative case in appendix title' do
+      with_locale(:pl) do
+        stub_locales({
+          'appendix': {
+            'nominative': 'Dodatek',
+            'genitive': 'Dodatku'
+          }
+        })
+        expect(
+          described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, options: { in_appendix: true, cases: true })
+        ).to match_snapshot_auto
+      end
+    end
+
+  end
+
 end

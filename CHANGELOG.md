@@ -6,11 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove title from section exercises in `organic-chemistry`
+* Fix eoc title in `organic-chemistry`
+* Change organic chemistry locale of `Chapter Outline` to `Chapter Contents`
+
+## [v1.14.0] - 2022-08-11
+
+* Modify `BakeListsWithPara` to change `only-child` paragraphs
+* Modify `BakeIndex` to display all children of term not just text
+* Enable `target labels with cases` for Introduction(`BakeChapterIntroductions.v2`), Non-Intro Modules (`BakeNonIntroductionPages`), Appendixes (`BakeAppendix`) for `pl-economics`, adjust `BakeChapterTitle`, `BakeToC`, and `AnswerKeyInnerContainer` to use `chapter title` cases for pl books which utilizes them
 * Add `learning-objectives` note to `pl-economics`
 * Change text in folio for Polish books
 * Add more selectors to `BakeFirstElements`
 * Change the way of baking title in `BakeChapterSectionExercises`
-## [v.1.13.0] - 2022-07-28
+
+## [v1.13.0] - 2022-07-28
 
 * Add answer key to `organic-chemistry`
 * Add `diseases` note to `anatomy`
@@ -24,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Update `BakeIframes` and `BakeScreenreaderSpans` to use new media switch markup
 * Translations added for Organic Chemistry eoc sections
 
-## [v.1.12.0] - 2022-07-18
+## [v1.12.0] - 2022-07-18
 
 * Specify header to remove form EOC in `Marketing`
 * Change EOC title in `Marketing`

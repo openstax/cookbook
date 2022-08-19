@@ -754,7 +754,6 @@ module Kitchen
 
         cases.each do |label_case|
           element_labels[label_case] = "#{I18n.t("#{label_text}.#{label_case}")} #{custom_content}"
-
           element_label_case = element_labels[label_case]
 
           pantry(name: "#{label_case}_link_text").store element_label_case, label: id if id
