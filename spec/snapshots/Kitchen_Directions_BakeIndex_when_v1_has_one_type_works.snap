@@ -53,7 +53,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="c">composite page at the top level</span>
 
-            <a class="os-term-section-link" href="#auto_composite_page_term2"><span class="os-term-section">2 Another EOC Section</span></a><!--
+            <a class="os-term-section-link" href="#replace-me-not-2"><span class="os-term-section">2 Another EOC Section</span></a><!--
           -->
         </div>
       
@@ -84,7 +84,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="f">foo</span>
 
-            <a class="os-term-section-link" href="#auto_p1_term1"><span class="os-term-section">Preface</span></a><!--
+            <a class="os-term-section-link" href="#replace-me-not"><span class="os-term-section">Preface</span></a><!--
           --><span class="os-index-link-separator">, </span>
             <a class="os-term-section-link" href="#auto_p1_term2"><span class="os-term-section">Preface</span></a><!--
           --><span class="os-index-link-separator">, </span>
