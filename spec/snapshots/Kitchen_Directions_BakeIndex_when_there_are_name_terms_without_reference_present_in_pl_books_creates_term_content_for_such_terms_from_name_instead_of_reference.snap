@@ -11,7 +11,7 @@
 <div data-type="chapter">
   <div data-type="page" id="p1">
     <div data-type="document-title"><span>1.1</span> First Page</div>
-    <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="name" cxlxt:name="Smith, Adam" id="auto_p1_term1" group-by="S">Adam Smith</span>
+    <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="name" cxlxt:name="Smith, Adam" id="auto_0a934714-8033-4bfb-9ebc-b83eeeb9ca1f_UUIDd3bc560b-d240-4014-72d2-a9efe31b0906" group-by="S">Adam Smith</span>
     <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="name" cxlxt:name="Keynes, John Maynard" id="auto_p1_term2" group-by="K">John Maynard Keynes</span>
     <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="&#x106;wierkowski, Wilhelm (1832-1920)" cxlxt:index="name" cxlxt:name="&#x106;wierkowskiego, Wilhelma" cxlxt:born="1832" cxlxt:died="1920" id="auto_p1_term3" group-by="&#x106;">Wilhelma &#x106;wierkowskiego</span>
     <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928" id="auto_p1_term4" group-by="C">Noama Chomsky'ego</span>
@@ -82,7 +82,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="S">Smith, Adam</span>
 
-            <a class="os-term-section-link" href="#auto_p1_term1"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_0a934714-8033-4bfb-9ebc-b83eeeb9ca1f_UUIDd3bc560b-d240-4014-72d2-a9efe31b0906"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
