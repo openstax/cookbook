@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix adding additional white spaces inside figure caption children in `BakeFigure`
 * Remove title from section exercises in `organic-chemistry`
 * Fix eoc title in `organic-chemistry`
 * Change organic chemistry locale of `Chapter Outline` to `Chapter Contents`
@@ -19,8 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Change text in folio for Polish books
 * Add more selectors to `BakeFirstElements`
 * Change the way of baking title in `BakeChapterSectionExercises`
-
-## [v1.13.0] - 2022-07-28
+## [v.1.13.0] - 2022-07-28
 
 * Add answer key to `organic-chemistry`
 * Add `diseases` note to `anatomy`
@@ -34,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Update `BakeIframes` and `BakeScreenreaderSpans` to use new media switch markup
 * Translations added for Organic Chemistry eoc sections
 
-## [v1.12.0] - 2022-07-18
+## [v.1.12.0] - 2022-07-18
 
 * Specify header to remove form EOC in `Marketing`
 * Change EOC title in `Marketing`
