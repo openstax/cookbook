@@ -11,8 +11,7 @@
 </div>
 
       
-      <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="id1-solution"><a class="os-number" href="#id1">1</a>
-<span class="os-divider">. </span>
+      <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="id1-solution"><a class="os-number" href="#id1">1</a><span class="os-divider">. </span>
 <div class="os-solution-container">
         solution 1
       </div>
@@ -28,8 +27,7 @@
 </div>
 
       
-      <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="id2-solution"><a class="os-number" href="#id2">2</a>
-<span class="os-divider">. </span>
+      <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="id2-solution"><a class="os-number" href="#id2">2</a><span class="os-divider">. </span>
 <div class="os-solution-container">
         solution 2
       </div>
@@ -45,8 +43,7 @@
 </div>
 
       
-      <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="id3-solution"><a class="os-number" href="#id3">3</a>
-<span class="os-divider">. </span>
+      <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed" id="id3-solution"><a class="os-number" href="#id3">3</a><span class="os-divider">. </span>
 <div class="os-solution-container">
         solution 3
       </div>

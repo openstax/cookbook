@@ -84,8 +84,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       solution.id = "#{id}-solution"
       solution.replace_children(with:
         <<~HTML
-          <a class='os-number' href='##{id}'>#{number}</a>
-          <span class='os-divider'>. </span>
+          <a class='os-number' href='##{id}'>#{number}</a><span class='os-divider'>. </span>
           <div class="os-solution-container">#{solution.children}</div>
         HTML
       )
