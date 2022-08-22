@@ -26,7 +26,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'summary',
+      uuid_key: '.summary',
+      section_selector: 'section.summary'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
 
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,

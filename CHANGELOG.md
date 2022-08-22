@@ -6,10 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove section subtitle from `Summary` in `organic-chemistry`
+* Fix adding additional white spaces inside figure caption children in `BakeFigure`
+* Fix additional whitespeces after solution number in `BakeInjectedExerciseQuestion`
+* Change `BakeIndex` so that `terms` only change their `ids` if an `id` is not already present
 * Remove title from section exercises in `organic-chemistry`
 * Fix eoc title in `organic-chemistry`
 * Change organic chemistry locale of `Chapter Outline` to `Chapter Contents`
 * Remove working problems from class baked notes in `organic-chemistry`
+* Set the `dummy` recipe to always be English so I18n does not complain
 
 ## [v1.14.0] - 2022-08-11
 
@@ -20,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Change text in folio for Polish books
 * Add more selectors to `BakeFirstElements`
 * Change the way of baking title in `BakeChapterSectionExercises`
-
 ## [v1.13.0] - 2022-07-28
 
 * Add answer key to `organic-chemistry`
