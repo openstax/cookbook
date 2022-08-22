@@ -56,7 +56,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
         end
       end
     end
-    BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+    BakeChapterSectionExercises.v1(chapter: chapter, options: { trash_title: true })
     # In-place bake exercises & solutions
     chapter.search('section.review-exercises').exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))

@@ -26,7 +26,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   book.chapters.each do |chapter|
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'summary',
+      uuid_key: '.summary',
+      section_selector: 'section.summary'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
 
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
@@ -44,7 +53,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
                           klass: 'visualizing-chemistry')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'additional-problems')
-    BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+    BakeChapterSectionExercises.v1(
+      chapter: chapter,
+      options: {
+        trash_title: true,
+        create_title: false
+      }
+    )
 
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
@@ -72,10 +87,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     )
     chapter.non_introduction_pages.each do |page|
       page.search('div.os-eos.os-section-exercises-container').each do |section_wrapper|
-        number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
         Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
           chapter: section_wrapper, append_to: answer_key_inner_container,
-          section_class: 'section-exercises', title_number: number
+          section_class: 'section-exercises', options: { add_title: false }
         )
       end
     end

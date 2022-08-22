@@ -42,7 +42,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
     BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    BakeChapterSectionExercises.v1(chapter: chapter, trash_title: true)
+    BakeChapterSectionExercises.v1(chapter: chapter, options: { trash_title: true })
 
     chapter.pages.sections('$.check-understanding').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
