@@ -15,6 +15,10 @@ module Kitchen
         figure.target_label(label_text: 'figure', custom_content: number, cases: cases)
         title = figure.title&.cut
         caption = figure.caption&.cut
+        caption&.name = 'span'
+        caption&.add_class('os-caption')
+        caption&.remove_attribute('id') # only needed for pl books, where captions have id
+
         if figure.has_class?('mechanism-figure')
           figure.prepend(sibling:
             <<~HTML
@@ -25,20 +29,20 @@ module Kitchen
                 #{"<span class=\'os-title\' data-type=\'title\' id=\"#{title.id}\">#{title.children}</span>" if title}
               </div>
               <div class="os-caption-text-container">
-                #{"<span class=\'os-caption\'>#{caption.children}</span>" if caption}
+                #{caption}
               </div>
             HTML
           )
         else
           figure.append(sibling:
-            <<~HTML
+            <<~HTML.chomp
               <div class="os-caption-container">
                 <span class="os-title-label">#{I18n.t("figure#{'.nominative' if cases}")} </span>
                 <span class="os-number">#{number}</span>
                 #{"<span class=\'os-divider\'> </span>" if title}
                 #{"<span class=\'os-title\' data-type=\'title\' id=\"#{title.id}\">#{title.children}</span>" if title}
                 #{"<span class=\'os-divider\'> </span>" if caption}
-                #{"<span class=\'os-caption\'>#{caption.children}</span>" if caption}
+                #{caption}
               </div>
             HTML
           )
