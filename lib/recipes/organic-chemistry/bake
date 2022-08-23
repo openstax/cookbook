@@ -150,7 +150,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     BakeFirstElements.v1(within: solution)
   end
 
-  note_classes = %w[why-chapter chemistry-matters working-problems]
+  note_classes = %w[why-chapter chemistry-matters]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
   BakeUnclassifiedNotes.v1(book: book)
