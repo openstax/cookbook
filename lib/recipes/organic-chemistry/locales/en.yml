@@ -4,7 +4,7 @@ en:
   chapter_outline: Chapter Contents
   notes:
     why-chapter: Why This Chapter?
-    something-extra: Something Extra
+    chemistry-matters: Chemistry Matters
     working-problems: Working Problems
   eoc:
     section-exercises: ! '%{number} Problems'
