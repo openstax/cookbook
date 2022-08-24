@@ -187,8 +187,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
 
     context 'when book contains mechanism figure' do
       it 'works with mechanism figure' do
-        described_class.v1(figure: figure_in_book_with_mechanism_figure, number: '1.2')
-
+        described_class.v1(figure: figure_in_book_with_mechanism_figure, number: '1.2', custom_class: 'mechanism-figure')
         expect(book_with_mechanism_figure.search('.os-figure.has-mechanism-figure').first).to match_snapshot_auto
       end
     end

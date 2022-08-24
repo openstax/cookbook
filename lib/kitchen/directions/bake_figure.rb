@@ -3,11 +3,11 @@
 module Kitchen
   module Directions
     module BakeFigure
-      def self.v1(figure:, number:, cases: false)
+      def self.v1(figure:, number:, cases: false, custom_class: nil)
         warn 'warning! exclude unnumbered figures from `BakeFigure` loop' if figure.unnumbered?
         figure.wrap(%(<div class="os-figure#{if figure.has_class?('splash')
                                                ' has-splash'
-                                             elsif figure.has_class?('mechanism-figure')
+                                             elsif custom_class == 'mechanism-figure'
                                                ' has-mechanism-figure'
                                              end}">))
 
@@ -19,7 +19,7 @@ module Kitchen
         caption&.add_class('os-caption')
         caption&.remove_attribute('id') # only needed for pl books, where captions have id
 
-        if figure.has_class?('mechanism-figure')
+        if custom_class == 'mechanism-figure'
           figure.prepend(sibling:
             <<~HTML
               <div class="os-caption-title-container">
