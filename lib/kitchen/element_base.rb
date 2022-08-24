@@ -747,7 +747,7 @@ module Kitchen
     #   (used in Polish books)
     # @return [Pantry]
     #
-    def target_label(label_text: nil, custom_content: nil, cases: false)
+    def target_label(label_text: nil, custom_content: nil, cases: false, label_class: nil)
       if cases
         cases = %w[nominative genitive dative accusative instrumental locative vocative]
         element_labels = {}
@@ -766,6 +766,10 @@ module Kitchen
                         end
         pantry(name: :link_text).store element_label, label: id if id
       end
+
+      return unless label_class
+
+      pantry(name: :link_type).store label_class, label: id if id
     end
 
     # Creates labels for links to modules (used only in accounting where LO link labels are also present and utilizes only the number)

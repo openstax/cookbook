@@ -36,7 +36,7 @@ module Kitchen
           end
         end
 
-        def bake(table:, number:, cases: false)
+        def bake(table:, number:, cases: false, label_class: nil)
           table.remove_attribute('summary')
           table.wrap(%(<div class="os-table">))
 
@@ -45,7 +45,12 @@ module Kitchen
           end
 
           # Store label information
-          table.target_label(label_text: 'table', custom_content: number, cases: cases)
+          table.target_label(
+            label_text: 'table',
+            custom_content: number,
+            cases: cases,
+            label_class: label_class
+          )
 
           if table.top_titled?
             klass = table.text_heavy? ? 'text-heavy-top-titled' : 'top-titled'
