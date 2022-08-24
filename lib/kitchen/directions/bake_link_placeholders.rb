@@ -10,7 +10,7 @@ module Kitchen
           next unless anchor.text == '[link]'
 
           label_case = anchor['cmlnle:case'] || anchor['case']
-          id = anchor[:href][1..-1]
+          id = anchor[:href][1..]
 
           if cases
             pantry_name = if anchor.key?('case')
