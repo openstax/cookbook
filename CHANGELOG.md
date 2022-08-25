@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove section subtitle from `Summary of Reaction` in `organic-chemistry`
 * Replace `Something Extra` note with `Chemistry Matters` in `organic-chemistry`
 * Remove section subtitle from `Summary` in `organic-chemistry`
 * Fix adding additional white spaces inside figure caption children in `BakeFigure`
