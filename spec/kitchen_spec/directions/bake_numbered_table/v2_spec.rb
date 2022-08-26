@@ -114,4 +114,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
       end
     end
   end
+
+  context 'when link to table has class' do
+    it 'stores link class' do
+      pantry = table_with_only_caption_title.pantry(name: :link_type)
+      expect(pantry).to receive(:store).with('table-target-label', { label: 'tId' })
+      described_class.new.bake(table: table_with_only_caption_title, number: 'S', label_class: 'table-target-label')
+    end
+  end
 end

@@ -5,8 +5,11 @@ module Kitchen::Directions::BakeNumberedTable
   # V2 caption titles are nested within an .os-caption span
   class V2
 
-    def bake(table:, number:, cases: false)
-      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number, cases: cases)
+    def bake(table:, number:, cases: false, label_class: nil)
+      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table,
+                                                      number: number,
+                                                      cases: cases,
+                                                      label_class: label_class)
 
       caption = ''
       if (table&.caption&.first("span[data-type='title']") || table&.caption) \

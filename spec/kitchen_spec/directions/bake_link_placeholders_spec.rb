@@ -63,6 +63,18 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
     end
   end
 
+  context 'when link has class' do
+    before do
+      book.pantry(name: :link_text).store('Example x.y', label: 'key')
+      book.pantry(name: :link_type).store('example-target-label', label: 'key')
+    end
+
+    it 'bakes' do
+      described_class.v1(book: book)
+      expect(book.body).to match_snapshot_auto
+    end
+  end
+
   it 'logs a warning' do
     allow($stdout).to receive(:puts)
     expect($stdout).to receive(:puts).with("warning! could not find a replacement for '[link]' on an element with ID 'invalid_key'")
