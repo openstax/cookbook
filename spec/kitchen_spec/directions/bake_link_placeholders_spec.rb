@@ -66,7 +66,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
   context 'when link has class' do
     before do
       book.pantry(name: :link_text).store('Example x.y', label: 'key')
-      book.pantry(name: :link_type).store('example-label', label: 'key')
+      book.pantry(name: :link_type).store('example-target-label', label: 'key')
     end
 
     it 'bakes' do

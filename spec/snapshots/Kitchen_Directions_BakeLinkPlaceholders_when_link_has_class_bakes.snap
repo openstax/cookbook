@@ -1,5 +1,5 @@
 <body>
     <a>skip this link</a>
-<a href="?key" class="example-label">Example x.y</a>
+<a href="?key" class="example-target-label">Example x.y</a>
 
   </body>
