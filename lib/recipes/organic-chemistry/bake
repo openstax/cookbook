@@ -102,7 +102,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}",
-                           label_class: 'table-label')
+                           label_class: 'table-target-label')
     end
 
     chapter.examples.each do |example|
@@ -114,7 +114,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}",
-                    label_class: 'figure-label')
+                    label_class: 'figure-target-label')
     end
   end
 
@@ -124,13 +124,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}",
-                    label_class: 'figure-label')
+                    label_class: 'figure-target-label')
     end
 
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{appendix_letter}#{table.count_in(:page)}",
-                           label_class: 'table-label')
+                           label_class: 'table-target-label')
     end
 
     page.examples.each do |example|
