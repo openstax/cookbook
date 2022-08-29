@@ -24,7 +24,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   answer_key_wrapper = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'key-terms',
+      uuid_key: '.key-terms',
+      section_selector: 'section.key-terms'
+    )
+
     BakeChapterKeyEquations.v1(chapter: chapter, metadata_source: metadata)
 
     sections_without_subtitle = %w[summary summary-reactions]
