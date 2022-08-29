@@ -89,7 +89,7 @@ module Kitchen
       end
 
       def self.li_for_page(page)
-        li_class =
+        li_page_type =
           case page
           when PageElement
             if page.has_ancestor?(:chapter)
@@ -137,7 +137,7 @@ module Kitchen
         end
 
         <<~HTML
-          <li class="#{li_class}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}">
+          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-target-page-type="#{li_page_type}">
             <a href="##{page.id}">
               #{title.element_children.copy.paste}
             </a>

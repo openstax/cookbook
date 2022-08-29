@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add class to `target-label`
+* Add `data-toc-target-page-type` attribute to TOC lis
 
 ## [v1.15.0] - 2022-08-25
 
