@@ -61,6 +61,8 @@ case "${book}" in
   world-history) dest="${DIR}/data/world-history/short" && script="${DIR}/lib/recipes/world-history/shorten";;
   marketing) dest="${DIR}/data/marketing/short" && script="${DIR}/lib/recipes/marketing/shorten";;
   organic-chemistry) dest="${DIR}/data/organic-chemistry/short" && script="${DIR}/lib/recipes/organic-chemistry/shorten";;
+  contemporary-math) dest="${DIR}/data/contemporary-math/short" && script="${DIR}/lib/recipes/contemporary-math/shorten";;
+
   *) echo "Unknown book '${book}'"; exit 1;;
 esac
 
