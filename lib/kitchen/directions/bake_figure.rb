@@ -3,7 +3,7 @@
 module Kitchen
   module Directions
     module BakeFigure
-      def self.v1(figure:, number:, cases: falses)
+      def self.v1(figure:, number:, cases: false)
         warn 'warning! exclude unnumbered figures from `BakeFigure` loop' if figure.unnumbered?
         figure.wrap(%(<div class="os-figure#{if figure.has_class?('splash')
                                                ' has-splash'
