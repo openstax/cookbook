@@ -13,7 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v1.15.0] - 2022-08-25
 
->>>>>>> main
 * Remove section subtitle from `Summary of Reaction` in `organic-chemistry`
 * Replace `Something Extra` note with `Chemistry Matters` in `organic-chemistry`
 * Remove section subtitle from `Summary` in `organic-chemistry`
