@@ -111,14 +111,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     end
 
     chapter.figures(only: :figure_to_number?).each do |figure|
-      if figure.has_class?('mechanism-figure')
-        BakeFigure.v1(figure: figure,
-                      number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}",
-                      custom_class: 'mechanism-figure')
-      else
-        BakeFigure.v1(figure: figure,
+      BakeFigure.v1(figure: figure,
                       number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
-      end
     end
   end
 
@@ -126,13 +120,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
     page.figures(only: :figure_to_number?).each do |figure|
-      if figure.has_class?('mechanism-figure')
-        BakeFigure.v1(figure: figure,
-                      number: "#{appendix_letter}#{figure.count_in(:page)}",
-                      custom_class: 'mechanism-figure')
-      else
-        BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
-      end
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
     end
 
     page.tables('$:not(.unnumbered)').each do |table|

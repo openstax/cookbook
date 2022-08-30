@@ -7,7 +7,7 @@ module Kitchen
         warn 'warning! exclude unnumbered figures from `BakeFigure` loop' if figure.unnumbered?
         figure.wrap(%(<div class="os-figure#{if figure.has_class?('splash')
                                                ' has-splash'
-                                             elsif custom_class == 'mechanism-figure'
+                                             elsif figure.has_class?('mechanism-figure')
                                                ' has-mechanism-figure'
                                              end}">))
 
@@ -25,7 +25,7 @@ module Kitchen
             #{"<span class=\'os-divider\'> </span>" if title}
             #{"<span class=\'os-title\' data-type=\'title\' id=\"#{title.id}\">#{title.children}</span>" if title}
           HTML
-        if custom_class == 'mechanism-figure'
+        if figure.has_class?('mechanism-figure')
           figure.prepend(sibling:
             <<~HTML
               <div class="os-caption-title-container">
