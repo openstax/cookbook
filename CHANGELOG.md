@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `key-terms` in `organic-chemistry`
 * Add class to `target-label`
 * Add `data-toc-target-page-type` attribute to TOC lis
 
