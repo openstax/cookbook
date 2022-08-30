@@ -3,12 +3,17 @@
 module Kitchen
   module Directions
     module BakeFigure
-      def self.v1(figure:, number:, cases: false)
+      def self.v1(figure:, number:, cases: false, label_class: nil)
         warn 'warning! exclude unnumbered figures from `BakeFigure` loop' if figure.unnumbered?
         figure.wrap(%(<div class="os-figure#{' has-splash' if figure.has_class?('splash')}">))
 
         # Store label information
-        figure.target_label(label_text: 'figure', custom_content: number, cases: cases)
+        figure.target_label(
+          label_text: 'figure',
+          custom_content: number,
+          cases: cases,
+          label_class: label_class
+        )
 
         title = figure.title&.cut
         caption = figure.caption&.cut

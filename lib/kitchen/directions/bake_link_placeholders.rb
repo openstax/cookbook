@@ -10,7 +10,7 @@ module Kitchen
           next unless anchor.text == '[link]'
 
           label_case = anchor['cmlnle:case'] || anchor['case']
-          id = anchor[:href][1..-1]
+          id = anchor[:href][1..]
 
           if cases
             pantry_name = if anchor.key?('case')
@@ -30,6 +30,9 @@ module Kitchen
             # TODO: log a warning!
             puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
           end
+
+          link_class = book.pantry(name: :link_type).get(id)
+          anchor.add_class(link_class) if link_class.present?
         end
       end
     end

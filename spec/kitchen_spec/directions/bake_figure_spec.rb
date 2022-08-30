@@ -230,6 +230,14 @@ RSpec.describe Kitchen::Directions::BakeFigure do
         end
       end
     end
+
+    context 'when link to figure has class' do
+      it 'stores link with class' do
+        pantry = book1.pantry(name: :link_type)
+        expect(pantry).to receive(:store).with('figure-target-label', { label: 'someId' })
+        described_class.v1(figure: book1_figure, number: '1.2', label_class: 'figure-target-label')
+      end
+    end
   end
 
   context 'when there are other nested children elements (eg. span, strong) in figure caption' do
