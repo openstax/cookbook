@@ -3,8 +3,11 @@
 module Kitchen::Directions::BakeNumberedTable
   class V1
 
-    def bake(table:, number:, always_caption: false, cases: false)
-      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table, number: number, cases: cases)
+    def bake(table:, number:, always_caption: false, cases: false, label_class: nil)
+      Kitchen::Directions::BakeTableBody::V1.new.bake(table: table,
+                                                      number: number,
+                                                      cases: cases,
+                                                      label_class: label_class)
 
       # TODO: extra spaces added here to match legacy implementation, but probably not meaningful?
       new_caption = ''
