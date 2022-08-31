@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+* Add `shorten` recipe for contemporary-math
 * Bake `key-terms` in `organic-chemistry`
 * Add class to `target-label`
 * Add `data-toc-target-page-type` attribute to TOC lis
