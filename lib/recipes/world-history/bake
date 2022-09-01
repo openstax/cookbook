@@ -34,22 +34,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
   book.chapters.each do |chapter|
 
     # Eoc sections
-
-    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata, klass: 'assessments')
-
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: eoc_wrapper)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
       container_key: 'section-summary',
       uuid_key: '.section-summary',
-      section_selector: 'section.section-summary',
-      append_to: eoc_wrapper
+      section_selector: 'section.section-summary'
     ) do |section|
       RemoveSectionTitle.v1(section: section)
       title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
       section.prepend(child: title)
     end
+
+    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata, klass: 'assessments')
 
     eoc_sections = %w[review-questions
                       check-understanding
