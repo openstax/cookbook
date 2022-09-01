@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Support trademark symbol in iframe link
 * Change eoc hierarchy in `world-history`
 * Add `shorten` recipe for contemporary-math
 * Bake `key-terms` in `organic-chemistry`
