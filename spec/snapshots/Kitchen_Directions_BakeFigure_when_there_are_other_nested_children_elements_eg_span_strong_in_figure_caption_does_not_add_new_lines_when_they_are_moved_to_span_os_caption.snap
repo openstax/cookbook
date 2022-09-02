@@ -8,9 +8,10 @@
 </figure>
   <div class="os-caption-container">
   <span class="os-title-label">Figure </span>
-  <span class="os-number">1.2</span>
-  <span class="os-divider"> </span>
-  <span class="os-title" data-type="title" id="">This Is A Title</span>
+<span class="os-number">1.2</span>
+<span class="os-divider"> </span>
+<span class="os-title" data-type="title" id="">This Is A Title</span>
+
   <span class="os-divider"> </span>
   <span class="os-caption"><strong><span class="green-text"><em data-effect="italics">sp</em><sup>3</sup> hybrid orbitals</span></strong>, oriented toward the corners of a regular tetrahedron, are formed by the combination of an <strong><span class="magenta-text"><em data-effect="italics">s</em> orbital</span></strong> and three <strong><span class="cyan-text"><em data-effect="italics">p</em> orbitals</span></strong> (<strong><span class="magenta-text">red</span></strong>/<strong><span class="cyan-text">blue</span></strong>). The <em data-effect="italics">sp</em><sup>3</sup> hybrids have two lobes and are unsymmetrical about the nucleus, giving them a directionality and allowing them to form strong bonds to other atoms.</span>
 </div>

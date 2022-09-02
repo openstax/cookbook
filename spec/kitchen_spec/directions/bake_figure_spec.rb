@@ -140,6 +140,22 @@ RSpec.describe Kitchen::Directions::BakeFigure do
     )
   end
 
+  let(:book_with_mechanism_figure) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <figure id="someId" class="mechanism-figure">
+            #{figure_caption}
+            #{figure_title}
+            <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+              <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
+            </span>
+          </figure>
+        HTML
+      )
+    )
+  end
+  let(:figure_in_book_with_mechanism_figure) { book_with_mechanism_figure.chapters.figures.first }
   let(:book1_figure) { book1.chapters.figures.first }
   let(:book3_figure_with_spans_strongs_in_caption) { book3.chapters.figures.first }
   let(:book4_figure_id_in_caption) { book4.chapters.figures.first }
@@ -167,6 +183,13 @@ RSpec.describe Kitchen::Directions::BakeFigure do
           </div>
         HTML
       )
+    end
+
+    context 'when book contains mechanism figure' do
+      it 'works with mechanism figure' do
+        described_class.v1(figure: figure_in_book_with_mechanism_figure, number: '1.2')
+        expect(book_with_mechanism_figure.search('.os-figure.has-mechanism-figure').first).to match_snapshot_auto
+      end
     end
 
     context 'without a caption' do
