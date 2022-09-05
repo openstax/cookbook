@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Modify `BakeEquations` to wrap equations in a `div`
 * Add support for figures with class `mechanism-figure` to `BakeFigure` for `organic-chemistry`
 * Support trademark symbol in iframe link
 * Change eoc hierarchy in `world-history`

@@ -1,7 +1,7 @@
 <div data-type="chapter">
-  <div data-type="equation" id="123">
+  <div data-type="equation" id="123"><div>
     <p>equation 1</p>
-  <div class="os-equation-number">
+  </div><div class="os-equation-number">
   <span class="os-number">(1.1)</span>
 </div>
 </div>
