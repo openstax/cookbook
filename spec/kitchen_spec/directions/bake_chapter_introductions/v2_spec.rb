@@ -131,6 +131,24 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     )
   end
 
+  let(:book_with_intro_module_title_children) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <h1 data-type="document-title">Chapter 1 Title</h1>
+          <div class="introduction" data-type="page" id="ipId">
+            <div data-type="document-title"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+            <figure class="splash">can't touch this (stop! hammer time)</figure>
+            <figure>move this</figure>
+            <div>content</div>
+            <p>Some paragraph text.</p>
+            <p>Another paragraph text.</p>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   context 'when v2 called on book with chapter objectives' do
     it 'with chapter outline' do
       described_class.v2(
@@ -161,7 +179,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     end
   end
 
-  context 'when v2 called on book with unit opener' do
+  context 'when v2 is called on book with unit opener' do
     it 'bakes' do
       described_class.v2(
         book: book_with_unit_opener,
@@ -181,6 +199,16 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         }
       )
       expect(book_v1.body).to match_snapshot_auto
+    end
+  end
+
+  context 'when v2 is called on book_with_intro_module_title_children' do
+    it 'keeps the introduction module title children' do
+      described_class.v2(
+        book: book_with_intro_module_title_children,
+        options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v1 }
+      )
+      expect(book_with_intro_module_title_children.body).to match_snapshot_auto
     end
   end
 
