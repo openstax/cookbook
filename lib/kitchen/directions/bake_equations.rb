@@ -4,7 +4,7 @@ module Kitchen
   module Directions
     module BakeEquations
       def self.v1(book:, number_decorator: :none, cases: false)
-        book.chapters.search('div[data-type="equation"]').each(&:wrap_children)
+        book.chapters.search('div[data-type="equation"].unnumbered').each(&:wrap_children)
 
         book.chapters.search('div[data-type="equation"]:not(.unnumbered)').each do |eq|
           chapter = eq.ancestor(:chapter)
@@ -31,6 +31,8 @@ module Kitchen
               </div>
             HTML
           )
+
+          eq.wrap_children
         end
       end
     end
