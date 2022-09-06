@@ -15,10 +15,12 @@ module Kitchen
             HTML
         end
 
+        title_text = page.title.search('.os-text').first # module titles which are already baked
+
         title_snippet = <<~HTML
           <#{title_tag} data-type="document-title">
             #{os_number}
-            <span class="os-text" data-type="" itemprop="">#{page.title_children}</span>
+            <span class="os-text" data-type="" itemprop="">#{title_text ? title_text.children : page.title.children}</span>
           </#{title_tag}>
         HTML
 
