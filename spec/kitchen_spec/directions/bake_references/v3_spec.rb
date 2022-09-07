@@ -93,8 +93,8 @@ RSpec.describe Kitchen::Directions::BakeReferences do
     expect(normalized_xml_doc_string(book1.references)).to match_snapshot_auto
   end
 
-  context 'v3 when book contains modules with titles elements children' do
-    it 'keeps the modules titles children while creating section title' do
+  context 'when book contains modules with titles elements children' do
+    it 'v3 keeps the modules titles children while creating section title' do
       described_class.v3(book: book_with_chapter_modules_with_titles_children, metadata_source: metadata_element)
       book_with_chapter_modules_with_titles_children.references.each
       expect(normalized_xml_doc_string(book_with_chapter_modules_with_titles_children.references)).to match_snapshot_auto
