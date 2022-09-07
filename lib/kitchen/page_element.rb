@@ -45,6 +45,15 @@ module Kitchen
       title.children.one? ? title.text : title.first('.os-text').text
     end
 
+    # Returns the title's primary children regardless of whether the title has been baked
+    #
+    # @return [Element]
+    #
+    def title_children
+      title_os_text = title.search('.os-text').first # module titles which are already baked
+      title_os_text ? title_os_text.children : title.children
+    end
+
     # Returns an enumerator for titles.
     #
     # @return [ElementEnumerator]
