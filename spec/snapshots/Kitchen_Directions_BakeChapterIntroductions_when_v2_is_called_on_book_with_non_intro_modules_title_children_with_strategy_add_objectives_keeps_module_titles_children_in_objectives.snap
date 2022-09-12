@@ -1,0 +1,46 @@
+<body>
+    <div data-type="chapter">
+  <h1 data-type="document-title">Chapter 1 Title</h1>
+  <div class="introduction" data-type="page" id="ipId">
+    
+    <figure class="splash">can't touch this (stop! hammer time)</figure>
+    
+    
+    
+    
+  <div class="intro-body">
+  <div class="os-chapter-outline">
+  <h3 class="os-title">Chapter Outline</h3>
+  <div class="os-chapter-objective">
+  <a class="os-chapter-objective" href="#">
+    <span class="os-number">1.1</span>
+    <span class="os-divider"> </span>
+    <span data-type="" itemprop="" class="os-text"><em data-effect="italics">Italics</em>  not italics with <sub>subscript</sub> and <sup>superscript</sup> text should be objective 1.1</span>
+  </a>
+</div>
+<div class="os-chapter-objective">
+  <a class="os-chapter-objective" href="#">
+    <span class="os-number">1.2</span>
+    <span class="os-divider"> </span>
+    <span data-type="" itemprop="" class="os-text"><em data-effect="italics">Italics</em>  not italics with <sub>subscript</sub> and <sup>superscript</sup> text should be objective 1.2</span>
+  </a>
+</div>
+
+</div>
+
+  <div class="intro-text">
+    <h2 data-type="document-title" id="ipId_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction</span>
+</h2>
+    <figure>move this</figure><div>content</div><p>Some paragraph text.</p><p>Another paragraph text.</p>
+  </div>
+</div>
+</div>
+  <div data-type="page">
+    <div data-type="document-title" id="becomes-ref-link"><em data-effect="italics">Italics</em>  not italics with <sub>subscript</sub> and <sup>superscript</sup> text should be objective 1.1</div>
+  </div>
+  <div data-type="page">
+    <div data-type="document-title"><em data-effect="italics">Italics</em>  not italics with <sub>subscript</sub> and <sup>superscript</sup> text should be objective 1.2</div>
+  </div>
+</div>
+
+  </body>

@@ -43,6 +43,34 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
     )
   end
 
+  let(:chapter_with_modules_title_children) do
+    chapter_element(
+      <<~HTML
+        <div data-type='page' id="00" class="introduction">
+          <h1 data-type="document-title" itemprop="name" id="intro"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text Introduction page!</h1>
+          <section class="summary" data-element-type="section-summary">
+              <h3 data-type='title'>Kitchen Prep</h3>
+              <p>This moves too!</p>
+          </section>
+        </div>
+        <div data-type='page' id ="01">
+          <h1 data-type="document-title" itemprop="name" id="first"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text First Title</h1>
+          <section class="summary" data-element-type="section-summary">
+              <h3 data-type='title'>Roasting</h3>
+              <p>Many paragraphs provide a good summary.</p>
+          </section>
+        </div>
+        <div data-type='page' id="02">
+          <h1 data-type="document-title" itemprop="name" id="second"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text Second Title</h1>
+          <section class="summary" data-element-type="section-summary">
+              <h3 data-type='title'>Frying</h3>
+              <p>Ooh, it's another bit of text.</p>
+          </section>
+        </div>
+      HTML
+    )
+  end
+
   let(:chapter_summary_no_bake_title) do
     chapter_element(
       page_element(
@@ -128,6 +156,20 @@ RSpec.describe Kitchen::Directions::BakeChapterSummary do
       )
       expect(
         described_class.v1(chapter: chapter_summary_no_bake_title, metadata_source: metadata, klass: 'section-summary', append_to: append_to)
+      ).to match_snapshot_auto
+    end
+  end
+
+  context 'when chapter includes modules titles children' do
+    it 'keeps the modules titles children' do
+      metadata = metadata_element.append(child:
+        <<~HTML
+          <div data-type="random" id="subject">Random - should not be included</div>
+        HTML
+      )
+      described_class.v1(chapter: chapter_with_modules_title_children, metadata_source: metadata)
+      expect(
+        chapter_with_modules_title_children
       ).to match_snapshot_auto
     end
   end

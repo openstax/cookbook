@@ -2,11 +2,11 @@
 
 module Kitchen
   module Directions
-    module MoveTitleTextIntoSpan
+    module MoveTitleChildrenIntoSpan
       def self.v1(title:)
         title.replace_children(with:
           <<~HTML
-            <span data-type="" itemprop="" class="os-text">#{title.text}</span>
+            <span data-type="" itemprop="" class="os-text">#{title.children}</span>
           HTML
         )
       end

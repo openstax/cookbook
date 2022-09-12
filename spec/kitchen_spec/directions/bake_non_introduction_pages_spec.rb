@@ -39,9 +39,28 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     ).chapters.first
   end
 
+  let(:chapter3) do
+    book_containing(html:
+        <<~HTML
+          <div data-type="chapter">
+            <div data-type="page" id="page_1234">
+              <div data-type="document-title" id="auto_1234_0"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+            </div>
+          </div>
+        HTML
+    ).chapters.first
+  end
+
   it 'works' do
     described_class.v1(chapter: chapter)
     expect(chapter).to match_snapshot_auto
+  end
+
+  context 'when module title has span children elements' do
+    it 'keeps title within its children' do
+      described_class.v1(chapter: chapter3)
+      expect(chapter3).to match_snapshot_auto
+    end
   end
 
   context 'when book has added target lables for modules' do
