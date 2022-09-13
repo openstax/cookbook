@@ -152,6 +152,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
                            label_class: 'table-target-label')
     end
 
+    page.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{appendix_letter}#{example.count_in(:page)}",
+                     title_tag: 'div')
+    end
+
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
