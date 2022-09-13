@@ -85,7 +85,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc|
       end
     end
 
-    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.tables('$:not(.unnumbered)').each do |table|
