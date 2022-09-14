@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Support dash in iframe link
+* Add support for module title element children (e.g. italics, sup, sub) to be kept while baking
+
+## [v1.16.0] - 2022-09-09
+
 * Add support for figures with class `mechanism-figure` to `BakeFigure` for `organic-chemistry`
 * Support trademark symbol in iframe link
 * Change eoc hierarchy in `world-history`

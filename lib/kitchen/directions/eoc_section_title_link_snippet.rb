@@ -18,7 +18,7 @@ module Kitchen
         title_snippet = <<~HTML
           <#{title_tag} data-type="document-title">
             #{os_number}
-            <span class="os-text" data-type="" itemprop="">#{page.title_text}</span>
+            <span class="os-text" data-type="" itemprop="">#{page.title_children}</span>
           </#{title_tag}>
         HTML
 

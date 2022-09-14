@@ -38,7 +38,7 @@ module Kitchen::Directions::BakeChapterIntroductions
             <a class="os-chapter-objective" href="##{page.id}">
               <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
               <span class="os-divider"> </span>
-              <span data-type="" itemprop="" class="os-text">#{page.title.children[0].text}</span>
+              <span data-type="" itemprop="" class="os-text">#{page.title_children}</span>
             </a>
           </div>
         HTML
