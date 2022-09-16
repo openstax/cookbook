@@ -17,6 +17,6 @@ class String
   # @return [String]
   #
   def kebab_case
-    strip.downcase.gsub(/®/, ' r').gsub(/[^(\w\s)]/, '').gsub(/\s/, '-')
+    strip.downcase.gsub(/®/, ' r').gsub(/[^(\w\s)\-]/, '').gsub(/\s/, '-')
   end
 end
