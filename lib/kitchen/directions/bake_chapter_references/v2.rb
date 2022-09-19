@@ -3,14 +3,12 @@
 module Kitchen::Directions::BakeChapterReferences
   class V2
     def bake(chapter:, metadata_source:, uuid_prefix: '.', klass: 'references')
-      chapter.pages.each do |page|
-        bake_page_cite(page: page)
-        bake_page_references(page: page)
-      end
+      bake_cite(chapter: chapter)
+      bake_references(chapter: chapter)
 
-      return if chapter.pages.references.none?
+      return if chapter.references.none?
 
-      content = chapter.pages.references.cut.paste
+      content = chapter.references.cut.paste
 
       Kitchen::Directions::CompositePageContainer.v1(
         container_key: klass,
@@ -21,10 +19,8 @@ module Kitchen::Directions::BakeChapterReferences
       )
     end
 
-    def bake_page_cite(page:)
-      page.search('[data-type="cite"]').each do |link|
-        link.id = "#{page.id}-endNote#{link.count_in(:chapter)}"
-
+    def bake_cite(chapter:)
+      chapter.search('[data-type="cite"]').each do |link|
         link.prepend(child:
           <<~HTML
             <sup class="os-end-note-number">#{link.count_in(:chapter)}</sup>
@@ -35,8 +31,8 @@ module Kitchen::Directions::BakeChapterReferences
       end
     end
 
-    def bake_page_references(page:)
-      page.references.each do |reference|
+    def bake_references(chapter:)
+      chapter.references.each do |reference|
         Kitchen::Directions::RemoveSectionTitle.v1(section: reference)
 
         reference.search('a').each do |ref_link|
@@ -45,7 +41,6 @@ module Kitchen::Directions::BakeChapterReferences
               <span>#{ref_link.count_in(:chapter)}.</span>
             HTML
           )
-          ref_link.href = "##{page.id}-endNote#{ref_link.count_in(:chapter)}"
         end
       end
     end
