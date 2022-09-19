@@ -1,7 +1,7 @@
 <div data-type="chapter"><div data-type="page" id="page1">
   <h1 data-type="document-title">Introduction to Sociology</h1>
   <p>Some text
-    <a href="#something" data-type="cite" id="page1-endNote1"><sup class="os-end-note-number">1</sup>
+    <a href="#note1" data-type="cite" id="some-id"><sup class="os-end-note-number">1</sup>
 
       
     </a>
@@ -11,7 +11,7 @@
 <div data-type="page" id="page2">
   <h1 data-type="document-title">What Is Sociology?</h1>
   <p>Some text
-    <a href="#something2" data-type="cite" id="page2-endNote2"><sup class="os-end-note-number">2</sup>
+    <a href="#note2" data-type="cite" id="some-id2"><sup class="os-end-note-number">2</sup>
 
       
     </a>
@@ -29,14 +29,14 @@
   <section data-depth="1" id="1" class="reference">
     
     <div data-type="note" id="note1">
-      <a href="#page1-endNote1"><span>1.</span>
+      <a href="#some-id"><span>1.</span>
 </a>
       <span>Victoria Knowles, &#x201C;What&#x2019;s the Difference Between CSR and Sustainability?&#x201D;</span>
     </div>
   </section><section data-depth="1" id="2" class="reference">
     
     <div data-type="note" id="note2">
-      <a href="#page2-endNote2"><span>2.</span>
+      <a href="#some-id2"><span>2.</span>
 </a>
       <span>Abercrombie, Nicholas, Stephen Hill, and Bryan S. Turner. 2000. The Penguin Dictionary of Sociology. London: Penguin.</span>
     </div>
