@@ -128,7 +128,7 @@ module Kitchen::Directions::BakeChapterIntroductions
       title = introduction_page.title.cut
       title.name = 'h2'
       title.id = "#{introduction_page.id}_titlecreatedbycookbook"
-      Kitchen::Directions::MoveTitleTextIntoSpan.v1(title: title)
+      Kitchen::Directions::MoveTitleChildrenIntoSpan.v1(title: title)
     end
   end
 end

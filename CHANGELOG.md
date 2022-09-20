@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Modify `BakeEquations` to wrap equations in a `div`
+* Use existing ids in `BakeChapterReferences.v2`
+* Support dash in iframe link
+* Change `world-history` BakeLearningObjectives to v1
+* Add support for module title element children (e.g. italics, sup, sub) to be kept while baking
+
+## [v1.16.0] - 2022-09-09
+
 * Add support for figures with class `mechanism-figure` to `BakeFigure` for `organic-chemistry`
 * Support trademark symbol in iframe link
 * Change eoc hierarchy in `world-history`

@@ -39,7 +39,7 @@ module Kitchen
             <<~HTML
               <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
-              <span data-type="" itemprop="" class="os-text">#{title.text}</span>
+              <span data-type="" itemprop="" class="os-text">#{page.title.children}</span>
             HTML
           )
         end
