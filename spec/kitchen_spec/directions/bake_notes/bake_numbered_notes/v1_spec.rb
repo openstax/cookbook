@@ -73,6 +73,19 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
             </div>
           </div>
         </div></div>
+        <div data-type="page" class="appendix" id="page_3">
+          <div data-type="note" id="5" class="foo">
+            <p>A title 5</p>
+            <div data-type="injected-exercise">
+              <div data-type="exercise-question" data-id="2">
+                <div data-type="question-stem">a question stem</div>
+                <div data-type="question-solution">
+                  some solution
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       HTML
     )
   end

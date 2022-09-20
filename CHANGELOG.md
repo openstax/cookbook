@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Modify `BakeNumberedNotes.v1` to bake notes within Appendix
 * Add `appendix` to `contemporary-math`
 * Modify `BakeEquations` to wrap equations in a `div`
 * Use existing ids in `BakeChapterReferences.v2`
