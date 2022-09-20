@@ -132,6 +132,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc|
 
   BakeUnnumberedTables.v1(book: book)
   BakeStepwise.v1(book: book)
+  BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)

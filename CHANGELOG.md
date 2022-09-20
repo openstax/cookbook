@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Modify `BakeEquations` to wrap equations in a `div`
 * Use existing ids in `BakeChapterReferences.v2`
 * Support dash in iframe link
 * Change `world-history` BakeLearningObjectives to v1
