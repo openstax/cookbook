@@ -1,28 +1,28 @@
 <body>
     <div data-type="chapter">
-  <div data-type="equation" class="unnumbered" id="aaa">
+  <div data-type="equation" class="unnumbered" id="aaa"><div>
     <p>do nothing</p>
-  </div>
-  <div data-type="equation" id="123">
+  </div></div>
+  <div data-type="equation" id="123"><div>
     <p>equation 1</p>
   <div class="os-equation-number">
   <span class="os-number">1.1</span>
 </div>
-</div>
+</div></div>
 </div>
 <div data-type="chapter">
-  <div data-type="equation" id="456">
+  <div data-type="equation" id="456"><div>
     <p>4+4=8</p>
   <div class="os-equation-number">
   <span class="os-number">2.1</span>
 </div>
-</div>
-  <div data-type="equation" id="789">
+</div></div>
+  <div data-type="equation" id="789"><div>
     <p>e=mc^2</p>
   <div class="os-equation-number">
   <span class="os-number">2.2</span>
 </div>
-</div>
+</div></div>
 </div>
 
   </body>

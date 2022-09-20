@@ -136,6 +136,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
   end
 
   BakeInlineLists.v1(book: book)
+  BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)

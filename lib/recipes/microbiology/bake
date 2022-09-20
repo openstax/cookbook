@@ -91,6 +91,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :microbiology) do |doc|
   end
 
   BakeUnnumberedTables.v1(book: book)
+  BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)

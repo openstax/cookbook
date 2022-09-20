@@ -85,6 +85,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc|
   end
 
   BakeReferences.v3(book: book, metadata_source: metadata)
+  BakeEquations.v1(book: book)
   BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
