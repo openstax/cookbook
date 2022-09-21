@@ -4,7 +4,7 @@
 class Strategy
   def bake(chapter:, append_to:)
     # Hacky numbering fix
-    Kitchen::Directions::MoveSolutionsFromNumberedNote.v2(
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
       chapter: chapter, append_to: append_to, note_class: 'your-turn'
     )
 

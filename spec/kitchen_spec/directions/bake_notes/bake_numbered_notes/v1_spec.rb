@@ -72,12 +72,26 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes do
               </div>
             </div>
           </div>
-        </div></div>
-        <div data-type="page" class="appendix" id="page_3">
           <div data-type="note" id="5" class="foo">
             <p>A title 5</p>
             <div data-type="injected-exercise">
-              <div data-type="exercise-question" data-id="2">
+              <div data-type="exercise-stimulus">Stimulus text for exercise.</div>
+              <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="101">
+                <div data-type="question-stem">a question</div>
+                <div data-type="question-solution">a solution</div>
+              </div>
+              <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="102">
+                <div data-type="question-stem">a question</div>
+                <div data-type="question-solution">a solution</div>
+              </div>
+            </div>
+          </div>
+        </div></div>
+        <div data-type="page" class="appendix" id="page_3">
+          <div data-type="note" id="6" class="foo">
+            <p>A title 6</p>
+            <div data-type="injected-exercise">
+              <div data-type="exercise-question" data-id="3">
                 <div data-type="question-stem">a question stem</div>
                 <div data-type="question-solution">
                   some solution

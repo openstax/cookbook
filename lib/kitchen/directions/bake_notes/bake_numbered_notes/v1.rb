@@ -47,6 +47,9 @@ module Kitchen::Directions
         note.exercises.each do |exercise|
           BakeNoteExercise.v1(note: note, exercise: exercise)
         end
+        note.injected_exercises.each do |injected_exercise|
+          BakeInjectedExercise.v1(exercise: injected_exercise, alphabetical_multiparts: true)
+        end
         note.injected_questions.each do |question|
           BakeNoteInjectedQuestion.v1(note: note, question: question)
         end

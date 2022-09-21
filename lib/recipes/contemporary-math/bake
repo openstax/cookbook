@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require_relative 'strategy'
+require_relative 'appendix_strategy'
 require_relative '../recipes_helper'
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
@@ -17,11 +18,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   BakePreface.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
+  AddInjectedExerciseId.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   note_classes =
     %w[people-mathematics who-knew tech-check check-point video work-out definition formula]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
-  BakeNumberedNotes.v1(book: book, classes: %w[your-turn], options: { bake_exercises: false })
+  BakeNumberedNotes.v1(book: book, classes: %w[your-turn])
   sections_with_unnumbered_tables_in_solutions = \
     'div.your-turn, section.section-exercises, section.chapter-review, section.chapter-test'
   book.search(sections_with_unnumbered_tables_in_solutions).solutions.each do |solution|
@@ -35,7 +37,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
   BakeUnnumberedTables.v1(book: book)
 
   book.injected_exercises.each do |exercise|
-    BakeInjectedExercise.v1(exercise: exercise)
+    BakeInjectedExercise.v1(exercise: exercise, alphabetical_multiparts: true)
   end
   answer_key = BookAnswerKeyContainer.v1(book: book)
   book.chapters.each do |chapter|
@@ -55,13 +57,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
     end
     chapter.pages.search('section.chapter-test').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-    end
-    chapter.pages.notes('$.your-turn').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(
-        question: question,
-        number: question.count_in(:note),
-        options: { only_number_solution: false }
-      )
     end
 
     chapter_summary = \
@@ -157,6 +152,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
                      number: "#{appendix_letter}#{example.count_in(:page)}",
                      title_tag: 'h3')
     end
+
+    answer_key_appendix_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: page, metadata_source: metadata, append_to: answer_key,
+      options: { solutions_plural: false, in_appendix: true }
+    )
+
+    AppendixStrategy.new.bake(
+      page: page,
+      append_to: answer_key_appendix_inner_container
+    )
 
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
