@@ -107,7 +107,7 @@
 </h3>
 <div class="os-note-body">
     <p>A title 4</p>
-    <div data-type="injected-exercise">
+    <div data-type="injected-exercise" data-question-count="1" data-is-multipart="False">
       <div data-type="exercise-question" data-id="1" class="unnumbered os-hasSolution" id="auto_2_1">
 <div class="os-problem-container">
   
@@ -126,6 +126,73 @@
       </div>
     </div>
   </div></div>
+  <div data-type="note" id="5" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">2.5</span>
+  <span class="os-divider"> </span>
+</h3>
+<div class="os-note-body">
+    <p>A title 5</p>
+    <div data-type="injected-exercise" data-question-count="2" data-is-multipart="True">
+      <div data-type="exercise-stimulus">Stimulus text for exercise.</div>
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="101" class="unnumbered os-hasSolution">
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">a question</div>
+  
+</div>
+
+        
+        <div data-type="question-solution" id="101-solution"><a class="os-number" href="#101">2.5</a><span class="os-divider">. </span>
+<div class="os-solution-container">a solution</div>
+</div>
+      </div>
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="102" class="unnumbered os-hasSolution">
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">a question</div>
+  
+</div>
+
+        
+        <div data-type="question-solution" id="102-solution"><a class="os-number" href="#102">2.5</a><span class="os-divider">. </span>
+<div class="os-solution-container">a solution</div>
+</div>
+      </div>
+    </div>
+  </div></div>
 </div></div>
+<div data-type="page" class="appendix" id="page_3">
+  <div data-type="note" id="6" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">A1</span>
+  <span class="os-divider"> </span>
+</h3>
+<div class="os-note-body">
+    <p>A title 6</p>
+    <div data-type="injected-exercise" data-question-count="1" data-is-multipart="False">
+      <div data-type="exercise-question" data-id="3" class="unnumbered os-hasSolution" id="auto_3_3">
+<div class="os-problem-container">
+  
+  
+  
+  <div data-type="question-stem">a question stem</div>
+  
+</div>
+
+        
+        <div data-type="question-solution" id="auto_3_3-solution"><a class="os-number" href="#auto_3_3">A1</a><span class="os-divider">. </span>
+<div class="os-solution-container">
+          some solution
+        </div>
+</div>
+      </div>
+    </div>
+  </div></div>
+</div>
 
   </body>
