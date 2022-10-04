@@ -25,7 +25,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           <div class="permissions" id="permissions">Permissions</div>
           <div data-type="subject" id="subject">Subject</div>
         </div>
-        <div data-type="page" id="p1">
+        <div data-type="page" class="preface" id="p1">
           <div data-type="document-title">Preface</div>
           <span data-type="term" id="replace-me-not">foo</span>
           <span data-type="term">Foo</span>
@@ -33,6 +33,12 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           <span data-type="term">bar</span>
           <span data-type="term">Ötzi the Iceman</span>
           <span data-type="term"><em data-effect="italics">Homo sapiens sapiens</em></span>
+        </div>
+        <div data-type="page" class="unit-opener" id="p7">
+          <div data-type="document-title">Introduction</div>
+          <span data-type="term" id="replace-me-not-5">foo</span>
+          <span data-type="term">Foo</span>
+          <span data-type="term">Bar</span>
         </div>
         <div data-type="chapter">
           <div data-type="page" id="p2">
@@ -59,6 +65,18 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             <span data-type="term">éblahblah</span>
             <span data-type="term">5’ cap</span>
           </div>
+        </div>
+        <div data-type="page" class="appendix" id="p5">
+          <div data-type="document-title">Appendix A</div>
+          <span data-type="term" id="replace-me-not-3">foo</span>
+          <span data-type="term">Foo</span>
+          <span data-type="term">Bar</span>
+        </div>
+        <div data-type="page" class="handbook" id="p6">
+          <div data-type="document-title">Handbook A</div>
+          <span data-type="term" id="replace-me-not-4">foo</span>
+          <span data-type="term">Foo</span>
+          <span data-type="term">Bar</span>
         </div>
       HTML
     )

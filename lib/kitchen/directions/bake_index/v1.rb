@@ -124,19 +124,40 @@ module Kitchen::Directions::BakeIndex
 
       # Numbering of IDs doesn't depend on term type
 
-      book.pages.terms.each do |term_element|
+      bob_pages = '$.preface, $.unit-opener'
+
+      book.pages(bob_pages).terms.each do |term_element|
         page = term_element.ancestor(:page)
         term_element.id ||= "auto_#{page.id}_term#{term_element.count_in(:book)}"
         page_title = page.title.text
         add_term_to_index(term_element, page_title)
       end
 
-      book.chapters.composite_pages.terms.each do |term_element|
-        page = term_element.ancestor(:composite_page)
-        chapter = term_element.ancestor(:chapter)
-        term_element.id ||= "auto_composite_page_term#{term_element.count_in(:book)}"
-        chapter_number = chapter.count_in(:book)
-        page_title = "#{chapter_number} #{page.title.text.strip}".strip
+      book.chapters.search_with(
+        Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
+      ).terms.each do |term_element|
+
+        if term_element.has_ancestor?(:page)
+          page = term_element.ancestor(:page)
+          term_element.id ||= "auto_#{page.id}_term#{term_element.count_in(:book)}"
+          page_title = page.title.text
+        elsif term_element.has_ancestor?(:composite_page)
+          page = term_element.ancestor(:composite_page)
+          chapter = term_element.ancestor(:chapter)
+          term_element.id ||= "auto_composite_page_term#{term_element.count_in(:book)}"
+          chapter_number = chapter.count_in(:book)
+          page_title = "#{chapter_number} #{page.title.text.strip}".strip
+        end
+
+        add_term_to_index(term_element, page_title)
+      end
+
+      eob_pages = '$.appendix, $.handbook'
+
+      book.pages(eob_pages).terms.each do |term_element|
+        page = term_element.ancestor(:page)
+        term_element.id ||= "auto_#{page.id}_term#{term_element.count_in(:book)}"
+        page_title = page.title.text
         add_term_to_index(term_element, page_title)
       end
 

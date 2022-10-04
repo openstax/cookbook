@@ -27,7 +27,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           <div class="permissions" id="permissions">Permissions</div>
           <div data-type="subject" id="subject">Subject</div>
         </div>
-        <div data-type="page" id="p1">
+        <div data-type="page" class="preface" id="p1">
           <div data-type="document-title">Preface</div>
           <span data-type="term">foo</span>
           <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" data-type="term" cmlnle:reference="foo">Foo</span>
