@@ -10,42 +10,42 @@
 </div>
 <div data-type="page" id="p1">
   <div data-type="document-title">Preface</div>
-  <span data-type="term" id="auto_p1_term1" group-by="f">foo</span>
-  <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" data-type="term" cmlnle:reference="foo" id="auto_p1_term2" group-by="f">Foo</span>
-  <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928" id="auto_p1_term3" group-by="C">Noam Chomsky</span>
+  <span data-type="term">foo</span>
+  <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" data-type="term" cmlnle:reference="foo">Foo</span>
+  <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928">Noam Chomsky</span>
   <span data-type="foreign" xml:lang="en">
-    <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign" id="auto_p1_term4" group-by="Symbole">&#x394;E</span>
+    <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign">&#x394;E</span>
   </span>
   <span data-type="foreign" xml:lang="en">
-    <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign" id="auto_p1_term5" group-by="i">introspection</span>
+    <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign">introspection</span>
   </span>
 </div>
 <div data-type="chapter">
   <div data-type="page" id="p2">
     <div data-type="document-title"><span>1.1</span> First Page</div>
-    <span data-type="term" id="auto_p2_term6" group-by="f">foo</span>
-    <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" data-type="term" cmlnle:reference="animag" id="auto_p2_term7" group-by="a">animagiem</span>
-    <span data-type="term" id="auto_p2_term8" group-by="Symbole">&#x394;E</span>
-    <span data-type="term" id="auto_p2_term9" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
-    <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Wundt, Wilhelm (1832-1920)" cxlxt:index="name" cxlxt:name="Wundta, Wilhelma" cxlxt:born="1832" cxlxt:died="1920" id="auto_p2_term10" group-by="W">Wilhelma Wundta</span>
-    <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928" id="auto_p2_term11" group-by="C">Noama Chomsky'ego</span>
+    <span data-type="term" id="auto_p2_term1" group-by="f">foo</span>
+    <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" data-type="term" cmlnle:reference="animag" id="auto_p2_term2" group-by="a">animagiem</span>
+    <span data-type="term" id="auto_p2_term3" group-by="Symbole">&#x394;E</span>
+    <span data-type="term" id="auto_p2_term4" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
+    <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Wundt, Wilhelm (1832-1920)" cxlxt:index="name" cxlxt:name="Wundta, Wilhelma" cxlxt:born="1832" cxlxt:died="1920" id="auto_p2_term5" group-by="W">Wilhelma Wundta</span>
+    <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928" id="auto_p2_term6" group-by="C">Noama Chomsky'ego</span>
     <span data-type="foreign" xml:lang="en">
-      <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign" id="auto_p2_term12" group-by="i">introspection</span>
+      <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign" id="auto_p2_term7" group-by="i">introspection</span>
     </span>
     <span data-type="foreign" xml:lang="en">
-      <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign" id="auto_p2_term13" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
+      <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign" id="auto_p2_term8" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
     </span>
-    <span data-type="term" reference="bar" id="auto_p2_term14" group-by="b">Boo</span>
-    <span data-type="term" reference="Christmas, Mary (ur. 1958)" index="name" name="Christmas, Mary" born="1958" id="auto_p2_term15" group-by="C">Mary Christmas</span>
+    <span data-type="term" reference="bar" id="auto_p2_term9" group-by="b">Boo</span>
+    <span data-type="term" reference="Christmas, Mary (ur. 1958)" index="name" name="Christmas, Mary" born="1958" id="auto_p2_term10" group-by="C">Mary Christmas</span>
     <span data-type="foreign" xml:lang="en">
-      <span data-type="term" index="foreign" id="auto_p2_term16" group-by="t">train</span>
+      <span data-type="term" index="foreign" id="auto_p2_term11" group-by="t">train</span>
     </span>
   </div>
   <div data-type="composite-chapter">
     <div data-type="document-title">Chapter Review</div>
     <div data-type="composite-page">
       <h3 data-type="title">EOC Section Title</h3>
-      <span data-type="term" id="auto_composite_page_term1" group-by="c">composite page in a composite chapter</span>
+      <span data-type="term" id="auto_composite_page_term12" group-by="c">composite page in a composite chapter</span>
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@
   <div data-type="page" id="p4"/>
   <div data-type="composite-page">
     <h2 data-type="document-title">Another EOC Section</h2>
-    <span data-type="term" id="auto_composite_page_term2" group-by="c">composite page at the top level</span>
+    <span data-type="term" id="auto_composite_page_term13" group-by="c">composite page at the top level</span>
   </div>
 </div>
 
@@ -72,16 +72,14 @@
         <div class="os-index-item">
               <span class="os-term" group-by="C">Chomsky, Noam (ur. 1928)</span>
 
-            <a class="os-term-section-link" href="#auto_p1_term3"><span class="os-term-section">Preface</span></a><!--
-          --><span class="os-index-link-separator">, </span>
-            <a class="os-term-section-link" href="#auto_p2_term11"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term6"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
         <div class="os-index-item">
               <span class="os-term" group-by="C">Christmas, Mary (ur. 1958)</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term15"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term10"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -93,7 +91,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="W">Wundt, Wilhelm (1832-1920)</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term10"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term5"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -115,7 +113,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="Symbole">&#x394;E</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term8"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term3"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -127,7 +125,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="a">animag</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term7"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term2"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -139,7 +137,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="b">bar</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term14"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term9"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -151,14 +149,14 @@
         <div class="os-index-item">
               <span class="os-term" group-by="c">composite page at the top level</span>
 
-            <a class="os-term-section-link" href="#auto_composite_page_term2"><span class="os-term-section">2 Another EOC Section</span></a><!--
+            <a class="os-term-section-link" href="#auto_composite_page_term13"><span class="os-term-section">2 Another EOC Section</span></a><!--
           -->
         </div>
       
         <div class="os-index-item">
               <span class="os-term" group-by="c">composite page in a composite chapter</span>
 
-            <a class="os-term-section-link" href="#auto_composite_page_term1"><span class="os-term-section">1 EOC Section Title</span></a><!--
+            <a class="os-term-section-link" href="#auto_composite_page_term12"><span class="os-term-section">1 EOC Section Title</span></a><!--
           -->
         </div>
       
@@ -170,11 +168,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="f">foo</span>
 
-            <a class="os-term-section-link" href="#auto_p1_term1"><span class="os-term-section">Preface</span></a><!--
-          --><span class="os-index-link-separator">, </span>
-            <a class="os-term-section-link" href="#auto_p1_term2"><span class="os-term-section">Preface</span></a><!--
-          --><span class="os-index-link-separator">, </span>
-            <a class="os-term-section-link" href="#auto_p2_term6"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term1"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -186,7 +180,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term9"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term4"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -203,26 +197,12 @@
   </div>
   
     <div class="group-by">
-      <span class="group-label">Symbole</span>
-      
-        <div class="os-index-item">
-              <span class="os-term" group-by="Symbole">&#x394;E</span>
-
-            <a class="os-term-section-link" href="#auto_p1_term4"><span class="os-term-section">Preface</span></a><!--
-          -->
-        </div>
-      
-    </div>
-  
-    <div class="group-by">
       <span class="group-label">I</span>
       
         <div class="os-index-item">
               <span class="os-term" group-by="i">introspection</span>
 
-            <a class="os-term-section-link" href="#auto_p1_term5"><span class="os-term-section">Preface</span></a><!--
-          --><span class="os-index-link-separator">, </span>
-            <a class="os-term-section-link" href="#auto_p2_term12"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term7"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -234,7 +214,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term13"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term8"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
@@ -246,7 +226,7 @@
         <div class="os-index-item">
               <span class="os-term" group-by="t">train</span>
 
-            <a class="os-term-section-link" href="#auto_p2_term16"><span class="os-term-section">1.1 First Page</span></a><!--
+            <a class="os-term-section-link" href="#auto_p2_term11"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
