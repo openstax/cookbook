@@ -34,6 +34,20 @@
     </div>
   
     <div class="group-by">
+      <span class="group-label">B</span>
+      
+        <div class="os-index-item">
+              <span class="os-term" group-by="B">Bar</span>
+
+            <a class="os-term-section-link" href="#auto_p1_term3"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p1_term4"><span class="os-term-section">Preface</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
       <span class="group-label">C</span>
       
         <div class="os-index-item">
@@ -70,6 +84,10 @@
         <div class="os-index-item">
               <span class="os-term" group-by="f">foo</span>
 
+            <a class="os-term-section-link" href="#replace-me-not"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p1_term2"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
             <a class="os-term-section-link" href="#auto_p2_term1"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
@@ -82,7 +100,21 @@
         <div class="os-index-item">
               <span class="os-term" group-by="H"><em data-effect="italics">Homo sapiens sapiens</em></span>
 
+            <a class="os-term-section-link" href="#auto_p1_term6"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
             <a class="os-term-section-link" href="#auto_p2_term5"><span class="os-term-section">1.1 First Page</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">O</span>
+      
+        <div class="os-index-item">
+              <span class="os-term" group-by="O">&#xD6;tzi the Iceman</span>
+
+            <a class="os-term-section-link" href="#auto_p1_term5"><span class="os-term-section">Preface</span></a><!--
           -->
         </div>
       

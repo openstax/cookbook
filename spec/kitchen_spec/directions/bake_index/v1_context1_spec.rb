@@ -25,7 +25,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           <div class="permissions" id="permissions">Permissions</div>
           <div data-type="subject" id="subject">Subject</div>
         </div>
-        <div data-type="page" id="p1">
+        <div data-type="page" class="preface" id="p1">
           <div data-type="document-title">Preface</div>
           <span data-type="term" id="replace-me-not">foo</span>
           <span data-type="term">Foo</span>
