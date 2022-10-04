@@ -150,7 +150,9 @@ module Kitchen::Directions::BakeIndex
         add_term_to_index(term_element, page_title)
       end
 
-      book.pages('$.appendix').terms.each do |term_element|
+      eob_pages = '$.appendix, $.handbook'
+
+      book.pages(eob_pages).terms.each do |term_element|
         page = term_element.ancestor(:page)
         term_element.id ||= "auto_#{page.id}_term#{term_element.count_in(:book)}"
         page_title = page.title.text
