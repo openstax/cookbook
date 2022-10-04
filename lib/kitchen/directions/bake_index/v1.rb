@@ -124,7 +124,9 @@ module Kitchen::Directions::BakeIndex
 
       # Numbering of IDs doesn't depend on term type
 
-      book.pages('$.preface').terms.each do |term_element|
+      bob_pages = '$.preface, $.unit-opener'
+
+      book.pages(bob_pages).terms.each do |term_element|
         page = term_element.ancestor(:page)
         term_element.id ||= "auto_#{page.id}_term#{term_element.count_in(:book)}"
         page_title = page.title.text
