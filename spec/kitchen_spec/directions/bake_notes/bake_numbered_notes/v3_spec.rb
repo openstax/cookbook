@@ -113,6 +113,24 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
     )
   end
 
+  let(:note_after_example) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <div data-type="page">
+            <div data-type="example">
+              <span class="os-number">1.1</span>
+            </div>
+            <div data-type="note" id="123" class="foo">
+              <p>content 1.1</p>
+            </div>
+            </div>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   before do
     stub_locales({
       'notes': {
@@ -130,5 +148,11 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V3 do
       options: { suppress_solution: true }
     )
     expect(book_with_notes.body).to match_snapshot_auto
+  end
+
+  it 'stores link text' do
+    pantry = note_after_example.pantry(name: :link_text)
+    expect(pantry).to receive(:store).with('Bar 1.1', { label: '123' })
+    described_class.new.bake(book: note_after_example, classes: %w[foo], options: { suppress_solution: true })
   end
 end
