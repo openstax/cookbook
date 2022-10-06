@@ -62,6 +62,7 @@ case "${book}" in
   marketing) dest="${DIR}/data/marketing/short" && script="${DIR}/lib/recipes/marketing/shorten";;
   organic-chemistry) dest="${DIR}/data/organic-chemistry/short" && script="${DIR}/lib/recipes/organic-chemistry/shorten";;
   contemporary-math) dest="${DIR}/data/contemporary-math/short" && script="${DIR}/lib/recipes/contemporary-math/shorten";;
+  python) dest="${DIR}/data/python/short" && script="${DIR}/lib/recipes/python/shorten";;
 
   *) echo "Unknown book '${book}'"; exit 1;;
 esac

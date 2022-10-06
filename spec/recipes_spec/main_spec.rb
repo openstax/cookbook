@@ -187,6 +187,10 @@ RSpec.describe 'books' do
     expect('psychology').to bake_correctly
   end
 
+  it 'bakes python' do
+    expect('python').to bake_correctly
+  end
+
   it 'bakes sociology' do
     expect('sociology').to bake_correctly
   end
