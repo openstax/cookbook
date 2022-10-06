@@ -64,6 +64,7 @@ case "${book}" in
   precalculus-coreq) $DIR/lib/recipes/precalculus-coreq/bake --input $input_file --output $output_file;;
   principles-management) $DIR/lib/recipes/principles-management/bake --input $input_file --output $output_file;;
   psychology) $DIR/lib/recipes/psychology/bake --input $input_file --output $output_file;;
+  python) $DIR/lib/recipes/python/bake --input $input_file --output $output_file;;
   sociology) $DIR/lib/recipes/sociology/bake --input $input_file --output $output_file;;
   statistics) $DIR/lib/recipes/statistics/bake --input $input_file --output $output_file;;
   u-physics) $DIR/lib/recipes/u-physics/bake --input $input_file --output $output_file;;
