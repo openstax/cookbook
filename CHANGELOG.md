@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake notes in `python`
 * Create recipe for `python` book
 * Support target labels for `BakeNumberedNotes.v3`
 * Fix page numbering in `BakeIndex`
