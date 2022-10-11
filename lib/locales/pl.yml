@@ -83,6 +83,8 @@ pl:
       instrumental: Dodatkiem
       locative: Dodatku
       vocative: Dodatku
+  preface:
+      nominative: Przedmowa
   chapter:
       nominative: Rozdział
       genitive: Rozdziału

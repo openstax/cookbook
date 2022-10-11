@@ -2,20 +2,52 @@
 
 # frozen_string_literal: true
 
+require_relative 'preface_strategy'
+require_relative 'strategy'
 require_relative '../recipes_helper'
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :python) do |doc|
   include Kitchen::Directions
 
   book = doc.book
-  # metadata = book.metadata
+  metadata = book.metadata
 
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
-  BakeIframes.v1(book: book) # check if exists
+  BakeIframes.v1(book: book)
+
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
+
+  notes = %w[guided-slides learning-questions practice-program]
+  BakeAutotitledNotes.v1(book: book, classes: notes, options: { bake_exercises: false })
+
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
+  book.pages('$.preface').each do |page|
+    page.notes('$.learning-questions').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:page),
+        options: { only_number_solution: false }
+      )
+    end
+
+    answer_key_preface_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: page, metadata_source: metadata, append_to: answer_key,
+      options: { solutions_plural: false, in_preface: true }
+    )
+
+    PrefaceStrategy.new.bake(
+      page: page,
+      append_to: answer_key_preface_inner_container
+    )
+  end
 
   BakeChapterTitle.v1(book: book)
 
@@ -39,12 +71,24 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :python) do |doc|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
+    chapter.pages.notes('$.learning-questions').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:page),
+        options: { only_number_solution: false }
+      )
+    end
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
+    )
+
+    Strategy.new.bake(
+      chapter: chapter,
+      append_to: answer_key_inner_container
+    )
   end
 
-  notes = %w[guided-slides learning-questions practice-program]
-  BakeAutotitledNotes.v1(book: book, classes: notes)
-
-  BakeIframes.v1(book: book)
   BakeFootnotes.v1(book: book, number_format: :roman) # check if exists
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
