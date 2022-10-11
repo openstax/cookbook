@@ -7,7 +7,8 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
   before do
     stub_locales({
       'chapter': 'Chapter',
-      'appendix': 'Appendix'
+      'appendix': 'Appendix',
+      'preface': 'Preface'
     })
   end
 
@@ -29,6 +30,17 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
       <<~HTML
         #{metadata_element}
         <div class ="appendix" data-type="page">
+          This is a page
+        </div>
+      HTML
+    )
+  end
+
+  let(:book_with_preface) do
+    book_containing(html:
+      <<~HTML
+        #{metadata_element}
+        <div class ="preface" data-type="page">
           This is a page
         </div>
       HTML
@@ -61,6 +73,14 @@ RSpec.describe Kitchen::Directions::AnswerKeyInnerContainer do
     it 'changes the title to appendix and adds appendix prefix to uuid' do
       expect(
         described_class.v1(chapter: book.pages.first, metadata_source: metadata_element, append_to: append_to, options: { in_appendix: true })
+      ).to match_snapshot_auto
+    end
+  end
+
+  context 'when in preface' do
+    it 'changes the title to preface and adds preface prefix to uuid' do
+      expect(
+        described_class.v1(chapter: book_with_preface.pages.first, metadata_source: metadata_element, append_to: append_to, options: { in_preface: true })
       ).to match_snapshot_auto
     end
   end
