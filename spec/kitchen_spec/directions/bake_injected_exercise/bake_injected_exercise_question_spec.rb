@@ -240,4 +240,45 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
       described_class.v1(question: question, number: '1')
     end
   end
+
+  context 'when questions are in preface' do
+    let(:book_with_preface_with_injected_section) do
+      book_containing(html:
+        <<~HTML
+          <div data-type="page" id="page_abc123" class="preface">
+            <section class="section-with-injected-exercises">
+              <div data-type="injected-exercise" data-injected-from-nickname="multiFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
+                <div data-type="exercise-stimulus">Exercise stimulus</div>
+                <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="1">
+                  <div data-type="question-stem">Question 1</div>
+                  <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">
+                    solution 1
+                  </div>
+                </div>
+                <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="2">
+                  <div data-type="question-stem">Question 2</div>
+                  <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">
+                    solution 2
+                  </div>
+                </div>
+                <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="3">
+                  <div data-type="question-stem">Question 3</div>
+                  <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">
+                    solution 3
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        HTML
+      )
+    end
+
+    it 'stores link text' do
+      question = book_with_preface_with_injected_section.pages.injected_questions.first
+      pantry = question.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Exercise 1.1', { label: 'auto_abc123_1' })
+      described_class.v1(question: question, number: '1')
+    end
+  end
 end

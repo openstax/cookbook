@@ -17,12 +17,13 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
     def bake(question:, number:, options:)
       id = question.id
       in_appendix = question.has_ancestor?(:page) && question.ancestor(:page).has_class?('appendix')
+      in_preface = question.has_ancestor?(:page) && question.ancestor(:page).has_class?('preface')
       alphabetical_multipart =
         question.search("div[data-type='alphabetical-question-multipart']")&.first&.present?
 
       # Store label in pantry
       unless options[:only_number_solution]
-        label_number = if in_appendix
+        label_number = if in_appendix || in_preface
                          "#{question.ancestor(:page).count_in(:book)}.#{number}"
                        else
                          "#{question.ancestor(:chapter).count_in(:book)}.#{number}"

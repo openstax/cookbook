@@ -3,11 +3,13 @@
 module Kitchen::Directions::AnswerKeyInnerContainer
   def self.v1(chapter:, metadata_source:, append_to:, options: {
     solutions_plural: true,
+    in_preface: false,
     in_appendix: false,
     cases: false
   })
     options.reverse_merge!(
       solutions_plural: true,
+      in_preface: false,
       in_appendix: false,
       cases: false
     )
@@ -26,6 +28,8 @@ module Kitchen::Directions::AnswerKeyInnerContainer
       @solutions_or_solution = options[:solutions_plural] ? 'solutions' : 'solution'
       @uuid_key = if options[:in_appendix]
                     "appendix#{@solutions_or_solution}#{chapter.count_in(:book)}"
+                  elsif options[:in_preface]
+                    "preface#{@solutions_or_solution}#{chapter.count_in(:book)}"
                   else
                     @uuid_key = "#{@solutions_or_solution}#{chapter.count_in(:book)}"
                   end
@@ -33,6 +37,8 @@ module Kitchen::Directions::AnswerKeyInnerContainer
       @composite_element = 'composite-page'
       @title = if options[:in_appendix]
                  "#{I18n.t("appendix#{'.nominative' if options[:cases]}")} #{[*('A'..'Z')][chapter.count_in(:book) - 1]}"
+               elsif options[:in_preface]
+                 I18n.t("preface#{'.nominative' if options[:cases]}").to_s
                else
                  "#{I18n.t("chapter#{'.nominative' if options[:cases]}")} #{chapter.count_in(:book)}"
                end
