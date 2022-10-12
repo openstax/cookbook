@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake notes in `python`
+
 ## [v1.18.0] - 2022-10-07
 
 * Create recipe for `python` book
