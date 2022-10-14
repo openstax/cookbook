@@ -157,6 +157,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc|
     )
   end
 
+  BakeEquations.v1(book: book)
   BakeIframes.v1(book: book)
   BakeFootnotes.v1(book: book, number_format: :roman)
   BakeIndex.v1(book: book)
