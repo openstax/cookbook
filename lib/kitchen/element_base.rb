@@ -2,6 +2,7 @@
 
 require 'forwardable'
 require 'securerandom'
+require 'byebug'
 
 # rubocop:disable Metrics/ClassLength
 module Kitchen
@@ -499,7 +500,7 @@ module Kitchen
 
         if node[:id].present?
           id_tracker.record_id_pasted(node[:id])
-          node[:id] = id_tracker.modified_id_to_paste(node[:id])
+          node.delete('id') unless id_tracker.first_id?(node[:id])
         end
       end
       temp_copy.to_s
