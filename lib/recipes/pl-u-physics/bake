@@ -40,7 +40,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc|
   solutions_container = BookAnswerKeyContainer.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeNonIntroductionPages.v1(chapter: chapter, options: { block_target_label: true })
+    BakeNonIntroductionPages.v1(chapter: chapter, options: { cases: true })
     BakeLearningObjectives.v1(chapter: chapter)
 
     # EOC
