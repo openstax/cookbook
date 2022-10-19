@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Unblock page target labels in `pl-u-physics`
+* Bake `UnclassifiedNotes` in `marketing`
 * Bake equations in `marketing`
 * Bake exercises in `python`
 * Bake notes in `python`
