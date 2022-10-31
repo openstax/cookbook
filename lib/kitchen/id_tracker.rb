@@ -7,7 +7,6 @@ module Kitchen
 
     def initialize
       @id_data = Hash.new { |hash, key| hash[key] = { count: 0, last_pasted: false } }
-      @id_copy_suffix = '_copy_'
     end
 
     # Keeps track that an element with the given ID has been copied.  When such

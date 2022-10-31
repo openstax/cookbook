@@ -2,7 +2,6 @@
 
 require 'forwardable'
 require 'securerandom'
-require 'byebug'
 
 # rubocop:disable Metrics/ClassLength
 module Kitchen
@@ -509,7 +508,7 @@ module Kitchen
     # Copy the element's id
     def copied_id
       id_tracker.record_id_copied(id)
-      id_tracker.modified_id_to_paste(id)
+      return nil unless id_tracker.first_id?(id)
     end
 
     # Delete the element
