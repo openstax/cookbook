@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'byebug'
 
 RSpec.describe Kitchen::IdTracker do
   let(:instance) { described_class.new }
