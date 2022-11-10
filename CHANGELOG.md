@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Remove copied duplicate ids
+
+## [v1.19.0] - 2022-10-21
+
+* Change title for `Problems` in `organic-chemistry`
 * Unblock page target labels in `pl-u-physics`
 * Bake `UnclassifiedNotes` in `marketing`
 * Bake equations in `marketing`
