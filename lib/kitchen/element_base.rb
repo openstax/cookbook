@@ -499,7 +499,7 @@ module Kitchen
 
         if node[:id].present?
           id_tracker.record_id_pasted(node[:id])
-          node[:id] = id_tracker.modified_id_to_paste(node[:id])
+          node.delete('id') unless id_tracker.first_id?(node[:id])
         end
       end
       temp_copy.to_s
@@ -508,7 +508,7 @@ module Kitchen
     # Copy the element's id
     def copied_id
       id_tracker.record_id_copied(id)
-      id_tracker.modified_id_to_paste(id)
+      return nil unless id_tracker.first_id?(id)
     end
 
     # Delete the element

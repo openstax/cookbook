@@ -104,12 +104,12 @@ RSpec.describe Kitchen::Element do
         expect(clipboard.first.id).to eq 'divId'
       end
 
-      it 'uses same ID on first paste and unique IDs on second and third paste' do
+      it 'uses same ID on first paste and no IDs on the second or third paste' do
         clipboard = Kitchen::Clipboard.new
         element1.cut(to: clipboard)
         expect(clipboard.paste).to match(/divId"/)
-        expect(clipboard.paste).to match(/divId_copy_1"/)
-        expect(clipboard.paste).to match(/divId_copy_2"/)
+        expect(clipboard.paste).not_to match(/id="/)
+        expect(clipboard.paste).not_to match(/id="/)
       end
 
       it 'uses the same ID when cutting, pasting, cutting, and pasting again' do
@@ -128,11 +128,11 @@ RSpec.describe Kitchen::Element do
         expect(the_cut_element.id).to eq 'divId'
       end
 
-      it 'uses same ID on first paste and unique IDs on second and third paste' do
+      it 'uses same ID on first paste and no IDs on second and third paste' do
         the_cut_element = element1.cut
         expect(the_cut_element.paste).to match(/divId"/)
-        expect(the_cut_element.paste).to match(/divId_copy_1"/)
-        expect(the_cut_element.paste).to match(/divId_copy_2"/)
+        expect(the_cut_element.paste).not_to match(/id="/)
+        expect(the_cut_element.paste).not_to match(/id="/)
       end
 
       it 'uses the same ID when cutting, pasting, cutting, and pasting again' do
@@ -164,24 +164,24 @@ RSpec.describe Kitchen::Element do
       it 'uses unique IDs all pastes' do
         clipboard = Kitchen::Clipboard.new
         element1.copy(to: clipboard)
-        expect(clipboard.paste).to match(/divId_copy_1"/)
-        expect(clipboard.paste).to match(/divId_copy_2"/)
+        expect(clipboard.paste).not_to match(/id="/)
+        expect(clipboard.paste).not_to match(/id="/)
       end
 
-      it 'uses unique IDs when copying and pasting twice' do
+      it 'uses no IDs when copying and pasting twice' do
         clipboard = Kitchen::Clipboard.new
         element1.copy(to: clipboard)
-        expect(clipboard.paste).to match(/divId_copy_1"/)
+        expect(clipboard.paste).not_to match(/id="/)
         element1.copy(to: clipboard)
-        expect(clipboard.paste).to match(/divId_copy_2"/)
+        expect(clipboard.paste).not_to match(/id="/)
       end
 
-      it 'uses unique IDs when copying 3 times' do
+      it 'uses no IDs when copying 3 times' do
         clipboard = Kitchen::Clipboard.new
         element1.copy(to: clipboard)
         element1.copy(to: clipboard)
         element1.copy(to: clipboard)
-        expect(clipboard.paste).to match(/divId_copy_3"/)
+        expect(clipboard.paste).not_to match(/id="/)
       end
     end
 
@@ -192,32 +192,32 @@ RSpec.describe Kitchen::Element do
         expect(the_copied_element.id).to eq 'divId'
       end
 
-      it 'uses unique IDs all pastes' do
+      it 'uses no IDs all duplicate pastes' do
         the_copied_element = element1.copy
-        expect(the_copied_element.paste).to match(/divId_copy_1"/)
-        expect(the_copied_element.paste).to match(/divId_copy_2"/)
+        expect(the_copied_element.paste).not_to match(/id="/)
+        expect(the_copied_element.paste).not_to match(/id="/)
       end
 
-      it 'keeps using unique IDs even if copied multiple times' do
+      it 'keeps using no IDs even if copied & pasting multiple times' do
         the_copied_element = element1.copy
-        expect(the_copied_element.paste).to match(/divId_copy_1"/)
+        expect(the_copied_element.paste).not_to match(/id="/)
         the_copied_element2 = element1.copy
-        expect(the_copied_element2.paste).to match(/divId_copy_2"/)
+        expect(the_copied_element2.paste).not_to match(/id="/)
       end
 
       it 'uses unique IDs when copying 3 times' do
         the_copied_element = element1.copy
         the_copied_element2 = element1.copy
         the_copied_element3 = element1.copy
-        expect(the_copied_element3.paste).to match(/divId_copy_3"/)
+        expect(the_copied_element3.paste).not_to match(/id="/)
       end
     end
   end
 
   describe '#copied_id' do
-    it 'increments id count on the document' do
-      expect(element1.copied_id).to eq('divId_copy_1')
-      expect(element1.copied_id).to eq('divId_copy_2')
+    it 'increments count, and returns nil if the id is a copy' do
+      expect(element1.copied_id).nil?
+      expect(element1.copied_id).nil?
     end
   end
 

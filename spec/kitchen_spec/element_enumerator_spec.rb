@@ -82,20 +82,20 @@ RSpec.describe Kitchen::ElementEnumerator do
     it 'can copy to a named clipboard' do
       enumerator.copy(to: :something)
       expect(element1.to_s).to eq original_element1_string
-      expect(element1.clipboard(name: :something).paste).to match(/id1.*id2[^3]*id4/)
+      expect(element1.clipboard(name: :something).items.to_s).to match(/id1.*id2[^3]*id4/)
     end
 
     it 'can copy to a new clipboard' do
       clipboard = enumerator.copy
       expect(element1.to_s).to eq original_element1_string
-      expect(clipboard.paste).to match(/id1.*id2[^3]*id4/)
+      expect(clipboard.items.to_s).to match(/id1.*id2[^3]*id4/)
     end
 
     it 'can copy to an existing clipboard' do
       clipboard = Kitchen::Clipboard.new
       enumerator.copy(to: clipboard)
       expect(element1.to_s).to eq original_element1_string
-      expect(clipboard.paste).to match(/id1.*id2[^3]*id4/)
+      expect(clipboard.items.to_s).to match(/id1.*id2[^3]*id4/)
     end
   end
 

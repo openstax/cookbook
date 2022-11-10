@@ -26,7 +26,7 @@
   <div class="intro-text">
     <h2 data-type="document-title" id="testid1_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction</span>
 </h2>
-    <p id="123">Though you may approach a course in anatomy and physiology...</p><p id="123_copy_1">This chapter begins with an overview of anatomy and...</p>
+    <p id="123">Though you may approach a course in anatomy and physiology...</p><p>This chapter begins with an overview of anatomy and...</p>
   </div>
 </div>
 </div>
