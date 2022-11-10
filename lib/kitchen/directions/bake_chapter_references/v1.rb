@@ -26,10 +26,12 @@ module Kitchen::Directions::BakeChapterReferences
       references = page.references
       return if references.none?
 
+      copied_id = page.title.copied_id.nil? ? '' : " id=\"#{page.title.copied_id}\""
+
       title = if page.is_introduction?
                 <<~HTML
                   <a href="##{page.title.id}">
-                    <h3 data-type="document-title" id="#{page.title.copied_id}">
+                    <h3 data-type="document-title"#{copied_id}>
                       <span class="os-text" data-type="" itemprop="">#{page.title_text}</span>
                     </h3>
                   </a>

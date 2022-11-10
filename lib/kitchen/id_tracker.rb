@@ -7,7 +7,6 @@ module Kitchen
 
     def initialize
       @id_data = Hash.new { |hash, key| hash[key] = { count: 0, last_pasted: false } }
-      @id_copy_suffix = '_copy_'
     end
 
     # Keeps track that an element with the given ID has been copied.  When such
@@ -45,24 +44,10 @@ module Kitchen
       @id_data[id][:last_pasted] = true
     end
 
-    # Returns a unique ID given the ID of an element that was copied and is about
-    # to be pasted
-    #
-    # @param original_id [String]
-    # @return [String]
-    #
-    def modified_id_to_paste(original_id)
-      return nil if original_id.nil?
-      return '' if original_id.blank?
+    def first_id?(id)
+      return nil if id.nil?
 
-      count = @id_data[original_id][:count]
-      # A count of 0 means the element was cut and this is the first paste, do not
-      # modify the ID; otherwise, use the uniquified ID.
-      if count.zero?
-        original_id
-      else
-        "#{original_id}#{@id_copy_suffix}#{count}"
-      end
+      @id_data[id][:count].zero?
     end
   end
 end
