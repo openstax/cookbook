@@ -1,13 +1,13 @@
 en:
   example: Worked Example
-  section_exercises: ! '%{number} Problems'
+  section_exercises: ! 'Section %{number} Problems'
   chapter_outline: Chapter Contents
   notes:
     why-chapter: Why This Chapter?
     chemistry-matters: Chemistry Matters
     working-problems: Working Problems
   eoc:
-    section-exercises: ! '%{number} Problems'
+    section-exercises: ! 'Section %{number} Problems'
     key-terms: Key Terms
     summary-reactions: Summary of Reactions
     visualizing-chemistry: Visualizing Chemistry
