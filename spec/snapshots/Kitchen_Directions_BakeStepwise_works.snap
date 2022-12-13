@@ -5,5 +5,5 @@
 <span class="os-stepwise-content">content2</span></li>
 </ol><ol class="os-stepwise">
   <li><span class="os-stepwise-token">Step 1. </span>
-<span class="os-stepwise-content">content3: <ul><li>nested list should not be baked</li></ul></span></li>
+<div class="os-stepwise-content">content3: <ul><li>nested list should not be baked</li></ul></div></li>
 </ol>
