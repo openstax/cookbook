@@ -173,6 +173,21 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     )
   end
 
+  let(:book_with_introduction_footnote) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter" xmlns:epub="http://www.idpf.org/2007/ops">
+          <h1 data-type="document-title">Chapter 1 Title</h1>
+          <div class="introduction" data-type="page" id="testid1">
+            <div data-type="document-title" id="testid">Introduction</div>
+            <a role="doc-noteref" epub:type="noteref">[footnote]</a>
+            <p><epub:example/></p>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   context 'when v2 called on book with chapter objectives' do
     it 'with chapter outline' do
       described_class.v2(
@@ -304,4 +319,15 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
       end
     end
   end
+
+  context 'when v2 is called on book with a footnote (containing a namespaced attribute)' do
+    it 'preserves the namespaced attribute' do
+      described_class.v2(
+        book: book_with_introduction_footnote,
+        options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v3 }
+      )
+      expect(book_with_introduction_footnote.body).to match_snapshot_auto
+    end
+  end
+
 end

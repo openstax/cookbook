@@ -493,6 +493,14 @@ module Kitchen
     def paste
       # See `clone` method for a note about namespaces
       block_error_if(block_given?)
+      # Attach namespace definitions for all attributes/elements that have namespaces.
+      raw.traverse do |node|
+        raw.add_namespace(node.namespace.prefix, node.namespace.href) if node.namespace
+        node.attribute_nodes.each do |attr|
+          raw.add_namespace(attr.namespace.prefix, attr.namespace.href) if attr.namespace
+        end
+      end
+
       temp_copy = clone
       temp_copy.raw.traverse do |node|
         next if node.text? || node.document?
