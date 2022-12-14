@@ -10,7 +10,7 @@ RSpec.describe Kitchen::Directions::BakeHighlightedCode do
           <code>This is code without a data-lang</code>
           <code class="python">This code should have data-lang="python"</code>
           <pre>This should not change</pre>
-          <pre class="python" data-type="python">This should not change</pre>
+          <pre class="python" data-lang="python">This should not change</pre>
         </div>
       HTML
     )
