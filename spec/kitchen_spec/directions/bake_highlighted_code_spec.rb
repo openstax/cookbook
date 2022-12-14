@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeInlineLists do
+RSpec.describe Kitchen::Directions::BakeHighlightedCode do
   let(:book) do
     book_containing(html:
       <<~HTML
