@@ -17,7 +17,7 @@ RSpec.describe Kitchen::Directions::BakeInlineLists do
   end
 
   it 'works' do
-    described_class.v1(book: book, languages: ["python"])
+    described_class.v1(book: book, languages: ['python'])
     expect(book.body).to match_snapshot_auto
   end
 end
