@@ -19,7 +19,7 @@ RSpec.describe Kitchen::Directions::BakeHighlightedCode do
   end
 
   it 'works' do
-    described_class.v1(book: book, languages: ['python', 'ruby'])
+    described_class.v1(book: book, languages: %w[python ruby])
     expect(book.body).to match_snapshot_auto
   end
 end
