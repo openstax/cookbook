@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Update CI to fail right away if kitchen tests fail
 * Revert adding `div` wrapper to `BakeEquations`
 
 ## [v1.20.0] - 2022-10-21
