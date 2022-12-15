@@ -6,6 +6,7 @@ module Kitchen
       def self.v1(book:, languages:)
         # gives the code with the specified languages class a data-lang attribute for highlight.js
         languages.each do |language|
+          byebug
           book.search("code.#{language}").each do |code_block|
             code_block[:'data-lang'] = language
           end
