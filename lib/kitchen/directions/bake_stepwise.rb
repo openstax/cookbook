@@ -4,49 +4,13 @@ module Kitchen
   module Directions
     module BakeStepwise
       def self.v1(book:)
-        # Block-level elements: https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
-        block_level = %w[
-          address
-          article
-          aside
-          blockquote
-          details
-          dialog
-          dd
-          div
-          dl
-          dt
-          fieldset
-          figcaption
-          figure
-          footer
-          form
-          h1
-          h2
-          h3
-          h4
-          h5
-          h6
-          header
-          hgroup
-          hr
-          li
-          main
-          nav
-          ol
-          p
-          pre
-          section
-          table
-          ul
-        ]
         book.search('ol.stepwise').each do |ol|
           ol.remove_class('stepwise')
           ol.add_class('os-stepwise')
 
           ol.search('> li').each_with_index do |li, ii|
             # If the list item contains block-level elements then wrap in a div
-            tag = if li.search(block_level.join(',')).to_a.length.positive?
+            tag = if li.contains_blockish?
                     'div'
                   else
                     'span'

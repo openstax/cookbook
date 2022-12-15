@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Revert adding `div` wrapper to `BakeEquations`
+* Fix injected stepwise element to generate valid HTML
 
 ## [v1.20.0] - 2022-10-21
 
