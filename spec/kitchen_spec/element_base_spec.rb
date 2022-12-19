@@ -709,4 +709,22 @@ RSpec.describe Kitchen::ElementBase do
       end.to raise_error('Media format invalid; valid formats are ["screen", "print", "screenreader"]') # TODO: specify exception
     end
   end
+
+  describe '#clone' do
+    let(:book_with_namespaces) do
+      book_containing(html:
+        <<~HTML
+          <div data-type="chapter" xmlns:epub="http://example.com/epub" xmlns:m="http://example.com/maybemath">
+            <epub:element><span epub:attr="123"/></epub:element>
+            <span epub:attr="123"/>
+            <m:math/>
+          <div>
+        HTML
+      )
+    end
+
+    it 'preserves namespaces when cloning (like foornote epub:type attributes and m:math)' do
+      expect(book_with_namespaces.clone).to match_snapshot_auto
+    end
+  end
 end

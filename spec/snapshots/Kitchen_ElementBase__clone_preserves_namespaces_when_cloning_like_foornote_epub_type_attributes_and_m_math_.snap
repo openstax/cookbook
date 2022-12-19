@@ -1,0 +1,11 @@
+<html xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:epub="http://example.com/epub">
+  <body>
+    <div xmlns:epub="http://example.com/epub" xmlns:m="http://example.com/maybemath" data-type="chapter">
+  <epub:element><span epub:attr="123"/></epub:element>
+  <span epub:attr="123"/>
+  <m:math/>
+<div>
+
+  </div>
+</div>
+</body></html>
