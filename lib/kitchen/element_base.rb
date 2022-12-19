@@ -401,6 +401,50 @@ module Kitchen
       @search_cache[key] == -1 ? nil : @search_cache[key]
     end
 
+    # Returns true if the current element contains blockish descendants
+    #
+    # @return [Boolean]
+    #
+    def contains_blockish?
+      # Block-level elements: https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
+      block_level = %w[
+        address
+        article
+        aside
+        blockquote
+        details
+        dialog
+        dd
+        div
+        dl
+        dt
+        fieldset
+        figcaption
+        figure
+        footer
+        form
+        h1
+        h2
+        h3
+        h4
+        h5
+        h6
+        header
+        hgroup
+        hr
+        li
+        main
+        nav
+        ol
+        p
+        pre
+        section
+        table
+        ul
+      ]
+      search(block_level.join(',')).to_a.length.positive?
+    end
+
     # Yields and returns the first child element that matches the provided
     # selector or XPath arguments.
     #

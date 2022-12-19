@@ -512,6 +512,16 @@ RSpec.describe Kitchen::ElementBase do
     end
   end
 
+  describe '#contains_blockish?' do
+    it 'returns true if the element has a blockish descendant (div)' do
+      expect(blank_space_book.contains_blockish?).to eq true
+    end
+
+    it 'returns false if the element only contians inline descendants (span)' do
+      expect(blank_space_book.first!('h1').contains_blockish?).to eq false
+    end
+  end
+
   describe '#titles' do
     it 'returns elements with data-type title' do
       expect(title_book.titles.map(&:text)).to eq(['Div Title', 'Span Title'])

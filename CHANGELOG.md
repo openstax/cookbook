@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Update CI to fail right away if kitchen tests fail
 * Add `BakeHighlightedCode` to add data-lang to code snippets
 * Revert adding `div` wrapper to `BakeEquations`
+* Fix injected stepwise element to generate valid HTML
 
 ## [v1.20.0] - 2022-10-21
 

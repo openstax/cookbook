@@ -9,7 +9,13 @@ module Kitchen
           ol.add_class('os-stepwise')
 
           ol.search('> li').each_with_index do |li, ii|
-            li.wrap_children('span', class: 'os-stepwise-content')
+            # If the list item contains block-level elements then wrap in a div
+            tag = if li.contains_blockish?
+                    'div'
+                  else
+                    'span'
+                  end
+            li.wrap_children(tag, class: 'os-stepwise-content')
             li.prepend(child:
               <<~HTML
                 <span class="os-stepwise-token">#{I18n.t(:stepwise_step_label)} #{ii + 1}. </span>
