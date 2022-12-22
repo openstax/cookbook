@@ -5,7 +5,7 @@ module Kitchen
     module BakeAsideInCaption
       def self.v1(caption_container:)
         caption_container.search('aside').each do |aside|
-          caption_container.append(child: aside)
+          caption_container.append(child: aside.cut.paste)
         end
       end
     end
