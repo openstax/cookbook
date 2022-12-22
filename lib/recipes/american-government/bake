@@ -79,8 +79,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :american_gov) do |doc|
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(
         table: table,
-        number: "#{appendix_letter}#{table.count_in(:page)}",
-        always_caption: true
+        number: "#{appendix_letter}#{table.count_in(:page)}"
       )
     end
 

@@ -113,8 +113,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
-                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}",
-                           always_caption: false)
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
     BakeNonIntroductionPages.v1(chapter: chapter)
@@ -135,8 +134,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc|
 
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
-                           number: "#{appendix_letter}#{table.count_in(:page)}",
-                           always_caption: true)
+                           number: "#{appendix_letter}#{table.count_in(:page)}")
     end
 
     BakeAppendix.v1(page: page, number: appendix_letter)
