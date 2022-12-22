@@ -53,6 +53,12 @@ module Kitchen
             HTML
           )
         end
+
+        return unless figure.baked_caption
+
+        Kitchen::Directions::BakeAsideInCaption.v1(
+          caption_container: figure.baked_caption
+        )
       end
     end
   end

@@ -14,6 +14,12 @@ module Kitchen
           table.search('th').each do |header|
             header[:scope] = 'col'
           end
+
+          next unless table.baked_caption
+
+          Kitchen::Directions::BakeAsideInCaption.v1(
+            caption_container: table.baked_caption
+          )
         end
       end
     end

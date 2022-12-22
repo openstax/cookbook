@@ -137,5 +137,8 @@ module Kitchen
       first('caption')
     end
 
+    def baked_caption
+      first('div.os-caption-container')
+    end
   end
 end
