@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `dedication-page` note in `organic-chemistry`
+
 ## [v1.21.0] - 2022-12-16
 
 * Update CI to fail right away if kitchen tests fail
