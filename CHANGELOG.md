@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Tweak `BakeHighlightedCode` to include `pre`
 * Add `BakeHighlightedCode` to add data-lang to code snippets
 * Revert adding `div` wrapper to `BakeEquations`
 
