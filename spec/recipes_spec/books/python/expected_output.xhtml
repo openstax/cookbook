@@ -1086,51 +1086,51 @@ to the variable holiday?</div>
               <tbody>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">"\n" </pre>
+                    <pre data-type="code" class="python" data-lang="python">"\n" </pre>
                   </td>
                   <td>Prints a new line.</td>
                   <td>
-                    <pre data-type="code" class="python">print("Escape\nsequence!") </pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Escape\nsequence!") </pre>
                   </td>
                   <td>Escape  sequence!</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">"\t" </pre>
+                    <pre data-type="code" class="python" data-lang="python">"\t" </pre>
                   </td>
                   <td>Prints a tab.</td>
                   <td>
-                    <pre data-type="code" class="python">print("Escape\tsequence!") </pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Escape\tsequence!") </pre>
                   </td>
                   <td>Escape     sequence!</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">"\'" </pre>
+                    <pre data-type="code" class="python" data-lang="python">"\'" </pre>
                   </td>
                   <td>Prints a single quote, an alternative to enclosed double quotes.</td>
                   <td>
-                    <pre data-type="code" class="python">print('I\'ll give it a try!') </pre>
+                    <pre data-type="code" class="python" data-lang="python">print('I\'ll give it a try!') </pre>
                   </td>
                   <td>I'll give it a try</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">"\"" </pre>
+                    <pre data-type="code" class="python" data-lang="python">"\"" </pre>
                   </td>
                   <td>Prints a double quote, an alternative to enclosed single quotes.</td>
                   <td>
-                    <pre data-type="code" class="python">print("I heard you said \"Yes\"") </pre>
+                    <pre data-type="code" class="python" data-lang="python">print("I heard you said \"Yes\"") </pre>
                   </td>
                   <td>I heard you said "Yes"</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">"\\" </pre>
+                    <pre data-type="code" class="python" data-lang="python">"\\" </pre>
                   </td>
                   <td>Prints a backslash (\).</td>
                   <td>
-                    <pre data-type="code" class="python">print("This prints a \\") </pre>
+                    <pre data-type="code" class="python" data-lang="python">print("This prints a \\") </pre>
                   </td>
                   <td>This prints a \</td>
                 </tr>
@@ -1307,7 +1307,7 @@ It is also a gigantic undertaking in the foundations of knowledge."<span data-ty
             <li>Additional details about the error.</li>
           </ol>
           <p id="auto_9a60b8a4-4fde-4459-8f23-6aadf57e5d77_para-00003"> Ex: Typing <code data-type="code" class="python" data-lang="python">print "Hello!"</code> without parentheses is a syntax error. The <code data-type="code" class="python" data-lang="python">syntax</code> of a language defines how code must be structured. In Python, parentheses are required to use <code data-type="code" class="python" data-lang="python">print</code>. When attempting to run <code data-type="code" class="python" data-lang="python">print "Hello!"</code>, Python displays the following error: </p>
-          <pre data-type="code" data-display="block" class="python">
+          <pre data-type="code" data-display="block" class="python" data-lang="python">
 Traceback (most recent call last):
   File "/home/student/Desktop/example.py", line 1
     print "Hello"
@@ -1339,7 +1339,7 @@ SyntaxError: Missing parentheses in call to 'print'. Did you mean print("Hello")
                 <span class="os-subtitle-label">Parts of an error</span>
               </h4>
               <p id="auto_9a60b8a4-4fde-4459-8f23-6aadf57e5d77_para-00015">Given the following error message:</p>
-              <pre data-type="code" data-display="block" class="python">
+              <pre data-type="code" data-display="block" class="python" data-lang="python">
 Traceback (most recent call last):
   File "/home/student/Desktop/example.py", line 2
     print "test"
@@ -1424,42 +1424,42 @@ SyntaxError: Missing parentheses in call to 'print'. Did you mean print("test")?
               <tbody>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">print("Have a nice day!"<span class="highlight"> </span></pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Have a nice day!"<span class="highlight"> </span></pre>
                   </td>
                   <td>SyntaxError: unexpected EOF while parsing</td>
                   <td>The closing parenthesis is missing. Python is surprised to reach the end of file (EOF) before this line is complete.</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">word = input("Type a word: <span class="highlight">)</span></pre>
+                    <pre data-type="code" class="python" data-lang="python">word = input("Type a word: <span class="highlight">)</span></pre>
                   </td>
                   <td>SyntaxError: EOL while scanning string literal</td>
                   <td>The quote marks are missing. As a result, the string does not terminate before the end of line (EOL).</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">print("You typed:", w<span class="highlight">i</span>rd)</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("You typed:", w<span class="highlight">i</span>rd)</pre>
                   </td>
                   <td>NameError: name 'wird' is not defined</td>
                   <td>The spelling of word is incorrect. The programmer accidentally typed the wrong key.</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python">print<span class="highlight">s</span>("You typed:", word)</pre>
+                    <pre data-type="code" class="python" data-lang="python">print<span class="highlight">s</span>("You typed:", word)</pre>
                   </td>
                   <td>NameError: name 'prints' is not defined</td>
                   <td>The spelling of print is incorrect. The programmer accidentally typed an extra letter.</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python"><span class="highlight"> </span>print("Hello")</pre>
+                    <pre data-type="code" class="python" data-lang="python"><span class="highlight"> </span>print("Hello")</pre>
                   </td>
                   <td>IndentationError: unexpected indent</td>
                   <td>The programmer accidentally typed a space at the start of the line.</td>
                 </tr>
                 <tr>
                   <td>
-                    <pre data-type="code" class="python"><span class="highlight">    </span>print("Goodbye")</pre>
+                    <pre data-type="code" class="python" data-lang="python"><span class="highlight">    </span>print("Goodbye")</pre>
                   </td>
                   <td>IndentationError: unexpected indent</td>
                   <td>The programmer accidentally pressed the Tab key at the start of the line.</td>
@@ -1633,7 +1633,7 @@ choice = intput("What would you like? ")</div>
             <li>Comments should explain the purpose of the code, not just repeat the code itself. Ex: # get the user's preferences is more descriptive than # input item1 and item2.</li>
           </ul>
           <div data-type="example" id="auto_f76aaef1-226c-4625-852e-2da19ffaf476_exam-00001">
-            <pre data-type="code" class="python" data-display="block">
+            <pre data-type="code" class="python" data-display="block" data-lang="python">
 # display the menu options
 print("----------")
 print("Lunch Menu")
@@ -2043,61 +2043,61 @@ print(  name,"should visit"  , place+  "!")</code>
                 <tr>
                   <td>Parentheses: no space before or after.</td>
                   <td>
-                    <pre data-type="code" class="python">print("Go team!")</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Go team!")</pre>
                   </td>
                   <td>
-                    <pre data-type="code" class="python">print<span class="highlight"> </span>("Go team!")</pre>
+                    <pre data-type="code" class="python" data-lang="python">print<span class="highlight"> </span>("Go team!")</pre>
                     <span data-type="newline">
                       <br />
                     </span>
-                    <pre data-type="code" class="python">print(<span class="highlight"> </span>"Go team!"<span class="highlight"> </span>)</pre>
+                    <pre data-type="code" class="python" data-lang="python">print(<span class="highlight"> </span>"Go team!"<span class="highlight"> </span>)</pre>
                   </td>
                 </tr>
                 <tr>
                   <td>Commas: no space before, one space after.</td>
                   <td>
-                    <pre data-type="code" class="python">print("Hello", name)</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Hello", name)</pre>
                   </td>
                   <td>
-                    <pre data-type="code" class="python">print("Hello"<span class="highlight"> </span>, name)</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Hello"<span class="highlight"> </span>, name)</pre>
                     <span data-type="newline">
                       <br />
                     </span>
-                    <pre data-type="code" class="python">print("Hello"<span class="highlight">,</span>name)</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Hello"<span class="highlight">,</span>name)</pre>
                   </td>
                 </tr>
                 <tr>
                   <td>Assignment: one space before and after the =.</td>
                   <td>
-                    <pre data-type="code" class="python">name = input("Your name? ")</pre>
+                    <pre data-type="code" class="python" data-lang="python">name = input("Your name? ")</pre>
                   </td>
                   <td>
-                    <pre data-type="code" class="python">name<span class="highlight">=</span>input("Your name? ")</pre>
+                    <pre data-type="code" class="python" data-lang="python">name<span class="highlight">=</span>input("Your name? ")</pre>
                     <span data-type="newline">
                       <br />
                     </span>
-                    <pre data-type="code" class="python">name<span class="highlight">=</span> input("Your name? ")</pre>
+                    <pre data-type="code" class="python" data-lang="python">name<span class="highlight">=</span> input("Your name? ")</pre>
                     <span data-type="newline">
                       <br />
                     </span>
-                    <pre data-type="code" class="python">name <span class="highlight">=</span>input("Your name? ")</pre>
+                    <pre data-type="code" class="python" data-lang="python">name <span class="highlight">=</span>input("Your name? ")</pre>
                   </td>
                 </tr>
                 <tr>
                   <td>Concatenation: one space before and after the +.</td>
                   <td>
-                    <pre data-type="code" class="python">print("Hi", name + "!")</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Hi", name + "!")</pre>
                   </td>
                   <td>
-                    <pre data-type="code" class="python">print("Hi", name<span class="highlight">+</span>"!")</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Hi", name<span class="highlight">+</span>"!")</pre>
                     <span data-type="newline">
                       <br />
                     </span>
-                    <pre data-type="code" class="python">print("Hi", name<span class="highlight">+</span> "!")</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Hi", name<span class="highlight">+</span> "!")</pre>
                     <span data-type="newline">
                       <br />
                     </span>
-                    <pre data-type="code" class="python">print("Hi", name <span class="highlight">+</span>"!")</pre>
+                    <pre data-type="code" class="python" data-lang="python">print("Hi", name <span class="highlight">+</span>"!")</pre>
                   </td>
                 </tr>
               </tbody>
@@ -2190,10 +2190,10 @@ print(  name,"should visit"  , place+  "!")</code>
         <section data-depth="1" id="auto_e2f6f1ca-d0f3-4d44-8dde-c94f54baef08_sect-00004">
           <h3 data-type="title">Automatic concatenation</h3>
           <p id="auto_e2f6f1ca-d0f3-4d44-8dde-c94f54baef08_para-00009">Long strings make Python programs difficult to read. Ex: This program prints the first sentence of the <a href="https://www.archives.gov/founding-docs/declaration-transcript" target="_blank" rel="noopener nofollow">US Declaration of Independence</a>:</p>
-          <pre data-type="code" class="python" data-display="block">
+          <pre data-type="code" class="python" data-display="block" data-lang="python">
 print("The unanimous Declaration of the thirteen united States of America, When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.")</pre>
           <p id="auto_e2f6f1ca-d0f3-4d44-8dde-c94f54baef08_para-00010">PEP 8 recommends that each line of code be less than 80 characters long. That way, programmers won't need to scroll horizontally to read the code. The above program can be rewritten by breaking up the original string:</p>
-          <pre data-type="code" class="python" data-display="block">
+          <pre data-type="code" class="python" data-display="block" data-lang="python">
 print("The unanimous Declaration of the thirteen united States of "
       "America, When in the Course of human events, it becomes "
       "necessary for one people to dissolve the political bands "
