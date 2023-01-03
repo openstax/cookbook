@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add `example` to `python`
+* Add `BakeHighlightedCode` to add data-lang to code snippets
 
 ## [v1.21.0] - 2022-12-16
 
 * Update CI to fail right away if kitchen tests fail
-* Add `BakeHighlightedCode` to add data-lang to code snippets
 * Revert adding `div` wrapper to `BakeEquations`
 * Fix injected stepwise element to generate valid HTML
 
