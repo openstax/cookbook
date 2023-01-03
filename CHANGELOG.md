@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add `example` to `python`
+* Tweak `BakeHighlightedCode` to include `pre`
 * Add `BakeHighlightedCode` to add data-lang to code snippets
 
 ## [v1.21.0] - 2022-12-16
