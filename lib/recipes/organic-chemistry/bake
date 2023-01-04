@@ -154,6 +154,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   note_classes = %w[why-chapter chemistry-matters]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
+  BakeCustomTitledNotes.v1(book: book, classes: %w[dedication-page])
+
   BakeUnclassifiedNotes.v1(book: book)
   BakeStepwise.v1(book: book)
   BakeMathInParagraph.v1(book: book)
