@@ -11,8 +11,12 @@ RSpec.describe Kitchen::Directions::BakeHighlightedCode do
           <code class="python">This code should have data-lang="python"</code>
           <code class="ruby">This code should have data-lang="ruby"</code>
           <pre>This should only have a pre tag</pre>
+          <pre class="python">This should have data-lang="python"</pre>
+          <pre class="python" data-lang="python">This should have data-lang="python" (unchanged)</pre>
           <code class="python">This code should have data-lang="python"</code>
           <pre class="python" data-lang="python">This should have class python and data-lang python (unchanged)</pre>
+          <pre class="javascript">This should not have any data-lang attribute</pre>
+          <code class="javascript">This should not have any data-lang attribute</code>
         </div>
       HTML
     )

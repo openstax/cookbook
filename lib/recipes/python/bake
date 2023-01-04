@@ -18,12 +18,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :python) do |doc|
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
-  BakeHighlightedCode.v1(book: book, languages: ["python"])
 
   AddInjectedExerciseId.v1(book: book)
   book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(exercise: exercise)
   end
+
+  BakeHighlightedCode.v1(book: book, languages: ['python'])
 
   notes = %w[guided-slides learning-questions practice-program]
   BakeAutotitledNotes.v1(book: book, classes: notes, options: { bake_exercises: false })
