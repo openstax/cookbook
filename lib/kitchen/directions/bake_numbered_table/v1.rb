@@ -37,6 +37,12 @@ module Kitchen::Directions::BakeNumberedTable
           </div>
         HTML
       )
+
+      return unless table.baked_caption
+
+      Kitchen::Directions::BakeAsideInCaption.v1(
+        caption_container: table.baked_caption
+      )
     end
   end
 end

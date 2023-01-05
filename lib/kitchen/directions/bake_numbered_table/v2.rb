@@ -32,6 +32,12 @@ module Kitchen::Directions::BakeNumberedTable
       )
 
       table.parent.add_class('os-timeline-table-container') if table.has_class?('timeline-table')
+
+      return unless table.baked_caption
+
+      Kitchen::Directions::BakeAsideInCaption.v1(
+        caption_container: table.baked_caption
+      )
     end
   end
 end

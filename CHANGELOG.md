@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Move `aside` elements outside of `spans` in captions (block level element cannot be inside an inline element)
 * Bake `dedication-page` note in `organic-chemistry`
 * Add `example` to `python`
 * Tweak `BakeHighlightedCode` to include `pre`
