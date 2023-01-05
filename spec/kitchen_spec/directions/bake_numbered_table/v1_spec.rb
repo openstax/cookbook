@@ -173,13 +173,13 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
   end
 
   it 'bakes a column header table' do
-    described_class.new.bake(table: column_header_table, number: '2.3', always_caption: false)
+    described_class.new.bake(table: column_header_table, number: '2.3')
 
     expect(column_header_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'bakes a text heavy table' do
-    described_class.new.bake(table: text_heavy_table, number: '2.3', always_caption: false)
+    described_class.new.bake(table: text_heavy_table, number: '2.3')
 
     expect(text_heavy_table.document.search('.os-table').first).to match_snapshot_auto
   end
@@ -191,25 +191,25 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
   end
 
   it 'bakes a text heavy top titled table' do
-    described_class.new.bake(table: text_heavy_top_titled_table, number: '2.3', always_caption: false)
+    described_class.new.bake(table: text_heavy_top_titled_table, number: '2.3')
 
     expect(text_heavy_top_titled_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'bakes a timeline table' do
-    described_class.new.bake(table: timeline_table, number: '2.3', always_caption: false)
+    described_class.new.bake(table: timeline_table, number: '2.3')
 
     expect(timeline_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'bakes a data table' do
-    described_class.new.bake(table: data_table, number: '2.3', always_caption: false)
+    described_class.new.bake(table: data_table, number: '2.3')
 
     expect(data_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'bakes a narrow table' do
-    described_class.new.bake(table: narrow_table, number: '2.3', always_caption: false)
+    described_class.new.bake(table: narrow_table, number: '2.3')
 
     expect(narrow_table.document.search('.os-table').first).to match_snapshot_auto
   end
@@ -221,12 +221,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
   end
 
   it 'bakes another table with a caption title' do
-    described_class.new.bake(table: table_with_caption_title, number: '2.3', always_caption: true)
+    described_class.new.bake(table: table_with_caption_title, number: '2.3')
 
     expect(table_with_caption_title.document.search('.os-table').first).to match_snapshot_auto
   end
 
-  context 'when no caption and always_caption false' do
+  context 'when no caption' do
     let(:caption) { '' }
 
     it 'does not include an os-caption' do
@@ -235,30 +235,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     end
   end
 
-  context 'when no caption and always_caption true' do
-    let(:caption) { '' }
-
-    it 'does include an os-caption' do
-      described_class.new.bake(table: column_header_table, number: '2.3', always_caption: true)
-      expect(column_header_table.document.search('.os-table').first).to match_snapshot_auto
-    end
-  end
-
-  context 'when blank caption and always_caption false' do
+  context 'when blank caption' do
     let(:caption) { "\n     \n    " }
 
     it 'does not include an os-caption' do
       described_class.new.bake(table: top_titled_table, number: '2.3')
       expect(top_titled_table.document).not_to match('os-caption')
-    end
-  end
-
-  context 'when blank caption and always_caption true' do
-    let(:caption) { " \n    \n " }
-
-    it 'does include an os-caption' do
-      described_class.new.bake(table: column_header_table, number: '2.3', always_caption: true)
-      expect(column_header_table.document.search('.os-table').first).to match_snapshot_auto
     end
   end
 

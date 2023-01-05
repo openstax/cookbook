@@ -3,7 +3,7 @@
 module Kitchen::Directions::BakeNumberedTable
   class V1
 
-    def bake(table:, number:, always_caption: false, cases: false, label_class: nil)
+    def bake(table:, number:, cases: false, label_class: nil)
       Kitchen::Directions::BakeTableBody::V1.new.bake(table: table,
                                                       number: number,
                                                       cases: cases,
@@ -22,10 +22,6 @@ module Kitchen::Directions::BakeNumberedTable
       if (caption = table.caption&.cut) && !caption&.children&.to_s&.blank?
         new_caption = <<~HTML
           \n<span class="os-caption">#{caption.children}</span>
-        HTML
-      elsif always_caption
-        new_caption = <<~HTML
-          \n<span class="os-caption"></span>
         HTML
       end
 

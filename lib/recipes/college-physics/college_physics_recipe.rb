@@ -66,8 +66,7 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
     chapter.tables.each do |table|
       BakeNumberedTable.v1(
         table: table,
-        number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}",
-        always_caption: true
+        number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}"
       )
     end
   end
@@ -78,8 +77,7 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(
         table: table,
-        number: "#{appendix_letter}#{table.count_in(:page)}",
-        always_caption: true
+        number: "#{appendix_letter}#{table.count_in(:page)}"
       )
     end
   end
