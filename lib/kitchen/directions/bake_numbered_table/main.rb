@@ -3,10 +3,9 @@
 module Kitchen
   module Directions
     module BakeNumberedTable
-      def self.v1(table:, number:, always_caption: false, cases: false, label_class: nil)
+      def self.v1(table:, number:, cases: false, label_class: nil)
         V1.new.bake(table: table,
                     number: number,
-                    always_caption: always_caption,
                     cases: cases,
                     label_class: label_class)
       end
