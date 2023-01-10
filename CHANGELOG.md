@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `remove_unused_snapshots` script
 * Move `aside` elements outside of `spans` in captions (block level element cannot be inside an inline element)
 * Bake `dedication-page` note in `organic-chemistry`
 * Add `example` to `python`

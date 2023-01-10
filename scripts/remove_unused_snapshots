@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+snaps_dir = "#{Dir.pwd}/spec/snapshots"
+
+Dir.each_child(snaps_dir) do |snapshot|
+  File.delete("#{snaps_dir}/#{snapshot}")
+end
+
+`rspec #{Dir.pwd}/spec/kitchen_spec`
