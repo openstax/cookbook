@@ -8,4 +8,5 @@ Dir.each_child(snaps_dir) do |snapshot|
   File.delete("#{snaps_dir}/#{snapshot}")
 end
 
+# Recreates all used snapshots; note that this will cause them to update
 `rspec #{Dir.pwd}/spec/kitchen_spec`
