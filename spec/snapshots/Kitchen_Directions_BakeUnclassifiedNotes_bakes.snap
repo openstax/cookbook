@@ -6,6 +6,13 @@
   
   <p>content</p>
 </div></div>
+<div data-type="note" id="titlednote"><h3 class="os-title" data-type="title">
+  <span class="os-title-label" data-type="">note <em data-effect="italics"> without title id</em></span>
+</h3>
+<div class="os-note-body">
+  
+  <p>content</p>
+</div></div>
 <div data-type="note" id="untitlednote"><div class="os-note-body">
   <p>content</p>
 </div></div>

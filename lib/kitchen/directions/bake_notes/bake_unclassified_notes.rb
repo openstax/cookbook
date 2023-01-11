@@ -17,10 +17,12 @@ module Kitchen
         title = note.title&.cut
         return unless title
 
+        title_id = " id=\"#{title[:id]}\"" if title[:id]
+
         note.prepend(child:
           <<~HTML
             <h3 class="os-title" data-type="title">
-              <span class="os-title-label" data-type="" id="#{title[:id]}">#{title.children}</span>
+              <span class="os-title-label" data-type=""#{title_id}>#{title.children}</span>
             </h3>
           HTML
         )
