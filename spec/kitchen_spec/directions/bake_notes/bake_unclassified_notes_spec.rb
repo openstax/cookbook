@@ -11,6 +11,10 @@ RSpec.describe Kitchen::Directions::BakeUnclassifiedNotes do
             <div data-type="title" id="titleId">note <em data-effect="italics">title</em></div>
             <p>content</p>
           </div>
+          <div data-type="note" id="titlednote">
+            <div data-type="title">note <em data-effect="italics"> without title id</em></div>
+            <p>content</p>
+          </div>
           <div data-type="note" id="untitlednote">
             <p>content</p>
           </div>
