@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.22.0] - 2023-01-13
+
 * Bugfix `BakeUnclassifiedNotes` so title's id isn't copied if empty
 * Add `remove_unused_snapshots` script
 * Move `aside` elements outside of `spans` in captions (block level element cannot be inside an inline element)
