@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove `ElementBase#copied_id` since we don't copy IDs anymore
+
 ## [v1.22.0] - 2023-01-13
 
 * Bugfix `BakeUnclassifiedNotes` so title's id isn't copied if empty

@@ -214,13 +214,6 @@ RSpec.describe Kitchen::Element do
     end
   end
 
-  describe '#copied_id' do
-    it 'increments count, and returns nil if the id is a copy' do
-      expect(element1.copied_id).nil?
-      expect(element1.copied_id).nil?
-    end
-  end
-
   describe '#first' do
     it 'records ancestry' do
       inner = element1.search('p').search('span').first
