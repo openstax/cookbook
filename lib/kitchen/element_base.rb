@@ -549,12 +549,6 @@ module Kitchen
       temp_copy.to_s
     end
 
-    # Copy the element's id
-    def copied_id
-      id_tracker.record_id_copied(id)
-      return nil unless id_tracker.first_id?(id)
-    end
-
     # Delete the element
     #
     def trash

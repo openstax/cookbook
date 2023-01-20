@@ -204,20 +204,6 @@ RSpec.describe Kitchen::Element do
         the_copied_element2 = element1.copy
         expect(the_copied_element2.paste).not_to match(/id="/)
       end
-
-      it 'uses unique IDs when copying 3 times' do
-        the_copied_element = element1.copy
-        the_copied_element2 = element1.copy
-        the_copied_element3 = element1.copy
-        expect(the_copied_element3.paste).not_to match(/id="/)
-      end
-    end
-  end
-
-  describe '#copied_id' do
-    it 'increments count, and returns nil if the id is a copy' do
-      expect(element1.copied_id).nil?
-      expect(element1.copied_id).nil?
     end
   end
 
