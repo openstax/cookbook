@@ -51,7 +51,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'visualizing-chemistry')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          klass: 'mechanism-problems')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          klass: 'energy-reaction')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'additional-problems')
+    MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
+                          klass: 'general-problems')
     BakeChapterSectionExercises.v1(chapter: chapter, options: { trash_title: true })
 
     MoveCustomSectionToEocContainer.v1(
@@ -67,7 +73,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     end
 
     exercise_selectors = 'section.section-exercises, section.visualizing-chemistry, ' \
-                         'section.additional-problems'
+                         'section.mechanism-problems, section.energy-reaction, ' \
+                         'section.additional-problems, section.general-problems'
 
     chapter.search(exercise_selectors).injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
