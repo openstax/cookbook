@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Create `UseSectionTitle` to move section title to composite page header
+
+## [v1.23.0] - 2023-01-27
+
 * Remove `ElementBase#copied_id` since we don't copy IDs anymore
 
 ## [v1.22.0] - 2023-01-13
 
+* Create additional EOC sections in `organic-chemistry`
 * Bugfix `BakeUnclassifiedNotes` so title's id isn't copied if empty
 * Add `remove_unused_snapshots` script
 * Move `aside` elements outside of `spans` in captions (block level element cannot be inside an inline element)
