@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove `numbered_solutions` option from `BakeExample`
+
 ## [v1.23.0] - 2023-01-27
 
 * Remove `ElementBase#copied_id` since we don't copy IDs anymore

@@ -211,44 +211,6 @@ RSpec.describe Kitchen::Directions::BakeExample do
     end
   end
 
-  context 'when there is more than one exercise with solutions' do
-    let(:exercise) do
-      <<~HTML
-        <div data-type="exercise" id="exercise_id">
-          <div data-type="problem" id="problem_id">
-            <div data-type="title" id="title_id">Evaluating Functions</div>
-            <p>example content</p>
-          </div>
-          <div data-type="solution" id="solution_id">
-            <p>Solution One Content</p>
-          </div>
-          <div data-type="commentary" id="commentary_id">
-            <div data-type="title" id="title_id">Analysis</div>
-          </div>
-        </div>
-        <div data-type="exercise" id="exercise_id">
-          <div data-type="problem" id="problem_id">
-            <div data-type="title" id="title_id">Evaluating Functions</div>
-            <p>example content</p>
-          </div>
-          <div data-type="solution" id="solution_id">
-            <p>Solution Two Content</p>
-          </div>
-        </div>
-      HTML
-    end
-
-    it 'numbers the solutions correctly when numbered_solutions true' do
-      described_class.v1(
-        example: example,
-        number: 4,
-        title_tag: 'title-tag-name',
-        options: { numbered_solutions: true }
-      )
-      expect(example).to match_snapshot_auto
-    end
-  end
-
   context 'when the title is a div' do
     let(:title) do
       <<~HTML
