@@ -35,7 +35,7 @@ module Kitchen
         pages = unit.element_children.only(PageElement)
 
         <<~HTML
-          <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit">
+          <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit" data-toc-type="unit">
             <a href="#">
               <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{unit.count_in(:book)}</span>
               <span class="os-divider"> </span>
@@ -69,7 +69,7 @@ module Kitchen
         inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
 
         <<~HTML
-          <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+          <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
               <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
               if options[:cases]}")} </span>#{chapter.count_in(:book)}</span>
@@ -137,7 +137,7 @@ module Kitchen
         end
 
         <<~HTML
-          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-target-page-type="#{li_page_type}">
+          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}">
             <a href="##{page.id}">
               #{title.element_children.copy.paste}
             </a>
