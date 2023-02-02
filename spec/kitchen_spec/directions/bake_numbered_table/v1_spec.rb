@@ -226,6 +226,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     expect(table_with_caption_title.document.search('.os-table').first).to match_snapshot_auto
   end
 
+  it 'bakes another table with a caption on top' do
+    described_class.new.bake(table: table_with_caption_title, number: '2.3', move_caption_on_top: true)
+
+    expect(table_with_caption_title.document.search('.os-table').first).to match_snapshot_auto
+  end
+
   context 'when no caption' do
     let(:caption) { '' }
 
