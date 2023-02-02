@@ -52,8 +52,18 @@ module Kitchen
       def self.li_for_composite_chapter(chapter)
         pages = chapter.element_children.only(CompositePageElement)
 
+        data_toc_type =
+          if chapter.parent[:'data-type'] == 'chapter'
+            'eoc-chapter'
+          elsif chapter.classes.include?('os-solution-container') || \
+                chapter.classes.include?('os-solutions-container')
+            'answer-key'
+          else
+            'eob-chapter'
+          end
+
         <<~HTML
-          <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+          <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="#{data_toc_type}">
             <a href="##{chapter.title.id}">
               #{chapter.title.children}
             </a>
