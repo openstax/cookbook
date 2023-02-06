@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Remove `numbered_solutions` option from `BakeExample`
+* Implement `BakeScreenreaderSpans` to more books
+* Add option `move_caption_on_top` to numbered tables
+* Create `UseSectionTitle` to move section title to composite page header
 
 ## [v1.23.0] - 2023-01-27
 

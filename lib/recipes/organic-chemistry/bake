@@ -27,6 +27,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
+      container_key: 'chemistry-matters',
+      uuid_key: '.chemistry-matters',
+      section_selector: 'section.chemistry-matters'
+    )
+
+    UseSectionTitle.v1(
+      chapter: chapter,
+      eoc_selector: '.os-chemistry-matters-container',
+      section_selector: 'section.chemistry-matters'
+    )
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
       container_key: 'key-terms',
       uuid_key: '.key-terms',
       section_selector: 'section.key-terms'
@@ -112,6 +126,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}",
+                           move_caption_on_top: true,
                            label_class: 'table-target-label')
     end
 
@@ -140,6 +155,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     page.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{appendix_letter}#{table.count_in(:page)}",
+                           move_caption_on_top: true,
                            label_class: 'table-target-label')
     end
 
