@@ -182,7 +182,6 @@ module Kitchen
           number.prepend(child: part_text.paste)
         end
 
-        # data-toc-type="link" data-toc-target-type="#{data_toc_target_type}"
         <<~HTML
           <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-type="link" data-toc-target-type="#{data_toc_target_type}">
             <a href="##{page.id}">
