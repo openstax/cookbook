@@ -2,6 +2,7 @@
 
 module Kitchen
   module Directions
+    # rubocop:disable Metrics/ModuleLength
     module BakeToc
       def self.v1(book:, options: { cases: false })
         options.reverse_merge!(
@@ -49,14 +50,13 @@ module Kitchen
         HTML
       end
 
-      def self.li_for_composite_chapter(chapter)
-        pages = chapter.element_children.only(CompositePageElement)
+      def self.li_for_composite_chapter(composite_chapter)
+        pages = composite_chapter.element_children.only(CompositePageElement)
 
         data_toc_type =
-          if chapter.parent[:'data-type'] == 'chapter'
+          if composite_chapter.has_ancestor?(:chapter)
             'eoc-chapter'
-          elsif chapter.classes.include?('os-solution-container') || \
-                chapter.classes.include?('os-solutions-container')
+          elsif composite_chapter.is_answer_key?
             'answer-key'
           else
             'eob-chapter'
@@ -64,8 +64,8 @@ module Kitchen
 
         <<~HTML
           <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="#{data_toc_type}">
-            <a href="##{chapter.title.id}">
-              #{chapter.title.children}
+            <a href="##{composite_chapter.title.id}">
+              #{composite_chapter.title.children}
             </a>
             <ol class="os-chapter">
               #{pages.map { |page| li_for_page(page) }.join("\n")}
@@ -99,6 +99,7 @@ module Kitchen
       end
 
       def self.li_for_page(page)
+        # Used for styling
         li_page_type =
           case page
           when PageElement
@@ -136,6 +137,41 @@ module Kitchen
             during baking TOC")
           end
 
+        # Used for web TOC
+        data_toc_target_type = \
+          case page
+          when PageElement
+            if page.is_preface?
+              'preface'
+            elsif page.is_appendix?
+              'appendix'
+            elsif page.is_handbook?
+              'handbook'
+            elsif page.has_ancestor?(:chapter) && page.is_introduction?
+              'chapter-intro'
+            elsif page.has_ancestor?(:chapter)
+              'numbered-section-page'
+            elsif page.has_ancestor?(:unit) && !
+                  page.has_ancestor?(:chapter) && !
+                  page.has_ancestor?(:composite_chapter)
+              'unit-intro'
+            else
+              raise "could not detect which page target type to apply to TOC for page id \
+              `#{page.id}` during baking the TOC. The classes on the page are: `#{page.classes}`"
+            end
+          when CompositePageElement
+            if page.is_index? || page.is_index_of_type?
+              'index'
+            elsif page.has_ancestor?(:composite_chapter) && \
+                  page.ancestor(:composite_chapter).is_answer_key?
+              'answer-key-chapter'
+            elsif page.has_ancestor?(:chapter)
+              'eoc-page'
+            else
+              'eob-page'
+            end
+          end
+
         title = page.title.copy
 
         # The part text gets inserted as a child to the number span
@@ -146,8 +182,9 @@ module Kitchen
           number.prepend(child: part_text.paste)
         end
 
+        # data-toc-type="link" data-toc-target-type="#{data_toc_target_type}"
         <<~HTML
-          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}">
+          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-type="link" data-toc-target-type="#{data_toc_target_type}">
             <a href="##{page.id}">
               #{title.element_children.copy.paste}
             </a>
@@ -155,5 +192,6 @@ module Kitchen
         HTML
       end
     end
+    # rubocop:enable Metrics/ModuleLength
   end
 end
