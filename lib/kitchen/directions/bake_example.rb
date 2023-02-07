@@ -4,12 +4,12 @@ module Kitchen
   module Directions
     module BakeExample
       def self.v1(example:, number:, title_tag:, options: {
-        numbered_solutions: false,
+        # numbered_solutions: false, # It's not used anymore, left just in case we gonna need this in next edition
         cases: false,
         add_problem_title: false
       })
         options.reverse_merge!(
-          numbered_solutions: false,
+          # numbered_solutions: false,
           cases: false,
           add_problem_title: false
         )
@@ -50,16 +50,17 @@ module Kitchen
           end
 
           exercise.solutions.each do |solution|
-            solution_number = if options[:numbered_solutions]
-                                "<span class=\"os-number\">#{solution.count_in(:example)}</span>"
-                              else
-                                ''
-                              end
+            # It's not used anymore, left just in case we gonna need this in next edition
+            #
+            # solution_number = if options[:numbered_solutions]
+            #                     "<span class=\"os-number\">#{solution.count_in(:example)}</span>"
+            #                   else
+            #                     ''
+            #                   end
             solution.replace_children(with:
               <<~HTML
                 <h4 data-type="solution-title">
                   <span class="os-title-label">#{I18n.t(:solution)}</span>
-                  #{solution_number}
                 </h4>
                 <div class="os-solution-container">#{solution.children}</div>
               HTML

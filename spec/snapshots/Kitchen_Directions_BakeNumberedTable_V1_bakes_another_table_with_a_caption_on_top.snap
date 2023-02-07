@@ -1,0 +1,26 @@
+<div class="os-table"><div class="os-caption-container">
+  <span class="os-title-label">Table </span>
+  <span class="os-number">2.3</span>
+  <span class="os-divider"> </span>
+<span class="os-title" data-type="title">Secret Title</span>
+
+  <span class="os-divider"> </span>
+<span class="os-caption">A caption</span>
+
+</div>
+<table class="some-class" id="tId">
+  
+  <thead>
+    <tr>
+      <th scope="col">A title</th>
+    </tr>
+    <tr>
+      <th scope="col">Another heading cell</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One lonely cell</td>
+    </tr>
+  </tbody>
+</table></div>

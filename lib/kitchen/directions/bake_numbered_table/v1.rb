@@ -3,7 +3,7 @@
 module Kitchen::Directions::BakeNumberedTable
   class V1
 
-    def bake(table:, number:, cases: false, label_class: nil)
+    def bake(table:, number:, cases: false, move_caption_on_top: false, label_class: nil)
       Kitchen::Directions::BakeTableBody::V1.new.bake(table: table,
                                                       number: number,
                                                       cases: cases,
@@ -27,16 +27,16 @@ module Kitchen::Directions::BakeNumberedTable
 
       return if table.unnumbered?
 
-      table.append(sibling:
-        <<~HTML
-          <div class="os-caption-container">
-            <span class="os-title-label">#{I18n.t("table#{'.nominative' if cases}")} </span>
-            <span class="os-number">#{number}</span>
-            <span class="os-divider"> </span>#{caption_title}
-            <span class="os-divider"> </span>#{new_caption}
-          </div>
-        HTML
-      )
+      sibling = <<~HTML
+        <div class="os-caption-container">
+          <span class="os-title-label">#{I18n.t("table#{'.nominative' if cases}")} </span>
+          <span class="os-number">#{number}</span>
+          <span class="os-divider"> </span>#{caption_title}
+          <span class="os-divider"> </span>#{new_caption}
+        </div>
+      HTML
+
+      move_caption_on_top ? table.prepend(sibling: sibling) : table.append(sibling: sibling)
 
       return unless table.baked_caption
 
