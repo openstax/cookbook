@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add 'exercise-block' class setting for alphabetical_multipart (optional, added in baked_injected_exercises)
 * Create `UseSectionTitle` to move section title to composite page header
 
 ## [v1.23.0] - 2023-01-27
