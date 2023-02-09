@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::BakeInjectedExercise
-  def self.v1(exercise:, alphabetical_multiparts: false)
-    V1.new.bake(exercise: exercise, alphabetical_multiparts: alphabetical_multiparts)
+  def self.v1(exercise:, alphabetical_multiparts: false, alphabetical_multiparts_block: false)
+    V1.new.bake(
+      exercise: exercise,
+      alphabetical_multiparts: alphabetical_multiparts,
+      alphabetical_multiparts_block: alphabetical_multiparts_block
+    )
   end
 
   class V1
-    def bake(exercise:, alphabetical_multiparts:)
+    def bake(exercise:, alphabetical_multiparts:, alphabetical_multiparts_block:)
       question_count = exercise.injected_questions.count
 
       context = exercise&.exercise_context
@@ -22,6 +26,7 @@ module Kitchen::Directions::BakeInjectedExercise
 
         exercise.injected_questions.each_with_index do |question, index|
           question.set(:'data-type', 'alphabetical-question-multipart')
+          question.add_class('.exercise-block') if alphabetical_multiparts_block
           problem_letter = "(#{alphabet[index]})"
 
           solution = question.solution
