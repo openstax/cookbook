@@ -130,7 +130,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
             <span data-type="" itemprop="" class="os-text">Appendix A Title</span>
           </h1>
         </div>
-        <div data-type="composite-chapter">
+        <div data-type="composite-chapter" class="os-eoc os-solutions-container">
           <h1 data-type="document-title" id="composite-chapter-1">
             <span class="os-text">Answer Key</span>
           </h1>
@@ -235,7 +235,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
         </div>
         <div data-type="composite-chapter">
           <h1 data-type="document-title" id="composite-chapter-1">
-            <span class="os-text">Answer Key</span>
+            <span class="os-text">Answer Key (no class)</span>
           </h1>
           <div data-type="composite-page" id="p6">
             <h2 data-type="document-title">
