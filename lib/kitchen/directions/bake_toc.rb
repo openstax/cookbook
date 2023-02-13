@@ -35,7 +35,7 @@ module Kitchen
         pages = unit.element_children.only(PageElement)
 
         <<~HTML
-          <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit">
+          <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit" data-toc-type="unit">
             <a href="#">
               <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{unit.count_in(:book)}</span>
               <span class="os-divider"> </span>
@@ -49,13 +49,22 @@ module Kitchen
         HTML
       end
 
-      def self.li_for_composite_chapter(chapter)
-        pages = chapter.element_children.only(CompositePageElement)
+      def self.li_for_composite_chapter(composite_chapter)
+        pages = composite_chapter.element_children.only(CompositePageElement)
+
+        data_toc_type =
+          if composite_chapter.has_ancestor?(:chapter)
+            'eoc-chapter'
+          elsif composite_chapter.is_answer_key?
+            'answer-key'
+          else
+            'eob-chapter'
+          end
 
         <<~HTML
-          <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="">
-            <a href="##{chapter.title.id}">
-              #{chapter.title.children}
+          <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="#{data_toc_type}">
+            <a href="##{composite_chapter.title.id}">
+              #{composite_chapter.title.children}
             </a>
             <ol class="os-chapter">
               #{pages.map { |page| li_for_page(page) }.join("\n")}
@@ -69,7 +78,7 @@ module Kitchen
         inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
 
         <<~HTML
-          <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="">
+          <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
               <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
               if options[:cases]}")} </span>#{chapter.count_in(:book)}</span>
@@ -89,34 +98,43 @@ module Kitchen
       end
 
       def self.li_for_page(page)
-        li_page_type =
+        # rubocop:disable Style/WordArray
+        # li_page_type is for styling, toc_target_type is for rex toc markup
+        (li_page_type, toc_target_type) =
           case page
           when PageElement
             if page.has_ancestor?(:chapter)
-              'os-toc-chapter-page'
+              if page.is_introduction?
+                ['os-toc-chapter-page', 'chapter-intro']
+              else
+                ['os-toc-chapter-page', 'numbered-section-page']
+              end
             elsif page.is_appendix?
-              'os-toc-appendix'
+              ['os-toc-appendix', 'appendix']
             elsif page.is_preface?
-              'os-toc-preface'
+              ['os-toc-preface', 'preface']
             elsif page.is_handbook?
-              'os-toc-handbook'
+              ['os-toc-handbook', 'handbook']
             elsif page.has_ancestor?(:unit) && !
                   page.has_ancestor?(:chapter) && !
                   page.has_ancestor?(:composite_chapter)
-              'os-toc-unit-page'
+              ['os-toc-unit-page', 'unit-intro']
             else
               raise "could not detect which page type class to apply for page.id `#{page.id}`
                during baking the TOC. The classes on the page are: `#{page.classes}`"
             end
           when CompositePageElement
             if page.is_index? || page.is_index_of_type?
-              'os-toc-index'
+              ['os-toc-index', 'index']
             elsif page.is_citation_reference?
-              'os-toc-reference'
+              ['os-toc-reference', 'references']
             elsif page.is_section_reference?
-              'os-toc-references'
+              ['os-toc-references', 'references']
+            elsif page.has_ancestor?(:composite_chapter) && \
+                  page.ancestor(:composite_chapter).is_answer_key?
+              ['os-toc-chapter-composite-page', 'answer-key-chapter']
             elsif page.has_ancestor?(:composite_chapter) || page.has_ancestor?(:chapter)
-              'os-toc-chapter-composite-page'
+              ['os-toc-chapter-composite-page', 'eoc-page']
             else
               raise "could not detect which composite page type class to apply to TOC for page id \
               `#{page.id}` during baking the TOC. The classes on the page are: `#{page.classes}`"
@@ -125,6 +143,7 @@ module Kitchen
             raise(ArgumentError, "could not detect any page type class to apply for `#{page.id}` \
             during baking TOC")
           end
+        # rubocop:enable Style/WordArray
 
         title = page.title.copy
 
@@ -137,7 +156,7 @@ module Kitchen
         end
 
         <<~HTML
-          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-target-page-type="#{li_page_type}">
+          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-type="link" data-toc-target-type="#{toc_target_type}">
             <a href="##{page.id}">
               #{title.element_children.copy.paste}
             </a>

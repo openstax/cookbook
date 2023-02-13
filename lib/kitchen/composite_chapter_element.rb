@@ -34,5 +34,13 @@ module Kitchen
       first!("./*[@data-type = 'document-title']")
     end
 
+    # Returns true if the composite chapter is an answer key
+    #
+    # @return [Boolean]
+    #
+    def is_answer_key?
+      (classes & %w[os-solution-container os-solutions-container]).any?
+    end
+
   end
 end
