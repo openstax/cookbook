@@ -25,6 +25,29 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
     )
   end
 
+  let(:book_with_table_with_caption) do
+    book_containing(html:
+      <<~HTML
+        <table class="unnumbered" id="tableId" summary="A summary...">
+          <caption>A caption<span data-type='title'>Secret Title</span></caption>
+          <thead>
+            <tr>
+              <th colspan="1" data-align="center">The Title</th>
+            </tr>
+            <tr valign="top">
+              <th data-align="left">Heading</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr valign="top">
+              <td data-align="left">Bar</td>
+            </tr>
+          </tbody>
+        </table>
+      HTML
+    )
+  end
+
   let(:book_with_column_header_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -51,6 +74,13 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
     described_class.v1(book: book1)
     expect(
       book1.body.children.to_s
+    ).to match_snapshot_auto
+  end
+
+  it 'bakes table with caption' do
+    described_class.v1(book: book_with_table_with_caption)
+    expect(
+      book_with_table_with_caption.body.children.to_s
     ).to match_snapshot_auto
   end
 
