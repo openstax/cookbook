@@ -1,6 +1,6 @@
 <nav id="toc"><h1 class="os-toc-title">Contents</h1>
 <ol>
-  <li class="os-toc-preface" cnx-archive-shortid="" cnx-archive-uri="p1" data-toc-type="link" data-toc-target-type="preface">
+  <li class="os-toc-preface" cnx-archive-shortid="" cnx-archive-uri="p1" data-toc-type="book-content" data-toc-target-type="preface">
   <a href="#p1">
     <span data-type="" itemprop="" class="os-text">Preface</span>
   </a>
@@ -13,7 +13,7 @@
     <span data-type="" itemprop="" class="os-text">Unit 1 Title</span>
   </a>
   <ol class="os-unit">
-    <li class="os-toc-unit-page" cnx-archive-shortid="" cnx-archive-uri="p2" data-toc-type="link" data-toc-target-type="unit-intro">
+    <li class="os-toc-unit-page" cnx-archive-shortid="" cnx-archive-uri="p2" data-toc-type="book-content" data-toc-target-type="intro">
   <a href="#p2">
     <span class="os-number"><span class="os-part-text">Unit </span>1</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Title holder for unit</span>
   </a>
@@ -26,25 +26,25 @@
     <span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
   </a>
   <ol class="os-chapter">
-    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p3" data-toc-type="link" data-toc-target-type="chapter-intro">
+    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p3" data-toc-type="book-content" data-toc-target-type="intro">
   <a href="#p3">
     <span data-type="" itemprop="" class="os-text">Introduction</span>
   </a>
 </li>
 
-<li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p4" data-toc-type="link" data-toc-target-type="numbered-section-page">
+<li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p4" data-toc-type="book-content" data-toc-target-type="numbered-section">
   <a href="#p4">
     <span class="os-number">1.1</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Page 1.1 Title</span>
   </a>
 </li>
 
-<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-1" data-toc-type="link" data-toc-target-type="eoc-page">
+<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-1" data-toc-type="book-content" data-toc-target-type="composite-page">
   <a href="#composite-page-1">
     <span class="os-text">Key Terms</span>
   </a>
 </li>
 
-<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-2" data-toc-type="link" data-toc-target-type="eoc-page">
+<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-2" data-toc-type="book-content" data-toc-target-type="composite-page">
   <a href="#composite-page-2">
     <span class="os-text">References</span>
   </a>
@@ -61,7 +61,7 @@
     <span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
   </a>
   <ol class="os-chapter">
-    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p5" data-toc-type="link" data-toc-target-type="numbered-section-page">
+    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p5" data-toc-type="book-content" data-toc-target-type="numbered-section">
   <a href="#p5">
     <span class="os-number">2.1</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Page 2.1 Title</span>
   </a>
@@ -89,25 +89,25 @@
     <span class="os-text" data-type="" itemprop="">Chapter 3 Title</span>
   </a>
   <ol class="os-chapter">
-    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p6" data-toc-type="link" data-toc-target-type="chapter-intro">
+    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p6" data-toc-type="book-content" data-toc-target-type="intro">
   <a href="#p6">
     <span data-type="" itemprop="" class="os-text">Introduction</span>
   </a>
 </li>
 
-<li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p7" data-toc-type="link" data-toc-target-type="numbered-section-page">
+<li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p7" data-toc-type="book-content" data-toc-target-type="numbered-section">
   <a href="#p7">
     <span class="os-number">3.1</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Page 3.1 Title</span>
   </a>
 </li>
 
-<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-3" data-toc-type="link" data-toc-target-type="eoc-page">
+<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-3" data-toc-type="book-content" data-toc-target-type="composite-page">
   <a href="#composite-page-3">
     <span class="os-text">Key Terms</span>
   </a>
 </li>
 
-<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-4" data-toc-type="link" data-toc-target-type="eoc-page">
+<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="composite-page-4" data-toc-type="book-content" data-toc-target-type="composite-page">
   <a href="#composite-page-4">
     <span class="os-text">References</span>
   </a>
@@ -120,20 +120,20 @@
   </ol>
 </li>
 
-<li class="os-toc-appendix" cnx-archive-shortid="" cnx-archive-uri="p8" data-toc-type="link" data-toc-target-type="appendix">
+<li class="os-toc-appendix" cnx-archive-shortid="" cnx-archive-uri="p8" data-toc-type="book-content" data-toc-target-type="appendix">
   <a href="#p8">
     <span class="os-number"><span class="os-part-text">Appendix </span>A</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Appendix A Title</span>
   </a>
 </li>
 
-<li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="answer-key">
+<li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="sub-book-tree">
   <a href="#composite-chapter-1">
     
     <span class="os-text">Answer Key</span>
   
   </a>
   <ol class="os-chapter">
-    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p9" data-toc-type="link" data-toc-target-type="answer-key-chapter">
+    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p9" data-toc-type="book-content" data-toc-target-type="answer-key">
   <a href="#p9">
     <span class="os-text">Chapter 1</span>
   </a>
@@ -142,25 +142,25 @@
   </ol>
 </li>
 
-<li class="os-toc-reference" cnx-archive-shortid="" cnx-archive-uri="p10" data-toc-type="link" data-toc-target-type="references">
+<li class="os-toc-reference" cnx-archive-shortid="" cnx-archive-uri="p10" data-toc-type="book-content" data-toc-target-type="composite-page">
   <a href="#p10">
     <span class="os-text">References</span>
   </a>
 </li>
 
-<li class="os-toc-references" cnx-archive-shortid="" cnx-archive-uri="p11" data-toc-type="link" data-toc-target-type="references">
+<li class="os-toc-references" cnx-archive-shortid="" cnx-archive-uri="p11" data-toc-type="book-content" data-toc-target-type="composite-page">
   <a href="#p11">
     <span class="os-text">References</span>
   </a>
 </li>
 
-<li class="os-toc-handbook" cnx-archive-shortid="" cnx-archive-uri="p12" data-toc-type="link" data-toc-target-type="handbook">
+<li class="os-toc-handbook" cnx-archive-shortid="" cnx-archive-uri="p12" data-toc-type="book-content" data-toc-target-type="appendix">
   <a href="#p12">
     <span data-type="" itemprop="" class="os-text">Handbook</span>
   </a>
 </li>
 
-<li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p13" data-toc-type="link" data-toc-target-type="index">
+<li class="os-toc-index" cnx-archive-shortid="" cnx-archive-uri="p13" data-toc-type="book-content" data-toc-target-type="index">
   <a href="#p13">
     <span class="os-text">Index</span>
   </a>
