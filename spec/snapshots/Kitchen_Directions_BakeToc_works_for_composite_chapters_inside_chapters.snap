@@ -1,6 +1,6 @@
 <nav id="toc"><h1 class="os-toc-title">Contents</h1>
 <ol>
-  <li class="os-toc-preface" cnx-archive-shortid="" cnx-archive-uri="p1" data-toc-type="link" data-toc-target-type="preface">
+  <li class="os-toc-preface" cnx-archive-shortid="" cnx-archive-uri="p1" data-toc-type="book-content" data-toc-target-type="preface">
   <a href="#p1">
     <span data-type="" itemprop="" class="os-text">Preface</span>
   </a>
@@ -14,14 +14,14 @@
   </a>
   <ol class="os-chapter">
     
-    <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="eoc-chapter">
+    <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="sub-book-tree">
   <a href="#composite-chapter-1">
     
       <span class="os-text">Chapter 1</span>
     
   </a>
   <ol class="os-chapter">
-    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p8" data-toc-type="link" data-toc-target-type="eoc-page">
+    <li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p8" data-toc-type="book-content" data-toc-target-type="composite-page">
   <a href="#p8">
     <span class="os-text">Chapter 1</span>
   </a>

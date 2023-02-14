@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `target-label` values in TOC
 * Bake caption in unnumbered tables
 
 ## [v1.24.0] - 2023-02-10

@@ -52,17 +52,8 @@ module Kitchen
       def self.li_for_composite_chapter(composite_chapter)
         pages = composite_chapter.element_children.only(CompositePageElement)
 
-        data_toc_type =
-          if composite_chapter.has_ancestor?(:chapter)
-            'eoc-chapter'
-          elsif composite_chapter.is_answer_key?
-            'answer-key'
-          else
-            'eob-chapter'
-          end
-
         <<~HTML
-          <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="#{data_toc_type}">
+          <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="sub-book-tree">
             <a href="##{composite_chapter.title.id}">
               #{composite_chapter.title.children}
             </a>
@@ -105,20 +96,20 @@ module Kitchen
           when PageElement
             if page.has_ancestor?(:chapter)
               if page.is_introduction?
-                ['os-toc-chapter-page', 'chapter-intro']
+                ['os-toc-chapter-page', 'intro']
               else
-                ['os-toc-chapter-page', 'numbered-section-page']
+                ['os-toc-chapter-page', 'numbered-section']
               end
             elsif page.is_appendix?
               ['os-toc-appendix', 'appendix']
             elsif page.is_preface?
               ['os-toc-preface', 'preface']
             elsif page.is_handbook?
-              ['os-toc-handbook', 'handbook']
+              ['os-toc-handbook', 'appendix']
             elsif page.has_ancestor?(:unit) && !
                   page.has_ancestor?(:chapter) && !
                   page.has_ancestor?(:composite_chapter)
-              ['os-toc-unit-page', 'unit-intro']
+              ['os-toc-unit-page', 'intro']
             else
               raise "could not detect which page type class to apply for page.id `#{page.id}`
                during baking the TOC. The classes on the page are: `#{page.classes}`"
@@ -127,14 +118,14 @@ module Kitchen
             if page.is_index? || page.is_index_of_type?
               ['os-toc-index', 'index']
             elsif page.is_citation_reference?
-              ['os-toc-reference', 'references']
+              ['os-toc-reference', 'composite-page']
             elsif page.is_section_reference?
-              ['os-toc-references', 'references']
+              ['os-toc-references', 'composite-page']
             elsif page.has_ancestor?(:composite_chapter) && \
                   page.ancestor(:composite_chapter).is_answer_key?
-              ['os-toc-chapter-composite-page', 'answer-key-chapter']
+              ['os-toc-chapter-composite-page', 'answer-key']
             elsif page.has_ancestor?(:composite_chapter) || page.has_ancestor?(:chapter)
-              ['os-toc-chapter-composite-page', 'eoc-page']
+              ['os-toc-chapter-composite-page', 'composite-page']
             else
               raise "could not detect which composite page type class to apply to TOC for page id \
               `#{page.id}` during baking the TOC. The classes on the page are: `#{page.classes}`"
@@ -156,7 +147,7 @@ module Kitchen
         end
 
         <<~HTML
-          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-type="link" data-toc-target-type="#{toc_target_type}">
+          <li class="#{li_page_type}" cnx-archive-shortid="" cnx-archive-uri="#{page.id}" data-toc-type="book-content" data-toc-target-type="#{toc_target_type}">
             <a href="##{page.id}">
               #{title.element_children.copy.paste}
             </a>
