@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Modify `UseSectionTitle` to return when page doesn't exist
+
 ## [v1.24.1] - 2023-02-14
 
 * Change `target-label` values in TOC
