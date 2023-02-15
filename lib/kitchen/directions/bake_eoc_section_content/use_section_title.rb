@@ -5,6 +5,8 @@ module Kitchen
     module UseSectionTitle
       def self.v1(chapter:, eoc_selector: '', section_selector: '')
         composite_page = chapter.search(eoc_selector).first
+        return if composite_page.nil?
+
         section = composite_page.search(section_selector).first
 
         section_title = section.first('[data-type="title"]')
