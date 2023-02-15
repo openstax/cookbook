@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "byebug"
-
 module Kitchen
   module Directions
     # Bake directions for link placeholders
@@ -28,7 +26,7 @@ module Kitchen
 
           if replacement.present?
             if ids_to_link_overwrite.detect { |i| i.match(id) }
-              #matches section #
+              # matches section number
               os_number = replacement.match(/([0-9]|[1-9][0-9]).([0-9]|[0-9][0-9])/)
 
               replacement = "#{I18n.t(:section)} #{os_number}"
