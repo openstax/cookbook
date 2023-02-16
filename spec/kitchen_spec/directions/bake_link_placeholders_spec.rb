@@ -50,6 +50,17 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
     end
   end
 
+  context 'when link place holder is to be replaced' do
+    before do
+      book.pantry(name: :link_text).store('1.21 Section About Decimals like 2.1 and 1.21', label: 'key')
+    end
+
+    it 'bakes correctly' do
+      described_class.v1(book: book, cases: false, ids_to_link_overwrite: ['key'])
+      expect(book_with_cases.body).to match_snapshot_auto
+    end
+  end
+
   context 'when book uses cases' do
     before do
       book_with_cases.pantry(name: :nominative_link_text).store('Przykład x.y', label: 'other_key')
