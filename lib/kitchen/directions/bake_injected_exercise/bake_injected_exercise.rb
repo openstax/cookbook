@@ -26,7 +26,7 @@ module Kitchen::Directions::BakeInjectedExercise
 
         exercise.injected_questions.each_with_index do |question, index|
           question.set(:'data-type', 'alphabetical-question-multipart')
-          question.add_class('.exercise-block') if alphabetical_multiparts_block
+          question.add_class('exercise-block') if alphabetical_multiparts_block
           problem_letter = "(#{alphabet[index]})"
 
           solution = question.solution
