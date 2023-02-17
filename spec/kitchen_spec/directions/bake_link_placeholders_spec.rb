@@ -69,7 +69,6 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
 
     it 'bakes correctly' do
       described_class.v1(book: book_with_sections_overwrite, replace_section_link_text: true)
-      # byebug
       expect(book_with_sections_overwrite.body).to match_snapshot_auto
     end
   end

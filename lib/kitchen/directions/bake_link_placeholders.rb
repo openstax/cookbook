@@ -12,6 +12,7 @@ module Kitchen
         book.search('a').each do |anchor|
           next unless anchor.text == '[link]'
 
+
           label_case = anchor['cmlnle:case'] || anchor['case']
           id = anchor[:href][1..]
 
@@ -26,8 +27,6 @@ module Kitchen
           else
             replacement = book.pantry(name: :link_text).get(id)
           end
-
-          # byebug
 
           if replacement.present?
             if ids_to_link_overwrite.detect { |i| i.match(id) }
