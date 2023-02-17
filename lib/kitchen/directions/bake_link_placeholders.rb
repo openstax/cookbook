@@ -5,7 +5,10 @@ module Kitchen
     # Bake directions for link placeholders
     #
     module BakeLinkPlaceholders
-      def self.v1(book:, cases: false)
+      def self.v1(book:, cases: false, replace_section_link_text: false)
+        # passing in relevant ids to overwrite
+        ids_to_link_overwrite = replace_section_link_text ? book.pages.map(&:id) : []
+
         book.search('a').each do |anchor|
           next unless anchor.text == '[link]'
 
@@ -25,6 +28,13 @@ module Kitchen
           end
 
           if replacement.present?
+            if ids_to_link_overwrite.detect { |i| i.match(id) }
+              # matches section number up to 99.99
+              os_number = replacement.match(/([0-9]|[1-9][0-9]).([0-9]|[0-9][0-9])/)
+
+              replacement = "#{I18n.t(:section)} #{os_number}"
+            end
+
             anchor.replace_children(with: replacement)
           else
             # TODO: log a warning!
