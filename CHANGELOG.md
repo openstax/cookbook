@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 * Corrected exercise block class name
+* Add a warning if a placeholder link doesn't have an id
 * Modify `UseSectionTitle` to return when page doesn't exist
 
 ## [v1.24.1] - 2023-02-14

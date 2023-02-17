@@ -9,6 +9,11 @@ module Kitchen
         book.search('a').each do |anchor|
           next unless anchor.text == '[link]'
 
+          if anchor[:href][1..].blank?
+            warn "warning! Link has no href on element: '#{anchor}'"
+            next
+          end
+
           label_case = anchor['cmlnle:case'] || anchor['case']
           id = anchor[:href][1..]
 
@@ -28,7 +33,7 @@ module Kitchen
             anchor.replace_children(with: replacement)
           else
             # TODO: log a warning!
-            puts "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
+            warn "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
           end
 
           link_class = book.pantry(name: :link_type).get(id)
