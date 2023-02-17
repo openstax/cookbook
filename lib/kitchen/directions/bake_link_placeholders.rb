@@ -6,7 +6,7 @@ module Kitchen
     #
     module BakeLinkPlaceholders
       def self.v1(book:, cases: false, replace_section_link_text: false)
-        # passing in relevant ids to overwrite (TODO: expand to use send?)
+        # passing in relevant ids to overwrite
         ids_to_link_overwrite = replace_section_link_text ? book.pages.map(&:id) : []
 
         book.search('a').each do |anchor|
