@@ -190,7 +190,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
-  BakeLinkPlaceholders.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book, replace_section_link_text: true)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end

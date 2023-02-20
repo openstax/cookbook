@@ -1,0 +1,27 @@
+
+    <div class="os-table"><table class="unnumbered" id="tableId">
+  
+  <thead>
+    <tr>
+      <th colspan="1" data-align="center" scope="col">The Title</th>
+    </tr>
+    <tr valign="top">
+      <th data-align="left" scope="col">Heading</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td data-align="left">Bar</td>
+    </tr>
+  </tbody>
+</table><div class="os-caption-container">
+  
+<span class="os-title" data-type="title">Secret Title</span>
+
+  <span class="os-divider"> </span>
+<span class="os-caption">A caption</span>
+
+</div>
+</div>
+
+  

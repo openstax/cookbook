@@ -5,7 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 * Create Recipe Nursing Series
+* Corrected exercise block class name
+* Modify `UseSectionTitle` to return when page doesn't exist
+* Modified `BakeLinkPlaceholders` to be able to replace certain placeholder text
+
+## [v1.24.1] - 2023-02-14
+
+* Change `target-label` values in TOC
+* Bake caption in unnumbered tables
+
 
 ## [v1.24.0] - 2023-02-10
 

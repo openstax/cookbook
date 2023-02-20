@@ -14,6 +14,29 @@ module Kitchen
           table.search('th').each do |header|
             header[:scope] = 'col'
           end
+
+          if (title = table.first("span[data-type='title']")&.cut)
+            caption_title = <<~HTML
+              \n<span class="os-title" data-type="title">#{title.children}</span>
+            HTML
+          end
+
+          if (caption = table.caption&.cut) && !caption&.children&.to_s&.blank?
+            caption_text = <<~HTML
+              \n<span class="os-caption">#{caption.children}</span>
+            HTML
+          end
+
+          next unless caption_text || caption_title
+
+          sibling = <<~HTML
+            <div class="os-caption-container">
+              #{caption_title}
+              <span class="os-divider"> </span>#{caption_text}
+            </div>
+          HTML
+
+          table.append(sibling: sibling)
         end
       end
     end
