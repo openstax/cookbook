@@ -15,10 +15,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :college_success) do |doc|
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  BakeChapterIntroductions.v2(
-    book: book,
-    options: { strategy: :none }
-  )
+  BakeChapterIntroductions.v1(book: book)
+
   BakeAutotitledNotes.v1(
     book: book,
     classes: %w[
