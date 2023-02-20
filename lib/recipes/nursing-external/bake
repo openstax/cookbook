@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require_relative '../recipes_helper'
+
+recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
+  include Kitchen::Directions
+
+  book = doc.book
+  metadata = book.metadata
+
+  book.search('cnx-pi').trash
+
+  # Your recipe code goes here
+  BakePreface.v1(book: book)
+
+  BakeFolio.v1(book: book)
+end
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [recipe, VALIDATE_OUTPUT],
+  output_file: opts[:output]
+)
