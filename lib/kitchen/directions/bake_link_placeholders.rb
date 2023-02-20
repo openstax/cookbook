@@ -12,7 +12,7 @@ module Kitchen
         book.search('a').each do |anchor|
           next unless anchor.text == '[link]'
 
-          if anchor[:href][1..].blank?
+          if anchor[:href].nil? || anchor[:href][1..].blank?
             warn "warning! Link has no href on element: '#{anchor}'"
             next
           end
