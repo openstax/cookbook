@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Add `Chapter Outline` to `college-success`
 * Corrected exercise block class name
+* Add a warning if a placeholder link doesn't have an id
 * Modify `UseSectionTitle` to return when page doesn't exist
 * Modified `BakeLinkPlaceholders` to be able to replace certain placeholder text
 
