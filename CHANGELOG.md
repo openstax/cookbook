@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add `Chapter Outline` to `college-success`
+* Corrected exercise block class name
 * Modify `UseSectionTitle` to return when page doesn't exist
+* Modified `BakeLinkPlaceholders` to be able to replace certain placeholder text
 
 ## [v1.24.1] - 2023-02-14
 
