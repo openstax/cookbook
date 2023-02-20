@@ -115,6 +115,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
 
   it 'logs a warning when link has no href' do
     expect(Warning).to receive(:warn).with(/warning! Link has no href on element: /)
+    expect(Warning).to receive(:warn).with(/warning! Link has no href on element: /)
     described_class.v1(book: missing_id_book)
   end
 
