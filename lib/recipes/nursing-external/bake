@@ -14,8 +14,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
 
   # Your recipe code goes here
   BakePreface.v1(book: book)
+  book.chapters.each do |chapter|
+    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
+    BakeNonIntroductionPages.v1(chapter: chapter)
+  end
 
+  BakeChapterIntroductions.v1(book: book)
+  BakeChapterTitle.v1(book: book)
   BakeFolio.v1(book: book)
+  BakeToc.v1(book: book)
 end
 
 opts = Slop.parse do |slop|

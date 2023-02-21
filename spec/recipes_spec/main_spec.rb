@@ -143,7 +143,7 @@ RSpec.describe 'books' do
     expect('microbiology').to bake_correctly
   end
 
-  it 'bakes nursing' do
+  it 'bakes nursing-external' do
     expect('nursing-external').to bake_correctly
   end
 
