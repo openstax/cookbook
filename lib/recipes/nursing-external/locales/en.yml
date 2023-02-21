@@ -1,2 +1,14 @@
 en:
-  sample: Text # remove this later
+  notes:
+    link-to-learning: Link to Learning
+    safety-alert: Safety Alert
+    clinical-tip: Clinical Tip
+    health-alert: The Roots of Health Inequities
+    healthy-people: Healthy People 2030
+    trending-today: trending-today
+    culture-conversations: Conversations About Culture
+    theory-action: Theory in Action
+    special-considerations: Special Considerations
+    black-box: FDA Black Box Warning
+    client-teaching: Client Teaching Guidelines
+    practice-problems: Practice Problems
