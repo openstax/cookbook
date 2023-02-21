@@ -44,6 +44,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   BakeChapterTitle.v1(book: book)
   BakeFolio.v1(book: book)
   BakeToc.v1(book: book)
+  BakeFootnotes.v1(book: book)
 end
 
 opts = Slop.parse do |slop|
