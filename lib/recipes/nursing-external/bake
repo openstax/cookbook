@@ -13,10 +13,24 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   book.search('cnx-pi').trash
 
   # Your recipe code goes here
+  BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
+
+    chapter.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+  end
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
+    page.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure, number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+    BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
   BakeChapterIntroductions.v1(book: book)
