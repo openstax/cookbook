@@ -64,6 +64,11 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
       one_chapter_with_one_page_containing(
         <<~HTML
           <table class="unnumbered top-titled" id="tId" summary="column header summary">
+            <thead>
+              <tr>
+                <th>Top Titled Table Title</th>
+              </tr>
+            </thead>
           </table>
         HTML
       )
@@ -98,13 +103,8 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
 
   it 'bakes top-titled table' do
     described_class.v1(book: book_with_top_titled_table)
-    expect(book_with_top_titled_table.tables.first.parent).to match_normalized_html(
-      <<~HTML
-        <div class="os-table os-top-titled-container">
-          <table class="unnumbered top-titled" id="tId">
-        </table>
-        </div>
-      HTML
-    )
+    expect(
+      book_with_top_titled_table.body.children.to_s
+    ).to match_snapshot_auto
   end
 end
