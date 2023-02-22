@@ -48,7 +48,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
 
   note_classes = %w[link-to-learning safety-alert clinical-tip health-alert healthy-people
                     trending-today culture-conversations theory-action special-considerations
-                    black-box client-teaching practice-problems]
+                    black-box client-teaching practice-problems unfolding-casestudy
+                    single-casestudy case-reflection]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
   BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature])
   BakeUnclassifiedNotes.v1(book: book)
