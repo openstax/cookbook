@@ -21,6 +21,16 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
     )
   end
 
+  let(:missing_id_book) do
+    book_containing(html:
+      <<~HTML
+        <a>skip this link</a>
+        <a>[link]</a>
+        <a href="">[link]</a>
+      HTML
+    )
+  end
+
   let(:book_with_cases) do
     book_containing(html:
       <<~HTML
@@ -98,9 +108,14 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
     end
   end
 
-  it 'logs a warning' do
-    allow($stdout).to receive(:puts)
-    expect($stdout).to receive(:puts).with("warning! could not find a replacement for '[link]' on an element with ID 'invalid_key'")
+  it 'logs a warning when href is invalid' do
+    expect(Warning).to receive(:warn).with("warning! could not find a replacement for '[link]' on an element with ID 'invalid_key'\n")
     described_class.v1(book: invalid_book)
   end
+
+  it 'logs a warning when link has no href' do
+    expect(Warning).to receive(:warn).with(/warning! Link has no href on element: /).twice
+    described_class.v1(book: missing_id_book)
+  end
+
 end
