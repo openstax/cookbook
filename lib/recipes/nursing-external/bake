@@ -8,6 +8,9 @@ require_relative 'strategy'
 recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   include Kitchen::Directions
 
+  doc.selectors.override(
+    reference: 'section.references'
+  )
   book = doc.book
   metadata = book.metadata
 
@@ -110,6 +113,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   BakeUnnumberedTables.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
+  BakeReferences.v2(book: book, metadata_source: metadata)
   BakeIndex.v1(book: book)
   BakeFolio.v1(book: book)
   BakeCompositePages.v1(book: book)
