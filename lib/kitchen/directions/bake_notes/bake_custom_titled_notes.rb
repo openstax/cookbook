@@ -24,7 +24,7 @@ module Kitchen
         note.prepend(child:
           <<~HTML
             <h3 class="os-title" data-type="title">
-              <span class="os-title-label" id="#{title[:id]}">#{title.children}</span>
+              <span class="os-title-label">#{title.children}</span>
             </h3>
           HTML
         )
