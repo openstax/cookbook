@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require_relative '../recipes_helper'
+require_relative 'strategy'
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   include Kitchen::Directions
@@ -15,6 +16,15 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   # Your recipe code goes here
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(
+      exercise: exercise
+      )
+  end
+
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
@@ -51,6 +61,24 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
       end
     end
 
+    chapter.search('section.review-questions').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+    chapter.pages.notes('$.unfolding-casestudy').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:chapter),
+        options: { only_number_solution: false }
+      )
+    end
+    chapter.pages.notes('$.single-casestudy').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:chapter),
+        options: { only_number_solution: false }
+      )
+    end
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
@@ -59,6 +87,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
+    )
+
+    Strategy.new.bake(
+      chapter: chapter,
+      append_to: answer_key_inner_container
+    )
   end
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
@@ -77,6 +113,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   BakeIndex.v1(book: book)
   BakeFolio.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
 
   note_classes = %w[link-to-learning safety-alert clinical-tip health-alert healthy-people
