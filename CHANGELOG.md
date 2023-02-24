@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.25.0] - 2023-02-24
+
 * Add `top_title` behavior to `BakeUnnumberedTables`
 * Add `Chapter Outline` to `college-success`
 * Corrected exercise block class name
