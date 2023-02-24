@@ -3,7 +3,7 @@
   <p>content</p>
 </div></div>
 <div data-type="note" id="titlednote" class="bar"><h3 class="os-title" data-type="title">
-  <span class="os-title-label" id="titleId">note title</span>
+  <span class="os-title-label">note title</span>
 </h3>
 <div class="os-note-body">
   
