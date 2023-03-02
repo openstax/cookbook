@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
 * Create Recipe Nursing Series
+
+=======
+## [v1.25.0] - 2023-02-24
+
+* Add `top_title` behavior to `BakeUnnumberedTables`
 
 * Add `Chapter Outline` to `college-success`
 
@@ -14,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add a warning if a placeholder link doesn't have an id
 * Modify `UseSectionTitle` to return when page doesn't exist
 * Modified `BakeLinkPlaceholders` to be able to replace certain placeholder text
+* Remove Figure title id attribute
 
 ## [v1.24.1] - 2023-02-14
 

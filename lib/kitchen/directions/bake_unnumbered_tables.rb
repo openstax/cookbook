@@ -9,7 +9,18 @@ module Kitchen
           table.remove_attribute('summary')
           table.parent.add_class('os-unstyled-container') if table.unstyled?
           table.parent.add_class('os-column-header-container') if table.column_header?
-          table.parent.add_class('os-top-titled-container') if table.top_titled?
+          if table.top_titled?
+            table.parent.add_class('os-top-titled-container')
+
+            if table.first('thead') && table.title
+              table.prepend(sibling:
+                <<~HTML
+                  <div class="os-table-title">#{table.title}</div>
+                HTML
+              )
+              table.title_row.trash
+            end
+          end
 
           table.search('th').each do |header|
             header[:scope] = 'col'

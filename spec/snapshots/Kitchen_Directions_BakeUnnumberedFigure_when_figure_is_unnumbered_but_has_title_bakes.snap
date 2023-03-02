@@ -5,7 +5,7 @@
   <img src="img.jpg"/>
 </span>
 </figure><div class="os-caption-container">
-  <span class="os-title" data-type="title" id="someId">Title</span>
+  <span class="os-title" data-type="title">Title</span>
   
   
 </div>
