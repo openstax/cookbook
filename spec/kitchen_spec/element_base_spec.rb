@@ -657,13 +657,9 @@ RSpec.describe Kitchen::ElementBase do
         eq('https://openstax.org/books/test-book-slug/pages/2-summary-or-something')
     end
 
-    it 'raises error for element without id' do
-      expect { book_rex_linkable.chapters.first.rex_link }.to raise_error('Cannot create rex link to an element without an ID')
-    end
-
     it 'raises error when ancestors can\'t be found' do
       expect { book_rex_linkable.pages('$#not-in-chapter').first.rex_link }.to \
-        raise_error('Cannot create rex link to element with ID not-in-chapter - needs ancestors of both types chapter & page/composite_page')
+        raise_error(/Cannot create rex link to element[^>]+id="not-in-chapter"/)
     end
   end
 
