@@ -13,7 +13,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
 
   book.search('cnx-pi').trash
 
-  BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
@@ -33,6 +32,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
       figure.add_class('unnumbered')
     end
   end
+  BakeUnnumberedFigure.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
   book.injected_exercises.each do |exercise|

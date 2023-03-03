@@ -13,6 +13,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :english_composition) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
+  BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeHandbook.v1(book: book)
 

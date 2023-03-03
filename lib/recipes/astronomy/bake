@@ -18,7 +18,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :astronomy) do |doc|
   BakeChapterIntroductions.v1(book: book)
 
   preface = book.pages('$.preface').first
-  preface.figures.each do |figure|
+  preface.figures(only: :figure_to_number?).each do |figure|
     BakeFigure.v1(
       figure: figure,
       number: figure.count_in(:page)

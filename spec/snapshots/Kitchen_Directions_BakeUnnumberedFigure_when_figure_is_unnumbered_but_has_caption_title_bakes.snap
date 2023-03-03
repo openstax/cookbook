@@ -11,5 +11,17 @@
   <span class="os-caption">figure caption</span>
 </div>
 </div>
+<div class="os-figure"><figure>
+  
+  
+  <span>
+    <img src="img.jpg"/>
+  </span>
+</figure><div class="os-caption-container">
+  <span class="os-title" data-type="title">Title</span>
+  <span class="os-divider"> </span>
+  <span class="os-caption">figure caption</span>
+</div>
+</div>
 
   </div>
