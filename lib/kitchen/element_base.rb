@@ -849,7 +849,7 @@ module Kitchen
     end
 
     def rex_link
-      self[:'data-is-for-rex-linking'] = "true"
+      self[:'data-is-for-rex-linking'] = 'true'
 
       element_with_ancestors = document.book.chapters.search_with(
         Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
