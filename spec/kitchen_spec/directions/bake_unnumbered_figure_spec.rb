@@ -13,6 +13,11 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
               <img src="img.jpg"/>
             </span>
           </figure>
+          <figure>
+            <span>
+              <img src="img.jpg"/>
+            </span>
+          </figure>
         HTML
       )
     )
@@ -73,6 +78,13 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedFigure do
           <span>
             <img src="img.jpg"/>
           </span>
+          </figure>
+          <figure>
+            <div data-type="title" id="someId">Title</div>
+            <figcaption>figure caption</figcaption>
+            <span>
+              <img src="img.jpg"/>
+            </span>
           </figure>
         HTML
       )
