@@ -7,13 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Create Recipe Nursing Series
-
 * Remove numbering from figures without id
 
 ## [v1.25.0] - 2023-02-24
 
 * Add `top_title` behavior to `BakeUnnumberedTables`
-
 * Add `Chapter Outline` to `college-success`
 
 * Corrected exercise block class name
@@ -35,7 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Remove `numbered_solutions` option from `BakeExample`
 * Implement `BakeScreenreaderSpans` to more books
 * Add option `move_caption_on_top` to numbered tables
-
 * Create `UseSectionTitle` to move section title to composite page header
 
 ## [v1.23.0] - 2023-01-27
