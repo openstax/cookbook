@@ -60,15 +60,36 @@ module Kitchen
       has_class?('unnumbered')
     end
 
+    # Returns true if the figure doesn't have id
+    #
+    # @return [Boolean]
+    #
+
+    def without_id?
+      return false if id.present?
+
+      true
+    end
+
     # Returns true unless the figure is a subfigure or has the 'unnumbered' class,
-    # unless the figure has both the 'unnumbered' and the 'splash' classes.
+    # or doesn't have an id (figures from injected exercises)
     #
     # @return [Boolean]
 
     def figure_to_number?
-      return false if subfigure? || unnumbered?
+      return false if subfigure? || unnumbered? || without_id?
 
       true
+    end
+
+    # Returns true if figure has 'unnumbered' class or doesn't have an id (figures from injected exercises)
+    # These figures shouldn't be numbered, but still have to be wrapped into 'os-figure' container
+    # and have baked caption if it exists
+    #
+    # @return [Boolean]
+
+    def unnumbered_figure_to_bake?
+      unnumbered? || without_id?
     end
   end
 end

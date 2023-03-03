@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove numbering from figures without id
+
 ## [v1.25.0] - 2023-02-24
 
 * Add `top_title` behavior to `BakeUnnumberedTables`
