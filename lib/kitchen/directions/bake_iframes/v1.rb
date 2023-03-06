@@ -12,9 +12,9 @@ module Kitchen::Directions::BakeIframes
 
         iframe_link = \
           begin
-            iframe.parent.rex_link
+            iframe.rex_link
           rescue StandardError
-            warn "Unable to find rex link for iframe with parent id=#{iframe.parent.id}"
+            warn "Unable to find rex link for iframe #{iframe}"
             iframe[:src]
           end
         iframe.wrap('<div class="os-has-iframe" data-type="switch">')

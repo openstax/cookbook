@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Create Recipe Nursing Series
 * Remove numbering from figures without id
+* Remove dependence on element id when creating rex links
 
 ## [v1.25.0] - 2023-02-24
 

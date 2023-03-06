@@ -849,14 +849,16 @@ module Kitchen
     end
 
     def rex_link
-      raise 'Cannot create rex link to an element without an ID' unless id
+      self[:'data-is-for-rex-linking'] = 'true'
 
       element_with_ancestors = document.book.chapters.search_with(
         Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
-      ).search("##{id}").first
+      ).search('[data-is-for-rex-linking="true"]').first
+
+      remove_attribute('data-is-for-rex-linking')
 
       unless element_with_ancestors
-        raise "Cannot create rex link to element with ID #{id} - needs ancestors of both types chapter & page/composite_page"
+        raise "Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page"
       end
 
       book_slug = document.search('span[data-type="slug"]').first[:'data-value']
