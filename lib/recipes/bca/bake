@@ -24,6 +24,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
   )
 
   AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
