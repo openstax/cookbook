@@ -120,7 +120,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <table class="full_width" id="tId">
+          <table class="full-width" id="tId">
           </table>
         HTML
       )
