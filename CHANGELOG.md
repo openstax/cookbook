@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `full-width` tables
 * Bake `injected-exercises` in `bca`
 * Create Recipe Nursing Series
 * Remove numbering from figures without id

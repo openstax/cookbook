@@ -129,6 +129,14 @@ module Kitchen
       has_class?('narrow-table')
     end
 
+    # Returns true if the table is full width
+    #
+    # @return [Boolean]
+    #
+    def full_width_table?
+      has_class?('full-width')
+    end
+
     # Returns an element for the table caption, if present
     #
     # @return [Element, nil]
