@@ -116,6 +116,17 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
+  let(:full_width_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="full_width" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:other_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -212,6 +223,12 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     described_class.new.bake(table: narrow_table, number: '2.3')
 
     expect(narrow_table.document.search('.os-table').first).to match_snapshot_auto
+  end
+
+  it 'bakes a full width table' do
+    described_class.new.bake(table: full_width_table, number: '2.3')
+
+    expect(full_width_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'bakes another kind of table' do
