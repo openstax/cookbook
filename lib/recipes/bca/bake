@@ -96,7 +96,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[check-point],
+    classes: %w[mac-tip],
     options: { bake_exercises: true }
   )
 
