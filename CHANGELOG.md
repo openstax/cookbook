@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `written-exercises` into `written-questions` in `bca`
+
 ## [v1.26.0] - 2023-03-13
 
 * Bake `full-width` tables
