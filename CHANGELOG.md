@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Change `written-exercises` into `written-questions` in `bca`
+
+## [v1.26.0] - 2023-03-13
+
 * Bake `full-width` tables
 * Bake `injected-exercises` in `bca`
 * Create Recipe Nursing Series
@@ -17,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Add `top_title` behavior to `BakeUnnumberedTables`
 * Add `Chapter Outline` to `college-success`
-
 * Corrected exercise block class name
 * Add a warning if a placeholder link doesn't have an id
 * Modify `UseSectionTitle` to return when page doesn't exist
