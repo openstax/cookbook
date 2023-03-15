@@ -63,7 +63,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
     end
 
     eoc_sections = %w[review-questions conceptual-questions you-try practice-exercises
-                      written-exercises case-exercises extension-exercises]
+                      written-questions case-exercises extension-exercises]
 
     eoc_sections.each do |klass|
       Kitchen::Directions::MoveCustomSectionToEocContainer.v1(
@@ -83,7 +83,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
 
     selectors = 'section.review-questions, section.conceptual-questions,
                  section.you-try, section.practice-exercises,
-                 section.written-exercises, section.case-exercises,
+                 section.written-questions, section.case-exercises,
                  section.extension-exercises'
 
     chapter.composite_pages.search(selectors).injected_questions.each do |question|
@@ -96,7 +96,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc|
 
   BakeAutotitledNotes.v1(
     book: book,
-    classes: %w[check-point],
+    classes: %w[mac-tip],
     options: { bake_exercises: true }
   )
 

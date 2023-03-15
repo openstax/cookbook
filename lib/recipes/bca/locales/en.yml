@@ -2,7 +2,7 @@ en:
   notes:
     real-application: "Real-World Application"
     spotlight-ethics: "Spotlight on Ethics"
-    check-point: "Checkpoint"
+    mac-tip: "Mac Tip"
     link-to-learning: "Link to Learning"
   eoc:
     chapter-review: Chapter Review
@@ -11,7 +11,7 @@ en:
     conceptual-questions: Conceptual Questions
     you-try: Now You Try It
     practice-exercises: Practice Exercises
-    written-exercises: Written Exercises
+    written-questions: Written Questions
     case-exercises: Case Exercises
     extension-exercises: Extension Exercises
   exercises:
