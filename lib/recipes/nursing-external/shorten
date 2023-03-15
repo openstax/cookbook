@@ -4,7 +4,7 @@
 
 require_relative '../recipes_helper'
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
+recipe = Kitchen::BookRecipe.new(book_short_name: :nursing-external) do |doc|
   include Kitchen::Directions
 
   book = doc.book
