@@ -2,6 +2,7 @@
     <div data-type="injected-exercise" data-injected-from-nickname="multiFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
       <div data-type="exercise-stimulus">Exercise stimulus</div>
       <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="1" id="auto_abc123_1" class="os-hasSolution"><a class="os-number" href="#auto_abc123_1-solution">1</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -18,6 +19,7 @@
 </div>
       </div>
       <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="2" id="auto_abc123_2" class="os-hasSolution"><a class="os-number" href="#auto_abc123_2-solution">2</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -34,6 +36,7 @@
 </div>
       </div>
       <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="3" id="auto_abc123_3" class="os-hasSolution"><a class="os-number" href="#auto_abc123_3-solution">3</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -52,6 +55,7 @@
     </div>
     <div data-type="injected-exercise" data-injected-from-nickname="singleFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
       <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="4" id="auto_abc123_4" class="os-hasSolution"><a class="os-number" href="#auto_abc123_4-solution">4</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -71,6 +75,7 @@
     </div>
     <div data-type="injected-exercise" data-injected-from-nickname="singleMC" data-injected-from-version="2" data-injected-from-url="url" data-tags="tags" data-is-vocab="False">
       <div data-type="exercise-question" data-is-answer-order-important="True" data-formats="multiple-choice test-format" data-id="5" id="auto_abc123_5" class="os-hasSolution"><a class="os-number" href="#auto_abc123_5-solution">5</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -107,6 +112,7 @@
     </div>
     <div data-type="injected-exercise" data-injected-from-nickname="singleMCWithDetailed" data-injected-from-version="2" data-injected-from-url="url" data-tags="tags" data-is-vocab="False">
       <div data-type="exercise-question" data-is-answer-order-important="True" data-formats="multiple-choice test-format" data-id="5" id="auto_abc123_5" class="os-hasSolution"><a class="os-number" href="#auto_abc123_5-solution">6</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -138,7 +144,9 @@
       </div>
     </div>
     <div data-type="injected-exercise" data-injected-from-nickname="singleFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
-      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="6" id="auto_abc123_6"><span class="os-number">7</span><span class="os-divider">. </span>
+      <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="6" id="auto_abc123_6"><span class="os-number">7</span>
+<span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
