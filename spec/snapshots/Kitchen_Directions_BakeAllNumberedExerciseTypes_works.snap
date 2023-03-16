@@ -2,6 +2,7 @@
   <div data-type="injected-exercise" data-injected-from-nickname="multiFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
     <div data-type="exercise-stimulus">Exercise stimulus</div>
     <div data-type="exercise-question" id="id1" data-is-answer-order-important="False" data-formats="free-response" data-id="1" class="os-hasSolution"><a class="os-number" href="#id1-solution">1</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -18,6 +19,7 @@
 </div>
     </div>
     <div data-type="exercise-question" id="id2" data-is-answer-order-important="False" data-formats="free-response" data-id="2" class="os-hasSolution"><a class="os-number" href="#id2-solution">2</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   
@@ -34,6 +36,7 @@
 </div>
     </div>
     <div data-type="exercise-question" id="id3" data-is-answer-order-important="False" data-formats="free-response" data-id="3" class="os-hasSolution"><a class="os-number" href="#id3-solution">3</a><span class="os-divider">. </span>
+
 <div class="os-problem-container">
   
   

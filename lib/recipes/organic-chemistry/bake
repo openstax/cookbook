@@ -75,7 +75,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
                           klass: 'additional-problems')
     MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata,
                           klass: 'general-problems')
-    BakeChapterSectionExercises.v1(chapter: chapter, options: { trash_title: true })
+    BakeChapterSectionExercises.v1(
+      chapter: chapter,
+      options: {
+        trash_title: true,
+        create_title: false
+      })
 
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
@@ -94,7 +99,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
                          'section.additional-problems, section.general-problems'
 
     chapter.search(exercise_selectors).injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: "#{chapter.count_in(:book)}-#{question.count_in(:chapter)}",
+        options: { problem_with_prefix: true }
+      )
       BakeFirstElements.v1(within: question)
     end
 
@@ -104,17 +113,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
     )
     chapter.non_introduction_pages.each do |page|
       page.search('div.os-eos.os-section-exercises-container').each do |section_wrapper|
-        number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
-
         Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
           chapter: section_wrapper, append_to: answer_key_inner_container,
-          section_class: 'section-exercises', title_number: number
+          section_class: 'section-exercises', options: { add_title: false }
         )
       end
     end
     %w[visualizing-chemistry additional-problems].each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+        chapter: chapter, append_to: answer_key_inner_container, section_class: klass,
+        options: { add_title: false }
       )
     end
   end
