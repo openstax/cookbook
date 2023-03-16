@@ -3,11 +3,13 @@
 module Kitchen::Directions::BakeInjectedExerciseQuestion
   def self.v1(question:, number:, options: {
     only_number_solution: false,
-    add_dot: false
+    add_dot: false,
+    problem_with_prefix: false
   })
     options.reverse_merge!(
       only_number_solution: false,
-      add_dot: false
+      add_dot: false,
+      problem_with_prefix: false
     )
 
     V1.new.bake(question: question, number: number, options: options)
@@ -56,9 +58,31 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
 
       # Bake question
       unless options[:only_number_solution]
-        problem_number = "<span class='os-number'>#{number}</span>"
-        if question.solution
-          problem_number = "<a class='os-number' href='##{id}-solution'>#{number}</a>"
+        if options[:problem_with_prefix]
+          problem_number = <<~HTML
+            <div class="os-prefix">
+              <span class="os-label">#{I18n.t('problem')}</span>
+              <span class="os-number">#{number}</span>
+            </div>
+          HTML
+          if question.solution
+            problem_number = <<~HTML
+              <a class="os-prefix" href='##{id}-solution'>
+                <span class="os-label">#{I18n.t('problem')}</span>
+                <span class="os-number">#{number}</span>
+              </a>
+            HTML
+          end
+        else
+          problem_number = <<~HTML
+            <span class='os-number'>#{number}</span>
+            <span class='os-divider'>. </span>
+          HTML
+          if question.solution
+            problem_number = <<~HTML
+              <a class='os-number' href='##{id}-solution'>#{number}</a><span class='os-divider'>. </span>
+            HTML
+          end
         end
       end
 
@@ -66,7 +90,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
 
       question.prepend(child:
         <<~HTML
-          #{problem_number unless options[:only_number_solution]}#{"<span class='os-divider'>. </span>" unless options[:only_number_solution]}
+          #{problem_number unless options[:only_number_solution]}
           <div class="os-problem-container">
             #{context if context.present?}
             #{"<span class='os-divider'>. </span>" if context.present?}
@@ -81,12 +105,24 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       solution = question.solution
       return unless solution
 
+      solution_number = if options[:problem_with_prefix]
+                          <<~HTML
+                            <a class="os-prefix" href='##{id}'>
+                              <span class="os-label">#{I18n.t('problem')}</span>
+                              <span class="os-number">#{number}</span>
+                            </a>
+                          HTML
+                        else
+                          <<~HTML
+                            <a class='os-number' href='##{id}'>#{number}</a><span class='os-divider'>. </span>
+                          HTML
+                        end
+
       question.add_class('os-hasSolution')
       solution.id = "#{id}-solution"
       solution.replace_children(with:
         <<~HTML
-          <a class='os-number' href='##{id}'>#{number}</a><span class='os-divider'>. </span>
-          <div class="os-solution-container">#{solution.children}</div>
+          #{solution_number}<div class="os-solution-container">#{solution.children}</div>
         HTML
       )
       question.search('div[data-type="answer-feedback"]').each(&:trash)
