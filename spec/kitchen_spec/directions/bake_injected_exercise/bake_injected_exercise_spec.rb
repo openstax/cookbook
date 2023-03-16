@@ -117,11 +117,4 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
       expect(injected_exercise_none).to match_snapshot_auto
     end
   end
-
-  context 'when alphabetical_multipart_block is true' do
-    it 'bakes an alphabetical multipart question with the exercise block class' do
-      described_class.v1(exercise: injected_exercise_full_with_multipart_questions_with_solutions, alphabetical_multiparts: true, alphabetical_multiparts_block: true)
-      expect(injected_exercise_full_with_multipart_questions_with_solutions).to match_snapshot_auto
-    end
-  end
 end
