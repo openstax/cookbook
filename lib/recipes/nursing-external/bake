@@ -123,6 +123,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeReferences.v2(book: book, metadata_source: metadata)
+  BakeIframes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeFolio.v1(book: book)
   BakeCompositePages.v1(book: book)
