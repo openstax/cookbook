@@ -3,7 +3,8 @@
 RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
   before do
     stub_locales({
-      'exercise': 'Exercise'
+      'exercise': 'Exercise',
+      'problem': 'Problem'
     })
   end
 
@@ -158,6 +159,13 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
   it 'bakes without question number' do
     described_class.v1(question: exercise_no_question_number.injected_questions.first, number: 4, options: { only_number_solution: true })
     expect(exercise_no_question_number).to match_snapshot_auto
+  end
+
+  it 'bakes with problem prefix' do
+    book_with_injected_section.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: "1-#{question.count_in(:chapter)}", options: { problem_with_prefix: true })
+    end
+    expect(book_with_injected_section.search('section').first).to match_snapshot_auto
   end
 
   context 'when the question-answers list type is not lower alpha' do
