@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake figures from `preface` in `contemporary-math`
 * Bugfix section link replacement names (using regex)
 * Add `BakeIFrame` to Nursing External Recipe
 * Create option `problem_with_prefix` for `organic-chemistry`
