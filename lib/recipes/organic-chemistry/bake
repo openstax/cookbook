@@ -20,8 +20,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
   book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(
       exercise: exercise,
-      alphabetical_multiparts: true,
-      alphabetical_multiparts_block: true)
+      alphabetical_multiparts: true)
   end
 
   answer_key_wrapper = BookAnswerKeyContainer.v1(book: book)
