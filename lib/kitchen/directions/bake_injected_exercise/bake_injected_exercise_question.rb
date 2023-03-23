@@ -92,8 +92,7 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         <<~HTML
           #{problem_number unless options[:only_number_solution]}
           <div class="os-problem-container">
-            #{context if context.present?}
-            #{"<span class='os-divider'>. </span>" if context.present?}
+            #{context if context.present?}#{"<span class='os-divider'>. </span>" if context.present?}
             #{question.stimulus&.cut&.paste}
             #{alphabetical_multipart ? question.search("div[data-type='alphabetical-question-multipart']").cut.paste : question.stem.cut.paste}
             #{question.answers&.cut&.paste}

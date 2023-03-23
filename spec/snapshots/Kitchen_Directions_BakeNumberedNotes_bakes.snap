@@ -112,7 +112,6 @@
 <div class="os-problem-container">
   
   
-  
   <div data-type="question-stem">a question stem</div>
   
 </div>
@@ -139,7 +138,6 @@
 <div class="os-problem-container">
   
   
-  
   <div data-type="question-stem">a question</div>
   
 </div>
@@ -151,7 +149,6 @@
       </div>
       <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="102" class="unnumbered os-hasSolution">
 <div class="os-problem-container">
-  
   
   
   <div data-type="question-stem">a question</div>
@@ -177,7 +174,6 @@
     <div data-type="injected-exercise" data-question-count="1" data-is-multipart="False">
       <div data-type="exercise-question" data-id="3" class="unnumbered os-hasSolution" id="auto_3_3">
 <div class="os-problem-container">
-  
   
   
   <div data-type="question-stem">a question stem</div>

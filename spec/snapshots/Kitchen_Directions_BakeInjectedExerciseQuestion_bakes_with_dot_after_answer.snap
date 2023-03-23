@@ -6,7 +6,6 @@
 <div class="os-problem-container">
   
   
-  
   <div data-type="question-stem">Question 1</div>
   
 </div>
@@ -23,7 +22,6 @@
 <div class="os-problem-container">
   
   
-  
   <div data-type="question-stem">Question 2</div>
   
 </div>
@@ -38,7 +36,6 @@
       <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="3" id="auto_abc123_3" class="os-hasSolution"><a class="os-number" href="#auto_abc123_3-solution">3</a><span class="os-divider">. </span>
 
 <div class="os-problem-container">
-  
   
   
   <div data-type="question-stem">Question 3</div>
@@ -58,7 +55,6 @@
 
 <div class="os-problem-container">
   
-  
   <div data-type="question-stimulus">Question 1 stimulus</div>
   <div data-type="question-stem">Question 1</div>
   
@@ -77,7 +73,6 @@
       <div data-type="exercise-question" data-is-answer-order-important="True" data-formats="multiple-choice test-format" data-id="5" id="auto_abc123_5" class="os-hasSolution"><a class="os-number" href="#auto_abc123_5-solution">5</a><span class="os-divider">. </span>
 
 <div class="os-problem-container">
-  
   
   <div data-type="question-stimulus">i'm a question stimulus</div>
   <div data-type="question-stem">Testing a multiple choice question</div>
@@ -115,7 +110,6 @@
 
 <div class="os-problem-container">
   
-  
   <div data-type="question-stimulus">i'm a question stimulus</div>
   <div data-type="question-stem">Testing a multiple choice question</div>
   <ol data-type="question-answers" type="a">
@@ -148,7 +142,6 @@
 <span class="os-divider">. </span>
 
 <div class="os-problem-container">
-  
   
   
   <div data-type="question-stem">question without solution</div>

@@ -9,7 +9,6 @@
 <div class="os-problem-container">
   
   
-  
   <div data-type="question-stem">Question 1</div>
   
 </div>
@@ -32,7 +31,6 @@
 <div class="os-problem-container">
   
   
-  
   <div data-type="question-stem">Question 2</div>
   
 </div>
@@ -53,7 +51,6 @@
 </a>
 
 <div class="os-problem-container">
-  
   
   
   <div data-type="question-stem">Question 3</div>
@@ -79,7 +76,6 @@
 
 <div class="os-problem-container">
   
-  
   <div data-type="question-stimulus">Question 1 stimulus</div>
   <div data-type="question-stem">Question 1</div>
   
@@ -104,7 +100,6 @@
 </a>
 
 <div class="os-problem-container">
-  
   
   <div data-type="question-stimulus">i'm a question stimulus</div>
   <div data-type="question-stem">Testing a multiple choice question</div>
@@ -148,7 +143,6 @@
 
 <div class="os-problem-container">
   
-  
   <div data-type="question-stimulus">i'm a question stimulus</div>
   <div data-type="question-stem">Testing a multiple choice question</div>
   <ol data-type="question-answers" type="a">
@@ -186,7 +180,6 @@
 </div>
 
 <div class="os-problem-container">
-  
   
   
   <div data-type="question-stem">question without solution</div>
