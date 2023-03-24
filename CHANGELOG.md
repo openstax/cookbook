@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.27.0] - 2023-03-24
+
 * Remove empty space after exercise context
 * Bake figures from `preface` in `contemporary-math`
 * Revert changes for `exercise-block` class
