@@ -129,6 +129,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, replace_section_link_text: true)
+  BakeUnitTitle.v1(book: book)
   BakeToc.v1(book: book)
 
   note_classes = %w[link-to-learning safety-alert clinical-tip health-alert healthy-people
