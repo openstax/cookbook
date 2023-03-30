@@ -147,6 +147,10 @@ RSpec.describe 'books' do
     expect('nursing-external').to bake_correctly
   end
 
+  it 'bakes nursing-internal' do
+    expect('nursing-internal').to bake_correctly
+  end
+
   it 'bakes organic-chemistry' do
     expect('organic-chemistry').to bake_correctly
   end
