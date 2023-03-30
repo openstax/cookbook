@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Create recipe for `nursing-internal`
+* Create recipe for `nursing-internal`
+* Bake `UnitTitle` in `nursing`
 
 ## [v1.27.0] - 2023-03-24
 
