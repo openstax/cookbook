@@ -56,18 +56,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc|
     # EOC
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'summary',
-      uuid_key: '.summary',
-      section_selector: 'section.summary'
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-      section.prepend(child: title)
-    end
-
     sections_with_module_links = %w[summary review-questions check-understanding
                                     critical-thinking competency-based reflection-questions
                                     what-nurses-do]
