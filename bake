@@ -54,6 +54,7 @@ case "${book}" in
   marketing) $DIR/lib/recipes/marketing/bake --input $input_file --output $output_file;;
   microbiology) $DIR/lib/recipes/microbiology/bake --input $input_file --output $output_file;;
   nursing-external) $DIR/lib/recipes/nursing-external/bake --input $input_file --output $output_file;;
+  nursing-internal) $DIR/lib/recipes/nursing-internal/bake --input $input_file --output $output_file;;
   organic-chemistry) $DIR/lib/recipes/organic-chemistry/bake --input $input_file --output $output_file;;
   otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
   philosophy) $DIR/lib/recipes/philosophy/bake --input $input_file --output $output_file;;
