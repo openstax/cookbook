@@ -126,6 +126,15 @@ RSpec.describe Kitchen::Directions::BakeFirstElements do
                 </div>
               </div>
             </div>
+            <div data-type="injected-exercise" id="bla13">
+              <div data-type="exercise-question">
+                <div class="os-problem-container">
+                  <div data-type="question-stimulus">
+                    <img alt="some text" data-media-type="image/jpeg" id="bla5" src="bla5.jpg" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
         HTML
       )
