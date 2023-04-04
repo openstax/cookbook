@@ -22,6 +22,17 @@ module Kitchen
           end
         end
 
+        third_level_selectors = [
+          'div.os-problem-container > div[data-type="question-stimulus"]:first-child > img'
+        ]
+
+        third_level_selectors.each do |third_level_selector|
+          within.search("#{third_level_selector}:first-child").each do |problem|
+            problem.add_class('first-element')
+            problem.parent.parent.add_class('has-first-element')
+          end
+        end
+
         return unless first_inline_list
 
         # add first-inline-element class

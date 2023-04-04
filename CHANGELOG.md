@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `third_level_selectors` to `BakeFirstElements`
 * Create recipe for `nursing-internal`
 * Bake `UnitTitle` in `nursing`
 
