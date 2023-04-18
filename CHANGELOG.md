@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove numbering from `Learning Objectives` in `bca`
 * Change iframe link text
 
 ## [v1.28.0] - 2023-04-07
