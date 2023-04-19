@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `no-cellborder` and `vertically-tight` tables to `CustomBody`
 * Remove numbering from `Learning Objectives` in `bca`
 * Change iframe link text
 

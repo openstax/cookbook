@@ -87,6 +87,12 @@ module Kitchen
           elsif table.narrow_table?
             custom_table = CustomBody.new(table: table, klass: 'narrow-table')
             custom_table.modify_body(has_fake_title: false)
+          elsif table.no_cellborder_table?
+            custom_table = CustomBody.new(table: table, klass: 'no-cellborder')
+            custom_table.modify_body(has_fake_title: false)
+          elsif table.vertically_tight_table?
+            custom_table = CustomBody.new(table: table, klass: 'vertically-tight')
+            custom_table.modify_body(has_fake_title: false)
           end
 
           return unless table.full_width_table?
