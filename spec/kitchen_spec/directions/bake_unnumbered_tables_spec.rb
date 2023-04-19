@@ -113,7 +113,7 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
   end
 
   it 'bakes no cellborder table' do
-    described_class.v1(book: book_with_column_header_table)
+    described_class.v1(book: book_with_no_cellborder_table)
     expect(book_with_column_header_table.tables.first.parent).to match_normalized_html(
       <<~HTML
         <div class="os-table os-no-cellborder-container">
