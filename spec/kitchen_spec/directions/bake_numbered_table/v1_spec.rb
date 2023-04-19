@@ -116,6 +116,28 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     ).tables.first
   end
 
+  let(:vertically_tight_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="vertically-tight" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
+  let(:no_cellborder_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="no-cellborder" id="tId">
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   let(:full_width_table) do
     book_containing(html:
       one_chapter_with_one_page_containing(
@@ -223,6 +245,18 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
     described_class.new.bake(table: narrow_table, number: '2.3')
 
     expect(narrow_table.document.search('.os-table').first).to match_snapshot_auto
+  end
+
+  it 'bakes a vertically-tight table' do
+    described_class.new.bake(table: vertically_tight_table, number: '2.3')
+
+    expect(vertically_tight_table.document.search('.os-table').first).to match_snapshot_auto
+  end
+
+  it 'bakes a no-cellborder table' do
+    described_class.new.bake(table: no_cellborder_table, number: '2.3')
+
+    expect(no_cellborder_table.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'bakes a full width table' do

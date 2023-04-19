@@ -8,6 +8,7 @@ module Kitchen
           table.wrap(%(<div class="os-table">))
           table.remove_attribute('summary')
           table.parent.add_class('os-unstyled-container') if table.unstyled?
+          table.parent.add_class('os-no-cellborder-container') if table.no_cellborder_table?
           table.parent.add_class('os-column-header-container') if table.column_header?
           if table.top_titled?
             table.parent.add_class('os-top-titled-container')

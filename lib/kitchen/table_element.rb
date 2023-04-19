@@ -137,6 +137,22 @@ module Kitchen
       has_class?('full-width')
     end
 
+    # Returns true if the table is vertically tight
+    #
+    # @return [Boolean]
+    #
+    def vertically_tight_table?
+      has_class?('vertically-tight')
+    end
+
+    # Returns true if the table is no-cellborder
+    #
+    # @return [Boolean]
+    #
+    def no_cellborder_table?
+      has_class?('no-cellborder')
+    end
+
     # Returns an element for the table caption, if present
     #
     # @return [Element, nil]
