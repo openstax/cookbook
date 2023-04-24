@@ -55,15 +55,19 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
 
     chapter.pages.sections('$.check-understanding').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
     end
     chapter.pages.search('section.section-exercises').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:page))
+      BakeFirstElements.v1(within: question)
     end
     chapter.pages.search('section.chapter-review').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
     end
     chapter.pages.search('section.chapter-test').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
     end
     chapter.pages.notes('$.your-turn').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(
@@ -71,6 +75,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc|
         number: question.count_in(:note),
         options: { only_number_solution: false }
       )
+      BakeFirstElements.v1(within: question)
     end
 
     chapter_summary = \
