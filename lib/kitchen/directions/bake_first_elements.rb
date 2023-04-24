@@ -23,7 +23,8 @@ module Kitchen
         end
 
         third_level_selectors = [
-          'div.os-problem-container > div[data-type="question-stimulus"]:first-child > img'
+          'div.os-problem-container > div[data-type="question-stimulus"]:first-child > img',
+          'div.os-problem-container > div[data-type="question-stem"]:first-child > img'
         ]
 
         third_level_selectors.each do |third_level_selector|
