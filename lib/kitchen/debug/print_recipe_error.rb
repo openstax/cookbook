@@ -18,6 +18,9 @@ module Kitchen
       print_specific_help_line(error)
       print_line_in_document_where_error_occurred(document)
       print_backtrace_info(error)
+
+      puts "\n"
+      print_fix_suggestion(document, error_line_number, error_filename)
     end
 
     def self.verbose?
@@ -77,6 +80,21 @@ module Kitchen
 
     def self.print_file_line(line_number, line)
       puts "#{format('%5s', line_number)}| #{line}"
+    end
+
+    def self.print_fix_suggestion(document, line_number, filename)
+      book_slug = document.slug.to_s
+
+      puts "Something is missing for #{Rainbow(book_slug).red} collection!"
+
+      File.readlines(filename).each.with_index do |line, line_index|
+        current_line_number = line_index + 1
+        direction_name = line.match(/(\S*)(\..*)/)
+
+        if current_line_number == line_number
+          puts "Please check if the element related with #{Rainbow(direction_name[1]).bright} direction is properly formatted or tagged."
+        end
+      end
     end
 
     def self.print_specific_help_line(error)
