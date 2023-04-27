@@ -32,13 +32,11 @@ RSpec.describe 'print_recipe_error' do
     end
 
     with_captured_stdout(clear_colors: true) do
-      begin
-        Kitchen::Oven.bake(input_file: input_file.path,
-                           recipes: [recipe],
-                           output_file: Tempfile.new.path)
-      rescue SystemExit
-        # So we don't exit
-      end
+      Kitchen::Oven.bake(input_file: input_file.path,
+                         recipes: [recipe],
+                         output_file: Tempfile.new.path)
+    rescue SystemExit
+      # So we don't exit
     end
   end
 
