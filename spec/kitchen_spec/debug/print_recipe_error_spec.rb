@@ -4,7 +4,20 @@ require 'spec_helper'
 require 'tempfile'
 
 RSpec.describe 'print_recipe_error' do
-  let(:xml) { "<div class='hi'>Howdy</div>\n" }
+  let(:xml) do
+    Nokogiri::XML(
+      <<~HTML
+        <html>
+          <body>
+            <div data-type="metadata">
+              <span data-type="slug" data-value="bar"/>
+            </div>
+            <div class="hi">Howdy</div>
+          </body>
+        </html>
+      HTML
+    )
+  end
 
   let(:recipe) do
     Kitchen::Recipe.new do |document|
@@ -53,16 +66,22 @@ RSpec.describe 'print_recipe_error' do
     expect(output).to match(/Full backtrace:\s+.*print_recipe_error_spec/)
   end
 
+  it 'prints document slag and fix suggestion' do
+    expect(output)
+      .to match('Something is missing for bar collection!')
+      .and match('Please check if the element related with document direction is properly formatted or tagged.')
+  end
+
   context 'when error encountered within a document' do
     let(:recipe) do
       Kitchen::Recipe.new do |document|
-        document.search('div').search('span').first!
+        document.search('div').search('ol').first!
       end
     end
 
     it 'prints the line in the document where the error happened' do
       expect(output)
-        .to match('Encountered on line 1')
+        .to match('Encountered on line 7')
         .and match('<div class="hi">...</div>')
     end
   end

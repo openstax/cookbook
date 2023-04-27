@@ -4,7 +4,20 @@ require 'spec_helper'
 require 'tempfile'
 
 RSpec.describe StringHelpers do
-  let(:xml) { "<div class='hi'>Howdy</div>\n" }
+  let(:xml) do
+    Nokogiri::XML(
+      <<~HTML
+        <html>
+          <body>
+            <div data-type="metadata">
+              <span data-type="slug" data-value="foo"/>
+            </div>
+            <div class='hi'>Howdy</div>
+          </body>
+        </html>
+      HTML
+    )
+  end
 
   let(:recipe) do
     Kitchen::Recipe.new do |document|
