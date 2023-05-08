@@ -24,7 +24,7 @@ done
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 case "${book}" in
-  accounting) $DIR/lib/recipes/accounting/bake --input $input_file --output $output_file;;
+  accounting) $DIR/lib/recipes/accounting/bake --input $input_file --output $output_file --resources $resource_dir;;
   american-government) $DIR/lib/recipes/american-government/bake --input $input_file --output $output_file;;
   anatomy) $DIR/lib/recipes/anatomy/bake --input $input_file --output $output_file;;
   anthropology) $DIR/lib/recipes/anthropology/bake --input $input_file --output $output_file;;

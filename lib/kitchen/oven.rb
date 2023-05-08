@@ -28,18 +28,18 @@ module Kitchen
         config: config
       )
 
+      # Add image metadata to resource hash
       resources = {}
       if resource_dir
         Dir.foreach(resource_dir) do |filename|
           next unless filename.match(/.json/)
 
-          # TODO: Open file & create ImageMetadata from contents
-          # Add to resources hash
-          id = filename.gsub('.json', '')
-          resources[id] = "hello"
+          file = File.read("#{resource_dir}/#{filename}")
+          img_hash = JSON.parse(file)
+          img_src = filename.gsub('.json', '')
+          resources[img_src] = img_hash
         end
       end
-      # puts resources
 
       I18n.locale = doc.locale
 

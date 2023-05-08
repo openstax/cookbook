@@ -8,7 +8,7 @@ require_relative '../recipes_helper'
 # spec input file contains test content from chapter 1 and 10 (needed for
 # BakeFirstElemets in the AnswerKey) from Accounting vol2
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
+recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -17,6 +17,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
+  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   book.pages('$.preface').each do |page|
     page.figures(only: :figure_to_number?).each do |figure|
@@ -150,6 +151,7 @@ end
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
+  slop.string '--resources', '', required: false
 end
 
 puts Kitchen::Oven.bake(
