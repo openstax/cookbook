@@ -12,20 +12,25 @@ module Kitchen
   end
 end
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc|
+recipe = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc, resources|
   include Kitchen::Directions
 
   book = doc.book
   book.search('div.test123').each { |div| div.replace_children(with: 'Hello, world!') }
+
+  puts 'resources from recipe'
+  puts resources
 end
 
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
+  slop.string '--resources', 'Book resources directory', required: false
 end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
   recipes: recipe,
-  output_file: opts[:output]
+  output_file: opts[:output],
+  resource_dir: opts[:resources]
 )

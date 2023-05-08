@@ -18,7 +18,7 @@ RSpec::Matchers.define :bake_correctly_with do |recipe|
     actual_file = Tempfile.new(book)
 
     cmd = `#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
-      -o #{actual_file.path}`
+      -r #{__dir__}/..books/#{book}/IO_RESOURCES -o #{actual_file.path}`
 
     if ENV['USE_LOCAL_KITCHEN']
       system({ 'USE_LOCAL_KITCHEN' => '1' }, cmd, %i[out err] => File::NULL)
