@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix `BakeLinkPlaceholders` to replace section link text only in chapter pages
 * Improve error message
 * Bake more `first elements` in `contemporary-math`
 
