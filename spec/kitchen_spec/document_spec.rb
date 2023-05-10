@@ -10,6 +10,9 @@ RSpec.describe Kitchen::Document do
       <<~HTML
         <html #{"lang=\"#{lang}\"" if lang}>
           <body>
+            <div data-type="metadata">
+              <span data-type="slug" data-value="foo"/>
+            </div>
             <div class='hi'>Howdy</div>
           </body>
         </html>

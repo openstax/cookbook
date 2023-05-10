@@ -4,7 +4,20 @@ require 'spec_helper'
 require 'tempfile'
 
 RSpec.describe StringHelpers do
-  let(:xml) { "<div class='hi'>Howdy</div>\n" }
+  let(:xml) do
+    Nokogiri::XML(
+      <<~HTML
+        <html>
+          <body>
+            <div data-type="metadata">
+              <span data-type="slug" data-value="foo"/>
+            </div>
+            <div class='hi'>Howdy</div>
+          </body>
+        </html>
+      HTML
+    )
+  end
 
   let(:recipe) do
     Kitchen::Recipe.new do |document|
@@ -19,13 +32,11 @@ RSpec.describe StringHelpers do
     end
 
     with_captured_stdout(clear_colors: clear_colors) do
-      begin
-        Kitchen::Oven.bake(input_file: input_file.path,
-                           recipes: [recipe],
-                           output_file: Tempfile.new.path)
-      rescue SystemExit
-        # So we don't exit
-      end
+      Kitchen::Oven.bake(input_file: input_file.path,
+                         recipes: [recipe],
+                         output_file: Tempfile.new.path)
+    rescue SystemExit
+      # So we don't exit
     end
   end
 

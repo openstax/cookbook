@@ -861,7 +861,7 @@ module Kitchen
         raise "Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page"
       end
 
-      book_slug = document.search('span[data-type="slug"]').first[:'data-value']
+      book_slug = document.slug
       chapter_count = element_with_ancestors.ancestor(:chapter).count_in(:book)
       page_string = ''
       page_title = ''

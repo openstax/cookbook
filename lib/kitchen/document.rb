@@ -171,6 +171,14 @@ module Kitchen
       end
     end
 
+    # Returns the slug for this document
+    #
+    # @return [Symbol]
+    #
+    def slug
+      search('span[data-type="slug"]').first[:'data-value']
+    end
+
     protected
 
     attr_reader :nokogiri_document
