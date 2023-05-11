@@ -345,7 +345,8 @@ module Kitchen
     def add_ancestor(ancestor)
       if @ancestors[ancestor.type].present?
         raise "Trying to add an ancestor of type '#{ancestor.type}' but one of that " \
-              "type is already present"
+              "type is already present" \
+              "#{data_source ? "\n" : nil}#{data_source}"
       end
 
       ancestor.increment_descendant_count(short_type)
@@ -366,7 +367,9 @@ module Kitchen
     #
     def count_in(ancestor_type)
       @ancestors[ancestor_type]&.get_descendant_count(short_type) ||
-        raise("No ancestor of type '#{ancestor_type}'")
+        raise("No ancestor of type '#{ancestor_type}'" /
+              "#{data_source ? "\n" : nil}#{data_source}"
+        )
     end
 
     # Track that a sub element found by the given query has been counted
@@ -892,7 +895,9 @@ module Kitchen
       remove_attribute('data-is-for-rex-linking')
 
       unless element_with_ancestors
-        raise "Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page"
+        raise("Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page" \
+              "#{data_source ? "\n" : nil}#{data_source}"
+        )
       end
 
       book_slug = document.search('span[data-type="slug"]').first[:'data-value']
