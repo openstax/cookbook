@@ -28,6 +28,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :hs_college_success) do |doc|
       get-connected
       family-friends
       checking-in
+      real-deal
     ]
   )
 
