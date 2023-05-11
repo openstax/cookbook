@@ -8,7 +8,7 @@ RSpec.describe Kitchen::ElementBase do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <div data-type="example" class="class1" id="div1">
+          <div data-type="example" class="class1" id="div1" data-sm="/module/m240/filename.cnxml:13:69">
             <p>This is a paragraph.</p>
           </div>
         HTML
@@ -173,11 +173,23 @@ RSpec.describe Kitchen::ElementBase do
     end
   end
 
+  describe '#data_sm' do
+    it 'returns the element\'s data-sm' do
+      expect(example.data_sm).to eq '/module/m240/filename.cnxml:13:69'
+    end
+  end
+
+  describe '#data_source' do
+    it 'returns the element\'s data source in M123:L456:C789 format' do
+      expect(example.data_source).to eq 'M240:L13:C69'
+    end
+  end
+
   describe '#parent' do
     it 'returns the element\'s parent' do
       expect(para.parent).to match_normalized_html(
         <<~HTML
-          <div class="class1" data-type="example" id="div1">
+          <div class="class1" data-sm="/module/m240/filename.cnxml:13:69" data-type="example" id="div1">
             <p>This is a paragraph.</p>
           </div>
         HTML
@@ -262,7 +274,7 @@ RSpec.describe Kitchen::ElementBase do
       type = :figure
       expect do
         p_element.ancestor(type).id
-      end.to raise_error("No ancestor of type '#{type}'")
+      end.to raise_error("No ancestor of type '#{type}'\nAncestor: M240:L13:C69")
     end
   end
 

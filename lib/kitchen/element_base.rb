@@ -2,6 +2,7 @@
 
 require 'forwardable'
 require 'securerandom'
+require 'byebug'
 
 # rubocop:disable Metrics/ClassLength
 module Kitchen
@@ -239,6 +240,38 @@ module Kitchen
       self[:href] = value
     end
 
+    # Returns the element's data-sm
+    #
+    # @return [String]
+    #
+    def data_sm
+      self[:'data-sm']
+    end
+
+    # Returns the element's data-sm
+    #
+    # @return [String]
+    #
+    def data_source
+      return nil if !parent&.name || parent&.name == 'html'
+
+      if data_sm.nil? && parent&.name != 'html'
+        parent_source = parent.data_source
+
+        return nil if parent_source.nil?
+
+        parent_source = "Ancestor: #{parent_source}" unless parent_source.match(/Ancestor:/)
+
+      else
+        format_match = /\/m(\d+)\/[^:]+:(\d+):(\d+)/
+
+        module_line_column = data_sm.match(format_match).captures
+
+        "M#{module_line_column[0]}:L#{module_line_column[1]}:C#{module_line_column[2]}"
+        # function to translate phil's notation (modules/m53650/index.cnxml:6:3) (6 Line, 3 col)  to M123:L456:C789
+      end
+    end
+
     # A way to set values and chain them
     #
     # @param property [String, Symbol] the name of the property to set
@@ -264,7 +297,8 @@ module Kitchen
     # @raise [StandardError] if there is no ancestor of the given type
     #
     def ancestor(type)
-      @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'")
+      @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'" \
+                                                "#{data_source ? "\n" : nil}#{data_source}")
     end
 
     # Returns true iff this element has an ancestor of the given type
