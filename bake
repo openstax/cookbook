@@ -49,6 +49,7 @@ case "${book}" in
   entrepreneurship) $DIR/lib/recipes/entrepreneurship/bake --input $input_file --output $output_file;;
   finance) $DIR/lib/recipes/finance/bake --input $input_file --output $output_file;;
   history) $DIR/lib/recipes/history/bake --input $input_file --output $output_file;;
+  hs-college-success) $DIR/lib/recipes/hs-college-success/bake --input $input_file --output $output_file;;
   hs-physics) $DIR/lib/recipes/hs-physics/bake --input $input_file --output $output_file;;
   intro-business) $DIR/lib/recipes/intro-business/bake --input $input_file --output $output_file;;
   marketing) $DIR/lib/recipes/marketing/bake --input $input_file --output $output_file;;

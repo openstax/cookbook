@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Modify `BakeFolio` to add folio paragraphs
+* Create recipe  and new unstyled notes for  `hs-college-success`
 * Fix `BakeLinkPlaceholders` to replace section link text only in chapter pages
 
 ## [v1.30.0] - 2023-05-08
