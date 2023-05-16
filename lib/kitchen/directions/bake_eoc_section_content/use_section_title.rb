@@ -15,7 +15,7 @@ module Kitchen
 
         composite_page_title.append(child:
           <<~HTML
-            <span class="os-divider"> - </span>
+            <span class="os-divider">&mdash;</span>
             <span class="os-subtitle">#{section_title.text}</span>
           HTML
         )

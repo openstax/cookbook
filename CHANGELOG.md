@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change order of EOC sections in `nursing-external`
+* Add `The Real Deal note` to `hs-college-success`
+* Change main `bake` script to enable `-r` resource optarg
+* Change divider in `UseSectionTitle` method
+* Modify `BakeFolio` to add folio paragraphs
+* Create recipe  and new unstyled notes for  `hs-college-success`
+* Fix `BakeLinkPlaceholders` to replace section link text only in chapter pages
+
+## [v1.30.0] - 2023-05-08
+
 * Improve error message
 * Bake more `first elements` in `contemporary-math`
 

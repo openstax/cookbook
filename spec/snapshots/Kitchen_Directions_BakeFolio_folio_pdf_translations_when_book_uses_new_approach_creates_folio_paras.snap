@@ -1,0 +1,59 @@
+<html xmlns:m="http://www.w3.org/1998/Math/MathML" data-pdf-folio-preface-message="Preface" data-pdf-folio-access-message="Access for free at openstax.org">
+  <body>
+    <div data-type="chapter">
+  <h1 data-type="document-title">
+    <span class="os-text">Chapter title</span>
+  </h1><p class="folio-chapter">
+  1 &#x2022; Chapter title
+</p>
+  <div data-type="page" class="introduction">
+    <h2 data-type="document-title">
+      <span class="os-text">Introduction title</span>
+    </h2><p class="folio-module">
+  1 &#x2022; Introduction title
+</p>
+  </div>
+  <div data-type="page">
+    <h2 data-type="document-title">
+      <span class="os-text">Module title</span>
+    </h2><p class="folio-module">
+  1.1 &#x2022; Module title
+</p>
+  </div>
+  <div data-type="composite-page" class="os-eoc">
+    <h2 data-type="document-title">
+      <span class="os-text">Eoc title</span>
+    </h2><p class="folio-eoc-right">
+  1 &#x2022; Eoc title
+</p><p class="folio-eoc-left">
+  1 &#x2022; Eoc title
+</p>
+  </div>
+</div>
+<div data-type="page" class="appendix">
+  <h1 data-type="document-title">
+    <span class="os-text">Appendix title</span>
+  </h1><p class="folio-appendix-right">
+  A &#x2022; Appendix title
+</p><p class="folio-appendix-left">
+  A &#x2022; Appendix title
+</p>
+</div>
+<div data-type="composite-chapter" class="os-eob os-solutions-container">
+  <h1 data-type="document-title">
+    <span class="os-text">Answer Key title</span>
+  </h1><p class="folio-eob-right">Answer Key title</p><p class="folio-eob-left">Answer Key title</p>
+  <div data-type="composite-page" class="os-eob os-solutions-container">
+    <h2 data-type="document-title">
+      <span class="os-text">Chapter title</span>
+    </h2>
+  </div>
+</div>
+<div data-type="composite-page" class="os-eob">
+  <h1 data-type="document-title">
+    <span class="os-text">Index title</span>
+  </h1><p class="folio-eob-right">Index title</p><p class="folio-eob-left">Index title</p>
+</div>
+
+  </body>
+</html>
