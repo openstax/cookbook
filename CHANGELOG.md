@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
+* Add `Student Story note` to `hs-college-success`
 * Add `The Real Deal note` to `hs-college-success`
 * Change main `bake` script to enable `-r` resource optarg
 * Change divider in `UseSectionTitle` method
