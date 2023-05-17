@@ -188,7 +188,7 @@ RSpec.describe Kitchen::ElementBase do
       expect(para.data_source).to eq '(nearest parent) M240:L13:C69'
     end
 
-    it 'returns nil when no parent has a data-sm' do
+    it 'returns nil when no ancestor has a data-sm' do
       expect(figure.data_source).to eq nil
     end
   end
