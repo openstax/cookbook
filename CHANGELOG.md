@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.31.0] - 2023-05-17
+
 * Add `Student Story note` to `hs-college-success`
 * Change order of EOC sections in `nursing-external`
 * Add `The Real Deal note` to `hs-college-success`
