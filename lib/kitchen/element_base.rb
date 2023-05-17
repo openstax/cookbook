@@ -247,7 +247,7 @@ module Kitchen
       self[:'data-sm']
     end
 
-    # Returns the element's data-sm
+    # Returns the element's data source map in M123:L456:C789 style and whether this is self or the nearest parent's sm
     #
     # @return [String]
     #
@@ -269,6 +269,10 @@ module Kitchen
         "(self) M#{module_line_column[0]}:L#{module_line_column[1]}:C#{module_line_column[2]}"
         # function to translate phil's notation (modules/m53650/index.cnxml:6:3) (6 Line, 3 col)  to M123:L456:C789
       end
+    end
+
+    def say_source_or_nil
+      "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
     end
 
     # A way to set values and chain them
@@ -297,7 +301,7 @@ module Kitchen
     #
     def ancestor(type)
       @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'" \
-                                          "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}")
+                                          "#{say_source_or_nil}")
     end
 
     # Returns true iff this element has an ancestor of the given type
@@ -345,7 +349,7 @@ module Kitchen
       if @ancestors[ancestor.type].present?
         raise "Trying to add an ancestor of type '#{ancestor.type}' but one of that " \
               "type is already present" \
-              "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
+              "#{say_source_or_nil}"
       end
 
       ancestor.increment_descendant_count(short_type)
@@ -367,7 +371,7 @@ module Kitchen
     def count_in(ancestor_type)
       @ancestors[ancestor_type]&.get_descendant_count(short_type) ||
         raise("No ancestor of type '#{ancestor_type}'" /
-              "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
+              "#{say_source_or_nil}"
         )
     end
 
@@ -895,7 +899,7 @@ module Kitchen
 
       unless element_with_ancestors
         raise("Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page" \
-              "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
+              "#{say_source_or_nil}"
         )
       end
 

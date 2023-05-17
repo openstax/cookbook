@@ -113,7 +113,7 @@ module Kitchen
             else
               raise "could not detect which page type class to apply for page.id `#{page.id}`
                during baking the TOC. The classes on the page are: `#{page.classes}`
-               #{page.data_source ? "\n" : nil}#{page.data_source}"
+               #{page.say_source_or_nil}"
             end
           when CompositePageElement
             if page.is_index? || page.is_index_of_type?
@@ -130,11 +130,11 @@ module Kitchen
             else
               raise "could not detect which composite page type class to apply to TOC for page id \
               `#{page.id}` during baking the TOC. The classes on the page are: `#{page.classes}`
-              #{page.data_source ? "\n" : nil}#{page.data_source}"
+              #{page.say_source_or_nil}"
             end
           else
-            raise(ArgumentError, "could not detect any page type class to apply for `#{page.id}` \
-                                  during baking TOC#{page.data_source ? "\n" : nil}#{page.data_source}")
+            raise(ArgumentError, "could not detect any page type class to apply for `#{page.id}`" \
+                                  "during baking TOC#{page.say_source_or_nil}")
           end
         # rubocop:enable Style/WordArray
 

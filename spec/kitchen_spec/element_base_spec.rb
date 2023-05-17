@@ -193,6 +193,16 @@ RSpec.describe Kitchen::ElementBase do
     end
   end
 
+  describe '#say_source_or_nil' do
+    it 'returns the data source in an error friendly format if it exists' do
+      expect(example.say_source_or_nil).to eq '\nCNXML: (self) M240:L13:C69'
+    end
+
+    it 'returns nil when no data-source' do
+      expect(figure.say_source_or_nil).to eq nil
+    end
+  end
+
   describe '#parent' do
     it 'returns the element\'s parent' do
       expect(para.parent).to match_normalized_html(
