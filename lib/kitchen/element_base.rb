@@ -2,7 +2,6 @@
 
 require 'forwardable'
 require 'securerandom'
-require 'byebug'
 
 # rubocop:disable Metrics/ClassLength
 module Kitchen
@@ -260,14 +259,14 @@ module Kitchen
 
         return nil if parent_source.nil?
 
-        parent_source = "Ancestor: #{parent_source}" unless parent_source.match(/Ancestor:/)
+        parent_source = "(nearest parent) #{parent_source.split(' ')[1]}" unless parent_source.match(/\(nearest parent\)/)
 
       else
         format_match = /\/m(\d+)\/[^:]+:(\d+):(\d+)/
 
         module_line_column = data_sm.match(format_match).captures
 
-        "M#{module_line_column[0]}:L#{module_line_column[1]}:C#{module_line_column[2]}"
+        "(self) M#{module_line_column[0]}:L#{module_line_column[1]}:C#{module_line_column[2]}"
         # function to translate phil's notation (modules/m53650/index.cnxml:6:3) (6 Line, 3 col)  to M123:L456:C789
       end
     end
@@ -298,7 +297,7 @@ module Kitchen
     #
     def ancestor(type)
       @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'" \
-                                                "#{data_source ? "\n" : nil}#{data_source}")
+                                          "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}")
     end
 
     # Returns true iff this element has an ancestor of the given type
@@ -346,7 +345,7 @@ module Kitchen
       if @ancestors[ancestor.type].present?
         raise "Trying to add an ancestor of type '#{ancestor.type}' but one of that " \
               "type is already present" \
-              "#{data_source ? "\n" : nil}#{data_source}"
+              "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
       end
 
       ancestor.increment_descendant_count(short_type)
@@ -368,7 +367,7 @@ module Kitchen
     def count_in(ancestor_type)
       @ancestors[ancestor_type]&.get_descendant_count(short_type) ||
         raise("No ancestor of type '#{ancestor_type}'" /
-              "#{data_source ? "\n" : nil}#{data_source}"
+              "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
         )
     end
 
@@ -896,7 +895,7 @@ module Kitchen
 
       unless element_with_ancestors
         raise("Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page" \
-              "#{data_source ? "\n" : nil}#{data_source}"
+              "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
         )
       end
 

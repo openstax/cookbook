@@ -181,7 +181,7 @@ RSpec.describe Kitchen::ElementBase do
 
   describe '#data_source' do
     it 'returns the element\'s data source in M123:L456:C789 format' do
-      expect(example.data_source).to eq 'M240:L13:C69'
+      expect(example.data_source).to eq '(self) M240:L13:C69'
     end
   end
 
@@ -274,7 +274,7 @@ RSpec.describe Kitchen::ElementBase do
       type = :figure
       expect do
         p_element.ancestor(type).id
-      end.to raise_error("No ancestor of type '#{type}'\nAncestor: M240:L13:C69")
+      end.to raise_error("No ancestor of type '#{type}'\nCNXML SOURCE: (nearest parent) M240:L13:C69")
     end
   end
 
@@ -301,7 +301,7 @@ RSpec.describe Kitchen::ElementBase do
       random_string = 'blah'
       expect do
         para.add_ancestors(random_string)
-      end.to raise_error("Unsupported ancestor type `#{random_string.class}`\nAncestor: M240:L13:C69")
+      end.to raise_error("Unsupported ancestor type `#{random_string.class}`")
     end
 
     it 'adds an element as an ancestor' do
@@ -324,7 +324,7 @@ RSpec.describe Kitchen::ElementBase do
       expect do
         para.add_ancestor(Kitchen::Ancestor.new(example_copy))
       end.to raise_error("Trying to add an ancestor of type '#{type}' but one of that " \
-        "type is already present")
+        "type is already present\nCNXML SOURCE: (nearest parent) M240:L13:C69")
     end
   end
 
