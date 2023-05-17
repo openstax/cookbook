@@ -180,8 +180,16 @@ RSpec.describe Kitchen::ElementBase do
   end
 
   describe '#data_source' do
-    it 'returns the element\'s data source in M123:L456:C789 format' do
+    it 'returns the element\'s data source in M123:L456:C789 format when the element has a data-sm' do
       expect(example.data_source).to eq '(self) M240:L13:C69'
+    end
+
+    it 'returns the element\'s parent\'s data source in M123:L456:C789 format when the element has no data-sm' do
+      expect(para.data_source).to eq '(nearest parent) M240:L13:C69'
+    end
+
+    it 'returns nil when no parent has a data-sm' do
+      expect(figure.data_source).to eq nil
     end
   end
 

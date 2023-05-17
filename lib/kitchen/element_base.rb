@@ -259,7 +259,7 @@ module Kitchen
 
         return nil if parent_source.nil?
 
-        parent_source = "(nearest parent) #{parent_source.split(' ')[1]}" unless parent_source.match(/\(nearest parent\)/)
+        "(nearest parent) #{parent_source.split(' ')[1]}" unless parent_source.match(/\(nearest parent\)/)
 
       else
         format_match = /\/m(\d+)\/[^:]+:(\d+):(\d+)/
