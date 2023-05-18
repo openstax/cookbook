@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add support for source mapping
+
 ## [1.31.0] - 2023-05-17
 
 * Add `Student Story note` to `hs-college-success`

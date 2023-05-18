@@ -8,7 +8,7 @@ RSpec.describe Kitchen::ElementBase do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <div data-type="example" class="class1" id="div1">
+          <div data-type="example" class="class1" id="div1" data-sm="/module/m240/filename.cnxml:13:69">
             <p>This is a paragraph.</p>
           </div>
         HTML
@@ -173,11 +173,41 @@ RSpec.describe Kitchen::ElementBase do
     end
   end
 
+  describe '#data_sm' do
+    it 'returns the element\'s data-sm' do
+      expect(example.data_sm).to eq '/module/m240/filename.cnxml:13:69'
+    end
+  end
+
+  describe '#data_source' do
+    it 'returns the element\'s data source in M123:L456:C789 format when the element has a data-sm' do
+      expect(example.data_source).to eq '(self) M240:L13:C69'
+    end
+
+    it 'returns the element\'s parent\'s data source in M123:L456:C789 format when the element has no data-sm' do
+      expect(para.data_source).to eq '(nearest parent) M240:L13:C69'
+    end
+
+    it 'returns nil when no ancestor has a data-sm' do
+      expect(figure.data_source).to eq nil
+    end
+  end
+
+  describe '#say_source_or_nil' do
+    it 'returns the data source in an error friendly format if it exists' do
+      expect(example.say_source_or_nil).to eq "\nCNXML SOURCE: (self) M240:L13:C69"
+    end
+
+    it 'returns nil when no data-source' do
+      expect(figure.say_source_or_nil).to eq ''
+    end
+  end
+
   describe '#parent' do
     it 'returns the element\'s parent' do
       expect(para.parent).to match_normalized_html(
         <<~HTML
-          <div class="class1" data-type="example" id="div1">
+          <div class="class1" data-sm="/module/m240/filename.cnxml:13:69" data-type="example" id="div1">
             <p>This is a paragraph.</p>
           </div>
         HTML
@@ -262,7 +292,7 @@ RSpec.describe Kitchen::ElementBase do
       type = :figure
       expect do
         p_element.ancestor(type).id
-      end.to raise_error("No ancestor of type '#{type}'")
+      end.to raise_error("No ancestor of type '#{type}'\nCNXML SOURCE: (nearest parent) M240:L13:C69")
     end
   end
 
@@ -312,7 +342,7 @@ RSpec.describe Kitchen::ElementBase do
       expect do
         para.add_ancestor(Kitchen::Ancestor.new(example_copy))
       end.to raise_error("Trying to add an ancestor of type '#{type}' but one of that " \
-        "type is already present")
+        "type is already present\nCNXML SOURCE: (nearest parent) M240:L13:C69")
     end
   end
 

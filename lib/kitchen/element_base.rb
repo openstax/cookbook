@@ -239,6 +239,53 @@ module Kitchen
       self[:href] = value
     end
 
+    # Returns the element's data-sm
+    #
+    # @return [String]
+    #
+    def data_sm
+      self[:'data-sm']
+    end
+
+    # function to translate phil's notation (modules/m53650/index.cnxml:6:3) (6 Line, 3 col)  to M123:L456:C789
+    #
+    # @return [String]
+    #
+    def data_sm_formatted
+      format_match = /\/m(\d+)\/[^:]+:(\d+):(\d+)/
+
+      module_line_column = data_sm.match(format_match).captures
+
+      "(self) M#{module_line_column[0]}:L#{module_line_column[1]}:C#{module_line_column[2]}"
+    end
+
+    # Returns the element's data source map in M123:L456:C789 style and whether this is self or the nearest parent's sm
+    #
+    # @return [String]
+    #
+    def data_source
+      return nil if !parent&.name || parent&.name == 'html'
+
+      if data_sm.nil? && parent&.name != 'html'
+        parent_source = parent.data_source
+
+        return nil if parent_source.nil?
+
+        "(nearest parent) #{parent_source.split(' ')[1]}" unless parent_source.match(/\(nearest parent\)/)
+
+      else
+        data_sm_formatted
+      end
+    end
+
+    # Gives Error-Ready Data Source Map message or nil if there's no data_source
+    #
+    # @return [String]
+    #
+    def say_source_or_nil
+      "#{data_source ? "\nCNXML SOURCE: " : nil}#{data_source}"
+    end
+
     # A way to set values and chain them
     #
     # @param property [String, Symbol] the name of the property to set
@@ -264,7 +311,8 @@ module Kitchen
     # @raise [StandardError] if there is no ancestor of the given type
     #
     def ancestor(type)
-      @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'")
+      @ancestors[type.to_sym]&.element || raise("No ancestor of type '#{type}'" \
+                                          "#{say_source_or_nil}")
     end
 
     # Returns true iff this element has an ancestor of the given type
@@ -311,7 +359,8 @@ module Kitchen
     def add_ancestor(ancestor)
       if @ancestors[ancestor.type].present?
         raise "Trying to add an ancestor of type '#{ancestor.type}' but one of that " \
-              "type is already present"
+              "type is already present" \
+              "#{say_source_or_nil}"
       end
 
       ancestor.increment_descendant_count(short_type)
@@ -332,7 +381,8 @@ module Kitchen
     #
     def count_in(ancestor_type)
       @ancestors[ancestor_type]&.get_descendant_count(short_type) ||
-        raise("No ancestor of type '#{ancestor_type}'")
+        raise("No ancestor of type '#{ancestor_type}'#{say_source_or_nil}"
+        )
     end
 
     # Track that a sub element found by the given query has been counted
@@ -858,7 +908,9 @@ module Kitchen
       remove_attribute('data-is-for-rex-linking')
 
       unless element_with_ancestors
-        raise "Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page"
+        raise("Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page" \
+              "#{say_source_or_nil}"
+        )
       end
 
       book_slug = document.slug

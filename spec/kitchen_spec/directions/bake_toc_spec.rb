@@ -20,7 +20,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
             <span data-type="" itemprop="" class="os-text">Preface</span>
           </h1>
         </div>
-        <div data-type="unit">
+        <div data-type="unit" data-sm="/module/m240/filename.cnxml:13:69">
           <h1 data-type="document-title">
             <span class="os-part-text">Unit </span>
             <span class="os-number">1</span>
@@ -301,16 +301,16 @@ RSpec.describe Kitchen::Directions::BakeToc do
     end
   end
 
-  let(:preface_page) do
-    page_element(
+  let(:no_pagetype_page) do
+    book_containing(html:
       <<~HTML
-        <div data-type="page" id="p1" class="preface">
+        <div data-type="page" id="p1" data-sm="/module/m240/filename.cnxml:8:22">
           <h1 data-type="document-title">
             <span data-type="" itemprop="" class="os-text">Preface</span>
           </h1>
         </div>
       HTML
-    )
+    ).pages.first
   end
 
   let(:page1) do
@@ -345,8 +345,8 @@ RSpec.describe Kitchen::Directions::BakeToc do
   describe 'raises error' do
     it 'Page element classes not found' do
       expect {
-        described_class.li_for_page(preface_page)
-      }.to raise_error(RuntimeError, /could not detect which page type class/)
+        described_class.li_for_page(no_pagetype_page)
+      }.to raise_error(RuntimeError, /could not detect which page type class[\s\S]+\(self\) M240:L8:C22/)
     end
 
     it 'Composite page element classes not found' do
@@ -355,6 +355,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
       expect {
         described_class.li_for_page(composite_page)
       }.to raise_error(RuntimeError, /could not detect which composite page type class/)
+      # Checks for source mapping too
     end
 
     it 'No familiar classes found' do
