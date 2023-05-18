@@ -49,6 +49,7 @@ case "${book}" in
   dev-math) dest="${DIR}/data/prealgebra/short" && script="${DIR}/lib/recipes/dev-math/shorten";;
   hs-physics) dest="${DIR}/data/hs-physics/short" && script="${DIR}/lib/recipes/hs-physics/shorten";;
   college-success) dest="${DIR}/data/college-success/short" && script="${DIR}/lib/recipes/college-success/shorten";;
+  hs-college-success) dest="${DIR}/data/hs-college-success/short" && script="${DIR}/lib/recipes/hs-college-success/shorten";;
   psychology) dest="${DIR}/data/psychology/short" && script="${DIR}/lib/recipes/psychology/shorten";;
   entrepreneurship) dest="${DIR}/data/entrepreneurship/short" && script="${DIR}/lib/recipes/entrepreneurship/shorten";;
   nursing-external) dest="${DIR}/data/nursing-external/short" && script="${DIR}/lib/recipes/nursing-external/shorten";;

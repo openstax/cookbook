@@ -45,10 +45,14 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
   let(:book_with_sections_overwrite) do
     book_containing(html:
       <<~HTML
-        <div data-type="page" id='?key'>1.21 Section About Decimals like 2.1 and 1.21</div>
-        <a>skip this link</a>
-        <a href='?key'>[link]</a>
-        <a href='?other_key'>[link]</a>
+        <div data-type="chapter">
+          <div data-type="page" id='?key'>1.21 Section About Decimals like 2.1 and 1.21</div>
+          <a>skip this link</a>
+          <a href='?key'>[link]</a>
+          <a href='?other_key'>[link]</a>
+          <a href='?foo_key'>[link]</a>
+        </div>
+        <div data-type="page" class="appendix" id='?foo_key'>Appendix A</div>
       HTML
     )
   end
@@ -75,6 +79,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
     before do
       book_with_sections_overwrite.pantry(name: :link_text).store('1.21 Section About Decimals like 2.1 and 1.21', label: 'key')
       book_with_sections_overwrite.pantry(name: :link_text).store('2.1 This label remains', label: 'other_key')
+      book_with_sections_overwrite.pantry(name: :link_text).store('Appendix A', label: 'foo_key')
     end
 
     it 'bakes correctly' do

@@ -31,7 +31,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
       metadata_source: metadata,
@@ -51,7 +51,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc|
       section.prepend(child: title)
     end
 
-    sections_with_exercises= %w[review-questions suggested-reading]
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+
+    sections_with_exercises = %w[review-questions suggested-reading]
 
     sections_with_exercises.each do |eoc_section|
       MoveCustomSectionToEocContainer.v1(
