@@ -199,7 +199,7 @@ RSpec.describe Kitchen::ElementBase do
     end
 
     it 'returns nil when no data-source' do
-      expect(figure.say_source_or_nil).to eq ""
+      expect(figure.say_source_or_nil).to eq ''
     end
   end
 

@@ -381,8 +381,7 @@ module Kitchen
     #
     def count_in(ancestor_type)
       @ancestors[ancestor_type]&.get_descendant_count(short_type) ||
-        raise("No ancestor of type '#{ancestor_type}'" /
-              "#{say_source_or_nil}"
+        raise("No ancestor of type '#{ancestor_type}'#{say_source_or_nil}"
         )
     end
 
