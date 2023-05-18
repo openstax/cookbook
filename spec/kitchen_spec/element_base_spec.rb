@@ -195,11 +195,11 @@ RSpec.describe Kitchen::ElementBase do
 
   describe '#say_source_or_nil' do
     it 'returns the data source in an error friendly format if it exists' do
-      expect(example.say_source_or_nil).to eq '\nCNXML: (self) M240:L13:C69'
+      expect(example.say_source_or_nil).to eq '\nCNXML SOURCE: (self) M240:L13:C69'
     end
 
     it 'returns nil when no data-source' do
-      expect(figure.say_source_or_nil).to eq nil
+      expect(figure.say_source_or_nil).to eq ""
     end
   end
 
