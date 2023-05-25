@@ -35,8 +35,8 @@ module Kitchen
           next unless filename.match(/.json/)
 
           file = File.read("#{resource_dir}/#{filename}")
-          img_hash = JSON.parse(file)
-          img_src = filename.gsub('.json', '')
+          img_hash = JSON.parse(file).with_indifferent_access
+          img_src = filename.gsub('.json', '').to_sym
           resources[img_src] = img_hash
         end
       end

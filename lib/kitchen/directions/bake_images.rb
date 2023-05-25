@@ -8,13 +8,21 @@ module Kitchen
       def self.v1(book:, resources:)
         # Add image dimensions to <img>s
         book.search('img').each do |image|
-          img_src = image[:src].gsub('../resources/', '').gsub('.json', '')
+          img_src = image[:src].gsub('../resources/', '').gsub('.json', '').to_sym
           img_json = resources&.[](img_src)
           if img_json
-            image[:width] = img_json['width']
-            image[:height] = img_json['height']
+            scale = \
+              if image[:width]
+                image[:width].to_f / img_json[:width].to_i
+              elsif image[:height]
+                image[:height].to_f / img_json[:height].to_i
+              else
+                1
+              end
+            image[:width] = (img_json[:width].to_i * scale).floor
+            image[:height] = (img_json[:height].to_i * scale).floor
           else
-            warn("Could not find resource for image with id: #{image.id}")
+            warn("Could not find resource for image with src #{image[:src]}")
           end
         end
       end
