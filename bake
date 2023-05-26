@@ -24,55 +24,76 @@ done
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-case "${book}" in
-  accounting) $DIR/lib/recipes/accounting/bake --input $input_file --output $output_file --resources $resource_dir;;
-  american-government) $DIR/lib/recipes/american-government/bake --input $input_file --output $output_file;;
-  anatomy) $DIR/lib/recipes/anatomy/bake --input $input_file --output $output_file;;
-  anthropology) $DIR/lib/recipes/anthropology/bake --input $input_file --output $output_file;;
-  ap-biology) $DIR/lib/recipes/ap-biology/bake --input $input_file --output $output_file;;
-  ap-history) $DIR/lib/recipes/ap-history/bake --input $input_file --output $output_file;;
-  ap-physics) $DIR/lib/recipes/ap-physics/bake --input $input_file --output $output_file;;
-  ap-physics-2e) $DIR/lib/recipes/ap-physics-2e/bake --input $input_file --output $output_file;;
-  astronomy) $DIR/lib/recipes/astronomy/bake --input $input_file --output $output_file;;
-  bca) $DIR/lib/recipes/bca/bake --input $input_file --output $output_file;;
-  biology) $DIR/lib/recipes/biology/bake --input $input_file --output $output_file;;
-  business-ethics) $DIR/lib/recipes/business-ethics/bake --input $input_file --output $output_file;;
-  calculus) $DIR/lib/recipes/calculus/bake --input $input_file --output $output_file;;
-  chemistry) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
-  college-physics) $DIR/lib/recipes/college-physics/bake --input $input_file --output $output_file;;
-  college-physics-2e) $DIR/lib/recipes/college-physics-2e/bake --input $input_file --output $output_file;;
-  college-success) $DIR/lib/recipes/college-success/bake --input $input_file --output $output_file;;
-  computer-science) $DIR/lib/recipes/computer-science/bake --input $input_file --output $output_file;;
-  contemporary-math) $DIR/lib/recipes/contemporary-math/bake --input $input_file --output $output_file;;
-  dev-math) $DIR/lib/recipes/dev-math/bake --input $input_file --output $output_file;;
-  dummy) $DIR/lib/recipes/dummy/bake --input $input_file --output $output_file --resources $resource_dir;;
-  economics) $DIR/lib/recipes/economics/bake --input $input_file --output $output_file;;
-  english-composition) $DIR/lib/recipes/english-composition/bake --input $input_file --output $output_file;;
-  entrepreneurship) $DIR/lib/recipes/entrepreneurship/bake --input $input_file --output $output_file;;
-  finance) $DIR/lib/recipes/finance/bake --input $input_file --output $output_file;;
-  history) $DIR/lib/recipes/history/bake --input $input_file --output $output_file;;
-  hs-college-success) $DIR/lib/recipes/hs-college-success/bake --input $input_file --output $output_file;;
-  hs-physics) $DIR/lib/recipes/hs-physics/bake --input $input_file --output $output_file;;
-  intro-business) $DIR/lib/recipes/intro-business/bake --input $input_file --output $output_file;;
-  marketing) $DIR/lib/recipes/marketing/bake --input $input_file --output $output_file;;
-  microbiology) $DIR/lib/recipes/microbiology/bake --input $input_file --output $output_file;;
-  nursing-external) $DIR/lib/recipes/nursing-external/bake --input $input_file --output $output_file;;
-  nursing-internal) $DIR/lib/recipes/nursing-internal/bake --input $input_file --output $output_file;;
-  organic-chemistry) $DIR/lib/recipes/organic-chemistry/bake --input $input_file --output $output_file;;
-  otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
-  philosophy) $DIR/lib/recipes/philosophy/bake --input $input_file --output $output_file;;
-  pl-economics) $DIR/lib/recipes/pl-economics/bake --input $input_file --output $output_file;;
-  pl-psychology) $DIR/lib/recipes/pl-psychology/bake --input $input_file --output $output_file;;
-  pl-u-physics) $DIR/lib/recipes/pl-u-physics/bake --input $input_file --output $output_file;;
-  political-science) $DIR/lib/recipes/political-science/bake --input $input_file --output $output_file;;
-  precalculus) $DIR/lib/recipes/precalculus/bake --input $input_file --output $output_file;;
-  precalculus-coreq) $DIR/lib/recipes/precalculus-coreq/bake --input $input_file --output $output_file;;
-  principles-management) $DIR/lib/recipes/principles-management/bake --input $input_file --output $output_file;;
-  psychology) $DIR/lib/recipes/psychology/bake --input $input_file --output $output_file;;
-  python) $DIR/lib/recipes/python/bake --input $input_file --output $output_file;;
-  sociology) $DIR/lib/recipes/sociology/bake --input $input_file --output $output_file;;
-  statistics) $DIR/lib/recipes/statistics/bake --input $input_file --output $output_file;;
-  u-physics) $DIR/lib/recipes/u-physics/bake --input $input_file --output $output_file;;
-  world-history) $DIR/lib/recipes/world-history/bake --input $input_file --output $output_file;;
-  *) echo "Unknown book '${book}'"; exit 1;;
-esac
+# Keep a list of valid recipes
+# Blow up if a recipe is not on this list
+valid_recipes=(
+  accounting
+  american-government
+  anatomy
+  anthropology
+  ap-biology
+  ap-history
+  ap-physics
+  ap-physics-2e
+  astronomy
+  bca
+  biology
+  business-ethics
+  calculus
+  chemistry
+  college-physics
+  college-physics-2e
+  college-success
+  computer-science
+  contemporary-math
+  dev-math
+  dummy
+  economics
+  english-composition
+  entrepreneurship
+  finance
+  history
+  hs-college-success
+  hs-physics
+  intro-business
+  marketing
+  microbiology
+  nursing-external
+  nursing-internal
+  organic-chemistry
+  otto-book
+  philosophy
+  pl-economics
+  pl-psychology
+  pl-u-physics
+  political-science
+  precalculus
+  precalculus-coreq
+  principles-management
+  psychology
+  python
+  sociology
+  statistics
+  u-physics
+  world-history
+)
+
+if [[ ! " ${valid_recipes[*]} " =~ " ${book} " ]]; then
+  echo "Unknown book '${book}'"
+  exit 1
+fi
+
+# Bake with or without resources depending on environment
+if [ $COOKBOOK_DEV ]; then
+    case "${book}" in
+    # mismatched recipe name
+    otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
+    # matched recipe name
+    *) $DIR/lib/recipes/$book/bake --input $input_file --output $output_file;;
+  esac
+else
+  case "${book}" in
+    otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file --resources $resource_dir;;
+    *) $DIR/lib/recipes/$book/bake --input $input_file --output $output_file --resources $resource_dir;;
+  esac
+fi

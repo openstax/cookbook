@@ -33,5 +33,5 @@ puts Kitchen::Oven.bake(
   input_file: opts[:input],
   recipes: recipe,
   output_file: opts[:output],
-  resource_dir: opts[:resources]
+  resource_dir: opts[:resources] || nil
 )

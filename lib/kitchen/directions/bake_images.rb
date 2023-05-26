@@ -22,7 +22,7 @@ module Kitchen
             image[:width] = (img_json[:width].to_i * scale).floor
             image[:height] = (img_json[:height].to_i * scale).floor
           else
-            warn("Could not find resource for image with src #{image[:src]}")
+            warn("Could not find resource for image with src #{image[:src]}") unless ENV['COOKBOOK_DEV']
           end
         end
       end

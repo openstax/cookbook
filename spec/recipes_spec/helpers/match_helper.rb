@@ -13,18 +13,21 @@ RSpec::Matchers.define(:be_same_file_as) do |expected_file_path|
   end
 end
 
-RSpec::Matchers.define :bake_correctly_with do |recipe|
+RSpec::Matchers.define :bake_correctly_with do |recipe, resources|
   match do |book|
     actual_file = Tempfile.new(book)
 
-    cmd = `#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
-      -r #{__dir__}/../books/#{book}/resources -o #{actual_file.path}` # TODO: make resources optional
+    cmd = \
+      if resources
+        "#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
+          -r #{__dir__}/../books/#{book}/resources -o #{actual_file.path}"
+      else
+        "COOKBOOK_DEV=1 \
+        #{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
+          -o #{actual_file.path}"
+      end
 
-    if ENV['USE_LOCAL_KITCHEN']
-      system({ 'USE_LOCAL_KITCHEN' => '1' }, cmd, %i[out err] => File::NULL)
-    else
-      cmd
-    end
+    `#{cmd}`
 
     `ruby scripts/normalize #{actual_file.path}`
     normalized_path = "#{actual_file.path}.normalized"
@@ -38,6 +41,6 @@ end
 
 RSpec::Matchers.define :bake_correctly do
   match do |book|
-    expect(book).to bake_correctly_with(book)
+    expect(book).to bake_correctly_with(book, nil)
   end
 end
