@@ -175,7 +175,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc|
                      title_tag: 'div')
     end
 
-    BakeAppendix.v1(page: page, number: appendix_letter)
+    BakeAppendix.v1(page: page, number: appendix_letter, options: { add_title_label: false })
   end
 
   BakeUnnumberedTables.v1(book: book)
