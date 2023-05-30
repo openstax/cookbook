@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Suppress `High School Features` in `college-success`
 * Add `Student Story note` to `hs-college-success`
 * Change order of EOC sections in `nursing-external`
 * Add `The Real Deal note` to `hs-college-success`
