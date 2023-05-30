@@ -85,6 +85,14 @@ RSpec.describe Kitchen::Directions::BakeAppendix do
     end
   end
 
+  context 'when book does not use title label in target labels' do
+    it 'stores link text' do
+      pantry = page.pantry(name: :link_text)
+      expect(pantry).to receive(:store).with('Appendix 3', { label: 'apId' })
+      described_class.v1(page: page, number: '3', options: { add_title_label: false })
+    end
+  end
+
   context 'when book has blocked adding target labels for appendices' do
     it 'stores link text' do
       pantry = page.pantry(name: :link_text)

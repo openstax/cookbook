@@ -5,12 +5,14 @@ module Kitchen
     module BakeAppendix
       def self.v1(page:, number:, options: {
         block_target_label: false,
-        cases: false
+        cases: false,
+        add_title_label: true
       })
 
         options.reverse_merge!(
           block_target_label: false,
-          cases: false
+          cases: false,
+          add_title_label: true
         )
 
         title = page.title
@@ -18,8 +20,15 @@ module Kitchen
 
         # Store label information
         title_label = title.children
+        custom_content = options[:add_title_label] ? "#{number} #{title_label}" : number.to_s
 
-        page.target_label(label_text: 'appendix', custom_content: "#{number} #{title_label}", cases: options[:cases]) unless options[:block_target_label]
+        unless options[:block_target_label]
+          page.target_label(
+            label_text: 'appendix',
+            custom_content: custom_content,
+            cases: options[:cases]
+          )
+        end
 
         title.replace_children(with:
           <<~HTML
