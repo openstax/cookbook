@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-buster AS runtime-env
+FROM ruby:3.2.2-bullseye AS runtime-env
 
 ARG bundler_version
 ARG EASYBAKE_VERSION=1.2.8
