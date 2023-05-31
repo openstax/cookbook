@@ -83,8 +83,8 @@ if [[ ! " ${valid_recipes[*]} " =~ " ${book} " ]]; then
   exit 1
 fi
 
-# Bake with or without resources depending on environment
-if [ $COOKBOOK_DEV ]; then
+# Bake with or without resources
+if [ $NO_IMAGE_RESOURCES ]; then
     case "${book}" in
     # mismatched recipe name
     otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
