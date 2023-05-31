@@ -39,8 +39,4 @@ RSpec.describe Kitchen::Directions::BakeImages do
     described_class.v1(book: book, resources: nil)
   end
 
-  # it 'logs no warning if env var set' do # TODO: fix
-  #   expect(Warning).not_to receive(:warn)
-  #   described_class.v1(book: book, resources: nil)
-  # end
 end

@@ -26,7 +26,7 @@ end
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Book resources directory', required: false
+  slop.string '--resources', 'Path to book resources directory', required: false
 end
 
 puts Kitchen::Oven.bake(
