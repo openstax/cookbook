@@ -114,12 +114,16 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
   end
 
   it 'logs a warning when href is invalid' do
-    expect(Warning).to receive(:warn).with("warning! could not find a replacement for '[link]' on an element with ID 'invalid_key'\n")
+    expect(Warning).to receive(:warn).with(
+      "warning! could not find a replacement for '[link]' on an element with ID 'invalid_key'\n",
+      {:category=>nil}
+    )
     described_class.v1(book: invalid_book)
   end
 
   it 'logs a warning when link has no href' do
-    expect(Warning).to receive(:warn).with(/warning! Link has no href on element: /).twice
+    expect(Warning).to receive(:warn).with(/warning! Link has no href on element: /,
+                                           {:category=>nil}).twice
     described_class.v1(book: missing_id_book)
   end
 

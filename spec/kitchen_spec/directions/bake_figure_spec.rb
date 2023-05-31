@@ -303,7 +303,10 @@ RSpec.describe Kitchen::Directions::BakeFigure do
   end
 
   it 'logs a warning' do
-    expect(Warning).to receive(:warn).with(/warning! exclude unnumbered figures from `BakeFigure` loop/)
+    expect(Warning).to receive(:warn).with(
+      /warning! exclude unnumbered figures from `BakeFigure` loop/,
+      {:category=>nil}
+    )
     described_class.v1(figure: book_with_unnumbered_splash.figures.first, number: 'blah')
   end
 
