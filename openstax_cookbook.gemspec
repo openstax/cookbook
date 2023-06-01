@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nokogiri'
   spec.add_dependency 'rainbow'
   spec.add_dependency 'twitter_cldr'
+  spec.add_dependency 'sorted_set'
 
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'inch'

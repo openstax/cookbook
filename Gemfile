@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in kitchen.gemspec
+# Specify your gem's dependencies in openstax_cookbook.gemspec
 gemspec
 
 gem 'rake', '~> 12.0'

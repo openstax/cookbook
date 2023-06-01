@@ -6,6 +6,7 @@ PATH
       i18n
       nokogiri
       rainbow
+      sorted_set
       twitter_cldr
 
 GEM
@@ -142,7 +143,6 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   slop (= 4.8.2)
-  sorted_set
   yard
 
 BUNDLED WITH
