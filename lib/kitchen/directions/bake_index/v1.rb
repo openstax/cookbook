@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sorted_set'
+
 module Kitchen::Directions::BakeIndex
   # Bake directions for eob index
   #
