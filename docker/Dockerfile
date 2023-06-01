@@ -24,9 +24,6 @@ RUN git clone https://github.com/nojhan/liquidprompt.git ~/liquidprompt && \
     sed -i "/color=auto/"' s/# //' ~/.bashrc && \
     sed -i "/alias ls/,/lA/"' s/# //' ~/.bashrc
 
-# VSCode Live Share libraries
-# RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vsls-reqs && ~/vsls-reqs
-
 WORKDIR /code
 COPY . /code/
 
