@@ -11,7 +11,6 @@ do
   case "${flag}" in
     b) book=${OPTARG} ;;
     i) input_file=${OPTARG} ;;
-    r) resource_dir=${OPTARG} ;;
     o) output_file=${OPTARG} ;;
     r) resource_dir=${OPTARG} ;;
     h) echo $usage; exit 0 ;;

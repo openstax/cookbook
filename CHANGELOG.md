@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * Add resource option & `BakeImages` to all recipes
   * Test that all recipes can receive resources; add match helpers
   * Update main `bake` script for our refactored times
+
+## [1.32.0] - 2023-06-02
+
 * Suppress `High School Features` in `college-success`
 * Remove title from `Appendix` target label in `organic-chemistry`
 * Add support for source mapping
