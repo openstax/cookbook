@@ -8,7 +8,6 @@ hs = Kitchen::BookRecipe.new(book_short_name: :hs_college_success) do |doc|
   include Kitchen::Directions
 
   book = doc.book
-  metadata = book.metadata
 
   book.search('cnx-pi').trash
 
