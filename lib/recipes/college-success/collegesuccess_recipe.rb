@@ -15,6 +15,12 @@ COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(
   BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
+  book.pages('$.preface').each do |page|
+    page.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: figure.count_in(:page).to_s)
+    end
+  end
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
