@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 require 'tempfile'
+require 'tmpdir'
 
 RSpec.describe Kitchen::Oven do
   describe 'BakeProfile' do
@@ -26,6 +27,21 @@ RSpec.describe Kitchen::Oven do
       end
 
       expect_bakes(input_xml: "<div>Howdy</div>\n", recipes: recipe, output_xml: "<booyah>Howdy</booyah>\n")
+    end
+
+    it 'converts filepath to resources' do
+      recipe = Kitchen::Recipe.new do |document, resources|
+        resources[resources.keys.first][:hello] = 'hiya'
+        document.search('div').first.append(child: "<div>#{resources[resources.keys.first][:hello]}</div>")
+      end
+
+      expect_bakes(
+        input_xml: "<div>Howdy</div>\n", recipes: recipe, output_xml: "<div>Howdy<div>hiya</div></div>\n",
+        resources_hash: [
+          { "abc": { "hello": 'world' } },
+          { "def": { "water": 'melon' } }
+        ]
+      )
     end
 
     it 'bakes with temporary, explicit, recipe-specific locales' do
@@ -66,7 +82,7 @@ RSpec.describe Kitchen::Oven do
             [
               I18n.t(:some_recipe_specific_term), # only in recipe translations
               I18n.t(:figure),                    # in recipe and kitchen translations
-              I18n.t(:chapter)                      # only in kitchen translations
+              I18n.t(:chapter)                    # only in kitchen translations
             ].join(',')
           )
         end
@@ -76,15 +92,28 @@ RSpec.describe Kitchen::Oven do
       end
     end
 
-    def expect_bakes(input_xml:, recipes:, output_xml:)
+    def expect_bakes(input_xml:, recipes:, output_xml:, resources_hash: nil)
       input_file = Tempfile.new.tap { |file| file.write(input_xml); file.rewind }
       output_file = Tempfile.new
 
-      described_class.bake(input_file: input_file.path,
-                           recipes: [recipes].flatten,
-                           output_file: output_file.path)
+      if resources_hash
+        Dir.mktmpdir do |directory|
+          resources_hash.each do |resource|
+            key = resource.keys.first
+            File.open("#{directory}/#{key}.json", 'w') { |file| file.write(resource[key].to_json); file.rewind }
+          end
+          described_class.bake(
+            input_file: input_file.path, recipes: [recipes].flatten,
+            output_file: output_file.path, resource_dir: directory
+          )
+        end
+      else
+        described_class.bake(input_file: input_file.path,
+                             recipes: [recipes].flatten,
+                             output_file: output_file.path)
 
-      expect(output_file.read).to eq output_xml
+        expect(output_file.read).to eq output_xml
+      end
     end
   end
 end

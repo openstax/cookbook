@@ -13,18 +13,14 @@ RSpec::Matchers.define(:be_same_file_as) do |expected_file_path|
   end
 end
 
-RSpec::Matchers.define :bake_correctly_with do |recipe|
+RSpec::Matchers.define :bake_correctly_with do |recipe, resource_path|
   match do |book|
     actual_file = Tempfile.new(book)
 
-    cmd = `#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
-      -o #{actual_file.path}`
+    cmd = "#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
+          -r #{__dir__}/#{resource_path} -o #{actual_file.path}"
 
-    if ENV['USE_LOCAL_KITCHEN']
-      system({ 'USE_LOCAL_KITCHEN' => '1' }, cmd, %i[out err] => File::NULL)
-    else
-      cmd
-    end
+    `#{cmd}`
 
     `ruby scripts/normalize #{actual_file.path}`
     normalized_path = "#{actual_file.path}.normalized"
@@ -38,6 +34,32 @@ end
 
 RSpec::Matchers.define :bake_correctly do
   match do |book|
-    expect(book).to bake_correctly_with(book)
+    expect(book).to bake_correctly_with(book, nil)
+  end
+end
+
+RSpec::Matchers.define :bake_correctly_with_empty_resources do
+  match do |book|
+    expect {
+      expect(book).to bake_correctly
+    }.to output(/Could not find resource for image/).to_stderr_from_any_process
+  end
+
+  failure_message do |book|
+    "Expected '#{book}' to bake correctly without resources.
+    Either something went wrong during baking, or the resources not found warning was not recieved."
+  end
+end
+
+RSpec::Matchers.define :bake_correctly_with_empty_resources_and_use do |recipe|
+  match do |book|
+    expect {
+      expect(book).to bake_correctly_with(recipe)
+    }.to output(/Could not find resource for image/).to_stderr_from_any_process
+  end
+
+  failure_message do |book|
+    "Expected '#{book}' to bake correctly without resources.
+    Either something went wrong during baking, or the resources not found warning was not recieved."
   end
 end

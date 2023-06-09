@@ -3,7 +3,8 @@
 require_relative '../recipes_helper'
 
 # Used in college success (bakes college-success and hs-college-success)
-COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_success) do |doc|
+COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(
+  book_short_name: :college_success) do |doc, resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -11,6 +12,7 @@ COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_succes
 
   book.search('cnx-pi').trash
 
+  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   book.pages('$.preface').each do |page|

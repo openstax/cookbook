@@ -18,10 +18,12 @@ end
 opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
+  slop.string '--resources', 'Path to book resources directory', required: false
 end
 
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
   recipes: [hs_delete, COLLEGESUCCESS_RECIPE, VALIDATE_OUTPUT],
-  output_file: opts[:output]
+  output_file: opts[:output],
+  resource_dir: opts[:resources] || nil
 )

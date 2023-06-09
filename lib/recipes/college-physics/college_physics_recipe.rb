@@ -2,7 +2,8 @@
 
 require_relative '../recipes_helper'
 
-COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physics_recipe) do |doc|
+COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(
+  book_short_name: :college_physics_recipe) do |doc, resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -10,6 +11,7 @@ COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physi
 
   book.search('cnx-pi').trash
 
+  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)

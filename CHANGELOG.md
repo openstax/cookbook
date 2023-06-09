@@ -6,8 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
+* Support `<img>` markup:
+  * Add `Kitchen` infrastructure to allow passing in resources to `Oven#bake`
+  * Create `BakeImages` to add image dimensions to `<img>` tags
+  * Add resource option & `BakeImages` to all recipes
+  * Test that all recipes can receive resources; add match helpers
+  * Update main `bake` script for our refactored times
 * Bake `figures in preface` in `college-success`
+
 
 ## [1.32.0] - 2023-06-02
 
