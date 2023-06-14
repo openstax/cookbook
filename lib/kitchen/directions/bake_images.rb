@@ -17,8 +17,8 @@ module Kitchen
               else
                 1
               end
-            image[:width] = (img_json[:width].to_i * scale).floor
-            image[:height] = (img_json[:height].to_i * scale).floor
+            image[:'data-width'] = (img_json[:width].to_i * scale).floor
+            image[:'data-height'] = (img_json[:height].to_i * scale).floor
           else
             warn("Could not find resource for image with src #{image[:src]}") unless ENV['NO_IMAGE_RESOURCES']
           end

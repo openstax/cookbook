@@ -26,9 +26,9 @@ RSpec.describe Kitchen::Directions::BakeImages do
     expect(book.body).to match_normalized_html(
       <<~HTML
         <body>
-          <img src="../resources/abcdef" data-media-type="image/jpeg" alt="an image" data-sm="blah" width="1028" height="464"/>
-          <img src="../resources/123456" data-media-type="image/jpeg" alt="an image" data-sm="blah2" width="241" height="111"/>
-          <img src="../resources/xyzqrs" data-media-type="image/jpeg" alt="an image" data-sm="blah3" width="49" height="90"/>
+          <img src="../resources/abcdef" data-media-type="image/jpeg" alt="an image" data-sm="blah" data-width="1028" data-height="464"/>
+          <img src="../resources/123456" data-media-type="image/jpeg" alt="an image" data-sm="blah2" data-width="241" data-height="111" width="241"/>
+          <img src="../resources/xyzqrs" data-media-type="image/jpeg" alt="an image" data-sm="blah3" data-width="49" data-height="90" height="90"/>
         </body>
       HTML
     )
