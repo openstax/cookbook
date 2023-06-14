@@ -4,7 +4,7 @@ require_relative '../recipes_helper'
 
 # Used in college success (bakes college-success and hs-college-success)
 COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(
-  book_short_name: :college_success) do |doc, resources|
+  book_short_name: :college_success) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
