@@ -8,7 +8,6 @@ COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(
   include Kitchen::Directions
 
   book = doc.book
-  metadata = book.metadata
 
   book.search('cnx-pi').trash
 
@@ -38,19 +37,6 @@ COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
-
-    eoc_sections = %w[summary career-connection rethinking where-go]
-    eoc_sections.each do |section_key|
-      MoveCustomSectionToEocContainer.v1(
-        chapter: chapter,
-        metadata_source: metadata,
-        container_key: section_key,
-        uuid_key: ".#{section_key}",
-        section_selector: "section.#{section_key}"
-      ) do |section|
-        RemoveSectionTitle.v1(section: section)
-      end
-    end
 
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(
