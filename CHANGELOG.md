@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `BakeImages` height & width to `data-height` and `data-width`
 * Add additional EOC sections to `hs-college-success`
 * Support `<img>` markup:
   * Add `Kitchen` infrastructure to allow passing in resources to `Oven#bake`
