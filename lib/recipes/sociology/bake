@@ -24,7 +24,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc, resources
     book.body.search('div[data-type="metadata"] > div[data-type="description"]').trash
   end
 
-  BakeImages.v1(book: book, resources: resources)
+  # BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
 

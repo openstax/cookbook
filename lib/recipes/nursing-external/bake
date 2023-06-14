@@ -17,7 +17,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc, re
   book.search('cnx-pi').trash
 
   # Your recipe code goes here
-  BakeImages.v1(book: book, resources: resources)
+  # BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   AddInjectedExerciseId.v1(book: book)

@@ -17,7 +17,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, resource
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
+  # BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   book.pages('$.preface').each do |page|
     page.figures(only: :figure_to_number?).each do |figure|

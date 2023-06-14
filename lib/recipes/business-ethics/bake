@@ -17,7 +17,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :business_ethics) do |doc, res
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
+  # BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)

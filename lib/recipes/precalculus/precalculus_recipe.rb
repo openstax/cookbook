@@ -13,7 +13,7 @@ PRECALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
+  # BakeImages.v1(book: book, resources: resources)
 
   book.search('section.coreq-skills').each do |coreq_section|
     coreq_section.tables.each { |table| table.add_class('os-coreq-element') }
