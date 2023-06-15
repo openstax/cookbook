@@ -821,7 +821,7 @@ module Kitchen
 
         # Define all namespaces that are used inside the node being cloned
         raw.traverse do |node|
-          raw.add_namespace(node.namespace.prefix, node.namespace.href) if node.namespace
+          raw.add_namespace(node.namespace.prefix, node.namespace.href) if node.namespace && node.namespace.prefix
           node.attribute_nodes.each do |attr|
             raw.add_namespace(attr.namespace.prefix, attr.namespace.href) if attr.namespace
           end
