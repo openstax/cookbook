@@ -72,7 +72,7 @@ RSpec.describe Kitchen::Oven do
         end
 
         expect_bakes(input_xml: '<div></div>', recipes: recipe, output_xml: "<div>Auto-discovered!,Figgy,Chapter</div>\n")
-        expect(I18n.t(:some_recipe_specific_term)).to match(/translation missing/)
+        expect(I18n.t(:some_recipe_specific_term)).to match(/Translation missing/)
       end
     end
 
