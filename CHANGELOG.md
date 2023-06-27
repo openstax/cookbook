@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Enable `detailed resolution` in `python`
+* Enable `detailed solution` in `python`
 
 ## [1.33.0] - 2023-06-15
 
