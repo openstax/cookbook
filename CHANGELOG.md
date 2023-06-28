@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.33.0] - 2023-06-15
+
+* Change `BakeImages` height & width to `data-height` and `data-width`
+* Add additional EOC sections to `hs-college-success`
+* Support `<img>` markup:
+  * Add `Kitchen` infrastructure to allow passing in resources to `Oven#bake`
+  * Create `BakeImages` to add image dimensions to `<img>` tags
+  * Add resource option & `BakeImages` to all recipes
+  * Test that all recipes can receive resources; add match helpers
+  * Update main `bake` script for our refactored times
+* Bake `figures in preface` in `college-success`
+
+
+## [1.32.0] - 2023-06-02
+
+* Suppress `High School Features` in `college-success`
+* Remove title from `Appendix` target label in `organic-chemistry`
 * Add support for source mapping
 * Upgrade to Ruby 3
 * Upgrade gems

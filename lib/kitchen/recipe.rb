@@ -9,6 +9,7 @@ module Kitchen
     # The document the recipe makes available for modification
     # @return [Document]
     attr_reader :document
+    attr_accessor :resources
 
     # The file location of the recipe
     # @return [String]
@@ -56,7 +57,7 @@ module Kitchen
     #
     def bake
       with_my_locales do
-        @block.to_proc.call(document)
+        @block.to_proc.call(document, resources)
       end
     rescue RecipeError, ElementNotFoundError, Nokogiri::CSS::SyntaxError => e
       print_recipe_error_and_exit(e)

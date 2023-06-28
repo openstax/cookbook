@@ -12,7 +12,7 @@ module Kitchen
     # @param recipes [Array<Recipe>] an array of recipes with which to bake the document
     # @param output_file [String] the path to the output file
     #
-    def self.bake(input_file:, recipes:, output_file:, config_file: nil)
+    def self.bake(input_file:, recipes:, output_file:, config_file: nil, resource_dir: nil)
       profile = BakeProfile.new
       profile.started!
 
@@ -28,10 +28,24 @@ module Kitchen
         config: config
       )
 
+      # Add image metadata to resource hash
+      resources = {}
+      if resource_dir
+        Dir.foreach(resource_dir) do |filename|
+          next unless filename.match(/.json/)
+
+          file = File.read("#{resource_dir}/#{filename}")
+          img_hash = JSON.parse(file).with_indifferent_access
+          img_src = filename.gsub('.json', '').to_sym
+          resources[img_src] = img_hash
+        end
+      end
+
       I18n.locale = doc.locale
 
       [recipes].flatten.each do |recipe|
         recipe.document = doc
+        recipe.resources = resources
         recipe.bake
       end
       profile.baked!
