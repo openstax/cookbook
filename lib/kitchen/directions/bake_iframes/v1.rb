@@ -25,7 +25,7 @@ module Kitchen::Directions::BakeIframes
 
         iframe.prepend(child:
           <<~HTML
-            <a class="os-is-link" href=#{iframe_link} target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)}</a>
+            <a class="os-is-link" href="#{iframe_link}" target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)}</a>
           HTML
         )
 
