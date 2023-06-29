@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Enable `detailed solution` in `python`
+
 ## [1.33.0] - 2023-06-15
 
 * Change `BakeImages` height & width to `data-height` and `data-width`

@@ -4,12 +4,14 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
   def self.v1(question:, number:, options: {
     only_number_solution: false,
     add_dot: false,
-    problem_with_prefix: false
+    problem_with_prefix: false,
+    detailed_solution: false
   })
     options.reverse_merge!(
       only_number_solution: false,
       add_dot: false,
-      problem_with_prefix: false
+      problem_with_prefix: false,
+      detailed_solution: false
     )
 
     V1.new.bake(question: question, number: number, options: options)
@@ -124,7 +126,12 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
           #{solution_number}<div class="os-solution-container">#{solution.children}</div>
         HTML
       )
-      question.search('div[data-type="answer-feedback"]').each(&:trash)
+      if options[:detailed_solution]
+        # Do no nothing and allow detailed solution to be displayed in answer key
+      else
+        # Suppress detailed solution
+        question.search('div[data-type="answer-feedback"]').each(&:trash)
+      end
     end
   end
 end
