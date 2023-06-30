@@ -14,7 +14,7 @@
   </a>
   <ol class="os-chapter">
     
-    <li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="sub-book-tree">
+<li class="os-toc-composite-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="sub-book-tree">
   <a href="#composite-chapter-1">
     
       <span class="os-text">Chapter 1</span>
@@ -28,6 +28,12 @@
 </li>
 
   </ol>
+</li>
+
+<li class="os-toc-chapter-composite-page" cnx-archive-shortid="" cnx-archive-uri="p9" data-toc-type="book-content" data-toc-target-type="composite-page">
+  <a href="#p9">
+    <span class="os-text">References</span>
+  </a>
 </li>
 
   </ol>
