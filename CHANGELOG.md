@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.33.0] - 2023-06-15
 
+* Bake `preview-carbonylchemistry` section in `organic-chemistry`
 * Change `BakeImages` height & width to `data-height` and `data-width`
 * Add additional EOC sections to `hs-college-success`
 * Support `<img>` markup:
