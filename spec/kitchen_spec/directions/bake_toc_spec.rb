@@ -293,6 +293,11 @@ RSpec.describe Kitchen::Directions::BakeToc do
               </h2>
             </div>
           </div>
+          <div data-type="composite-page" id="p9">
+              <h2 data-type="document-title">
+                <span class="os-text">References</span>
+              </h2>
+            </div>
         </div>
       HTML
     ).tap do |book|
