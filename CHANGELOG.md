@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+* Bake figures in preface in `all books`
 * Reorder EOC sections in `nursing-internal`
 * Bake `preview-carbonylchemistry` section in `organic-chemistry`
 * Enable `detailed solution` in `python`

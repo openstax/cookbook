@@ -18,6 +18,33 @@ RSpec.describe Kitchen::Directions::BakePreface::V1 do
           <div data-type="metadata">
             <div data-type="document-title">Preface</div>
           </div>
+          <figure id="someId">
+            <figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>
+            <div data-type='title'>This Is A Title</div>
+            <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+            </span>
+          </figure>
+          <div data-type="abstract" id="abcde">abstract</div>
+        </div>
+
+        <div data-type="page" class="preface">
+          <div data-type="document-title">Preface</div>
+          <div class="description" data-type="description" itemprop="description">description</div>
+          <div data-type="metadata">
+            <div data-type="document-title">Preface</div>
+          </div>
+          <figure id="someId1">
+            <figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>
+            <div data-type='title'>This Is A Title</div>
+            <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+            </span>
+          </figure>
+          <figure id="someId2">
+          <figcaption>Solid <em>carbon</em> dioxide sublimes ...</figcaption>
+          <div data-type='title'>This Is A Title</div>
+          <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+          </span>
+        </figure>
           <div data-type="abstract" id="abcde">abstract</div>
         </div>
       HTML
@@ -26,20 +53,6 @@ RSpec.describe Kitchen::Directions::BakePreface::V1 do
 
   it 'works' do
     described_class.new.bake(book: book1, title_element: 'h1')
-
-    expected = <<~HTML
-      <div class="preface" data-type="page">
-        <h1 data-type="document-title">
-          <span class="os-text" data-type="" itemprop="">Preface</span>
-        </h1>
-        <div data-type="metadata">
-          <h1 data-type="document-title">
-            <span class="os-text" data-type="" itemprop="">Preface</span>
-          </h1>
-        </div>
-      </div>
-    HTML
-
-    expect(book1.search('div.preface')).to all(match_normalized_html(expected))
+    expect(book1).to match_snapshot_auto
   end
 end

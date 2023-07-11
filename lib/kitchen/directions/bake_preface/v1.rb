@@ -13,6 +13,10 @@ module Kitchen::Directions::BakePreface
           )
           title.name = title_element
         end
+        page.figures(only: :figure_to_number?).each do |figure|
+          Kitchen::Directions::BakeFigure.v1(figure: figure,
+                                             number: figure.count_in(:page).to_s)
+        end
       end
     end
   end
