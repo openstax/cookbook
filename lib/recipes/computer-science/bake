@@ -96,12 +96,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc, re
     end
   end
 
-  book.pages('$.preface').each do |page|
-    page.figures(only: :figure_to_number?).each do |figure|
-      BakeFigure.v1(figure: figure, number: figure.count_in(:page))
-    end
-  end
-
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 

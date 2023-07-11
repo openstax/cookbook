@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake figures in preface in `all books`
 * Enable `detailed solution` in `python`
 
 ## [1.33.0] - 2023-06-15
