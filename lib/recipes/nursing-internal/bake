@@ -35,7 +35,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, re
   BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
+    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.figures(only: :figure_to_number?).each do |figure|
