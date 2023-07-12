@@ -148,8 +148,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, re
   end
 
   note_classes = %w[link-to-learning unfolding-casestudy rn-stories clinical-safety
-                    cultural-context patient-conversations pharma-connections legal-ethical
-                    multi-disciplinary clinical-judgment electronic-hr psychosocial-considerations]
+                    cultural-context lifestage-context patient-conversations pharma-connections
+                    legal-ethical multi-disciplinary clinical-judgment electronic-hr
+                    psychosocial-considerations]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
   # Appendix
