@@ -18,12 +18,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, re
   # Your recipe code goes here
   BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
-  book.pages('$.preface').each do |page|
-    page.figures(only: :figure_to_number?).each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: figure.count_in(:page)).to_s
-    end
-  end
+
   BakeUnnumberedFigure.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
@@ -63,8 +58,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, re
       section_selector: 'section.summary'
     ) do |section|
       RemoveSectionTitle.v1(section: section)
-      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-      section.prepend(child: title)
     end
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -87,8 +80,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, re
         append_to: eoc_wrapper
       ) do |section|
         RemoveSectionTitle.v1(section: section)
-        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-        section.prepend(child: title)
       end
     end
 

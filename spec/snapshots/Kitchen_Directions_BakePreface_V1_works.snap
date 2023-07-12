@@ -1,0 +1,76 @@
+<html xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <body>
+    <div data-type="page" class="preface">
+  <h1 data-type="document-title"><span data-type="" itemprop="" class="os-text">Preface</span>
+</h1>
+  <div data-type="metadata">
+    <h1 data-type="document-title"><span data-type="" itemprop="" class="os-text">Preface</span>
+</h1>
+  </div>
+</div>
+<div data-type="page" class="preface">
+  <h1 data-type="document-title"><span data-type="" itemprop="" class="os-text">Preface</span>
+</h1>
+  
+  <div data-type="metadata">
+    <h1 data-type="document-title"><span data-type="" itemprop="" class="os-text">Preface</span>
+</h1>
+  </div>
+  <div class="os-figure"><figure id="someId">
+    
+    
+    <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+    </span>
+  </figure><div class="os-caption-container">
+  <span class="os-title-label">Figure </span>
+<span class="os-number">1</span>
+<span class="os-divider"> </span>
+<span class="os-title" data-type="title">This Is A Title</span>
+
+  <span class="os-divider"> </span>
+  <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
+</div></div>
+  
+</div>
+
+<div data-type="page" class="preface">
+  <h1 data-type="document-title"><span data-type="" itemprop="" class="os-text">Preface</span>
+</h1>
+  
+  <div data-type="metadata">
+    <h1 data-type="document-title"><span data-type="" itemprop="" class="os-text">Preface</span>
+</h1>
+  </div>
+  <div class="os-figure"><figure id="someId1">
+    
+    
+    <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+    </span>
+  </figure><div class="os-caption-container">
+  <span class="os-title-label">Figure </span>
+<span class="os-number">1</span>
+<span class="os-divider"> </span>
+<span class="os-title" data-type="title">This Is A Title</span>
+
+  <span class="os-divider"> </span>
+  <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
+</div></div>
+  <div class="os-figure"><figure id="someId2">
+  
+  
+  <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
+  </span>
+</figure><div class="os-caption-container">
+  <span class="os-title-label">Figure </span>
+<span class="os-number">2</span>
+<span class="os-divider"> </span>
+<span class="os-title" data-type="title">This Is A Title</span>
+
+  <span class="os-divider"> </span>
+  <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
+</div></div>
+  
+</div>
+
+  </body>
+</html>

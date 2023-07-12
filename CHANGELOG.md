@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Feature design changes in `nursing-internal`
+* Remove section title links from EOC sections in `nursing-internal`
+* Bake figures in preface in `all books`
 * Reorder EOC sections in `nursing-internal`
 * Bake `preview-carbonylchemistry` section in `organic-chemistry`
 * Enable `detailed solution` in `python`
