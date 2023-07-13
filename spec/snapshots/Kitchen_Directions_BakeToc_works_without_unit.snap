@@ -13,7 +13,8 @@
     <span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
   </a>
   <ol class="os-chapter">
-    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p2" data-toc-type="book-content" data-toc-target-type="intro">
+    
+<li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p2" data-toc-type="book-content" data-toc-target-type="intro">
   <a href="#p2">
     <span data-type="" itemprop="" class="os-text">Introduction</span>
   </a>
@@ -37,7 +38,6 @@
   </a>
 </li>
 
-    
   </ol>
 </li>
 
@@ -48,13 +48,13 @@
     <span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
   </a>
   <ol class="os-chapter">
-    <li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p4" data-toc-type="book-content" data-toc-target-type="numbered-section">
+    
+<li class="os-toc-chapter-page" cnx-archive-shortid="" cnx-archive-uri="p4" data-toc-type="book-content" data-toc-target-type="numbered-section">
   <a href="#p4">
     <span class="os-number">2.1</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Page 2.1 Title</span>
   </a>
 </li>
 
-    
   </ol>
 </li>
 

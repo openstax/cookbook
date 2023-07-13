@@ -94,9 +94,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc, r
       section.prepend(child: title)
     end
 
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'preview-carbonylchemistry',
+      uuid_key: '.preview-carbonylchemistry',
+      section_selector: 'section.preview-carbonylchemistry'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
+
     exercise_selectors = 'section.section-exercises, section.visualizing-chemistry, ' \
                          'section.mechanism-problems, section.energy-reaction, ' \
-                         'section.additional-problems, section.general-problems'
+                         'section.additional-problems, section.general-problems, ' \
+                         'section.preview-carbonylchemistry'
 
     chapter.search(exercise_selectors).injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(
@@ -119,7 +130,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc, r
         )
       end
     end
-    %w[visualizing-chemistry additional-problems].each do |klass|
+    %w[visualizing-chemistry additional-problems preview-carbonylchemistry].each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
         chapter: chapter, append_to: answer_key_inner_container, section_class: klass,
         options: { add_title: false }

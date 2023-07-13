@@ -67,8 +67,13 @@ module Kitchen
       end
 
       def self.li_for_chapter(chapter, options)
-        pages = chapter.element_children.only(PageElement, CompositePageElement)
-        inner_composite_chapters = chapter.element_children.only(CompositeChapterElement)
+        chapter_children = chapter.element_children.map do |child|
+          if child.instance_of?(PageElement) || child.instance_of?(CompositePageElement)
+            li_for_page(child)
+          elsif child.instance_of?(CompositeChapterElement)
+            li_for_composite_chapter(child)
+          end
+        end.join("\n")
 
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
@@ -79,12 +84,7 @@ module Kitchen
               <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
             </a>
             <ol class="os-chapter">
-              #{pages.map { |page| li_for_page(page) }.join("\n")}
-              #{
-                inner_composite_chapters.map do |composite_chapter|
-                  li_for_composite_chapter(composite_chapter)
-                end.join("\n")
-              }
+              #{chapter_children}
             </ol>
           </li>
         HTML

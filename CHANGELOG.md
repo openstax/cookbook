@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `nursing-internal` learning objectives from v2 to v1
+
+## [1.34.0] - 2023-07-13
+
+* Remove section title links from EOC sections in `nursing-internal`
+* Bake figures in preface in `all books`
+* Reorder EOC sections in `nursing-internal`
+* Bake `preview-carbonylchemistry` section in `organic-chemistry`
+* Enable `detailed solution` in `python`
+
 ## [1.33.0] - 2023-06-15
 
 * Change `BakeImages` height & width to `data-height` and `data-width`
