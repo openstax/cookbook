@@ -209,6 +209,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc, r
   BakeFootnotes.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
+  # flatten Chemistry Matters section
+  book.first!('nav').search('ol.os-chapter').each do |toc_chapter|
+    chemistry_matters_link = toc_chapter.first('li.os-toc-chapter-composite-page').first('a')
+    chemistry_matters_link.replace_children(with:
+      "<span class=\"os-text\">#{chemistry_matters_link.children.text.strip}</span>"
+    )
+  end
   BakeLinkPlaceholders.v1(book: book, replace_section_link_text: true)
   BakeFolio.v1(book: book, options: { new_approach: true })
   BakeLinks.v1(book: book)
