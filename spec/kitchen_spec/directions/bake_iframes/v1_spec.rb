@@ -102,7 +102,7 @@ RSpec.describe Kitchen::Directions::BakeIframes::V1 do
 
     it 'warns when rex link can\'t be made - no slug' do
       expect(Warning).to receive(:warn).with(
-        /Unable to find rex link for iframe <iframe/, {:category=>nil}
+        /Unable to find rex link for iframe <iframe/, { :category=>nil }
       )
       described_class.new.bake(book: book_with_iframe_no_slug)
     end
