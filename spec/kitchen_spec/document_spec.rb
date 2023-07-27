@@ -77,7 +77,7 @@ RSpec.describe Kitchen::Document do
 
     context 'when lang is absent' do
       it 'defaults to en' do
-        expect(Warning).to receive(:warn).with(/No `lang`/, { :category => nil })
+        expect(Warning).to receive(:warn).with(/No `lang`/, { category: nil })
         expect(instance.locale).to eq :en
       end
     end
