@@ -6,9 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Change `nursing-internal` learning objectives from v2 to v1
+## [v1.35.0] - 2023-07-27
 
-## [1.34.0] - 2023-07-13
+* Change `nursing-internal` learning objectives from v2 to v1
+* Hack organic-chemistry recipe to flatten Chemistry Matters title in the TOC
+
+## [v1.34.0] - 2023-07-13
 
 * Remove section title links from EOC sections in `nursing-internal`
 * Bake figures in preface in `all books`
@@ -16,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Bake `preview-carbonylchemistry` section in `organic-chemistry`
 * Enable `detailed solution` in `python`
 
-## [1.33.0] - 2023-06-15
+## [v1.33.0] - 2023-06-15
 
 * Change `BakeImages` height & width to `data-height` and `data-width`
 * Add additional EOC sections to `hs-college-success`
@@ -29,15 +32,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Bake `figures in preface` in `college-success`
 
 
-## [1.32.0] - 2023-06-02
+## [v1.32.0] - 2023-06-02
 
 * Suppress `High School Features` in `college-success`
 * Remove title from `Appendix` target label in `organic-chemistry`
 * Add support for source mapping
 
-## [1.31.0] - 2023-05-17
+## [v1.31.0] - 2023-05-17
 
-* Hack organic-chemistry recipe to flatten Chemistry Matters title in the TOC
 * Add `Student Story note` to `hs-college-success`
 * Change order of EOC sections in `nursing-external`
 * Add `The Real Deal note` to `hs-college-success`
