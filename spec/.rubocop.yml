@@ -23,6 +23,10 @@ Style/Semicolon:
 Style/SymbolProc:
   Enabled: false
 
+# lets us use the rspec message "works"
+RSpec/ExampleWording:
+  DisallowedExamples: []
+
 RSpec/FilePath:
   Enabled: false
 

@@ -44,6 +44,9 @@ Metrics/ModuleLength:
 Style/Alias:
   EnforcedStyle: prefer_alias_method
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
 Style/StringLiterals:
   ConsistentQuotesInMultiline: true
 
