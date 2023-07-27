@@ -11,7 +11,7 @@ Layout/FirstHashElementIndentation:
   Enabled: false
 
 Style/BlockDelimiters:
-  IgnoredMethods:
+  AllowedMethods:
     - expect
 
 Style/Semicolon:
