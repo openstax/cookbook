@@ -14,6 +14,9 @@ Style/BlockDelimiters:
   AllowedMethods:
     - expect
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
 Style/Semicolon:
   Enabled: false
 
