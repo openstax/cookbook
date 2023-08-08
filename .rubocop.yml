@@ -59,6 +59,9 @@ Style/AccessorGrouping:
 Style/SingleLineMethods:
   Enabled: false # don't abuse it, but sometimes it is right
 
+Style/RedundantBegin:
+  Enabled: false
+
 Style/RegexpLiteral:
   AllowInnerSlashes: true
 
