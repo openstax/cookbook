@@ -21,7 +21,6 @@ module Kitchen
           end
         end.compact.join("\n")
 
-        # the greater than switch happens in this piece of code
         book.first!('nav').replace_children(with: <<~HTML
           <h1 class="os-toc-title">#{I18n.t(:toc_title)}</h1>
           <ol>
