@@ -14,7 +14,9 @@ module Kitchen
               exercise: exercise, number: exercise_counter, options: exercise_options
             )
           else
-            BakeInjectedExerciseQuestion.v1(number: exercise_counter, question: exercise)
+            BakeInjectedExerciseQuestion.v1(
+              number: exercise_counter, question: exercise, options: question_options
+            )
           end
           exercise_counter += 1
         end
