@@ -28,7 +28,6 @@ module Kitchen
           </ol>
         HTML
         )
-
       end
 
       def self.li_for_unit(unit, options)
