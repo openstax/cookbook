@@ -18,13 +18,11 @@ do
   esac
 done
 
-# Call the baking script based on the book; books will probably have the same
-# calling syntax, but maybe not so don't try to reduce duplication here.
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Keep a list of valid recipes
 # Blow up if a recipe is not on this list
+
 valid_recipes=(
   accounting
   american-government
@@ -82,17 +80,16 @@ if [[ ! " ${valid_recipes[*]} " =~ " ${book} " ]]; then
   exit 1
 fi
 
-# Bake with or without resources
-if [ $NO_IMAGE_RESOURCES ]; then
-    case "${book}" in
-    # mismatched recipe name
-    otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
-    # matched recipe name
-    *) $DIR/lib/recipes/$book/bake --input $input_file --output $output_file;;
-  esac
-else
+# Bake the given book
+
+if [[ -n $resource_dir ]]; then
   case "${book}" in
     otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file --resources $resource_dir;;
     *) $DIR/lib/recipes/$book/bake --input $input_file --output $output_file --resources $resource_dir;;
+  esac
+else
+  case "${book}" in
+    otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
+    *) $DIR/lib/recipes/$book/bake --input $input_file --output $output_file;;
   esac
 fi
