@@ -4,7 +4,7 @@
 
 require_relative '../college-success/collegesuccess_recipe'
 
-hs = Kitchen::BookRecipe.new(book_short_name: :hs_college_success) do |doc|
+hs = Kitchen::BookRecipe.new(book_short_name: :hs_college_success) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book

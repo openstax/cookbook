@@ -5,7 +5,7 @@
 require_relative '../recipes_helper'
 require_relative '../college-physics/college_physics_recipe'
 
-college_physics = Kitchen::BookRecipe.new(book_short_name: :college_physics) do |doc|
+college_physics = Kitchen::BookRecipe.new(book_short_name: :college_physics) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book

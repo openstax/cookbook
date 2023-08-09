@@ -17,8 +17,14 @@ RSpec::Matchers.define :bake_correctly_with do |recipe, resource_path|
   match do |book|
     actual_file = Tempfile.new(book)
 
-    cmd = "#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
-          -r #{__dir__}/#{resource_path} -o #{actual_file.path}"
+    cmd = \
+      if resource_path
+        "#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
+        -r #{__dir__}/#{resource_path} -o #{actual_file.path}"
+      else
+        "#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
+        -o #{actual_file.path}"
+      end
 
     `#{cmd}`
 
@@ -38,28 +44,14 @@ RSpec::Matchers.define :bake_correctly do
   end
 end
 
-RSpec::Matchers.define :bake_correctly_with_empty_resources do
+RSpec::Matchers.define :bake_correctly_with_resources do |resources|
   match do |book|
-    expect {
-      expect(book).to bake_correctly
-    }.to output(/Could not find resource for image/).to_stderr_from_any_process
-  end
-
-  failure_message do |book|
-    "Expected '#{book}' to bake correctly without resources.
-    Either something went wrong during baking, or the resources not found warning was not recieved."
+    expect(book).to bake_correctly_with(book, resources)
   end
 end
 
-RSpec::Matchers.define :bake_correctly_with_empty_resources_and_use do |recipe|
+RSpec::Matchers.define :bake_correctly_with_recipe do |recipe|
   match do |book|
-    expect {
-      expect(book).to bake_correctly_with(recipe)
-    }.to output(/Could not find resource for image/).to_stderr_from_any_process
-  end
-
-  failure_message do |book|
-    "Expected '#{book}' to bake correctly without resources.
-    Either something went wrong during baking, or the resources not found warning was not recieved."
+    expect(book).to bake_correctly_with(recipe, nil)
   end
 end

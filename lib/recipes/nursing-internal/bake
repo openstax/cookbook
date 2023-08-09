@@ -4,7 +4,7 @@
 
 require_relative '../recipes_helper'
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, resources|
+recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, _resources|
   include Kitchen::Directions
 
   doc.selectors.override(
@@ -16,7 +16,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, re
   book.search('cnx-pi').trash
 
   # Your recipe code goes here
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
 
   BakeUnnumberedFigure.v1(book: book)

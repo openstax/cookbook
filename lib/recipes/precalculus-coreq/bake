@@ -4,7 +4,7 @@
 
 require_relative '../precalculus/precalculus_recipe'
 
-coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
+coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book

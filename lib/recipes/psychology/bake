@@ -4,7 +4,7 @@
 
 require_relative '../recipes_helper'
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :psychology) do |doc, resources|
+recipe = Kitchen::BookRecipe.new(book_short_name: :psychology) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -17,7 +17,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :psychology) do |doc, resource
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
 
