@@ -148,7 +148,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, resources
       BakeInjectedExerciseQuestion.v1(
         question: question,
         number: "#{appendix_letter}#{question.count_in(:page)}",
-        options: { add_dot: true }
       )
     end
 
