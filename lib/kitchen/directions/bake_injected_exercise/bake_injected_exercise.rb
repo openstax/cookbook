@@ -33,7 +33,7 @@ module Kitchen::Directions::BakeInjectedExercise
           question.prepend(child:
             <<~HTML
               <div class="os-problem-container">
-                <a class='problem-letter' #{"href=##{solution_id}" if solution.present?}>#{problem_letter}</a>
+                <a class='problem-letter' #{"href='##{solution_id}'" if solution.present?}>#{problem_letter}</a>
                 <span class='os-divider'> </span>
                 #{question.stimulus&.cut&.paste}
                 #{question.stem&.cut&.paste}
