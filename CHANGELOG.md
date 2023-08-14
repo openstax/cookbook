@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Suppress `High School Features` in `college-success`
 * Remove title from `Appendix` target label in `organic-chemistry`
 * Add support for source mapping
+* Upgrade to Ruby 3
+* Upgrade gems
 
 ## [v1.31.0] - 2023-05-17
 

@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.2
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
@@ -9,7 +9,7 @@ Layout/EmptyLinesAroundBlockBody:
 
 Layout/LineLength:
   Max: 100
-  IgnoredPatterns: ['(\A|\s)#']
+  AllowedPatterns: ['(\A|\s)#']
 
 Metrics/AbcSize:
   Max: 50
@@ -17,7 +17,7 @@ Metrics/AbcSize:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
-Metrix/PerceivedComplexity:
+Metrics/PerceivedComplexity:
   Enabled: false
 
 Naming/PredicateName:
@@ -44,6 +44,9 @@ Metrics/ModuleLength:
 Style/Alias:
   EnforcedStyle: prefer_alias_method
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
 Style/StringLiterals:
   ConsistentQuotesInMultiline: true
 
@@ -56,11 +59,14 @@ Style/AccessorGrouping:
 Style/SingleLineMethods:
   Enabled: false # don't abuse it, but sometimes it is right
 
+Style/RedundantBegin:
+  Enabled: false
+
 Style/RegexpLiteral:
   AllowInnerSlashes: true
 
 Style/SymbolProc:
-  IgnoredMethods:
+  AllowedMethods:
     - respond_to
     - define_method
     - XML # For Nokogiri::XML

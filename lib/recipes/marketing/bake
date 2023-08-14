@@ -58,7 +58,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resource
     chapter.pages.each do |page|
       BakeAllNumberedExerciseTypes.v1(
         within: page.search('section.knowledge-check'),
-        question_options: { options: { add_dot: true } }
+        question_options: { add_dot: true }
       )
     end
 
@@ -144,7 +144,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resource
     end
 
     page.search('section.knowledge-check').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: "#{appendix_letter}#{question.count_in(:page)}")
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: "#{appendix_letter}#{question.count_in(:page)}",
+      )
     end
 
     answer_key_appendix_inner_container = AnswerKeyInnerContainer.v1(
