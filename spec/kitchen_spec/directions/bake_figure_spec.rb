@@ -144,7 +144,7 @@ RSpec.describe Kitchen::Directions::BakeFigure do
     book_containing(html:
       one_chapter_with_one_page_containing(
         <<~HTML
-          <figure id="someId" class="mechanism-figure">
+          <figure id="someId" class="mechanism-figure scaled-down">
             #{figure_caption}
             #{figure_title}
             <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
