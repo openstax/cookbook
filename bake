@@ -72,6 +72,7 @@ valid_recipes=(
   sociology
   statistics
   u-physics
+  web-generic
   world-history
 )
 

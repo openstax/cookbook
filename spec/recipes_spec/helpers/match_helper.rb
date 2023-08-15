@@ -13,18 +13,15 @@ RSpec::Matchers.define(:be_same_file_as) do |expected_file_path|
   end
 end
 
-RSpec::Matchers.define :bake_correctly_with do |recipe, resource_path|
+RSpec::Matchers.define :bake_correctly_with do |recipe, resource_path, output_from|
   match do |book|
     actual_file = Tempfile.new(book)
 
     cmd = \
-      if resource_path
-        "#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
-        -r #{__dir__}/#{resource_path} -o #{actual_file.path}"
-      else
-        "#{__dir__}/../../../bake -b #{recipe} -i #{__dir__}/../books/#{book}/input.xhtml \
-        -o #{actual_file.path}"
-      end
+      "#{__dir__}/../../../bake -b #{recipe} \
+      -i #{output_from ? "#{__dir__}/../books/#{output_from}/expected_output.xhtml" : "#{__dir__}/../books/#{book}/input.xhtml"} \
+      #{"-r #{__dir__}/#{resource_path}" if resource_path} \
+      -o #{actual_file.path}"
 
     `#{cmd}`
 
@@ -40,18 +37,24 @@ end
 
 RSpec::Matchers.define :bake_correctly do
   match do |book|
-    expect(book).to bake_correctly_with(book, nil)
+    expect(book).to bake_correctly_with(book, nil, nil)
   end
 end
 
 RSpec::Matchers.define :bake_correctly_with_resources do |resources|
   match do |book|
-    expect(book).to bake_correctly_with(book, resources)
+    expect(book).to bake_correctly_with(book, resources, nil)
   end
 end
 
 RSpec::Matchers.define :bake_correctly_with_recipe do |recipe|
   match do |book|
-    expect(book).to bake_correctly_with(recipe, nil)
+    expect(book).to bake_correctly_with(recipe, nil, nil)
+  end
+end
+
+RSpec::Matchers.define :bake_correctly_on_output_from do |resource_path, output_from|
+  match do |book|
+    expect(book).to bake_correctly_with(book, resource_path, output_from)
   end
 end

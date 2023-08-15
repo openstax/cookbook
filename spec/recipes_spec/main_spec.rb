@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe 'books' do
   it 'bakes dummy' do
-    expect('dummy').to bake_correctly_with_resources('/../books/dummy/resources')
+    expect('dummy').to bake_correctly_with_resources('../books/dummy/resources')
   end
 
   it 'bakes accounting' do
@@ -225,4 +225,8 @@ RSpec.describe 'books' do
 
   # ATTENTION: SPECS ARE NOW ALPHABETIZED
   # please add future specs in alphabetical order
+
+  it 'bakes web-generic on chemistry' do
+    expect('web-generic').to bake_correctly_on_output_from('../books/chemistry/resources', 'chemistry')
+  end
 end
