@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require_relative '../lib/recipes/recipes_helper'
+
+def write_resource(resource_key:, directory:)
+  file = File.open("#{directory}/#{resource_key}.json", 'w')
+  file.write(
+    "{\"sha1\": \"#{resource_key}\", \"width\": 1111, \"height\": 565}"
+  )
+end
+
+def get_resource_keys_from_file(input_file:)
+  resource_keys = []
+  doc = Nokogiri::XML(File.open(input_file))
+  doc.search('img').each do |image|
+    resource_keys.append(
+      image[:src].gsub('../resources/', '').gsub('.json', '').to_sym  # TODO: make this always the same as the line in bake_images
+    )
+  end
+  resource_keys
+end
+
+def write_resources_to_dir(resource_keys:, out_dir:)
+  resource_keys.each do |key|
+    write_resource(resource_key: key, directory: out_dir)
+  end
+end
+
+input_file = ARGV[0]
+out_dir = "#{__dir__}/../#{ARGV[1]}"
+FileUtils.mkdir_p(out_dir)
+
+resource_keys = get_resource_keys_from_file(input_file: input_file)
+write_resources_to_dir(resource_keys: resource_keys, out_dir: out_dir)
