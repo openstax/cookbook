@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add dot to solutions in `nursing-external`
+
 ## [v1.35.0] - 2023-07-27
 
 * Change `nursing-internal` learning objectives from v2 to v1
