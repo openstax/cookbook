@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add dot to solutions in `nursing-external`
+* Add class `scaled-down` to mechanism figure caption
 
 ## [v1.35.0] - 2023-07-27
 
