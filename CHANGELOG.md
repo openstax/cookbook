@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add dot to solutions in `nursing-external`
+* Add class `scaled-down` to mechanism figure caption
+
 ## [v1.35.0] - 2023-07-27
 
 * Change `nursing-internal` learning objectives from v2 to v1
@@ -37,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Suppress `High School Features` in `college-success`
 * Remove title from `Appendix` target label in `organic-chemistry`
 * Add support for source mapping
+* Upgrade to Ruby 3
+* Upgrade gems
 
 ## [v1.31.0] - 2023-05-17
 

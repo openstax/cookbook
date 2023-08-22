@@ -50,7 +50,7 @@ RSpec.describe Kitchen::Oven do
       end
 
       expect_bakes(input_xml: '<div></div>', recipes: recipe, output_xml: "<div>Howdy!</div>\n")
-      expect(I18n.t(:some_recipe_specific_term)).to match(/translation missing/)
+      expect(I18n.t(:some_recipe_specific_term)).to match(/Translation missing/)
     end
 
     it 'bakes with temporary, auto-discovered, recipe-specific locales' do
@@ -59,7 +59,7 @@ RSpec.describe Kitchen::Oven do
       end
 
       expect_bakes(input_xml: '<div></div>', recipes: recipe, output_xml: "<div>Auto-discovered!</div>\n")
-      expect(I18n.t(:some_recipe_specific_term)).to match(/translation missing/)
+      expect(I18n.t(:some_recipe_specific_term)).to match(/Translation missing/)
     end
 
     it 'autodetects the language' do
@@ -88,7 +88,7 @@ RSpec.describe Kitchen::Oven do
         end
 
         expect_bakes(input_xml: '<div></div>', recipes: recipe, output_xml: "<div>Auto-discovered!,Figgy,Chapter</div>\n")
-        expect(I18n.t(:some_recipe_specific_term)).to match(/translation missing/)
+        expect(I18n.t(:some_recipe_specific_term)).to match(/Translation missing/)
       end
     end
 

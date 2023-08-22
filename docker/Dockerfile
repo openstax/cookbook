@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-buster AS runtime-env
+FROM ruby:3.2.2-bullseye AS runtime-env
 
 ARG bundler_version
 ARG EASYBAKE_VERSION=1.2.8
@@ -23,9 +23,6 @@ RUN git clone https://github.com/nojhan/liquidprompt.git ~/liquidprompt && \
     echo 'export LP_USER_ALWAYS=-1' >>~/.config/liquidpromptrc && \
     sed -i "/color=auto/"' s/# //' ~/.bashrc && \
     sed -i "/alias ls/,/lA/"' s/# //' ~/.bashrc
-
-# VSCode Live Share libraries
-RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vsls-reqs && ~/vsls-reqs
 
 WORKDIR /code
 COPY . /code/

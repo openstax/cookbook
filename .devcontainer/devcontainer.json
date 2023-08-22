@@ -4,7 +4,7 @@
     "dockerfile": "../docker/Dockerfile",
     "context": "..",
     "args": {
-      "bundler_version": "2.2.4"
+      "bundler_version": "2.3.9"
     }
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",

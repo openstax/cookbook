@@ -14,9 +14,9 @@ module Kitchen
               exercise: exercise, number: exercise_counter, options: exercise_options
             )
           else
-            question_options[:number] = exercise_counter
-            question_options[:question] = exercise
-            BakeInjectedExerciseQuestion.v1(question_options)
+            BakeInjectedExerciseQuestion.v1(
+              number: exercise_counter, question: exercise, options: question_options
+            )
           end
           exercise_counter += 1
         end

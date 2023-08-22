@@ -39,7 +39,7 @@ module Kitchen
             <a href="#">
               <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{unit.count_in(:book)}</span>
               <span class="os-divider"> </span>
-              <span data-type itemprop class="os-text">#{unit.title_text}</span>
+              <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
             </a>
             <ol class="os-unit">
               #{pages.map { |page| li_for_page(page) }.join("\n")}

@@ -35,7 +35,7 @@ RSpec.describe Kitchen::Directions::BakeImages do
   end
 
   it 'logs warning' do
-    expect(Warning).to receive(:warn).with(/Could not find resource for image/).exactly(3).times
+    expect(Warning).to receive(:warn).with(/Could not find resource for image/, { category: nil }).exactly(3).times
     described_class.v1(book: book, resources: nil)
   end
 

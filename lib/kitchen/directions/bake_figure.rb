@@ -29,15 +29,16 @@ module Kitchen
             <span class="os-title-label">#{I18n.t("figure#{'.nominative' if cases}")} </span>
             <span class="os-number">#{number}</span>
             #{"<span class=\'os-divider\'> </span>" if title}
-            #{"<span class=\'os-title\' data-type=\'title\'\">#{title.children}</span>" if title}
+            #{"<span class=\'os-title\' data-type=\'title\'>#{title.children}</span>" if title}
           HTML
         if figure.has_class?('mechanism-figure')
+          scaled_class = ' scaled-down' if figure.has_class?('scaled-down')
           figure.prepend(sibling:
             <<~HTML
-              <div class="os-caption-title-container">
+              <div class="os-caption-title-container#{scaled_class}">
                 #{caption_title_content}
               </div>
-              <div class="os-caption-text-container">
+              <div class="os-caption-text-container#{scaled_class}">
                 #{caption}
               </div>
             HTML

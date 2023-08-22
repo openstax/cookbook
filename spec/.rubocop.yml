@@ -11,14 +11,21 @@ Layout/FirstHashElementIndentation:
   Enabled: false
 
 Style/BlockDelimiters:
-  IgnoredMethods:
+  AllowedMethods:
     - expect
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
 
 Style/Semicolon:
   Enabled: false
 
 Style/SymbolProc:
   Enabled: false
+
+# lets us use the rspec message "works"
+RSpec/ExampleWording:
+  DisallowedExamples: []
 
 RSpec/FilePath:
   Enabled: false
