@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Update CI config to call recipes & kitchen separately
 * Add dot to solutions in `nursing-external`
 * Add class `scaled-down` to mechanism figure caption
 
