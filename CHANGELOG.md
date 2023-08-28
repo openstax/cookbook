@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `V4` of `BakeReferences` for `nursing-external`
+
 ## [v2.0.0] - 2023-08-24
 
 * Upgrade to Ruby 3
