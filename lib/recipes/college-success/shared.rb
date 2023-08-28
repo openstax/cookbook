@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
 # Used in college success (bakes college-success and hs-college-success)
-COLLEGESUCCESS_RECIPE = Kitchen::BookRecipe.new(
+COLLEGE_SUCCESS_SHARED_RECIPE = Kitchen::BookRecipe.new(
   book_short_name: :college_success) do |doc, resources|
   include Kitchen::Directions
 

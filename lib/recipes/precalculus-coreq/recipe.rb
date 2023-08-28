@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../precalculus/precalculus_recipe'
-
-coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
+PRECALCULUS_COREQ_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
   include Kitchen::Directions
 
   book = doc.book
@@ -38,16 +34,3 @@ coreq = Kitchen::BookRecipe.new(book_short_name: :precalculus_coreq) do |doc|
     end
   end
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [PRECALCULUS_RECIPE, coreq, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

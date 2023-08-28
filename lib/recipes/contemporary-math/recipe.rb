@@ -1,11 +1,9 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
 require_relative 'strategy'
-require_relative '../recipes_helper'
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc, resources|
+CONTEMPORARY_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) \
+do |doc, resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -180,16 +178,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc, r
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

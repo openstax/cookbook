@@ -1,11 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-require_relative '../college-physics/college_physics_recipe'
-
-college_physics = Kitchen::BookRecipe.new(book_short_name: :college_physics) do |doc|
+COLLEGE_PHYSICS_1E_RECIPE = Kitchen::BookRecipe.new(book_short_name: :college_physics) do |doc|
   include Kitchen::Directions
 
   book = doc.book
@@ -19,16 +14,3 @@ college_physics = Kitchen::BookRecipe.new(book_short_name: :college_physics) do 
   end
 
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Shortened assembled XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [COLLEGE_PHYSICS_RECIPE, college_physics, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

@@ -54,3 +54,7 @@ require_all('kitchen/directions')
 
 # Setup locales
 I18n.backend.load_translations(file_glob('/locales/*.yml'))
+
+# Import recipes
+require_all('recipes/**/recipe.rb', '')
+require_all('recipes/**/shared.rb', '')

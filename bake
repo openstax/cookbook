@@ -18,81 +18,13 @@ do
   esac
 done
 
-# Call the baking script based on the book; books will probably have the same
-# calling syntax, but maybe not so don't try to reduce duplication here.
+# Call the baking script based on the book.
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# Keep a list of valid recipes
-# Blow up if a recipe is not on this list
-valid_recipes=(
-  accounting
-  american-government
-  anatomy
-  anthropology
-  ap-biology
-  ap-history
-  ap-physics
-  ap-physics-2e
-  astronomy
-  bca
-  biology
-  business-ethics
-  calculus
-  chemistry
-  college-physics
-  college-physics-2e
-  college-success
-  computer-science
-  contemporary-math
-  dev-math
-  dummy
-  economics
-  english-composition
-  entrepreneurship
-  finance
-  history
-  hs-college-success
-  hs-physics
-  intro-business
-  marketing
-  microbiology
-  nursing-external
-  nursing-internal
-  organic-chemistry
-  otto-book
-  philosophy
-  pl-economics
-  pl-psychology
-  pl-u-physics
-  political-science
-  precalculus
-  precalculus-coreq
-  principles-management
-  psychology
-  python
-  sociology
-  statistics
-  u-physics
-  world-history
-)
-
-if [[ ! " ${valid_recipes[*]} " =~ " ${book} " ]]; then
-  echo "Unknown book '${book}'"
-  exit 1
-fi
-
 # Bake with or without resources
 if [ $NO_IMAGE_RESOURCES ]; then
-    case "${book}" in
-    # mismatched recipe name
-    otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file;;
-    # matched recipe name
-    *) $DIR/lib/recipes/$book/bake --input $input_file --output $output_file;;
-  esac
+  $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book
 else
-  case "${book}" in
-    otto-book) $DIR/lib/recipes/chemistry/bake --input $input_file --output $output_file --resources $resource_dir;;
-    *) $DIR/lib/recipes/$book/bake --input $input_file --output $output_file --resources $resource_dir;;
-  esac
+  $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book --resources $resource_dir
 fi

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
 AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |doc, resources|
   include Kitchen::Directions
 

@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require_relative 'recipes_helper'
+
+opts = Slop.parse do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+  slop.string '--recipe', 'Keyword for recipe', required: true
+  slop.string '--resources', 'Path to book resources directory', required: false
+end
+
+# Map recipe keyword to recipe/recipes
+book_recipe = \
+  case opts[:recipe]
+  when 'dummy' then [DUMMY_RECIPE]
+  when 'accounting' then [ACCOUNTING_RECIPE]
+  when 'american-government' then [AMERICAN_GOVERNMENT_RECIPE]
+  when 'anatomy' then [ANATOMY_RECIPE]
+  when 'anthropology' then [ANTHROPOLOGY_RECIPE]
+  when 'ap-biology' then [AP_BIOLOGY_RECIPE]
+  when 'ap-history' then [AP_HISTORY_RECIPE]
+  when 'ap-physics' then [AP_PHYSICS_RECIPE]
+  when 'ap-physics-2e' then [AP_PHYSICS_RECIPE]
+  when 'astronomy' then [ASTRONOMY_RECIPE]
+  when 'bca' then [BCA_RECIPE]
+  when 'biology' then [BIOLOGY_RECIPE]
+  when 'business-ethics' then [BUSINESS_ETHICS_RECIPE]
+  when 'calculus' then [CALCULUS_RECIPE]
+  when 'chemistry' then [CHEMISTRY_RECIPE]
+  when 'college-physics' then [COLLEGE_PHYSICS_SHARED_RECIPE, COLLEGE_PHYSICS_1E_RECIPE]
+  when 'college-physics-2e' then [COLLEGE_PHYSICS_2E_RECIPE, COLLEGE_PHYSICS_SHARED_RECIPE]
+  when 'computer-science' then [COMPUTER_SCIENCE_RECIPE]
+  when 'college-success' then [COLLEGE_SUCCESS_HS_DELETE_RECIPE, COLLEGE_SUCCESS_SHARED_RECIPE]
+  when 'contemporary-math' then [CONTEMPORARY_MATH_RECIPE]
+  when 'dev-math' then [DEV_MATH_RECIPE]
+  when 'economics' then [ECONOMICS_RECIPE]
+  when 'english-composition' then [ENGLISH_COMPOSITION_RECIPE]
+  when 'entrepreneurship' then [ENTREPRENEURSHIP_RECIPE]
+  when 'finance' then [FINANCE_RECIPE]
+  when 'history' then [HISTORY_RECIPE]
+  when 'hs-college-success' then [COLLEGE_SUCCESS_HIGH_SCHOOL_RECIPE, COLLEGE_SUCCESS_SHARED_RECIPE]
+  when 'hs-physics' then [HS_PHYSICS_RECIPE]
+  when 'intro-business' then [INTRO_BUSINESS_RECIPE]
+  when 'marketing' then [MARKETING_RECIPE]
+  when 'microbiology' then [MICROBIOLOGY_RECIPE]
+  when 'nursing-external' then [NURSING_EXTERNAL_RECIPE]
+  when 'nursing-internal' then [NURSING_INTERNAL_RECIPE]
+  when 'organic-chemistry' then [ORGANIC_CHEMISTRY_RECIPE]
+  when 'otto-book' then [CHEMISTRY_RECIPE]
+  when 'philosophy' then [PHILOSOPHY_RECIPE]
+  when 'pl-economics' then [PL_ECONOMICS_RECIPE]
+  when 'pl-psychology' then [PL_PSYCHOLOGY_RECIPE]
+  when 'pl-u-physics' then [PL_U_PHYSICS_RECIPE]
+  when 'political-science' then [POLITICAL_SCIENCE_RECIPE]
+  when 'precalculus' then [PRECALCULUS_COREQ_DELETE_RECIPE, PRECALCULUS_SHARED_RECIPE]
+  when 'precalculus-coreq' then [PRECALCULUS_SHARED_RECIPE, PRECALCULUS_COREQ_RECIPE]
+  when 'principles-management' then [PRINCIPLES_MANAGEMENT_RECIPE]
+  when 'psychology' then [PSYCHOLOGY_RECIPE]
+  when 'python' then [PYTHON_RECIPE]
+  when 'sociology' then [SOCIOLOGY_RECIPE]
+  when 'statistics' then [STATISTICS_RECIPE]
+  when 'u-physics' then [U_PHYSICS_RECIPE]
+  when 'world-history' then [WORLD_HISTORY_RECIPE]
+  else
+    raise 'Invalid recipe keyword'
+  end
+
+puts Kitchen::Oven.bake(
+  input_file: opts[:input],
+  recipes: [book_recipe, VALIDATE_OUTPUT].flatten,
+  output_file: opts[:output],
+  resource_dir: opts[:resources] || nil
+)

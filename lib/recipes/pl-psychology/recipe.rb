@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc, resources|
+PL_PSYCHOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc, resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -104,15 +100,4 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :plpsychology) do |doc, resour
   BakeLinks.v1(book: book)
 end
 
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
 
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)
