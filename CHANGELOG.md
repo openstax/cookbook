@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Create `V4` of `BakeReferences` for `nursing-external`
+* Bake `injected-exercises` in `anatomy`
 
 ## [v2.0.0] - 2023-08-24
 
