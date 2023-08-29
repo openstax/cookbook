@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Create `V4` of `BakeReferences` for `nursing-external`
 * Bake `injected-exercises` in `anatomy`
+* Remove from Dockerfile `git`, `vim`, `openssh-server`, `wget`, `libicu-dev`, and `liveshare`
 
 ## [v2.0.0] - 2023-08-24
 
