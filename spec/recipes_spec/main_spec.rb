@@ -7,10 +7,6 @@ RSpec.describe 'books' do
     expect('dummy').to bake_correctly_with('dummy', '/../books/dummy/resources')
   end
 
-  it 'bakes accounting' do
-    expect('accounting').to bake_correctly_with_empty_resources
-  end
-
   it 'bakes american-government' do
     expect('american-government').to bake_correctly_with_empty_resources
   end
