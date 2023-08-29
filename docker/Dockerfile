@@ -5,7 +5,6 @@ ARG EASYBAKE_VERSION=1.2.8
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    build-essential \
     software-properties-common \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
