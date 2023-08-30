@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Refactor: Move baking logic from recipe files to centralized executable
+  * Change `bake` files to `recipe.rb`
+* Refactor: Take out `Strategy` architecture, move logic inline
+* Add `V2` of `MoveSolutionsFromAutotitledNote` for `precalculus`
 * Fix problem with mathml namespaces in `hs-physics`
 
 ## [v2.1.0] - 2023-09-08

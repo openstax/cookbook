@@ -31,3 +31,4 @@ ignore:
   - "books"
   - "lib/kitchen/patches/nokogiri_profiling"
   - "scripts"
+  - "lib/recipes"
