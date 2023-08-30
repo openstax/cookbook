@@ -35,10 +35,10 @@ do |doc|
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
 
-    classes = %w[problems-exercises]
-    classes.each do |klass|
+    exercise_section_classes = %w[problems-exercises]
+    exercise_section_classes.each do |klass|
       MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
       )
     end
   end

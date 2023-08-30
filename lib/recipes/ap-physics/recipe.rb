@@ -104,7 +104,7 @@ AP_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_physics) do |do
     classes = %w[problems-exercises ap-test-prep]
     classes.each do |klass|
       MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
       )
     end
   end

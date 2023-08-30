@@ -80,14 +80,14 @@ DEV_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, r
     chapter.non_introduction_pages.each do |page|
       number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        within: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
         title_number: number
       )
     end
-    classes = %w[review-exercises practice-test]
-    classes.each do |klass|
+    exercise_section_classes = %w[review-exercises practice-test]
+    exercise_section_classes.each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
       )
     end
 

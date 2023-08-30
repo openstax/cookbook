@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::MoveSolutionsFromExerciseSection
-  def self.v1(chapter:, append_to:, section_class:, title_number: nil, options: {
+  def self.v1(within:, append_to:, section_class:, title_number: nil, options: {
     add_title: true,
     in_appendix: false
   })
@@ -9,13 +9,18 @@ module Kitchen::Directions::MoveSolutionsFromExerciseSection
       add_title: true,
       in_appendix: false
     )
-    V1.new.bake(chapter: chapter, append_to: append_to, section_class: section_class,
+    V1.new.bake(within: within, append_to: append_to, section_class: section_class,
                 title_number: title_number, options: options)
   end
 
   class V1
-    def bake(chapter:, append_to:, section_class:, title_number:, options:)
-      solutions_clipboard = chapter.search("section.#{section_class}").solutions.cut
+    def bake(within:, append_to:, section_class:, title_number:, options:)
+      solutions_clipboard = \
+        if within.instance_of?(Kitchen::SectionElement)
+          within.solutions.cut
+        else
+          within.search("section.#{section_class}").solutions.cut
+        end
 
       return if solutions_clipboard.items.empty?
 

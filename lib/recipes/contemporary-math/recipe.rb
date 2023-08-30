@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'strategy'
-
 CONTEMPORARY_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) \
 do |doc, resources|
   include Kitchen::Directions
@@ -136,11 +134,23 @@ do |doc, resources|
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    # Bake solutions
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v2(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'your-turn'
     )
+    chapter.non_introduction_pages.each do |page|
+      number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        title_number: number
+      )
+    end
+    exercise_section_classes = %w[chapter-review chapter-test check-understanding]
+    exercise_section_classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   book.pages('$.appendix').each do |page|

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'preface_strategy'
-require_relative 'strategy'
-
 PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, resources|
   include Kitchen::Directions
 
@@ -42,10 +39,9 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, resou
       chapter: page, metadata_source: metadata, append_to: answer_key,
       options: { solutions_plural: false, in_preface: true }
     )
-
-    PrefaceStrategy.new.bake(
-      page: page,
-      append_to: answer_key_preface_inner_container
+    Kitchen::Directions::MoveSolutionsFromAutotitledNote.v1(
+      page: page, append_to: answer_key_preface_inner_container,
+      note_class: 'learning-questions', title: nil
     )
   end
 
@@ -88,11 +84,13 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, resou
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
-    )
+    chapter.non_introduction_pages.each do |page|
+      title = page.title.children
+      Kitchen::Directions::MoveSolutionsFromAutotitledNote.v1(
+        page: page, append_to: answer_key_inner_container, note_class: 'learning-questions',
+        title: title
+      )
+    end
   end
 
   BakeFootnotes.v1(book: book, number_format: :roman) # check if exists

@@ -122,14 +122,14 @@ do |doc, resources|
     chapter.non_introduction_pages.each do |page|
       page.search('div.os-eos.os-section-exercises-container').each do |section_wrapper|
         Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-          chapter: section_wrapper, append_to: answer_key_inner_container,
+          within: section_wrapper, append_to: answer_key_inner_container,
           section_class: 'section-exercises', options: { add_title: false }
         )
       end
     end
     %w[visualizing-chemistry additional-problems preview-carbonylchemistry].each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass,
+        within: chapter, append_to: answer_key_inner_container, section_class: klass,
         options: { add_title: false }
       )
     end

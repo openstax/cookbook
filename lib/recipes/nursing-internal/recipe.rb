@@ -126,7 +126,7 @@ do |doc, resources|
 
     exercises.each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
       )
     end
   end

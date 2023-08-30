@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'strategy'
-
 CALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, resources|
   include Kitchen::Directions
 
@@ -102,10 +100,20 @@ CALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, r
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: book_metadata, append_to: book_answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    # Bake solutions
+    MoveSolutionsFromAutotitledNote.v1(
+      page: chapter, append_to: answer_key_inner_container, note_class: 'checkpoint',
+      title: I18n.t(:'notes.checkpoint')
+    )
+    chapter.sections('$.section-exercises').each do |section|
+      number = "#{chapter.count_in(:book)}.#{section.count_in(:chapter)}"
+      MoveSolutionsFromExerciseSection.v1(
+        within: section, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        title_number: number
+      )
+    end
+    MoveSolutionsFromExerciseSection.v1(
+      within: chapter, append_to: answer_key_inner_container, section_class: 'review-exercises'
     )
   end
 

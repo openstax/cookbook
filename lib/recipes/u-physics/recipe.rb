@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'strategy'
-
 U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc, resources|
   include Kitchen::Directions
 
@@ -53,11 +51,16 @@ U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :uphysics) do |doc, 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: solutions_container
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'check-understanding'
     )
+    exercise_section_classes = %w[review-conceptual-questions review-problems
+                                  review-additional-problems review-challenge]
+    exercise_section_classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   book.search('div[data-type="solution"]').each do |solution|

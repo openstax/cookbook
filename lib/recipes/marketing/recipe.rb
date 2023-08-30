@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'strategy'
-require_relative 'appendix_strategy'
-
 MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, resources|
   include Kitchen::Directions
 
@@ -102,10 +99,13 @@ MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc,
       chapter: chapter, metadata_source: metadata, append_to: answer_key,
       options: { solutions_plural: false }
     )
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
-    )
+    chapter.non_introduction_pages.each do |page|
+      number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: page, append_to: answer_key_inner_container, section_class: 'knowledge-check',
+        title_number: number
+      )
+    end
   end
 
   notes = %w[marketing-practice companies-conscience link-to-learning careers-marketing]
@@ -152,10 +152,9 @@ MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc,
       chapter: page, metadata_source: metadata, append_to: answer_key,
       options: { solutions_plural: false, in_appendix: true }
     )
-
-    AppendixStrategy.new.bake(
-      page: page,
-      append_to: answer_key_appendix_inner_container
+    Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+      within: page, append_to: answer_key_appendix_inner_container,
+      section_class: 'knowledge-check', options: { in_appendix: true }
     )
   end
 
@@ -171,6 +170,3 @@ MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc,
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
 end
-
-
-

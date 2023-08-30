@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'strategy'
-
 NURSING_EXTERNAL_RECIPE = Kitchen::BookRecipe.new(book_short_name: :nursing_external) \
 do |doc, resources|
   include Kitchen::Directions
@@ -104,10 +102,16 @@ do |doc, resources|
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    # Solutions from note
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'unfolding-casestudy'
+    )
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'single-casestudy'
+    )
+    # Solutions from other exercise sections
+    Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+      within: chapter, append_to: answer_key_inner_container, section_class: 'review-questions'
     )
   end
 
@@ -146,6 +150,3 @@ do |doc, resources|
   BakeUnclassifiedNotes.v1(book: book)
   BakeFootnotes.v1(book: book)
 end
-
-
-

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'strategy'
-
 PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc, resources|
   include Kitchen::Directions
 
@@ -102,11 +100,16 @@ PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |
       chapter: chapter, metadata_source: metadata, append_to: solutions_container,
       options: { cases: true }
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'check-understanding'
     )
+    exercise_section_classes = %w[review-conceptual-questions review-problems
+                                  review-additional-problems review-challenge]
+    exercise_section_classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   book.search('div[data-type="solution"]').each do |solution|
@@ -167,6 +170,3 @@ PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-
-

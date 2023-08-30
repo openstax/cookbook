@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'strategy'
-
 # Used in precalculus (bakes precalculus, trigonometry, and college-algebra)
 # and precalculus-coreq (bakes college-algebra-coreq)
 PRECALCULUS_SHARED_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc, resources|
@@ -129,11 +127,24 @@ PRECALCULUS_SHARED_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculu
       append_to: solutions_container,
       options: { solutions_plural: false }
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    # Bake note solutions
+    MoveSolutionsFromAutotitledNote.v2(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'try'
     )
+    # Bake section exercise solutions
+    chapter.non_introduction_pages.each do |page|
+      number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        title_number: number
+      )
+    end
+    classes = %w[review-exercises practice-test]
+    classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   BakeScreenreaderSpans.v1(book: book)
