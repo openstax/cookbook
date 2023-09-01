@@ -15,7 +15,7 @@ module Kitchen::Directions::BakeReferences
         chapter.append(child:
           <<~HTML
             <div class="os-chapter-area">
-              <a href="#chapTitle#{chapter.count_in(:book)}">
+              <a href="##{chapter.title.id}">
                 <h2 data-type="document-title" data-rex-keep="true">
                   <span class="os-part-text">#{I18n.t("chapter#{'.nominative' if cases}")} </span>
                   <span class="os-number">#{chapter.count_in(:book)}</span>
