@@ -74,7 +74,9 @@ do |doc, resources|
         RemoveSectionTitle.v1(section: section)
       end
       chapter.composite_pages.search("section.#{section_key}").injected_questions.each do |question|
-        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:composite_page))
+        BakeInjectedExerciseQuestion.v1(
+          question: question, number: question.count_in(:composite_page)
+        )
       end
     end
 

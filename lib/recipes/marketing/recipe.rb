@@ -144,7 +144,7 @@ MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc,
     page.search('section.knowledge-check').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(
         question: question,
-        number: "#{appendix_letter}#{question.count_in(:page)}",
+        number: "#{appendix_letter}#{question.count_in(:page)}"
       )
     end
 

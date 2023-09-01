@@ -217,6 +217,3 @@ do |doc, resources|
   BakeFolio.v1(book: book, options: { new_approach: true })
   BakeLinks.v1(book: book)
 end
-
-
-

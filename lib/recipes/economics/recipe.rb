@@ -28,7 +28,8 @@ ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc,
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
-    exercise_section_classes = %w[summary self-check-questions review-questions critical-thinking problems]
+    exercise_section_classes = \
+      %w[summary self-check-questions review-questions critical-thinking problems]
 
     chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
@@ -45,7 +46,9 @@ ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc,
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
-      strategy_options: { selectors: %w[self-check-questions problems ap-test-prep].prefix('section.') },
+      strategy_options: {
+        selectors: %w[self-check-questions problems ap-test-prep].prefix('section.')
+      },
       chapter: chapter,
       append_to: answer_key_inner_container
     )

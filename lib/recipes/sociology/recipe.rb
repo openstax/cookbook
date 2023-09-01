@@ -26,7 +26,7 @@ SOCIOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc,
 
   # Bake NumberedTable in Preface
   book.pages('$.preface').tables('$:not(.unnumbered)').each do |table|
-    BakeNumberedTable.v1(table: table, number: "#{table.count_in(:page)}")
+    BakeNumberedTable.v1(table: table, number: table.count_in(:page))
   end
 
   BakeChapterTitle.v1(book: book)
@@ -40,7 +40,8 @@ SOCIOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc,
     MoveExercisesToEOC.v3(chapter: chapter, metadata_source: metadata, klass: 'short-answer')
     BakeFurtherResearch.v1(chapter: chapter, metadata_source: metadata)
     chapter.composite_pages.each do |composite_page|
-      composite_page.search('section.short-answer, section.section-quiz').exercises.each do |exercise|
+      composite_page.search('section.short-answer, section.section-quiz').exercises.each \
+      do |exercise|
         BakeNumberedExercise.v1(
           exercise: exercise, number: exercise.count_in(:composite_page),
           options: { suppress_solution_if: :even?, note_suppressed_solutions: true }

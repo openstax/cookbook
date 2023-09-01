@@ -78,6 +78,3 @@ do |doc, resources|
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-
-

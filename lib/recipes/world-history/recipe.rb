@@ -44,7 +44,9 @@ WORLD_HISTORY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :world_history) 
       section.prepend(child: title)
     end
 
-    eoc_wrapper = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata, klass: 'assessments')
+    eoc_wrapper = ChapterReviewContainer.v1(
+      chapter: chapter, metadata_source: metadata, klass: 'assessments'
+    )
 
     eoc_sections = %w[review-questions
                       check-understanding

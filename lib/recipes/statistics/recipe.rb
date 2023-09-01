@@ -84,15 +84,16 @@ STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |do
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
-    exercise_selectors = 'section.practice, section.bring-together-exercises, section.free-response, section.bring-together-homework'
+    exercise_selectors = 'section.practice, section.bring-together-exercises, ' \
+                         'section.free-response, section.bring-together-homework'
     chapter.search(exercise_selectors).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    BakeChapterSolutions.v1(chapter: chapter,
-                            metadata_source: metadata,
-                            classes: %w[practice bring-together-exercises free-response bring-together-homework])
-                            # breaks when replaced by exercise_selectors
+    BakeChapterSolutions.v1(
+      chapter: chapter, metadata_source: metadata,
+      classes: %w[practice bring-together-exercises free-response bring-together-homework]
+    ) # breaks when replaced by exercise_selectors
 
     chapter.examples.each do |example|
       BakeExample.v1(example: example,

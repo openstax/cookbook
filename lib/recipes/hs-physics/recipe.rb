@@ -154,6 +154,3 @@ HS_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :hs_physics) do |do
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-
-

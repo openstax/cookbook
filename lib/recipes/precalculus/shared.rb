@@ -2,7 +2,8 @@
 
 # Used in precalculus (bakes precalculus, trigonometry, and college-algebra)
 # and precalculus-coreq (bakes college-algebra-coreq)
-PRECALCULUS_SHARED_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do |doc, resources|
+PRECALCULUS_SHARED_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do \
+  |doc, resources|
   include Kitchen::Directions
 
   book = doc.book

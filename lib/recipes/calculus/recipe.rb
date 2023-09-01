@@ -43,7 +43,8 @@ CALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, r
     # Just above we moved the review exercises to the end of the chapter. Now that all of the
     # non-checkpoint exercises are in the right order, we bake them (the "in place" modifications)
     # and number them.
-    chapter.search('section.section-exercises, section.review-exercises').exercises.each do |exercise|
+    chapter.search('section.section-exercises, section.review-exercises').exercises.each \
+    do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
   end

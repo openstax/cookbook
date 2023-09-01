@@ -87,7 +87,7 @@ PL_ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do 
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    BakeAppendix.v1(page: page, number: appendix_letter, options: { cases: true } )
+    BakeAppendix.v1(page: page, number: appendix_letter, options: { cases: true })
     page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}",
@@ -126,6 +126,3 @@ PL_ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do 
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeLinks.v1(book: book)
 end
-
-
-

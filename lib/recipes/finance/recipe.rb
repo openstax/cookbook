@@ -127,6 +127,3 @@ FINANCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc, res
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-
-

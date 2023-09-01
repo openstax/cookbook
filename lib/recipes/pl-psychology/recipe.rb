@@ -99,5 +99,3 @@ PL_PSYCHOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plpsychology) d
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-
