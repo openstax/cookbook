@@ -79,7 +79,7 @@ module Nokogiri
         element = attribute || self
 
         ancestors.each do |a|
-          next if a.document? || a.name == 'html'
+          next if a.document?
 
           namespace = a.namespace_definitions.find do |ns|
             ns.prefix == element.namespace.prefix && ns.href == element.namespace.href
