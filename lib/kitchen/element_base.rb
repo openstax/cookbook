@@ -800,6 +800,32 @@ module Kitchen
     #
     def clone
       super.tap do |element|
+        # Define all namespaces that are used inside the node being cloned.
+        #
+        # When document is created, all namespaces definitions from the book
+        # are collected and added to the html tag.
+        # In the moment when clipboard is pasted and converted to string
+        # we are loosing information about namespaces defined on html ancestor.
+        #
+        # It's important to add namespace definition directly to the node that has a namespace.
+        # Adding it just to the node being cloned is breaking elements that have
+        # namespaces without prefix (e.g <math xmlns="http://www.w3.org/1998/Math/MathML"/>)
+        raw.traverse do |node|
+          node.attribute_nodes.each do |attr|
+            next unless attr.namespace
+
+            unless node.has_namespace_defined_on_ancestor?(attribute: attr)
+              node.add_namespace(attr.namespace.prefix, attr.namespace.href)
+            end
+          end
+
+          next unless node.namespace
+
+          unless node.has_namespace_defined_on_ancestor?
+            node.add_namespace(node.namespace.prefix, node.namespace.href)
+          end
+        end
+
         # When we call dup, the dup gets a bunch of default namespace stuff that
         # the original doesn't have.  Why? Unclear, but hard to get rid of nicely.
         # So here we mark that the element is a clone and then all of the `to_s`-like
@@ -818,24 +844,6 @@ module Kitchen
         #
         # I may not fully understand why the extra default namespace stuff is happening
         # FWIW :-)
-
-        # Define all namespaces that are used inside the node being cloned
-        raw.traverse do |node|
-          node.attribute_nodes.each do |attr|
-            next unless attr.namespace
-
-            unless node.has_namespace_defined_on_ancestor?(attribute: attr)
-              node.add_namespace(attr.namespace.prefix, attr.namespace.href)
-            end
-          end
-
-          next unless node.namespace
-
-          unless node.has_namespace_defined_on_ancestor?
-            node.add_namespace(node.namespace.prefix, node.namespace.href)
-          end
-        end
-
         element.node = node.dup
         element.is_a_clone = true
       end

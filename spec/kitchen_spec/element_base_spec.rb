@@ -755,6 +755,13 @@ RSpec.describe Kitchen::ElementBase do
     end
 
     context 'when node attribute has a namespace' do
+      # `book_containing` method is creating new document (see factory_helpers.rb)
+      # When document is initialized then all namespaces definitions are collected
+      # and added to html tag (see document.rb)
+      #
+      # To be able to test case when node being cloned doesn't have an ancestor
+      # with namespace definition, we need to add an element to existing document,
+      # so then namespaces from this node won't be collected to html tag.
       let(:chapter) do
         <<~HTML
           <div data-type="chapter">
