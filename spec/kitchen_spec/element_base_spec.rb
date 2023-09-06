@@ -737,20 +737,46 @@ RSpec.describe Kitchen::ElementBase do
   end
 
   describe '#clone' do
-    let(:book_with_namespaces) do
-      book_containing(html:
-        <<~HTML
-          <div data-type="chapter" xmlns:epub="http://example.com/epub" xmlns:m="http://example.com/maybemath">
-            <epub:element><span epub:attr="123"/></epub:element>
-            <span epub:attr="123"/>
-            <m:math/>
-          <div>
-        HTML
-      )
+    context 'when node has a namespace' do
+      let(:book_with_namespaces) do
+        book_containing(html:
+          <<~HTML
+            <div data-type="chapter">
+              <m:math/>
+              <math xmlns="http://www.w3.org/1998/Math/MathML"></math>
+            <div>
+          HTML
+        )
+      end
+
+      it 'preserves namespaces when cloning (like m:math)' do
+        expect(book_with_namespaces.clone).to match_snapshot_auto
+      end
     end
 
-    it 'preserves namespaces when cloning (like foornote epub:type attributes and m:math)' do
-      expect(book_with_namespaces.clone).to match_snapshot_auto
+    context 'when node attribute has a namespace' do
+      let(:chapter) do
+        <<~HTML
+          <div data-type="chapter">
+            <span xmlns:epub="http://example.com/epub" epub:attr="abc"/>
+          <div>
+        HTML
+      end
+
+      let(:new_book) do
+        book_containing(html:
+          <<~HTML
+          HTML
+        )
+      end
+
+      before do
+        new_book.search('body').first.replace_children(with: chapter)
+      end
+
+      it 'preserves attributes namespaces when cloning (like footnote epub:type)' do
+        expect(new_book.clone).to match_snapshot_auto
+      end
     end
   end
 end

@@ -821,9 +821,18 @@ module Kitchen
 
         # Define all namespaces that are used inside the node being cloned
         raw.traverse do |node|
-          raw.add_namespace(node.namespace.prefix, node.namespace.href) if node.namespace
           node.attribute_nodes.each do |attr|
-            raw.add_namespace(attr.namespace.prefix, attr.namespace.href) if attr.namespace
+            next unless attr.namespace
+
+            unless node.has_namespace_defined_on_ancestor?(attribute: attr)
+              node.add_namespace(attr.namespace.prefix, attr.namespace.href)
+            end
+          end
+
+          next unless node.namespace
+
+          unless node.has_namespace_defined_on_ancestor?
+            node.add_namespace(node.namespace.prefix, node.namespace.href)
           end
         end
 
@@ -918,7 +927,7 @@ module Kitchen
       page_string = ''
       page_title = ''
       page = element_with_ancestors.ancestor(:page) if element_with_ancestors.has_ancestor?(:page)
-      if page && page&.is_introduction?
+      if page&.is_introduction?
         page_title = page.first('[data-type="document-title"]').text.kebab_case
       elsif page
         page_string = "#{page.count_in(:chapter) - 1}-"
