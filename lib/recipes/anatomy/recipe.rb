@@ -21,6 +21,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc, _resources|
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnitTitle.v1(book: book)
+  AddInjectedExerciseId.v1(book: book)
   BakeChapterIntroductions.v2(
     book: book,
     options: {
@@ -53,11 +54,10 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc, _resources|
       )
     end
 
-    chapter.search(exercise_section_classes.prefix('section.').join(', ')).exercises
-           .each do |exercise|
-      exercise.solution.trash
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-    end
+    BakeAllNumberedExerciseTypes.v1(
+      within: chapter.search('div.os-eoc'),
+      exercise_options: { suppress_solution_if: true }
+    )
 
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,

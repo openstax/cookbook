@@ -5,14 +5,8 @@ ARG EASYBAKE_VERSION=1.2.8
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    git \
-    vim \
-    openssh-server \
-    build-essential \
-    wget \
     software-properties-common \
     zlib1g-dev \
-    libicu-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install a quick colorized prompt and turn on ls coloring

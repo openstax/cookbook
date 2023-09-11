@@ -68,7 +68,11 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc, _r
     end
 
     chapter.search('section.review-questions').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:chapter),
+        options: { add_dot: true }
+      )
       BakeFirstElements.v1(within: question)
     end
 
@@ -76,7 +80,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc, _r
       BakeInjectedExerciseQuestion.v1(
         question: question,
         number: question.count_in(:chapter),
-        options: { only_number_solution: false }
+        options: { only_number_solution: false, add_dot: true }
       )
     end
 
@@ -84,7 +88,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc, _r
       BakeInjectedExerciseQuestion.v1(
         question: question,
         number: question.count_in(:chapter),
-        options: { only_number_solution: false }
+        options: { only_number_solution: false, add_dot: true }
       )
     end
 

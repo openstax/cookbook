@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  rspec:
+  kitchen_tests:
     timeout-minutes: 10
     runs-on: ubuntu-22.04
 
@@ -19,8 +19,24 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - name: Build docker image and run specs within it
+      - name: Build docker image and run kitchen specs + codecov within it
         # See https://docs.codecov.io/docs/testing-with-docker
         run: |
           ./docker/build --ci
-          CI_ENV=`bash <(curl -s https://codecov.io/env)` ./docker/ci
+          CI_ENV=`bash <(curl -s https://codecov.io/env)` ./docker/ci_kitchen
+  recipes_tests:
+    timeout-minutes: 10
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Build docker image and run recipes specs within it
+        run: |
+          ./docker/build --ci
+          ./docker/ci_recipes
