@@ -69,10 +69,26 @@ module Nokogiri
 
       def preceded_by_text?
         prev = previous_sibling
-        while !prev.nil? && prev.blank? do prev = prev.previous_sibling end
+        prev = prev.previous_sibling while !prev.nil? && prev.blank?
         return false if prev.nil?
 
         prev.text?
+      end
+
+      def has_namespace_defined_on_ancestor?(attribute: nil)
+        element = attribute || self
+
+        ancestors.each do |a|
+          next if a.document?
+
+          namespace = a.namespace_definitions.find do |ns|
+            ns.prefix == element.namespace.prefix && ns.href == element.namespace.href
+          end
+
+          return true if namespace
+        end
+
+        false
       end
 
       def self.selector_to_css_nodes(selector)
@@ -83,7 +99,6 @@ module Nokogiri
 
       protected
 
-      # rubocop:disable Metrics/CyclomaticComplexity
       def matches_css_node?(css_node)
         case css_node.type
         when :CONDITIONAL_SELECTOR
@@ -105,7 +120,6 @@ module Nokogiri
           raise "Unknown Nokogiri::CSS:Node type in #{css_node}"
         end
       end
-      # rubocop:enable Metrics/CyclomaticComplexity
     end
   end
 end

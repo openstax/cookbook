@@ -71,6 +71,42 @@ RSpec.describe 'Nokogiri patches' do
         }.to raise_error(/Unknown.*type/)
       end
     end
+
+    describe '#has_namespace_defined_on_ancestor?' do
+      let(:node_with_namespace_on_ancestor) do
+        Nokogiri::XML(
+          <<~XML
+            <div xmlns:m="http://example.com/maybemath">
+              <m:math/>
+            </div>
+          XML
+      ).search('div').first.element_children.first
+      end
+
+      let(:node_attribute_with_namespace_on_ancestor) do
+        Nokogiri::XML(
+          <<~XML
+            <div xmlns:epub="http://example.com/epub">
+              <aside epub:attr="123"/>
+            </div>
+          XML
+      ).search('div').first.element_children.first
+      end
+
+      let(:attr) do
+        node_attribute_with_namespace_on_ancestor.attribute_nodes[0]
+      end
+
+      it 'works for node' do
+        expect(node_with_namespace_on_ancestor.has_namespace_defined_on_ancestor?).to be true
+        expect(make_nokogiri_node('<m:math/>').has_namespace_defined_on_ancestor?).to be false
+      end
+
+      it 'works for node attribute' do
+        expect(node_attribute_with_namespace_on_ancestor.has_namespace_defined_on_ancestor?(attribute: attr)).to be true
+        expect(make_nokogiri_node('<aside epub:attr="123"/>').has_namespace_defined_on_ancestor?).to be false
+      end
+    end
   end
 
   def make_nokogiri_node(string)
