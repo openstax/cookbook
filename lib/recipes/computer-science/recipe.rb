@@ -1,10 +1,7 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc, _resources|
+COMPUTER_SCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :computer_science) \
+do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -76,7 +73,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc, _r
         RemoveSectionTitle.v1(section: section)
       end
       chapter.composite_pages.search("section.#{section_key}").injected_questions.each do |question|
-        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:composite_page))
+        BakeInjectedExerciseQuestion.v1(
+          question: question, number: question.count_in(:composite_page)
+        )
       end
     end
 
@@ -122,16 +121,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :computer_science) do |doc, _r
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

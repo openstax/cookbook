@@ -1,0 +1,9 @@
+<div class="top-level">
+  <div data-type="solution">
+      <div class="os-solution-container">Solution 1</div>
+    </div>
+  <div data-type="solution">Solution 2</div>
+  <div data-type="question-solution">
+        <div class="os-solution-container">injected solution</div>
+      </div>
+</div>

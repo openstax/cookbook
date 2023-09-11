@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc, _resources|
+STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -87,15 +83,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc, _resourc
 
     BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
 
-    exercise_selectors = 'section.practice, section.bring-together-exercises, section.free-response, section.bring-together-homework'
+    exercise_selectors = 'section.practice, section.bring-together-exercises, ' \
+                         'section.free-response, section.bring-together-homework'
     chapter.search(exercise_selectors).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    BakeChapterSolutions.v1(chapter: chapter,
-                            metadata_source: metadata,
-                            classes: %w[practice bring-together-exercises free-response bring-together-homework])
-                            # breaks when replaced by exercise_selectors
+    BakeChapterSolutions.v1(
+      chapter: chapter, metadata_source: metadata,
+      classes: %w[practice bring-together-exercises free-response bring-together-homework]
+    ) # breaks when replaced by exercise_selectors
 
     chapter.examples.each do |example|
       BakeExample.v1(example: example,
@@ -158,16 +155,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc, _resourc
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

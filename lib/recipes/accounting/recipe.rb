@@ -1,14 +1,9 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
-
-require_relative 'strategy'
-require_relative '../recipes_helper'
 
 # spec input file contains test content from chapter 1 and 10 (needed for
 # BakeFirstElemets in the AnswerKey) from Accounting vol2
 
-recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, _resources|
+ACCOUNTING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -100,11 +95,12 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, _resourc
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
-    )
+    answer_key_classes_to_move = %w[multiple-choice questions]
+    answer_key_classes_to_move.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   BakeAutotitledNotes.v1(book: book, classes: %w[your-turn
@@ -141,16 +137,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, _resourc
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

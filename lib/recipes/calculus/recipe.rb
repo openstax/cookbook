@@ -1,11 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative 'strategy'
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, _resources|
+CALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -47,7 +42,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, _resources
     # Just above we moved the review exercises to the end of the chapter. Now that all of the
     # non-checkpoint exercises are in the right order, we bake them (the "in place" modifications)
     # and number them.
-    chapter.search('section.section-exercises, section.review-exercises').exercises.each do |exercise|
+    chapter.search('section.section-exercises, section.review-exercises').exercises.each \
+    do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
   end
@@ -104,10 +100,20 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, _resources
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: book_metadata, append_to: book_answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    # Bake solutions
+    MoveSolutionsFromAutotitledNote.v1(
+      page: chapter, append_to: answer_key_inner_container, note_class: 'checkpoint',
+      title: I18n.t(:'notes.checkpoint')
+    )
+    chapter.sections('$.section-exercises').each do |section|
+      number = "#{chapter.count_in(:book)}.#{section.count_in(:chapter)}"
+      MoveSolutionsFromExerciseSection.v1(
+        within: section, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        title_number: number
+      )
+    end
+    MoveSolutionsFromExerciseSection.v1(
+      within: chapter, append_to: answer_key_inner_container, section_class: 'review-exercises'
     )
   end
 
@@ -135,16 +141,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, _resources
   BakeLinks.v1(book: book)
 
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

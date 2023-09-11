@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc, _resources|
+PL_ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc, _resources|
   include Kitchen::Directions
 
   doc.selectors.override(
@@ -90,7 +86,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc, _resour
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
 
-    BakeAppendix.v1(page: page, number: appendix_letter, options: { cases: true } )
+    BakeAppendix.v1(page: page, number: appendix_letter, options: { cases: true })
     page.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{appendix_letter}#{figure.count_in(:page)}",
@@ -129,16 +125,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do |doc, _resour
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

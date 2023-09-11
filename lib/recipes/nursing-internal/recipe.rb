@@ -1,10 +1,7 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, _resources|
+NURSING_INTERNAL_RECIPE = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) \
+do |doc, _resources|
   include Kitchen::Directions
 
   doc.selectors.override(
@@ -128,7 +125,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, _r
 
     exercises.each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
       )
     end
   end
@@ -166,16 +163,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) do |doc, _r
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

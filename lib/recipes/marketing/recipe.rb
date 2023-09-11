@@ -1,12 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative 'strategy'
-require_relative 'appendix_strategy'
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resources|
+MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -104,10 +98,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resource
       chapter: chapter, metadata_source: metadata, append_to: answer_key,
       options: { solutions_plural: false }
     )
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
-    )
+    chapter.non_introduction_pages.each do |page|
+      number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: page, append_to: answer_key_inner_container, section_class: 'knowledge-check',
+        title_number: number
+      )
+    end
   end
 
   notes = %w[marketing-practice companies-conscience link-to-learning careers-marketing]
@@ -146,7 +143,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resource
     page.search('section.knowledge-check').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(
         question: question,
-        number: "#{appendix_letter}#{question.count_in(:page)}",
+        number: "#{appendix_letter}#{question.count_in(:page)}"
       )
     end
 
@@ -154,10 +151,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resource
       chapter: page, metadata_source: metadata, append_to: answer_key,
       options: { solutions_plural: false, in_appendix: true }
     )
-
-    AppendixStrategy.new.bake(
-      page: page,
-      append_to: answer_key_appendix_inner_container
+    Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+      within: page, append_to: answer_key_appendix_inner_container,
+      section_class: 'knowledge-check', options: { in_appendix: true }
     )
   end
 
@@ -173,16 +169,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resource
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

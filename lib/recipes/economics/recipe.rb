@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc, _resources|
+ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc, _resources|
   include Kitchen::Directions
 
   doc.selectors.override(
@@ -31,7 +27,8 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc, _resource
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
-    exercise_section_classes = %w[summary self-check-questions review-questions critical-thinking problems]
+    exercise_section_classes = \
+      %w[summary self-check-questions review-questions critical-thinking problems]
 
     chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
@@ -48,7 +45,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc, _resource
     )
 
     DefaultStrategyForAnswerKeySolutions.v1(
-      strategy_options: { selectors: %w[self-check-questions problems ap-test-prep].prefix('section.') },
+      strategy_options: {
+        selectors: %w[self-check-questions problems ap-test-prep].prefix('section.')
+      },
       chapter: chapter,
       append_to: answer_key_inner_container
     )
@@ -108,16 +107,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc, _resource
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

@@ -1,11 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative 'strategy'
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc, _resources|
+PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -104,11 +99,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc, _resourc
       chapter: chapter, metadata_source: metadata, append_to: solutions_container,
       options: { cases: true }
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'check-understanding'
     )
+    exercise_section_classes = %w[review-conceptual-questions review-problems
+                                  review-additional-problems review-challenge]
+    exercise_section_classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   book.search('div[data-type="solution"]').each do |solution|
@@ -169,16 +169,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc, _resourc
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

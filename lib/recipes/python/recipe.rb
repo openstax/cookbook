@@ -1,12 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative 'preface_strategy'
-require_relative 'strategy'
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _resources|
+PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -44,10 +38,9 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _resources|
       chapter: page, metadata_source: metadata, append_to: answer_key,
       options: { solutions_plural: false, in_preface: true }
     )
-
-    PrefaceStrategy.new.bake(
-      page: page,
-      append_to: answer_key_preface_inner_container
+    Kitchen::Directions::MoveSolutionsFromAutotitledNote.v1(
+      page: page, append_to: answer_key_preface_inner_container,
+      note_class: 'learning-questions', title: nil
     )
   end
 
@@ -90,11 +83,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _resources|
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
-    )
+    chapter.non_introduction_pages.each do |page|
+      title = page.title.children
+      Kitchen::Directions::MoveSolutionsFromAutotitledNote.v1(
+        page: page, append_to: answer_key_inner_container, note_class: 'learning-questions',
+        title: title
+      )
+    end
   end
 
   BakeFootnotes.v1(book: book, number_format: :roman) # check if exists
@@ -106,16 +101,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _resources|
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

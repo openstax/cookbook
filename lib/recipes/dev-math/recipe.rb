@@ -1,11 +1,7 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
 # used for prealgebra, intermediate-algebra, and elementary-algebra
-recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, _resources|
+DEV_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -83,14 +79,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, _resources
     chapter.non_introduction_pages.each do |page|
       number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        within: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
         title_number: number
       )
     end
-    classes = %w[review-exercises practice-test]
-    classes.each do |klass|
+    exercise_section_classes = %w[review-exercises practice-test]
+    exercise_section_classes.each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
       )
     end
 
@@ -142,16 +138,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, _resources
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

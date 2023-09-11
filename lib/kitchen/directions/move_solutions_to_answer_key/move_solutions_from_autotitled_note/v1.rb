@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::MoveSolutionsFromAutotitledNote
-  def self.v1(page:, append_to:, note_class:, title: nil)
-    V1.new.bake(page: page, append_to: append_to, note_class: note_class, title: title)
-  end
-
   class V1
     def bake(page:, append_to:, note_class:, title:)
       solutions_clipboard = page.notes("$.#{note_class}").solutions.cut

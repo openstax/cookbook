@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-COLLEGE_PHYSICS_RECIPE = Kitchen::BookRecipe.new(
+COLLEGE_PHYSICS_SHARED_RECIPE = Kitchen::BookRecipe.new(
   book_short_name: :college_physics_recipe) do |doc, _resources|
   include Kitchen::Directions
 

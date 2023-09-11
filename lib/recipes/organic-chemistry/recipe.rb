@@ -1,10 +1,7 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc, _resources|
+ORGANIC_CHEMISTRY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) \
+do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -124,14 +121,14 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc, _
     chapter.non_introduction_pages.each do |page|
       page.search('div.os-eos.os-section-exercises-container').each do |section_wrapper|
         Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-          chapter: section_wrapper, append_to: answer_key_inner_container,
+          within: section_wrapper, append_to: answer_key_inner_container,
           section_class: 'section-exercises', options: { add_title: false }
         )
       end
     end
     %w[visualizing-chemistry additional-problems preview-carbonylchemistry].each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        chapter: chapter, append_to: answer_key_inner_container, section_class: klass,
+        within: chapter, append_to: answer_key_inner_container, section_class: klass,
         options: { add_title: false }
       )
     end
@@ -219,16 +216,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :organic_chemistry) do |doc, _
   BakeFolio.v1(book: book, options: { new_approach: true })
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

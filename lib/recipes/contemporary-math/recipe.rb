@@ -1,11 +1,7 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative 'strategy'
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc, _resources|
+CONTEMPORARY_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) \
+do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -137,11 +133,23 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc, _
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    # Bake solutions
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v2(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'your-turn'
     )
+    chapter.non_introduction_pages.each do |page|
+      number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: page, append_to: answer_key_inner_container, section_class: 'section-exercises',
+        title_number: number
+      )
+    end
+    exercise_section_classes = %w[chapter-review chapter-test check-understanding]
+    exercise_section_classes.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   book.pages('$.appendix').each do |page|
@@ -179,16 +187,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :contemporary_math) do |doc, _
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

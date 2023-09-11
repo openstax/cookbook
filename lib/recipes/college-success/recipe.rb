@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../college-success/collegesuccess_recipe'
-
-hs_delete = Kitchen::BookRecipe.new(book_short_name: :hs_delete) do |doc|
+COLLEGE_SUCCESS_HS_DELETE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :hs_delete) do |doc|
   include Kitchen::Directions
 
   book = doc.book
@@ -30,16 +26,3 @@ hs_delete = Kitchen::BookRecipe.new(book_short_name: :hs_delete) do |doc|
     end
   end
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [hs_delete, COLLEGESUCCESS_RECIPE, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)

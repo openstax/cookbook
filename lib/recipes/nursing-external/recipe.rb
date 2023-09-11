@@ -1,11 +1,7 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-require_relative '../recipes_helper'
-require_relative 'strategy'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc, _resources|
+NURSING_EXTERNAL_RECIPE = Kitchen::BookRecipe.new(book_short_name: :nursing_external) \
+do |doc, _resources|
   include Kitchen::Directions
 
   doc.selectors.override(
@@ -105,10 +101,16 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc, _r
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
-
-    Strategy.new.bake(
-      chapter: chapter,
-      append_to: answer_key_inner_container
+    # Solutions from note
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'unfolding-casestudy'
+    )
+    Kitchen::Directions::MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container, note_class: 'single-casestudy'
+    )
+    # Solutions from other exercise sections
+    Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+      within: chapter, append_to: answer_key_inner_container, section_class: 'review-questions'
     )
   end
 
@@ -147,16 +149,3 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :nursing_external) do |doc, _r
   BakeUnclassifiedNotes.v1(book: book)
   BakeFootnotes.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output],
-  resource_dir: opts[:resources] || nil
-)
