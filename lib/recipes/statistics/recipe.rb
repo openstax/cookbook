@@ -1,0 +1,158 @@
+# frozen_string_literal: true
+
+STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc, resources|
+  include Kitchen::Directions
+
+  # Set overrides
+  doc.selectors.override(
+    reference: '.references'
+  )
+
+  book = doc.book
+  metadata = book.metadata
+
+  # Some stuff just goes away
+  book.search('cnx-pi').trash
+  book.body.search('div[data-type="metadata"] > div[data-type="description"]').trash
+
+  BakeImages.v1(book: book, resources: resources)
+  BakeUnnumberedFigure.v1(book: book)
+  BakePreface.v1(book: book, title_element: 'h1')
+  BakeInlineLists.v1(book: book)
+  BakeUnclassifiedNotes.v1(book: book)
+  BakeChapterTitle.v1(book: book)
+  BakeChapterIntroductions.v2(book: book)
+
+  book.chapters.each do |chapter|
+    BakeLearningObjectives.v1(chapter: chapter)
+
+    # EOC sections
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'formula-review',
+      uuid_key: '.formula-review',
+      section_selector: 'section.formula-review',
+      append_to: chapter
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      section.prepend(child: EocSectionTitleLinkSnippet.v1(
+        page: section.ancestor(:page)
+      ))
+    end
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'practice',
+      uuid_key: '.practice',
+      section_selector: 'section.practice',
+      append_to: chapter
+    ) do |section|
+      RemoveSectionTitle.v1(section: section, selector: 'h3')
+      section.prepend(child: EocSectionTitleLinkSnippet.v1(
+        page: section.ancestor(:page)
+      ))
+    end
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'bring-together-exercises',
+      uuid_key: '.bring-together-exercises',
+      section_selector: 'section.bring-together-exercises',
+      append_to: chapter
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
+
+    BakeFreeResponse.v1(chapter: chapter, metadata_source: metadata)
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'bring-together-homework',
+      uuid_key: '.bring-together-homework',
+      section_selector: 'section.bring-together-homework',
+      append_to: chapter
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+    end
+
+    BakeChapterReferences.v1(chapter: chapter, metadata_source: book.metadata)
+
+    exercise_selectors = 'section.practice, section.bring-together-exercises, ' \
+                         'section.free-response, section.bring-together-homework'
+    chapter.search(exercise_selectors).exercises.each do |exercise|
+      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    end
+
+    BakeChapterSolutions.v1(
+      chapter: chapter, metadata_source: metadata,
+      classes: %w[practice bring-together-exercises free-response bring-together-homework]
+    ) # breaks when replaced by exercise_selectors
+
+    chapter.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
+                     title_tag: 'h3',
+                     options: { add_problem_title: true })
+    end
+  end
+
+  BakeNumberedNotes.v3(book: book, classes: %w[try], options: { suppress_solution: true })
+  BakeAutotitledNotes.v1(book: book, classes: %w[lab calculator])
+  BakeAutotitledNotes.v1(book: book, classes: %w[collab], options: { bake_subtitle: false })
+
+  book.chapters.each do |chapter|
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    BakeNonIntroductionPages.v1(chapter: chapter)
+
+    chapter.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+  end
+
+  book.pages('$.appendix').each do |page|
+    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
+
+    page.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{appendix_letter}#{figure.count_in(:page)}")
+    end
+
+    page.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{appendix_letter}#{table.count_in(:page)}")
+    end
+
+    BakeAppendix.v1(page: page, number: appendix_letter)
+  end
+
+  book.search('section.section-exercises',
+              'section.free-response',
+              'section.bring-together-homework',
+              'div.os-solutions-container').each do |within|
+    BakeFirstElements.v1(within: within)
+  end
+
+  BakeUnnumberedTables.v1(book: book)
+  BakeEquations.v1(book: book)
+  BakeMathInParagraph.v1(book: book)
+  BakeIndex.v1(book: book)
+  BakeCompositePages.v1(book: book)
+  BakeFootnotes.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
+  BakeToc.v1(book: book)
+  BakeFolio.v1(book: book)
+  BakeLinks.v1(book: book)
+end
