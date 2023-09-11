@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Fix problem with mathml namespaces in `hs-physics`
+
+## [v2.1.0] - 2023-09-08
+
+* Revert `BakeReferences` version to `V2` in `nursing-external` until fix for webview be ready
 * Create `V4` of `BakeReferences` for `nursing-external`
 * Bake `injected-exercises` in `anatomy`
 * Remove from Dockerfile `git`, `vim`, `openssh-server`, `wget`, `libicu-dev`, and `liveshare`
