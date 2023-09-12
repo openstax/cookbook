@@ -31,7 +31,7 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, resou
       BakeInjectedExerciseQuestion.v1(
         question: question,
         number: question.count_in(:page),
-        options: { only_number_solution: false, detailed_solution: true }
+        options: { only_number_solution: false }
       )
     end
 
@@ -77,7 +77,7 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, resou
       BakeInjectedExerciseQuestion.v1(
         question: question,
         number: question.count_in(:page),
-        options: { only_number_solution: false, add_dot: true, detailed_solution: true }
+        options: { only_number_solution: false, add_dot: true }
       )
     end
 
