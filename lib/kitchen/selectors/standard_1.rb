@@ -31,6 +31,7 @@ module Kitchen
         self.injected_question          = "div[data-type='exercise-question']"
         self.section                    = 'section'
         self.injected_exercise          = "div[data-type='injected-exercise']"
+        self.image                      = 'img'
       end
 
     end

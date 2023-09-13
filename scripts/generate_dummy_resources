@@ -2,6 +2,8 @@
 
 # frozen_string_literal: true
 
+# Call with ./scripts/generate_dummy_resources <input-file> <output-dir>
+
 require_relative '../lib/recipes/recipes_helper'
 
 def write_resource(resource_key:, directory:)
@@ -13,11 +15,13 @@ end
 
 def get_resource_keys_from_file(input_file:)
   resource_keys = []
-  doc = Nokogiri::XML(File.open(input_file))
-  doc.search('img').each do |image|
-    resource_keys.append(
-      image[:src].gsub('../resources/', '').gsub('.json', '').to_sym  # TODO: make this always the same as the line in bake_images
+  doc = Kitchen::BookDocument.new(document:
+    Kitchen::Document.new(nokogiri_document:
+      Nokogiri::XML(File.open(input_file))
     )
+  )
+  doc.book.images.each do |image|
+    resource_keys.append(image.resource_key)
   end
   resource_keys
 end
