@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add options for multipart questions in `BakeInjectedExercise`
 * Refactor: Move baking logic from recipe files to centralized executable
   * Change `bake` files to `recipe.rb`
 * Refactor: Take out `Strategy` architecture, move logic inline
