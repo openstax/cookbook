@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe 'books' do
   it 'bakes dummy' do
-    expect('dummy').to bake_correctly_with_resources('../books/dummy/resources')
+    expect('dummy').to bake_correctly
   end
 
   it 'bakes accounting' do
