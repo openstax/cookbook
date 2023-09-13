@@ -8,7 +8,7 @@ opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
   slop.string '--recipe', 'Keyword for recipe', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
+  slop.string '--resources', 'Path to book resources directory', suppress_errors: true
 end
 
 # Map recipe keyword to recipe/recipes
@@ -62,6 +62,7 @@ book_recipe = \
   when 'sociology' then [SOCIOLOGY_RECIPE]
   when 'statistics' then [STATISTICS_RECIPE]
   when 'u-physics' then [U_PHYSICS_RECIPE]
+  when 'web-generic' then [WEB_RECIPE]
   when 'world-history' then [WORLD_HISTORY_RECIPE]
   else
     raise 'Invalid recipe keyword'

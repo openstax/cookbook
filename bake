@@ -23,8 +23,10 @@ done
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Bake with or without resources
-if [[ -n $resource_dir ]]; then
+if [[ -v $resource_dir ]]; then
+  echo "BAKING WITHOUT RESOURCES"
   $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book
 else
+  echo "BAKING WITH RESOURCES"
   $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book --resources $resource_dir
 fi
