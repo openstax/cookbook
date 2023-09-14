@@ -2,17 +2,21 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-usage="bake -b <bookname> -i <inputfile> -o <outputfile> -r <resourcedir>"
+usage="bake -b <bookname> -i <inputfile> -o <outputfile> -r <resourcedir> -p <platform>"
+
+platform='default'
+resource_dir=0
 
 # Get command line arguments
 
-while getopts b:i:o:r:h flag
+while getopts b:i:o:r:p:h flag
 do
   case "${flag}" in
     b) book=${OPTARG} ;;
     i) input_file=${OPTARG} ;;
     o) output_file=${OPTARG} ;;
     r) resource_dir=${OPTARG} ;;
+    p) platform=${OPTARG} ;; # web or default (pdf)
     h) echo $usage; exit 0 ;;
     *) echo "Unknown flag '${flag}'"; exit 1 ;;
   esac
@@ -23,10 +27,12 @@ done
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Bake with or without resources
-if [[ -v $resource_dir ]]; then
-  echo "BAKING WITHOUT RESOURCES"
-  $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book
+if [[ $resource_dir == 0 ]]; then
+  if [[ $platform == 'web' ]]; then
+    echo "ERROR: resources required when baking for web"
+    exit 1
+  fi
+  $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book --platform $platform
 else
-  echo "BAKING WITH RESOURCES"
-  $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book --resources $resource_dir
+  $DIR/lib/recipes/bake --input $input_file --output $output_file --recipe $book --resources $resource_dir --platform $platform
 fi
