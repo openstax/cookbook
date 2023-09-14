@@ -22,7 +22,10 @@ BCA_RECIPE = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc, resources|
 
   AddInjectedExerciseId.v1(book: book)
   book.injected_exercises.each do |exercise|
-    BakeInjectedExercise.v1(exercise: exercise)
+    BakeInjectedExercise.v1(
+      exercise: exercise,
+      options: { alphabetical_multiparts: true, list_type: 'upper-alpha' }
+    )
   end
 
   book.chapters.each do |chapter|
