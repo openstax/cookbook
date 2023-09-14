@@ -40,7 +40,7 @@ module Kitchen::Directions::BakeInjectedExercise
           problem_letter = if options[:add_brackets]
                              "(#{alphabet[index]})"
                            else
-                             alphabet[index]
+                             "#{alphabet[index]}."
                            end
 
           solution = question.solution
