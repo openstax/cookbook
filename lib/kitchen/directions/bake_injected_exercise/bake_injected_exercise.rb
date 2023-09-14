@@ -36,12 +36,12 @@ module Kitchen::Directions::BakeInjectedExercise
 
         exercise.injected_questions.each_with_index do |question, index|
           question.set(:'data-type', 'alphabetical-question-multipart')
-          # problem_letter = "(#{alphabet[index]})"
+
           problem_letter = if options[:add_brackets]
-            "(#{alphabet[index]})"
-          else
-            alphabet[index]
-          end
+                             "(#{alphabet[index]})"
+                           else
+                             alphabet[index]
+                           end
 
           solution = question.solution
           solution_id = "#{question.id}-solution" if solution.present?

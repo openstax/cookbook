@@ -115,10 +115,18 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
       expect(injected_exercise_full_with_multipart_questions_with_solutions).to match_snapshot_auto
     end
 
+    it 'bakes an alphabetical multipart question with different numbering' do
+      described_class.v1(
+        exercise: injected_exercise_full_with_multipart_questions_with_solutions,
+        options: { alphabetical_multiparts: true, list_type: 'upper-alpha' }
+      )
+      expect(injected_exercise_full_with_multipart_questions_with_solutions).to match_snapshot_auto
+    end
+
     it 'leaves an exercise without a stimulus alone' do
       described_class.v1(
         exercise: injected_exercise_none,
-        options: { alphabetical_multiparts: true, list_type: 'upper-alpha' }
+        options: { alphabetical_multiparts: true, list_type: 'lower-alpha' }
       )
       expect(injected_exercise_none).to match_snapshot_auto
     end
