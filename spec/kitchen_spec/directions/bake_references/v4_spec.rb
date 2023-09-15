@@ -32,6 +32,9 @@ RSpec.describe Kitchen::Directions::BakeReferences do
           <span class="os-divider"> </span>
           <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
         </h1>
+        <div data-type="page" class="introduction" id="page_id">
+          <h2 data-type='document-title' id="page_id_titlecreatedbycookbook">Introduction</h2>
+        </div>
         <div data-type="page">
           <h2 data-type='document-title'>Stuff and Things</h2>
           <section data-depth="1" id="1" class="reference">
@@ -47,6 +50,9 @@ RSpec.describe Kitchen::Directions::BakeReferences do
           <span class="os-divider"> </span>
           <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
         </h1>
+        <div data-type="page" class="introduction" id="page_id2">
+          <h2 data-type='document-title' id="page_id2_titlecreatedbycookbook">Introduction</h2>
+        </div>
         <div data-type="page">
           <h2 data-type='document-title'>Somehing</h2>
           <section data-depth="1" id="2" class="reference">
@@ -62,6 +68,9 @@ RSpec.describe Kitchen::Directions::BakeReferences do
           <span class="os-divider"> </span>
           <span class="os-text" data-type="" itemprop="">Title Text Chapter 3</span>
         </h1>
+        <div data-type="page" class="introduction" id="page_id3">
+          <h2 data-type='document-title' id="page_id3_titlecreatedbycookbook">Introduction</h2>
+        </div>
         <div data-type="page">
           <h2 data-type='document-title'>Somehing else</h2>
         </div>

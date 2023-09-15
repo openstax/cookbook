@@ -131,7 +131,7 @@ do |doc, resources|
   BakeUnnumberedTables.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  BakeReferences.v2(book: book, metadata_source: metadata)
+  BakeReferences.v4(book: book, metadata_source: metadata)
   BakeIframes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeFolio.v1(book: book)

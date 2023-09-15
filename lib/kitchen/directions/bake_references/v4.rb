@@ -9,17 +9,18 @@ module Kitchen::Directions::BakeReferences
 
         chapter_references = chapter.pages.references.cut
         chapter_title_text = chapter.title.search('.os-text')
+        introduction_page = chapter.introduction_page
 
         next if chapter_references.items.empty?
 
         chapter.append(child:
           <<~HTML
             <div class="os-chapter-area">
-              <a href="#chapTitle#{chapter.count_in(:book)}">
+              <a href="##{introduction_page.id}_titlecreatedbycookbook">
                 <h2 data-type="document-title" data-rex-keep="true">
                   <span class="os-part-text">#{I18n.t("chapter#{'.nominative' if cases}")} </span>
                   <span class="os-number">#{chapter.count_in(:book)}</span>
-                  <span class="os-divider">: </span>
+                  <span class="os-divider"> </span>
                   #{chapter_title_text}
                 </h2>
               </a>
