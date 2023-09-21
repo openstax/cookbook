@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `BakeTableColumns` module
 * Fix `V4` of `BakeReferences` and apply it to `nursing-external`
 * Add options for multipart questions in `BakeInjectedExercise`
 * Revert changes made for `detailed solution` in `python`

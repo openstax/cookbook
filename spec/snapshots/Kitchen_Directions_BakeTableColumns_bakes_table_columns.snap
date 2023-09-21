@@ -1,0 +1,24 @@
+
+    <table id="tableId" summary="A summary..." data-columns="2" data-ratio="1,2">
+  <colgroup>
+    <col data-width="1*"/>
+    <col data-width="2*"/>
+  </colgroup>
+  <thead>
+    <tr>
+      <th colspan="2" data-align="center">The Title</th>
+    </tr>
+    <tr valign="top">
+      <th data-align="left">Heading</th>
+      <th data-align="left">Headin2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td data-align="left">Bar</td>
+      <td data-align="left">Foo</td>
+    </tr>
+  </tbody>
+</table>
+
+  

@@ -129,6 +129,7 @@ do |doc, resources|
   end
 
   BakeUnnumberedTables.v1(book: book)
+  BakeTableColumns.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeReferences.v4(book: book, metadata_source: metadata)
