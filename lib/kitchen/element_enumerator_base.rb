@@ -392,7 +392,7 @@ module Kitchen
       raise 'must supply at least one enumerator class' if enumerator_classes.empty?
 
       factory = enumerator_classes[0].factory
-      enumerator_classes[1..-1].each do |enumerator_class|
+      enumerator_classes[1..].each do |enumerator_class|
         factory = factory.or_with(enumerator_class.factory)
       end
       factory.build_within(self)
