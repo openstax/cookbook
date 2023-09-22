@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.2.0] - 2023-09-22
+
 * Fix `V4` of `BakeReferences` and apply it to `nursing-external`
 * Add options for multipart questions in `BakeInjectedExercise`
 * Revert changes made for `detailed solution` in `python`
