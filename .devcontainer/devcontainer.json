@@ -10,8 +10,7 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind,consistency=default",
   "workspaceFolder": "/code",
   "extensions": [
-    "castwide.solargraph",
-    "rebornix.Ruby"
+    "Shopify.ruby-lsp"
   ],
   "settings": {
     "files.trimTrailingWhitespace": true,
@@ -19,20 +18,8 @@
     "terminal.integrated.shell.linux": "/bin/bash",
     "[ruby]": {
       "editor.insertSpaces": true,
-      "editor.tabSize": 2,
+      "editor.tabSize": 2
     },
-    "ruby.lint": {
-      "rubocop": {
-        "useBundler": true // enable rubocop via bundler
-      },
-    },
-    "ruby.format": "rubocop", // use rubocop for formatting
-    "ruby.useLanguageServer": true,
-    "solargraph.commandPath": "/usr/local/bundle/bin/solargraph",
-    "solargraph.bundlerPath": "/usr/local/bin/bundle",
-    "ruby.rubocop.executePath": "/usr/local/bundle/bin/",
-    "ruby.rubocop.onSave": true,
-    "ruby.rubocop.configFilePath": "/code/.rubocop.yml",
     "terminal.integrated.scrollback": 100000
   }
 }

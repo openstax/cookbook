@@ -23,7 +23,6 @@ COPY . /code/
 
 RUN gem install bundler --no-document --version $bundler_version && \
     bundle install && \
-    gem install solargraph && \
     gem install lefthook && \
     bundle config set no-cache 'true' && \
     bundle config set silence_root_warning 'true' && \
