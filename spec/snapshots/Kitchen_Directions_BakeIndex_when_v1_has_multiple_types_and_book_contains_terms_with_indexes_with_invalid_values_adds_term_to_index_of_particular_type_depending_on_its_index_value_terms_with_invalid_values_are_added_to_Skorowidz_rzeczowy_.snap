@@ -11,7 +11,7 @@
       <span class="group-label">C</span>
       
         <div class="os-index-item">
-              <span class="os-term" group-by="C">Chomsky, Noam</span>
+<span class="os-term" group-by="C">Chomsky, Noam</span>
 
             <a class="os-term-section-link" href="#auto_p1_term5"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
@@ -32,21 +32,21 @@
       <span class="group-label">C</span>
       
         <div class="os-index-item">
-              <span class="os-term" group-by="c">czarownica</span>
+<span class="os-term" group-by="c">czarownica</span>
 
             <a class="os-term-section-link" href="#auto_p1_term3"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
         <div class="os-index-item">
-              <span class="os-term" group-by="c">czas</span>
+<span class="os-term" group-by="c">czas</span>
 
             <a class="os-term-section-link" href="#auto_p1_term2"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
         </div>
       
         <div class="os-index-item">
-              <span class="os-term" group-by="c">czosnek</span>
+<span class="os-term" group-by="c">czosnek</span>
 
             <a class="os-term-section-link" href="#auto_p1_term1"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
@@ -67,7 +67,8 @@
       <span class="group-label">I</span>
       
         <div class="os-index-item">
-              <span class="os-term" group-by="i">introspection</span>
+                <span class="os-term" xml:lang="en" lang="en" group-by="i">introspection</span>
+
 
             <a class="os-term-section-link" href="#auto_p1_term4"><span class="os-term-section">1.1 First Page</span></a><!--
           -->
