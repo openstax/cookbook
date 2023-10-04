@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Refactor custom `Matcher`s to be more readable
+* Create test & test data for web pipeline
 * Refactor: Move baking logic from recipe files to centralized executable
   * Change `bake` files to `recipe.rb`
 * Refactor: Take out `Strategy` architecture, move logic inline
