@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require_relative '../lib/recipes/recipes_helper'
+require 'tempfile'
 
 def read_and_write(input_file:, output_file:)
   doc = Nokogiri::XML(File.open(input_file)) { |config| config.noblanks }
@@ -13,14 +14,9 @@ def read_and_write(input_file:, output_file:)
 end
 
 ARGV.each do |input_file|
-  output_file =
-    if File.extname(input_file) != ''
-      input_file.gsub(/(\.\w+)\z/, '.normalized\1')
-    else
-      "#{input_file}.normalized"
-    end
+  tmp_output = Tempfile.new(input_file)
+  read_and_write(input_file: input_file, output_file: tmp_output)
+  FileUtils.cp(tmp_output, input_file)
 
-  read_and_write(input_file: input_file, output_file: output_file)
-
-  puts "Normalized '#{input_file}' to '#{output_file}'"
+  puts "Normalized '#{input_file}'"
 end

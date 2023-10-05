@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'digest'
-require 'tempfile'
 
 RSpec::Matchers.define(:be_same_file_as) do |expected_file_path|
   match do |actual_file_path|
@@ -13,48 +12,25 @@ RSpec::Matchers.define(:be_same_file_as) do |expected_file_path|
   end
 end
 
-RSpec::Matchers.define :bake_correctly_with do |recipe, resource_path, output_from|
+def form_bake_cmd(book:, recipe: nil, resource_path: nil, output_platform: nil)
+  recipe ||= book
+  "#{__dir__}/../../../bake -b #{recipe} \
+  -i #{__dir__}/../books/#{book}/input.xhtml \
+  #{"-r #{__dir__}/#{resource_path}" if resource_path} \
+  -o #{__dir__}/../books/#{book}/actual_output.xhtml \
+  -p #{output_platform || 'default'}"
+end
+
+RSpec::Matchers.define(:match_expected_when_baked_with) do |cmd|
   match do |book|
-    actual_file = Tempfile.new(book)
-
-    cmd = \
-      "#{__dir__}/../../../bake -b #{recipe} \
-      -i #{output_from ? "#{__dir__}/../books/#{output_from}/expected_output.xhtml" : "#{__dir__}/../books/#{book}/input.xhtml"} \
-      #{"-r #{__dir__}/#{resource_path}" if resource_path} \
-      -o #{actual_file.path}"
-
+    # run formatted command
     `#{cmd}`
 
-    `ruby scripts/normalize #{actual_file.path}`
-    normalized_path = "#{actual_file.path}.normalized"
-    FileUtils.cp(normalized_path, "spec/recipes_spec/books/#{book}/actual_output.xhtml")
-    expect("spec/recipes_spec/books/#{book}/expected_output.xhtml").to be_same_file_as(normalized_path)
-
-    File.delete(normalized_path)
-    File.delete("spec/recipes_spec/books/#{book}/actual_output.xhtml")
-  end
-end
-
-RSpec::Matchers.define :bake_correctly do
-  match do |book|
-    expect(book).to bake_correctly_with(book, nil, nil)
-  end
-end
-
-RSpec::Matchers.define :bake_correctly_with_resources do |resources|
-  match do |book|
-    expect(book).to bake_correctly_with(book, resources, nil)
-  end
-end
-
-RSpec::Matchers.define :bake_correctly_with_recipe do |recipe|
-  match do |book|
-    expect(book).to bake_correctly_with(recipe, nil, nil)
-  end
-end
-
-RSpec::Matchers.define :bake_correctly_on_output_from do |resource_path, output_from|
-  match do |book|
-    expect(book).to bake_correctly_with(book, resource_path, output_from)
+    # write output and run test
+    actual_output = "#{__dir__}/../books/#{book}/actual_output.xhtml"
+    `ruby scripts/normalize #{actual_output}`
+    expect("spec/recipes_spec/books/#{book}/expected_output.xhtml").to be_same_file_as(actual_output)
+    # only deletes actual_output if expect succeeds
+    File.delete(actual_output)
   end
 end
