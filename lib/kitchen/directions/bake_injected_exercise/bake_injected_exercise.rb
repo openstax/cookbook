@@ -1,31 +1,47 @@
 # frozen_string_literal: true
 
 module Kitchen::Directions::BakeInjectedExercise
-  def self.v1(exercise:, alphabetical_multiparts: false)
-    V1.new.bake(
-      exercise: exercise,
-      alphabetical_multiparts: alphabetical_multiparts
+  def self.v1(exercise:, options: {
+    alphabetical_multiparts: false,
+    list_type: nil,
+    add_brackets: false
+  })
+    options.reverse_merge!(
+      alphabetical_multiparts: false,
+      list_type: nil,
+      add_brackets: false
     )
+    V1.new.bake(exercise: exercise, options: options)
   end
 
   class V1
-    def bake(exercise:, alphabetical_multiparts:)
+    def bake(exercise:, options:)
       question_count = exercise.injected_questions.count
 
       context = exercise&.exercise_context
       stimulus = exercise&.first("div[data-type='exercise-stimulus']")
 
       # To handle alphabetical multipart questions without interrupting numbering
-      if alphabetical_multiparts && stimulus
+      if options[:alphabetical_multiparts] && stimulus
         question_count = 1
         solutions_clipboard = Kitchen::Clipboard.new
         questions_clipboard = Kitchen::Clipboard.new
-        alphabet = *('a'..'z')
         wrapper_id = "#{exercise.injected_questions.first.id}-wrapper"
+
+        if options[:list_type] == 'lower-alpha'
+          alphabet = *('a'..'z')
+        elsif options[:list_type] == 'upper-alpha'
+          alphabet = *('A'..'Z')
+        end
 
         exercise.injected_questions.each_with_index do |question, index|
           question.set(:'data-type', 'alphabetical-question-multipart')
-          problem_letter = "(#{alphabet[index]})"
+
+          problem_letter = if options[:add_brackets]
+                             "(#{alphabet[index]})"
+                           else
+                             "#{alphabet[index]}."
+                           end
 
           solution = question.solution
           solution_id = "#{question.id}-solution" if solution.present?

@@ -12,15 +12,17 @@ module Kitchen::Directions::BakeIndex
       attr_reader :text
       attr_reader :children
       attr_reader :id
-      attr_reader :group_by
       attr_reader :page_title
+      attr_reader :group_by
+      attr_reader :lang
 
-      def initialize(text:, children:, id:, group_by:, page_title:)
+      def initialize(text:, children:, id:, page_title:, **attributes)
         @text = text.strip
         @children = children
         @id = id
-        @group_by = group_by
         @page_title = page_title
+        @group_by = attributes[:group_by]
+        @lang = attributes[:lang]
       end
     end
 
@@ -168,8 +170,8 @@ module Kitchen::Directions::BakeIndex
         @uuid_key = "#{uuid_prefix}index#{"-#{type}" unless type == 'main'}"
         @title = I18n.t("index.#{type}")
 
-        index_name = type == 'main' ? 'term' : type
-        @index = @indexes[index_name]
+        @index_name = type == 'main' ? 'term' : type
+        @index = @indexes[@index_name]
 
         book.first('body').append(child: render(file: 'v1.xhtml.erb'))
       end
@@ -211,14 +213,17 @@ module Kitchen::Directions::BakeIndex
       group_by = I18n.t(:eob_index_symbols_group) unless group_by.match?(/[[:alpha:]]/)
       term_element['group-by'] = group_by
 
+      lang = term_element.parent.data_type == 'foreign' ? term_element.parent['lang'] : nil
+
       # Add it to our index object
       @indexes[type].add_term(
         Term.new(
           text: content,
           children: children,
           id: term_element.id,
+          page_title: page_title.gsub(/\n/, ''),
           group_by: group_by,
-          page_title: page_title.gsub(/\n/, '')
+          lang: lang
         )
       )
     end

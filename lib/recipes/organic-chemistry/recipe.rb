@@ -17,7 +17,7 @@ do |doc, _resources|
   book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(
       exercise: exercise,
-      alphabetical_multiparts: true)
+      options: { alphabetical_multiparts: true, list_type: 'lower-alpha', add_brackets: true })
   end
 
   answer_key_wrapper = BookAnswerKeyContainer.v1(book: book)
