@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create recipe for polish marketing
 * Add attribute `lang` to index foreign terms
 
 ## [v2.2.0] - 2023-09-22
