@@ -15,7 +15,7 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
 
   BakeListsWithPara.v1(book: book)
   BakeImages.v1(book: book, resources: resources)
-  BakePreface.v1(book: book)
+  BakePreface.v1(book: book, cases: true)
 
   book.pages('$.preface').each do |page|
     page.tables('$:not(.unnumbered)').each do |table|

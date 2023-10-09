@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `cases` option to `BakePreface`
 * Create recipe for polish marketing
 * Add attribute `lang` to index foreign terms
 

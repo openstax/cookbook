@@ -2,7 +2,7 @@
 
 module Kitchen::Directions::BakePreface
   class V1
-    def bake(book:, title_element:)
+    def bake(book:, title_element:, cases: false)
       book.pages('$.preface').each do |page|
         page.search('div[data-type="description"], div[data-type="abstract"]').each(&:trash)
         page.titles.each do |title|
@@ -15,7 +15,8 @@ module Kitchen::Directions::BakePreface
         end
         page.figures(only: :figure_to_number?).each do |figure|
           Kitchen::Directions::BakeFigure.v1(figure: figure,
-                                             number: figure.count_in(:page).to_s)
+                                             number: figure.count_in(:page).to_s,
+                                             cases: cases)
         end
       end
     end
