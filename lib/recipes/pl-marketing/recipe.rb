@@ -39,6 +39,7 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter, options: { cases: true })
+    BakeLearningObjectives.v2(chapter: chapter, add_title: false, li_numbering: :count_only_li)
 
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
@@ -71,6 +72,24 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
+    eoc_sections = %w[marketing-discussion critical-thinking marketing-plan company-case]
+
+    eoc_sections.each do |section_key|
+      BakeAllNumberedExerciseTypes.v1(
+        within: chapter.pages.search("section.#{section_key}")
+      )
+
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+      end
+    end
+
     BakeChapterReferences.v2(
       chapter: chapter,
       metadata_source: metadata,
@@ -91,7 +110,7 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
     end
   end
 
-  notes = %w[marketing-practice companies-conscience link-to-learning careers-marketing]
+  notes = %w[marketing-practice companies-conscience link-to-learning]
   BakeAutotitledNotes.v1(book: book, classes: notes, options: { cases: true })
   BakeAutotitledNotes.v1(
     book: book,
