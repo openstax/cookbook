@@ -1,0 +1,21 @@
+
+    <table id="tableId" summary="A summary...">
+  <colgroup>
+    <col data-width="1*"/>
+  </colgroup>
+  <thead>
+    <tr>
+      <th data-align="center">The Title</th>
+    </tr>
+    <tr valign="top">
+      <th data-align="left">Heading</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td data-align="left">Bar</td>
+    </tr>
+  </tbody>
+</table>
+
+  
