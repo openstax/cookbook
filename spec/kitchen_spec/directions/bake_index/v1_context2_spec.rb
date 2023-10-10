@@ -32,10 +32,10 @@ RSpec.describe Kitchen::Directions::BakeIndex do
           <span data-type="term">foo</span>
           <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" data-type="term" cmlnle:reference="foo">Foo</span>
           <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928">Noam Chomsky</span>
-          <span data-type="foreign" xml:lang="en">
+          <span data-type="foreign" xml:lang="en" lang="en">
             <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign">ΔE</span>
           </span>
-          <span data-type="foreign" xml:lang="en">
+          <span data-type="foreign" xml:lang="en" lang="en">
             <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign">introspection</span>
           </span>
         </div>
@@ -48,15 +48,15 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             <span data-type="term"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
             <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Wundt, Wilhelm (1832-1920)" cxlxt:index="name" cxlxt:name="Wundta, Wilhelma" cxlxt:born="1832" cxlxt:died="1920">Wilhelma Wundta</span>
             <span xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cmlnle:reference="Chomsky, Noam (ur. 1928)" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928">Noama Chomsky'ego</span>
-            <span data-type="foreign" xml:lang="en">
+            <span data-type="foreign" xml:lang="en" lang="en">
               <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign">introspection</span>
             </span>
-            <span data-type="foreign" xml:lang="en">
+            <span data-type="foreign" xml:lang="en" lang="en">
               <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
             </span>
             <span data-type="term" reference="bar">Boo</span>
             <span data-type="term" reference="Christmas, Mary (ur. 1958)" index="name" name="Christmas, Mary" born="1958">Mary Christmas</span>
-            <span data-type="foreign" xml:lang="en">
+            <span data-type="foreign" xml:lang="en" lang="en">
               <span data-type="term" index="foreign">train</span>
             </span>
           </div>

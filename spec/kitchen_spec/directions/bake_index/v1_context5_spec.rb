@@ -33,7 +33,7 @@ RSpec.describe Kitchen::Directions::BakeIndex do
             <span data-type="term" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" cxlxt:index="default">czosnek</span>
             <span data-type="term">czas</span>
             <span data-type="term" xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" cxlxt:index="czarownica">czarownica</span>
-            <span data-type="foreign" xml:lang="en">
+            <span data-type="foreign" xml:lang="en" lang="en">
               <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="foreign">introspection</span>
             </span>
             <span xmlns:cxlxt="http://katalysteducation.org/cxlxt/1.0" data-type="term" cxlxt:index="name" cxlxt:name="Chomsky, Noam" cxlxt:born="1928">Noam Chomsky</span>
