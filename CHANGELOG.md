@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Add `cases` option to `BakePreface`
 * Create recipe for polish marketing
+* Create `BakeTableColumns` module
 
 ## [v2.3.0] - 2023-10-06
 
