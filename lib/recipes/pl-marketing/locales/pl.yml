@@ -5,6 +5,7 @@ pl:
     companies-conscience: Tytuł notatki
     link-to-learning: Tytuł notatki
   eoc:
+    knowledge-check: ! '%{number} Tytuł sekcji'
     chapter-summary: Tytuł sekcji
     marketing-discussion: Tytuł sekcji
     critical-thinking: Tytuł sekcji
