@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `generate_test_resources_from_file` script
 * Refactor custom `Matcher`s to be more readable
 * Create test & test data for web pipeline
+* Create `BakeTableColumns` module
+
+## [v2.3.0] - 2023-10-06
+
 * Add attribute `lang` to index foreign terms
 
 ## [v2.2.0] - 2023-09-22
