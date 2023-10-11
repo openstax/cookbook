@@ -56,6 +56,7 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
     chapter.pages.each do |page|
       BakeAllNumberedExerciseTypes.v1(
         within: page.search('section.knowledge-check'),
+        exercise_options: { cases: true },
         question_options: { add_dot: true }
       )
     end
@@ -76,7 +77,8 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
 
     eoc_sections.each do |section_key|
       BakeAllNumberedExerciseTypes.v1(
-        within: chapter.pages.search("section.#{section_key}")
+        within: chapter.pages.search("section.#{section_key}"),
+        exercise_options: { cases: true }
       )
 
       MoveCustomSectionToEocContainer.v1(
