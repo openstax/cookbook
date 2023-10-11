@@ -147,7 +147,8 @@ do |doc, resources|
                     black-box client-teaching practice-problems unfolding-casestudy
                     single-casestudy case-reflection]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
-  BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature])
+  BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature boxed-feature])
+  # BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature])
   BakeUnclassifiedNotes.v1(book: book)
   BakeFootnotes.v1(book: book)
 end
