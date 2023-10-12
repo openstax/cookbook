@@ -14,6 +14,9 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
             <tr valign="top">
               <th data-align="left">Heading</th>
             </tr>
+            <tr valign="top">
+              <th colspan="2" data-align="left">Heading</th>
+            </tr>
           </thead>
           <tbody>
             <tr valign="top">
@@ -36,6 +39,9 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
             </tr>
             <tr valign="top">
               <th data-align="left">Heading</th>
+            </tr>
+            <tr valign="top">
+              <th colspan="2" data-align="left">Heading</th>
             </tr>
           </thead>
           <tbody>
