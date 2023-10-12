@@ -24,7 +24,7 @@ module Kitchen
           end
 
           table.search('th').each do |header|
-            if header[:colspan].nil? || header[:colespan] == '1'
+            if header[:colspan].nil? || header[:colspan] == '1'
               header[:scope] = 'col'
             else
               header[:scope] = 'colgroup'
