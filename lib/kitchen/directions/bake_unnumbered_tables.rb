@@ -24,10 +24,10 @@ module Kitchen
           end
 
           table.search('th').each do |header|
-            if header[:colspan].nil? || header[:colspan] == '1'
-              header[:scope] = 'col'
+            header[:scope] = if header[:colspan].nil? || header[:colspan] == '1'
+              'col'
             else
-              header[:scope] = 'colgroup'
+              'colgroup'
             end
           end
 
