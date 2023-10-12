@@ -41,7 +41,11 @@ module Kitchen
           table.wrap(%(<div class="os-table">))
 
           table.search('th').each do |header|
-            header[:scope] = 'col'
+            if header[:colspan].nil? || header[:colespan] == '1'
+              header[:scope] = 'col'
+            else
+              header[:scope] = 'colgroup'
+            end
           end
 
           # Store label information

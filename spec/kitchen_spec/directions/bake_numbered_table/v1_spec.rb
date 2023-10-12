@@ -24,7 +24,7 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V1 do
                 <th scope="col">A title</th>
               </tr>
               <tr>
-                <th scope="col">Another heading cell</th>
+                <th colspan="2">Another heading cell</th>
               </tr>
             </thead>
             <tbody>

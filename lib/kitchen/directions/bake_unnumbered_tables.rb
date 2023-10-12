@@ -24,7 +24,11 @@ module Kitchen
           end
 
           table.search('th').each do |header|
-            header[:scope] = 'col'
+            if header[:colspan].nil? || header[:colespan] == '1'
+              header[:scope] = 'col'
+            else
+              header[:scope] = 'colgroup'
+            end
           end
 
           if (title = table.first("span[data-type='title']")&.cut)
