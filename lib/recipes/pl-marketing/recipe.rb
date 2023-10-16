@@ -71,7 +71,7 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
       RemoveSectionTitle.v1(section: section)
     end
 
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, has_para: true)
 
     eoc_sections = %w[marketing-discussion critical-thinking marketing-plan company-case]
 
