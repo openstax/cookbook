@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `boxed-feature` note to `nursing-external`
 * Create `BakeTableColumns` module
 * Add colgroup to `BakeNumberedTables` and `BakeUnnumberedTables`
 
