@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Add `cases` option to `BakePreface`
 * Create recipe for polish marketing
+* Add `boxed-feature` note to `nursing-external`
 * Create `BakeTableColumns` module
+* Add colgroup to `BakeNumberedTables` and `BakeUnnumberedTables`
 
 ## [v2.3.0] - 2023-10-06
 
