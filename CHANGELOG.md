@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.4.0] - 2023-10-20
+
 * Add `cases` option to `BakePreface`
 * Create recipe for polish marketing
 * Add `boxed-feature` note to `nursing-external`
