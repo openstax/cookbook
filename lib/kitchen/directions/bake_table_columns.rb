@@ -13,6 +13,7 @@ module Kitchen
           ratio_list = []
 
           table.search('col').each do |column|
+            next if column['data-width'].nil?
             ratio = column['data-width'].gsub('*', '')
             ratio_list.push(ratio)
           end
