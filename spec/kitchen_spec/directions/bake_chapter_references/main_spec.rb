@@ -20,4 +20,10 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences do
       .with(chapter: 'chapter1', metadata_source: 'metadata', uuid_prefix: 'uuid')
     described_class.v3(chapter: 'chapter1', metadata_source: 'metadata', uuid_prefix: 'uuid')
   end
+
+  it 'calls v4' do
+    expect_any_instance_of(Kitchen::Directions::BakeChapterReferences::V4).to receive(:bake)
+      .with(chapter: 'chapter1', metadata_source: 'metadata', klass: 'klass')
+    described_class.v4(chapter: 'chapter1', metadata_source: 'metadata', klass: 'klass')
+  end
 end

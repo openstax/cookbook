@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add new extension `ruby-lsp`
+* Create new version of `references` in form of footnotes
 * Add `BakeLinks` to nursing-external recipes
 
 ## [v2.4.0] - 2023-10-20
