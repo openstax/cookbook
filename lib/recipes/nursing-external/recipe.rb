@@ -129,6 +129,7 @@ do |doc, resources|
   end
 
   BakeUnnumberedTables.v1(book: book)
+  BakeTableColumns.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeReferences.v4(book: book, metadata_source: metadata)
@@ -146,7 +147,9 @@ do |doc, resources|
                     black-box client-teaching practice-problems unfolding-casestudy
                     single-casestudy case-reflection]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
-  BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature])
+  BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature boxed-feature])
+  # BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature])
   BakeUnclassifiedNotes.v1(book: book)
   BakeFootnotes.v1(book: book)
+  BakeLinks.v1(book: book)
 end

@@ -167,6 +167,10 @@ RSpec.describe 'books' do
     expect('philosophy').to bake_correctly_with_empty_resources
   end
 
+  it 'bakes pl-marketing' do
+    expect('pl-marketing').to bake_correctly_with_empty_resources
+  end
+
   it 'bakes pl-microeconomics' do
     expect('pl-microeconomics').to bake_correctly_with_empty_resources_and_use('pl-economics')
   end

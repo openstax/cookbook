@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add new extension `ruby-lsp`
+* Add `BakeLinks` to nursing-external recipes
+
+## [v2.4.0] - 2023-10-20
+
+* Add `cases` option to `BakePreface`
+* Create recipe for polish marketing
+* Add `boxed-feature` note to `nursing-external`
+* Create `BakeTableColumns` module
+* Add colgroup to `BakeNumberedTables` and `BakeUnnumberedTables`
+
+## [v2.3.0] - 2023-10-06
+
+* Add attribute `lang` to index foreign terms
 
 ## [v2.2.0] - 2023-09-22
 
