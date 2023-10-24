@@ -5,7 +5,7 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
 
   # Set overrides
   doc.selectors.override(
-    reference: 'section.references'
+    reference: 'aside.reference'
   )
 
   book = doc.book
@@ -92,13 +92,6 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
       end
     end
 
-    BakeChapterReferences.v2(
-      chapter: chapter,
-      metadata_source: metadata,
-      uuid_prefix: '.',
-      klass: 'references'
-    )
-
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter, metadata_source: metadata, append_to: answer_key,
       options: { solutions_plural: false, cases: true }
@@ -112,6 +105,18 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
     end
   end
 
+  # References
+  BakeFootnotes.v1(book: book, selector: '.reference')
+
+  book.chapters.each do |chapter|
+    BakeChapterReferences.v4(
+      chapter: chapter,
+      metadata_source: metadata,
+      klass: 'references'
+    )
+  end
+
+  # Notes
   notes = %w[marketing-practice companies-conscience link-to-learning]
   BakeAutotitledNotes.v1(book: book, classes: notes, options: { cases: true })
   BakeAutotitledNotes.v1(
@@ -122,7 +127,7 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
 
   BakeEquations.v1(book: book)
   BakeIframes.v1(book: book)
-  BakeFootnotes.v1(book: book, number_format: :roman)
+  BakeFootnotes.v1(book: book, number_format: :roman, selector: ':not(.reference)')
   BakeIndex.v1(book: book, types: %w[name term foreign], uuid_prefix: '.')
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
