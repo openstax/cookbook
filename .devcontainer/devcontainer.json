@@ -17,8 +17,12 @@
     "files.insertFinalNewline": true,
     "terminal.integrated.shell.linux": "/bin/bash",
     "[ruby]": {
+      "editor.defaultFormatter": "Shopify.ruby-lsp",
       "editor.insertSpaces": true,
-      "editor.tabSize": 2
+      "editor.tabSize": 2,
+      "editor.formatOnSave": true,
+      "editor.semanticHighlighting.enabled": true,
+      "editor.formatOnType": true
     },
     "terminal.integrated.scrollback": 100000
   }
