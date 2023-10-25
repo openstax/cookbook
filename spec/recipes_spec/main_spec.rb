@@ -147,6 +147,10 @@ RSpec.describe 'books' do
     expect('microbiology').to bake_correctly_with_empty_resources
   end
 
+  it 'bakes neuroscience' do
+    expect('neuroscience').to bake_correctly_with_empty_resources
+  end
+
   it 'bakes nursing-external' do
     expect('nursing-external').to bake_correctly_with_empty_resources
   end
