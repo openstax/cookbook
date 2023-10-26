@@ -13,6 +13,7 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, resou
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
+  BakeUnnumberedTables.v1(book: book)
 
   AddInjectedExerciseId.v1(book: book)
   book.injected_exercises.each do |exercise|
