@@ -10,6 +10,7 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
+  BakeImages.v1(book: book, resources: resources)
 
   BakeChapterTitle.v1(book: book)
 
@@ -20,7 +21,7 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
   # BakeIndex.v1(book: book)
   # BakeCompositePages.v1(book: book)
   # BakeCompositeChapters.v1(book: book)
-  # BakeToc.v1(book: book)
+  BakeToc.v1(book: book)
   # BakeLinkPlaceholders.v1(book: book)
   # BakeFolio.v1(book: book)
   # BakeLinks.v1(book: book)
