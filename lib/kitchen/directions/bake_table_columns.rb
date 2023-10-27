@@ -13,6 +13,11 @@ module Kitchen
           ratio_list = []
 
           table.search('col').each do |column|
+            if column['data-width'].nil?
+              warn "warning! colwidth attribute is missing in table: data-sm=#{table['data-sm']}"
+              next
+            end
+
             ratio = column['data-width'].gsub('*', '')
             ratio_list.push(ratio)
           end
