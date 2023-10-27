@@ -8,3 +8,5 @@ RUN gem install bundler --no-document --version $bundler_version
 
 WORKDIR /code
 COPY . /code/
+
+RUN git config --global --add safe.directory /code
