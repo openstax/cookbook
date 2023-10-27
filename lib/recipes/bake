@@ -47,6 +47,7 @@ book_recipes = \
   when 'intro-business' then [INTRO_BUSINESS_RECIPE]
   when 'marketing' then [MARKETING_RECIPE]
   when 'microbiology' then [MICROBIOLOGY_RECIPE]
+  when 'neuroscience' then [NEUROSCIENCE_RECIPE]
   when 'nursing-external' then [NURSING_EXTERNAL_RECIPE]
   when 'nursing-internal' then [NURSING_INTERNAL_RECIPE]
   when 'organic-chemistry' then [ORGANIC_CHEMISTRY_RECIPE]
