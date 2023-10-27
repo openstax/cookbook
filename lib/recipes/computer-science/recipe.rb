@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 COMPUTER_SCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :computer_science) \
-do |doc, resources|
+do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -15,7 +15,6 @@ do |doc, resources|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book, title_element: 'h1')
   BakeChapterIntroductions.v1(book: book)

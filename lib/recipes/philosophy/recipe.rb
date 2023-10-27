@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-PHILOSOPHY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc, resources|
+PHILOSOPHY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -13,7 +13,6 @@ PHILOSOPHY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |do
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v2(

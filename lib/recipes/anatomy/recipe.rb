@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ANATOMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc, resources|
+ANATOMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -14,7 +14,6 @@ ANATOMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :anatomy) do |doc, res
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book, title_element: 'h1')
   BakeUnitTitle.v1(book: book)

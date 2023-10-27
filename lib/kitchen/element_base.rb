@@ -905,7 +905,7 @@ module Kitchen
     def_delegators :as_enumerator, :pages, :chapters, :terms, :figures, :notes, :tables, :examples,
                    :metadatas, :non_introduction_pages, :units, :titles, :exercises, :references,
                    :composite_pages, :composite_chapters, :solutions, :injected_questions,
-                   :search_with, :sections, :injected_exercises
+                   :search_with, :sections, :injected_exercises, :images
 
     # Returns this element as an enumerator (over only one element, itself)
     #

@@ -8,11 +8,13 @@ opts = Slop.parse do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
   slop.string '--recipe', 'Keyword for recipe', required: true
-  slop.string '--resources', 'Path to book resources directory', required: false
+  slop.string '--resources', 'Path to book resources directory', suppress_errors: true
+  slop.string '--platform', 'Sets output platform, options: default, web', \
+              suppress_errors: true
 end
 
 # Map recipe keyword to recipe/recipes
-book_recipe = \
+book_recipes = \
   case opts[:recipe]
   when 'dummy' then [DUMMY_RECIPE]
   when 'accounting' then [ACCOUNTING_RECIPE]
@@ -63,14 +65,19 @@ book_recipe = \
   when 'sociology' then [SOCIOLOGY_RECIPE]
   when 'statistics' then [STATISTICS_RECIPE]
   when 'u-physics' then [U_PHYSICS_RECIPE]
+  when 'web-generic' then [WEB_RECIPE]
   when 'world-history' then [WORLD_HISTORY_RECIPE]
   else
     raise 'Invalid recipe keyword'
   end
 
+recipe_array = book_recipes
+recipe_array.push(WEB_RECIPE) if opts[:platform] == 'web'
+recipe_array.push(VALIDATE_OUTPUT)
+
 puts Kitchen::Oven.bake(
   input_file: opts[:input],
-  recipes: [book_recipe, VALIDATE_OUTPUT].flatten,
+  recipes: recipe_array,
   output_file: opts[:output],
   resource_dir: opts[:resources] || nil
 )

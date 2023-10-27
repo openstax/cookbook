@@ -3,7 +3,7 @@
 # spec input file contains test content from chapter 1 and 10 (needed for
 # BakeFirstElemets in the AnswerKey) from Accounting vol2
 
-ACCOUNTING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, resources|
+ACCOUNTING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :accounting) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -12,7 +12,6 @@ ACCOUNTING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :accounting) do |do
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
 
   BakeUnnumberedFigure.v1(book: book)

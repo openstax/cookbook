@@ -13,7 +13,7 @@ module LocaleToEnMonkeypatch
   end
 end
 
-DUMMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc, resources|
+DUMMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc, _resources|
   include Kitchen::Directions
 
   # Patch locale
@@ -22,6 +22,4 @@ DUMMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dummy) do |doc, resourc
 
   book = doc.book
   book.search('div.test123').each { |div| div.replace_children(with: 'Hello, world!') }
-
-  BakeImages.v1(book: book, resources: resources)
 end

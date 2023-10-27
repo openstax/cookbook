@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ANTHROPOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :anthropology) do |doc, resources|
+ANTHROPOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :anthropology) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -8,7 +8,6 @@ ANTHROPOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :anthropology) do
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterIntroductions.v1(book: book)

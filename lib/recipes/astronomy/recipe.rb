@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ASTRONOMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :astronomy) do |doc, resources|
+ASTRONOMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :astronomy) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -8,7 +8,6 @@ ASTRONOMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :astronomy) do |doc,
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)

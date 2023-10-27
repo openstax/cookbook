@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-CALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, resources|
+CALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -9,7 +9,6 @@ CALCULUS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :calculus) do |doc, r
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)

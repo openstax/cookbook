@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # used for prealgebra, intermediate-algebra, and elementary-algebra
-DEV_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, resources|
+DEV_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -9,7 +9,6 @@ DEV_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, r
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)

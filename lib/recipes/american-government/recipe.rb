@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 AMERICAN_GOVERNMENT_RECIPE = Kitchen::BookRecipe.new(book_short_name: :american_gov) \
-do |doc, resources|
+do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -10,7 +10,6 @@ do |doc, resources|
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)

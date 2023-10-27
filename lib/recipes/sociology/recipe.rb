@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-SOCIOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc, resources|
+SOCIOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -20,7 +20,6 @@ SOCIOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :sociology) do |doc,
     book.body.search('div[data-type="metadata"] > div[data-type="description"]').trash
   end
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
 

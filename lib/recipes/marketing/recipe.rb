@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, resources|
+MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -13,7 +13,6 @@ MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :marketing) do |doc,
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
 
   book.pages('$.preface').each do |page|

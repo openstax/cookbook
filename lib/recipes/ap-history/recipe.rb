@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-AP_HISTORY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_history) do |doc, resources|
+AP_HISTORY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_history) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeUnitTitle.v1(book: book)

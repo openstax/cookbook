@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 BUSINESS_ETHICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :business_ethics) \
-do |doc, resources|
+do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -14,7 +14,6 @@ do |doc, resources|
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)

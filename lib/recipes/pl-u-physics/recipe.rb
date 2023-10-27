@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc, resources|
+PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -9,7 +9,6 @@ PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |
   book.search('cnx-pi').trash
   book.search('.check-understanding strong').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
 
   BakeChapterTitle.v1(book: book, cases: true)

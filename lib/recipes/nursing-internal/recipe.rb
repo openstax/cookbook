@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 NURSING_INTERNAL_RECIPE = Kitchen::BookRecipe.new(book_short_name: :nursing_internal) \
-do |doc, resources|
+do |doc, _resources|
   include Kitchen::Directions
 
   doc.selectors.override(
@@ -13,7 +13,6 @@ do |doc, resources|
   book.search('cnx-pi').trash
 
   # Your recipe code goes here
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
 
   BakeUnnumberedFigure.v1(book: book)

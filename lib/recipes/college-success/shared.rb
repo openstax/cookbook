@@ -2,14 +2,13 @@
 
 # Used in college success (bakes college-success and hs-college-success)
 COLLEGE_SUCCESS_SHARED_RECIPE = Kitchen::BookRecipe.new(
-  book_short_name: :college_success) do |doc, resources|
+  book_short_name: :college_success) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
 
