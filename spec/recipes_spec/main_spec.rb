@@ -183,6 +183,11 @@ RSpec.describe 'books' do
     expect('microbiology').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes neuroscience' do
+    cmd = form_bake_cmd(book: 'neuroscience')
+    expect('neuroscience').to match_expected_when_baked_with(cmd)
+  end
+
   it 'bakes nursing-external' do
     cmd = form_bake_cmd(book: 'nursing-external')
     expect('nursing-external').to match_expected_when_baked_with(cmd)
