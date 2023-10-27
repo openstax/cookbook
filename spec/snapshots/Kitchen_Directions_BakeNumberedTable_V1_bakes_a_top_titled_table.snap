@@ -4,7 +4,7 @@
   <thead>
     
     <tr>
-      <th scope="col">Another heading cell</th>
+      <th colspan="2" scope="colgroup">Another heading cell</th>
     </tr>
   </thead>
   <tbody>

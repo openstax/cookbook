@@ -6,15 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Add `ImageElement`, enumerator, and support
-* Update `BakeImages` to use `ImageElement`
-* Update recipes to remove `BakeImages`
-* Add web recipe that calls `BakeImages`
-* Update `bake` script to accept output platform argument
-* Add `generate_test_resources_from_file` script
-* Refactor custom `Matcher`s to be more readable
-* Create test & test data for web pipeline
+* bake-web:
+  * Add `ImageElement`, enumerator, and support
+  * Update `BakeImages` to use `ImageElement`
+  * Update recipes to remove `BakeImages`
+  * Add web recipe that calls `BakeImages`
+  * Update `bake` script to accept output platform argument
+  * Add `generate_test_resources_from_file` script
+  * Refactor custom `Matcher`s to be more readable
+  * Create test & test data for web pipeline
+* Add new extension `ruby-lsp`
+* Create new version of `references` in form of footnotes
+* Add `BakeLinks` to nursing-external recipes
+
+## [v2.4.0] - 2023-10-20
+
+* Add `cases` option to `BakePreface`
+* Create recipe for polish marketing
+* Add `boxed-feature` note to `nursing-external`
 * Create `BakeTableColumns` module
+* Add colgroup to `BakeNumberedTables` and `BakeUnnumberedTables`
 
 ## [v2.3.0] - 2023-10-06
 

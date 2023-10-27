@@ -25,6 +25,13 @@ module Kitchen
           metadata_source: metadata_source,
           uuid_prefix: uuid_prefix)
       end
+
+      def self.v4(chapter:, metadata_source:, klass: 'references')
+        V4.new.bake(
+          chapter: chapter,
+          metadata_source: metadata_source,
+          klass: klass)
+      end
     end
   end
 end

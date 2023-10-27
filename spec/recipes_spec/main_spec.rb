@@ -208,6 +208,10 @@ RSpec.describe 'books' do
     expect('philosophy').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes pl-marketing' do
+    expect('pl-marketing').to bake_correctly_with_empty_resources
+  end
+
   it 'bakes pl-microeconomics' do
     cmd = form_bake_cmd(book: 'pl-microeconomics', recipe: 'pl-economics')
     expect('pl-microeconomics').to match_expected_when_baked_with(cmd)

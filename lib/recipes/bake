@@ -53,6 +53,7 @@ book_recipes = \
   when 'otto-book' then [CHEMISTRY_RECIPE]
   when 'philosophy' then [PHILOSOPHY_RECIPE]
   when 'pl-economics' then [PL_ECONOMICS_RECIPE]
+  when 'pl-marketing' then [PL_MARKETING_RECIPE]
   when 'pl-psychology' then [PL_PSYCHOLOGY_RECIPE]
   when 'pl-u-physics' then [PL_U_PHYSICS_RECIPE]
   when 'political-science' then [POLITICAL_SCIENCE_RECIPE]
