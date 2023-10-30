@@ -88,6 +88,34 @@ RSpec.describe Kitchen::Directions::BakeTableColumns do
     )
   end
 
+  let(:book_with_missing_colwidth) do
+    book_containing(html:
+      <<~HTML
+        <table id="tableId" summary="A summary..." data-sm="blah">
+          <colgroup>
+            <col data-width="1*"/>
+            <col/>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="2" data-align="center">The Title</th>
+            </tr>
+            <tr valign="top">
+              <th data-align="left">Heading</th>
+              <th data-align="left">Headin2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr valign="top">
+              <td data-align="left">Bar</td>
+              <td data-align="left">Foo</td>
+            </tr>
+          </tbody>
+        </table>
+      HTML
+    )
+  end
+
   it 'bakes table columns' do
     described_class.v1(book: book1)
     expect(book1.body.children.to_s).to match_snapshot_auto
@@ -101,5 +129,10 @@ RSpec.describe Kitchen::Directions::BakeTableColumns do
   it 'bakes table with multiple columns' do
     described_class.v1(book: multiple_columns_table)
     expect(multiple_columns_table.body.children.to_s).to match_snapshot_auto
+  end
+
+  it 'logs a warning when column has no colwidth' do
+    expect(Warning).to receive(:warn).with("warning! colwidth attribute is missing in table: data-sm=blah\n", { category: nil })
+    described_class.v1(book: book_with_missing_colwidth)
   end
 end

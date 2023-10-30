@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FINANCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc, resources|
+FINANCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -14,7 +14,6 @@ FINANCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :finance) do |doc, res
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book, title_element: 'h1')
 

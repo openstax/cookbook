@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 COLLEGE_PHYSICS_SHARED_RECIPE = Kitchen::BookRecipe.new(
-  book_short_name: :college_physics_recipe) do |doc, resources|
+  book_short_name: :college_physics_recipe) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -9,7 +9,6 @@ COLLEGE_PHYSICS_SHARED_RECIPE = Kitchen::BookRecipe.new(
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)

@@ -3,15 +3,13 @@
 # Used in precalculus (bakes precalculus, trigonometry, and college-algebra)
 # and precalculus-coreq (bakes college-algebra-coreq)
 PRECALCULUS_SHARED_RECIPE = Kitchen::BookRecipe.new(book_short_name: :precalculus) do \
-  |doc, resources|
+  |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
   metadata = book.metadata
 
   book.search('cnx-pi').trash
-
-  BakeImages.v1(book: book, resources: resources)
 
   book.search('section.coreq-skills').each do |coreq_section|
     coreq_section.tables.each { |table| table.add_class('os-coreq-element') }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc, resources|
+STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |doc, _resources|
   include Kitchen::Directions
 
   # Set overrides
@@ -15,7 +15,6 @@ STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |do
   book.search('cnx-pi').trash
   book.body.search('div[data-type="metadata"] > div[data-type="description"]').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book, title_element: 'h1')
   BakeInlineLists.v1(book: book)

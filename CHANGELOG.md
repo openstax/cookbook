@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add `BakeUnnumberedTables` to `python`
+* bake-web:
+  * Add `ImageElement`, enumerator, and support
+  * Update `BakeImages` to use `ImageElement`
+  * Update recipes to remove `BakeImages`
+  * Add web recipe that calls `BakeImages`
+  * Update `bake` script to accept output platform argument
+  * Add `generate_test_resources_from_file` script
+  * Refactor custom `Matcher`s to be more readable
+  * Create test & test data for web pipeline
+* Add warning to `BakeTableColumns`
 * Add new extension `ruby-lsp`
 * Create new version of `references` in form of footnotes
 * Add `BakeLinks` to nursing-external recipes

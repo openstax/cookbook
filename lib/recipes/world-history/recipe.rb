@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-WORLD_HISTORY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc, resources|
+WORLD_HISTORY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :world_history) do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -14,7 +14,6 @@ WORLD_HISTORY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :world_history) 
     BakeInjectedExercise.v1(exercise: exercise)
   end
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
 

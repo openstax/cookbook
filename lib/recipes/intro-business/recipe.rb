@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 INTRO_BUSINESS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :intro_business) \
-do |doc, resources|
+do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -9,7 +9,6 @@ do |doc, resources|
 
   book.search('cnx-pi').trash
 
-  BakeImages.v1(book: book, resources: resources)
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
 

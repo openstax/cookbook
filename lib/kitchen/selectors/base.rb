@@ -68,6 +68,9 @@ module Kitchen
       # Selector for an injected exercise
       # @return [String]
       attr_accessor :injected_exercise
+      # Selector for an image
+      # @return [String]
+      attr_accessor :image
 
       # Override specific selectors
       #
