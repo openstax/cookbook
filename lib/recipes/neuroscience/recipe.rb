@@ -10,6 +10,6 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
 
   BakePreface.v1(book: book)
   BakeChapterTitle.v1(book: book)
-  #BakeToc.v1(book: book)
+  BakeToc.v1(book: book)
   BakeIndex.v1(book: book)
 end
