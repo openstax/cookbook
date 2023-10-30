@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeUnnumberedTables` to `python`
 * bake-web:
   * Add `ImageElement`, enumerator, and support
   * Update `BakeImages` to use `ImageElement`
