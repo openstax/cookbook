@@ -14,10 +14,7 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
   BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
-
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'summary')
 
 
@@ -26,24 +23,15 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
 
-  end
-
-  book.pages('$.appendix').each do |page|
-    appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
-    BakeAppendix.v1(page: page, number: appendix_letter)
-
-    page.figures(only: :figure_to_number?).each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: "#{appendix_letter}#{figure.count_in(:page)}")
-    end
-    page.tables('$:not(.unnumbered)').each do |table|
+    chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
-                           number: "#{appendix_letter}#{table.count_in(:page)}")
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
+
   end
+
 
   BakeIframes.v1(book: book)
-  BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
