@@ -120,8 +120,8 @@ do |doc, _resources|
     )
 
     exercises = %w[review-questions check-understanding
-                   critical-thinking competency-based
-                   reflection-questions what-nurses-do]
+                   reflection-questions critical-thinking
+                   what-nurses-do competency-based]
 
     exercises.each do |klass|
       Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
