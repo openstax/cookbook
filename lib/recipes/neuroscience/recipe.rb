@@ -82,6 +82,7 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
   BakeChapterIntroductions.v1(book: book)
   BakeIframes.v1(book: book)
   BakeFootnotes.v1(book: book)
+  BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
