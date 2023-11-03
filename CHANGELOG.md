@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-## [v2.5.0] - 2023-11-05
+## [v2.5.0] - 2023-11-03
 
 * Change order of `AnswerKey` sections in `nursing-internal`
 * Add `BakeUnnumberedTables` to `python`
