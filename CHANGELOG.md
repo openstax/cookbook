@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Fix problem letter tag in multipart questions
+* Change EOC titles in `nursing-internal`
 
 ## [v2.5.0] - 2023-11-03
 
