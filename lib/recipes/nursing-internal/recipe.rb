@@ -54,6 +54,8 @@ do |doc, _resources|
       section_selector: 'section.summary'
     ) do |section|
       RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
     end
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
