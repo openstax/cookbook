@@ -46,10 +46,17 @@ module Kitchen::Directions::BakeInjectedExercise
           solution = question.solution
           solution_id = "#{question.id}-solution" if solution.present?
 
+          problem_letter_tag = \
+            if solution.present?
+              "<a class='problem-letter' href='##{solution_id}'>#{problem_letter}</a>"
+            else
+              "<span class='problem-letter'>#{problem_letter}</span>"
+            end
+
           question.prepend(child:
             <<~HTML
               <div class="os-problem-container">
-                <a class='problem-letter' #{"href='##{solution_id}'" if solution.present?}>#{problem_letter}</a>
+                #{problem_letter_tag}
                 <span class='os-divider'> </span>
                 #{question.stimulus&.cut&.paste}
                 #{question.stem&.cut&.paste}
