@@ -214,5 +214,6 @@ do |doc, _resources|
   end
   BakeLinkPlaceholders.v1(book: book, replace_section_link_text: true)
   BakeFolio.v1(book: book, options: { new_approach: true })
+  BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 end

@@ -98,5 +98,6 @@ PHILOSOPHY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :philosophy) do |do
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
+  BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 end
