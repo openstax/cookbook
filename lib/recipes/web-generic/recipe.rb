@@ -5,5 +5,5 @@ WEB_RECIPE = Kitchen::BookRecipe.new(book_short_name: :web) do |doc, resources|
 
   book = doc.book
 
-  BakeImages.v1(book: book, resources: resources)
+  # BakeImages.v1(book: book, resources: resources)
 end
