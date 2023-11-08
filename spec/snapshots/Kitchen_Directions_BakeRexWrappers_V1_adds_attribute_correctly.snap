@@ -1,0 +1,19 @@
+<html xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <body data-book-content="true">
+    <div data-type="page" data-book-content="true">
+  <h1>Page 1</h1>
+</div>
+<div data-type="composite-page" data-book-content="true">
+  <h1>Page 1</h1>
+</div>
+<div data-type="chapter">
+  <div data-type="page" data-book-content="true">
+    <h1>Page 1</h1>
+  </div>
+  <div data-type="composite-page" data-book-content="true">
+    <h1>Page 1</h1>
+  </div>
+</div>
+
+  </body>
+</html>
