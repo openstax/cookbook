@@ -168,4 +168,5 @@ PL_U_PHYSICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pluphysics) do |
   BakeLinkPlaceholders.v1(book: book, cases: true)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
+  BakeRexWrappers.v1(book: book)
 end
