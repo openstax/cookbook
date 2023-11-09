@@ -4,7 +4,8 @@ en:
     unfolding-casestudy: Unfolding Case Study
     rn-stories: Real RN Stories
     clinical-safety: Clinical Safety and Procedures (QSEN)
-    cultural-context: Life-stage and Cultural Context
+    cultural-context: Cultural Context
+    lifestage-context: Life-Stage Context
     patient-conversations: Patient Conversations
     pharma-connections: Pharmacology Connections
     legal-ethical: Legal and Ethical Issues
@@ -15,9 +16,9 @@ en:
   eoc:
     chapter-review: Assessments
     summary: Summary
-    review-questions: Review
-    check-understanding: Check Your Understanding
-    critical-thinking: Critical Thinking about Case Studies
-    competency-based: Competencies
-    reflection-questions: Reflection
+    review-questions: Review Questions
+    check-understanding: Check Your Understanding Questions
+    critical-thinking: Critical-Thinking Questions about Case Studies
+    competency-based: Competency-Based Assessments
+    reflection-questions: Reflection Questions
     what-nurses-do: What Should the Nurse Do?
