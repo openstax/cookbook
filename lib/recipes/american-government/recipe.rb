@@ -109,5 +109,6 @@ do |doc, _resources|
   BakeFolio.v1(book: book)
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
+  BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 end

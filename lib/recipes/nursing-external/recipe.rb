@@ -150,5 +150,6 @@ do |doc, _resources|
   # BakeCustomTitledNotes.v1(book: book, classes: %w[media-feature])
   BakeUnclassifiedNotes.v1(book: book)
   BakeFootnotes.v1(book: book)
+  BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 end

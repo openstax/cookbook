@@ -100,5 +100,6 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _reso
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
+  BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 end

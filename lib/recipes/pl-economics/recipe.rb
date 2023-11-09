@@ -123,5 +123,6 @@ PL_ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :pleconomics) do 
   BakeToc.v1(book: book, options: { cases: true })
   BakeFolio.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
+  BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 end
