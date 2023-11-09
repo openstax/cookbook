@@ -37,4 +37,8 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
+
+  note_classes = %w[meet-author]
+  BakeAutotitledNotes.v1(book: book, classes: note_classes)
+
 end
