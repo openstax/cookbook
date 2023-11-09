@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Adds `meet-author` note in `neuroscience`
 * Add `lifestage-context` note to `nursing-internal`
 * Add section titles links to `summary` in `nursing-internal`
 * Change EOC titles in `nursing-internal`
