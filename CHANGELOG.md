@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Add `BakeRexWrappers` to every recipe-- gives an attribute for rex
+* Add `BakeRexWrappers` to every recipe-- gives an attribute to scope styles for rex
 * Add `lifestage-context` note to `nursing-internal`
 * Add section titles links to `summary` in `nursing-internal`
 * Change EOC titles in `nursing-internal`
