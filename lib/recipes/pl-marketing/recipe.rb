@@ -135,6 +135,5 @@ PL_MARKETING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plmarketing) do 
   BakeUnitPageTitle.v1(book: book)
   BakeToc.v1(book: book, options: { cases: true })
   BakeFolio.v1(book: book)
-  BakeRexWrappers.v1(book: book)
   BakeLinkPlaceholders.v1(book: book, cases: true)
 end

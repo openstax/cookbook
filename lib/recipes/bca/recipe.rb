@@ -118,6 +118,5 @@ BCA_RECIPE = Kitchen::BookRecipe.new(book_short_name: :bca) do |doc, _resources|
   BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
-  BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 end
