@@ -54,6 +54,8 @@ do |doc, _resources|
       section_selector: 'section.summary'
     ) do |section|
       RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
     end
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
@@ -135,8 +137,9 @@ do |doc, _resources|
   end
 
   note_classes = %w[link-to-learning unfolding-casestudy rn-stories clinical-safety
-                    cultural-context patient-conversations pharma-connections legal-ethical
-                    multi-disciplinary clinical-judgment electronic-hr psychosocial-considerations]
+                    cultural-context lifestage-context patient-conversations pharma-connections
+                    legal-ethical multi-disciplinary clinical-judgment electronic-hr
+                    psychosocial-considerations]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
   # Appendix
