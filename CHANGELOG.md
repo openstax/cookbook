@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `learning-objectives` in `neuroscience`
 * Add `BakeRexWrappers` to every recipe-- gives an attribute for rex
 * Fix problem letter tag in multipart questions
 * Adds `meet-author` note in `neuroscience`
