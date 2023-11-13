@@ -15,6 +15,7 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'summary')
 
     chapter.figures(only: :figure_to_number?).each do |figure|
