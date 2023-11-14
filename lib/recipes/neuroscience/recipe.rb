@@ -10,13 +10,20 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
 
   BakeUnnumberedFigure.v1(book: book)
   BakePreface.v1(book: book)
+
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(
+      exercise: exercise
+    )
+  end
+
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
-    BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata, klass: 'summary')
 
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
@@ -28,6 +35,34 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
+    # EOC
+    sections_with_module_links = %w[section-summary key-terms references
+                                    multiple-choice fillin-blank]
+
+    sections_with_module_links.each do |eoc_section|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: eoc_section,
+        uuid_key: ".#{eoc_section}",
+        section_selector: "section.#{eoc_section}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
+      end
+    end
+
+    # Exercises
+    chapter.search('section.multiple-choice').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+
+    chapter.search('section.fillin-blank').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
   end
 
   BakeIframes.v1(book: book)
