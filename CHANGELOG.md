@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Add `boxed-feature` note in `neuroscience`
 * Bake EOC sections in  `neuroscience`
+* Add `tables` in `neuroscience`
 * Add `neurscience across species` note in `neuroscience`
 * Bake `learning-objectives` in `neuroscience`
 * Add `BakeRexWrappers` to every recipe-- gives an attribute for rex

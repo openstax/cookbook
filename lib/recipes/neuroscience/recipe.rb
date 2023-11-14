@@ -64,7 +64,6 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
       BakeFirstElements.v1(within: question)
     end
   end
-
   # Appendix
   book.pages('$.appendix').each do |page|
     appendix_letter = [*('A'..'Z')][page.count_in(:book) - 1]
@@ -79,6 +78,8 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  BakeUnnumberedTables.v1(book: book)
+  BakeTableColumns.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
   BakeIframes.v1(book: book)
   BakeFootnotes.v1(book: book)
