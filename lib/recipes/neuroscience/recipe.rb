@@ -43,4 +43,5 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
   note_classes = %w[meet-author across-species]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
+  BakeCustomTitledNotes.v1(book: book, classes: %w[boxed-feature])
 end
