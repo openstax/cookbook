@@ -5,7 +5,6 @@ do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
-  metadata = book.metadata
 
   book.search('cnx-pi').trash
 
