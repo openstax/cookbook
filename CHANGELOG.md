@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create basic files for `lifespan-development` recipe
 * Add `boxed-feature` note in `neuroscience`
 * Bake EOC sections in  `neuroscience`
 * Add `neurscience across species` note in `neuroscience`
