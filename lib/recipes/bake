@@ -45,6 +45,7 @@ book_recipes = \
   when 'hs-college-success' then [COLLEGE_SUCCESS_HIGH_SCHOOL_RECIPE, COLLEGE_SUCCESS_SHARED_RECIPE]
   when 'hs-physics' then [HS_PHYSICS_RECIPE]
   when 'intro-business' then [INTRO_BUSINESS_RECIPE]
+  when 'lifespan-development' then [LIFESPAN_DEVELOPMENT_RECIPE]
   when 'marketing' then [MARKETING_RECIPE]
   when 'microbiology' then [MICROBIOLOGY_RECIPE]
   when 'neuroscience' then [NEUROSCIENCE_RECIPE]
