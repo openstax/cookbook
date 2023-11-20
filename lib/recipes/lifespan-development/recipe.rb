@@ -23,6 +23,11 @@ do |doc, _resources|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v2(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
   end
 
   # Appendix
