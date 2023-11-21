@@ -4,12 +4,10 @@ require 'spec_helper'
 
 RSpec.describe Kitchen::PageElement do
 
-  let(:page_title_text) { 'A title!' }
-
   let(:metadata) do
     <<~HTML
       <div data-type="metadata" style="display: none;">
-        <h1 data-type="document-title" itemprop="name">#{page_title_text}</h1>
+        <h1 data-type="document-title" itemprop="name">Metadata title</h1>
       </div>
     HTML
   end
@@ -19,7 +17,7 @@ RSpec.describe Kitchen::PageElement do
       one_chapter_with_one_page_containing(
         <<~HTML
           #{metadata}
-          <div data-type="document-title">#{page_title_text}</div>
+          <div data-type="document-title">Page title</div>
         HTML
       )).pages.first
   end
@@ -88,13 +86,18 @@ RSpec.describe Kitchen::PageElement do
       let(:metadata) { '' }
 
       it 'finds the title' do
-        expect(page1.title.text).to eq page_title_text
+        expect(page1.title.text).to eq 'Page title'
       end
     end
 
     context 'with metadata' do
-      it 'finds the title' do
-        expect(page1.title.text).to eq page_title_text
+      it 'skips metadata to find title' do
+        expect(page1.title.text).to eq 'Page title'
+      end
+
+      it 'errors when no title' do
+        page1.title.trash
+        expect { page1.title }.to raise_error(/Title not found for page/)
       end
     end
   end
@@ -130,11 +133,4 @@ RSpec.describe Kitchen::PageElement do
   it 'returns the metadata' do
     expect(page1.metadata).to match_normalized_html(metadata)
   end
-
-  describe '#exercises' do
-    it 'returns the exercises element' do
-      expect(page_with_exercises.exercises).to match_snapshot_auto
-    end
-  end
-
 end

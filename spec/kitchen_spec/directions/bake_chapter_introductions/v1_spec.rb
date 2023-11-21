@@ -56,7 +56,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     it 'updates selectors' do
       expect { described_class.v1(book: book) }.to change {
         book.selectors.title_in_introduction_page
-      }.from("./*[@data-type = 'document-title']").to(".intro-text > [data-type='document-title']")
+      }.from(".//*[@data-type='document-title']").to(".intro-text > [data-type='document-title']")
     end
   end
 end

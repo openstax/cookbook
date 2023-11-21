@@ -28,9 +28,25 @@ module Kitchen
     # @raise [ElementNotFoundError] if no matching element is found
     # @return [Element]
     #
-    def title
-      first!('h3[data-type="title"], h2[data-type="document-title"],' \
-             'h1[data-type="document-title"]')
+    def title(reload: false)
+      @title ||= begin
+        selector = 'h3[data-type="title"], h2[data-type="document-title"],' \
+        'h1[data-type="document-title"]'
+        search(selector, reload: reload).map do |title|
+          next if title.parent[:'data-type'] == 'metadata'
+
+          return title
+        end
+      end
+    end
+
+    # Returns the metadata element.
+    #
+    # @raise [ElementNotFoundError] if no matching element is found
+    # @return [Element]
+    #
+    def metadata
+      first!("div[data-type='metadata']")
     end
 
     # Returns true if this page is a book index
