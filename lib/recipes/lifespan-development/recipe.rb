@@ -44,6 +44,7 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
