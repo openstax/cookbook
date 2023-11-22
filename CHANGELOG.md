@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Bake `index` in `lifespan-development`
+* Bake `eoc` sections in `lifespan-development`
 * Bake `tables` in `lifespan-development`
 * Bake `figures` in `lifespan-development`
 * Create basic files for `lifespan-development` recipe
