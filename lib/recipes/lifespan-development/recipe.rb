@@ -94,6 +94,9 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  notes = %w[link-to-learning what-heard it-depends intersections-contexts life-hacks]
+  BakeAutotitledNotes.v1(book: book, classes: notes)
+
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositePages.v1(book: book)
