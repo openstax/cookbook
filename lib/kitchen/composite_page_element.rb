@@ -37,6 +37,7 @@ module Kitchen
 
           return title
         end
+        raise "Title not found for composite page id=#{id}"
       end
     end
 
