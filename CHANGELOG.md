@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `answer key` in `lifespan-development`
 * Bake `notes` in `lifespan-development`
 * Bake `index` in `lifespan-development`
 * Bake `eoc` sections in `lifespan-development`

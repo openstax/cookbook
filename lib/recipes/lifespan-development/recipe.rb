@@ -29,6 +29,8 @@ do |doc, _resources|
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
 
@@ -78,6 +80,19 @@ do |doc, _resources|
     BakeAllNumberedExerciseTypes.v1(
       within: chapter.search('div[data-type="composite-page"]')
     )
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      append_to: answer_key
+    )
+
+    sections_with_exercises.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass,
+        options: { add_title: false }
+      )
+    end
   end
 
   # Appendix
@@ -100,6 +115,7 @@ do |doc, _resources|
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
