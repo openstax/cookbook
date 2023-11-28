@@ -33,7 +33,12 @@ module Kitchen
       # The selector for intro titles changes during the baking process
       @title ||= begin
         selector = is_introduction? ? selectors.title_in_introduction_page : selectors.title_in_page
-        first!(selector, reload: reload)
+        search(selector, reload: reload).map do |title|
+          next if title.parent[:'data-type'] == 'metadata'
+
+          return title
+        end
+        raise "Title not found for page id=#{id}"
       end
     end
 
@@ -112,15 +117,6 @@ module Kitchen
     #
     def summary
       first(selectors.page_summary)
-    end
-
-    # Returns the exercises element.
-    #
-    # @raise [ElementNotFoundError] if no matching element is found
-    # @return [Element]
-    #
-    def exercises
-      first!('section.exercises')
     end
 
     # Returns the free response questions
