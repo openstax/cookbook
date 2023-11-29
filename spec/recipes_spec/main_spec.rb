@@ -173,6 +173,11 @@ RSpec.describe 'books' do
     expect('intro-business').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes lifespan development' do
+    cmd = form_bake_cmd(book: 'lifespan-development')
+    expect('lifespan-development').to match_expected_when_baked_with(cmd)
+  end
+
   it 'bakes marketing' do
     cmd = form_bake_cmd(book: 'marketing')
     expect('marketing').to match_expected_when_baked_with(cmd)
