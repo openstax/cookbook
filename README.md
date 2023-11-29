@@ -1,18 +1,33 @@
-# Kitchen
+# Cookbook
 
-[![Tests](https://github.com/openstax/kitchen/workflows/Tests/badge.svg)](https://github.com/openstax/kitchen/actions?query=workflow:Tests)
-[![Coverage Status](https://img.shields.io/codecov/c/github/openstax/kitchen.svg)](https://codecov.io/gh/openstax/kitchen)
+[![Tests](https://github.com/openstax/cookbook/workflows/Tests/badge.svg)](https://github.com/openstax/cookbook/actions?query=workflow:Tests)
+[![Coverage Status](https://img.shields.io/codecov/c/github/openstax/cookbook.svg)](https://codecov.io/gh/openstax/cookbook)
 
-Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`.
+Cookbook lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`.
 
-[Full documentation at rubydoc.info](https://rubydoc.info/github/openstax/kitchen).
+[Full documentation at rubydoc.info](https://rubydoc.info/github/openstax/cookbook).
 
 ## Installation
+
+Recommended way is to use devcontainer. It helps to keep consistent development environment for all team members.
+But there is also an option to install project locally.
+
+### Devcontainer
+
+1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser
+2. It'll open VSCode and bring you to an extension install screen, click "Install"
+3. Click the remote button now in the bottom left hand corner.
+4. Click "Remote-Containers: Open Folder in Container"
+5. Select the cloned cookbook folder.
+
+This (assuming you have Docker installed) will launch a docker container for Cookbook, install Ruby and needed libraries, and then let you edit the code running in that container through VSCode.
+
+### Local setup
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'openstax_kitchen'
+gem 'openstax_cookbook'
 ```
 
 And then execute:
@@ -21,7 +36,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install openstax_kitchen
+    $ gem install openstax_cookbook
 
 ## Two Ways to Use Kitchen
 
@@ -654,16 +669,6 @@ There's a low-level CSS query caching tool that saves repeated queries.  In some
 ```ruby
 doc.config.enable_search_cache = true
 ```
-
-### VSCode
-
-1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser
-2. It'll open VSCode and bring you to an extension install screen, click "Install"
-3. Click the remote button now in the bottom left hand corner.
-4. Click "Remote-Containers: Open Folder in Container"
-5. Select the cloned kitchen folder.
-
-This (assuming you have Docker installed) will launch a docker container for Kitchen, install Ruby and needed libraries, and then let you edit the code running in that container through VSCode.  Solargraph will work (code completion and inline documentation) as will Rubocop for linting.
 
 ### Rubocop
 
