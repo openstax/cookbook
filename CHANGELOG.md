@@ -39,7 +39,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add `lifestage-context` note to `nursing-internal`
 * Add section titles links to `summary` in `nursing-internal`
 * Change EOC titles in `nursing-internal`
-* Added `index` and `appendix` to `neuroscience`
 
 ## [v2.5.0] - 2023-11-03
 
