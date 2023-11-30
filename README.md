@@ -3,7 +3,7 @@
 [![Tests](https://github.com/openstax/cookbook/workflows/Tests/badge.svg)](https://github.com/openstax/cookbook/actions?query=workflow:Tests)
 [![Coverage Status](https://img.shields.io/codecov/c/github/openstax/cookbook.svg)](https://codecov.io/gh/openstax/cookbook)
 
-Cookbook lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`.
+In Cookbook there are two main catalogs - `Kitchen` and `Recipes`. `Kitchen` is a place where you modify the structure and content of XML files. It gives you also tools that you can use to create a `Recipe` with instructions and `bake` it in the `Oven`. `Recipes`, as the name suggests, keeps all created recipes for books.
 
 [Full documentation at rubydoc.info](https://rubydoc.info/github/openstax/cookbook).
 
@@ -38,18 +38,18 @@ Or install it yourself as:
 
     $ gem install openstax_cookbook
 
-## Two Ways to Use Kitchen
+## I. Kitchen
 
 There are two ways to use Kitchen: the "generic" way and the "book" way.  The generic way provides mechanisms for traversing and modifying an XML document.  The book way extends the generic way by adding mechanisms that are specific to the book content XML produced at OpenStax (e.g. the book way knows about chapters and pages, figures and terms, etc, whereas the generic way does not have this knowledge).
 
 We'll first talk about the generic way since those tools are also available in the book way.
 
-## Generic Usage
+### 1. Generic Usage
 
 Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` and `bake` it in the `Oven`:
 
 ```ruby
-require "openstax_kitchen"
+require "openstax_cookbook"
 
 recipe = Kitchen::Recipe.new do |document|
   document.search("div.section").each do |element|
@@ -69,7 +69,7 @@ The above example changes all `<div class="section">` tags to `<section>`.
 
 The `document` above is a `Kitchen::Document` and the `element` is a `Kitchen::Element`.  Both have methods for reading and manipulating the XML.  You can of course name the block argument whatever you want (see examples below).
 
-### The `search` method and enumerators
+#### a. The `search` method and enumerators
 
 `search` takes one or more CSS and XPath selectors and returns an enumerator that iterates over the matching elements inside the document or element that `search` is called on.
 
@@ -92,7 +92,7 @@ doc.search("div.example").each do |div| # find all "div.example" elements in the
 end
 ```
 
-### Clipboards, cut, copy, and paste
+#### b. Clipboards, cut, copy, and paste
 
 When baking our content, we often want to move content around or make copies of content to reuse elsewhere in the document.  Kitchen provides clipboard functionality to help with this.
 
@@ -160,7 +160,7 @@ some_div.trash
 doc.search(".not_needed").trash
 ```
 
-### Pantries
+#### c. Pantries
 
 A document also gives you access to named pantries.  A pantry is a place to store items that you can label for later retrieval by that label.
 
@@ -175,7 +175,7 @@ The above uses the `:default` pantry.  You can also use named pantries:
 doc.pantry(name: :figure_titles).store "Moon landing", label: "id42"
 ```
 
-### Counters
+#### d. Counters
 
 Oftentimes we need to count things in a document, for example to number chapters and pages.  A document provides named counters:
 
@@ -187,7 +187,7 @@ doc.counter(:chapter).reset
 
 See book-oriented usage for a better way of counting elements.
 
-### Adding content
+#### e. Adding content
 
 In kitchen we can prepend or append element children or siblings:
 
@@ -232,7 +232,7 @@ or wrap an element's children:
 doc.search("span").first.wrap_children('span', class: 'other', data_type: 'foo')
 ```
 
-### Checking for elements
+#### f. Checking for elements
 
 You can see if an element contains an element matching a selector:
 
@@ -240,13 +240,15 @@ You can see if an element contains an element matching a selector:
 my_element.contains?(".title") #=> true or false
 ```
 
-### Miscellaneous
+#### g. Miscellaneous
 
 * `ElementEnumerator` also provides a `first!` method that is like the standard `first` except it raises an error if there is no matching first element to return.
 
-### Using `raw` to get at underlying Nokogiri objects.
+#### h. Using `raw` to get at underlying Nokogiri objects.
 
 Kitchen uses the Nokogiri gem to parse and manipulate XML documents.  `Document` objects wraps a `Nokogiri::XML::Document` object, and `Element` objects wrap a `Nokogiri::XML::Node` object.  If you want to do something wild and crazy you can access these underlying objects using the `raw` method on `Document` and `Element`.  Note that many of the methods on the underlying objects are exposed on the Kitchen object, e.g. instead of saying `my_element.raw['data-type']` you can say `my_element['data-type']`.
+
+## II. Recipes
 
 ## Book-Oriented Usage
 
