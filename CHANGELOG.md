@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `in the lab note` in `neuroscience`
 * Add Shellcheck to Dockerfile
 * Fixup `PageElement`, add specs for `CompositePageElement`
 * Bake `answer key` in `lifespan-development`
