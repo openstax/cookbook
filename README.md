@@ -248,9 +248,7 @@ my_element.contains?(".title") #=> true or false
 
 Kitchen uses the Nokogiri gem to parse and manipulate XML documents.  `Document` objects wraps a `Nokogiri::XML::Document` object, and `Element` objects wrap a `Nokogiri::XML::Node` object.  If you want to do something wild and crazy you can access these underlying objects using the `raw` method on `Document` and `Element`.  Note that many of the methods on the underlying objects are exposed on the Kitchen object, e.g. instead of saying `my_element.raw['data-type']` you can say `my_element['data-type']`.
 
-## II. Recipes
-
-## Book-Oriented Usage
+### 2. Book-Oriented Usage
 
 All of the above works, but it is generic and we have a specific problem handling books that use a specific schema.  To that end, Kitchen also includes a `BookDocument` to use in place of `Document` as well as elements and enumerators specific to this schema, e.g. `BookElement`, `ChapterElement`, `PageElement`, `TableElement`, `FigureElement`, `NoteElement`, `ExampleElement`.  `BookDocument` has a method called `book` that returns a `BookElement` that wraps the top-level `html` element.  All of these elements have methods on them for searching for other of these specific elements, so that instead of
 
@@ -311,7 +309,7 @@ doc.book.figures(only: ->(fig) { fig.children.count == 2 })
 
 Obviously this is a somewhat contrived example, but the idea is that by passing a callable you can do complex searches.
 
-### Overriding Default Book-Oriented Selectors
+#### Overriding Default Book-Oriented Selectors
 
 Book-oriented methods like `book.pages.figures` hide from us the CSS or XPath selectors that let us find child elements like `.pages`.  But sometimes, the default selector we have isn't what is used in a certain book.  In these cases, we can override the selector once in the recipe and still continue to use the book-oriented usage.  For example, a page summary is normally found using the CSS `section.summary`.  But some books use a `.section-summary` class.  For these books, we can override the selectors in their recipes:
 
@@ -322,7 +320,7 @@ recipe = Kitchen::BookRecipe.new do |doc|
   )
 ```
 
-## Directions
+### 3. Directions
 
 All of the above talks about the how to search through the XML file and perform basic operations on that file.  Our recipes will be combinations of all of the above: search for elements; cut, copy and paste them; count them; rework them; etc.
 
@@ -334,15 +332,16 @@ In Kitchen, we've started the process of writing out these steps and we've put t
 
 It is probably true that the `BakeChapterSummary` code will work for some number of books, but other books might have different requirements.  As such we can expect that there will be different variants of the chapter summary baking step.  To anticipate this, our first implementation of this step lives in a method named `v1` (so to run it you call `BakeChapterSummary.v1(chapter: some_chapter)`).  Later if there's a tweak needed that can't fit into v1's approach, we can make a `v2` method that could live in its own file.  This may or may not be the right approach to handle this kind of code variation, but it is at least a place to start.
 
-### Internationalization (I18n)
+#### a. Internationalization (I18n)
 
-Recognizing that our books will be translated into multiple languages, Kitchen has support for internationalization (I18n).  There's a spot for translation files in the `locales` directory, in which there is currently one `en.yml` translation file for English.  Within our directions code you'll see uses of it like here to title an Example:
+Recognizing that our books will be translated into multiple languages, Kitchen has support for internationalization (I18n).  There's a spot for translation files in the `locales` directory, in which there are currently three `_.yml` translation files for English, Spanish and Polish.  Within our directions code you'll see uses of it like here to title an Example:
 
 ```erb
 <span class="os-title-label">#{I18n.t(:example)} </span>
 ```
+Similar files appear in each book recipe separately. More about it in part `II. Recipes`.
 
-### Building HTML strings
+#### b. Building HTML strings
 
 There are a number of valid ways of building up HTML strings to insert into documents.
 
@@ -432,7 +431,7 @@ end
 
 The above works but it is a little fragmented to read.  We have to build up parts of the bulleted lists in arrays, then join them together with newlines and embed them in other strings (some of which are also collected in an array and then later substituted and joined).
 
-For these more complex strings we have another option: [ERB (Embedded RuBy)](https://www.stuartellis.name/articles/erb/).  ERB is part of standard Ruby and had its heyday when Rails came out in the 2000s.  ERB lets us make a separate HTML file with Ruby sprinkled within it.  Let's call this file `blah.html.erb`:
+For these more complex strings we have another option: [ERB (Embedded RuBy)](https://www.puppet.com/docs/puppet/5.5/lang_template_erb.html).  ERB is part of standard Ruby and had its heyday when Rails came out in the 2000s.  ERB lets us make a separate HTML file with Ruby sprinkled within it.  Let's call this file `blah.html.erb`:
 
 ```erb
 <ul>
@@ -470,6 +469,8 @@ The `render` method takes a `file` argument that is a string file path.  If the 
 If you want to make relative file paths be relative to a different directory, you can pass a directory string to the `renderable` statement: `renderable dir: '/Some/other/directory'`.
 
 Again, all these techniques work and there are times to use them all.
+
+## II. Recipes
 
 ## One-file scripts
 
