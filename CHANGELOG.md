@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add `in the lab note` in `neuroscience`
+* Add Shellcheck to Dockerfile
+* Fixup `PageElement`, add specs for `CompositePageElement`
+* Bake `answer key` in `lifespan-development`
+* Bake `notes` in `lifespan-development`
+* Bake `index` in `lifespan-development`
+* Bake `eoc` sections in `lifespan-development`
+* Bake `tables` in `lifespan-development`
+* Bake `figures` in `lifespan-development`
+* Create basic files for `lifespan-development` recipe
+
+## [v2.6.0] - 2023-11-17
+
+* Add `boxed-feature` note in `neuroscience`
+* Bake EOC sections in  `neuroscience`
 * Add `neurscience across species` note in `neuroscience`
 * Bake `learning-objectives` in `neuroscience`
 * Add `BakeRexWrappers` to every recipe-- gives an attribute for rex
