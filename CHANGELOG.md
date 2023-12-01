@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `BakeOrderHeaders` direction & specs
 * Fixup `PageElement`, add specs for `CompositePageElement`
 * Bake `answer key` in `lifespan-development`
 * Bake `notes` in `lifespan-development`
