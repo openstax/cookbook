@@ -7,6 +7,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     software-properties-common \
     zlib1g-dev \
+    shellcheck \
     && rm -rf /var/lib/apt/lists/*
 
 # Install a quick colorized prompt and turn on ls coloring

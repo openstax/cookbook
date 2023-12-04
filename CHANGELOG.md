@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Create `BakeOrderHeaders` direction & specs
+
+## [v2.7.0] - 2023-12-01
+
+* Add `in the lab note` in `neuroscience`
+* Add Shellcheck to Dockerfile
 * Fixup `PageElement`, add specs for `CompositePageElement`
 * Bake `answer key` in `lifespan-development`
 * Bake `notes` in `lifespan-development`
