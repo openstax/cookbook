@@ -470,9 +470,11 @@ If you want to make relative file paths be relative to a different directory, yo
 
 Again, all these techniques work and there are times to use them all.
 
-## II. Recipes
-
-## One-file scripts
+### 4. One-file scripts ??????????
+<!-- Do we need this? It was created when Kitchen was a separate repo,
+so it was given an oportunity to play around with it and try how it does work.
+Now, when we have Cookbook repo with Kitchen and Recipes, it's strongly connected
+to Openstax project. We have `bake` script that we can use to try out things. -->
 
 Want to make a one-file script to do some baking?  Use the "inline" form of bundler:
 
@@ -482,10 +484,10 @@ Want to make a one-file script to do some baking?  Use the "inline" form of bund
 require "bundler/inline"
 
 gemfile do
-  gem 'openstax_kitchen', '2.0.0'
+  gem 'openstax_cookbook', '1.0.0'
 end
 
-require "openstax_kitchen"
+require "openstax_cookbook"
 
 recipe = Kitchen::Recipe.new do |doc|
   # ... recipe steps here
@@ -494,15 +496,21 @@ end
 Kitchen::Oven.bake(
   input_file: "some_file.xhtml",
   recipes: recipe,
-  output_file: "some_other_file.xhtml")
+  output_file: "some_other_file.xhtml"
 )
 ```
 
 Incidentally, the `bake` method returns timing information, if you `puts` its result you'll see it.
 
-## Recipe (and Gem) Development
+### 5. Other
 
-### Docker
+<!-- ????????????????????????????????????????????????????????? -->
+<!-- Do we want to keep points a-c? If yes, I think it should be moved to `Installation`.
+The question is, do we still need local setup option, when all developers are using devcontainer?
+This was created when Kitchen was a seperate repo and could be used by other people in different projects.
+Now it is a part of Cookbook, that is used only for creating Openstax books. -->
+
+#### a. Docker
 
 You can use Docker for your development environment.  To build the image:
 
@@ -522,13 +530,18 @@ To run specs (or something else) from the host:
 $> ./docker/run rspec
 ```
 
-### Non-Docker
+#### b. Non-Docker
 
 After checking out the repo, run `bin/setup` to install dependencies.  If you want to install this gem onto your local machine, run `bundle exec rake install`.
 
-### Console
+#### c. Console
 
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+<!-- ?????????????????????????????????????????????????????????? -->
+
+## II. Recipes
+## III. Development
 
 ### Tutorials
 
