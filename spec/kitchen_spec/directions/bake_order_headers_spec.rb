@@ -9,7 +9,7 @@ RSpec.describe Kitchen::Directions::BakeOrderHeaders do
         <<~HTML
           <h3>The top title within the page</h3>
           <div>Body of introduction
-            <h6>Subtitle</h5>
+            <h6>Subtitle</h6>
             <p>a paragraph</p>
           </div>
           <h3>wow another header</h3>
