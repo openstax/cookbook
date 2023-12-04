@@ -1,18 +1,33 @@
-# Kitchen
+# Cookbook
 
-[![Tests](https://github.com/openstax/kitchen/workflows/Tests/badge.svg)](https://github.com/openstax/kitchen/actions?query=workflow:Tests)
-[![Coverage Status](https://img.shields.io/codecov/c/github/openstax/kitchen.svg)](https://codecov.io/gh/openstax/kitchen)
+[![Tests](https://github.com/openstax/cookbook/workflows/Tests/badge.svg)](https://github.com/openstax/cookbook/actions?query=workflow:Tests)
+[![Coverage Status](https://img.shields.io/codecov/c/github/openstax/cookbook.svg)](https://codecov.io/gh/openstax/cookbook)
 
-Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` with instructions and `bake` it in the `Oven`.
+In Cookbook there are two main catalogs - `Kitchen` and `Recipes`. `Kitchen` is a place where you modify the structure and content of XML files. It gives you also tools that you can use to create a `Recipe` with instructions and `bake` it in the `Oven`. `Recipes`, as the name suggests, keeps all created recipes for books.
 
-[Full documentation at rubydoc.info](https://rubydoc.info/github/openstax/kitchen).
+[Full documentation at rubydoc.info](https://rubydoc.info/github/openstax/cookbook).
 
 ## Installation
+
+Recommended way is to use devcontainer. It helps to keep consistent development environment for all team members.
+But there is also an option to install project locally.
+
+### Devcontainer
+
+1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser
+2. It'll open VSCode and bring you to an extension install screen, click "Install"
+3. Click the remote button now in the bottom left hand corner.
+4. Click "Remote-Containers: Open Folder in Container"
+5. Select the cloned cookbook folder.
+
+This (assuming you have Docker installed) will launch a docker container for Cookbook, install Ruby and needed libraries, and then let you edit the code running in that container through VSCode.
+
+### Local setup
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'openstax_kitchen'
+gem 'openstax_cookbook'
 ```
 
 And then execute:
@@ -21,20 +36,20 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install openstax_kitchen
+    $ gem install openstax_cookbook
 
-## Two Ways to Use Kitchen
+## I. Kitchen
 
 There are two ways to use Kitchen: the "generic" way and the "book" way.  The generic way provides mechanisms for traversing and modifying an XML document.  The book way extends the generic way by adding mechanisms that are specific to the book content XML produced at OpenStax (e.g. the book way knows about chapters and pages, figures and terms, etc, whereas the generic way does not have this knowledge).
 
 We'll first talk about the generic way since those tools are also available in the book way.
 
-## Generic Usage
+### 1. Generic Usage
 
 Kitchen lets you modify the structure and content of XML files.  You create a `Recipe` and `bake` it in the `Oven`:
 
 ```ruby
-require "openstax_kitchen"
+require "openstax_cookbook"
 
 recipe = Kitchen::Recipe.new do |document|
   document.search("div.section").each do |element|
@@ -54,7 +69,7 @@ The above example changes all `<div class="section">` tags to `<section>`.
 
 The `document` above is a `Kitchen::Document` and the `element` is a `Kitchen::Element`.  Both have methods for reading and manipulating the XML.  You can of course name the block argument whatever you want (see examples below).
 
-### The `search` method and enumerators
+#### a. The `search` method and enumerators
 
 `search` takes one or more CSS and XPath selectors and returns an enumerator that iterates over the matching elements inside the document or element that `search` is called on.
 
@@ -77,7 +92,7 @@ doc.search("div.example").each do |div| # find all "div.example" elements in the
 end
 ```
 
-### Clipboards, cut, copy, and paste
+#### b. Clipboards, cut, copy, and paste
 
 When baking our content, we often want to move content around or make copies of content to reuse elsewhere in the document.  Kitchen provides clipboard functionality to help with this.
 
@@ -145,7 +160,7 @@ some_div.trash
 doc.search(".not_needed").trash
 ```
 
-### Pantries
+#### c. Pantries
 
 A document also gives you access to named pantries.  A pantry is a place to store items that you can label for later retrieval by that label.
 
@@ -160,7 +175,7 @@ The above uses the `:default` pantry.  You can also use named pantries:
 doc.pantry(name: :figure_titles).store "Moon landing", label: "id42"
 ```
 
-### Counters
+#### d. Counters
 
 Oftentimes we need to count things in a document, for example to number chapters and pages.  A document provides named counters:
 
@@ -172,7 +187,7 @@ doc.counter(:chapter).reset
 
 See book-oriented usage for a better way of counting elements.
 
-### Adding content
+#### e. Adding content
 
 In kitchen we can prepend or append element children or siblings:
 
@@ -217,7 +232,7 @@ or wrap an element's children:
 doc.search("span").first.wrap_children('span', class: 'other', data_type: 'foo')
 ```
 
-### Checking for elements
+#### f. Checking for elements
 
 You can see if an element contains an element matching a selector:
 
@@ -225,15 +240,15 @@ You can see if an element contains an element matching a selector:
 my_element.contains?(".title") #=> true or false
 ```
 
-### Miscellaneous
+#### g. Miscellaneous
 
 * `ElementEnumerator` also provides a `first!` method that is like the standard `first` except it raises an error if there is no matching first element to return.
 
-### Using `raw` to get at underlying Nokogiri objects.
+#### h. Using `raw` to get at underlying Nokogiri objects.
 
 Kitchen uses the Nokogiri gem to parse and manipulate XML documents.  `Document` objects wraps a `Nokogiri::XML::Document` object, and `Element` objects wrap a `Nokogiri::XML::Node` object.  If you want to do something wild and crazy you can access these underlying objects using the `raw` method on `Document` and `Element`.  Note that many of the methods on the underlying objects are exposed on the Kitchen object, e.g. instead of saying `my_element.raw['data-type']` you can say `my_element['data-type']`.
 
-## Book-Oriented Usage
+### 2. Book-Oriented Usage
 
 All of the above works, but it is generic and we have a specific problem handling books that use a specific schema.  To that end, Kitchen also includes a `BookDocument` to use in place of `Document` as well as elements and enumerators specific to this schema, e.g. `BookElement`, `ChapterElement`, `PageElement`, `TableElement`, `FigureElement`, `NoteElement`, `ExampleElement`.  `BookDocument` has a method called `book` that returns a `BookElement` that wraps the top-level `html` element.  All of these elements have methods on them for searching for other of these specific elements, so that instead of
 
@@ -294,7 +309,7 @@ doc.book.figures(only: ->(fig) { fig.children.count == 2 })
 
 Obviously this is a somewhat contrived example, but the idea is that by passing a callable you can do complex searches.
 
-### Overriding Default Book-Oriented Selectors
+#### Overriding Default Book-Oriented Selectors
 
 Book-oriented methods like `book.pages.figures` hide from us the CSS or XPath selectors that let us find child elements like `.pages`.  But sometimes, the default selector we have isn't what is used in a certain book.  In these cases, we can override the selector once in the recipe and still continue to use the book-oriented usage.  For example, a page summary is normally found using the CSS `section.summary`.  But some books use a `.section-summary` class.  For these books, we can override the selectors in their recipes:
 
@@ -305,7 +320,7 @@ recipe = Kitchen::BookRecipe.new do |doc|
   )
 ```
 
-## Directions
+### 3. Directions
 
 All of the above talks about the how to search through the XML file and perform basic operations on that file.  Our recipes will be combinations of all of the above: search for elements; cut, copy and paste them; count them; rework them; etc.
 
@@ -317,15 +332,16 @@ In Kitchen, we've started the process of writing out these steps and we've put t
 
 It is probably true that the `BakeChapterSummary` code will work for some number of books, but other books might have different requirements.  As such we can expect that there will be different variants of the chapter summary baking step.  To anticipate this, our first implementation of this step lives in a method named `v1` (so to run it you call `BakeChapterSummary.v1(chapter: some_chapter)`).  Later if there's a tweak needed that can't fit into v1's approach, we can make a `v2` method that could live in its own file.  This may or may not be the right approach to handle this kind of code variation, but it is at least a place to start.
 
-### Internationalization (I18n)
+#### a. Internationalization (I18n)
 
-Recognizing that our books will be translated into multiple languages, Kitchen has support for internationalization (I18n).  There's a spot for translation files in the `locales` directory, in which there is currently one `en.yml` translation file for English.  Within our directions code you'll see uses of it like here to title an Example:
+Recognizing that our books will be translated into multiple languages, Kitchen has support for internationalization (I18n).  There's a spot for translation files in the `locales` directory, in which there are currently three `_.yml` translation files for English, Spanish and Polish.  Within our directions code you'll see uses of it like here to title an Example:
 
 ```erb
 <span class="os-title-label">#{I18n.t(:example)} </span>
 ```
+Similar files appear in each book recipe separately. More about it in part `II. Recipes`.
 
-### Building HTML strings
+#### b. Building HTML strings
 
 There are a number of valid ways of building up HTML strings to insert into documents.
 
@@ -415,7 +431,7 @@ end
 
 The above works but it is a little fragmented to read.  We have to build up parts of the bulleted lists in arrays, then join them together with newlines and embed them in other strings (some of which are also collected in an array and then later substituted and joined).
 
-For these more complex strings we have another option: [ERB (Embedded RuBy)](https://www.stuartellis.name/articles/erb/).  ERB is part of standard Ruby and had its heyday when Rails came out in the 2000s.  ERB lets us make a separate HTML file with Ruby sprinkled within it.  Let's call this file `blah.html.erb`:
+For these more complex strings we have another option: [ERB (Embedded RuBy)](https://www.puppet.com/docs/puppet/5.5/lang_template_erb.html).  ERB is part of standard Ruby and had its heyday when Rails came out in the 2000s.  ERB lets us make a separate HTML file with Ruby sprinkled within it.  Let's call this file `blah.html.erb`:
 
 ```erb
 <ul>
@@ -454,7 +470,15 @@ If you want to make relative file paths be relative to a different directory, yo
 
 Again, all these techniques work and there are times to use them all.
 
-## One-file scripts
+### 4. One-file scripts
+
+```ruby
+# ???????????????????????????????????????????????????????
+# Do we need this? It was created when Kitchen was a separate repo,
+# so it was given an oportunity to play around with it and try how it does work.
+# Now, when we have Cookbook repo with Kitchen and Recipes, it's strongly connected
+# to Openstax project. We have `bake` script that we can use to try out things.
+```
 
 Want to make a one-file script to do some baking?  Use the "inline" form of bundler:
 
@@ -464,10 +488,10 @@ Want to make a one-file script to do some baking?  Use the "inline" form of bund
 require "bundler/inline"
 
 gemfile do
-  gem 'openstax_kitchen', '2.0.0'
+  gem 'openstax_cookbook', '1.0.0'
 end
 
-require "openstax_kitchen"
+require "openstax_cookbook"
 
 recipe = Kitchen::Recipe.new do |doc|
   # ... recipe steps here
@@ -476,15 +500,23 @@ end
 Kitchen::Oven.bake(
   input_file: "some_file.xhtml",
   recipes: recipe,
-  output_file: "some_other_file.xhtml")
+  output_file: "some_other_file.xhtml"
 )
 ```
 
 Incidentally, the `bake` method returns timing information, if you `puts` its result you'll see it.
 
-## Recipe (and Gem) Development
+### 5. Other
 
-### Docker
+```ruby
+# ????????????????????????????????????????????????????????
+# Do we want to keep points a-c? If yes, I think it should be moved to `Installation`.
+# The question is, do we still need local setup option, when all developers are using devcontainer?
+# This was created when Kitchen was a seperate repo and could be used by other people in different projects.
+# Now it is a part of Cookbook, that is used only for creating Openstax books.
+```
+
+#### a. Docker
 
 You can use Docker for your development environment.  To build the image:
 
@@ -504,13 +536,16 @@ To run specs (or something else) from the host:
 $> ./docker/run rspec
 ```
 
-### Non-Docker
+#### b. Non-Docker
 
 After checking out the repo, run `bin/setup` to install dependencies.  If you want to install this gem onto your local machine, run `bundle exec rake install`.
 
-### Console
+#### c. Console
 
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+## II. Recipes
+## III. Development
 
 ### Tutorials
 
@@ -654,16 +689,6 @@ There's a low-level CSS query caching tool that saves repeated queries.  In some
 ```ruby
 doc.config.enable_search_cache = true
 ```
-
-### VSCode
-
-1. Visit `vscode:extension/ms-vscode-remote.remote-containers` in a browser
-2. It'll open VSCode and bring you to an extension install screen, click "Install"
-3. Click the remote button now in the bottom left hand corner.
-4. Click "Remote-Containers: Open Folder in Container"
-5. Select the cloned kitchen folder.
-
-This (assuming you have Docker installed) will launch a docker container for Kitchen, install Ruby and needed libraries, and then let you edit the code running in that container through VSCode.  Solargraph will work (code completion and inline documentation) as will Rubocop for linting.
 
 ### Rubocop
 
