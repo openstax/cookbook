@@ -36,6 +36,7 @@ book_recipes = \
   when 'computer-science' then [COMPUTER_SCIENCE_RECIPE]
   when 'college-success' then [COLLEGE_SUCCESS_HS_DELETE_RECIPE, COLLEGE_SUCCESS_SHARED_RECIPE]
   when 'contemporary-math' then [CONTEMPORARY_MATH_RECIPE]
+  when 'data-science' then [DATA_SCIENCE_RECIPE]
   when 'dev-math' then [DEV_MATH_RECIPE]
   when 'economics' then [ECONOMICS_RECIPE]
   when 'english-composition' then [ENGLISH_COMPOSITION_RECIPE]
