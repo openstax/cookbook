@@ -76,6 +76,7 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
   BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 
+  book.notes('$.developmental-perspective').each { |note| note['use-subtitle'] = true }
   note_classes = %w[meet-author developmental-perspective across-species inthe-lab]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
