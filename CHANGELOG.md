@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `EOC` in `data-science`
 * Create basic files for `data-science` recipe
 * Bake `chapter outline` in `neuroscience`
 

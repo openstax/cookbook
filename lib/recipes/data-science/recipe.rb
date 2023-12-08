@@ -7,7 +7,7 @@ do |doc, _resources|
   book = doc.book
 
   book.search('cnx-pi').trash
-  # metadata = book.metadata
+  metadata = book.metadata
 
   BakePreface.v1(book: book)
 
@@ -28,6 +28,24 @@ do |doc, _resources|
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    # EOC
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+
+    eoc_sections = %w[group-project chapter-problems]
+
+    eoc_sections.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
+      end
     end
   end
 
