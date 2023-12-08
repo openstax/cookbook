@@ -19,6 +19,7 @@ do |doc, _resources|
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
+    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
 
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
