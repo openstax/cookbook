@@ -118,6 +118,11 @@ RSpec.describe 'books' do
     expect('contemporary-math').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes data science' do
+    cmd = form_bake_cmd(book: 'data-science')
+    expect('data-science').to match_expected_when_baked_with(cmd)
+  end
+
   it 'bakes economics' do
     cmd = form_bake_cmd(book: 'economics')
     expect('economics').to match_expected_when_baked_with(cmd)
