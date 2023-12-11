@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `lo` in `data-science`
 * Add `developmental-perspective` note in `neuroscience`
 * Create basic files for `data-science` recipe
 * Create `BakeOrderHeaders` direction & specs
