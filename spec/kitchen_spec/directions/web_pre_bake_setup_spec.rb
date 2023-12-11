@@ -29,7 +29,7 @@ RSpec.describe Kitchen::Directions::WebPreBakeSetup do
 
   it 'works' do
     described_class.v1(book_pages: book_pages)
-    expect(book_pages).to match_snapshot_auto
+    expect(book_pages.to_s).to match_snapshot_auto
   end
 
   it 'works opposite WebPostBakeRestore' do
