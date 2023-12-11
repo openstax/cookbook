@@ -29,20 +29,7 @@ RSpec.describe Kitchen::Directions::WebPreBakeSetup do
 
   it 'works' do
     described_class.v1(book_pages: book_pages)
-    expect(book_pages).to match_normalized_html(
-      <<~HTML
-        <div data-type="page" id="1234">
-          <span data-replacement-key="1234-title">placeholder title</span>
-          <span data-replacement-key="1234-metadata">placeholder metadata</span>
-          <div>page 1 content<h3>subtitle 1</h3></div>
-        </div>
-        <div data-type="page" id="abcd">
-          <span data-replacement-key="abcd-title">placeholder title</span>
-          <span data-replacement-key="abcd-metadata">placeholder metadata</span>
-          <div>page 2 content<h3>subtitle 2</h3></div>
-        </div>
-      HTML
-    )
+    expect(book_pages).to match_snapshot_auto
   end
 
   it 'works opposite WebPostBakeRestore' do
