@@ -61,8 +61,8 @@ do |doc, _resources|
   BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
 
-  note_classes = %w[exploring-further]
+  note_classes = %w[exploring-further python-feature]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
-  BakeCustomTitledNotes.v1(book: book, classes: %w[boxed-feature python-feature])
+  BakeCustomTitledNotes.v1(book: book, classes: %w[boxed-feature])
 end
