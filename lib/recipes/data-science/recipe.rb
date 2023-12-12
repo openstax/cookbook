@@ -10,7 +10,6 @@ do |doc, _resources|
   # metadata = book.metadata
 
   BakePreface.v1(book: book)
-
   BakeUnnumberedFigure.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
@@ -29,6 +28,12 @@ do |doc, _resources|
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v2(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
+    end
+
+    chapter.examples.each do |example|
+      BakeExample.v1(example: example,
+                     number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
+                     title_tag: 'h3')
     end
   end
 
@@ -55,4 +60,9 @@ do |doc, _resources|
   BakeFolio.v1(book: book)
   BakeRexWrappers.v1(book: book)
   BakeLinks.v1(book: book)
+
+  note_classes = %w[exploring-further]
+  BakeAutotitledNotes.v1(book: book, classes: note_classes)
+
+  BakeCustomTitledNotes.v1(book: book, classes: %w[boxed-feature])
 end
