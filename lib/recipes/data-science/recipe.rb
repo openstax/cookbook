@@ -64,5 +64,5 @@ do |doc, _resources|
   note_classes = %w[exploring-further python-feature]
   BakeAutotitledNotes.v1(book: book, classes: note_classes)
 
-  BakeCustomTitledNotes.v1(book: book, classes: %w[boxed-feature])
+  BakeCustomTitledNotes.v1(book: book, classes: %w[boxed-feature download-file])
 end
