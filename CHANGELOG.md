@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Bake `lo` in `data-science`
 * Add `developmental-perspective` note in `neuroscience`
 * Create basic files for `data-science` recipe
+* Added `index` and `appendix` to `neuroscience`
 * Create `BakeOrderHeaders` direction & specs
 * Bake `chapter outline` in `neuroscience`
 
@@ -24,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Bake `tables` in `lifespan-development`
 * Bake `figures` in `lifespan-development`
 * Create basic files for `lifespan-development` recipe
+
 
 ## [v2.6.0] - 2023-11-17
 
