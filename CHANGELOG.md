@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Bake `EOC` in `data-science`
+* Bake `lo` in `data-science`
+* Add `developmental-perspective` note in `neuroscience`
 * Create basic files for `data-science` recipe
+* Create `BakeOrderHeaders` direction & specs
 * Bake `chapter outline` in `neuroscience`
 
 ## [v2.7.0] - 2023-12-01
