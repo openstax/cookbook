@@ -17,6 +17,8 @@ do |doc, _resources|
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
+  BakeHighlightedCode.v1(book: book, languages: ['python'])
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)

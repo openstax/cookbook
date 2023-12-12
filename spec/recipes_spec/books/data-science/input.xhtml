@@ -12,14 +12,14 @@
     <meta itemprop="accessibilityFeature" content="structuredNavigation"/>
 
 
-    <meta itemprop="dateModified" content="2023-12-06T15:47:09+00:00"/>
+    <meta itemprop="dateModified" content="2023-12-11T16:00:09+00:00"/>
   </head>
   <body itemscope="itemscope" itemtype="http://schema.org/Book">
     <div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Principles of Data Science</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="slug" data-value="principles-of-data-science"/>
-      <span data-type="cnx-archive-uri" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c@d717ec0"/>
+      <span data-type="cnx-archive-uri" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c@4c79826"/>
 
       <div class="permissions">
         <p class="license">
@@ -39,7 +39,7 @@
 
    <h1 data-type="document-title">Descriptive Measurements and Probability Distributions</h1><div data-type="page" id="page_bf4b6343-4997-42a5-9afd-31c113d33426" class="introduction"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Test Module 1</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="bf4b6343-4997-42a5-9afd-31c113d33426@"/>
     </div>
@@ -124,7 +124,7 @@
   </div>
   </div><div data-type="page" id="page_80180f36-bc98-4dc5-a9cf-6e9f02a8090d"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Test Module 2</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="80180f36-bc98-4dc5-a9cf-6e9f02a8090d@"/>
     </div>
@@ -567,32 +567,32 @@
         To use Python for determining measures of center, you will need to work with lists using the statistics library.  A list in Python holds a collection of items such as numeric values, or non-numeric values, or a mix of the two.  Lists are enclosed in square brackets and can be named. The items in a list are separated with commas.
       </p>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00044" data-sm="./modules/m00002/index.cnxml:328:7">Example of Lists in Python:</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:329:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:329:29">
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:329:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:329:58">
         exam_scores = [95.5, 82.2, 75.6, 100]
         pulse_rates = [68, 92, 76, 51, 65, 83, 94, 72, 88, 59]
         eye_color = [“brown”, “blue”, “black”]
       </span></pre>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00045" data-sm="./modules/m00002/index.cnxml:334:7">The “statistics” library can be included in a Python program using the “import” command.</p>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00046" data-sm="./modules/m00002/index.cnxml:335:7">At the beginning of a Python program, type:</p>
-      <pre data-type="code" data-sm="./modules/m00002/index.cnxml:336:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:336:13">import statistics</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00002/index.cnxml:336:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:336:42">import statistics</span></pre>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00047" data-sm="./modules/m00002/index.cnxml:337:7">This will allow various statistical functions to be available in your Python program such as for calculating the mean and median. </p>
       <section data-depth="2" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_sect-00008" data-sm="./modules/m00002/index.cnxml:338:7"><h4 data-type="title" data-sm="./modules/m00002/index.cnxml:339:9">Using Python to Calculate the Mean</h4>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00048" data-sm="./modules/m00002/index.cnxml:340:9">The statistics library in Python has a built-in function to calculate the mean of a dataset and takes a list of numeric values as its input.  The Python command is</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:341:9"><span class="blu-code" data-sm="./modules/m00002/index.cnxml:341:31">statistics.mean(list_name)</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:341:9"><span class="blu-code" data-sm="./modules/m00002/index.cnxml:341:60">statistics.mean(list_name)</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00052" data-sm="./modules/m00002/index.cnxml:342:9">Here is a simple program to calculate the mean of a dataset in Python.</p>
         <div data-type="note" class="boxed-feature" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_note-00002" data-sm="./modules/m00002/index.cnxml:343:9"><div data-type="title" data-sm="./modules/m00002/index.cnxml:344:11">NOTE</div>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00053" data-sm="./modules/m00002/index.cnxml:345:11">Any line that begins with the # symbol is  a comment and is not executed by the program.</p>
         </div>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00054" data-sm="./modules/m00002/index.cnxml:347:9"># import the statistics library</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:348:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:348:31">import statistics</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:348:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:348:60">import statistics</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00055" data-sm="./modules/m00002/index.cnxml:349:9"># define the dataset of 10 pulse rates</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:350:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:350:31">pulse_rates = [68, 92, 76, 51, 65, 83, 94, 72, 88, 59]</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:350:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:350:60">pulse_rates = [68, 92, 76, 51, 65, 83, 94, 72, 88, 59]</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00056" data-sm="./modules/m00002/index.cnxml:351:9"># execute the statistics.mean function on this list </p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:352:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:352:31">print(statistics.mean(pulse_rates))</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:352:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:352:60">print(statistics.mean(pulse_rates))</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00057" data-sm="./modules/m00002/index.cnxml:353:9">Note that the print command is typically used to show the output of the command.</p>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00058" data-sm="./modules/m00002/index.cnxml:354:9">Here is the input and output of this python program:</p>
         <div data-type="note" class="python-feature" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_note-00003" data-sm="./modules/m00002/index.cnxml:355:9">
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:356:9">
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:356:9">
         <span class="green-code" data-sm="./modules/m00002/index.cnxml:357:9">## import the statistics library</span>
         <span class="purple-code" data-sm="./modules/m00002/index.cnxml:358:9">import</span> statistics
         <span class="green-code" data-sm="./modules/m00002/index.cnxml:359:9"># define a dataset of 10 pulse rates</span>
@@ -606,20 +606,20 @@
       </section>
         <section data-depth="2" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_sect-00009" data-sm="./modules/m00002/index.cnxml:368:9"><h4 data-type="title" data-sm="./modules/m00002/index.cnxml:369:11">Using Python to Calculate the Median</h4>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00059" data-sm="./modules/m00002/index.cnxml:370:11">The statistics library in Python also provides a function to calculate the median of a dataset:</p>
-          <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:371:11"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:371:33">statistics.median(list_name)</span></pre>
+          <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:371:11"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:371:62">statistics.median(list_name)</span></pre>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00060" data-sm="./modules/m00002/index.cnxml:372:11">A list of data values is created and then the median can be easily calculated.</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00061" data-sm="./modules/m00002/index.cnxml:373:11">Consider this dataset of amounts spent in an online store: 67.75, 72.39, 85.06, 99.83, 129.93, 130.45, 158.76</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00062" data-sm="./modules/m00002/index.cnxml:374:11">Notice the data is already in ascending order, and the median is the middle value, namely 99.83.</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00063" data-sm="./modules/m00002/index.cnxml:375:11">To calculate the median of this dataset in Python:</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00064" data-sm="./modules/m00002/index.cnxml:376:11"># import the statistics library</p>
-          <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:377:11"><span class="green-code" data-sm="./modules/m00002/index.cnxml:377:33"># import statistics</span></pre>
+          <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:377:11"><span class="green-code" data-sm="./modules/m00002/index.cnxml:377:62"># import statistics</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00049" data-sm="./modules/m00002/index.cnxml:378:9"># define the dataset of amounts spent in an online store:</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:379:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:379:31">spend_amounts = [67.75, 72.39, 85.06, 99.83, 129.93, 130.45, 158.76]</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:379:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:379:60">spend_amounts = [67.75, 72.39, 85.06, 99.83, 129.93, 130.45, 158.76]</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00050" data-sm="./modules/m00002/index.cnxml:380:9"># execute the statistics.median function on this list </p>
-        <pre data-type="code" data-sm="./modules/m00002/index.cnxml:381:9">print(statistics.median(spend_amounts))</pre>
+        <pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00002/index.cnxml:381:9">print(statistics.median(spend_amounts))</pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00051" data-sm="./modules/m00002/index.cnxml:382:9">Here is the input and output of this Python program:</p>
 <div data-type="note" class="python-feature" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_note-00001" data-sm="./modules/m00002/index.cnxml:383:1">
-<pre data-type="code" data-sm="./modules/m00002/index.cnxml:384:1">
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00002/index.cnxml:384:1">
 <span class="green-code" data-sm="./modules/m00002/index.cnxml:385:1"># import the statistics library</span>
 <span class="purple-code" data-sm="./modules/m00002/index.cnxml:386:1">import</span> statistics
 <span class="green-code" data-sm="./modules/m00002/index.cnxml:387:1"># define the dataset of amounts spent in an online store:</span>
@@ -752,7 +752,7 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
   </div>
   </div><div data-type="page" id="page_77648ca6-4500-4dff-9308-5a656a16e882"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Measures of Variation</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="77648ca6-4500-4dff-9308-5a656a16e882@"/>
     </div>
@@ -1245,19 +1245,19 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
       <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00064" data-sm="./modules/m00003/index.cnxml:395:7">Since population standard deviation and sample standard deviation make use of different formulas, there are separate Python commands for these functions:</p>
       <table class="unnumbered unstyled" id="auto_77648ca6-4500-4dff-9308-5a656a16e882_table-00001" data-sm="./modules/m00003/index.cnxml:396:7"><tbody data-sm="./modules/m00003/index.cnxml:397:26">
           <tr data-sm="./modules/m00003/index.cnxml:398:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:399:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:399:42">pstdev()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:399:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:399:71">pstdev()</span></pre></td>
             <td>Population standard deviation of a dataset.</td>
           </tr>
           <tr data-sm="./modules/m00003/index.cnxml:402:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:403:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:403:42">pvariance()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:403:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:403:71">pvariance()</span></pre></td>
             <td>Population variance of a dataset.</td>
           </tr>
           <tr data-sm="./modules/m00003/index.cnxml:406:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:407:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:407:42">stdev()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:407:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:407:71">stdev()</span></pre></td>
             <td>Sample standard deviation of a dataset.</td>
           </tr>
           <tr data-sm="./modules/m00003/index.cnxml:410:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:411:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:411:42">variance()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:411:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:411:71">variance()</span></pre></td>
             <td>Sample variance of a dataset.</td>
           </tr>
         </tbody></table>
@@ -1268,23 +1268,23 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00066" data-sm="./modules/m00003/index.cnxml:421:5">40, 36, 44, 51, 54, 55, 39, 47, 44, 50</p>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00067" data-sm="./modules/m00003/index.cnxml:422:5">As part of the statistical analysis associated with the clinical trial, the researcher is interested in calculating the sample mean and sample variance of the ages of participants.</p>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00068" data-sm="./modules/m00003/index.cnxml:423:5">#import the statistics library</p>
-    <pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:424:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:424:27">import statistics</span></pre>
+    <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:424:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:424:56">import statistics</span></pre>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00069" data-sm="./modules/m00003/index.cnxml:425:5"># define a dataset of 10 ages</p>
-    <pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:426:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:426:27">ages = [40, 36, 44, 51, 54, 55, 39, 47, 44, 50]</span></pre>
+    <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:426:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:426:56">ages = [40, 36, 44, 51, 54, 55, 39, 47, 44, 50]</span></pre>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00070" data-sm="./modules/m00003/index.cnxml:427:5"># execute the statistics.stdev function on this list</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00071" data-sm="./modules/m00003/index.cnxml:428:1"># optional step is to save the result in a variable called result1</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00072" data-sm="./modules/m00003/index.cnxml:429:1"># another optional step is to round the result using the built in Python command called round</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00073" data-sm="./modules/m00003/index.cnxml:430:1"># round takes a result and round to the specified number of decimal positions.</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00074" data-sm="./modules/m00003/index.cnxml:431:1"># In this case we will round answers to 1 decimal place</p>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:432:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:432:23">result1 = (statistics.stdev(ages))</span></pre>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:433:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:433:23">print('standard deviation = ',round(result1,1))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:432:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:432:52">result1 = (statistics.stdev(ages))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:433:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:433:52">print('standard deviation = ',round(result1,1))</span></pre>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00075" data-sm="./modules/m00003/index.cnxml:434:1"># also execute the statistics.variance function on this list</p>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:435:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:435:23">result2 = (statistics.variance(ages))</span></pre>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:436:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:436:23">print('variance = ', round(result2,1))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:435:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:435:52">result2 = (statistics.variance(ages))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:436:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:436:52">print('variance = ', round(result2,1))</span></pre>
 
   <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00076" data-sm="./modules/m00003/index.cnxml:438:3">Here is the input and output of this python program:</p>
   <div data-type="note" class="python-code" id="auto_77648ca6-4500-4dff-9308-5a656a16e882_note-00002" data-sm="./modules/m00003/index.cnxml:439:3">
-  <pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:440:3">
+  <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:440:3">
   <span class="green-code" data-sm="./modules/m00003/index.cnxml:441:3"># import the statistics library</span>
   <span class="purple-code" data-sm="./modules/m00003/index.cnxml:442:3">import</span> statistics
   <span class="green-code" data-sm="./modules/m00003/index.cnxml:443:3"># define a dataset of 10 ages</span>
@@ -1379,7 +1379,7 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
 </div>
   </div><div data-type="page" id="page_ef698593-f9d6-4377-acfd-343ab3db943c"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Measures of Position</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="ef698593-f9d6-4377-acfd-343ab3db943c@"/>
     </div>
@@ -1755,14 +1755,14 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00039" data-sm="./modules/m00004/index.cnxml:263:7">The function allows the user to specify calculation of quartiles and percentiles, using the parameter “n”. Set n = 4 for quartiles.</p>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00040" data-sm="./modules/m00004/index.cnxml:264:7">Here is an example of using this python function to calculate quartiles for the dataset from <a href="#auto_77648ca6-4500-4dff-9308-5a656a16e882_exam-00002" data-sm="./modules/m00004/index.cnxml:264:122">Example 3.6</a>.</p>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00041" data-sm="./modules/m00004/index.cnxml:265:7"># import the statistics library</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00004/index.cnxml:266:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:266:29">import statistics</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00004/index.cnxml:266:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:266:58">import statistics</span></pre>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00042" data-sm="./modules/m00004/index.cnxml:267:7"># define a dataset of rates of returns </p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00004/index.cnxml:268:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:268:29">rates_of_return = [5.4, 6.0, 6.3, 6.8, 7.1, 7.2, 7.4, 7.5, 7.9, 8.2, 8.7]</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00004/index.cnxml:268:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:268:58">rates_of_return = [5.4, 6.0, 6.3, 6.8, 7.1, 7.2, 7.4, 7.5, 7.9, 8.2, 8.7]</span></pre>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00043" data-sm="./modules/m00004/index.cnxml:269:7"># execute the statistics.quantiles function on this list, using n = 4 to specify quartiles.</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00004/index.cnxml:270:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:270:29">print('quartiles = ',statistics.quantiles(rates_of_return,n = 4))</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00004/index.cnxml:270:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:270:58">print('quartiles = ',statistics.quantiles(rates_of_return,n = 4))</span></pre>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00044" data-sm="./modules/m00004/index.cnxml:271:7">Here is the input and output of this python program:</p>
     <div data-type="note" class="python-feature" id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_note-00001" data-sm="./modules/m00004/index.cnxml:272:5">
-    <pre data-type="code" data-sm="./modules/m00004/index.cnxml:273:5"><span class="green-code" data-sm="./modules/m00004/index.cnxml:273:11"># import the statistics library</span>
+    <pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00004/index.cnxml:273:5"><span class="green-code" data-sm="./modules/m00004/index.cnxml:273:40"># import the statistics library</span>
 import statistics
 <span class="green-code" data-sm="./modules/m00004/index.cnxml:275:1"># define a dataset of rates of returns</span>
 rates_of_return = [<span class="green-code" data-sm="./modules/m00004/index.cnxml:276:20">5.4</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:57">6.0</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:94">6.3</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:131">6.8</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:168">7.1</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:205">7.2</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:242">7.4</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:279">7.5</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:316">7.9</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:353">8.2</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:390">8.7</span>]
@@ -1888,7 +1888,7 @@ rates_of_return = [<span class="green-code" data-sm="./modules/m00004/index.cnxm
   </div>
   </div><div data-type="page" id="page_87edc559-a950-425c-9ea3-daa25cee8549"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Basic Statistical Graphing</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="87edc559-a950-425c-9ea3-daa25cee8549@"/>
     </div>
@@ -2242,13 +2242,13 @@ rates_of_return = [<span class="green-code" data-sm="./modules/m00004/index.cnxm
 
     <section data-depth="1" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_sect-00009" data-sm="./modules/m00005/index.cnxml:373:5"><h3 data-type="title" data-sm="./modules/m00005/index.cnxml:374:7">Using Python for Statistical Graphing</h3>
       <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00032" data-sm="./modules/m00005/index.cnxml:375:7">Data visualization is a very important part of data science and Python has many built-in graphing capabilities through a package called “matplotlib.” To import this package into a python program use the command:</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00005/index.cnxml:376:7"><span class="blue-code" data-sm="./modules/m00005/index.cnxml:376:29">import matplotlib.pyplot as plt</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00005/index.cnxml:376:7"><span class="blue-code" data-sm="./modules/m00005/index.cnxml:376:58">import matplotlib.pyplot as plt</span></pre>
       <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00033" data-sm="./modules/m00005/index.cnxml:377:7">Matplotlib contains functions such as “bar” and “plot” and “scatter” which can be used to generate bar charts, time series graphs, scatter plots, etc.</p>
       <section data-depth="2" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_sect-00010" data-sm="./modules/m00005/index.cnxml:378:7"><h4 data-type="title" data-sm="./modules/m00005/index.cnxml:379:9">Time Series Chart using Python</h4>
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00034" data-sm="./modules/m00005/index.cnxml:380:9">To use the plot function, define (x, y) datapoints and use the plt.plot function. A title can be added to the chart by using the plt.title function.  Graphs can be customized in many ways in Python by adding labels, titles, colors, combining multiple plots in a display, etc.</p>
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00035" data-sm="./modules/m00005/index.cnxml:381:9">Here is an example of a simple time series chart using plt.plot:</p>
 <div data-type="note" class="python-feature" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_note-00001" data-sm="./modules/m00005/index.cnxml:382:1">
-<pre data-type="code" data-sm="./modules/m00005/index.cnxml:383:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:383:7"># import the matplotlib library</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00005/index.cnxml:383:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:383:36"># import the matplotlib library</span>
 <span class="purple-code" data-sm="./modules/m00005/index.cnxml:384:1">import</span> matplotlib.pyplot <span class="purple-code" data-sm="./modules/m00005/index.cnxml:384:59">as</span> plt
 
 <span class="green-code" data-sm="./modules/m00005/index.cnxml:386:1"># define the x-data</span>
@@ -2276,7 +2276,7 @@ plt.title(<span class="red-code" data-sm="./modules/m00005/index.cnxml:396:11">"
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00036" data-sm="./modules/m00005/index.cnxml:409:9">To generate a bar chart, the function “bar” can be used. Bars can be oriented either vertically or horizontally based on user preference.  A legend can be added to a bar chart using the “legend” function.  Labels can be added to the x and y axes by using the “xlabel” and “ylabel” functions.</p>
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00037" data-sm="./modules/m00005/index.cnxml:410:9">Here is an example of a vertical bar chart created in Python:</p>
         <div data-type="note" class="python-feature" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_note-00002" data-sm="./modules/m00005/index.cnxml:411:9">
-<pre data-type="code" data-sm="./modules/m00005/index.cnxml:412:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:412:7"># import the matplotlib library</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00005/index.cnxml:412:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:412:36"># import the matplotlib library</span>
 <span class="purple-code" data-sm="./modules/m00005/index.cnxml:413:1">import</span> matplotlib.pyplot <span class="purple-code" data-sm="./modules/m00005/index.cnxml:413:59">as</span> plt
 
 <span class="green-code" data-sm="./modules/m00005/index.cnxml:415:1"># define the x-data</span>
@@ -2310,7 +2310,7 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:432:13"
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00039" data-sm="./modules/m00005/index.cnxml:444:9">The example below shows how to use Python to create a scatter plot for the stock price data provided in <a href="#auto_87edc559-a950-425c-9ea3-daa25cee8549_fig03_05" data-sm="./modules/m00005/index.cnxml:444:135" class="autogenerated-content">[link]</a>.</p>
 
 <div data-type="note" class="python-feature" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_note-00003" data-sm="./modules/m00005/index.cnxml:446:1">
-<pre data-type="code" data-sm="./modules/m00005/index.cnxml:447:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:447:7"># import the matplotlib library</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00005/index.cnxml:447:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:447:36"># import the matplotlib library</span>
 <span class="purple-code" data-sm="./modules/m00005/index.cnxml:448:1">import</span> matplotlib.pyplot <span class="purple-code" data-sm="./modules/m00005/index.cnxml:448:59">as</span> plt
 
 <span class="green-code" data-sm="./modules/m00005/index.cnxml:450:1"># define the x-data</span>
@@ -2492,7 +2492,7 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:464:13"
   </div>
   </div><div data-type="page" id="page_1b1280e5-cbfa-4448-9e30-14982c2f3583"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Probability Theory</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="1b1280e5-cbfa-4448-9e30-14982c2f3583@"/>
     </div>
@@ -3476,7 +3476,7 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:464:13"
   </div>
   </div><div data-type="page" id="page_1bb19f5d-6bf6-49db-8f8e-7c94d4752718"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Discrete and Continuous Probability Distributions</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="1bb19f5d-6bf6-49db-8f8e-7c94d4752718@"/>
     </div>
@@ -4246,7 +4246,7 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:464:13"
       <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00091" data-sm="./modules/m00007/index.cnxml:618:7">Here is the input and output of this python program:</p>
 
       <div data-type="note" class="python-feature" id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_note-00003" data-sm="./modules/m00007/index.cnxml:620:7">
-<pre data-type="code" data-sm="./modules/m00007/index.cnxml:621:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:621:7"># from scipy.stats import binom</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00007/index.cnxml:621:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:621:36"># from scipy.stats import binom</span>
 <span class="purple-code" data-sm="./modules/m00007/index.cnxml:622:1">from</span> scipy.stats <span class="purple-code" data-sm="./modules/m00007/index.cnxml:622:51">import</span> binom
 
 <span class="green-code" data-sm="./modules/m00007/index.cnxml:624:1"># define parameters x, n, and p:</span>
@@ -4284,7 +4284,7 @@ round (binom.pmf(x, n, p), <span class="green-code" data-sm="./modules/m00007/in
               <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00102" data-sm="./modules/m00007/index.cnxml:657:15">Here is the input and output of this python program:</p>
 
 <div data-type="note" class="python-feature" id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_note-00002" data-sm="./modules/m00007/index.cnxml:659:1">
-<pre data-type="code" data-sm="./modules/m00007/index.cnxml:660:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:660:7"># from scipy.stats import norm</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00007/index.cnxml:660:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:660:36"># from scipy.stats import norm</span>
 <span class="purple-code" data-sm="./modules/m00007/index.cnxml:661:1">from</span> scipy.stats <span class="purple-code" data-sm="./modules/m00007/index.cnxml:661:51">import</span> norm
 
 <span class="green-code" data-sm="./modules/m00007/index.cnxml:663:1"># define parameters x, mean and standard_deviation:</span>
@@ -4482,7 +4482,7 @@ round (<span class="green-code" data-sm="./modules/m00007/index.cnxml:671:8">1</
 
    <h1 data-type="document-title">Placeholder Chapter</h1><div data-type="page" id="page_137996a0-7eb0-46f6-b7b6-c278170e2b7e" class="introduction"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Introduction</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="137996a0-7eb0-46f6-b7b6-c278170e2b7e@"/>
     </div>
@@ -4503,7 +4503,7 @@ round (<span class="green-code" data-sm="./modules/m00007/index.cnxml:671:8">1</
 
   </div><div data-type="page" id="page_3cc299fe-1ac3-4c59-8bfd-b4d51ddcd879"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Repeat Measures of Center</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T16:00:09+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="3cc299fe-1ac3-4c59-8bfd-b4d51ddcd879@"/>
     </div>
