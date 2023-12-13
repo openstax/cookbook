@@ -18,7 +18,10 @@ RSpec.describe Kitchen::Directions::WebPreBakeSetup do
           <div data-type="page" id="abcd">
             <h2 data-type="document-title">Title for P2</h2>
             <div data-type="metadata">
-              <h2 data-type="document-title">Metadata title P2</h2>
+              <h2 data-type="document-title">
+                <span>Metadata title P2<sup>superscript should be preserved</sup></span>
+                <m:math>namespaces in titles should also be preserved</m:math>
+              </h2>
             </div>
             <div>page 2 content<h3>subtitle 2</h3></div>
           </div>
