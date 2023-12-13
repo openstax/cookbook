@@ -14,6 +14,11 @@ do |doc, _resources|
   BakeUnnumberedFigure.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
+
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
@@ -47,6 +52,12 @@ do |doc, _resources|
         title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
         section.prepend(child: title)
       end
+    end
+
+    chapter.composite_pages.search('section.chapter-problems').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(
+        question: question, number: question.count_in(:composite_page)
+      )
     end
   end
 
