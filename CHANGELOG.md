@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `references` in `data-science`
 * Bake `EOC` in `data-science`
 * Bake `notes` in `data-science`
 * Add `tables` in `neuroscience`

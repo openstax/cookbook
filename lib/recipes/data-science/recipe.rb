@@ -4,6 +4,10 @@ DATA_SCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :data_science) \
 do |doc, _resources|
   include Kitchen::Directions
 
+  doc.selectors.override(
+    reference: 'section.references'
+  )
+
   book = doc.book
 
   book.search('cnx-pi').trash
@@ -80,6 +84,7 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  BakeReferences.v2(book: book, metadata_source: metadata)
   BakeEquations.v1(book: book)
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
