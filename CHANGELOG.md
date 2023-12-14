@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Create `WebPreBakeSetup` and `WebPostBakeRestore` directions
 * Add `WebPreBakeSetup` and `WebPostBakeRestore` to web recipe
 * Update web recipe to use `book_pages` instead of `book`
+* Bake `notes` in `data-science`
+* Add `tables` in `neuroscience`
+* Added `index` and `appendix` to `neuroscience`
 * Bake `lo` in `data-science`
 * Add `developmental-perspective` note in `neuroscience`
 * Create basic files for `data-science` recipe
@@ -28,10 +31,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Bake `figures` in `lifespan-development`
 * Create basic files for `lifespan-development` recipe
 
+
 ## [v2.6.0] - 2023-11-17
 
 * Add `boxed-feature` note in `neuroscience`
 * Bake EOC sections in  `neuroscience`
+* Add `tables` in `neuroscience`
 * Add `neurscience across species` note in `neuroscience`
 * Bake `learning-objectives` in `neuroscience`
 * Add `BakeRexWrappers` to every recipe-- gives an attribute for rex
