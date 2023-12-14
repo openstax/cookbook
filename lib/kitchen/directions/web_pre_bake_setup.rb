@@ -4,6 +4,7 @@ module Kitchen
   module Directions
     module WebPreBakeSetup
       def self.v1(book_pages:)
+        puts 'Setting up baking for web ...' # since this is an invisible direction, logging shows that it's happening
         pantry = book_pages.first.ancestor(:book).pantry(name: :web_placeholders)
 
         # Replace title & metadata elements with placeholders

@@ -4,6 +4,7 @@ module Kitchen
   module Directions
     module WebPostBakeRestore
       def self.v1(book_pages:)
+        puts 'Web baking complete, restoring content to its original form' # since this is an invisible direction, logging shows that it's happening
         pantry = book_pages.first.ancestor(:book).pantry(name: :web_placeholders)
 
         # Replace title & metadata elements, remove placeholders
