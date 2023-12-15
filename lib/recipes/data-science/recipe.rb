@@ -7,11 +7,16 @@ do |doc, _resources|
   book = doc.book
 
   book.search('cnx-pi').trash
-  # metadata = book.metadata
+  metadata = book.metadata
 
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
+
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
 
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
@@ -34,6 +39,30 @@ do |doc, _resources|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3')
+    end
+
+    # EOC
+    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+
+    eoc_sections = %w[group-project chapter-problems]
+
+    eoc_sections.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
+      end
+    end
+
+    chapter.composite_pages.search('section.chapter-problems').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(
+        question: question, number: question.count_in(:composite_page)
+      )
     end
   end
 

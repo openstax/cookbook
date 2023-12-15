@@ -12,14 +12,14 @@
     <meta itemprop="accessibilityFeature" content="structuredNavigation"/>
 
 
-    <meta itemprop="dateModified" content="2023-12-06T15:47:09+00:00"/>
+    <meta itemprop="dateModified" content="2023-12-11T17:53:55+00:00"/>
   </head>
   <body itemscope="itemscope" itemtype="http://schema.org/Book">
     <div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Principles of Data Science</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="slug" data-value="principles-of-data-science"/>
-      <span data-type="cnx-archive-uri" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c@d717ec0"/>
+      <span data-type="cnx-archive-uri" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c@fc18972"/>
 
       <div class="permissions">
         <p class="license">
@@ -39,7 +39,7 @@
 
    <h1 data-type="document-title">Descriptive Measurements and Probability Distributions</h1><div data-type="page" id="page_bf4b6343-4997-42a5-9afd-31c113d33426" class="introduction"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Test Module 1</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="bf4b6343-4997-42a5-9afd-31c113d33426@"/>
     </div>
@@ -124,7 +124,7 @@
   </div>
   </div><div data-type="page" id="page_80180f36-bc98-4dc5-a9cf-6e9f02a8090d"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Test Module 2</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="80180f36-bc98-4dc5-a9cf-6e9f02a8090d@"/>
     </div>
@@ -567,32 +567,32 @@
         To use Python for determining measures of center, you will need to work with lists using the statistics library.  A list in Python holds a collection of items such as numeric values, or non-numeric values, or a mix of the two.  Lists are enclosed in square brackets and can be named. The items in a list are separated with commas.
       </p>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00044" data-sm="./modules/m00002/index.cnxml:328:7">Example of Lists in Python:</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:329:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:329:29">
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:329:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:329:58">
         exam_scores = [95.5, 82.2, 75.6, 100]
         pulse_rates = [68, 92, 76, 51, 65, 83, 94, 72, 88, 59]
         eye_color = [“brown”, “blue”, “black”]
       </span></pre>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00045" data-sm="./modules/m00002/index.cnxml:334:7">The “statistics” library can be included in a Python program using the “import” command.</p>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00046" data-sm="./modules/m00002/index.cnxml:335:7">At the beginning of a Python program, type:</p>
-      <pre data-type="code" data-sm="./modules/m00002/index.cnxml:336:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:336:13">import statistics</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00002/index.cnxml:336:7"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:336:42">import statistics</span></pre>
       <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00047" data-sm="./modules/m00002/index.cnxml:337:7">This will allow various statistical functions to be available in your Python program such as for calculating the mean and median. </p>
       <section data-depth="2" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_sect-00008" data-sm="./modules/m00002/index.cnxml:338:7"><h4 data-type="title" data-sm="./modules/m00002/index.cnxml:339:9">Using Python to Calculate the Mean</h4>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00048" data-sm="./modules/m00002/index.cnxml:340:9">The statistics library in Python has a built-in function to calculate the mean of a dataset and takes a list of numeric values as its input.  The Python command is</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:341:9"><span class="blu-code" data-sm="./modules/m00002/index.cnxml:341:31">statistics.mean(list_name)</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:341:9"><span class="blu-code" data-sm="./modules/m00002/index.cnxml:341:60">statistics.mean(list_name)</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00052" data-sm="./modules/m00002/index.cnxml:342:9">Here is a simple program to calculate the mean of a dataset in Python.</p>
         <div data-type="note" class="boxed-feature" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_note-00002" data-sm="./modules/m00002/index.cnxml:343:9"><div data-type="title" data-sm="./modules/m00002/index.cnxml:344:11">NOTE</div>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00053" data-sm="./modules/m00002/index.cnxml:345:11">Any line that begins with the # symbol is  a comment and is not executed by the program.</p>
         </div>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00054" data-sm="./modules/m00002/index.cnxml:347:9"># import the statistics library</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:348:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:348:31">import statistics</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:348:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:348:60">import statistics</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00055" data-sm="./modules/m00002/index.cnxml:349:9"># define the dataset of 10 pulse rates</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:350:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:350:31">pulse_rates = [68, 92, 76, 51, 65, 83, 94, 72, 88, 59]</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:350:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:350:60">pulse_rates = [68, 92, 76, 51, 65, 83, 94, 72, 88, 59]</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00056" data-sm="./modules/m00002/index.cnxml:351:9"># execute the statistics.mean function on this list </p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:352:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:352:31">print(statistics.mean(pulse_rates))</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:352:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:352:60">print(statistics.mean(pulse_rates))</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00057" data-sm="./modules/m00002/index.cnxml:353:9">Note that the print command is typically used to show the output of the command.</p>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00058" data-sm="./modules/m00002/index.cnxml:354:9">Here is the input and output of this python program:</p>
         <div data-type="note" class="python-feature" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_note-00003" data-sm="./modules/m00002/index.cnxml:355:9">
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:356:9">
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:356:9">
         <span class="green-code" data-sm="./modules/m00002/index.cnxml:357:9">## import the statistics library</span>
         <span class="purple-code" data-sm="./modules/m00002/index.cnxml:358:9">import</span> statistics
         <span class="green-code" data-sm="./modules/m00002/index.cnxml:359:9"># define a dataset of 10 pulse rates</span>
@@ -606,20 +606,20 @@
       </section>
         <section data-depth="2" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_sect-00009" data-sm="./modules/m00002/index.cnxml:368:9"><h4 data-type="title" data-sm="./modules/m00002/index.cnxml:369:11">Using Python to Calculate the Median</h4>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00059" data-sm="./modules/m00002/index.cnxml:370:11">The statistics library in Python also provides a function to calculate the median of a dataset:</p>
-          <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:371:11"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:371:33">statistics.median(list_name)</span></pre>
+          <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:371:11"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:371:62">statistics.median(list_name)</span></pre>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00060" data-sm="./modules/m00002/index.cnxml:372:11">A list of data values is created and then the median can be easily calculated.</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00061" data-sm="./modules/m00002/index.cnxml:373:11">Consider this dataset of amounts spent in an online store: 67.75, 72.39, 85.06, 99.83, 129.93, 130.45, 158.76</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00062" data-sm="./modules/m00002/index.cnxml:374:11">Notice the data is already in ascending order, and the median is the middle value, namely 99.83.</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00063" data-sm="./modules/m00002/index.cnxml:375:11">To calculate the median of this dataset in Python:</p>
           <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00064" data-sm="./modules/m00002/index.cnxml:376:11"># import the statistics library</p>
-          <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:377:11"><span class="green-code" data-sm="./modules/m00002/index.cnxml:377:33"># import statistics</span></pre>
+          <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:377:11"><span class="green-code" data-sm="./modules/m00002/index.cnxml:377:62"># import statistics</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00049" data-sm="./modules/m00002/index.cnxml:378:9"># define the dataset of amounts spent in an online store:</p>
-        <pre data-type="code" data-display="block" data-sm="./modules/m00002/index.cnxml:379:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:379:31">spend_amounts = [67.75, 72.39, 85.06, 99.83, 129.93, 130.45, 158.76]</span></pre>
+        <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00002/index.cnxml:379:9"><span class="blue-code" data-sm="./modules/m00002/index.cnxml:379:60">spend_amounts = [67.75, 72.39, 85.06, 99.83, 129.93, 130.45, 158.76]</span></pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00050" data-sm="./modules/m00002/index.cnxml:380:9"># execute the statistics.median function on this list </p>
-        <pre data-type="code" data-sm="./modules/m00002/index.cnxml:381:9">print(statistics.median(spend_amounts))</pre>
+        <pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00002/index.cnxml:381:9">print(statistics.median(spend_amounts))</pre>
         <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00051" data-sm="./modules/m00002/index.cnxml:382:9">Here is the input and output of this Python program:</p>
 <div data-type="note" class="python-feature" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_note-00001" data-sm="./modules/m00002/index.cnxml:383:1">
-<pre data-type="code" data-sm="./modules/m00002/index.cnxml:384:1">
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00002/index.cnxml:384:1">
 <span class="green-code" data-sm="./modules/m00002/index.cnxml:385:1"># import the statistics library</span>
 <span class="purple-code" data-sm="./modules/m00002/index.cnxml:386:1">import</span> statistics
 <span class="green-code" data-sm="./modules/m00002/index.cnxml:387:1"># define the dataset of amounts spent in an online store:</span>
@@ -681,78 +681,85 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
         </tbody></table>
        </section>
       <section data-depth="2" id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_sect-00012" data-sm="./modules/m00002/index.cnxml:450:7"><h4 data-type="title" data-sm="./modules/m00002/index.cnxml:451:9">Chapter Problems</h4>
-        <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00065" data-sm="./modules/m00002/index.cnxml:452:9">1a. For Dataset D, calculate the mean and trimmed mean (round answers to 1 decimal place).   Use technology as appropriate.</p>
-        <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00066" data-sm="./modules/m00002/index.cnxml:453:9">1b. Is there any benefit in using the trimmed mean versus the mean for this dataset?</p>
-        <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00067" data-sm="./modules/m00002/index.cnxml:454:9">2a. For Dataset B, calculate the mean and median (round answers to 1 decimal place).   Use technology as appropriate.</p>
-        <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00068" data-sm="./modules/m00002/index.cnxml:455:9">2b. Is there any preference in using the mean versus the median for this dataset?</p>
-        <p id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_para-00069" data-sm="./modules/m00002/index.cnxml:456:9">2c. If so, would the mean or the median be preferred as a measure of central tendency for this dataset?</p>
-      </section>
+        <div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-001" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-001" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367952">
+        <div data-type="question-stem">1a. For Dataset D, calculate the mean and trimmed mean (round answers to 1 decimal place). Use technology as appropriate.<br/>
+1b. Is there any benefit in using the trimmed mean versus the mean for this dataset?</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-002" data-injected-from-version="2" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-002" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367972">
+        <div data-type="question-stem">2a. For Dataset B, calculate the mean and median (round answers to 1 decimal place).   Use technology as appropriate.<br/>
+2b. Is there any preference in using the mean versus the median for this dataset?<br/>
+2c. If so, would the mean or the median be preferred as a measure of central tendency for this dataset?
+</div>
+        </div>
+    </div></section>
     </section>
 
-  <div data-type="glossary" data-sm="./modules/m00002/index.cnxml:461:3"><h3 data-type="glossary-title">Glossary</h3>
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00001" data-sm="./modules/m00002/index.cnxml:462:5">
-      <dt data-sm="./modules/m00002/index.cnxml:463:7">descriptive statistics</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:464:7">the organization, summarization, and graphical display of data.</dd>
+  <div data-type="glossary" data-sm="./modules/m00002/index.cnxml:467:3"><h3 data-type="glossary-title">Glossary</h3>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00001" data-sm="./modules/m00002/index.cnxml:468:5">
+      <dt data-sm="./modules/m00002/index.cnxml:469:7">descriptive statistics</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:470:7">the organization, summarization, and graphical display of data.</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00002" data-sm="./modules/m00002/index.cnxml:467:5">
-      <dt data-sm="./modules/m00002/index.cnxml:468:7">frequency distribution</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:469:7">a method of organizing and summarizing a data set that provides the frequency with which each value in the data set occurs</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00002" data-sm="./modules/m00002/index.cnxml:473:5">
+      <dt data-sm="./modules/m00002/index.cnxml:474:7">frequency distribution</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:475:7">a method of organizing and summarizing a data set that provides the frequency with which each value in the data set occurs</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00003" data-sm="./modules/m00002/index.cnxml:472:5">
-      <dt data-sm="./modules/m00002/index.cnxml:473:7">mean (also called arithmetic mean)</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:474:7">a measure of center of a data set, calculated by adding up the data values and dividing the sum by the number of data values; average</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00003" data-sm="./modules/m00002/index.cnxml:478:5">
+      <dt data-sm="./modules/m00002/index.cnxml:479:7">mean (also called arithmetic mean)</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:480:7">a measure of center of a data set, calculated by adding up the data values and dividing the sum by the number of data values; average</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00004" data-sm="./modules/m00002/index.cnxml:477:5">
-      <dt data-sm="./modules/m00002/index.cnxml:478:7">median</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:479:7">the middle value in an ordered data set</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00004" data-sm="./modules/m00002/index.cnxml:483:5">
+      <dt data-sm="./modules/m00002/index.cnxml:484:7">median</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:485:7">the middle value in an ordered data set</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00005" data-sm="./modules/m00002/index.cnxml:482:5">
-      <dt data-sm="./modules/m00002/index.cnxml:483:7">mode</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:484:7">the most frequently occurring data value in a data set</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00005" data-sm="./modules/m00002/index.cnxml:488:5">
+      <dt data-sm="./modules/m00002/index.cnxml:489:7">mode</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:490:7">the most frequently occurring data value in a data set</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00006" data-sm="./modules/m00002/index.cnxml:487:5">
-      <dt data-sm="./modules/m00002/index.cnxml:488:7">outliers</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:489:7">data values that are significantly different from the other data values in a data set </dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00006" data-sm="./modules/m00002/index.cnxml:493:5">
+      <dt data-sm="./modules/m00002/index.cnxml:494:7">outliers</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:495:7">data values that are significantly different from the other data values in a data set </dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00007" data-sm="./modules/m00002/index.cnxml:492:5">
-      <dt data-sm="./modules/m00002/index.cnxml:493:7">population data</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:494:7">data representing all the outcomes or measurements that are of interest</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00007" data-sm="./modules/m00002/index.cnxml:498:5">
+      <dt data-sm="./modules/m00002/index.cnxml:499:7">population data</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:500:7">data representing all the outcomes or measurements that are of interest</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00008" data-sm="./modules/m00002/index.cnxml:497:5">
-      <dt data-sm="./modules/m00002/index.cnxml:498:7">population mean (population size)</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:499:7"/>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00008" data-sm="./modules/m00002/index.cnxml:503:5">
+      <dt data-sm="./modules/m00002/index.cnxml:504:7">population mean (population size)</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:505:7"/>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00009" data-sm="./modules/m00002/index.cnxml:502:5">
-      <dt data-sm="./modules/m00002/index.cnxml:503:7">sample data</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:504:7">data representing outcomes or measurements collected from a subset or part of a population</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00009" data-sm="./modules/m00002/index.cnxml:508:5">
+      <dt data-sm="./modules/m00002/index.cnxml:509:7">sample data</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:510:7">data representing outcomes or measurements collected from a subset or part of a population</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00010" data-sm="./modules/m00002/index.cnxml:507:5">
-      <dt data-sm="./modules/m00002/index.cnxml:508:7">sample mean (sample size)</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:509:7"/>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00010" data-sm="./modules/m00002/index.cnxml:513:5">
+      <dt data-sm="./modules/m00002/index.cnxml:514:7">sample mean (sample size)</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:515:7"/>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00011" data-sm="./modules/m00002/index.cnxml:512:5">
-      <dt data-sm="./modules/m00002/index.cnxml:513:7">statistical analysis</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:514:7">the science of collecting, organizing, and interpreting data to make decisions</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00011" data-sm="./modules/m00002/index.cnxml:518:5">
+      <dt data-sm="./modules/m00002/index.cnxml:519:7">statistical analysis</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:520:7">the science of collecting, organizing, and interpreting data to make decisions</dd>
     </dl>
 
-    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00012" data-sm="./modules/m00002/index.cnxml:517:5">
-      <dt data-sm="./modules/m00002/index.cnxml:518:7">trimmed mean</dt>
-      <dd data-sm="./modules/m00002/index.cnxml:519:7">a calculation for the average or mean of a dataset where some percentage of data values are removed from the lower and upper end of the dataset, typically used to mitigate  the effects of outliers on the mean.</dd>
+    <dl id="auto_80180f36-bc98-4dc5-a9cf-6e9f02a8090d_def-00012" data-sm="./modules/m00002/index.cnxml:523:5">
+      <dt data-sm="./modules/m00002/index.cnxml:524:7">trimmed mean</dt>
+      <dd data-sm="./modules/m00002/index.cnxml:525:7">a calculation for the average or mean of a dataset where some percentage of data values are removed from the lower and upper end of the dataset, typically used to mitigate  the effects of outliers on the mean.</dd>
     </dl>
   </div>
   </div><div data-type="page" id="page_77648ca6-4500-4dff-9308-5a656a16e882"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Measures of Variation</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="77648ca6-4500-4dff-9308-5a656a16e882@"/>
     </div>
@@ -1245,19 +1252,19 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
       <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00064" data-sm="./modules/m00003/index.cnxml:395:7">Since population standard deviation and sample standard deviation make use of different formulas, there are separate Python commands for these functions:</p>
       <table class="unnumbered unstyled" id="auto_77648ca6-4500-4dff-9308-5a656a16e882_table-00001" data-sm="./modules/m00003/index.cnxml:396:7"><tbody data-sm="./modules/m00003/index.cnxml:397:26">
           <tr data-sm="./modules/m00003/index.cnxml:398:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:399:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:399:42">pstdev()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:399:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:399:71">pstdev()</span></pre></td>
             <td>Population standard deviation of a dataset.</td>
           </tr>
           <tr data-sm="./modules/m00003/index.cnxml:402:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:403:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:403:42">pvariance()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:403:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:403:71">pvariance()</span></pre></td>
             <td>Population variance of a dataset.</td>
           </tr>
           <tr data-sm="./modules/m00003/index.cnxml:406:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:407:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:407:42">stdev()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:407:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:407:71">stdev()</span></pre></td>
             <td>Sample standard deviation of a dataset.</td>
           </tr>
           <tr data-sm="./modules/m00003/index.cnxml:410:11">
-            <td><pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:411:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:411:42">variance()</span></pre></td>
+            <td><pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:411:20"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:411:71">variance()</span></pre></td>
             <td>Sample variance of a dataset.</td>
           </tr>
         </tbody></table>
@@ -1268,23 +1275,23 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00066" data-sm="./modules/m00003/index.cnxml:421:5">40, 36, 44, 51, 54, 55, 39, 47, 44, 50</p>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00067" data-sm="./modules/m00003/index.cnxml:422:5">As part of the statistical analysis associated with the clinical trial, the researcher is interested in calculating the sample mean and sample variance of the ages of participants.</p>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00068" data-sm="./modules/m00003/index.cnxml:423:5">#import the statistics library</p>
-    <pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:424:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:424:27">import statistics</span></pre>
+    <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:424:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:424:56">import statistics</span></pre>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00069" data-sm="./modules/m00003/index.cnxml:425:5"># define a dataset of 10 ages</p>
-    <pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:426:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:426:27">ages = [40, 36, 44, 51, 54, 55, 39, 47, 44, 50]</span></pre>
+    <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:426:5"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:426:56">ages = [40, 36, 44, 51, 54, 55, 39, 47, 44, 50]</span></pre>
     <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00070" data-sm="./modules/m00003/index.cnxml:427:5"># execute the statistics.stdev function on this list</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00071" data-sm="./modules/m00003/index.cnxml:428:1"># optional step is to save the result in a variable called result1</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00072" data-sm="./modules/m00003/index.cnxml:429:1"># another optional step is to round the result using the built in Python command called round</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00073" data-sm="./modules/m00003/index.cnxml:430:1"># round takes a result and round to the specified number of decimal positions.</p>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00074" data-sm="./modules/m00003/index.cnxml:431:1"># In this case we will round answers to 1 decimal place</p>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:432:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:432:23">result1 = (statistics.stdev(ages))</span></pre>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:433:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:433:23">print('standard deviation = ',round(result1,1))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:432:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:432:52">result1 = (statistics.stdev(ages))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:433:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:433:52">print('standard deviation = ',round(result1,1))</span></pre>
 <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00075" data-sm="./modules/m00003/index.cnxml:434:1"># also execute the statistics.variance function on this list</p>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:435:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:435:23">result2 = (statistics.variance(ages))</span></pre>
-<pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:436:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:436:23">print('variance = ', round(result2,1))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:435:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:435:52">result2 = (statistics.variance(ages))</span></pre>
+<pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:436:1"><span class="blue-code" data-sm="./modules/m00003/index.cnxml:436:52">print('variance = ', round(result2,1))</span></pre>
 
   <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00076" data-sm="./modules/m00003/index.cnxml:438:3">Here is the input and output of this python program:</p>
   <div data-type="note" class="python-code" id="auto_77648ca6-4500-4dff-9308-5a656a16e882_note-00002" data-sm="./modules/m00003/index.cnxml:439:3">
-  <pre data-type="code" data-display="block" data-sm="./modules/m00003/index.cnxml:440:3">
+  <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00003/index.cnxml:440:3">
   <span class="green-code" data-sm="./modules/m00003/index.cnxml:441:3"># import the statistics library</span>
   <span class="purple-code" data-sm="./modules/m00003/index.cnxml:442:3">import</span> statistics
   <span class="green-code" data-sm="./modules/m00003/index.cnxml:443:3"># define a dataset of 10 ages</span>
@@ -1355,31 +1362,34 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
         </tbody></table>
        </section>
       <section data-depth="2" id="auto_77648ca6-4500-4dff-9308-5a656a16e882_sect-00008" data-sm="./modules/m00003/index.cnxml:515:7"><h4 data-type="title" data-sm="./modules/m00003/index.cnxml:516:9">Chapter Problems</h4>
-        <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00077" data-sm="./modules/m00003/index.cnxml:517:9">3a. For Dataset A, calculate the range, standard deviation, and variance (round answers to 1 decimal place). Use technology as appropriate and include appropriate units as part of your answers.</p>
-        <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00078" data-sm="./modules/m00003/index.cnxml:518:9">3b. What does the standard deviation of this dataset communicate regarding the amount of time to provide relief from migraine headache?</p>
-        <p id="auto_77648ca6-4500-4dff-9308-5a656a16e882_para-00079" data-sm="./modules/m00003/index.cnxml:519:9">3c. Would a medical researcher prefer to use the standard deviation or the variation for this dataset and why?</p>
-      </section>
+        <div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-003" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-003" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367954">
+        <div data-type="question-stem">3a. For Dataset A, calculate the range, standard deviation, and variance (round answers to 1 decimal place). Use technology as appropriate and include appropriate units as part of your answers.<br/>
+3b. What does the standard deviation of this dataset communicate regarding the amount of time to provide relief from migraine headache?<br/>
+3c. Would a medical researcher prefer to use the standard deviation or the variation for this dataset and why?</div>
+        </div>
+    </div></section>
     </section>
 
-  <div data-type="glossary" data-sm="./modules/m00003/index.cnxml:524:1"><h3 data-type="glossary-title">Glossary</h3>
-  <dl id="auto_77648ca6-4500-4dff-9308-5a656a16e882_def-00001" data-sm="./modules/m00003/index.cnxml:525:3">
-    <dt data-sm="./modules/m00003/index.cnxml:526:5">range</dt>
-    <dd data-sm="./modules/m00003/index.cnxml:527:5">a measure of dispersion for a data set calculated by subtracting the minimum from the maximum of the data set</dd>
+  <div data-type="glossary" data-sm="./modules/m00003/index.cnxml:526:1"><h3 data-type="glossary-title">Glossary</h3>
+  <dl id="auto_77648ca6-4500-4dff-9308-5a656a16e882_def-00001" data-sm="./modules/m00003/index.cnxml:527:3">
+    <dt data-sm="./modules/m00003/index.cnxml:528:5">range</dt>
+    <dd data-sm="./modules/m00003/index.cnxml:529:5">a measure of dispersion for a data set calculated by subtracting the minimum from the maximum of the data set</dd>
   </dl>
 
-  <dl id="auto_77648ca6-4500-4dff-9308-5a656a16e882_def-00002" data-sm="./modules/m00003/index.cnxml:530:3">
-    <dt data-sm="./modules/m00003/index.cnxml:531:5">standard deviation</dt>
-    <dd data-sm="./modules/m00003/index.cnxml:532:5">a measure of the spread of a data set that indicates how far a typical data value is from the mean</dd>
+  <dl id="auto_77648ca6-4500-4dff-9308-5a656a16e882_def-00002" data-sm="./modules/m00003/index.cnxml:532:3">
+    <dt data-sm="./modules/m00003/index.cnxml:533:5">standard deviation</dt>
+    <dd data-sm="./modules/m00003/index.cnxml:534:5">a measure of the spread of a data set that indicates how far a typical data value is from the mean</dd>
   </dl>
 
-  <dl id="auto_77648ca6-4500-4dff-9308-5a656a16e882_def-00003" data-sm="./modules/m00003/index.cnxml:535:3">
-    <dt data-sm="./modules/m00003/index.cnxml:536:5">variance</dt>
-    <dd data-sm="./modules/m00003/index.cnxml:537:5">the measure of the spread of data values calculated as the square of the standard deviation</dd>
+  <dl id="auto_77648ca6-4500-4dff-9308-5a656a16e882_def-00003" data-sm="./modules/m00003/index.cnxml:537:3">
+    <dt data-sm="./modules/m00003/index.cnxml:538:5">variance</dt>
+    <dd data-sm="./modules/m00003/index.cnxml:539:5">the measure of the spread of data values calculated as the square of the standard deviation</dd>
   </dl>
 </div>
   </div><div data-type="page" id="page_ef698593-f9d6-4377-acfd-343ab3db943c"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Measures of Position</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="ef698593-f9d6-4377-acfd-343ab3db943c@"/>
     </div>
@@ -1755,14 +1765,14 @@ spend_amounts = [<span class="green-code" data-sm="./modules/m00002/index.cnxml:
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00039" data-sm="./modules/m00004/index.cnxml:263:7">The function allows the user to specify calculation of quartiles and percentiles, using the parameter “n”. Set n = 4 for quartiles.</p>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00040" data-sm="./modules/m00004/index.cnxml:264:7">Here is an example of using this python function to calculate quartiles for the dataset from <a href="#auto_77648ca6-4500-4dff-9308-5a656a16e882_exam-00002" data-sm="./modules/m00004/index.cnxml:264:122">Example 3.6</a>.</p>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00041" data-sm="./modules/m00004/index.cnxml:265:7"># import the statistics library</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00004/index.cnxml:266:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:266:29">import statistics</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00004/index.cnxml:266:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:266:58">import statistics</span></pre>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00042" data-sm="./modules/m00004/index.cnxml:267:7"># define a dataset of rates of returns </p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00004/index.cnxml:268:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:268:29">rates_of_return = [5.4, 6.0, 6.3, 6.8, 7.1, 7.2, 7.4, 7.5, 7.9, 8.2, 8.7]</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00004/index.cnxml:268:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:268:58">rates_of_return = [5.4, 6.0, 6.3, 6.8, 7.1, 7.2, 7.4, 7.5, 7.9, 8.2, 8.7]</span></pre>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00043" data-sm="./modules/m00004/index.cnxml:269:7"># execute the statistics.quantiles function on this list, using n = 4 to specify quartiles.</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00004/index.cnxml:270:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:270:29">print('quartiles = ',statistics.quantiles(rates_of_return,n = 4))</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00004/index.cnxml:270:7"><span class="blue-code" data-sm="./modules/m00004/index.cnxml:270:58">print('quartiles = ',statistics.quantiles(rates_of_return,n = 4))</span></pre>
       <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00044" data-sm="./modules/m00004/index.cnxml:271:7">Here is the input and output of this python program:</p>
     <div data-type="note" class="python-feature" id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_note-00001" data-sm="./modules/m00004/index.cnxml:272:5">
-    <pre data-type="code" data-sm="./modules/m00004/index.cnxml:273:5"><span class="green-code" data-sm="./modules/m00004/index.cnxml:273:11"># import the statistics library</span>
+    <pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00004/index.cnxml:273:5"><span class="green-code" data-sm="./modules/m00004/index.cnxml:273:40"># import the statistics library</span>
 import statistics
 <span class="green-code" data-sm="./modules/m00004/index.cnxml:275:1"># define a dataset of rates of returns</span>
 rates_of_return = [<span class="green-code" data-sm="./modules/m00004/index.cnxml:276:20">5.4</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:57">6.0</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:94">6.3</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:131">6.8</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:168">7.1</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:205">7.2</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:242">7.4</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:279">7.5</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:316">7.9</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:353">8.2</span>, <span class="green-code" data-sm="./modules/m00004/index.cnxml:276:390">8.7</span>]
@@ -1823,72 +1833,82 @@ rates_of_return = [<span class="green-code" data-sm="./modules/m00004/index.cnxm
         </tbody></table>
        </section>
       <section data-depth="2" id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_sect-00008" data-sm="./modules/m00004/index.cnxml:338:7"><h4 data-type="title" data-sm="./modules/m00004/index.cnxml:339:9">Chapter Problems</h4>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00045" data-sm="./modules/m00004/index.cnxml:340:9">4a. For Dataset C, calculate the quartiles of the dataset.</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00046" data-sm="./modules/m00004/index.cnxml:341:9">4b. For this same dataset, calculate the inter-quartile range (IQR).</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00047" data-sm="./modules/m00004/index.cnxml:342:9">4c. Determine if there are any potential outliers in this dataset.</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00048" data-sm="./modules/m00004/index.cnxml:343:9">5. For Dataset E, determine the percentile for the employee with a salary of $82,000. Round your answer to the nearest whole number percentile.</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00049" data-sm="./modules/m00004/index.cnxml:344:9">At a website development company, the average number of sick days taken by employees per year is 9 days with a standard deviation of 2.3 days.</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00050" data-sm="./modules/m00004/index.cnxml:345:9">6a. A certain employee has taken 2 sick days for the year. Calculate the z-score for this employee (round your answer to 2 decimal places).</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00051" data-sm="./modules/m00004/index.cnxml:346:9">6b. What does the z-score communicate about this employee’s number of sick days as compared to other employees in the company?</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00052" data-sm="./modules/m00004/index.cnxml:347:9">6c. A different employee has taken 17 sick days for the year. Calculate the z-score for this employee (round your answer to 2 decimal places).</p>
-        <p id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_para-00053" data-sm="./modules/m00004/index.cnxml:348:9">6d. What does the z-score communicate about this employee’s number of sick days as compared to other employees in the company?</p>
-      </section>
+        <div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-004" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-004" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367955">
+        <div data-type="question-stem">4a. For Dataset C, calculate the quartiles of the dataset.<br/>
+4b. For this same dataset, calculate the inter-quartile range (IQR).<br/>
+4c. Determine if there are any potential outliers in this dataset.</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-005" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-005" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367956">
+        <div data-type="question-stem">5. For Dataset E, determine the percentile for the employee with a salary of $82,000. Round your answer to the nearest whole number percentile.</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-006" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-006" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367957">
+        <div data-type="question-stem">At a website development company, the average number of sick days taken by employees per year is 9 days with a standard deviation of 2.3 days.<br/><br/>
+6a. A certain employee has taken 2 sick days for the year. Calculate the z-score for this employee (round your answer to 2 decimal places).<br/>
+6b. What does the z-score communicate about this employee’s number of sick days as compared to other employees in the company?<br/>
+6c. A different employee has taken 17 sick days for the year. Calculate the z-score for this employee (round your answer to 2 decimal places).<br/>
+6d. What does the z-score communicate about this employee’s number of sick days as compared to other employees in the company?
+</div>
+        </div>
+    </div></section>
     </section>
 
-  <div data-type="glossary" data-sm="./modules/m00004/index.cnxml:353:3"><h3 data-type="glossary-title">Glossary</h3>
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00001" data-sm="./modules/m00004/index.cnxml:354:5">
-      <dt data-sm="./modules/m00004/index.cnxml:355:7">interquartile range (IQR)</dt>
-      <dd data-sm="./modules/m00004/index.cnxml:356:7">a number that indicates the spread of the middle half, or middle 50%, of the data; the difference between the third quartile (<m:math display="inline"><m:semantics><m:mrow><m:msub data-sm="./modules/m00004/index.cnxml:356:150"><m:mi data-sm="./modules/m00004/index.cnxml:356:158">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:356:172">3</m:mn></m:msub></m:mrow><m:annotation-xml encoding="MathML-Content"><m:msub data-sm="./modules/m00004/index.cnxml:356:150"><m:mi data-sm="./modules/m00004/index.cnxml:356:158">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:356:172">3</m:mn></m:msub></m:annotation-xml></m:semantics></m:math>) and the first quartile (<m:math display="inline"><m:semantics><m:mrow><m:msub data-sm="./modules/m00004/index.cnxml:356:238"><m:mi data-sm="./modules/m00004/index.cnxml:356:246">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:356:260">1</m:mn></m:msub></m:mrow><m:annotation-xml encoding="MathML-Content"><m:msub data-sm="./modules/m00004/index.cnxml:356:238"><m:mi data-sm="./modules/m00004/index.cnxml:356:246">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:356:260">1</m:mn></m:msub></m:annotation-xml></m:semantics></m:math>)</dd>
+  <div data-type="glossary" data-sm="./modules/m00004/index.cnxml:361:3"><h3 data-type="glossary-title">Glossary</h3>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00001" data-sm="./modules/m00004/index.cnxml:362:5">
+      <dt data-sm="./modules/m00004/index.cnxml:363:7">interquartile range (IQR)</dt>
+      <dd data-sm="./modules/m00004/index.cnxml:364:7">a number that indicates the spread of the middle half, or middle 50%, of the data; the difference between the third quartile (<m:math display="inline"><m:semantics><m:mrow><m:msub data-sm="./modules/m00004/index.cnxml:364:150"><m:mi data-sm="./modules/m00004/index.cnxml:364:158">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:364:172">3</m:mn></m:msub></m:mrow><m:annotation-xml encoding="MathML-Content"><m:msub data-sm="./modules/m00004/index.cnxml:364:150"><m:mi data-sm="./modules/m00004/index.cnxml:364:158">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:364:172">3</m:mn></m:msub></m:annotation-xml></m:semantics></m:math>) and the first quartile (<m:math display="inline"><m:semantics><m:mrow><m:msub data-sm="./modules/m00004/index.cnxml:364:238"><m:mi data-sm="./modules/m00004/index.cnxml:364:246">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:364:260">1</m:mn></m:msub></m:mrow><m:annotation-xml encoding="MathML-Content"><m:msub data-sm="./modules/m00004/index.cnxml:364:238"><m:mi data-sm="./modules/m00004/index.cnxml:364:246">Q</m:mi><m:mn data-sm="./modules/m00004/index.cnxml:364:260">1</m:mn></m:msub></m:annotation-xml></m:semantics></m:math>)</dd>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00002" data-sm="./modules/m00004/index.cnxml:359:5">
-      <dt data-sm="./modules/m00004/index.cnxml:360:7">percentiles</dt>
-      <dd data-sm="./modules/m00004/index.cnxml:361:7">numbers that divide an ordered data set into hundredths; often used to indicate position of a data value in a data set</dd>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00002" data-sm="./modules/m00004/index.cnxml:367:5">
+      <dt data-sm="./modules/m00004/index.cnxml:368:7">percentiles</dt>
+      <dd data-sm="./modules/m00004/index.cnxml:369:7">numbers that divide an ordered data set into hundredths; often used to indicate position of a data value in a data set</dd>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00003" data-sm="./modules/m00004/index.cnxml:364:5">
-      <dt data-sm="./modules/m00004/index.cnxml:365:7">quartiles</dt>
-      <dd data-sm="./modules/m00004/index.cnxml:366:7">numbers that divide an ordered data set into quarters; the second quartile is the same as the median</dd>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00003" data-sm="./modules/m00004/index.cnxml:372:5">
+      <dt data-sm="./modules/m00004/index.cnxml:373:7">quartiles</dt>
+      <dd data-sm="./modules/m00004/index.cnxml:374:7">numbers that divide an ordered data set into quarters; the second quartile is the same as the median</dd>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00004" data-sm="./modules/m00004/index.cnxml:369:5">
-      <dt data-sm="./modules/m00004/index.cnxml:370:7">z-score (or z-value)</dt>
-      <dd data-sm="./modules/m00004/index.cnxml:371:7">a measure of the position of a data value in the data set, calculated by subtracting the mean from the data value and then dividing the difference by the standard deviation</dd>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00004" data-sm="./modules/m00004/index.cnxml:377:5">
+      <dt data-sm="./modules/m00004/index.cnxml:378:7">z-score (or z-value)</dt>
+      <dd data-sm="./modules/m00004/index.cnxml:379:7">a measure of the position of a data value in the data set, calculated by subtracting the mean from the data value and then dividing the difference by the standard deviation</dd>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00005" data-sm="./modules/m00004/index.cnxml:374:5">
-      <dt data-sm="./modules/m00004/index.cnxml:375:7"/>
-      <dd data-sm="./modules/m00004/index.cnxml:376:7"/>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00005" data-sm="./modules/m00004/index.cnxml:382:5">
+      <dt data-sm="./modules/m00004/index.cnxml:383:7"/>
+      <dd data-sm="./modules/m00004/index.cnxml:384:7"/>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00006" data-sm="./modules/m00004/index.cnxml:379:5">
-      <dt data-sm="./modules/m00004/index.cnxml:380:7"/>
-      <dd data-sm="./modules/m00004/index.cnxml:381:7"/>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00006" data-sm="./modules/m00004/index.cnxml:387:5">
+      <dt data-sm="./modules/m00004/index.cnxml:388:7"/>
+      <dd data-sm="./modules/m00004/index.cnxml:389:7"/>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00007" data-sm="./modules/m00004/index.cnxml:384:5">
-      <dt data-sm="./modules/m00004/index.cnxml:385:7"/>
-      <dd data-sm="./modules/m00004/index.cnxml:386:7"/>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00007" data-sm="./modules/m00004/index.cnxml:392:5">
+      <dt data-sm="./modules/m00004/index.cnxml:393:7"/>
+      <dd data-sm="./modules/m00004/index.cnxml:394:7"/>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00008" data-sm="./modules/m00004/index.cnxml:389:5">
-      <dt data-sm="./modules/m00004/index.cnxml:390:7"/>
-      <dd data-sm="./modules/m00004/index.cnxml:391:7"/>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00008" data-sm="./modules/m00004/index.cnxml:397:5">
+      <dt data-sm="./modules/m00004/index.cnxml:398:7"/>
+      <dd data-sm="./modules/m00004/index.cnxml:399:7"/>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00009" data-sm="./modules/m00004/index.cnxml:394:5">
-      <dt data-sm="./modules/m00004/index.cnxml:395:7"/>
-      <dd data-sm="./modules/m00004/index.cnxml:396:7"/>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00009" data-sm="./modules/m00004/index.cnxml:402:5">
+      <dt data-sm="./modules/m00004/index.cnxml:403:7"/>
+      <dd data-sm="./modules/m00004/index.cnxml:404:7"/>
     </dl>
 
-    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00010" data-sm="./modules/m00004/index.cnxml:399:5">
-      <dt data-sm="./modules/m00004/index.cnxml:400:7"/>
-      <dd data-sm="./modules/m00004/index.cnxml:401:7"/>
+    <dl id="auto_ef698593-f9d6-4377-acfd-343ab3db943c_def-00010" data-sm="./modules/m00004/index.cnxml:407:5">
+      <dt data-sm="./modules/m00004/index.cnxml:408:7"/>
+      <dd data-sm="./modules/m00004/index.cnxml:409:7"/>
     </dl>
   </div>
   </div><div data-type="page" id="page_87edc559-a950-425c-9ea3-daa25cee8549"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Basic Statistical Graphing</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="87edc559-a950-425c-9ea3-daa25cee8549@"/>
     </div>
@@ -2242,13 +2262,13 @@ rates_of_return = [<span class="green-code" data-sm="./modules/m00004/index.cnxm
 
     <section data-depth="1" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_sect-00009" data-sm="./modules/m00005/index.cnxml:373:5"><h3 data-type="title" data-sm="./modules/m00005/index.cnxml:374:7">Using Python for Statistical Graphing</h3>
       <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00032" data-sm="./modules/m00005/index.cnxml:375:7">Data visualization is a very important part of data science and Python has many built-in graphing capabilities through a package called “matplotlib.” To import this package into a python program use the command:</p>
-      <pre data-type="code" data-display="block" data-sm="./modules/m00005/index.cnxml:376:7"><span class="blue-code" data-sm="./modules/m00005/index.cnxml:376:29">import matplotlib.pyplot as plt</span></pre>
+      <pre data-type="code" class="python" data-lang="python" data-display="block" data-sm="./modules/m00005/index.cnxml:376:7"><span class="blue-code" data-sm="./modules/m00005/index.cnxml:376:58">import matplotlib.pyplot as plt</span></pre>
       <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00033" data-sm="./modules/m00005/index.cnxml:377:7">Matplotlib contains functions such as “bar” and “plot” and “scatter” which can be used to generate bar charts, time series graphs, scatter plots, etc.</p>
       <section data-depth="2" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_sect-00010" data-sm="./modules/m00005/index.cnxml:378:7"><h4 data-type="title" data-sm="./modules/m00005/index.cnxml:379:9">Time Series Chart using Python</h4>
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00034" data-sm="./modules/m00005/index.cnxml:380:9">To use the plot function, define (x, y) datapoints and use the plt.plot function. A title can be added to the chart by using the plt.title function.  Graphs can be customized in many ways in Python by adding labels, titles, colors, combining multiple plots in a display, etc.</p>
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00035" data-sm="./modules/m00005/index.cnxml:381:9">Here is an example of a simple time series chart using plt.plot:</p>
 <div data-type="note" class="python-feature" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_note-00001" data-sm="./modules/m00005/index.cnxml:382:1">
-<pre data-type="code" data-sm="./modules/m00005/index.cnxml:383:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:383:7"># import the matplotlib library</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00005/index.cnxml:383:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:383:36"># import the matplotlib library</span>
 <span class="purple-code" data-sm="./modules/m00005/index.cnxml:384:1">import</span> matplotlib.pyplot <span class="purple-code" data-sm="./modules/m00005/index.cnxml:384:59">as</span> plt
 
 <span class="green-code" data-sm="./modules/m00005/index.cnxml:386:1"># define the x-data</span>
@@ -2276,7 +2296,7 @@ plt.title(<span class="red-code" data-sm="./modules/m00005/index.cnxml:396:11">"
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00036" data-sm="./modules/m00005/index.cnxml:409:9">To generate a bar chart, the function “bar” can be used. Bars can be oriented either vertically or horizontally based on user preference.  A legend can be added to a bar chart using the “legend” function.  Labels can be added to the x and y axes by using the “xlabel” and “ylabel” functions.</p>
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00037" data-sm="./modules/m00005/index.cnxml:410:9">Here is an example of a vertical bar chart created in Python:</p>
         <div data-type="note" class="python-feature" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_note-00002" data-sm="./modules/m00005/index.cnxml:411:9">
-<pre data-type="code" data-sm="./modules/m00005/index.cnxml:412:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:412:7"># import the matplotlib library</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00005/index.cnxml:412:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:412:36"># import the matplotlib library</span>
 <span class="purple-code" data-sm="./modules/m00005/index.cnxml:413:1">import</span> matplotlib.pyplot <span class="purple-code" data-sm="./modules/m00005/index.cnxml:413:59">as</span> plt
 
 <span class="green-code" data-sm="./modules/m00005/index.cnxml:415:1"># define the x-data</span>
@@ -2310,7 +2330,7 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:432:13"
         <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00039" data-sm="./modules/m00005/index.cnxml:444:9">The example below shows how to use Python to create a scatter plot for the stock price data provided in <a href="#auto_87edc559-a950-425c-9ea3-daa25cee8549_fig03_05" data-sm="./modules/m00005/index.cnxml:444:135" class="autogenerated-content">[link]</a>.</p>
 
 <div data-type="note" class="python-feature" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_note-00003" data-sm="./modules/m00005/index.cnxml:446:1">
-<pre data-type="code" data-sm="./modules/m00005/index.cnxml:447:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:447:7"># import the matplotlib library</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00005/index.cnxml:447:1"><span class="green-code" data-sm="./modules/m00005/index.cnxml:447:36"># import the matplotlib library</span>
 <span class="purple-code" data-sm="./modules/m00005/index.cnxml:448:1">import</span> matplotlib.pyplot <span class="purple-code" data-sm="./modules/m00005/index.cnxml:448:59">as</span> plt
 
 <span class="green-code" data-sm="./modules/m00005/index.cnxml:450:1"># define the x-data</span>
@@ -2387,112 +2407,118 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:464:13"
         </tbody></table>
        </section>
       <section data-depth="2" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_sect-00015" data-sm="./modules/m00005/index.cnxml:528:7"><h4 data-type="title" data-sm="./modules/m00005/index.cnxml:529:9">Chapter Problems</h4>
-        <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00040" data-sm="./modules/m00005/index.cnxml:530:9">7. The following data was collected for the temperature in degrees Celsius at a monitoring station in the Arctic circle.  Create a time series graph for this data and comment on any conclusions derived from the graph.</p>
-        <table class="unnumbered" summary="hgfgf" id="auto_87edc559-a950-425c-9ea3-daa25cee8549_table-00003" data-sm="./modules/m00005/index.cnxml:531:9"><thead data-sm="./modules/m00005/index.cnxml:534:7">
-        <tr data-sm="./modules/m00005/index.cnxml:535:9">
-          <th data-align="center">Year</th>
-          <th data-align="center">Temperature (degrees Celsius)</th>
-        </tr>
-      </thead><tbody data-sm="./modules/m00005/index.cnxml:540:11">
-        <tr data-sm="./modules/m00005/index.cnxml:541:9">
-          <td data-align="center">2014</td>
-          <td data-align="center">1.5</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:545:9">
-          <td data-align="center">2015</td>
-          <td data-align="center">1.7</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:549:9">
-          <td data-align="center">2016</td>
-          <td data-align="center">1.6</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:553:9">
-          <td data-align="center">2017</td>
-          <td data-align="center">2.0</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:557:9">
-          <td data-align="center">2018</td>
-          <td data-align="center">2.2</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:561:9">
-          <td data-align="center">2019</td>
-          <td data-align="center">2.6</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:565:9">
-          <td data-align="center">2020</td>
-          <td data-align="center">2.8</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:569:9">
-          <td data-align="center">2021</td>
-          <td data-align="center">3.0</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:573:9">
-          <td data-align="center">2022</td>
-          <td data-align="center">3.3</td>
-        </tr>
-        <tr data-sm="./modules/m00005/index.cnxml:577:9">
-          <td data-align="center">2023</td>
-          <td data-align="center">3.2</td>
-        </tr>
-      </tbody></table>
-    <p id="auto_87edc559-a950-425c-9ea3-daa25cee8549_para-00041" data-sm="./modules/m00005/index.cnxml:584:5">8. A human resources administrator is interested in studying the correlation between years of professional experience and starting salary.  The administrator is considering creating either a histogram or box plot or bar graph or scatter plot.  Which type of graph would be the best choice for this type of data?</p>
-      </section>
+        <div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-007" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-007" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367958">
+        <div data-type="question-stem">7. The following data was collected for the temperature in degrees Celsius at a monitoring station in the Arctic circle.  Create a time series graph for this data and comment on any conclusions derived from the graph.<br/><br/>
+
+<table>
+<tbody><tr>
+<th>Year</th>
+<th>Temperature</th>
+</tr>
+<tr>
+<td>2014</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>2015</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>2016</td>
+<td>1.6</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>2.2</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>2.6</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>2.8</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>3.3</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>3.2</td>
+</tr>
+</tbody></table></div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-008" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-008" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367959">
+        <div data-type="question-stem">A human resources administrator is interested in studying the correlation between years of professional experience and starting salary.  The administrator is considering creating either a histogram or box plot or bar graph or scatter plot.  Which type of graph would be the best choice for this type of data?</div>
+        </div>
+    </div></section>
     </section>
 
-  <div data-type="glossary" data-sm="./modules/m00005/index.cnxml:589:3"><h3 data-type="glossary-title">Glossary</h3>
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00001" data-sm="./modules/m00005/index.cnxml:590:5">
-      <dt data-sm="./modules/m00005/index.cnxml:591:7">bar graph</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:592:7">a chart that presents categorical data in a summarized form based on frequency or relative frequency</dd>
+  <div data-type="glossary" data-sm="./modules/m00005/index.cnxml:545:3"><h3 data-type="glossary-title">Glossary</h3>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00001" data-sm="./modules/m00005/index.cnxml:546:5">
+      <dt data-sm="./modules/m00005/index.cnxml:547:7">bar graph</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:548:7">a chart that presents categorical data in a summarized form based on frequency or relative frequency</dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00002" data-sm="./modules/m00005/index.cnxml:595:5">
-      <dt data-sm="./modules/m00005/index.cnxml:596:7">bivariate data</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:597:7">paired data in which each value of one variable is paired with a value of a second variable</dd>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00002" data-sm="./modules/m00005/index.cnxml:551:5">
+      <dt data-sm="./modules/m00005/index.cnxml:552:7">bivariate data</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:553:7">paired data in which each value of one variable is paired with a value of a second variable</dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00003" data-sm="./modules/m00005/index.cnxml:600:5">
-      <dt data-sm="./modules/m00005/index.cnxml:601:7">boxplot</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:602:7"/>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00003" data-sm="./modules/m00005/index.cnxml:556:5">
+      <dt data-sm="./modules/m00005/index.cnxml:557:7">boxplot</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:558:7"/>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00004" data-sm="./modules/m00005/index.cnxml:605:5">
-      <dt data-sm="./modules/m00005/index.cnxml:606:7">data visualization</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:607:7">the use of graphical displays, such as bar charts, histograms, and scatter plots, to help interpret patterns and trends in a data set</dd>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00004" data-sm="./modules/m00005/index.cnxml:561:5">
+      <dt data-sm="./modules/m00005/index.cnxml:562:7">data visualization</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:563:7">the use of graphical displays, such as bar charts, histograms, and scatter plots, to help interpret patterns and trends in a data set</dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00005" data-sm="./modules/m00005/index.cnxml:610:5">
-      <dt data-sm="./modules/m00005/index.cnxml:611:7">histogram</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:612:7">a graphical display of continuous data showing class intervals on the horizontal axis and frequency or relative frequency on the vertical axis</dd>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00005" data-sm="./modules/m00005/index.cnxml:566:5">
+      <dt data-sm="./modules/m00005/index.cnxml:567:7">histogram</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:568:7">a graphical display of continuous data showing class intervals on the horizontal axis and frequency or relative frequency on the vertical axis</dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00006" data-sm="./modules/m00005/index.cnxml:615:5">
-      <dt data-sm="./modules/m00005/index.cnxml:616:7">scatter plot (or scatter diagram)</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:617:7">a graphical display that shows the relationship between a dependent variable and an independent variable </dd>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00006" data-sm="./modules/m00005/index.cnxml:571:5">
+      <dt data-sm="./modules/m00005/index.cnxml:572:7">scatter plot (or scatter diagram)</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:573:7">a graphical display that shows the relationship between a dependent variable and an independent variable </dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00007" data-sm="./modules/m00005/index.cnxml:620:5">
-      <dt data-sm="./modules/m00005/index.cnxml:621:7">time series graph</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:622:7">a graphical display used to show measurement data plotted versus time, where time is displayed on the horizontal axis </dd>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00007" data-sm="./modules/m00005/index.cnxml:576:5">
+      <dt data-sm="./modules/m00005/index.cnxml:577:7">time series graph</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:578:7">a graphical display used to show measurement data plotted versus time, where time is displayed on the horizontal axis </dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00008" data-sm="./modules/m00005/index.cnxml:625:5">
-      <dt data-sm="./modules/m00005/index.cnxml:626:7"><m:math display="inline"><m:semantics><m:mrow><m:mi data-sm="./modules/m00005/index.cnxml:626:21">x</m:mi></m:mrow><m:annotation-xml encoding="MathML-Content"><m:mi data-sm="./modules/m00005/index.cnxml:626:21">x</m:mi></m:annotation-xml></m:semantics></m:math>-axis</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:627:7">the horizontal axis in a rectangular coordinate system</dd>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00008" data-sm="./modules/m00005/index.cnxml:581:5">
+      <dt data-sm="./modules/m00005/index.cnxml:582:7"><m:math display="inline"><m:semantics><m:mrow><m:mi data-sm="./modules/m00005/index.cnxml:582:21">x</m:mi></m:mrow><m:annotation-xml encoding="MathML-Content"><m:mi data-sm="./modules/m00005/index.cnxml:582:21">x</m:mi></m:annotation-xml></m:semantics></m:math>-axis</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:583:7">the horizontal axis in a rectangular coordinate system</dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00009" data-sm="./modules/m00005/index.cnxml:630:5">
-      <dt data-sm="./modules/m00005/index.cnxml:631:7"><m:math display="inline"><m:semantics><m:mrow><m:mi data-sm="./modules/m00005/index.cnxml:631:21">y</m:mi></m:mrow><m:annotation-xml encoding="MathML-Content"><m:mi data-sm="./modules/m00005/index.cnxml:631:21">y</m:mi></m:annotation-xml></m:semantics></m:math>-axis</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:632:7">the vertical axis in a rectangular coordinate system</dd>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00009" data-sm="./modules/m00005/index.cnxml:586:5">
+      <dt data-sm="./modules/m00005/index.cnxml:587:7"><m:math display="inline"><m:semantics><m:mrow><m:mi data-sm="./modules/m00005/index.cnxml:587:21">y</m:mi></m:mrow><m:annotation-xml encoding="MathML-Content"><m:mi data-sm="./modules/m00005/index.cnxml:587:21">y</m:mi></m:annotation-xml></m:semantics></m:math>-axis</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:588:7">the vertical axis in a rectangular coordinate system</dd>
     </dl>
 
-    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00010" data-sm="./modules/m00005/index.cnxml:635:5">
-      <dt data-sm="./modules/m00005/index.cnxml:636:7">univariate data</dt>
-      <dd data-sm="./modules/m00005/index.cnxml:637:7"/>
+    <dl id="auto_87edc559-a950-425c-9ea3-daa25cee8549_def-00010" data-sm="./modules/m00005/index.cnxml:591:5">
+      <dt data-sm="./modules/m00005/index.cnxml:592:7">univariate data</dt>
+      <dd data-sm="./modules/m00005/index.cnxml:593:7"/>
     </dl>
   </div>
   </div><div data-type="page" id="page_1b1280e5-cbfa-4448-9e30-14982c2f3583"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Probability Theory</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="1b1280e5-cbfa-4448-9e30-14982c2f3583@"/>
     </div>
@@ -3352,32 +3378,46 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:464:13"
         </tbody></table>
        </section>
       <section data-depth="2" id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_sect-00015" data-sm="./modules/m00006/index.cnxml:707:7"><h4 data-type="title" data-sm="./modules/m00006/index.cnxml:708:9">Chapter Problems</h4>
-        <p id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_para-00068" data-sm="./modules/m00006/index.cnxml:709:9">9. Two cards are selected at random from a standard 52 card deck. Find the probability that the second card is an ACE, given that the first card selected was an ACE (assume the first card is not replaced before selecting the second card).  Round your answer to 3 decimal places.</p>
-        <p id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_para-00069" data-sm="./modules/m00006/index.cnxml:710:9">10. From past data it’s known that the probability that an individual owns a dog is 0.42.  Three random people are asked if they own a dog.  (Round answers to 3 decimal places).
-          </p><ol id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_list-00008" type="a" data-sm="./modules/m00006/index.cnxml:711:11">
-          <li data-sm="./modules/m00006/index.cnxml:712:11">Find the probability that all three people say they own a dog.</li>
-          <li data-sm="./modules/m00006/index.cnxml:713:11">Find the probability that none of the three people own a dog.</li>
-          <li data-sm="./modules/m00006/index.cnxml:714:11">Find the probability that at least one of the people own a dog.</li>
-        </ol>
-          <p id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_para-00070" data-sm="./modules/m00006/index.cnxml:717:11">
-            11. In a group of 100 people, 35 people wear glasses, 40 people wear contacts, 12 wear both glasses and contacts and 25 wear neither glasses nor contacts.
-            </p><ol id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_list-00009" type="a" data-sm="./modules/m00006/index.cnxml:719:13">
-            <li data-sm="./modules/m00006/index.cnxml:720:13">Are the events “person wears glasses” and “person wears contacts mutually exclusive?</li>
-            <li data-sm="./modules/m00006/index.cnxml:721:13">Calculate the probability that a randomly chosen person wears glasses or contacts. Round your answer to 3 decimal places.</li>
-</ol>
-          <p id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_para-00071" data-sm="./modules/m00006/index.cnxml:724:11">
-            12. A medical researcher collects statistical data as follows:
-            </p><ul id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_list-00010" data-sm="./modules/m00006/index.cnxml:726:13">
-<li data-sm="./modules/m00006/index.cnxml:727:1">23% of senior citizens (65 or older) get the flu each year</li>
-<li data-sm="./modules/m00006/index.cnxml:728:1">32% of people under 65 get the flu each year</li>
-<li data-sm="./modules/m00006/index.cnxml:729:1">In the population there are 15% senior citizens</li>
-</ul><ol id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_list-00011" type="a" data-sm="./modules/m00006/index.cnxml:731:1">
-<li data-sm="./modules/m00006/index.cnxml:732:1">Are the events: being a senior  and getting the flu dependent or independent?</li>
-<li data-sm="./modules/m00006/index.cnxml:733:1">Find the probability that a person selected at random is a senior and will get the flu</li>
-<li data-sm="./modules/m00006/index.cnxml:734:1">Find the probability that a person selected at random is under 65 years old and will get the flu</li>
-</ol>
-          <p id="auto_1b1280e5-cbfa-4448-9e30-14982c2f3583_para-00072" data-sm="./modules/m00006/index.cnxml:737:11">13. A certain type of COVID related virus affects 5% of the population. A screening test is available to detect the virus. Assume the probability of a true positive from the screening test is 85% meaning that the probability that a person has a positive test result, given that they actually have the virus is 0.85. Also assume the probability of a false positive from the screening test is 12% which indicates that probability that a person has a positive test result, given that they do not have the virus is 0.12. Calculate the probability that a person actually has the virus given that the screening test shows a positive result. Round your answer to 3 decimal places.</p>
-      </section>
+        <div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-009" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-009" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367960">
+        <div data-type="question-stem">Two cards are selected at random from a standard 52 card deck. Find the probability that the second card is an ACE, given that the first card selected was an ACE (assume the first card is not replaced before selecting the second card).  Round your answer to 3 decimal places.</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-010" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-010" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367961">
+        <div data-type="question-stem">From past data it’s known that the probability that an individual owns a dog is 0.42.  Three random people are asked if they own a dog.  (Round answers to 3 decimal places).
+<ol type="a">
+<li>Find the probability that all three people say they own a dog.</li>
+<li>Find the probability that none of the three people own a dog.</li>
+<li>Find the probability that at least one of the people own a dog.</li>
+</ol></div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-011" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-011" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367962">
+        <div data-type="question-stem">In a group of 100 people, 35 people wear glasses, 40 people wear contacts, 12 wear both glasses and contacts and 25 wear neither glasses nor contacts.
+<ol type="a">
+<li>Are the events “person wears glasses” and “person wears contacts mutually exclusive?</li>
+<li>Calculate the probability that a randomly chosen person wears glasses or contacts. Round your answer to 3 decimal places.</li>
+</ol></div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-012" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-012" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367964">
+        <div data-type="question-stem">A medical researcher collects statistical data as follows:
+<ul>
+<li>23% of senior citizens (65 or older) get the flu each year</li>
+<li>32% of people under 65 get the flu each year</li>
+<li>In the population there are 15% senior citizens</li>
+</ul>
+<ol type="a">
+<li>Are the events: being a senior  and getting the flu dependent or independent?</li>
+<li>Find the probability that a person selected at random is a senior and will get the flu</li>
+<li>Find the probability that a person selected at random is under 65 years old and will get the flu</li>
+</ol></div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-013" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-013" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367965">
+        <div data-type="question-stem">A certain type of COVID related virus affects 5% of the population. A screening test is available to detect the virus. Assume the probability of a true positive from the screening test is 85% meaning that the probability that a person has a positive test result, given that they actually have the virus is 0.85. Also assume the probability of a false positive from the screening test is 12% which indicates that probability that a person has a positive test result, given that they do not have the virus is 0.12. Calculate the probability that a person actually has the virus given that the screening test shows a positive result. Round your answer to 3 decimal places.</div>
+        </div>
+    </div></section>
     </section>
 
 
@@ -3476,7 +3516,7 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:464:13"
   </div>
   </div><div data-type="page" id="page_1bb19f5d-6bf6-49db-8f8e-7c94d4752718"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Discrete and Continuous Probability Distributions</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="1bb19f5d-6bf6-49db-8f8e-7c94d4752718@"/>
     </div>
@@ -4246,7 +4286,7 @@ plt.ylabel (<span class="red-code" data-sm="./modules/m00005/index.cnxml:464:13"
       <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00091" data-sm="./modules/m00007/index.cnxml:618:7">Here is the input and output of this python program:</p>
 
       <div data-type="note" class="python-feature" id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_note-00003" data-sm="./modules/m00007/index.cnxml:620:7">
-<pre data-type="code" data-sm="./modules/m00007/index.cnxml:621:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:621:7"># from scipy.stats import binom</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00007/index.cnxml:621:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:621:36"># from scipy.stats import binom</span>
 <span class="purple-code" data-sm="./modules/m00007/index.cnxml:622:1">from</span> scipy.stats <span class="purple-code" data-sm="./modules/m00007/index.cnxml:622:51">import</span> binom
 
 <span class="green-code" data-sm="./modules/m00007/index.cnxml:624:1"># define parameters x, n, and p:</span>
@@ -4284,7 +4324,7 @@ round (binom.pmf(x, n, p), <span class="green-code" data-sm="./modules/m00007/in
               <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00102" data-sm="./modules/m00007/index.cnxml:657:15">Here is the input and output of this python program:</p>
 
 <div data-type="note" class="python-feature" id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_note-00002" data-sm="./modules/m00007/index.cnxml:659:1">
-<pre data-type="code" data-sm="./modules/m00007/index.cnxml:660:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:660:7"># from scipy.stats import norm</span>
+<pre data-type="code" class="python" data-lang="python" data-sm="./modules/m00007/index.cnxml:660:1"><span class="green-code" data-sm="./modules/m00007/index.cnxml:660:36"># from scipy.stats import norm</span>
 <span class="purple-code" data-sm="./modules/m00007/index.cnxml:661:1">from</span> scipy.stats <span class="purple-code" data-sm="./modules/m00007/index.cnxml:661:51">import</span> norm
 
 <span class="green-code" data-sm="./modules/m00007/index.cnxml:663:1"># define parameters x, mean and standard_deviation:</span>
@@ -4427,49 +4467,64 @@ round (<span class="green-code" data-sm="./modules/m00007/index.cnxml:671:8">1</
         </tbody></table>
        </section>
       <section data-depth="2" id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_sect-00018" data-sm="./modules/m00007/index.cnxml:820:7"><h4 data-type="title" data-sm="./modules/m00007/index.cnxml:821:9">Chapter Problems</h4>
-        <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00117" data-sm="./modules/m00007/index.cnxml:822:9">14. You are taking a multiple-choice test with 10 questions where each question has 5 possible answers: (a), (b), (c), (d) and (e). You did not study so you will guess at each question. What is the probability of getting exactly 5 questions correct?</p>
-        <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00118" data-sm="./modules/m00007/index.cnxml:823:9">15. The average arrival rate of trucks at a truck loading station is 15 per day. Calculate the probability that 17 trucks arrive at the loading station on a particular day.</p>
-        <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00119" data-sm="./modules/m00007/index.cnxml:824:9">16. A laptop computer is known to have a mean lifetime of 6 years and the length of time that the laptop lasts is known to follow an exponential distribution. Calculate the probability that the laptop will last less than 10 years.</p>
-        <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00120" data-sm="./modules/m00007/index.cnxml:825:9">17. An automotive service center has a guarantee for oil changes that if an oil change is not completed within 30 minutes, the oil change is free.  The time to complete an oil change service follows an exponential distribution with a mean time of 10 minutes.  What is the probability that a customer will receive a free oil change?</p>
-        <p id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_para-00121" data-sm="./modules/m00007/index.cnxml:826:9">18. In a certain city, cellphone bills are known to follow a normal distribution with a mean of $92 and standard deviation of $14.
-          </p><ol id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_list-00012" type="a" data-sm="./modules/m00007/index.cnxml:827:11">
-          <li data-sm="./modules/m00007/index.cnxml:828:11">Find the probability that a randomly selected cell phone customer has a monthly bill less than $75.</li>
-          <li data-sm="./modules/m00007/index.cnxml:829:11">Find the probability that a randomly selected cell phone customer has a monthly bill of more than $85.</li>
-        </ol>
-      </section>
+        <div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-014" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-014" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367966">
+        <div data-type="question-stem">You are taking a multiple-choice test with 10 questions where each question has 5 possible answers: (a), (b), (c), (d) and (e). You did not study so you will guess at each question. What is the probability of getting exactly 5 questions correct?</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-015" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-015" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367967">
+        <div data-type="question-stem">The average arrival rate of trucks at a truck loading station is 15 per day. Calculate the probability that 17 trucks arrive at the loading station on a particular day.</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-016" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-016" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367968">
+        <div data-type="question-stem">A laptop computer is known to have a mean lifetime of 6 years and the length of time that the laptop lasts is known to follow an exponential distribution. Calculate the probability that the laptop will last less than 10 years.</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-017" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-017" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367969">
+        <div data-type="question-stem">An automotive service center has a guarantee for oil changes that if an oil change is not completed within 30 minutes, the oil change is free.  The time to complete an oil change service follows an exponential distribution with a mean time of 10 minutes.  What is the probability that a customer will receive a free oil change?</div>
+        </div>
+    </div><div data-type="injected-exercise" class="os-embed autogenerated-content" data-injected-from-nickname="DS-test-018" data-injected-from-version="1" data-injected-from-url="https://exercises.openstax.org/api/exercises?q=nickname:DS-test-018" data-tags="type:practice" data-is-vocab="false">
+    <div data-type="exercise-question" data-is-answer-order-important="false" data-formats="free-response" data-id="367970">
+        <div data-type="question-stem">In a certain city, cellphone bills are known to follow a normal distribution with a mean of $92 and standard deviation of $14.
+<ol type="a">
+<li>Find the probability that a randomly selected cell phone customer has a monthly bill less than $75.</li>
+<li>Find the probability that a randomly selected cell phone customer has a monthly bill of more than $85.</li>
+</ol></div>
+        </div>
+    </div></section>
     </section>
 
 
 
-  <div data-type="glossary" data-sm="./modules/m00007/index.cnxml:837:3"><h3 data-type="glossary-title">Glossary</h3>
-    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00001" data-sm="./modules/m00007/index.cnxml:838:5">
-      <dt data-sm="./modules/m00007/index.cnxml:839:7">binomial distribution</dt>
-      <dd data-sm="./modules/m00007/index.cnxml:840:7">a probability distribution for discrete random variable where there are only two possible outcomes of an experiment  </dd>
+  <div data-type="glossary" data-sm="./modules/m00007/index.cnxml:856:3"><h3 data-type="glossary-title">Glossary</h3>
+    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00001" data-sm="./modules/m00007/index.cnxml:857:5">
+      <dt data-sm="./modules/m00007/index.cnxml:858:7">binomial distribution</dt>
+      <dd data-sm="./modules/m00007/index.cnxml:859:7">a probability distribution for discrete random variable where there are only two possible outcomes of an experiment  </dd>
     </dl>
 
-    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00002" data-sm="./modules/m00007/index.cnxml:843:5">
-      <dt data-sm="./modules/m00007/index.cnxml:844:7">empirical rule</dt>
-      <dd data-sm="./modules/m00007/index.cnxml:845:7">a rule that provides the percentages of data values falling within one, two, and three standard deviations from the mean for a bell-shaped (normal) distribution</dd>
+    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00002" data-sm="./modules/m00007/index.cnxml:862:5">
+      <dt data-sm="./modules/m00007/index.cnxml:863:7">empirical rule</dt>
+      <dd data-sm="./modules/m00007/index.cnxml:864:7">a rule that provides the percentages of data values falling within one, two, and three standard deviations from the mean for a bell-shaped (normal) distribution</dd>
     </dl>
 
-    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00003" data-sm="./modules/m00007/index.cnxml:848:5">
-      <dt data-sm="./modules/m00007/index.cnxml:849:7">exponential distribution</dt>
-      <dd data-sm="./modules/m00007/index.cnxml:850:7">a continuous probability distribution that is useful for calculating probabilities within the time between events</dd>
+    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00003" data-sm="./modules/m00007/index.cnxml:867:5">
+      <dt data-sm="./modules/m00007/index.cnxml:868:7">exponential distribution</dt>
+      <dd data-sm="./modules/m00007/index.cnxml:869:7">a continuous probability distribution that is useful for calculating probabilities within the time between events</dd>
     </dl>
 
-    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00004" data-sm="./modules/m00007/index.cnxml:853:5">
-      <dt data-sm="./modules/m00007/index.cnxml:854:7">normal distribution</dt>
-      <dd data-sm="./modules/m00007/index.cnxml:855:7">a bell-shaped distribution curve that is used to model many measurements, including IQ scores, salaries, heights, weights, blood pressures, etc.</dd>
+    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00004" data-sm="./modules/m00007/index.cnxml:872:5">
+      <dt data-sm="./modules/m00007/index.cnxml:873:7">normal distribution</dt>
+      <dd data-sm="./modules/m00007/index.cnxml:874:7">a bell-shaped distribution curve that is used to model many measurements, including IQ scores, salaries, heights, weights, blood pressures, etc.</dd>
     </dl>
 
-    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00005" data-sm="./modules/m00007/index.cnxml:858:5">
-      <dt data-sm="./modules/m00007/index.cnxml:859:7">Poisson distribution</dt>
-      <dd data-sm="./modules/m00007/index.cnxml:860:7">a probability distribution for discrete random variable used to calculate probabilities for a certain number of successes in a specific interval</dd>
+    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00005" data-sm="./modules/m00007/index.cnxml:877:5">
+      <dt data-sm="./modules/m00007/index.cnxml:878:7">Poisson distribution</dt>
+      <dd data-sm="./modules/m00007/index.cnxml:879:7">a probability distribution for discrete random variable used to calculate probabilities for a certain number of successes in a specific interval</dd>
     </dl>
 
-    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00006" data-sm="./modules/m00007/index.cnxml:863:5">
-      <dt data-sm="./modules/m00007/index.cnxml:864:7">probability density function (PDF)</dt>
-      <dd data-sm="./modules/m00007/index.cnxml:865:7"/>
+    <dl id="auto_1bb19f5d-6bf6-49db-8f8e-7c94d4752718_def-00006" data-sm="./modules/m00007/index.cnxml:882:5">
+      <dt data-sm="./modules/m00007/index.cnxml:883:7">probability density function (PDF)</dt>
+      <dd data-sm="./modules/m00007/index.cnxml:884:7"/>
     </dl>
   </div>
   </div></div></div><div data-type="unit"><div data-type="metadata" style="display: none;">
@@ -4482,7 +4537,7 @@ round (<span class="green-code" data-sm="./modules/m00007/index.cnxml:671:8">1</
 
    <h1 data-type="document-title">Placeholder Chapter</h1><div data-type="page" id="page_137996a0-7eb0-46f6-b7b6-c278170e2b7e" class="introduction"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Introduction</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="137996a0-7eb0-46f6-b7b6-c278170e2b7e@"/>
     </div>
@@ -4503,7 +4558,7 @@ round (<span class="green-code" data-sm="./modules/m00007/index.cnxml:671:8">1</
 
   </div><div data-type="page" id="page_3cc299fe-1ac3-4c59-8bfd-b4d51ddcd879"><div data-type="metadata" style="display: none;">
       <h1 data-type="document-title" itemprop="name">Repeat Measures of Center</h1>
-      <span data-type="revised" data-value="2023-12-06T15:47:09+00:00"/>
+      <span data-type="revised" data-value="2023-12-11T17:53:55+00:00"/>
       <span data-type="canonical-book-uuid" data-value="54ef6090-af3e-47f9-8277-4a312aff4b2c"/>
       <span data-type="cnx-archive-uri" data-value="3cc299fe-1ac3-4c59-8bfd-b4d51ddcd879@"/>
     </div>
