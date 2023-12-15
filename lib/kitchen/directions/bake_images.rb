@@ -3,9 +3,9 @@
 module Kitchen
   module Directions
     module BakeImages
-      def self.v1(book:, resources:)
+      def self.v1(book_pages:, resources:)
         # Add image dimensions to <img>s
-        book.images.each do |image|
+        book_pages.images.each do |image|
           img_src = image.resource_key
           img_json = resources&.[](img_src)
           if img_json

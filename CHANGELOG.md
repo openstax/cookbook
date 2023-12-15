@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `WebPreBakeSetup` and `WebPostBakeRestore` directions
+* Add `WebPreBakeSetup` and `WebPostBakeRestore` to web recipe
+* Update web recipe to use `book_pages` instead of `book`
 * Bake `references` in `data-science`
 * Bake `EOC` in `data-science`
 * Bake `notes` in `data-science`
