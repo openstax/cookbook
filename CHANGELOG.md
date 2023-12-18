@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `BakeOrderHeaders` to web recipe
+
 ## [v2.8.0] - 2023-12-15
 
 * Create `WebPreBakeSetup` and `WebPostBakeRestore` directions
