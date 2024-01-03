@@ -163,6 +163,11 @@ RSpec.describe 'books' do
     expect('hs-physics').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes information systems' do
+    cmd = form_bake_cmd(book: 'information-systems')
+    expect('information-systems').to match_expected_when_baked_with(cmd)
+  end
+
   it 'bakes intellectual property' do
     cmd = form_bake_cmd(book: 'intellectual-property', recipe: 'business-ethics')
     expect('intellectual-property').to match_expected_when_baked_with(cmd)
