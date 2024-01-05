@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `TOC`, `titles` and `appendix` in `information-systems`
 * Initialize `information-systems` recipe
 
 ## [v2.8.0] - 2023-12-15
