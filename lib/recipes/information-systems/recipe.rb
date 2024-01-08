@@ -11,6 +11,7 @@ do |doc, _resources|
 
   BakePreface.v1(book: book)
   BakeUnnumberedFigure.v1(book: book)
+  BakeUnnumberedTables.v1(book: book)
 
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
@@ -22,6 +23,11 @@ do |doc, _resources|
     chapter.figures(only: :figure_to_number?).each do |figure|
       BakeFigure.v1(figure: figure,
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
+
+    chapter.tables('$:not(.unnumbered)').each do |table|
+      BakeNumberedTable.v1(table: table,
+                           number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
   end
 
@@ -39,6 +45,7 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  BakeTableColumns.v1(book: book)
   BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
 end
