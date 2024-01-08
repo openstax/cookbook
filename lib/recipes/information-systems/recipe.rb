@@ -10,6 +10,7 @@ do |doc, _resources|
   book.search('cnx-pi').trash
 
   BakePreface.v1(book: book)
+  BakeUnnumberedFigure.v1(book: book)
 
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
@@ -17,6 +18,11 @@ do |doc, _resources|
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
+
+    chapter.figures(only: :figure_to_number?).each do |figure|
+      BakeFigure.v1(figure: figure,
+                    number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
+    end
   end
 
   # Appendix
