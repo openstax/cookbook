@@ -46,6 +46,10 @@ do |doc, _resources|
   end
 
   BakeTableColumns.v1(book: book)
+  BakeFootnotes.v1(book: book)
   BakeToc.v1(book: book)
+  BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
+  BakeRexWrappers.v1(book: book)
+  BakeLinks.v1(book: book)
 end
