@@ -55,6 +55,8 @@ ASTRONOMY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :astronomy) do |doc,
         append_to: exercises_composite_chapter
       ) do |section|
         RemoveSectionTitle.v1(section: section)
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
       end
     end
     exercises_composite_chapter.exercises.each do |exercise|

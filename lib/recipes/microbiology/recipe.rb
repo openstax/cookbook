@@ -35,13 +35,19 @@ MICROBIOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :microbiology) do
     exercise_section_classes = %w[multiple-choice true-false matching
                                   fill-in-the-blank short-answer critical-thinking]
 
-    exercise_section_classes.each do |klass|
-      MoveExercisesToEOC.v1(
+    exercise_section_classes.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
         metadata_source: metadata,
-        append_to: eoc_wrapper,
-        klass: klass
-      )
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}",
+        append_to: eoc_wrapper
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
+      end
     end
 
     chapter.search(exercise_section_classes.prefix('section.').join(', ')).exercises

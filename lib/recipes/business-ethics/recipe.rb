@@ -67,6 +67,8 @@ do |doc, _resources|
         section_selector: "section.#{section_key}"
       ) do |section|
         RemoveSectionTitle.v1(section: section)
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
       end
     end
 
