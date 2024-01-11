@@ -22,6 +22,11 @@ do |doc, _resources|
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: %w[future-tech global-connect is-ethics is-careers link-to-learning]
+  )
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
 
