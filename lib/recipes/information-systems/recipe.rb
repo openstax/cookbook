@@ -27,6 +27,8 @@ do |doc, _resources|
     classes: %w[future-tech global-connect is-ethics is-careers link-to-learning]
   )
 
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
 
@@ -76,6 +78,17 @@ do |doc, _resources|
         BakeFirstElements.v1(within: question)
       end
     end
+
+    # Answer Key
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
+    )
+
+    eoc_sections.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   # Appendix
@@ -94,7 +107,9 @@ do |doc, _resources|
 
   BakeTableColumns.v1(book: book)
   BakeFootnotes.v1(book: book)
+  BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
