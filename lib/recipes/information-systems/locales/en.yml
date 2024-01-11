@@ -1,5 +1,10 @@
 en:
   placeholder: "hello world"
+  eoc:
+    review-questions: Review Questions
+    check-understanding: Check Your Understanding
+    reflection-questions: Reflection Questions
+    media-questions: Media Questions
   notes:
     future-tech: IS Future Tech
     global-connect: IS Global Connect

@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `eoc` in `information-systems`
 * Bake `notes` in `information-systems`
 * Bake `footnotes`, `rex wrappers`, and `target labels` in `information-systems`
 * Bake `tables` in `information-systems`
