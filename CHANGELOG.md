@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Add `BakeOrderHeaders` to web recipe
+* Bake `eob` in `information-systems`
+
+## [v2.9.0] - 2024-01-12
+
+* Bake `eoc` in `information-systems`
+* Bake `notes` in `information-systems`
+* Bake `footnotes`, `rex wrappers`, and `target labels` in `information-systems`
+* Bake `tables` in `information-systems`
+* Bake `figures` in `information-systems`
+* Bake `TOC`, `titles` and `appendix` in `information-systems`
+* Initialize `information-systems` recipe
 
 ## [v2.8.0] - 2023-12-15
 
