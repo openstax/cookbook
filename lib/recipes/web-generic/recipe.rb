@@ -12,7 +12,9 @@ WEB_RECIPE = Kitchen::BookRecipe.new(book_short_name: :web) do |doc, resources|
 
   # Web directions
   BakeImages.v1(book_pages: book_pages, resources: resources)
-  BakeOrderHeaders.v1(within: book_pages)
+  book_pages.each do |page_or_composite|
+    BakeOrderHeaders.v1(within: page_or_composite)
+  end
 
   # Restore
   WebPostBakeRestore.v1(book_pages: book_pages)
