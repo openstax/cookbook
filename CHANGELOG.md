@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Clean up webview `index` from repetitive links
 * Add `BakeOrderHeaders` to web recipe
 * Bake `eob` in `information-systems`
 
