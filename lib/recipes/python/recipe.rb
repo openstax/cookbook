@@ -26,25 +26,6 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _reso
 
   answer_key = BookAnswerKeyContainer.v1(book: book)
 
-  book.pages('$.preface').each do |page|
-    page.notes('$.learning-questions').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(
-        question: question,
-        number: question.count_in(:page),
-        options: { only_number_solution: false }
-      )
-    end
-
-    answer_key_preface_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: page, metadata_source: metadata, append_to: answer_key,
-      options: { solutions_plural: false, in_preface: true }
-    )
-    Kitchen::Directions::MoveSolutionsFromAutotitledNote.v1(
-      page: page, append_to: answer_key_preface_inner_container,
-      note_class: 'learning-questions', title: nil
-    )
-  end
-
   BakeChapterTitle.v1(book: book)
 
   BakeChapterIntroductions.v2(
