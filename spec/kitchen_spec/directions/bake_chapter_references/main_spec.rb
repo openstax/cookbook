@@ -17,8 +17,8 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences do
 
   it 'calls v3' do
     expect_any_instance_of(Kitchen::Directions::BakeChapterReferences::V3).to receive(:bake)
-      .with(chapter: 'chapter1', metadata_source: 'metadata', uuid_prefix: 'uuid')
-    described_class.v3(chapter: 'chapter1', metadata_source: 'metadata', uuid_prefix: 'uuid')
+      .with(chapter: 'chapter1', metadata_source: 'metadata', append_to: 'append', uuid_prefix: 'uuid')
+    described_class.v3(chapter: 'chapter1', metadata_source: 'metadata', append_to: 'append', uuid_prefix: 'uuid')
   end
 
   it 'calls v4' do

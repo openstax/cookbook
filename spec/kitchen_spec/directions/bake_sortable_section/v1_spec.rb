@@ -2,12 +2,12 @@
 
 require 'spec_helper'
 
-RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
+RSpec.describe Kitchen::Directions::BakeSortableSection::V1 do
 
   before do
     stub_locales({
       'eoc': {
-        'references': 'References'
+        'suggested-reading': 'Suggested Reading'
       }
     })
   end
@@ -15,7 +15,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
   let(:chapter) do
     chapter_element(
       <<~HTML
-        <section class='references'>
+        <section class='suggested-reading'>
           <p>
             ZzZ
           </p>
@@ -33,7 +33,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
   let(:chapter_with_pl_diacritics) do
     chapter_element(
       <<~HTML
-        <section class='references'>
+        <section class='suggested-reading'>
           <p>
             ZzZ
           </p>
@@ -72,7 +72,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
         HTML
       )
       expect(
-        described_class.new.bake(chapter: chapter, metadata_source: metadata)
+        described_class.new.bake(chapter: chapter, metadata_source: metadata, klass: 'suggested-reading')
       ).to match_snapshot_auto
     end
   end
@@ -80,7 +80,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
   context 'when append_to is not nil' do
     it 'works' do
       expect(
-        described_class.new.bake(chapter: chapter, metadata_source: metadata_element, append_to: append_to)
+        described_class.new.bake(chapter: chapter, metadata_source: metadata_element, klass: 'suggested-reading', append_to: append_to)
       ).to match_snapshot_auto
     end
   end
@@ -90,7 +90,7 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
       with_locale(:pl) do
         stub_locales({
           'eoc': {
-            'references': 'Bibliografia'
+            'suggested-reading': 'Sugerowana lektura'
           }
         })
         metadata = metadata_element.append(child:
@@ -99,26 +99,26 @@ RSpec.describe Kitchen::Directions::BakeChapterReferences::V3 do
           HTML
         )
         expect(
-          described_class.new.bake(chapter: chapter_with_pl_diacritics, metadata_source: metadata)
+          described_class.new.bake(chapter: chapter_with_pl_diacritics, metadata_source: metadata, klass: 'suggested-reading')
         ).to match_snapshot_auto
       end
     end
   end
 
-  context 'when no references are found' do
-    let(:chapter_without_references) do
+  context 'when no sortable section is found' do
+    let(:chapter_without_sortable_section) do
       book_containing(html: one_chapter_with_one_page_containing(
-        '<div>this chapter doesn\'t have references</div>'
+        '<div>this chapter doesn\'t have sortable section</div>'
       )).chapters.first
     end
 
     it 'doesn\'t create an empty wrapper' do
-      described_class.new.bake(chapter: chapter_without_references, metadata_source: metadata_element)
-      expect(chapter_without_references).to match_normalized_html(
+      described_class.new.bake(chapter: chapter_without_sortable_section, metadata_source: metadata_element, klass: 'suggested-reading')
+      expect(chapter_without_sortable_section).to match_normalized_html(
         <<~HTML
           <div data-type="chapter">
             <div data-type="page" id="testidOne">
-              <div>this chapter doesn't have references</div>
+              <div>this chapter doesn't have sortable section</div>
             </div>
           </div>
         HTML

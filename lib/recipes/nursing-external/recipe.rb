@@ -49,19 +49,21 @@ do |doc, _resources|
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    sections_with_exercises = %w[review-questions suggested-reading]
-
-    sections_with_exercises.each do |eoc_section|
-      MoveCustomSectionToEocContainer.v1(
-        chapter: chapter,
-        metadata_source: metadata,
-        container_key: eoc_section,
-        uuid_key: ".#{eoc_section}",
-        section_selector: "section.#{eoc_section}"
-      ) do |section|
-        RemoveSectionTitle.v1(section: section)
-      end
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'review-questions',
+      uuid_key: '.review-questions',
+      section_selector: 'section.review-questions'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
     end
+
+    BakeSortableSection.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      klass: 'suggested-reading'
+    )
 
     chapter.search('section.review-questions').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(
