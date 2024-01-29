@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Create `BakeSortableSection` direction
+* Remove preface exercises from `python`
 * Add `BakeOrderHeaders` to web recipe
 * Bake `eob` in `information-systems`
 
