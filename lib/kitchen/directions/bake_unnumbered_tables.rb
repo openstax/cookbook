@@ -4,7 +4,7 @@ module Kitchen
   module Directions
     module BakeUnnumberedTables
       def self.v1(book:)
-        book.tables('$:not(.unnumbered) > .hljs-ln, .unnumbered').each do |table|
+        book.tables('$:not(.unnumbered) > .hljs-ln, $:not([data-type=code]) > .hljs-ln, .unnumbered').each do |table|
           table.wrap(%(<div class="os-table">))
           table.remove_attribute('summary')
           table.parent.add_class('os-unstyled-container') if table.unstyled?
