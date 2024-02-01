@@ -19,10 +19,11 @@ module Kitchen
           klass: klass)
       end
 
-      def self.v3(chapter:, metadata_source:, uuid_prefix: '.')
+      def self.v3(chapter:, metadata_source:, append_to: nil, uuid_prefix: '.')
         V3.new.bake(
           chapter: chapter,
           metadata_source: metadata_source,
+          append_to: append_to,
           uuid_prefix: uuid_prefix)
       end
 
