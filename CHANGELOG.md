@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `eoc` sections in `lifespan-development`
 * Change title for `single-casestudy` note from `nursing-external`
 * Create `BakeSortableSection` direction
 
