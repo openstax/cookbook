@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [v2.11.0] - 2024-02-09
 * Change title for `single-casestudy` note from `nursing-external`
 * Create `BakeSortableSection` direction
 
