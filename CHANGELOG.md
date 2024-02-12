@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove `what-heard` note from `lifespan-development`
 * Change `eoc` sections in `lifespan-development`
 
 ## [v2.11.0] - 2024-02-09
