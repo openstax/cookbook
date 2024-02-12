@@ -4,11 +4,6 @@ LIFESPAN_DEVELOPMENT_RECIPE = Kitchen::BookRecipe.new(book_short_name: :lifespan
 do |doc, _resources|
   include Kitchen::Directions
 
-  # Set overrides
-  doc.selectors.override(
-    reference: 'section.references'
-  )
-
   book = doc.book
 
   book.search('cnx-pi').trash
@@ -46,7 +41,7 @@ do |doc, _resources|
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    sections_with_module_links = %w[summary references]
+    sections_with_module_links = %w[summary]
 
     sections_with_module_links.each do |eoc_section|
       MoveCustomSectionToEocContainer.v1(
@@ -62,8 +57,8 @@ do |doc, _resources|
       end
     end
 
-    sections_with_exercises = %w[review-questions check-understanding reflection-questions
-                                 media-questions thought-provokers case-study]
+    sections_with_exercises = %w[review-questions check-understanding
+                                 personal-application essay-questions]
 
     sections_with_exercises.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
