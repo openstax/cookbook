@@ -12,7 +12,7 @@ RSpec.describe Kitchen::Directions::BakeOrderHeaders do
             <h6>Subtitle</h6>
             <p>a paragraph</p>
           </div>
-          <h3>wow another header</h3>
+          <h3 data-type="document-title">wow another header</h3>
           <h5>subheader also</h5>
           <div><h6>subtitle subtitle</h6><p>paragraph</p>
             <h6>here we see a subtitle</h6>
