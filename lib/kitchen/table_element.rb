@@ -172,14 +172,6 @@ module Kitchen
       true
     end
 
-    # Returns true if table has 'unnumbered' class or is from code with line numbering
-    #
-    # @return [Boolean]
-
-    def unnumbered_table_to_bake?
-      unnumbered? || hljs_ln_table?
-    end
-
     # Returns an element for the table caption, if present
     #
     # @return [Element, nil]
