@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `hljs-ln` table as unnumbered
 * Remove `what-heard` note from `lifespan-development`
 * Change `eoc` sections in `lifespan-development`
 

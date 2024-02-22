@@ -43,7 +43,7 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _reso
                     number: "#{chapter.count_in(:book)}.#{figure.count_in(:chapter)}")
     end
 
-    chapter.tables('$:not(.unnumbered)').each do |table|
+    chapter.tables(only: :table_to_number?).each do |table|
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end

@@ -92,6 +92,35 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
     )
   end
 
+  let(:book_with_hljs_ln_table) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <pre data-type="code" class="python line-numbering" data-lang="python">
+            <table class="hljs-ln">
+              <tr>
+                <td class="hljs-ln-line hljs-ln-numbers" data-line-number="1">
+                  <div class="hljs-ln-n" data-line-number="1">1</div>
+                </td>
+                <td class="hljs-ln-line hljs-ln-code" data-line-number="1">
+                  <span class="hljs-comment"># Setup a list of numbers</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="hljs-ln-line hljs-ln-numbers" data-line-number="2">
+                  <div class="hljs-ln-n" data-line-number="2">2</div>
+                </td>
+                <td class="hljs-ln-line hljs-ln-code" data-line-number="2">
+                  num_list = [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+                </td>
+              </tr>
+            </table>
+          </pre>
+        HTML
+      )
+    )
+  end
+
   it 'bakes unstyled table' do
     described_class.v1(book: book1)
     expect(
@@ -134,6 +163,13 @@ RSpec.describe Kitchen::Directions::BakeUnnumberedTables do
     described_class.v1(book: book_with_top_titled_table)
     expect(
       book_with_top_titled_table.body.children.to_s
+    ).to match_snapshot_auto
+  end
+
+  it 'bakes hljs ln table' do
+    described_class.v1(book: book_with_hljs_ln_table)
+    expect(
+      book_with_hljs_ln_table.body.children.to_s
     ).to match_snapshot_auto
   end
 end

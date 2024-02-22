@@ -4,7 +4,7 @@ module Kitchen
   module Directions
     module BakeUnnumberedTables
       def self.v1(book:)
-        book.tables('$.unnumbered').each do |table|
+        book.tables(only: :unnumbered_table_to_bake?).each do |table|
           table.wrap(%(<div class="os-table">))
           table.remove_attribute('summary')
           table.parent.add_class('os-unstyled-container') if table.unstyled?
