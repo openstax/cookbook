@@ -16,6 +16,10 @@ module Kitchen
         end
         # using the map, promote headers in place
         within.search('h1,h2,h3,h4,h5,h6').each do |header|
+          if header_map[header.name] == 'h2' && header['data-type'] == 'document-title'
+            header['data-rex-keep'] = true
+            # play nice with https://github.com/openstax/rex-web/blob/main/src/app/content/components/Page/contentDOMTransformations.ts#L39
+          end
           header.name = header_map[header.name]
         end
       end
