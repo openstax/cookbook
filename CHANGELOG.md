@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.12.0] - 2024-02-23
+
 * Exclude `hljs-ln` tables from `BakeNumberedTable`
 * Add `data-rex-keep` class to promoted webview headers in `BakeOrderHeaders`
 * Remove `what-heard` note from `lifespan-development`
