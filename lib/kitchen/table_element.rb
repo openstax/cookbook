@@ -153,6 +153,25 @@ module Kitchen
       has_class?('no-cellborder')
     end
 
+    # Returns true if the table is from code with line numbering
+    #
+    # @return [Boolean]
+    #
+    def hljs_ln_table?
+      has_class?('hljs-ln')
+    end
+
+    # Returns true unless the table is from code with line numbering or
+    # has the 'unnumbered' class
+    #
+    # @return [Boolean]
+
+    def table_to_number?
+      return false if hljs_ln_table? || unnumbered?
+
+      true
+    end
+
     # Returns an element for the table caption, if present
     #
     # @return [Element, nil]
