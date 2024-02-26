@@ -59,8 +59,7 @@ do |doc, _resources|
       section.prepend(child: title)
     end
 
-    eoc_sections = %w[chapter-review critical-thinking
-                      chapter-problems quantitative-problems]
+    eoc_sections = %w[chapter-review critical-thinking quantitative-problems]
 
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
@@ -80,11 +79,6 @@ do |doc, _resources|
     end
 
     chapter.search('section.critical-thinking').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-      BakeFirstElements.v1(within: question)
-    end
-
-    chapter.search('section.chapter-problems').injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
       BakeFirstElements.v1(within: question)
     end
