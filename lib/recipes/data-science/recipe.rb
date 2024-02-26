@@ -48,7 +48,19 @@ do |doc, _resources|
     # EOC
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    eoc_sections = %w[group-project chapter-problems]
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'group-project',
+      uuid_key: '.group-project',
+      section_selector: 'section.group-project'
+    ) do |section|
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
+    end
+
+    eoc_sections = %w[chapter-review critical-thinking
+                      chapter-problems quantitative-problems]
 
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
@@ -58,15 +70,28 @@ do |doc, _resources|
         uuid_key: ".#{section_key}",
         section_selector: "section.#{section_key}"
       ) do |section|
-        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-        section.prepend(child: title)
+        RemoveSectionTitle.v1(section: section)
       end
     end
 
-    chapter.composite_pages.search('section.chapter-problems').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(
-        question: question, number: question.count_in(:composite_page)
-      )
+    chapter.search('section.chapter-review').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+
+    chapter.search('section.critical-thinking').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+
+    chapter.search('section.chapter-problems').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+
+    chapter.search('section.quantitative-problems').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
     end
   end
 

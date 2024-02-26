@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `eoc` sections in `data-science`
+
 ## [v2.12.0] - 2024-02-23
 
 * Exclude `hljs-ln` tables from `BakeNumberedTable`
