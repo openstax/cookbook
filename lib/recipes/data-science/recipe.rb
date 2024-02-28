@@ -25,6 +25,8 @@ do |doc, _resources|
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
@@ -87,6 +89,23 @@ do |doc, _resources|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
       BakeFirstElements.v1(within: question)
     end
+
+    # Answer Key
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      append_to: answer_key
+    )
+
+    eoc_sections.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
+  end
+
+  book.search('div[data-type="question-solution"]').each do |solution|
+    BakeFirstElements.v1(within: solution)
   end
 
   # Appendix
@@ -108,6 +127,7 @@ do |doc, _resources|
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
