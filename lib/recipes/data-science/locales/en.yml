@@ -1,7 +1,9 @@
 en:
   eoc:
     group-project: Group Project
-    chapter-problems: Chapter Problems and Data Sets
+    chapter-review: Chapter Review
+    critical-thinking: Critical Thinking
+    quantitative-problems: Quantitative Problems
   notes:
     exploring-further: Exploring Further
     python-feature: Python Feature
