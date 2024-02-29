@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change title of `data-science` note: Python Feature -> Python Code
 * Bake `answer-key` in `data-science`
 * Change `eoc` sections in `data-science`
 
