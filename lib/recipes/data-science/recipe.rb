@@ -25,6 +25,8 @@ do |doc, _resources|
   BakeChapterTitle.v1(book: book)
   BakeChapterIntroductions.v1(book: book)
 
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
@@ -48,7 +50,18 @@ do |doc, _resources|
     # EOC
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    eoc_sections = %w[group-project chapter-problems]
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'group-project',
+      uuid_key: '.group-project',
+      section_selector: 'section.group-project'
+    ) do |section|
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
+    end
+
+    eoc_sections = %w[chapter-review critical-thinking quantitative-problems]
 
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
@@ -58,16 +71,43 @@ do |doc, _resources|
         uuid_key: ".#{section_key}",
         section_selector: "section.#{section_key}"
       ) do |section|
-        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-        section.prepend(child: title)
+        RemoveSectionTitle.v1(section: section)
       end
     end
 
-    chapter.composite_pages.search('section.chapter-problems').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(
-        question: question, number: question.count_in(:composite_page)
+    chapter.search('section.chapter-review').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+
+    chapter.search('section.critical-thinking').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+
+    chapter.search('section.quantitative-problems').injected_questions.each do |question|
+      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeFirstElements.v1(within: question)
+    end
+
+    BakeChapterReferences.v3(chapter: chapter, metadata_source: metadata)
+
+    # Answer Key
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      append_to: answer_key
+    )
+
+    eoc_sections.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
       )
     end
+  end
+
+  book.search('div[data-type="question-solution"]').each do |solution|
+    BakeFirstElements.v1(within: solution)
   end
 
   # Appendix
@@ -84,11 +124,11 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeReferences.v2(book: book, metadata_source: metadata)
   BakeEquations.v1(book: book)
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeCompositePages.v1(book: book)
+  BakeCompositeChapters.v1(book: book)
   BakeToc.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
