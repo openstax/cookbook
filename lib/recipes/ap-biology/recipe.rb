@@ -44,8 +44,10 @@ AP_BIOLOGY_RECIPE = Kitchen::BookRecipe.new(book_short_name: :ap_bio) do |doc, _
     exercise.problem.wrap_children(class: 'os-problem-container')
   end
   # Injected questions in notes should be treated as unnumbered questions
+  # and have their required contexts removed
   book.notes.injected_questions.each do |question|
     question.wrap_children(class: 'os-problem-container')
+    question.search('div[data-type="exercise-context"]')&.cut
   end
 
   book.chapters.each do |chapter|

@@ -90,6 +90,8 @@ do |doc, _resources|
       BakeFirstElements.v1(within: question)
     end
 
+    BakeChapterReferences.v3(chapter: chapter, metadata_source: metadata)
+
     # Answer Key
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
       chapter: chapter,
@@ -122,7 +124,6 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  BakeReferences.v2(book: book, metadata_source: metadata)
   BakeEquations.v1(book: book)
   BakeIndex.v1(book: book)
   BakeFootnotes.v1(book: book)
