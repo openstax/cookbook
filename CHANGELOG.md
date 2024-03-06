@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Remove `exercise-context` from `ap-biology` exercises in notes
 * Move `references` from EOB to EOC in `data-science`
 * Bake `answer-key` in `data-science`
 * Change `eoc` sections in `data-science`
