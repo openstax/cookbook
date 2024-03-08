@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.13.0] - 2024-03-08
+
 * Change title of `data-science` note: Python Feature -> Python Code
 * Remove `exercise-context` from `ap-biology` exercises in notes
 * Move `references` from EOB to EOC in `data-science`
