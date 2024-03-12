@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `BakeExerciseWithTitle` direction for `webview`
+
 ## [v2.13.0] - 2024-03-08
 
 * Change title of `data-science` note: Python Feature -> Python Code
