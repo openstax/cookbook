@@ -19,7 +19,7 @@ PYTHON_RECIPE = Kitchen::BookRecipe.new(book_short_name: :python) do |doc, _reso
     BakeInjectedExercise.v1(exercise: exercise)
   end
 
-  BakeHighlightedCode.v1(book: book, languages: ['python'])
+  #BakeHighlightedCode.v1(book: book, languages: ['python'])
 
   notes = %w[guided-slides learning-questions practice-program]
   BakeAutotitledNotes.v1(book: book, classes: notes, options: { bake_exercises: false })
