@@ -84,34 +84,16 @@ do |doc, _resources|
     BakeChapterReferences.v3(chapter: chapter, metadata_source: metadata)
 
     # Exercises
-    chapter.search('section.review-questions').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-      BakeFirstElements.v1(within: question)
-    end
-
-    chapter.search('section.check-understanding').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-      BakeFirstElements.v1(within: question)
-    end
-
-    chapter.search('section.critical-thinking').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-      BakeFirstElements.v1(within: question)
-    end
-
-    chapter.search('section.competency-based').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-      BakeFirstElements.v1(within: question)
-    end
-
-    chapter.search('section.reflection-questions').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-      BakeFirstElements.v1(within: question)
-    end
-
-    chapter.search('section.what-nurses-do').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
-      BakeFirstElements.v1(within: question)
+    exercise_sections_or_notes = %w[
+      section.review-questions section.check-understanding  section.critical-thinking
+      section.competency-based section.reflection-questions section.what-nurses-do
+      div[data-type="note"].unfolding-casestudy
+    ]
+    exercise_sections_or_notes.each do |selector|
+      chapter.search(selector).injected_questions.each do |question|
+        BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+        BakeFirstElements.v1(within: question)
+      end
     end
 
     # Answer Key
@@ -120,6 +102,8 @@ do |doc, _resources|
       metadata_source: metadata,
       append_to: answer_key
     )
+
+    MoveSolutionsFromNumberedNote.v1(chapter: chapter, append_to: answer_key_inner_container, note_class: 'unfolding-casestudy')
 
     exercises = %w[review-questions check-understanding
                    reflection-questions critical-thinking
