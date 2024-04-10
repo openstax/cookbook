@@ -85,7 +85,7 @@ do |doc, _resources|
 
     # Exercises
     exercise_sections_or_notes = %w[
-      section.review-questions section.check-understanding  section.critical-thinking
+      section.review-questions section.check-understanding section.critical-thinking
       section.competency-based section.reflection-questions section.what-nurses-do
       div[data-type="note"].unfolding-casestudy
     ]
@@ -103,7 +103,10 @@ do |doc, _resources|
       append_to: answer_key
     )
 
-    MoveSolutionsFromNumberedNote.v1(chapter: chapter, append_to: answer_key_inner_container, note_class: 'unfolding-casestudy')
+    MoveSolutionsFromNumberedNote.v1(
+      chapter: chapter, append_to: answer_key_inner_container,
+      note_class: 'unfolding-casestudy'
+    )
 
     exercises = %w[review-questions check-understanding
                    reflection-questions critical-thinking
