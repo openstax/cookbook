@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Change `note titles` in `information systems`
+
 ## [v2.14.0] - 2024-03-22
 
 * Create `BakeExerciseWithTitle` direction for `webview`
