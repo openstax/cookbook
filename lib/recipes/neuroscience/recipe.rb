@@ -36,6 +36,8 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
     end
 
     # EOC
+    BakeChapterGlossary.v2(chapter: chapter)
+
     sections_with_module_links = %w[section-summary key-terms references
                                     multiple-choice fillin-blank]
 
