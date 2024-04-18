@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Create `v4` of `introduction` order
+* Add translations for notes titles and eoc sections to `pl-marketing`
 * Create `V2` of `BakeChapterGlossary`
 * Change `note titles` in `information systems`
 * Change EOC sections in `information-systems`
