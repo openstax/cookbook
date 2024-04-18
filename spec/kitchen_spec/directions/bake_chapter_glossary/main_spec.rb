@@ -8,4 +8,9 @@ RSpec.describe Kitchen::Directions::BakeChapterGlossary do
       .with(chapter: 'chapter1', metadata_source: 'metadata', append_to: 'append', uuid_prefix: 'uuid', has_para: false)
     described_class.v1(chapter: 'chapter1', metadata_source: 'metadata', append_to: 'append', uuid_prefix: 'uuid', has_para: false)
   end
+
+  it 'calls v2' do
+    expect_any_instance_of(Kitchen::Directions::BakeChapterGlossary::V2).to receive(:bake).with(chapter: 'chapter1')
+    described_class.v2(chapter: 'chapter1')
+  end
 end

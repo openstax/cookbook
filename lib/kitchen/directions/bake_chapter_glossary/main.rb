@@ -14,6 +14,10 @@ module Kitchen
           has_para: has_para
         )
       end
+
+      def self.v2(chapter:)
+        V2.new.bake(chapter: chapter)
+      end
     end
   end
 end
