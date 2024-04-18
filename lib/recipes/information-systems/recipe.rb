@@ -57,8 +57,7 @@ do |doc, _resources|
       section.prepend(child: title)
     end
 
-    eoc_sections = %w[review-questions check-understanding
-                      reflection-questions media-questions]
+    eoc_sections = %w[review-questions check-understanding application-questions]
 
     eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(

@@ -2,12 +2,11 @@ en:
   placeholder: "hello world"
   eoc:
     review-questions: Review Questions
-    check-understanding: Check Your Understanding
-    reflection-questions: Reflection Questions
-    media-questions: Media Questions
+    check-understanding: Check Your Understanding Questions
+    application-questions: Application Questions
   notes:
-    future-tech: IS Future Tech
-    global-connect: IS Global Connect
-    is-ethics: IS Ethics
-    is-careers: IS Careers
+    future-tech: Future Technology
+    global-connect: Global Connections
+    is-ethics: Ethics in IS
+    is-careers: Careers in IS
     link-to-learning: Link to Learning
