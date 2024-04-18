@@ -1,13 +1,13 @@
 pl:
   notes:
-    marketing-dashboard: Tytuł notatki
-    marketing-practice: Tytuł notatki
-    companies-conscience: Tytuł notatki
-    link-to-learning: Tytuł notatki
+    marketing-dashboard: Analityka marketingowa
+    marketing-practice: Z doświadczenia marketera
+    companies-conscience: Etyczna firma
+    link-to-learning: Sięgnij po więcej
   eoc:
-    knowledge-check: ! '%{number} Tytuł sekcji'
-    chapter-summary: Tytuł sekcji
-    marketing-discussion: Tytuł sekcji
-    critical-thinking: Tytuł sekcji
-    marketing-plan: Tytuł sekcji
-    company-case: Tytuł sekcji
+    knowledge-check: ! '%{number} Sprawdź wiedzę'
+    chapter-summary: Podsumowanie rozdziału
+    marketing-discussion: Marketing w praktyce — przedyskutuj to
+    critical-thinking: Ćwicz myślenie krytyczne
+    marketing-plan: Plan marketingowy — ćwiczenia
+    company-case: A na koniec — studium przypadku
