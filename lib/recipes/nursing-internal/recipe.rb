@@ -157,6 +157,7 @@ do |doc, _resources|
   end
 
   BakeUnitTitle.v1(book: book)
+  BakeTableColumns.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeCompositeChapters.v1(book: book)
