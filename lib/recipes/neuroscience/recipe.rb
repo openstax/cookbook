@@ -20,6 +20,14 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
 
   BakeUnitTitle.v1(book: book)
   BakeChapterTitle.v1(book: book)
+  BakeChapterIntroductions.v2(
+    book: book,
+    options: {
+      strategy: :add_objectives,
+      bake_chapter_outline: true,
+      introduction_order: :v4
+    }
+  )
 
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
@@ -82,7 +90,6 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
 
   BakeUnnumberedTables.v1(book: book)
   BakeTableColumns.v1(book: book)
-  BakeChapterIntroductions.v1(book: book)
   BakeIframes.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeIndex.v1(book: book)
