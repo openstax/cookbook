@@ -131,6 +131,32 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     )
   end
 
+  let(:book_with_meet_author) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <h1 data-type="document-title">Chapter 1 Title</h1>
+          <div class="introduction" data-type="page" id="testid1">
+            <div data-type="document-title">Introduction</div>
+            <figure class="splash">
+              <div data-type="title">Blood Pressure</div>
+              <figcaption>A proficiency in anatomy and physiology... (credit: Bryan Mason/flickr)</figcaption>
+              <span data-type="media" data-alt="This photo shows a nurse taking a woman’s...">
+              <img src="ccc4ed14-6c87-408b-9934-7a0d279d853a/100_Blood_Pressure.jpg" data-media-type="image/jpg" alt="This photo shows a nurse taking..." />
+              </span>
+            </figure>
+            <div data-type="note" class="meet-author">
+              <div data-type="title">Understanding the Marketplace</div>
+              <p>Welcome to Part II of Principles of Marketing...</p>
+            </div>
+            <p id="123">Though you may approach a course in anatomy and physiology...</p>
+            <p id="123">This chapter begins with an overview of anatomy and...</p>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   let(:book_with_intro_module_title_children) do
     book_containing(html:
       <<~HTML
@@ -210,6 +236,16 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v3 }
       )
       expect(book_with_unit_opener.body).to match_snapshot_auto
+    end
+  end
+
+  context 'when v2 is called on book with meet author note' do
+    it 'bakes' do
+      described_class.v2(
+        book: book_with_meet_author,
+        options: { strategy: :default, bake_chapter_outline: true, introduction_order: :v4 }
+      )
+      expect(book_with_meet_author.body).to match_snapshot_auto
     end
   end
 

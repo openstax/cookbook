@@ -57,6 +57,12 @@ module Kitchen::Directions::BakeChapterIntroductions
           chapter_intro_html: chapter_intro_html,
           title: title
         )
+      when :v4
+        v4_introduction_order(
+          introduction_page: introduction_page,
+          chapter_intro_html: chapter_intro_html,
+          title: title
+        )
       end
     end
 
@@ -111,6 +117,27 @@ module Kitchen::Directions::BakeChapterIntroductions
           <div class="intro-body">
             #{unit_opener_note.paste}
             #{chapter_intro_html}
+            <div class="intro-text">
+              #{title.paste}
+              #{intro_content.paste}
+            </div>
+          </div>
+        HTML
+      )
+    end
+
+    def v4_introduction_order(introduction_page:, chapter_intro_html:, title:)
+      intro_content = introduction_page.search(
+        "> :not([data-type='metadata']):not(.splash):not(.has-splash):not(.meet-author)"
+      ).cut
+
+      meet_author_note = introduction_page.search('[data-type="note"].meet-author').cut
+
+      introduction_page.append(child:
+        <<~HTML
+          <div class="intro-body">
+            #{chapter_intro_html}
+            #{meet_author_note.paste}
             <div class="intro-text">
               #{title.paste}
               #{intro_content.paste}

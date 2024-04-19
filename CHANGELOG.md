@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create `v4` of `introduction` order
 * Bake `unfolding-casestudy` note exercises in `nursing-internal`
 * Add translations for notes titles and eoc sections to `pl-marketing`
 * Create `V2` of `BakeChapterGlossary`
