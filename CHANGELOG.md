@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `injected exercise` with more then one solution
+
 ## [v2.15.0] - 2024-04-19
 
 * Bake `TableColumns` in `nursing-internal`

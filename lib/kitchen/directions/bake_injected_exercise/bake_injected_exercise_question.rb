@@ -101,8 +101,10 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       )
 
       # Bake solution
-      solution = question.solution
-      return unless solution
+      solutions_count = question.solutions.count
+      return unless solutions_count != 0
+
+      question.add_class('os-hasSolution')
 
       solution_number = if options[:problem_with_prefix]
                           <<~HTML
@@ -117,13 +119,42 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
                           HTML
                         end
 
-      question.add_class('os-hasSolution')
-      solution.id = "#{id}-solution"
-      solution.replace_children(with:
-        <<~HTML
-          #{solution_number}<div class="os-solution-container">#{solution.children}</div>
-        HTML
-      )
+      if solutions_count == 1
+        solution = question.solution
+        solution.id = "#{id}-solution"
+        solution.replace_children(with:
+          <<~HTML
+            #{solution_number}<div class="os-solution-container">#{solution.children}</div>
+          HTML
+        )
+      elsif solutions_count > 1
+        solutions_clipboard = Kitchen::Clipboard.new
+
+        question.solutions.each do |question_solution|
+          partial_solution =
+            <<~HTML
+              <div class="os-partial-solution">#{question_solution.children}</div>
+            HTML
+
+          question_solution.replace_children(with: partial_solution)
+
+          question.search('.os-partial-solution').first.cut(to: solutions_clipboard)
+
+          question_solution.trash
+        end
+
+        question.append(child:
+          <<~HTML
+            <div data-type='question-solution' id='#{id}-solution'>
+              #{solution_number}
+              <div class="os-solution-container">
+                #{solutions_clipboard.paste}
+              </div>
+            </div>
+          HTML
+        )
+      end
+
       question.search('div[data-type="answer-feedback"]').each(&:trash)
     end
   end
