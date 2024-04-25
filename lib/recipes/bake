@@ -18,6 +18,7 @@ book_recipes = \
   case opts[:recipe]
   when 'dummy' then [DUMMY_RECIPE]
   when 'accounting' then [ACCOUNTING_RECIPE]
+  when 'additive-manufacturing' then [ADDITIVE_MANUFACTURING_RECIPE]
   when 'american-government' then [AMERICAN_GOVERNMENT_RECIPE]
   when 'anatomy' then [ANATOMY_RECIPE]
   when 'anthropology' then [ANTHROPOLOGY_RECIPE]
