@@ -1,8 +1,6 @@
 codecov:
   require_ci_to_pass: no
 
-token: 162e931b-e4e7-4084-a9d6-276b53812823
-
 coverage:
   precision: 2
   round: down
