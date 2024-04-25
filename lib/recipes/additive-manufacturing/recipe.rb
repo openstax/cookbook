@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-ADDITIVE_MANUFACTURING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |doc, _resources|
+ADDITIVE_MANUFACTURING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :addman) \
+do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
