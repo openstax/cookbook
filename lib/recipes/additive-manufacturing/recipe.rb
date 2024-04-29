@@ -1,12 +1,7 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-# ARCHIVED. NO LONGER IN PRODUCTION
-
-require_relative '../recipes_helper'
-
-recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |doc|
+ADDITIVE_MANUFACTURING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :addman) \
+do |doc, _resources|
   include Kitchen::Directions
 
   book = doc.book
@@ -70,22 +65,13 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :additive_manufacturing) do |d
     )
   end
 
-  BakeFootnotes.v1(book: book)
-  BakeIndex.v1(book: book)
+  # TODO: Footnotes, Index, and ToC baking turned off until there's content
+
+  # BakeFootnotes.v1(book: book)
+  # BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  BakeToc.v1(book: book)
+  # BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
-end
-
-puts Kitchen::Oven.bake(
-  input_file: opts[:input],
-  recipes: [recipe, VALIDATE_OUTPUT],
-  output_file: opts[:output]
-)
