@@ -19,7 +19,10 @@ do |doc, _resources|
 
   AddInjectedExerciseId.v1(book: book)
   book.injected_exercises.each do |exercise|
-    BakeInjectedExercise.v1(exercise: exercise)
+    BakeInjectedExercise.v1(
+      exercise: exercise,
+      options: { alphabetical_multiparts: true, list_type: 'upper-alpha' }
+      )
   end
 
   BakeChapterTitle.v1(book: book)
