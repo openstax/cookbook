@@ -21,7 +21,7 @@ do |doc, _resources|
   book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(
       exercise: exercise,
-      options: { alphabetical_multiparts: true, list_type: 'upper-alpha' }
+      options: { alphabetical_multiparts: true, list_type: 'lower-alpha' }
       )
   end
 
