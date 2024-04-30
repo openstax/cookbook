@@ -101,59 +101,12 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       )
 
       # Bake solution
-      solutions_count = question.solutions.count
-      return unless solutions_count != 0
-
-      question.add_class('os-hasSolution')
-
-      solution_number = if options[:problem_with_prefix]
-                          <<~HTML
-                            <a class="os-prefix" href='##{id}'>
-                              <span class="os-label">#{I18n.t('problem')}</span>
-                              <span class="os-number">#{number}</span>
-                            </a>
-                          HTML
-                        else
-                          <<~HTML
-                            <a class='os-number' href='##{id}'>#{number}</a><span class='os-divider'>. </span>
-                          HTML
-                        end
-
-      if solutions_count == 1
-        solution = question.solution
-        solution.id = "#{id}-solution"
-        solution.replace_children(with:
-          <<~HTML
-            #{solution_number}<div class="os-solution-container">#{solution.children}</div>
-          HTML
-        )
-      elsif solutions_count > 1
-        solutions_clipboard = Kitchen::Clipboard.new
-
-        question.solutions.each do |question_solution|
-          partial_solution =
-            <<~HTML
-              <div class="os-partial-solution">#{question_solution.children}</div>
-            HTML
-
-          question_solution.replace_children(with: partial_solution)
-
-          question.search('.os-partial-solution').first.cut(to: solutions_clipboard)
-
-          question_solution.trash
-        end
-
-        question.append(child:
-          <<~HTML
-            <div data-type='question-solution' id='#{id}-solution'>
-              #{solution_number}
-              <div class="os-solution-container">
-                #{solutions_clipboard.paste}
-              </div>
-            </div>
-          HTML
-        )
-      end
+      Kitchen::Directions::BakeInjectedExerciseSolution.v1(
+        question: question,
+        id: id,
+        number: number,
+        options: { problem_with_prefix: options[:problem_with_prefix] }
+      )
 
       question.search('div[data-type="answer-feedback"]').each(&:trash)
     end

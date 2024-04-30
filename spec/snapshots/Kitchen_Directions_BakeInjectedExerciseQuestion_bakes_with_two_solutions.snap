@@ -17,13 +17,11 @@
       <div data-type="question-solution" id="auto_6dd92b44-db43-4254-a4db-45fb02eb773e_1-solution">
   <a class="os-number" href="#auto_6dd92b44-db43-4254-a4db-45fb02eb773e_1">1</a><span class="os-divider">. </span>
 
-  <div class="os-solution-container">
-    <div class="os-partial-solution">
+  <div class="os-solution-container"><div class="os-partial-solution">
           solution 1
         </div><div class="os-partial-solution">
           solution 2
-        </div>
-  </div>
+        </div></div>
 </div>
 </div>
     </div>
