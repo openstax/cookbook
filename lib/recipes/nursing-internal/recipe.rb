@@ -143,6 +143,7 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
+  AnswerKeyCleaner.v1(book: book)
   BakeUnitTitle.v1(book: book)
   BakeTableColumns.v1(book: book)
   BakeIndex.v1(book: book)
