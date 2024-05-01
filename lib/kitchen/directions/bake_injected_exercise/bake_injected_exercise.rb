@@ -36,6 +36,7 @@ module Kitchen::Directions::BakeInjectedExercise
 
         exercise.injected_questions.each_with_index do |question, index|
           question.set(:'data-type', 'alphabetical-question-multipart')
+          id = question.id
 
           problem_letter = if options[:add_brackets]
                              "(#{alphabet[index]})"
@@ -43,12 +44,9 @@ module Kitchen::Directions::BakeInjectedExercise
                              "#{alphabet[index]}."
                            end
 
-          solution = question.solution
-          solution_id = "#{question.id}-solution" if solution.present?
-
           problem_letter_tag = \
-            if solution.present?
-              "<a class='problem-letter' href='##{solution_id}'>#{problem_letter}</a>"
+            if question.solution.present?
+              "<a class='problem-letter' href='##{id}-solution'>#{problem_letter}</a>"
             else
               "<span class='problem-letter'>#{problem_letter}</span>"
             end
@@ -66,17 +64,13 @@ module Kitchen::Directions::BakeInjectedExercise
 
           question&.cut(to: questions_clipboard)
 
-          next unless solution.present?
-
-          solution.replace_children(with:
-            <<~HTML
-              <a class='problem-letter' id='#{solution_id}'>#{problem_letter}</a>
-              <span class='os-divider'> </span>
-              <div class="os-solution-container">#{question.solution&.children}</div>
-            HTML
+          # Bake solutions
+          Kitchen::Directions::BakeInjectedExerciseSolution.v1(
+            question: question,
+            id: id,
+            number: problem_letter,
+            options: { solutions_clipboard: solutions_clipboard }
           )
-          solution.set(:'data-type', 'solution-part')
-          solution.cut(to: solutions_clipboard)
         end
 
         stimulus.set(:'data-type', 'question-stimulus')

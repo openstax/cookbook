@@ -20,11 +20,9 @@
     
   </div>
   <div data-type="question-solution" id="101-wrapper-solution">
-  <div data-type="solution-part"><a class="problem-letter" id="101-solution">(a)</a>
-<span class="os-divider"> </span>
+  <div data-type="solution-part" id="101-solution"><a class="problem-letter" href="#101">(a)</a><span class="os-divider"> </span>
 <div class="os-solution-container">a solution</div>
-</div><div data-type="solution-part"><a class="problem-letter" id="102-solution">(b)</a>
-<span class="os-divider"> </span>
+</div><div data-type="solution-part" id="102-solution"><a class="problem-letter" href="#102">(b)</a><span class="os-divider"> </span>
 <div class="os-solution-container">a solution</div>
 </div>
 </div>

@@ -142,6 +142,30 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
     ).chapters.pages.notes.first
   end
 
+  let(:book_with_exercise_with_two_solutions) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter"><div data-type="page" id="page_6dd92b44-db43-4254-a4db-45fb02eb773e">
+          <section data-depth="1" id="auto_7335a4e5-b65f-438f-9e89-931000468b59_fs-idm265611728" class="review-questions">
+            <h3 data-type="title">Review Questions</h3>
+            <div data-type="injected-exercise" data-injected-from-nickname="singleFR" data-injected-from-version="2" data-injected-from-url="url" data-tags="type:practice all" data-is-vocab="False">
+              <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" data-id="1">
+                <div data-type="question-stimulus">Question 1 stimulus</div>
+                <div data-type="question-stem">Question 1</div>
+                <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="summary">
+                  solution 1
+                </div>
+                <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">
+                  solution 2
+                </div>
+              </div>
+            </div>
+          </section>
+        <div></div>
+      HTML
+    )
+  end
+
   it 'bakes' do
     book_with_injected_section.chapters.pages.injected_questions.each do |question|
       described_class.v1(question: question, number: question.count_in(:page))
@@ -166,6 +190,13 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
       described_class.v1(question: question, number: "1-#{question.count_in(:chapter)}", options: { problem_with_prefix: true })
     end
     expect(book_with_injected_section.search('section').first).to match_snapshot_auto
+  end
+
+  it 'bakes with two solutions' do
+    book_with_exercise_with_two_solutions.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: question.count_in(:page))
+    end
+    expect(book_with_exercise_with_two_solutions.search('section').first).to match_snapshot_auto
   end
 
   context 'when the question-answers list type is not lower alpha' do
