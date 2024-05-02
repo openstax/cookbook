@@ -101,29 +101,13 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       )
 
       # Bake solution
-      solution = question.solution
-      return unless solution
-
-      solution_number = if options[:problem_with_prefix]
-                          <<~HTML
-                            <a class="os-prefix" href='##{id}'>
-                              <span class="os-label">#{I18n.t('problem')}</span>
-                              <span class="os-number">#{number}</span>
-                            </a>
-                          HTML
-                        else
-                          <<~HTML
-                            <a class='os-number' href='##{id}'>#{number}</a><span class='os-divider'>. </span>
-                          HTML
-                        end
-
-      question.add_class('os-hasSolution')
-      solution.id = "#{id}-solution"
-      solution.replace_children(with:
-        <<~HTML
-          #{solution_number}<div class="os-solution-container">#{solution.children}</div>
-        HTML
+      Kitchen::Directions::BakeInjectedExerciseSolution.v1(
+        question: question,
+        id: id,
+        number: number,
+        options: { problem_with_prefix: options[:problem_with_prefix] }
       )
+
       question.search('div[data-type="answer-feedback"]').each(&:trash)
     end
   end
