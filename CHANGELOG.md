@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Remove `chapter headings (when no solutions) in answer key` in `nursing-internal`
+* Bake `injected exercise` with more then one solution
 * Move `additive-manufacturing` out of archived recipes and outline test data
 
 ## [v2.15.0] - 2024-04-19
