@@ -12,9 +12,8 @@ module Kitchen::Directions::AnswerKeyCleaner
       answer_key_chapters = book.search(
         '.os-eob[data-type="composite-chapter"] > [data-type="composite-page"]')
       answer_key_chapters.each do |container|
-        if !(container.contains?('[data-type="solution"]') || container.contains?('[data-type="question-solution"]'))
-        container.trash
-        end
+        container.trash unless (container.contains?('[data-type="solution"]') ||
+          container.contains?('[data-type="question-solution"]'))
       end
     end
   end
