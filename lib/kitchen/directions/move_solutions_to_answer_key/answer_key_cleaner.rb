@@ -13,7 +13,7 @@ module Kitchen::Directions::AnswerKeyCleaner
         '.os-eob[data-type="composite-chapter"] > [data-type="composite-page"]')
       answer_key_chapters.each do |container|
         container.trash unless container.contains?('[data-type="solution"]') ||
-        container.contains?('[data-type="question-solution"]')
+                               container.contains?('[data-type="question-solution"]')
       end
     end
   end
