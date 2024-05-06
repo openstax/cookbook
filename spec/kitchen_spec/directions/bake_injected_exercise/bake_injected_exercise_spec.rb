@@ -94,8 +94,8 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
             </div>
             <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="101">
               <div data-type="question-stem">a question</div>
-              <div data-type="question-solution">a solution</div>
-              <div data-type="question-solution">other solution</div>
+              <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="summary">a solution</div>
+              <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">other solution</div>
             </div>
             <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="102">
               <div data-type="question-stem">a question</div>
