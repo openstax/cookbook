@@ -21,8 +21,12 @@ do |doc, _resources|
   book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(
       exercise: exercise,
-      options: { alphabetical_multiparts: true, list_type: 'lower-alpha' }
-      )
+      options: {
+        alphabetical_multiparts: true,
+        list_type: 'lower-alpha',
+        suppress_summary: true
+      }
+    )
   end
 
   BakeChapterTitle.v1(book: book)
@@ -89,7 +93,11 @@ do |doc, _resources|
     end
 
     chapter.search('section.quantitative-problems').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:chapter),
+        options: { suppress_summary: true }
+      )
       BakeFirstElements.v1(within: question)
     end
 

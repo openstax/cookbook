@@ -199,6 +199,13 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
     expect(book_with_exercise_with_two_solutions.search('section').first).to match_snapshot_auto
   end
 
+  it 'bakes with suppressing_summary' do
+    book_with_exercise_with_two_solutions.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: question.count_in(:page), options: { suppress_summary: true })
+    end
+    expect(book_with_exercise_with_two_solutions.search('section').first).to match_snapshot_auto
+  end
+
   context 'when the question-answers list type is not lower alpha' do
     let(:question_with_all_correct) do
       book_containing(html:

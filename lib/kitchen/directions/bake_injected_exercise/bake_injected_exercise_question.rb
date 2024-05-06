@@ -4,12 +4,14 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
   def self.v1(question:, number:, options: {
     only_number_solution: false,
     add_dot: false,
-    problem_with_prefix: false
+    problem_with_prefix: false,
+    suppress_summary: false
   })
     options.reverse_merge!(
       only_number_solution: false,
       add_dot: false,
-      problem_with_prefix: false
+      problem_with_prefix: false,
+      suppress_summary: false
     )
 
     V1.new.bake(question: question, number: number, options: options)
@@ -105,7 +107,10 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         question: question,
         id: id,
         number: number,
-        options: { problem_with_prefix: options[:problem_with_prefix] }
+        options: {
+          problem_with_prefix: options[:problem_with_prefix],
+          suppress_summary: options[:suppress_summary]
+        }
       )
 
       question.search('div[data-type="answer-feedback"]').each(&:trash)

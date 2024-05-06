@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Suppress `summary solution` in `data-science`
+
 ## [v2.16.0] - 2024-05-03
 
 * Remove `chapter headings (when no solutions) in answer key` in `nursing-internal`

@@ -99,8 +99,8 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
             </div>
             <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="free-response" id="102">
               <div data-type="question-stem">a question</div>
-              <div data-type="question-solution">a solution</div>
-              <div data-type="question-solution">other solution</div>
+              <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="summary">a solution</div>
+              <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">other solution</div>
             </div>
           </div>
         HTML
@@ -189,6 +189,14 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
       described_class.v1(
         exercise: injected_exercise_full_with_multipart_questions_with_many_solutions,
         options: { alphabetical_multiparts: true, list_type: 'lower-alpha', add_brackets: true }
+      )
+      expect(injected_exercise_full_with_multipart_questions_with_many_solutions).to match_snapshot_auto
+    end
+
+    it 'bakes an alphabetical multipart question with suppressing summary' do
+      described_class.v1(
+        exercise: injected_exercise_full_with_multipart_questions_with_many_solutions,
+        options: { alphabetical_multiparts: true, list_type: 'lower-alpha', add_brackets: true, suppress_summary: true }
       )
       expect(injected_exercise_full_with_multipart_questions_with_many_solutions).to match_snapshot_auto
     end
