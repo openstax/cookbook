@@ -3,11 +3,13 @@
 module Kitchen::Directions::BakeInjectedExerciseSolution
   def self.v1(question:, id:, number:, options: {
     problem_with_prefix: false,
-    solutions_clipboard: nil
+    solutions_clipboard: nil,
+    suppress_summary: false
   })
     options.reverse_merge!(
       problem_with_prefix: false,
-      solutions_clipboard: nil
+      solutions_clipboard: nil,
+      suppress_summary: false
     )
 
     V1.new.bake(question: question, id: id, number: number, options: options)
@@ -15,6 +17,12 @@ module Kitchen::Directions::BakeInjectedExerciseSolution
 
   class V1
     def bake(question:, id:, number:, options:)
+      # Suppress summary solution before counting solutions
+      if options[:suppress_summary]
+        question.solutions('$[data-solution-type="summary"]').each(&:trash)
+      end
+
+      # Count solutions
       solutions_count = question.solutions.count
       return unless solutions_count != 0
 
