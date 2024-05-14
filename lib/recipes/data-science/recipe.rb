@@ -48,7 +48,7 @@ do |doc, _resources|
       BakeExample.v1(example: example,
                      number: "#{chapter.count_in(:book)}.#{example.count_in(:chapter)}",
                      title_tag: 'h3',
-                    options: {add_problem_title: true})
+                     options: { add_problem_title: true })
     end
 
     # EOC
