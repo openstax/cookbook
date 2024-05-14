@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Apply `BakeTableColumns` to `data-science`
 * Suppress `summary solution` in `data-science`
 
 ## [v2.16.0] - 2024-05-03
