@@ -4,12 +4,14 @@ module Kitchen::Directions::BakeInjectedExercise
   def self.v1(exercise:, options: {
     alphabetical_multiparts: false,
     list_type: nil,
-    add_brackets: false
+    add_brackets: false,
+    suppress_summary: false
   })
     options.reverse_merge!(
       alphabetical_multiparts: false,
       list_type: nil,
-      add_brackets: false
+      add_brackets: false,
+      suppress_summary: false
     )
     V1.new.bake(exercise: exercise, options: options)
   end
@@ -69,7 +71,10 @@ module Kitchen::Directions::BakeInjectedExercise
             question: question,
             id: id,
             number: problem_letter,
-            options: { solutions_clipboard: solutions_clipboard }
+            options: {
+              solutions_clipboard: solutions_clipboard,
+              suppress_summary: options[:suppress_summary]
+            }
           )
         end
 
