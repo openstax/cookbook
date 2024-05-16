@@ -64,10 +64,7 @@ do |doc, _resources|
       container_key: 'group-project',
       uuid_key: '.group-project',
       section_selector: 'section.group-project'
-    ) do |section|
-      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-      section.prepend(child: title)
-    end
+    )
 
     eoc_sections = %w[chapter-review critical-thinking quantitative-problems]
 
