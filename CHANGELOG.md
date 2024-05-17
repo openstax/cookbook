@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.17.0] - 2024-05-17
+
 * Add Problem title to unnumbered exercises in `data-science`
 * Remove section titles from `group-project` in `data-science`
 * Apply `BakeTableColumns` to `data-science`
