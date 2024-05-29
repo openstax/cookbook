@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix `BakeListsWithPara` to bake nested lists
+
 ## [v2.17.0] - 2024-05-17
 
 * Add Problem title to unnumbered exercises in `data-science`
