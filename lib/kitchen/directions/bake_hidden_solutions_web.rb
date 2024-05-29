@@ -5,8 +5,10 @@ module Kitchen::Directions
     def self.v1(book_pages:)
       book_pages.exercises('$.unnumbered').each do |exercise|
         # wrap content, add [Show/Hide Solution] element
+        solution = exercise.solutions&.first
+        next unless solution
+
         show_hide_translated = 'Show/Hide Solution' # TODO: I18n.t(:problem) - why is this broken?
-        solution = exercise.solutions.first
         solution[:'aria-label'] = show_hide_translated
         children = solution.element_children.cut
         solution.append(child:
