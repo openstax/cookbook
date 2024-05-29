@@ -11,6 +11,16 @@
       </span>
     </figure>
   </li>
+  <li>
+    <p>blah4</p>
+    <ol>
+      <li>blah5</li>
+      <li>
+        <p>blah6<a href="#aside1" role="doc-noteref">[footnote]</a></p>
+        <aside id="aside1" type="footnote">Footnote content 1</aside>
+      </li>
+    </ol>
+  </li>
 </ol>
 <ul>
   <li>foo1</li>
