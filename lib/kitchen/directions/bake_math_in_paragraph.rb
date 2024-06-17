@@ -7,7 +7,9 @@ module Kitchen
     module BakeMathInParagraph
       def self.v1(book:)
         mathNameSpace =  book.search('p m|math', '//p//math | //p//m')
-        if mathNameSpace
+        if mathNameSpace.nil?
+          #do nothing
+        else
           mathNameSpace.each do |math|
           math.wrap("<span class='os-math-in-para'>")
           end
