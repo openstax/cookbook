@@ -41,20 +41,16 @@ do |doc, _resources|
 
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
 
-    sections_with_module_links = %w[summary]
-
-    sections_with_module_links.each do |eoc_section|
-      MoveCustomSectionToEocContainer.v1(
-        chapter: chapter,
-        metadata_source: metadata,
-        container_key: eoc_section,
-        uuid_key: ".#{eoc_section}",
-        section_selector: "section.#{eoc_section}"
-      ) do |section|
-        RemoveSectionTitle.v1(section: section)
-        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-        section.prepend(child: title)
-      end
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'summary',
+      uuid_key: '.summary',
+      section_selector: 'section.summary'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
     end
 
     sections_with_exercises = %w[review-questions check-understanding
@@ -70,6 +66,18 @@ do |doc, _resources|
       ) do |section|
         RemoveSectionTitle.v1(section: section)
       end
+    end
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'references',
+      uuid_key: '.references',
+      section_selector: 'section.references'
+    ) do |section|
+      RemoveSectionTitle.v1(section: section)
+      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+      section.prepend(child: title)
     end
 
     BakeAllNumberedExerciseTypes.v1(
