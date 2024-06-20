@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix locale typo in `lifespan-development`
 * Bake `references` in `lifespan-development`
 
 ## [v2.18.0] - 2024-06-03
