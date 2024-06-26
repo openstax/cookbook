@@ -111,7 +111,6 @@ do |doc, _resources|
   BakeIframes.v1(book: book)
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
-  BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
