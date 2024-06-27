@@ -87,7 +87,7 @@ do |doc, _resources|
     exercise_sections_or_notes = %w[
       section.review-questions section.check-understanding section.critical-thinking
       section.competency-based section.reflection-questions section.what-nurses-do
-      div[data-type="note"].unfolding-casestudy
+      div[data-type="note"].unfolding-casestudy div[data-type="note"].electronic-hr
     ]
     exercise_sections_or_notes.each do |selector|
       chapter.search(selector).injected_questions.each do |question|
@@ -103,10 +103,14 @@ do |doc, _resources|
       append_to: answer_key
     )
 
-    MoveSolutionsFromNumberedNote.v1(
-      chapter: chapter, append_to: answer_key_inner_container,
-      note_class: 'unfolding-casestudy'
-    )
+    notes = %w[unfolding-casestudy electronic-hr]
+
+    notes.each do |klass|
+      MoveSolutionsFromNumberedNote.v1(
+        chapter: chapter, append_to: answer_key_inner_container,
+        note_class: klass
+      )
+    end
 
     exercises = %w[review-questions check-understanding
                    reflection-questions critical-thinking
