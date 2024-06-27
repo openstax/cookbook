@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Bake `exercises` from `note` in `nursing-internal`
+* Remove `BakeMathInParagraph` from `computer-science`
 * Fix locale typo in `lifespan-development`
 * Bake `references` in `lifespan-development`
 
