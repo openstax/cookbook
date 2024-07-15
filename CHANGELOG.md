@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Uncommented elements needed to build `additive-manufacturing`
+
 ## [v2.19.0] - 2024-06-28
 
 * Bake `exercises` from `note` in `nursing-internal`
