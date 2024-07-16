@@ -65,13 +65,11 @@ do |doc, _resources|
     )
   end
 
-  # TODO: Footnotes, Index, and ToC baking turned off until there's content
-
-  # BakeFootnotes.v1(book: book)
-  # BakeIndex.v1(book: book)
+  BakeFootnotes.v1(book: book)
+  BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeLinkPlaceholders.v1(book: book)
-  # BakeToc.v1(book: book)
+  BakeToc.v1(book: book)
   BakeFolio.v1(book: book)
   BakeLinks.v1(book: book)
 end
