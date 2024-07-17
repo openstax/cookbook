@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake `answer key` in `neuroscience`
+
 ## [v2.20.0] - 2024-07-16
 
 * Uncommented elements needed to build `additive-manufacturing`

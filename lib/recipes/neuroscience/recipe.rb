@@ -29,6 +29,8 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
     }
   )
 
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
     BakeLearningObjectives.v2(chapter: chapter, add_title: false)
@@ -73,6 +75,18 @@ NEUROSCIENCE_RECIPE = Kitchen::BookRecipe.new(book_short_name: :neuroscience) do
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
       BakeFirstElements.v1(within: question)
     end
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
+    )
+
+    Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+      within: chapter, append_to: answer_key_inner_container, section_class: 'multiple-choice'
+    )
+
+    Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+      within: chapter, append_to: answer_key_inner_container, section_class: 'fillin-blank'
+    )
   end
   # Appendix
   book.pages('$.appendix').each do |page|
