@@ -7,8 +7,13 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # without it per:
 # https://github.com/codecov/codecov-ruby/blob/484767f1c3d7992a9d7fedd6dc72d35a80d04f70/lib/codecov.rb#L68-L69
 
+# CODECOV_TOKEN is added to repo settings according to:
+# https://github.com/openstax/cnx-recipes/issues/5516
+# https://docs.codecov.com/docs/adding-the-codecov-token#github-actions
+
 docker run $CI_ENV \
            -e ENABLE_CODECOV=1 -e CI=true \
+           -e CODECOV_TOKEN=${CODECOV_TOKEN} \
            -v $DIR/..:/code \
            -w /code \
            openstax/cookbook.ci:latest \

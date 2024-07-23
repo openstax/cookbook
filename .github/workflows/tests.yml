@@ -20,6 +20,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
       - name: Build docker image and run kitchen specs + codecov within it
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         # See https://docs.codecov.io/docs/testing-with-docker
         run: |
           ./docker/build --ci
