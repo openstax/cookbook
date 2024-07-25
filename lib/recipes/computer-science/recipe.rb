@@ -40,7 +40,6 @@ do |doc, _resources|
   BakeUnclassifiedNotes.v1(book: book)
 
   book.chapters.each do |chapter|
-    BakeLearningObjectives.v2(chapter: chapter, add_title: false)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     # create Chapter Review EOC wrapper
