@@ -68,18 +68,6 @@ do |doc, _resources|
       end
     end
 
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      container_key: 'references',
-      uuid_key: '.references',
-      section_selector: 'section.references'
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
-      section.prepend(child: title)
-    end
-
     BakeAllNumberedExerciseTypes.v1(
       within: chapter.search('div[data-type="composite-page"]')
     )
