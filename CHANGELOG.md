@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.22.0] - 2024-08-12
+* Revert references to EOS in `lifespan-development`
+
 ## [v2.21.0] - 2024-07-26
 
 * Add Codecov secret value in GH settings
