@@ -48,20 +48,20 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       if options[:suppress_summary]
         question.solutions('$[data-solution-type="summary"]').each(&:trash)
       end
-      if letter_answers.present? && !question.solution
-        question.append(child:
-          <<~HTML
-            <div data-type="question-solution">
-              <span class="answer-letters">#{letter_answers.join(', ')}#{'.' if options[:add_dot]}</span>
-            </div>
-          HTML
-        )
-      elsif letter_answers.present?
-        question.solution.prepend(child:
-          <<~HTML.chomp
-            <span class="answer-letters">#{letter_answers.join(', ')}#{'.' if options[:add_dot]}</span>
-          HTML
-        )
+      if letter_answers.present?
+        text_content = "#{letter_answers.join(', ')}#{'.' if options[:add_dot]}"
+        answer_letters_span = "<span class=\"answer-letters\">#{text_content}</span>"
+        if !question.solution
+          question.append(child:
+            <<~HTML
+              <div data-type="question-solution">
+                #{answer_letters_span}
+              </div>
+            HTML
+          )
+        else
+          question.solution.prepend(child: answer_letters_span)
+        end
       end
 
       # Bake question
