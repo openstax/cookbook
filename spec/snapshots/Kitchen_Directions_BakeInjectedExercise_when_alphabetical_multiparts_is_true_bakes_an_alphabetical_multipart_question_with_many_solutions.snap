@@ -22,7 +22,33 @@
     
     
   
+</div><div data-type="alphabetical-question-multipart" data-is-answer-order-important="False" data-formats="multiple-choice" id="103"><div class="os-problem-container">
+  <a class="problem-letter" href="#103-solution">(c)</a>
+  <span class="os-divider"> </span>
+  
+  <div data-type="question-stem">a question</div>
 </div>
+
+    
+    <ol data-type="question-answers" type="a">
+      <li data-type="question-answer" data-correctness="0.0" data-id="668496">
+        <div data-type="answer-content">mean - i'm distractor</div>
+        <div data-type="answer-feedback">choice level feedback</div>
+      </li>
+      <li data-type="question-answer" data-correctness="0.0" data-id="668497">
+        <div data-type="answer-content">median - distractor</div>
+      </li>
+      <li data-type="question-answer" data-correctness="1.0" data-id="668498">
+        <div data-type="answer-content">mode - correct answer</div>
+        <div data-type="answer-feedback">choice level feedback</div>
+      </li>
+      <li data-type="question-answer" data-correctness="0.0" data-id="668499">
+        <div data-type="answer-content">all of the above - distractor</div>
+        <div data-type="answer-feedback">choice level feedback</div>
+      </li>
+    </ol>
+    
+  </div>
   <div data-type="question-solution" id="101-wrapper-solution">
   <div data-type="solution-part" id="101-solution">
   <a class="problem-letter" href="#101">(a)</a><span class="os-divider"> </span>
@@ -32,11 +58,14 @@
   <a class="problem-letter" href="#102">(b)</a><span class="os-divider"> </span>
 
   <div class="os-solution-container"><div class="os-partial-solution">a solution</div><div class="os-partial-solution">other solution</div></div>
+</div><div data-type="solution-part" data-solution-source="collaborator" data-solution-type="detailed" id="103-solution"><a class="problem-letter" href="#103">(c)</a><span class="os-divider"> </span>
+<div class="os-solution-container">other solution</div>
 </div>
 </div>
 
 </div>
 
+  
   
   
   
