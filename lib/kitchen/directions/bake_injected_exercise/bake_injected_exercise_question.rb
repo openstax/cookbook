@@ -52,13 +52,16 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         question.append(child:
           <<~HTML
             <div data-type="question-solution">
-              #{letter_answers.join(', ')}#{'.' if options[:add_dot]}
+              <span class="answer-letters">#{letter_answers.join(', ')}#{'.' if options[:add_dot]}</span>
             </div>
           HTML
         )
       elsif letter_answers.present?
         question.solution.prepend(child:
-          "<span>#{letter_answers.join(', ')}#{'.' if options[:add_dot]}</span>")
+          <<~HTML.chomp
+            <span class="answer-letters">#{letter_answers.join(', ')}#{'.' if options[:add_dot]}</span>
+          HTML
+        )
       end
 
       # Bake question
