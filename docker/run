@@ -2,7 +2,21 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+extra_args=()
+
+# Environment variables we want to send to the container
+env_names=(
+    UPDATE_SNAPSHOTS # rspec will update snapshots if this is set
+)
+
+for env_name in "${env_names[@]}"; do
+    env_value="${!env_name}"
+    if [[ -z "$env_value" ]]; then continue; fi
+    extra_args+=("--env" "$env_name=$env_value")
+done
+
 docker run -it \
+           "${extra_args[@]}" \
            -v $DIR/..:/code \
            -w /code \
            openstax/cookbook:latest \
