@@ -45,6 +45,9 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         end
         letter_answers = question.correct_answer_letters(alphabet)
       end
+      if options[:suppress_summary]
+        question.solutions('$[data-solution-type="summary"]').each(&:trash)
+      end
       if letter_answers.present? && !question.solution
         question.append(child:
           <<~HTML

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 * Change `Multidisplinary` to `Interdisciplinary` in Note/Feature Box Title for `nursing-internal`
 
+* Suppress summary solution for `chapter-review` in `data-science`
+* Suppress summary solution for `critical-thinking` in `data-science`
+* Suppress summary solution in `BakeInjectedExerciseQuestion`
+
 ## [v2.22.0] - 2024-08-12
 * Revert references to EOS in `lifespan-development`
 
