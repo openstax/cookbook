@@ -130,7 +130,7 @@
   <span class="os-number">1-5</span>
 </a>
 <div class="os-solution-container">
-  c, d
+  <span class="answer-letters">c, d</span>
 </div>
 </div>
 </div>
@@ -167,7 +167,7 @@
   <span class="os-label">Problem</span>
   <span class="os-number">1-6</span>
 </a>
-<div class="os-solution-container"><span>b, c</span>
+<div class="os-solution-container"><span class="answer-letters">b, c</span>
           detailed solution for MC
         </div>
 </div>

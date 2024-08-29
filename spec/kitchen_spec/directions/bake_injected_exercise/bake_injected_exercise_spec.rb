@@ -102,6 +102,27 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
               <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="summary">a solution</div>
               <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">other solution</div>
             </div>
+            <div data-type="exercise-question" data-is-answer-order-important="False" data-formats="multiple-choice" id="103">
+              <div data-type="question-stem">a question</div>
+              <ol data-type="question-answers" type="a">
+                <li data-type="question-answer" data-correctness="0.0" data-id="668496">
+                  <div data-type="answer-content">mean - i'm distractor</div>
+                  <div data-type="answer-feedback">choice level feedback</div>
+                </li>
+                <li data-type="question-answer" data-correctness="0.0" data-id="668497">
+                  <div data-type="answer-content">median - distractor</div>
+                </li>
+                <li data-type="question-answer" data-correctness="1.0" data-id="668498">
+                  <div data-type="answer-content">mode - correct answer</div>
+                  <div data-type="answer-feedback">choice level feedback</div>
+                </li>
+                <li data-type="question-answer" data-correctness="0.0" data-id="668499">
+                  <div data-type="answer-content">all of the above - distractor</div>
+                  <div data-type="answer-feedback">choice level feedback</div>
+                </li>
+              </ol>
+              <div data-type="question-solution" data-solution-source="collaborator" data-solution-type="detailed">other solution</div>
+            </div>
           </div>
         HTML
       )
