@@ -45,17 +45,23 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         end
         letter_answers = question.correct_answer_letters(alphabet)
       end
-      if letter_answers.present? && !question.solution
-        question.append(child:
-          <<~HTML
-            <div data-type="question-solution">
-              #{letter_answers.join(', ')}#{'.' if options[:add_dot]}
-            </div>
-          HTML
-        )
-      elsif letter_answers.present?
-        question.solution.prepend(child:
-          "<span>#{letter_answers.join(', ')}#{'.' if options[:add_dot]}</span>")
+      if options[:suppress_summary]
+        question.solutions('$[data-solution-type="summary"]').each(&:trash)
+      end
+      if letter_answers.present?
+        text_content = "#{letter_answers.join(', ')}#{'.' if options[:add_dot]}"
+        answer_letters_span = "<span class=\"answer-letters\">#{text_content}</span>"
+        if !question.solution
+          question.append(child:
+            <<~HTML
+              <div data-type="question-solution">
+                #{answer_letters_span}
+              </div>
+            HTML
+          )
+        else
+          question.solution.prepend(child: answer_letters_span)
+        end
       end
 
       # Bake question

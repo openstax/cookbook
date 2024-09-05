@@ -81,12 +81,20 @@ do |doc, _resources|
     end
 
     chapter.search('section.chapter-review').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:chapter),
+        options: { suppress_summary: true }
+      )
       BakeFirstElements.v1(within: question)
     end
 
     chapter.search('section.critical-thinking').injected_questions.each do |question|
-      BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
+      BakeInjectedExerciseQuestion.v1(
+        question: question,
+        number: question.count_in(:chapter),
+        options: { suppress_summary: true }
+      )
       BakeFirstElements.v1(within: question)
     end
 
