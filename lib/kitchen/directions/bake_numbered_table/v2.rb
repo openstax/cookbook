@@ -17,6 +17,7 @@ module Kitchen::Directions::BakeNumberedTable
         caption_el = table.caption
         caption_el.add_class('os-caption')
         caption_el.name = 'span'
+        caption_el&.children&.first&.add_next_sibling('<span class="os-divider"> </span>')
         caption = caption_el.cut
       end
 
