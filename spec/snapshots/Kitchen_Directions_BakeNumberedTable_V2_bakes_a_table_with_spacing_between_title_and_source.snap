@@ -1,0 +1,22 @@
+<div class="os-table"><table class="some-class" id="tId">
+  
+  <thead>
+    <tr>
+      <th scope="col">A title</th>
+    </tr>
+    <tr>
+      <th scope="col">Another heading cell</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One lonely cell</td>
+    </tr>
+  </tbody>
+</table><div class="os-caption-container">
+  <span class="os-title-label">Table </span>
+  <span class="os-number">S</span>
+  <span class="os-divider"> </span>
+  <span class="os-caption"><span data-type="title">Secret Title</span><span class="os-divider"> </span>(source: Erikson, 1950, 1963)</span>
+</div>
+</div>
