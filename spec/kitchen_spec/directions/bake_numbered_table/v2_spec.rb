@@ -71,9 +71,39 @@ RSpec.describe Kitchen::Directions::BakeNumberedTable::V2 do
     ).tables.first
   end
 
+  let(:table_with_caption_title_and_source) do
+    book_containing(html:
+      one_chapter_with_one_page_containing(
+        <<~HTML
+          <table class="some-class" id="tId">
+            <caption><span data-type='title'>Secret Title</span>(source: Erikson, 1950, 1963)</caption>
+            <thead>
+              <tr>
+                <th>A title</th>
+              </tr>
+              <tr>
+                <th>Another heading cell</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>One lonely cell</td>
+              </tr>
+            </tbody>
+          </table>
+        HTML
+      )
+    ).tables.first
+  end
+
   it 'another way of table captioning' do
     described_class.new.bake(table: table_with_only_caption_title, number: 'S')
     expect(table_with_only_caption_title.document.search('.os-table').first).to match_snapshot_auto
+  end
+
+  it 'bakes a table with spacing between title and source' do
+    described_class.new.bake(table: table_with_caption_title_and_source, number: 'S')
+    expect(table_with_caption_title_and_source.document.search('.os-table').first).to match_snapshot_auto
   end
 
   it 'still works when caption doesn\'t have title' do
