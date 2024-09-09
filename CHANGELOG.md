@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create space between table title and source for lifespan-development
 * Change `Multidisplinary` to `Interdisciplinary` in Note/Feature Box Title for `nursing-internal`
 * Suppress summary solution for `chapter-review` in `data-science`
 * Suppress summary solution for `critical-thinking` in `data-science`
