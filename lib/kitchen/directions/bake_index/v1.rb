@@ -173,6 +173,8 @@ module Kitchen::Directions::BakeIndex
         @index_name = type == 'main' ? 'term' : type
         @index = @indexes[@index_name]
 
+        next if @index.sections.empty?
+
         book.first('body').append(child: render(file: 'v1.xhtml.erb'))
       end
     end

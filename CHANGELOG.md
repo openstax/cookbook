@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix `index` to not generate empty module
+
 ## [v2.23.0] - 2024-09-09
 
 * Create space between table title and source for lifespan-development
