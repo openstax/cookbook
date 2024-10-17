@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Fix `index` to not generate empty module
+* Add `BakeEmbeddedExerciseQuestion` for baking exercise-like things
+* Bake ordered lists as embedded exercise questions in `computer-science`
 
 ## [v2.23.0] - 2024-09-09
 
