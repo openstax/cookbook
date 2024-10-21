@@ -84,7 +84,7 @@ do |doc, _resources|
       BakeInjectedExerciseQuestion.v1(
         question: question,
         number: question.count_in(:chapter),
-        options: { suppress_summary: true }
+        options: { suppress_summary: true, add_dot: true }
       )
       BakeFirstElements.v1(within: question)
     end
