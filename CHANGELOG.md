@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+
+## [v2.24.0] - 2024-10-24
+
 * Fix `index` to not generate empty module
 * Add dots to letter answers in `data-science`
 * Add `BakeEmbeddedExerciseQuestion` for baking exercise-like things
