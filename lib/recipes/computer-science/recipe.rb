@@ -57,6 +57,25 @@ do |doc, _resources|
       title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
       section.prepend(child: title)
     end
+
+    # Convert lab numbered lists to a series of exercise questions
+    lab_item_number = 1
+    chapter.search('section.labs-assessments').each do |lab|
+      ordered_lists = lab.search('> ol')
+      next unless ordered_lists.any?
+
+      ordered_lists.each do |list|
+        list.search('> li').each do |item|
+          item.name = 'span'
+          BakeEmbeddedExerciseQuestion.v1(
+            question: item, number: lab_item_number, append_to: list
+          )
+          lab_item_number += 1
+        end
+        list.name = 'span'
+      end
+    end
+
     eoc_sections = %w[review-questions conceptual-questions practice-exercises
                       problem-set-a problem-set-b thought-provokers labs-assessments]
 
