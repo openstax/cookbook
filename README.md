@@ -504,6 +504,12 @@ To run specs (or something else) from the host:
 $> ./docker/run rspec
 ```
 
+To run a specific spec, reference the line where the test starts:
+
+```bash
+$> ./docker/run rspec spec/recipes_spec/main_spec.rb:116
+```
+
 ### Non-Docker
 
 After checking out the repo, run `bin/setup` to install dependencies.  If you want to install this gem onto your local machine, run `bundle exec rake install`.
