@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
+* Create recipe for Polish Nursing book
 
 ## [v2.24.0] - 2024-10-24
 

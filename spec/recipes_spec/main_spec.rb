@@ -243,6 +243,11 @@ RSpec.describe 'books' do
     expect('pl-microeconomics').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes pl-nursing' do
+    cmd = form_bake_cmd(book: 'pl-nursing')
+    expect('pl-nursing').to match_expected_when_baked_with(cmd)
+  end
+
   it 'bakes pl-psychology' do
     cmd = form_bake_cmd(book: 'pl-psychology')
     expect('pl-psychology').to match_expected_when_baked_with(cmd)
