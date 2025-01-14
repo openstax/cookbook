@@ -24,6 +24,8 @@ do |doc, _resources|
 
   AddInjectedExerciseId.v1(book: book)
 
+  answer_key = BookAnswerKeyContainer.v1(book: book)
+
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
 
@@ -37,10 +39,13 @@ do |doc, _resources|
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
 
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata)
+    BakeChapterGlossary.v2(chapter: chapter)
 
-    eoc_with_exercise = %w[review-questions case-questions free-response]
-    eoc_with_exercise.each do |section_key|
+    eoc_sections = %w[summary
+                      review-questions
+                      free-response
+                      practice]
+    eoc_sections.each do |section_key|
       MoveCustomSectionToEocContainer.v1(
         chapter: chapter,
         metadata_source: metadata,
@@ -52,19 +57,40 @@ do |doc, _resources|
       end
     end
 
-    selectors = 'section.review-questions, section.case-questions, section.free-response'
+    sections_with_module_links = %w[key-terms]
+    sections_with_module_links.each do |eoc_section|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: eoc_section,
+        uuid_key: ".#{eoc_section}",
+        section_selector: "section.#{eoc_section}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
+      end
+    end
+
+    selectors = 'section.review-questions, section.practice, section.free-response'
 
     chapter.composite_pages.search(selectors).injected_questions.each do |question|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
 
-    BakeAllChapterSolutionsTypes.v1(
-      chapter: chapter,
-      within: chapter.search(selectors),
-      metadata_source: metadata
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
     )
+
+    exercises = %w[review-questions practice free-response]
+    exercises.each do |klass|
+      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
+  AnswerKeyCleaner.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
