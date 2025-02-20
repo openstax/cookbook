@@ -24,8 +24,6 @@ do |doc, _resources|
 
   AddInjectedExerciseId.v1(book: book)
 
-  answer_key = BookAnswerKeyContainer.v1(book: book)
-
   book.chapters.each do |chapter|
     BakeNonIntroductionPages.v1(chapter: chapter)
 
@@ -78,19 +76,8 @@ do |doc, _resources|
       BakeInjectedExerciseQuestion.v1(question: question, number: question.count_in(:chapter))
     end
 
-    answer_key_inner_container = AnswerKeyInnerContainer.v1(
-      chapter: chapter, metadata_source: metadata, append_to: answer_key
-    )
-
-    exercises = %w[review-questions practice free-response]
-    exercises.each do |klass|
-      Kitchen::Directions::MoveSolutionsFromExerciseSection.v1(
-        within: chapter, append_to: answer_key_inner_container, section_class: klass
-      )
-    end
   end
 
-  AnswerKeyCleaner.v1(book: book)
   BakeFootnotes.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
