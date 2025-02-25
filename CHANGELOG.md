@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [v2.25.1] - 2025-02-25
+
+* Stop baking `answer key` in `additive-manufacturing`
+
 ## [v2.25.0] - 2025-01-16
 
 * Bake `glossary` in `additive-manufacturing`
