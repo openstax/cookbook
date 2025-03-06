@@ -936,13 +936,13 @@ module Kitchen
       page_title = ''
       page = element_with_ancestors.ancestor(:page) if element_with_ancestors.has_ancestor?(:page)
       if page&.is_introduction?
-        page_title = page.first('[data-type="document-title"]').text.kebab_case
+        page_title = page.first('[data-type="document-title"]').text.slugify
       elsif page
         page_string = "#{page.count_in(:chapter) - 1}-"
-        page_title = page.title_text.kebab_case
+        page_title = page.title_text.slugify
       else
         page = element_with_ancestors.ancestor(:composite_page)
-        page_title = page.title.text.kebab_case
+        page_title = page.title.text.slugify
       end
 
       "https://openstax.org/books/#{book_slug}/pages/#{chapter_count}-#{page_string}#{page_title}"
