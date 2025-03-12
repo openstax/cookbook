@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix iframes links for Polish books
 
 ## [v2.25.1] - 2025-02-25
 

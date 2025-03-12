@@ -656,6 +656,17 @@ RSpec.describe Kitchen::ElementBase do
               </h2>
               <div id="element2"></div>
             </div>
+            <div data-type="page">
+              <div data-type="metadata" style="display: none;">
+                <h1 data-type="document-title" itemprop="name">I have hyphen — and latin letter ć</h1>
+              </div>
+              <h2 data-type="document-title">
+                <span class="os-number">1.2</span>
+                <span class="os-divider"> </span>
+                <span data-type="" itemprop="" class="os-text">I have hyphen — and latin letter ć</span>
+              </h2>
+              <div id="element4"></div>
+            </div>
           </div>
           <div data-type="chapter">
             <div class="os-eoc os-summary-container" data-type="composite-page" data-uuid-key=".summary" id="composite-page-1">
@@ -685,6 +696,11 @@ RSpec.describe Kitchen::ElementBase do
     it 'returns rex link for element in composite page' do
       expect(book_rex_linkable.first('div#element3').rex_link).to \
         eq('https://openstax.org/books/test-book-slug/pages/2-summary-or-something')
+    end
+
+    it 'returns rex link for element with hyphen and latin letter' do
+      expect(book_rex_linkable.first('div#element4').rex_link).to \
+        eq('https://openstax.org/books/test-book-slug/pages/1-2-i-have-hyphen-and-latin-letter-c')
     end
 
     it 'raises error when ancestors can\'t be found' do
