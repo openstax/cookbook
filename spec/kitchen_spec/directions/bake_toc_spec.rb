@@ -336,6 +336,12 @@ RSpec.describe Kitchen::Directions::BakeToc do
     expect(book_unit.search('nav').to_s).to match_snapshot_auto
   end
 
+  it 'supports unit numbering' do
+    described_class.v1(book: book_unit, options: { unit_numbering: true })
+
+    expect(book_unit.search('nav').to_s).to match_snapshot_auto
+  end
+
   it 'works without unit' do
     described_class.v1(book: book_no_unit)
 
