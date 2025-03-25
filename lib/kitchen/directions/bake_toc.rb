@@ -5,7 +5,8 @@ module Kitchen
     module BakeToc
       def self.v1(book:, options: { cases: false })
         options.reverse_merge!(
-          cases: false
+          cases: false,
+          unit_numbering: false
         )
 
         li_tags = book.body.element_children.map do |element|
@@ -72,12 +73,17 @@ module Kitchen
             li_for_composite_chapter(child)
           end
         end.join("\n")
-
+        if options[:unit_numbering] and chapter.has_ancestor?(:unit)
+          unit = chapter.ancestor(:unit)
+          number = "#{unit.count_in(:book)}.#{chapter.count_in(:unit)}"
+        else
+          number = chapter.count_in(:book)
+        end
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
               <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
-              if options[:cases]}")} </span>#{chapter.count_in(:book)}</span>
+              if options[:cases]}")} </span>#{number}</span>
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
             </a>

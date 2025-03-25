@@ -3,18 +3,20 @@
 module Kitchen
   module Directions
     module BakeNonIntroductionPages
-      def self.v1(chapter:, options: {
-        custom_target_label: false,
-        block_target_label: false,
-        cases: false
-      })
+      def self.v1(chapter:, options: {})
         options.reverse_merge!(
           custom_target_label: false,
           block_target_label: false,
-          cases: false
+          cases: false,
+          unit_numbering: false
         )
         chapter.non_introduction_pages.each do |page|
-          number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+          if options[:unit_numbering]
+            unit = chapter.ancestor(:unit)
+            number = "#{unit.count_in(:book)}.#{chapter.count_in(:unit)}.#{page.count_in(:chapter)}"
+          else
+            number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+          end
 
           page.search("div[data-type='description']").each(&:trash)
           page.add_class('chapter-content-module')
