@@ -1,17 +1,17 @@
 <div class="interactive" data-has-label="true" data-label="" data-type="note" id="iframenote">
       <div data-alt="atoms_isotopes" data-type="media" id="media1">
-        <div class="os-has-iframe os-has-link" data-type="switch"><a class="os-is-link" href="https://openstax.org/books/the-book-slug/pages/1-1-the-document-title" target="_blank" rel="noopener nofollow" data-media="print">Click to view content</a>
+        <div class="os-has-iframe os-has-link" data-type="switch"><a class="os-is-link" data-needs-rex-link="true" href="/404-this-link-should-be-replaced" target="_blank" rel="noopener nofollow" data-media="print">Click to view content</a>
 <iframe height="371.4" src="https://openstax.org/l/atoms_isotopes" width="660" class="os-is-iframe" data-media="screen"><!-- no-selfclose -->
           </iframe></div>
       </div>
     </div><div class="interactive interactive-long" data-has-label="true" data-label="" data-type="note" id="iframenote3">
       <ul>
         <li>1: The evolution from fish to earliest tetrapod<span data-type="newline"><br/></span>
-          <div data-alt="tetrapod_evol1" data-type="media" id="media2"><div class="os-has-iframe os-has-link" data-type="switch"><a class="os-is-link" href="https://openstax.org/books/the-book-slug/pages/1-1-the-document-title" target="_blank" rel="noopener nofollow" data-media="print">Click to view content</a>
+          <div data-alt="tetrapod_evol1" data-type="media" id="media2"><div class="os-has-iframe os-has-link" data-type="switch"><a class="os-is-link" data-needs-rex-link="true" href="/404-this-link-should-be-replaced" target="_blank" rel="noopener nofollow" data-media="print">Click to view content</a>
 <iframe height="371.4" src="url1" width="660" class="os-is-iframe" data-media="screen"><!-- no-selfclose --></iframe></div></div>
         </li>
         <li>2: The discovery of coelacanth and <em data-effect="italics">Acanthostega</em> fossils<span data-type="newline"><br/></span>
-          <div data-alt="tetrapod_evol2" data-type="media" id="media3"><div class="os-has-iframe os-has-link" data-type="switch"><a class="os-is-link" href="https://openstax.org/books/the-book-slug/pages/1-1-the-document-title" target="_blank" rel="noopener nofollow" data-media="print">Click to view content</a>
+          <div data-alt="tetrapod_evol2" data-type="media" id="media3"><div class="os-has-iframe os-has-link" data-type="switch"><a class="os-is-link" data-needs-rex-link="true" href="/404-this-link-should-be-replaced" target="_blank" rel="noopener nofollow" data-media="print">Click to view content</a>
 <iframe height="371.4" src="url2" width="660" class="os-is-iframe" data-media="screen"><!-- no-selfclose --></iframe></div></div>
         </li>
       </ul>
