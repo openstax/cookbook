@@ -360,7 +360,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
     it 'Page element classes not found' do
       expect {
         described_class.li_for_page(no_pagetype_page)
-      }.to raise_error(RuntimeError, /could not detect which page type class[\s\S]+\(self\) M240:L8:C22/)
+      }.to raise_error(RuntimeError, /could not detect which page type class[\s\S]+\(self\) \/module\/m240\/filename.cnxml:8:22/)
     end
 
     it 'Composite page element classes not found' do

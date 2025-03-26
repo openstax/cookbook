@@ -247,19 +247,7 @@ module Kitchen
       self[:'data-sm']
     end
 
-    # function to translate phil's notation (modules/m53650/index.cnxml:6:3) (6 Line, 3 col)  to M123:L456:C789
-    #
-    # @return [String]
-    #
-    def data_sm_formatted
-      format_match = /\/m(\d+)\/[^:]+:(\d+):(\d+)/
-
-      module_line_column = data_sm.match(format_match).captures
-
-      "(self) M#{module_line_column[0]}:L#{module_line_column[1]}:C#{module_line_column[2]}"
-    end
-
-    # Returns the element's data source map in M123:L456:C789 style and whether this is self or the nearest parent's sm
+    # Returns the element's data source map or nearest parent's
     #
     # @return [String]
     #
@@ -274,7 +262,7 @@ module Kitchen
         "(nearest parent) #{parent_source.split(' ')[1]}" unless parent_source.match(/\(nearest parent\)/)
 
       else
-        data_sm_formatted
+        "(self) #{data_sm}"
       end
     end
 

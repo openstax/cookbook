@@ -69,6 +69,44 @@ RSpec.describe Kitchen::ElementBase do
       ))
   end
 
+  let(:searchable_book_with_units) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="unit">
+          <div data-type="chapter">
+            <div data-type="page" id="page1">
+              <div data-type="example" class="class1" id="example1">
+                <p>This is an example.</p>
+              </div>
+              <figure id="figure1">can't touch this (stop! hammer time)</figure>
+            </div>
+            <div data-type="page" id="page2"> This is a page </div>
+          </div>
+        </div>
+        <div data-type="unit">
+          <div data-type="chapter">
+            <div data-type="page" id="page3">
+              <div data-type="example" class="class1" id="example2">
+                <p>This is an example.</p>
+              </div>
+              <figure id="figure2">can't touch this (stop! hammer time)</figure>
+            </div>
+            <div data-type="page" id="page4"> This is a page </div>
+          </div>
+          <div data-type="chapter">
+            <div data-type="page" id="page4">
+              <div data-type="example" class="class1" id="example3">
+                <p>This is an example.</p>
+              </div>
+              <figure id="figure3">can't touch this (stop! hammer time)</figure>
+            </div>
+            <div data-type="page" id="page5"> This is a page </div>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   let(:sibling_book) do
     book_containing(html:
       chapter_element(
@@ -180,12 +218,12 @@ RSpec.describe Kitchen::ElementBase do
   end
 
   describe '#data_source' do
-    it 'returns the element\'s data source in M123:L456:C789 format when the element has a data-sm' do
-      expect(example.data_source).to eq '(self) M240:L13:C69'
+    it 'returns the element\'s data source in /module/m240/filename.cnxml:13:69 format when the element has a data-sm' do
+      expect(example.data_source).to eq '(self) /module/m240/filename.cnxml:13:69'
     end
 
-    it 'returns the element\'s parent\'s data source in M123:L456:C789 format when the element has no data-sm' do
-      expect(para.data_source).to eq '(nearest parent) M240:L13:C69'
+    it 'returns the element\'s parent\'s data source in /module/m240/filename.cnxml:13:69 format when the element has no data-sm' do
+      expect(para.data_source).to eq '(nearest parent) /module/m240/filename.cnxml:13:69'
     end
 
     it 'returns nil when no ancestor has a data-sm' do
@@ -195,7 +233,7 @@ RSpec.describe Kitchen::ElementBase do
 
   describe '#say_source_or_nil' do
     it 'returns the data source in an error friendly format if it exists' do
-      expect(example.say_source_or_nil).to eq "\nCNXML SOURCE: (self) M240:L13:C69"
+      expect(example.say_source_or_nil).to eq "\nCNXML SOURCE: (self) /module/m240/filename.cnxml:13:69"
     end
 
     it 'returns nil when no data-source' do
@@ -292,7 +330,7 @@ RSpec.describe Kitchen::ElementBase do
       type = :figure
       expect do
         p_element.ancestor(type).id
-      end.to raise_error("No ancestor of type '#{type}'\nCNXML SOURCE: (nearest parent) M240:L13:C69")
+      end.to raise_error("No ancestor of type '#{type}'\nCNXML SOURCE: (nearest parent) /module/m240/filename.cnxml:13:69")
     end
   end
 
@@ -342,7 +380,7 @@ RSpec.describe Kitchen::ElementBase do
       expect do
         para.add_ancestor(Kitchen::Ancestor.new(example_copy))
       end.to raise_error("Trying to add an ancestor of type '#{type}' but one of that " \
-        "type is already present\nCNXML SOURCE: (nearest parent) M240:L13:C69")
+        "type is already present\nCNXML SOURCE: (nearest parent) /module/m240/filename.cnxml:13:69")
     end
   end
 
@@ -621,6 +659,76 @@ RSpec.describe Kitchen::ElementBase do
   describe '#count_in' do
     it 'raises when asked for counts in a non-existent ancestor' do
       expect { para.count_in(:foo) }.to raise_error(/No ancestor/)
+    end
+  end
+
+  describe '#os_number' do
+    it 'works with chapter numbers' do
+      options = { separator: '.', mode: :chapter_page }
+      numbers = searchable_book_with_units.units.chapters.pages.map do |page|
+        page.os_number(options)
+      end
+      expect(numbers.to_a).to eq [
+        '1.1',
+        '1.2',
+        '2.1',
+        '2.2',
+        '3.1',
+        '3.2'
+      ]
+    end
+
+    it 'works with unit numbers' do
+      options = { separator: '-', mode: :unit_chapter_page }
+      numbers = searchable_book_with_units.units.chapters.pages.map do |page|
+        page.os_number(options)
+      end
+      expect(numbers.to_a).to eq [
+        '1-1-1',
+        '1-1-2',
+        '2-1-1',
+        '2-1-2',
+        '2-2-1',
+        '2-2-2'
+      ]
+    end
+  end
+
+  describe '#number_parts' do
+    it 'works with chapter numbers' do
+      parts = searchable_book_with_units.units.chapters.pages.map do |page|
+        page.number_parts(:chapter_page)
+      end
+      expect(parts.to_a).to eq [
+        [1, 1],
+        [1, 2],
+        [2, 1],
+        [2, 2],
+        [3, 1],
+        [3, 2]
+      ]
+    end
+
+    it 'works with unit numbers' do
+      parts = searchable_book_with_units.units.chapters.pages.map do |page|
+        page.number_parts(:unit_chapter_page)
+      end
+      expect(parts.to_a).to eq [
+        [1, 1, 1],
+        [1, 1, 2],
+        [2, 1, 1],
+        [2, 1, 2],
+        [2, 2, 1],
+        [2, 2, 2]
+      ]
+    end
+
+    it 'errors when mode is unknown' do
+      expect do
+        searchable_book_with_units.units.chapters.pages.map do |page|
+          page.number_parts(:the_unknown_soldier)
+        end
+      end.to raise_error(/Unknown mode: the_unknown_soldier/)
     end
   end
 
