@@ -6,7 +6,7 @@ module Kitchen
       def self.v1(book:, options: { cases: false })
         options.reverse_merge!(
           cases: false,
-          unit_numbering: false
+          numbering_options: { mode: :chapter_page, separator: '.' }
         )
 
         li_tags = book.body.element_children.map do |element|
@@ -73,12 +73,7 @@ module Kitchen
             li_for_composite_chapter(child)
           end
         end.join("\n")
-        if options[:unit_numbering] and chapter.has_ancestor?(:unit)
-          unit = chapter.ancestor(:unit)
-          number = "#{unit.count_in(:book)}.#{chapter.count_in(:unit)}"
-        else
-          number = chapter.count_in(:book)
-        end
+        number = chapter.os_number(options[:numbering_options])
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
