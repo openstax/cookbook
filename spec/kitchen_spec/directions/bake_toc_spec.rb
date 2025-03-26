@@ -337,7 +337,10 @@ RSpec.describe Kitchen::Directions::BakeToc do
   end
 
   it 'supports unit numbering' do
-    described_class.v1(book: book_unit, options: { unit_numbering: true })
+    described_class.v1(
+      book: book_unit,
+      options: { numbering_options: { mode: :unit_chapter_page } }
+    )
 
     expect(book_unit.search('nav').to_s).to match_snapshot_auto
   end
