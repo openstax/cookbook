@@ -8,15 +8,10 @@ module Kitchen
           custom_target_label: false,
           block_target_label: false,
           cases: false,
-          unit_numbering: false
+          numbering_options: { mode: :chapter_page, separator: '.' }
         )
         chapter.non_introduction_pages.each do |page|
-          if options[:unit_numbering]
-            unit = chapter.ancestor(:unit)
-            number = "#{unit.count_in(:book)}.#{chapter.count_in(:unit)}.#{page.count_in(:chapter)}"
-          else
-            number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
-          end
+          number = page.os_number(options[:numbering_options])
 
           page.search("div[data-type='description']").each(&:trash)
           page.add_class('chapter-content-module')
