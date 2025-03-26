@@ -5,11 +5,13 @@ module Kitchen
     module BakeChapterSectionExercises
       def self.v1(chapter:, options: {
         trash_title: false,
-        create_title: true
+        create_title: true,
+        numbering_options: {}
       })
         options.reverse_merge!(
           trash_title: false,
-          create_title: true
+          create_title: true,
+          numbering_options: {}
         )
         V1.new.bake(chapter: chapter, options: options)
       end
