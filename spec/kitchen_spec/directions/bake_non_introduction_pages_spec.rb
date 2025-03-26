@@ -150,10 +150,13 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     end
   end
 
-  context 'when unit numbering is enabled' do
+  context 'when numbering mode is :unit_chapter_page' do
     it 'includes unit count, chapter count in unit, and page count in chapter' do
       units.chapters.each do |chapter|
-        described_class.v1(chapter: chapter, options: { unit_numbering: true })
+        described_class.v1(
+          chapter: chapter,
+          options: { numbering_options: { mode: :unit_chapter_page } }
+        )
       end
       expect(units.to_a.join).to match_snapshot_auto
     end
