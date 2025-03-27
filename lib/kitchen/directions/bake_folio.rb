@@ -3,9 +3,14 @@
 module Kitchen
   module Directions
     module BakeFolio
-      def self.v1(book:, options: { new_approach: false })
-        options.reverse_merge!(new_approach: false)
-        V1.new.bake(book: book, options: options)
+      def self.v1(book:, chapters: nil, options: {})
+        options.reverse_merge!(
+          new_approach: false,
+          numbering_options: { mode: :chapter_page, separator: '.' })
+        V1.new.bake(
+          book: book,
+          chapters: chapters || book.chapters,
+          options: options)
       end
 
       class V1
@@ -56,19 +61,27 @@ module Kitchen
           end
         end
 
-        def bake(book:, options:)
+        def bake(book:, chapters:, options:)
           book['data-pdf-folio-preface-message'] = I18n.t(:"folio.preface")
           book['data-pdf-folio-access-message'] = I18n.t(:"folio.access_for_free")
 
           return unless options[:new_approach]
 
           # TODO: apply to all books and remove an option
-
-          book.chapters.each do |chapter|
-            chapter_folio(chapter: chapter)
-            module_folio(chapter: chapter)
-            eoc_folio(chapter: chapter, klass: 'folio-eoc-left')
-            eoc_folio(chapter: chapter, klass: 'folio-eoc-right')
+          numbering_options = options[:numbering_options]
+          chapters.each do |chapter|
+            chapter_folio(chapter: chapter, numbering_options: numbering_options)
+            module_folio(chapter: chapter, numbering_options: numbering_options)
+            eoc_folio(
+              chapter: chapter,
+              klass: 'folio-eoc-left',
+              numbering_options: numbering_options
+            )
+            eoc_folio(
+              chapter: chapter,
+              klass: 'folio-eoc-right',
+              numbering_options: numbering_options
+            )
           end
 
           appendix_folio(book: book, klass: 'folio-appendix-left')
@@ -78,23 +91,23 @@ module Kitchen
           eob_folio(book: book, klass: 'folio-eob-right')
         end
 
-        def chapter_folio(chapter:)
+        def chapter_folio(chapter:, numbering_options:)
           chapter_para = FolioParaWithNumber.new(
             klass: 'folio-chapter',
             title: chapter.title,
-            title_number: chapter.count_in(:book).to_s
+            title_number: chapter.os_number(numbering_options)
           )
 
           chapter_para.create_para
         end
 
-        def module_folio(chapter:)
+        def module_folio(chapter:, numbering_options:)
           # Introduction para
           chapter.pages('$.introduction').each do |page|
             intro_para = FolioParaWithNumber.new(
               klass: 'folio-module',
               title: page.search('h2[data-type="document-title"]').first,
-              title_number: chapter.count_in(:book).to_s
+              title_number: chapter.os_number(numbering_options)
             )
 
             intro_para.create_para
@@ -105,19 +118,19 @@ module Kitchen
             module_para = FolioParaWithNumber.new(
               klass: 'folio-module',
               title: page.title,
-              title_number: "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+              title_number: page.os_number(numbering_options)
             )
 
             module_para.create_para
           end
         end
 
-        def eoc_folio(chapter:, klass:)
+        def eoc_folio(chapter:, klass:, numbering_options:)
           chapter.search(' > .os-eoc').each do |eoc_page|
             eoc_para = FolioParaWithNumber.new(
               klass: klass,
               title: eoc_page.search('h2[data-type="document-title"]').first,
-              title_number: chapter.count_in(:book).to_s
+              title_number: chapter.os_number(numbering_options)
             )
 
             eoc_para.create_para
