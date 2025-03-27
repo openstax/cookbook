@@ -10,7 +10,8 @@ RSpec.describe Kitchen::Directions::BakeChapterSectionExercises do
         options: {
           trash_title: false,
           create_title: true,
-          numbering_options: { mode: :chapter_page, separator: '.' } })
+          numbering_options: { mode: :chapter_page, separator: '.' }
+        })
     described_class.v1(chapter: 'chapter1', options: {})
   end
 end

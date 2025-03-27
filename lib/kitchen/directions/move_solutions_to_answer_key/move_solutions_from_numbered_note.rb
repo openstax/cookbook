@@ -32,6 +32,7 @@ module Kitchen::Directions::MoveSolutionsFromNumberedNote
   class V2
     def bake(chapter:, append_to:, note_class:, numbering_options: {})
       return unless chapter.notes("$.#{note_class}").solutions.any?
+
       numbering_options.reverse_merge!(mode: :chapter_page, separator: '.')
 
       notes_title = <<~HTML
