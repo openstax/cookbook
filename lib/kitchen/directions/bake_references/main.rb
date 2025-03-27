@@ -17,8 +17,14 @@ module Kitchen
         V3.new.bake(book: book, metadata_source: metadata_source)
       end
 
-      def self.v4(book:, metadata_source:, cases: false)
-        V4.new.bake(book: book, metadata_source: metadata_source, cases: cases)
+      def self.v4(book:, metadata_source:, chapters: nil, cases: false, numbering_options: {})
+        numbering_options.reverse_merge!(mode: :chapter_page, separator: '.')
+        V4.new.bake(
+          book: book,
+          chapters: chapters || book.chapters,
+          metadata_source: metadata_source,
+          cases: cases,
+          numbering_options: numbering_options)
       end
     end
   end

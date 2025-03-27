@@ -2,14 +2,15 @@
 
 module Kitchen::Directions::BakeReferences
   class V4
-    def bake(book:, metadata_source:, cases: false)
-      book.chapters.each do |chapter|
+    def bake(book:, chapters:, metadata_source:, cases: false, numbering_options: {})
+      chapters.each do |chapter|
 
         chapter.references.search('h3').trash
 
         chapter_references = chapter.pages.references.cut
         chapter_title_text = chapter.title.search('.os-text')
         introduction_page = chapter.introduction_page
+        number = chapter.os_number(numbering_options)
 
         next if chapter_references.items.empty?
 
@@ -19,7 +20,7 @@ module Kitchen::Directions::BakeReferences
               <a href="##{introduction_page.id}_titlecreatedbycookbook">
                 <h2 data-type="document-title" data-rex-keep="true">
                   <span class="os-part-text">#{I18n.t("chapter#{'.nominative' if cases}")} </span>
-                  <span class="os-number">#{chapter.count_in(:book)}</span>
+                  <span class="os-number">#{number}</span>
                   <span class="os-divider"> </span>
                   #{chapter_title_text}
                 </h2>
@@ -30,7 +31,7 @@ module Kitchen::Directions::BakeReferences
         )
       end
 
-      chapter_area_references = book.chapters.search('.os-chapter-area').cut
+      chapter_area_references = chapters.search('.os-chapter-area').cut
 
       Kitchen::Directions::CompositePageContainer.v1(
         container_key: 'references',
