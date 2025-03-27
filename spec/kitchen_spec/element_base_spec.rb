@@ -710,10 +710,18 @@ RSpec.describe Kitchen::ElementBase do
     end
 
     it 'works with unit numbers' do
-      parts = searchable_book_with_units.units.chapters.pages.map do |page|
+      unit_parts = searchable_book_with_units.units.map do |unit|
+        unit.number_parts(:unit_chapter_page)
+      end
+      chapter_parts = searchable_book_with_units.units.chapters.map do |unit|
+        unit.number_parts(:unit_chapter_page)
+      end
+      page_parts = searchable_book_with_units.units.chapters.pages.map do |page|
         page.number_parts(:unit_chapter_page)
       end
-      expect(parts.to_a).to eq [
+      expect(unit_parts).to eq [[1], [2]]
+      expect(chapter_parts).to eq [[1, 1], [2, 1], [2, 2]]
+      expect(page_parts).to eq [
         [1, 1, 1],
         [1, 1, 2],
         [2, 1, 1],
