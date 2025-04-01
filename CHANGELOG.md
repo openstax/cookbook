@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Fix iframes links for Polish books
+* Remove `ElementBase#rex_link` in favor of generating links elsewhere
+* Update `BakeIframes` to mark iframe links as needing rex linking
 
 ## [v2.25.1] - 2025-02-25
 
