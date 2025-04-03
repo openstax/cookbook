@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Fix iframes links for Polish books
+* Create `number_parts` method in `ElementBase`
+* Create `os_number` method in `ElementBase` for creating `os-number` text
+* Add backward-compatible support for unit numbering where possible
+* Create `v2` of `BakeEquations` that takes chapters as input instead of book
+* Create `v2` of `BakeChapterTitle` that takes chapters as input instead of book
 * Remove `ElementBase#rex_link` in favor of generating links elsewhere
 * Update `BakeIframes` to mark iframe links as needing rex linking
 

@@ -2,12 +2,12 @@
 
 module Kitchen::Directions::BakeChapterIntroductions
   class BakeChapterObjectives
-    def bake(chapter:, strategy:)
+    def bake(chapter:, strategy:, options:)
       case strategy
       when :default
         bake_as_note(chapter: chapter)
       when :add_objectives
-        add_chapter_objectives(chapter: chapter)
+        add_chapter_objectives(chapter: chapter, options: options)
       when :none
         ''
       else
@@ -31,12 +31,14 @@ module Kitchen::Directions::BakeChapterIntroductions
       chapter_objectives_note.cut.paste
     end
 
-    def add_chapter_objectives(chapter:)
+    def add_chapter_objectives(chapter:, options: {})
+      options.reverse_merge!(numbering_options: { mode: :chapter_page, separator: '.' })
       chapter.non_introduction_pages.map do |page|
+        number = page.os_number(options[:numbering_options])
         <<~HTML
           <div class="os-chapter-objective">
             <a class="os-chapter-objective" href="##{page.id}">
-              <span class="os-number">#{chapter.count_in(:book)}.#{page.count_in(:chapter)}</span>
+              <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
               <span data-type="" itemprop="" class="os-text">#{page.title_children}</span>
             </a>

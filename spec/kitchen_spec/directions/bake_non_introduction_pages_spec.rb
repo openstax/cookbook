@@ -51,6 +51,49 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
     ).chapters.first
   end
 
+  let(:units) do
+    book_containing(html:
+        <<~HTML
+          <div data-type="unit">
+            <div data-type="chapter">
+              <div data-type="page" id="page_1">
+                <div data-type="document-title" id="auto_1234_0"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+              <div data-type="page" id="page_2">
+                <div data-type="document-title" id="auto_1234_1"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+            </div>
+            <div data-type="chapter">
+              <div data-type="page" id="page_3">
+                <div data-type="document-title" id="auto_1234_2"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+              <div data-type="page" id="page_4">
+                <div data-type="document-title" id="auto_1234_3"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+            </div>
+          </div>
+          <div data-type="unit">
+            <div data-type="chapter">
+              <div data-type="page" id="page_5">
+                <div data-type="document-title" id="auto_1234_4"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+              <div data-type="page" id="page_6">
+                <div data-type="document-title" id="auto_1234_5"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+            </div>
+            <div data-type="chapter">
+              <div data-type="page" id="page_7">
+                <div data-type="document-title" id="auto_1234_6"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+              <div data-type="page" id="page_8">
+                <div data-type="document-title" id="auto_1234_7"><em data-effect="italics">Italics</em> & not italics with <sub>subscript</sub> and <sup>superscript</sup> text</div>
+              </div>
+            </div>
+          </div>
+        HTML
+    ).units
+  end
+
   it 'works' do
     described_class.v1(chapter: chapter)
     expect(chapter).to match_snapshot_auto
@@ -104,6 +147,18 @@ RSpec.describe Kitchen::Directions::BakeNonIntroductionPages do
         expect(pantry).to receive(:store).with('Podrozdziału 1.1 Review of Functions', { label: 'page_123' })
         described_class.v1(chapter: chapter2, options: { cases: true })
       end
+    end
+  end
+
+  context 'when numbering mode is :unit_chapter_page' do
+    it 'includes unit count, chapter count in unit, and page count in chapter' do
+      units.chapters.each do |chapter|
+        described_class.v1(
+          chapter: chapter,
+          options: { numbering_options: { mode: :unit_chapter_page } }
+        )
+      end
+      expect(units.to_a.join).to match_snapshot_auto
     end
   end
 end

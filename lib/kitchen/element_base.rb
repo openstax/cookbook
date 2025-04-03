@@ -247,19 +247,7 @@ module Kitchen
       self[:'data-sm']
     end
 
-    # function to translate phil's notation (modules/m53650/index.cnxml:6:3) (6 Line, 3 col)  to M123:L456:C789
-    #
-    # @return [String]
-    #
-    def data_sm_formatted
-      format_match = /\/m(\d+)\/[^:]+:(\d+):(\d+)/
-
-      module_line_column = data_sm.match(format_match).captures
-
-      "(self) M#{module_line_column[0]}:L#{module_line_column[1]}:C#{module_line_column[2]}"
-    end
-
-    # Returns the element's data source map in M123:L456:C789 style and whether this is self or the nearest parent's sm
+    # Returns the element's data source map or nearest parent's
     #
     # @return [String]
     #
@@ -274,7 +262,7 @@ module Kitchen
         "(nearest parent) #{parent_source.split(' ')[1]}" unless parent_source.match(/\(nearest parent\)/)
 
       else
-        data_sm_formatted
+        "(self) #{data_sm}"
       end
     end
 
@@ -383,6 +371,57 @@ module Kitchen
       @ancestors[ancestor_type]&.get_descendant_count(short_type) ||
         raise("No ancestor of type '#{ancestor_type}'#{say_source_or_nil}"
         )
+    end
+
+    # Return the parts used to make up numbering for a page-or-thing-on-page,
+    # chapter, unit, etc.
+    #
+    # @param mode [Symbol] the mode to build number parts in
+    #   :chapter_page chapter level and page level
+    #   :unit_chapter_page unit level, chapter level, and page level
+    # @return [Array<integer>] an array of numbers ordered hierarchically
+    #
+    def number_parts(mode)
+      case mode
+      when :chapter_page
+        case data_type
+        when 'chapter'
+          [count_in(:book)]
+        else
+          [ancestor(:chapter).count_in(:book), count_in(:chapter)]
+        end
+      when :unit_chapter_page
+        case data_type
+        when 'chapter'
+          unit = ancestor(:unit)
+          [unit.count_in(:book), count_in(:unit)]
+        when 'unit'
+          [count_in(:book)]
+        else
+          unit = ancestor(:unit)
+          chapter = ancestor(:chapter)
+          [unit.count_in(:book), chapter.count_in(:unit), count_in(:chapter)]
+        end
+      else
+        # Further levels of nesting are not currently supported because of how
+        # ancestors are stored. Assembled documents can contain an arbitrary
+        # number of unit levels above the chapter level. Only one unit level is
+        # supported in cookbook because ancestor types must be unique.
+        raise "Unknown mode: #{mode}"
+      end
+    end
+
+    # Return the os-number value for this element (e.g. 1.1)
+    #
+    # @param options [Hash] optionally defines mode and separator
+    # @return [String] number parts joined on separator
+    #
+    def os_number(options={})
+      options.reverse_merge!(
+        mode: :chapter_page,
+        separator: '.'
+      )
+      number_parts(options[:mode]).join(options[:separator])
     end
 
     # Track that a sub element found by the given query has been counted

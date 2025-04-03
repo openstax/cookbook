@@ -1,0 +1,36 @@
+<div class="os-eob os-references-container" data-type="composite-page" data-uuid-key=".references">
+  <h1 data-type="document-title">
+    <span class="os-text">References</span>
+  </h1>
+  <div data-type="metadata" style="display: none;">
+    <h1 data-type="document-title" itemprop="name">References</h1>
+    <span data-type="revised">Revised</span><span data-type="slug">Slug</span><div class="authors">Authors</div><div class="publishers">Publishers</div><div class="print-style">Print Style</div><div class="permissions">Permissions</div><div data-type="subject">Subject</div>
+  </div>
+  <div class="os-chapter-area">
+  <a href="#page_id_titlecreatedbycookbook">
+    <h2 data-type="document-title" data-rex-keep="true">
+      <span class="os-part-text">Chapter </span>
+      <span class="os-number">1</span>
+      <span class="os-divider"> </span>
+      <span class="os-text" data-type="" itemprop="">Title Text Chapter 1</span>
+    </h2>
+  </a>
+  <section data-depth="1" id="1" class="reference">
+        
+        <p>Prattchett, Terry: The Color of Magic</p>
+      </section>
+</div><div class="os-chapter-area">
+  <a href="#page_id2_titlecreatedbycookbook">
+    <h2 data-type="document-title" data-rex-keep="true">
+      <span class="os-part-text">Chapter </span>
+      <span class="os-number">2</span>
+      <span class="os-divider"> </span>
+      <span class="os-text" data-type="" itemprop="">Title Text Chapter 2</span>
+    </h2>
+  </a>
+  <section data-depth="1" id="2" class="reference">
+        
+        <p>American Psychological Association</p>
+      </section>
+</div>
+</div>

@@ -1,0 +1,153 @@
+<div class="os-eob os-index-container" data-type="composite-page" data-uuid-key="index">
+  <h1 data-type="document-title">
+    <span class="os-text">Index</span>
+  </h1>
+  <div data-type="metadata" style="display: none;">
+    <h1 data-type="document-title" itemprop="name">Index</h1>
+    <span data-type="revised">Revised</span><span data-type="slug">Slug</span><div class="authors">Authors</div><div class="publishers">Publishers</div><div class="print-style">Print Style</div><div class="permissions">Permissions</div><div data-type="subject">Subject</div>
+  </div>
+  
+    <div class="group-by">
+      <span class="group-label">Symbols</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="Symbols">3-PGA</span>
+
+            <a class="os-term-section-link" href="#auto_p2_term4"><span class="os-term-section">1.1 First Page</span></a><!--
+          -->
+        </div>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="Symbols">5&#x2019; cap</span>
+
+            <a class="os-term-section-link" href="#auto_composite_page_term9"><span class="os-term-section">2 Another EOC Section</span></a><!--
+          -->
+        </div>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="Symbols">&#x394;E</span>
+
+            <a class="os-term-section-link" href="#auto_p2_term2"><span class="os-term-section">1.1 First Page</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">B</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="B">Bar</span>
+
+            <a class="os-term-section-link" href="#auto_p1_term3"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p1_term4"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p7_term9"><span class="os-term-section">Introduction</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p5_term3"><span class="os-term-section">Appendix A</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p6_term6"><span class="os-term-section">Handbook A</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">C</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="c">composite page at the top level</span>
+
+            <a class="os-term-section-link" href="#replace-me-not-2"><span class="os-term-section">2 Another EOC Section</span></a><!--
+          -->
+        </div>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="c">composite page in a composite chapter</span>
+
+            <a class="os-term-section-link" href="#auto_composite_page_term6"><span class="os-term-section">1 EOC Section Title</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">E</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="e">&#xE9;blahblah</span>
+
+            <a class="os-term-section-link" href="#auto_composite_page_term8"><span class="os-term-section">2 Another EOC Section</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">F</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="f">foo</span>
+
+            <a class="os-term-section-link" href="#replace-me-not"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p1_term2"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#replace-me-not-5"><span class="os-term-section">Introduction</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p7_term8"><span class="os-term-section">Introduction</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p2_term1"><span class="os-term-section">1.1 First Page</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#replace-me-not-3"><span class="os-term-section">Appendix A</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p5_term2"><span class="os-term-section">Appendix A</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#replace-me-not-4"><span class="os-term-section">Handbook A</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p6_term5"><span class="os-term-section">Handbook A</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">H</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="H"><em data-effect="italics">Homo sapiens sapiens</em></span>
+
+            <a class="os-term-section-link" href="#auto_p1_term6"><span class="os-term-section">Preface</span></a><!--
+          --><span class="os-index-link-separator">, </span>
+            <a class="os-term-section-link" href="#auto_p2_term5"><span class="os-term-section">1.1 First Page</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">O</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="O">&#xD6;tzi the Iceman</span>
+
+            <a class="os-term-section-link" href="#auto_p1_term5"><span class="os-term-section">Preface</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+    <div class="group-by">
+      <span class="group-label">S</span>
+      
+        <div class="os-index-item">
+<span class="os-term" group-by="s"><em>sp</em><sup>3</sup><em>d</em><sup>2</sup> orbitals</span>
+
+            <a class="os-term-section-link" href="#auto_p2_term3"><span class="os-term-section">1.1 First Page</span></a><!--
+          -->
+        </div>
+      
+    </div>
+  
+</div>

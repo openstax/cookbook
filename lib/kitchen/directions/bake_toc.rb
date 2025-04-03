@@ -5,7 +5,8 @@ module Kitchen
     module BakeToc
       def self.v1(book:, options: { cases: false })
         options.reverse_merge!(
-          cases: false
+          cases: false,
+          numbering_options: { mode: :chapter_page, separator: '.' }
         )
 
         li_tags = book.body.element_children.map do |element|
@@ -72,12 +73,12 @@ module Kitchen
             li_for_composite_chapter(child)
           end
         end.join("\n")
-
+        number = chapter.os_number(options[:numbering_options])
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
               <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
-              if options[:cases]}")} </span>#{chapter.count_in(:book)}</span>
+              if options[:cases]}")} </span>#{number}</span>
               <span class="os-divider"> </span>
               <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
             </a>

@@ -3,18 +3,15 @@
 module Kitchen
   module Directions
     module BakeNonIntroductionPages
-      def self.v1(chapter:, options: {
-        custom_target_label: false,
-        block_target_label: false,
-        cases: false
-      })
+      def self.v1(chapter:, options: {})
         options.reverse_merge!(
           custom_target_label: false,
           block_target_label: false,
-          cases: false
+          cases: false,
+          numbering_options: { mode: :chapter_page, separator: '.' }
         )
         chapter.non_introduction_pages.each do |page|
-          number = "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}"
+          number = page.os_number(options[:numbering_options])
 
           page.search("div[data-type='description']").each(&:trash)
           page.add_class('chapter-content-module')

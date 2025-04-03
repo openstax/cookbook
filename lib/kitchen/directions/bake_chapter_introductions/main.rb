@@ -11,10 +11,12 @@ module Kitchen
 
       def self.v2(
         book:,
+        chapters: nil,
         options: {
           strategy: :default, bake_chapter_outline: false, introduction_order: :v1,
           block_target_label: false,
-          cases: false
+          cases: false,
+          numbering_options: { mode: :chapter_page, separator: '.' }
         }
       )
         options.reverse_merge!(
@@ -22,18 +24,21 @@ module Kitchen
           bake_chapter_outline: false,
           introduction_order: :v1,
           block_target_label: false,
-          cases: false
+          cases: false,
+          numbering_options: { mode: :chapter_page, separator: '.' }
         )
         V2.new.bake(
           book: book,
+          chapters: chapters || book.chapters,
           options: options
         )
       end
 
-      def self.bake_chapter_objectives(chapter:, strategy:)
+      def self.bake_chapter_objectives(chapter:, strategy:, options:)
         BakeChapterObjectives.new.bake(
           chapter: chapter,
-          strategy: strategy
+          strategy: strategy,
+          options: options
         )
       end
 

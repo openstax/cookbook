@@ -118,13 +118,14 @@ module Kitchen::Directions::BakeIndex
       end
     end
 
-    def bake(book:, types: %w[main], uuid_prefix: '')
+    def bake(book:, chapters:, types: %w[main], uuid_prefix: '', numbering_options: {})
       @metadata_elements = book.metadata.children_to_keep.copy
       @uuid_prefix = uuid_prefix
       @indexes = types.each.with_object({}) do |type, hash|
         index_name = type == 'main' ? 'term' : type
         hash[index_name] = Index.new
       end
+      numbering_options.reverse_merge!(mode: :chapter_page, separator: '.')
 
       # Numbering of IDs doesn't depend on term type
 
@@ -137,7 +138,7 @@ module Kitchen::Directions::BakeIndex
         add_term_to_index(term_element, page_title)
       end
 
-      book.chapters.search_with(
+      chapters.search_with(
         Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
       ).terms.each do |term_element|
 
@@ -149,7 +150,7 @@ module Kitchen::Directions::BakeIndex
           page = term_element.ancestor(:composite_page)
           chapter = term_element.ancestor(:chapter)
           term_element.id ||= "auto_composite_page_term#{term_element.count_in(:book)}"
-          chapter_number = chapter.count_in(:book)
+          chapter_number = chapter.os_number(numbering_options)
           page_title = "#{chapter_number} #{page.title.text.strip}".strip
         end
 

@@ -2,10 +2,10 @@
 
 module Kitchen::Directions::BakeChapterIntroductions
   class V2
-    def bake(book:, options:)
-      book.chapters.each do |chapter|
+    def bake(book:, chapters:, options:)
+      chapters.each do |chapter|
         introduction_page = chapter.introduction_page
-        number = chapter.count_in(:book)
+        number = chapter.os_number(options[:numbering_options])
         title_label = chapter.title.search('.os-text').first&.text
         title_label = chapter.title.text if title_label.nil?
 
@@ -16,7 +16,8 @@ module Kitchen::Directions::BakeChapterIntroductions
         chapter_intro_html =
           Kitchen::Directions::BakeChapterIntroductions.bake_chapter_objectives(
             chapter: chapter,
-            strategy: options[:strategy]
+            strategy: options[:strategy],
+            options: options
           )
 
         if options[:bake_chapter_outline]
