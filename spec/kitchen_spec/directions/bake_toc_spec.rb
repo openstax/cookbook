@@ -128,6 +128,13 @@ RSpec.describe Kitchen::Directions::BakeToc do
               <span data-type="" itemprop="" class="os-text">Unit Closer</span>
             </h2>
           </div>
+          <div data-type="page" id="p-unit-close-2r" class="unit-closer">
+            <h2 data-type="document-title">
+              <span class="os-number">3</span>
+              <span class="os-divider"> </span>
+              <span data-type="" itemprop="" class="os-text">Unit Closer 2</span>
+            </h2>
+          </div>
         </div>
         <div data-type="page" id="p8" class="appendix">
           <h1 data-type="document-title">

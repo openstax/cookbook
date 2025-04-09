@@ -2,10 +2,16 @@
 
 ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _resources|
   include Kitchen::Directions
-
+  
   book = doc.book
   book_metadata = book.metadata
-
+  
+  book.units.each_with_index do |unit, idx|
+    if idx < 2
+      unit[:'data-intro-unit'] = 'true'
+    end
+    unit.chapters.first[:'data-intro-chapter'] = 'true'
+  end
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
@@ -16,62 +22,108 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   BakeIframes.v1(book: book)
 
   # book.notes('$.theorem').each { |theorem| theorem['use-subtitle'] = true }
-
+  notes = %w[
+    chapter-objectives
+    general-strategies
+    link-to-learning
+    mini-lesson-question
+    self-check
+    try
+  ]
+  BakeAutotitledNotes.v1(book: book, classes: notes)
   # BakeAutotitledNotes.v1(book: book, classes: %w[media-2 problem-solving project])
   # BakeNumberedNotes.v1(book: book, classes: %w[theorem checkpoint])
 
-  book.chapters.each do |chapter|
-    chapter_review = ChapterReviewContainer.v1(
-      chapter: chapter,
-      metadata_source: book_metadata
-    )
+  # book.chapters.each do |chapter|
+    # chapter_review = ChapterReviewContainer.v1(
+    #   chapter: chapter,
+    #   metadata_source: book_metadata
+    # )
 
-    BakeChapterGlossary.v1(
-      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    )
-    BakeChapterKeyEquations.v1(
-      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    )
-    BakeChapterKeyConcepts.v1(
-      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    )
-    MoveExercisesToEOC.v1(
-      chapter: chapter, metadata_source: book_metadata,
-      append_to: chapter_review, klass: 'review-exercises'
-    )
-    BakeChapterSectionExercises.v1(chapter: chapter)
+    # BakeChapterGlossary.v1(
+    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
+    # )
+    # BakeChapterKeyEquations.v1(
+    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
+    # )
+    # BakeChapterKeyConcepts.v1(
+    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
+    # )
+    # MoveExercisesToEOC.v1(
+    #   chapter: chapter, metadata_source: book_metadata,
+    #   append_to: chapter_review, klass: 'review-exercises'
+    # )
+    # BakeChapterSectionExercises.v1(chapter: chapter)
 
     # Just above we moved the review exercises to the end of the chapter. Now that all of the
     # non-checkpoint exercises are in the right order, we bake them (the "in place" modifications)
     # and number them.
-    chapter.search('section.section-exercises, section.review-exercises').exercises.each \
-    do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-    end
-  end
+    # chapter.search('section.section-exercises, section.review-exercises').exercises.each \
+    # do |exercise|
+    #   BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    # end
+  # end
 
-  BakeChapterIntroductions.v2(book: book,
-                            chapters: book.units.chapters,
-                            options: { numbering_options: { mode: :unit_chapter_page } })
+  # BakeChapterIntroductions.v2(book: book,
+  #                           chapters: book.units.chapters,
+  #                           options: { numbering_options: { mode: :unit_chapter_page } })
   BakeChapterTitle.v2(chapters: book.units.chapters, numbering_options: { mode: :unit_chapter_page })
 
-  book.units.chapters.each do |chapter|
-    chapter.tables('$:not(.unnumbered)').each do |table|
-      BakeNumberedTable.v1(table: table,
-                          number: table.os_number({ mode: :unit_chapter_page }))
-    end
+  chapter_numbering_options = {
+    intro: { mode: :chapter_page, page_offset: -1 },
+    main: { mode: :unit_chapter_page, page_offset: -1 }
+  }
+  chapters_by_type = {
+    intro: lambda { book.chapters('$[data-intro-chapter]') },
+    main: lambda {
+      book.units('$:not([data-intro-unit])').chapters('$:not([data-intro-chapter])')
+    }
+  }
 
-    chapter.examples.each do |example|
-      BakeExample.v1(example: example,
-                    number: example.os_number({ mode: :unit_chapter_page }),
-                    title_tag: 'h3')
-    end
+  chapters_by_type[:main].call.each do |chapter|
+    # chapter_review = ChapterReviewContainer.v1(
+    #   chapter: chapter,
+    #   metadata_source: book_metadata
+    # )
 
-    chapter.figures(only: :figure_to_number?).each do |figure|
-      BakeFigure.v1(figure: figure,
-                    number: figure.os_number({ mode: :unit_chapter_page }))
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: book_metadata,
+      container_key: 'key-terms',
+      uuid_key: '.key-terms',
+      section_selector: 'section.key-terms'
+    )    
+
+    # BakeChapterGlossary.v1(
+    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
+    # )
+  end
+
+  [:intro, :main].each do |chapter_selection|
+    numbering_options = chapter_numbering_options[chapter_selection]
+    chapters = chapters_by_type[chapter_selection].call
+    chapters.each do |chapter|
+      chapter.tables('$:not(.unnumbered)').each do |table|
+        BakeNumberedTable.v1(table: table,
+                            number: table.os_number(numbering_options))
+      end
+  
+      chapter.examples.each do |example|
+        BakeExample.v1(example: example,
+                      number: example.os_number(numbering_options),
+                      title_tag: 'h3')
+      end
+      chapter.figures(only: :figure_to_number?).each do |figure|
+        BakeFigure.v1(figure: figure,
+                      number: figure.os_number(numbering_options))
+      end
+      chapter.pages.search('section.practice').exercises.each_with_index do |exercise, idx|
+        BakeNumberedExercise.v1(exercise: exercise, number: idx + 1)
+      end
+      # Title added here
+      BakeNonIntroductionPages.v1(chapter: chapter,
+                                  options: { numbering_options: numbering_options })
     end
-    BakeNonIntroductionPages.v1(chapter: chapter, options: { numbering_options: { mode: :unit_chapter_page } })
   end
 
   book.pages('$.appendix').each do |page|
@@ -134,7 +186,38 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   BakeCompositeChapters.v1(book: book)
   BakeUnitTitle.v1(book: book)
   BakeUnitPageTitle.v1(book: book)
-  BakeToc.v1(book: book, options: { numbering_options: { mode: :unit_chapter_page } })
+
+  # Remove numbering from page titles in intro chapter pages and unit closers
+  # This must happen before BakeToc because The ToC uses these titles
+  book.pages('$.unit-closer').each do |page|
+    page.title.replace_children(with: page.title.first!('.os-text').copy.paste)
+  end
+  chapters_by_type[:intro].call.pages.each do |page|
+    page.title.replace_children(with: page.title.first!('.os-text').copy.paste)
+  end
+
+  BakeToc.v1(book: book, options: {
+    numbering_options: { mode: :unit_chapter_page, unit_offset: -2, chapter_offset: -1 },
+    controller: {
+      get_unit_toc_title: lambda do |unit|
+        if unit[:'data-intro-unit']
+          %%<span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>%
+        end
+      end,
+      get_chapter_toc_title: lambda do |chapter|
+        if chapter[:'data-intro-chapter']
+          %%<span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>%
+        else
+          number = chapter.os_number({ mode: :unit_chapter_page, unit_offset: -2, chapter_offset: -1 })
+          <<~HTML
+            <span class="os-number"><span class="os-part-text">#{I18n.t('lesson')} </span>#{number}</span>
+            <span class="os-divider"> </span>
+            <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
+          HTML
+        end
+      end
+    }
+  })
   BakeEquations.v1(book: book, number_decorator: :parentheses)
   BakeFolio.v1(book: book, chapters: book.units.chapters, options: { numbering_options: { mode: :unit_chapter_page } } )
 

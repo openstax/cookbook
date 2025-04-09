@@ -381,26 +381,28 @@ module Kitchen
     #   :unit_chapter_page unit level, chapter level, and page level
     # @return [Array<integer>] an array of numbers ordered hierarchically
     #
-    def number_parts(mode)
+    def number_parts(mode, unit_offset:, chapter_offset:, page_offset:)
       case mode
       when :chapter_page
         case data_type
         when 'chapter'
-          [count_in(:book)]
+          [count_in(:book) + chapter_offset]
+        when 'unit'
+          [count_in(:book) + unit_offset]
         else
-          [ancestor(:chapter).count_in(:book), count_in(:chapter)]
+          [ancestor(:chapter).count_in(:book) + chapter_offset, count_in(:chapter) + page_offset]
         end
       when :unit_chapter_page
         case data_type
         when 'chapter'
           unit = ancestor(:unit)
-          [unit.count_in(:book), count_in(:unit)]
+          [unit.count_in(:book) + unit_offset, count_in(:unit) + chapter_offset]
         when 'unit'
-          [count_in(:book)]
+          [count_in(:book) + unit_offset]
         else
           unit = ancestor(:unit)
           chapter = ancestor(:chapter)
-          [unit.count_in(:book), chapter.count_in(:unit), count_in(:chapter)]
+          [unit.count_in(:book) + unit_offset, chapter.count_in(:unit) + chapter_offset, count_in(:chapter) + page_offset]
         end
       else
         # Further levels of nesting are not currently supported because of how
@@ -419,9 +421,18 @@ module Kitchen
     def os_number(options={})
       options.reverse_merge!(
         mode: :chapter_page,
-        separator: '.'
+        separator: '.',
+        unit_offset: 0,
+        chapter_offset: 0,
+        page_offset: 0,
       )
-      number_parts(options[:mode]).join(options[:separator])
+      parts = number_parts(
+        options[:mode],
+        unit_offset: options[:unit_offset],
+        chapter_offset: options[:chapter_offset],
+        page_offset: options[:page_offset],
+      )
+      parts.join(options[:separator])
     end
 
     # Track that a sub element found by the given query has been counted
