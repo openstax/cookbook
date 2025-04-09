@@ -2,10 +2,13 @@
 
 ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _resources|
   include Kitchen::Directions
-
+  
   book = doc.book
   book_metadata = book.metadata
-
+  
+  book.units.each_with_index do |unit, idx|
+    unit[:'data-numbered-unit'] = "true" if idx > 1
+  end
   # Some stuff just goes away
   book.search('cnx-pi').trash
 
@@ -20,42 +23,42 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   # BakeAutotitledNotes.v1(book: book, classes: %w[media-2 problem-solving project])
   # BakeNumberedNotes.v1(book: book, classes: %w[theorem checkpoint])
 
-  book.chapters.each do |chapter|
-    chapter_review = ChapterReviewContainer.v1(
-      chapter: chapter,
-      metadata_source: book_metadata
-    )
+  # book.chapters.each do |chapter|
+    # chapter_review = ChapterReviewContainer.v1(
+    #   chapter: chapter,
+    #   metadata_source: book_metadata
+    # )
 
-    BakeChapterGlossary.v1(
-      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    )
-    BakeChapterKeyEquations.v1(
-      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    )
-    BakeChapterKeyConcepts.v1(
-      chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    )
-    MoveExercisesToEOC.v1(
-      chapter: chapter, metadata_source: book_metadata,
-      append_to: chapter_review, klass: 'review-exercises'
-    )
-    BakeChapterSectionExercises.v1(chapter: chapter)
+    # BakeChapterGlossary.v1(
+    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
+    # )
+    # BakeChapterKeyEquations.v1(
+    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
+    # )
+    # BakeChapterKeyConcepts.v1(
+    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
+    # )
+    # MoveExercisesToEOC.v1(
+    #   chapter: chapter, metadata_source: book_metadata,
+    #   append_to: chapter_review, klass: 'review-exercises'
+    # )
+    # BakeChapterSectionExercises.v1(chapter: chapter)
 
     # Just above we moved the review exercises to the end of the chapter. Now that all of the
     # non-checkpoint exercises are in the right order, we bake them (the "in place" modifications)
     # and number them.
-    chapter.search('section.section-exercises, section.review-exercises').exercises.each \
-    do |exercise|
-      BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-    end
-  end
+    # chapter.search('section.section-exercises, section.review-exercises').exercises.each \
+    # do |exercise|
+    #   BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
+    # end
+  # end
 
   BakeChapterIntroductions.v2(book: book,
                             chapters: book.units.chapters,
                             options: { numbering_options: { mode: :unit_chapter_page } })
   BakeChapterTitle.v2(chapters: book.units.chapters, numbering_options: { mode: :unit_chapter_page })
 
-  book.units.chapters.each do |chapter|
+  book.units('$[data-numbered-unit="true"]').chapters.each do |chapter|
     chapter.tables('$:not(.unnumbered)').each do |table|
       BakeNumberedTable.v1(table: table,
                           number: table.os_number({ mode: :unit_chapter_page }))
