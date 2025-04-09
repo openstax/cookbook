@@ -53,9 +53,9 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
     # end
   # end
 
-  BakeChapterIntroductions.v2(book: book,
-                            chapters: book.units.chapters,
-                            options: { numbering_options: { mode: :unit_chapter_page } })
+  # BakeChapterIntroductions.v2(book: book,
+  #                           chapters: book.units.chapters,
+  #                           options: { numbering_options: { mode: :unit_chapter_page } })
   BakeChapterTitle.v2(chapters: book.units.chapters, numbering_options: { mode: :unit_chapter_page })
 
   book.units('$[data-numbered-unit="true"]').chapters.each do |chapter|
