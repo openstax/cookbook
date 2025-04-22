@@ -33,7 +33,9 @@ module Kitchen
 
       def self.li_for_unit(unit, options)
         chapters = unit.element_children.only(ChapterElement)
-        pages = unit.element_children.only(PageElement)
+        pages = unit.element_children.only(PageElement).to_a
+        after_chapter = pages.filter(&:is_unit_closer?)
+        before_chapter = pages.difference(after_chapter)
 
         <<~HTML
           <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit" data-toc-type="unit">
@@ -43,8 +45,9 @@ module Kitchen
               <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
             </a>
             <ol class="os-unit">
-              #{pages.map { |page| li_for_page(page) }.join("\n")}
+              #{before_chapter.map { |page| li_for_page(page) }.join("\n")}
               #{chapters.map { |chapter| li_for_chapter(chapter, options) }.join("\n")}
+              #{after_chapter.map { |page| li_for_page(page) }.join("\n")}
             </ol>
           </li>
         HTML
@@ -110,7 +113,7 @@ module Kitchen
             elsif page.has_ancestor?(:unit) && !
                   page.has_ancestor?(:chapter) && !
                   page.has_ancestor?(:composite_chapter)
-              ['os-toc-unit-page', 'intro']
+              ['os-toc-unit-page', page.is_unit_closer? ? 'numbered-section' : 'intro']
             else
               raise "could not detect which page type class to apply for page.id `#{page.id}`
                during baking the TOC. The classes on the page are: `#{page.classes}`
