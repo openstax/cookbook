@@ -6,15 +6,52 @@ module Kitchen
       def self.v1(book:, options: { cases: false })
         options.reverse_merge!(
           cases: false,
-          numbering_options: { mode: :chapter_page, separator: '.' }
+          numbering_options: { mode: :chapter_page, separator: '.' },
+          controller: {
+            get_chapter_toc_title: nil,
+            get_unit_toc_title: nil,
+          }
         )
+        controller = options[:controller]
+        @toc_title_for_unit = lambda do |unit|
+          number = unit.os_number(options[:numbering_options])
+          <<~HTML
+            <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{number}</span>
+            <span class="os-divider"> </span>
+            <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
+          HTML
+        end
+        
+        if controller[:get_unit_toc_title].present?
+          original = @toc_title_for_unit
+          @toc_title_for_unit = lambda do |unit|
+            controller[:get_unit_toc_title].call(unit) || original.call(unit)
+          end
+        end
+        
+        @toc_title_for_chapter = lambda do |chapter|
+          number = chapter.os_number(options[:numbering_options])
+          <<~HTML
+            <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
+            if options[:cases]}")} </span>#{number}</span>
+            <span class="os-divider"> </span>
+            <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
+          HTML
+        end
+        if controller[:get_chapter_toc_title].present?
+          original_get_chapter = @toc_title_for_chapter
+          @toc_title_for_chapter = lambda do |chapter|
+            controller[:get_chapter_toc_title].call(chapter) || original_get_chapter.call(chapter)
+          end
+        end
+
 
         li_tags = book.body.element_children.map do |element|
           case element
           when UnitElement
-            li_for_unit(element, options)
+            li_for_unit(element)
           when ChapterElement
-            li_for_chapter(element, options)
+            li_for_chapter(element)
           when PageElement, CompositePageElement
             li_for_page(element)
           when CompositeChapterElement
@@ -31,7 +68,7 @@ module Kitchen
         )
       end
 
-      def self.li_for_unit(unit, options)
+      def self.li_for_unit(unit)
         chapters = unit.element_children.only(ChapterElement)
         pages = unit.element_children.only(PageElement).to_a
         after_chapter = pages.filter(&:is_unit_closer?)
@@ -40,13 +77,11 @@ module Kitchen
         <<~HTML
           <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit" data-toc-type="unit">
             <a href="#">
-              <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{unit.count_in(:book)}</span>
-              <span class="os-divider"> </span>
-              <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
+              #{@toc_title_for_unit.call(unit)}
             </a>
             <ol class="os-unit">
               #{before_chapter.map { |page| li_for_page(page) }.join("\n")}
-              #{chapters.map { |chapter| li_for_chapter(chapter, options) }.join("\n")}
+              #{chapters.map { |chapter| li_for_chapter(chapter) }.join("\n")}
               #{after_chapter.map { |page| li_for_page(page) }.join("\n")}
             </ol>
           </li>
@@ -68,7 +103,7 @@ module Kitchen
         HTML
       end
 
-      def self.li_for_chapter(chapter, options)
+      def self.li_for_chapter(chapter)
         chapter_children = chapter.element_children.map do |child|
           if child.instance_of?(PageElement) || child.instance_of?(CompositePageElement)
             li_for_page(child)
@@ -76,14 +111,11 @@ module Kitchen
             li_for_composite_chapter(child)
           end
         end.join("\n")
-        number = chapter.os_number(options[:numbering_options])
+        
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
-              <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
-              if options[:cases]}")} </span>#{number}</span>
-              <span class="os-divider"> </span>
-              <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
+              #{@toc_title_for_chapter.call(chapter)}
             </a>
             <ol class="os-chapter">
               #{chapter_children}
