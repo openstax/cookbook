@@ -193,12 +193,13 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   BakeUnitTitle.v1(book: book)
   BakeUnitPageTitle.v1(book: book)
 
-  # Remove numbering from page titles in intro chapter pages and unit closers
-  # This must happen before BakeToc because The ToC uses these titles
-  book.pages('$.unit-closer').each do |page|
-    page.title.replace_children(with: page.title.first!('.os-text').copy.paste)
-  end
-  chapters_by_type[:intro].call.pages.each do |page|
+  # Remove numbering from page titles in intro chapter pages, unit intro pages,
+  # and unit closers. This must happen before BakeToc because The ToC uses these titles
+  (
+    book.units("$[#{intro_unit_marker}]").pages.to_a |
+    book.pages('$.unit-closer').to_a |
+    chapters_by_type[:intro].call.pages.to_a
+  ).each do |page|
     page.title.replace_children(with: page.title.first!('.os-text').copy.paste)
   end
 
