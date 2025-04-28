@@ -387,6 +387,8 @@ module Kitchen
         case data_type
         when 'chapter'
           [count_in(:book) + chapter_offset]
+        when 'unit'
+          [count_in(:book) + unit_offset]
         else
           [ancestor(:chapter).count_in(:book) + chapter_offset, count_in(:chapter) + page_offset]
         end
