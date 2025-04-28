@@ -5,12 +5,18 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   
   book = doc.book
   book_metadata = book.metadata
+  intro_unit_marker = 'data-intro-unit'
+  intro_chapter_marker = 'data-intro-chapter'
   
   book.units.each_with_index do |unit, idx|
     if idx < 2
-      unit[:'data-intro-unit'] = 'true'
+      unit[intro_unit_marker] = 'true'
     end
-    unit.chapters.first[:'data-intro-chapter'] = 'true'
+    unit.chapters.each_with_index do |chapter, ch_idx|
+      if ch_idx == 0 or chapter.title.to_s.index(/Project [0-9]+:/) != nil
+        chapter[intro_chapter_marker] = 'true'
+      end
+    end
   end
   # Some stuff just goes away
   book.search('cnx-pi').trash
@@ -74,9 +80,9 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
     main: { mode: :unit_chapter_page, page_offset: -1 }
   }
   chapters_by_type = {
-    intro: lambda { book.chapters('$[data-intro-chapter]') },
+    intro: lambda { book.chapters("$[#{intro_chapter_marker}]") },
     main: lambda {
-      book.units('$:not([data-intro-unit])').chapters('$:not([data-intro-chapter])')
+      book.units("$:not([#{intro_unit_marker}])").chapters("$:not([#{intro_chapter_marker}])")
     }
   }
 
@@ -229,4 +235,10 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   BakeLinkPlaceholders.v1(book: book)
   BakeLinks.v1(book: book)
 
+  book.chapters("$[#{intro_chapter_marker}]").each do |chapter|
+    chapter.remove_attribute(intro_chapter_marker)
+  end
+  book.units("$[#{intro_unit_marker}]").each do |unit|
+    unit.remove_attribute(intro_unit_marker)
+  end
 end
