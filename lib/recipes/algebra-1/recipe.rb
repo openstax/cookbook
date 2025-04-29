@@ -17,8 +17,6 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       title.include?('Research in Practice'))
     if is_unnumbered_unit
       unit[unnumbered_unit_marker] = 'true'
-    end
-    if is_unnumbered_unit
       unit.chapters.each { |ch| ch[unnumbered_chapter_marker] = 'true' }
     else
       unit.chapters.each_with_index do |ch, ch_idx|
