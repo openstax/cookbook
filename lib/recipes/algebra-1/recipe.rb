@@ -51,7 +51,8 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
   # BakeChapterIntroductions.v2(book: book,
   #                           chapters: book.units.chapters,
   #                           options: { numbering_options: { mode: :unit_chapter_page } })
-  BakeChapterTitle.v2(chapters: book.units.chapters, numbering_options: { mode: :unit_chapter_page })
+  BakeChapterTitle.v2(chapters: book.units.chapters,
+                      numbering_options: { mode: :unit_chapter_page, unit_offset: -2 })
 
   chapter_numbering_options = {
     unnumbered: { mode: :chapter_page, page_offset: -1 },
@@ -146,13 +147,15 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
   BakeUnitPageTitle.v1(book: book)
 
   # Remove numbering from page titles in intro chapter pages, unit intro pages,
-  # and unit closers. This must happen before BakeToc because The ToC uses these titles
+  # unit closers, unit titles, and chapter titles. This must happen before BakeToc because The ToC uses these titles
   (
+    book.units("$[#{unnumbered_unit_marker}]").to_a |
     book.units("$[#{unnumbered_unit_marker}]").pages('$:not(.introduction)').to_a |
-    book.pages('$.unit-closer').to_a |
-    book.chapters("$[#{unnumbered_chapter_marker}]").pages.to_a
-  ).each do |page|
-    page.title.replace_children(with: %%<span data-type="" itemprop="" class="os-text">#{page.title_text}</span>%)
+    book.chapters("$[#{unnumbered_chapter_marker}]").to_a |
+    book.chapters("$[#{unnumbered_chapter_marker}]").pages.to_a |
+    book.pages('$.unit-closer').to_a
+  ).each do |element|
+    element.title.replace_children(with: %%<span data-type="" itemprop="" class="os-text">#{element.title_text}</span>%)
   end
 
   skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
