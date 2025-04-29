@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Support `unit-closer` pages in TOC
 * Fix iframes links for Polish books
 * Create `number_parts` method in `ElementBase`
 * Create `os_number` method in `ElementBase` for creating `os-number` text
