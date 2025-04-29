@@ -1,20 +1,33 @@
 # frozen_string_literal: true
 
-ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _resources|
+ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, _resources|
   include Kitchen::Directions
   
   book = doc.book
   book_metadata = book.metadata
-  intro_unit_marker = 'data-intro-unit'
-  intro_chapter_marker = 'data-intro-chapter'
+  unnumbered_unit_marker = 'data-unnumbered-unit'
+  unnumbered_chapter_marker = 'data-unnumbered-chapter'
   
-  book.units.each_with_index do |unit, idx|
-    if idx < 2
-      unit[intro_unit_marker] = 'true'
-    end
-    unit.chapters.each_with_index do |chapter, ch_idx|
-      if ch_idx == 0 or chapter.title.to_s.index(/Project [0-9]+:/) != nil
-        chapter[intro_chapter_marker] = 'true'
+  # Mark unnumbered units and chapters
+  book.units.each do |unit|
+    title = unit.title.to_s
+    is_unnumbered_unit = (
+      title.include?('Getting Started') or
+      title.include?('Supporting All Learners') or
+      title.include?('Research in Practice'))
+    if is_unnumbered_unit
+      unit[unnumbered_unit_marker] = 'true'
+      unit.chapters.each { |ch| ch[unnumbered_chapter_marker] = 'true' }
+    else
+      unit.chapters.each_with_index do |ch, ch_idx|
+        title = ch.title.to_s
+        is_unnumbered_chapter = (
+          ch_idx == 0 or
+          title.include?('Overview and Readiness') or
+          title.include?('Project'))
+        if is_unnumbered_chapter
+          ch[unnumbered_chapter_marker] = 'true'
+        end
       end
     end
   end
@@ -22,12 +35,9 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   book.search('cnx-pi').trash
 
   BakeUnnumberedFigure.v1(book: book)
-  # BakePreface.v1(book: book)
-  book.pages('$.preface').each(&:trash)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
 
-  # book.notes('$.theorem').each { |theorem| theorem['use-subtitle'] = true }
   notes = %w[
     chapter-objectives
     general-strategies
@@ -37,38 +47,6 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
     try
   ]
   BakeAutotitledNotes.v1(book: book, classes: notes)
-  # BakeAutotitledNotes.v1(book: book, classes: %w[media-2 problem-solving project])
-  # BakeNumberedNotes.v1(book: book, classes: %w[theorem checkpoint])
-
-  # book.chapters.each do |chapter|
-    # chapter_review = ChapterReviewContainer.v1(
-    #   chapter: chapter,
-    #   metadata_source: book_metadata
-    # )
-
-    # BakeChapterGlossary.v1(
-    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    # )
-    # BakeChapterKeyEquations.v1(
-    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    # )
-    # BakeChapterKeyConcepts.v1(
-    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    # )
-    # MoveExercisesToEOC.v1(
-    #   chapter: chapter, metadata_source: book_metadata,
-    #   append_to: chapter_review, klass: 'review-exercises'
-    # )
-    # BakeChapterSectionExercises.v1(chapter: chapter)
-
-    # Just above we moved the review exercises to the end of the chapter. Now that all of the
-    # non-checkpoint exercises are in the right order, we bake them (the "in place" modifications)
-    # and number them.
-    # chapter.search('section.section-exercises, section.review-exercises').exercises.each \
-    # do |exercise|
-    #   BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
-    # end
-  # end
 
   # BakeChapterIntroductions.v2(book: book,
   #                           chapters: book.units.chapters,
@@ -76,17 +54,17 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   BakeChapterTitle.v2(chapters: book.units.chapters, numbering_options: { mode: :unit_chapter_page })
 
   chapter_numbering_options = {
-    intro: { mode: :chapter_page, page_offset: -1 },
-    main: { mode: :unit_chapter_page, page_offset: -1 }
+    unnumbered: { mode: :chapter_page, page_offset: -1 },
+    numbered: { mode: :unit_chapter_page, page_offset: -1 }
   }
   chapters_by_type = {
-    intro: lambda { book.chapters("$[#{intro_chapter_marker}]") },
-    main: lambda {
-      book.units("$:not([#{intro_unit_marker}])").chapters("$:not([#{intro_chapter_marker}])")
+    unnumbered: lambda { book.chapters("$[#{unnumbered_chapter_marker}]") },
+    numbered: lambda {
+      book.units("$:not([#{unnumbered_unit_marker}])").chapters("$:not([#{unnumbered_chapter_marker}])")
     }
   }
 
-  chapters_by_type[:main].call.each do |chapter|
+  chapters_by_type[:numbered].call.each do |chapter|
     # chapter_review = ChapterReviewContainer.v1(
     #   chapter: chapter,
     #   metadata_source: book_metadata
@@ -105,7 +83,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
     # )
   end
 
-  [:intro, :main].each do |chapter_selection|
+  [:unnumbered, :numbered].each do |chapter_selection|
     numbering_options = chapter_numbering_options[chapter_selection]
     chapters = chapters_by_type[chapter_selection].call
     chapters.each do |chapter|
@@ -152,32 +130,6 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  # Here we move the solutions to the end of the book. Calculus has an "Answer Key" composite
-  # chapter after the appendices. So we make the answer key, then iterate over the chapters, making
-  # an answer key composite page for each chapter that we append to the answer key composite chapter
-  # book_answer_key = BookAnswerKeyContainer.v1(book: book)
-
-  # book.units.chapters.each do |chapter|
-  #   answer_key_inner_container = AnswerKeyInnerContainer.v1(
-  #     chapter: chapter, metadata_source: book_metadata, append_to: book_answer_key
-  #   )
-  #   # Bake solutions
-  #   MoveSolutionsFromAutotitledNote.v1(
-  #     page: chapter, append_to: answer_key_inner_container, note_class: 'checkpoint',
-  #     title: I18n.t(:'notes.checkpoint')
-  #   )
-  #   chapter.sections('$.section-exercises').each do |section|
-  #     number = "#{chapter.count_in(:book)}.#{section.count_in(:chapter)}"
-  #     MoveSolutionsFromExerciseSection.v1(
-  #       within: section, append_to: answer_key_inner_container, section_class: 'section-exercises',
-  #       title_number: number
-  #     )
-  #   end
-  #   MoveSolutionsFromExerciseSection.v1(
-  #     within: chapter, append_to: answer_key_inner_container, section_class: 'review-exercises'
-  #   )
-  # end
-
   BakeStepwise.v1(book: book)
   BakeUnnumberedTables.v1(book: book)
 
@@ -185,7 +137,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
     BakeFirstElements.v1(within: within)
   end
 
-  # BakeMathInParagraph.v1(book: book)
+  BakeMathInParagraph.v1(book: book)
   BakeIndex.v1(book: book)
   BakeCompositePages.v1(book: book)
   BakeFootnotes.v1(book: book)
@@ -196,28 +148,37 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   # Remove numbering from page titles in intro chapter pages, unit intro pages,
   # and unit closers. This must happen before BakeToc because The ToC uses these titles
   (
-    book.units("$[#{intro_unit_marker}]").pages.to_a |
+    book.units("$[#{unnumbered_unit_marker}]").pages('$:not(.introduction)').to_a |
     book.pages('$.unit-closer').to_a |
-    chapters_by_type[:intro].call.pages.to_a
+    book.chapters("$[#{unnumbered_chapter_marker}]").pages.to_a
   ).each do |page|
-    page.title.replace_children(with: page.title.first!('.os-text').copy.paste)
+    page.title.replace_children(with: %%<span data-type="" itemprop="" class="os-text">#{page.title_text}</span>%)
   end
 
+  skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
   BakeToc.v1(book: book, options: {
-    numbering_options: { mode: :unit_chapter_page, unit_offset: -2, chapter_offset: -1 },
     controller: {
       get_unit_toc_title: lambda do |unit|
-        if unit[:'data-intro-unit']
+        if unit[unnumbered_unit_marker]
           %%<span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>%
+        else
+          number = unit.os_number({ mode: :unit_chapter_page, unit_offset: -skipped_units })
+          <<~HTML
+            <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{number}</span>
+            <span class="os-divider"> </span>
+            <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
+          HTML
         end
       end,
       get_chapter_toc_title: lambda do |chapter|
-        if chapter[:'data-intro-chapter']
+        if chapter[unnumbered_chapter_marker]
           %%<span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>%
         else
-          number = chapter.os_number({ mode: :unit_chapter_page, unit_offset: -2, chapter_offset: -1 })
+          unit = chapter.ancestor(:unit)
+          skipped_chapters = unit.chapters("$[#{unnumbered_chapter_marker}]").count - 1
+          number = chapter.os_number({ mode: :unit_chapter_page, unit_offset: -skipped_units, chapter_offset: -skipped_chapters })
           <<~HTML
-            <span class="os-number"><span class="os-part-text">#{I18n.t('lesson')} </span>#{number}</span>
+            <span class="os-number"><span class="os-part-text">#{I18n.t('chapter')} </span>#{number}</span>
             <span class="os-divider"> </span>
             <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
           HTML
@@ -226,7 +187,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
     }
   })
   BakeEquations.v1(book: book, number_decorator: :parentheses)
-  BakeFolio.v1(book: book, chapters: book.units.chapters, options: { numbering_options: { mode: :unit_chapter_page } } )
+  BakeFolio.v1(book: book, chapters: book.units.chapters, options: { numbering_options: { mode: :unit_chapter_page } })
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter)
@@ -236,10 +197,10 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :raise) do |doc, _re
   BakeLinkPlaceholders.v1(book: book)
   BakeLinks.v1(book: book)
 
-  book.chapters("$[#{intro_chapter_marker}]").each do |chapter|
-    chapter.remove_attribute(intro_chapter_marker)
+  book.chapters("$[#{unnumbered_chapter_marker}]").each do |chapter|
+    chapter.remove_attribute(unnumbered_chapter_marker)
   end
-  book.units("$[#{intro_unit_marker}]").each do |unit|
-    unit.remove_attribute(intro_unit_marker)
+  book.units("$[#{unnumbered_unit_marker}]").each do |unit|
+    unit.remove_attribute(unnumbered_unit_marker)
   end
 end
