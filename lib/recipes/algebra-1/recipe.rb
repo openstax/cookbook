@@ -89,7 +89,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     # )
   end
 
-  [:unnumbered, :numbered].each do |chapter_selection|
+  chapters_by_type.keys.each do |chapter_selection|
     numbering_options = chapter_numbering_options[chapter_selection]
     chapters = chapters_by_type[chapter_selection].call
     chapters.each do |chapter|
@@ -107,13 +107,19 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
         BakeFigure.v1(figure: figure,
                       number: figure.os_number(numbering_options))
       end
-      chapter.search('section.practice').injected_exercises.each_with_index do |exercise, idx|
-        BakeInjectedExerciseQuestion.v1(question: question, number: idx + 1)
-        BakeFirstElements.v1(within: question)
-      end
-      # TODO: Delete me
-      chapter.search('section.practice').exercises.each_with_index do |exercise, idx|
-        BakeNumberedExercise.v1(exercise: exercise, number: idx + 1)
+      exercise_sections_or_notes = %w[
+        section.practice div[data-type="note"].mini-lesson-question
+        div[data-type="note"].mini-lesson-review div[data-type="note"].self-check
+      ]
+      exercise_sections_or_notes.each do |selector|
+        chapter.search(selector).injected_questions.each_with_index do |question, idx|
+          BakeInjectedExerciseQuestion.v1(question: question, number: idx + 1)
+          BakeFirstElements.v1(within: question)
+        end
+        # TODO: Delete me?
+        chapter.search(selector).exercises.each_with_index do |exercise, idx|
+          BakeNumberedExercise.v1(exercise: exercise, number: idx + 1)
+        end
       end
       # Title added here
       BakeNonIntroductionPages.v1(chapter: chapter,
