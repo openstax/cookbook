@@ -13,38 +13,34 @@ module Kitchen
           }
         )
         controller = options[:controller]
-        @toc_title_for_unit = lambda do |unit|
-          number = unit.os_number(options[:numbering_options])
-          <<~HTML
-            <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{number}</span>
-            <span class="os-divider"> </span>
-            <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
-          HTML
-        end
-        
-        if controller[:get_unit_toc_title].present?
-          original = @toc_title_for_unit
-          @toc_title_for_unit = lambda do |unit|
-            controller[:get_unit_toc_title].call(unit) || original.call(unit)
+        @toc_title_for_unit = 
+          if controller[:get_unit_toc_title].nil?
+            lambda do |unit|
+              number = unit.os_number(options[:numbering_options])
+              <<~HTML
+                <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{number}</span>
+                <span class="os-divider"> </span>
+                <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
+              HTML
+            end
+          else
+            controller[:get_unit_toc_title]
           end
-        end
         
-        @toc_title_for_chapter = lambda do |chapter|
-          number = chapter.os_number(options[:numbering_options])
-          <<~HTML
-            <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
-            if options[:cases]}")} </span>#{number}</span>
-            <span class="os-divider"> </span>
-            <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
-          HTML
-        end
-        if controller[:get_chapter_toc_title].present?
-          original_get_chapter = @toc_title_for_chapter
-          @toc_title_for_chapter = lambda do |chapter|
-            controller[:get_chapter_toc_title].call(chapter) || original_get_chapter.call(chapter)
+        @toc_title_for_chapter = 
+          if controller[:get_chapter_toc_title].nil?
+            lambda do |chapter|
+              number = chapter.os_number(options[:numbering_options])
+              <<~HTML
+                <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
+                if options[:cases]}")} </span>#{number}</span>
+                <span class="os-divider"> </span>
+                <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
+              HTML
+            end
+          else
+            controller[:get_chapter_toc_title]
           end
-        end
-
 
         li_tags = book.body.element_children.map do |element|
           case element

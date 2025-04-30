@@ -37,6 +37,11 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
+  
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
 
   notes = %w[
     chapter-objectives
@@ -102,7 +107,12 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
         BakeFigure.v1(figure: figure,
                       number: figure.os_number(numbering_options))
       end
-      chapter.pages.search('section.practice').exercises.each_with_index do |exercise, idx|
+      chapter.search('section.practice').injected_exercises.each_with_index do |exercise, idx|
+        BakeInjectedExerciseQuestion.v1(question: question, number: idx + 1)
+        BakeFirstElements.v1(within: question)
+      end
+      # TODO: Delete me
+      chapter.search('section.practice').exercises.each_with_index do |exercise, idx|
         BakeNumberedExercise.v1(exercise: exercise, number: idx + 1)
       end
       # Title added here
@@ -147,7 +157,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
   BakeUnitPageTitle.v1(book: book)
 
   # Remove numbering from page titles in intro chapter pages, unit intro pages,
-  # unit closers, unit titles, and chapter titles. This must happen before BakeToc because The ToC uses these titles
+  # unit closers, unit titles, and chapter titles. 
   (
     book.units("$[#{unnumbered_unit_marker}]").to_a |
     book.units("$[#{unnumbered_unit_marker}]").pages('$:not(.introduction)').to_a |
