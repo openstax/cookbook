@@ -108,18 +108,26 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
                       number: figure.os_number(numbering_options))
       end
       exercise_sections_or_notes = %w[
-        section.practice div[data-type="note"].mini-lesson-question
-        div[data-type="note"].mini-lesson-review div[data-type="note"].self-check
+        section.practice
+        div[data-type="note"].mini-lesson-question
+        div[data-type="note"].mini-lesson-review
+        div[data-type="note"].self-check
       ]
       exercise_sections_or_notes.each do |selector|
-        chapter.search(selector).injected_questions.each_with_index do |question, idx|
-          BakeInjectedExerciseQuestion.v1(question: question, number: idx + 1)
-          BakeFirstElements.v1(within: question)
+        chapter.pages.search(selector).each do |element|
+          is_numbered = element.has_class?('practice')
+          options = { only_number_solution: !is_numbered }
+          element.injected_questions.each_with_index do |question, idx|
+            BakeInjectedExerciseQuestion.v1(question: question,
+                                            number: idx + 1,
+                                            options: options)
+            BakeFirstElements.v1(within: question)
+          end
         end
-        # TODO: Delete me?
-        chapter.search(selector).exercises.each_with_index do |exercise, idx|
-          BakeNumberedExercise.v1(exercise: exercise, number: idx + 1)
-        end
+      end
+      # TODO: Delete me?
+      chapter.pages.search('section.practice').exercises.each_with_index do |exercise, idx|
+        BakeNumberedExercise.v1(exercise: exercise, number: idx + 1)
       end
       # Title added here
       BakeNonIntroductionPages.v1(chapter: chapter,
