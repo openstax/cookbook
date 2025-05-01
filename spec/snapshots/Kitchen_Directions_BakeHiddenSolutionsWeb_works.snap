@@ -1,0 +1,13 @@
+<html xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <body>
+    <div data-type="exercise" class="unnumbered">
+  <div data-type="problem"/>
+  <details data-type="solution" abc="123" aria-label="Show/Hide Solution">
+    
+  <summary class="btn-link ui-toggle" title="Show/Hide Solution" data-content="Show/Hide Solution">[Show/Hide Solution]</summary>
+<section class="ui-body" role="alert"><span>solution content</span></section>
+</details>
+</div>
+
+  </body>
+</html>
