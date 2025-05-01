@@ -51,7 +51,10 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     self-check
     try
   ]
-  BakeAutotitledNotes.v1(book: book, classes: notes)
+  BakeAutotitledNotes.v1(
+    book: book,
+    classes: notes,
+    options: { bake_subtitle: true })
 
   # BakeChapterIntroductions.v2(book: book,
   #                           chapters: book.units.chapters,
