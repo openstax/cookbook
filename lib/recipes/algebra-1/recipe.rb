@@ -118,7 +118,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       ]
       exercise_sections_or_notes.each do |selector|
         chapter.pages.search(selector).each do |element|
-          is_numbered = element.has_class?('practice')
+          is_numbered = false
           options = { only_number_solution: !is_numbered }
           element.injected_questions.each_with_index do |question, idx|
             BakeInjectedExerciseQuestion.v1(question: question,
