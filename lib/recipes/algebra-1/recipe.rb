@@ -128,6 +128,9 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
           end
         end
       end
+      chapter.pages.search('section.numbered-exercises').exercises.each_with_index do |exercise, idx|
+        BakeNumberedExercise.v1(exercise: exercise, number: idx + 1)
+      end
       # Title added here
       BakeNonIntroductionPages.v1(chapter: chapter,
                                   options: { numbering_options: numbering_options })
