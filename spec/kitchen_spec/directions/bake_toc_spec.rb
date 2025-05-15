@@ -408,4 +408,22 @@ RSpec.describe Kitchen::Directions::BakeToc do
       end
     end
   end
+
+  describe 'controllers' do
+    it 'calls correct controller on each unit/chapter' do
+      options = {
+        controller: {
+          get_unit_toc_title: lambda do |unit|
+            "UNIT - #{unit.title_text}"
+          end,
+          get_chapter_toc_title: lambda do |chapter|
+            "CHAPTER - #{chapter.title_text}"
+          end
+        }
+      }
+
+      described_class.v1(book: book_unit, options: options)
+      expect(book_unit.search('nav').to_s).to match_snapshot_auto
+    end
+  end
 end
