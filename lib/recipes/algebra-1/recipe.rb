@@ -92,7 +92,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     # )
   end
 
-  chapters_by_type.keys.each do |chapter_selection|
+  chapters_by_type.each_key do |chapter_selection|
     numbering_options = chapter_numbering_options[chapter_selection]
     chapters = chapters_by_type[chapter_selection].call
     chapters.each do |chapter|

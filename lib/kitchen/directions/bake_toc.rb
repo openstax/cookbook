@@ -2,6 +2,7 @@
 
 module Kitchen
   module Directions
+    # rubocop:disable Metrics/ModuleLength
     module BakeToc
       def self.v1(book:, options: { cases: false })
         options.reverse_merge!(
@@ -190,4 +191,5 @@ module Kitchen
       end
     end
   end
+  # rubocop:enable Metrics/ModuleLength
 end
