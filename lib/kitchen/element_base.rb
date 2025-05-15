@@ -402,7 +402,9 @@ module Kitchen
         else
           unit = ancestor(:unit)
           chapter = ancestor(:chapter)
-          [unit.count_in(:book) + unit_offset, chapter.count_in(:unit) + chapter_offset, count_in(:chapter) + page_offset]
+          [unit.count_in(:book) + unit_offset,
+           chapter.count_in(:unit) + chapter_offset,
+           count_in(:chapter) + page_offset]
         end
       else
         # Further levels of nesting are not currently supported because of how
@@ -424,13 +426,13 @@ module Kitchen
         separator: '.',
         unit_offset: 0,
         chapter_offset: 0,
-        page_offset: 0,
+        page_offset: 0
       )
       parts = number_parts(
         options[:mode],
         unit_offset: options[:unit_offset],
         chapter_offset: options[:chapter_offset],
-        page_offset: options[:page_offset],
+        page_offset: options[:page_offset]
       )
       parts.join(options[:separator])
     end

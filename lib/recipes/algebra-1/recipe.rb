@@ -22,12 +22,10 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       unit.chapters.each_with_index do |ch, ch_idx|
         title = ch.title.to_s
         is_unnumbered_chapter = (
-          ch_idx == 0 or
+          ch_idx.zero? or
           title.include?('Overview and Readiness') or
           title.include?('Project'))
-        if is_unnumbered_chapter
-          ch[unnumbered_chapter_marker] = 'true'
-        end
+        ch[unnumbered_chapter_marker] = 'true' if is_unnumbered_chapter
       end
     end
   end
@@ -67,7 +65,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     numbered: { mode: :unit_chapter_page, page_offset: -1 }
   }
   chapters_by_type = {
-    unnumbered: lambda { book.chapters("$[#{unnumbered_chapter_marker}]") },
+    unnumbered: -> { book.chapters("$[#{unnumbered_chapter_marker}]") },
     numbered: lambda {
       book
         .units("$:not([#{unnumbered_unit_marker}])")
@@ -188,7 +186,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     book.pages('$.unit-closer').to_a
   ).each do |element|
     element.title.replace_children(
-      with: %%<span data-type="" itemprop="" class="os-text">#{element.title_text}</span>%
+      with: %(<span data-type="" itemprop="" class="os-text">#{element.title_text}</span>)
     )
   end
 
@@ -199,7 +197,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       controller: {
         get_unit_toc_title: lambda do |unit|
           if unit[unnumbered_unit_marker]
-            (%%<span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>%)
+            %(<span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>)
           else
             number = unit.os_number({ mode: :unit_chapter_page,
                                       unit_offset: -skipped_units })

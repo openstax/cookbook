@@ -9,11 +9,11 @@ module Kitchen
           numbering_options: { mode: :chapter_page, separator: '.' },
           controller: {
             get_chapter_toc_title: nil,
-            get_unit_toc_title: nil,
+            get_unit_toc_title: nil
           }
         )
         controller = options[:controller]
-        @toc_title_for_unit = 
+        @toc_title_for_unit =
           if controller[:get_unit_toc_title].nil?
             lambda do |unit|
               number = unit.os_number(options[:numbering_options])
@@ -26,8 +26,8 @@ module Kitchen
           else
             controller[:get_unit_toc_title]
           end
-        
-        @toc_title_for_chapter = 
+
+        @toc_title_for_chapter =
           if controller[:get_chapter_toc_title].nil?
             lambda do |chapter|
               number = chapter.os_number(options[:numbering_options])
@@ -107,7 +107,7 @@ module Kitchen
             li_for_composite_chapter(child)
           end
         end.join("\n")
-        
+
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
