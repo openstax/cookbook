@@ -2,12 +2,12 @@
 
 ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, _resources|
   include Kitchen::Directions
-  
+
   book = doc.book
   book_metadata = book.metadata
   unnumbered_unit_marker = 'data-unnumbered-unit'
   unnumbered_chapter_marker = 'data-unnumbered-chapter'
-  
+
   # Mark unnumbered units and chapters
   book.units.each do |unit|
     title = unit.title.to_s
@@ -37,7 +37,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
   BakeUnnumberedFigure.v1(book: book)
   BakeUnclassifiedNotes.v1(book: book)
   BakeIframes.v1(book: book)
-  
+
   AddInjectedExerciseId.v1(book: book)
   book.injected_exercises.each do |exercise|
     BakeInjectedExercise.v1(exercise: exercise)
@@ -69,7 +69,9 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
   chapters_by_type = {
     unnumbered: lambda { book.chapters("$[#{unnumbered_chapter_marker}]") },
     numbered: lambda {
-      book.units("$:not([#{unnumbered_unit_marker}])").chapters("$:not([#{unnumbered_chapter_marker}])")
+      book
+        .units("$:not([#{unnumbered_unit_marker}])")
+        .chapters("$:not([#{unnumbered_chapter_marker}])")
     }
   }
 
@@ -85,7 +87,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       container_key: 'key-terms',
       uuid_key: '.key-terms',
       section_selector: 'section.key-terms'
-    )    
+    )
 
     # BakeChapterGlossary.v1(
     #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
@@ -98,13 +100,13 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     chapters.each do |chapter|
       chapter.tables('$:not(.unnumbered)').each do |table|
         BakeNumberedTable.v1(table: table,
-                            number: table.os_number(numbering_options))
+                             number: table.os_number(numbering_options))
       end
-  
+
       chapter.examples.each do |example|
         BakeExample.v1(example: example,
-                      number: example.os_number(numbering_options),
-                      title_tag: 'h3')
+                       number: example.os_number(numbering_options),
+                       title_tag: 'h3')
       end
       chapter.figures(only: :figure_to_number?).each do |figure|
         BakeFigure.v1(figure: figure,
@@ -175,7 +177,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
   BakeUnitPageTitle.v1(book: book)
 
   # Remove numbering from page titles in intro chapter pages, unit intro pages,
-  # unit closers, unit titles, and chapter titles. 
+  # unit closers, unit titles, and chapter titles.
   (
     book.units("$[#{unnumbered_unit_marker}]").to_a |
     book.units("$[#{unnumbered_unit_marker}]").pages('$:not(.introduction)').to_a |
@@ -183,42 +185,53 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     book.chapters("$[#{unnumbered_chapter_marker}]").pages.to_a |
     book.pages('$.unit-closer').to_a
   ).each do |element|
-    element.title.replace_children(with: %%<span data-type="" itemprop="" class="os-text">#{element.title_text}</span>%)
+    element.title.replace_children(
+      with: %%<span data-type="" itemprop="" class="os-text">#{element.title_text}</span>%
+    )
   end
 
   skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
-  BakeToc.v1(book: book, options: {
-    controller: {
-      get_unit_toc_title: lambda do |unit|
-        if unit[unnumbered_unit_marker]
-          %%<span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>%
-        else
-          number = unit.os_number({ mode: :unit_chapter_page, unit_offset: -skipped_units })
-          <<~HTML
-            <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{number}</span>
-            <span class="os-divider"> </span>
-            <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
-          HTML
+  BakeToc.v1(
+    book: book,
+    options: {
+      controller: {
+        get_unit_toc_title: lambda do |unit|
+          if unit[unnumbered_unit_marker]
+            (%%<span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>%)
+          else
+            number = unit.os_number({ mode: :unit_chapter_page,
+                                      unit_offset: -skipped_units })
+            <<~HTML
+              <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{number}</span>
+              <span class="os-divider"> </span>
+              <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
+            HTML
+          end
+        end,
+        get_chapter_toc_title: lambda do |chapter|
+          if chapter[unnumbered_chapter_marker]
+            <<~HTML
+              <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
+            HTML
+          else
+            unit = chapter.ancestor(:unit)
+            skipped_chapters = unit.chapters("$[#{unnumbered_chapter_marker}]").count - 1
+            number = chapter.os_number({ mode: :unit_chapter_page,
+                                         unit_offset: -skipped_units,
+                                         chapter_offset: -skipped_chapters })
+            <<~HTML
+              <span class="os-number"><span class="os-part-text">#{I18n.t('chapter')} </span>#{number}</span>
+              <span class="os-divider"> </span>
+              <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
+            HTML
+          end
         end
-      end,
-      get_chapter_toc_title: lambda do |chapter|
-        if chapter[unnumbered_chapter_marker]
-          %%<span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>%
-        else
-          unit = chapter.ancestor(:unit)
-          skipped_chapters = unit.chapters("$[#{unnumbered_chapter_marker}]").count - 1
-          number = chapter.os_number({ mode: :unit_chapter_page, unit_offset: -skipped_units, chapter_offset: -skipped_chapters })
-          <<~HTML
-            <span class="os-number"><span class="os-part-text">#{I18n.t('chapter')} </span>#{number}</span>
-            <span class="os-divider"> </span>
-            <span class="os-text" data-type="" itemprop="">#{chapter.title.first!('.os-text').text}</span>
-          HTML
-        end
-      end
-    }
-  })
+      }
+    })
   BakeEquations.v1(book: book, number_decorator: :parentheses)
-  BakeFolio.v1(book: book, chapters: book.units.chapters, options: { numbering_options: { mode: :unit_chapter_page } })
+  BakeFolio.v1(book: book,
+               chapters: book.units.chapters,
+               options: { numbering_options: { mode: :unit_chapter_page } })
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter)
