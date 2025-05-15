@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add recipe for `algebra-1`
+* Add support for offsets in `ElementBase.os_number`
 * Support `unit-closer` pages in TOC
 * Fix iframes links for Polish books
 * Create `number_parts` method in `ElementBase`
