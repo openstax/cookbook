@@ -75,7 +75,7 @@ module Kitchen
       @is_introduction ||= has_class?('introduction')
     end
 
-    # Returns true if this page is a unit closer
+    # Returns true if this page appears after all chapters in a unit
     #
     # @return [Boolean]
     #

@@ -67,6 +67,7 @@ book_recipes = \
   when 'principles-management' then [PRINCIPLES_MANAGEMENT_RECIPE]
   when 'psychology' then [PSYCHOLOGY_RECIPE]
   when 'python' then [PYTHON_RECIPE]
+  when 'algebra-1' then [ALGEBRA_1_RECIPE]
   when 'sociology' then [SOCIOLOGY_RECIPE]
   when 'statistics' then [STATISTICS_RECIPE]
   when 'u-physics' then [U_PHYSICS_RECIPE]

@@ -9,8 +9,9 @@
 <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit" data-toc-type="unit">
   <a href="#">
     <span class="os-number"><span class="os-part-text">Unit </span>1</span>
-    <span class="os-divider"> </span>
-    <span data-type="" itemprop="" class="os-text">Unit 1 Title</span>
+<span class="os-divider"> </span>
+<span data-type="" itemprop="" class="os-text">Unit 1 Title</span>
+
   </a>
   <ol class="os-unit">
     <li class="os-toc-unit-page" cnx-archive-shortid="" cnx-archive-uri="p2" data-toc-type="book-content" data-toc-target-type="intro">
@@ -22,8 +23,9 @@
     <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
   <a href="#chapTitle1">
     <span class="os-number"><span class="os-part-text">Chapter </span>1</span>
-    <span class="os-divider"> </span>
-    <span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
+<span class="os-divider"> </span>
+<span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
+
   </a>
   <ol class="os-chapter">
     
@@ -57,8 +59,9 @@
 <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
   <a href="#chapTitle2">
     <span class="os-number"><span class="os-part-text">Chapter </span>2</span>
-    <span class="os-divider"> </span>
-    <span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
+<span class="os-divider"> </span>
+<span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
+
   </a>
   <ol class="os-chapter">
     
@@ -78,16 +81,18 @@
 <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit" data-toc-type="unit">
   <a href="#">
     <span class="os-number"><span class="os-part-text">Unit </span>2</span>
-    <span class="os-divider"> </span>
-    <span data-type="" itemprop="" class="os-text">Unit 2 Title</span>
+<span class="os-divider"> </span>
+<span data-type="" itemprop="" class="os-text">Unit 2 Title</span>
+
   </a>
   <ol class="os-unit">
     
     <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
   <a href="#chapTitle3">
     <span class="os-number"><span class="os-part-text">Chapter </span>3</span>
-    <span class="os-divider"> </span>
-    <span class="os-text" data-type="" itemprop="">Chapter 3 Title</span>
+<span class="os-divider"> </span>
+<span class="os-text" data-type="" itemprop="">Chapter 3 Title</span>
+
   </a>
   <ol class="os-chapter">
     
@@ -121,6 +126,12 @@
     <li class="os-toc-unit-page" cnx-archive-shortid="" cnx-archive-uri="p-unit-closer" data-toc-type="book-content" data-toc-target-type="numbered-section">
   <a href="#p-unit-closer">
     <span class="os-number">3</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Unit Closer</span>
+  </a>
+</li>
+
+<li class="os-toc-unit-page" cnx-archive-shortid="" cnx-archive-uri="p-unit-close-2r" data-toc-type="book-content" data-toc-target-type="numbered-section">
+  <a href="#p-unit-close-2r">
+    <span class="os-number">3</span><span class="os-divider"> </span><span data-type="" itemprop="" class="os-text">Unit Closer 2</span>
   </a>
 </li>
 

@@ -697,7 +697,10 @@ RSpec.describe Kitchen::ElementBase do
   describe '#number_parts' do
     it 'works with chapter numbers' do
       parts = searchable_book_with_units.units.chapters.pages.map do |page|
-        page.number_parts(:chapter_page)
+        page.number_parts(:chapter_page,
+                          unit_offset: 0,
+                          chapter_offset: 0,
+                          page_offset: 0)
       end
       expect(parts.to_a).to eq [
         [1, 1],
@@ -711,13 +714,22 @@ RSpec.describe Kitchen::ElementBase do
 
     it 'works with unit numbers' do
       unit_parts = searchable_book_with_units.units.map do |unit|
-        unit.number_parts(:unit_chapter_page)
+        unit.number_parts(:unit_chapter_page,
+                          unit_offset: 0,
+                          chapter_offset: 0,
+                          page_offset: 0)
       end
       chapter_parts = searchable_book_with_units.units.chapters.map do |unit|
-        unit.number_parts(:unit_chapter_page)
+        unit.number_parts(:unit_chapter_page,
+                          unit_offset: 0,
+                          chapter_offset: 0,
+                          page_offset: 0)
       end
       page_parts = searchable_book_with_units.units.chapters.pages.map do |page|
-        page.number_parts(:unit_chapter_page)
+        page.number_parts(:unit_chapter_page,
+                          unit_offset: 0,
+                          chapter_offset: 0,
+                          page_offset: 0)
       end
       expect(unit_parts).to eq [[1], [2]]
       expect(chapter_parts).to eq [[1, 1], [2, 1], [2, 2]]
@@ -734,7 +746,10 @@ RSpec.describe Kitchen::ElementBase do
     it 'errors when mode is unknown' do
       expect do
         searchable_book_with_units.units.chapters.pages.map do |page|
-          page.number_parts(:the_unknown_soldier)
+          page.number_parts(:the_unknown_soldier,
+                            unit_offset: 0,
+                            chapter_offset: 0,
+                            page_offset: 0)
         end
       end.to raise_error(/Unknown mode: the_unknown_soldier/)
     end

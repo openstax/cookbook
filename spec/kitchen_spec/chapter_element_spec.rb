@@ -44,4 +44,10 @@ RSpec.describe Kitchen::ChapterElement do
       expect(sample_chapter.has_introduction?).to eq(false)
     end
   end
+
+  describe '#title_text' do
+    it 'returns only text' do
+      expect(sample_chapter.title_text).to eq('Chapter 1 Title')
+    end
+  end
 end
