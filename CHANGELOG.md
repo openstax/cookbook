@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `suppress_solution_title` to `bake_numbered_exercise`
 * Add recipe for `algebra-1`
 * Add support for offsets in `ElementBase.os_number`
 * Support `unit-closer` pages in TOC
