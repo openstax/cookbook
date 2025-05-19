@@ -50,9 +50,11 @@ module Kitchen::Directions::BakeNumberedExercise
           bake_solution(
             exercise: exercise,
             number: number,
-            solution_stays_put: options[:solution_stays_put],
-            with_title: !options[:suppress_solution_title],
-            in_appendix: in_appendix
+            options: {
+              solution_stays_put: options[:solution_stays_put],
+              with_title: !options[:suppress_solution_title],
+              in_appendix: in_appendix
+            }
           )
         end
       end
@@ -66,12 +68,17 @@ module Kitchen::Directions::BakeNumberedExercise
       )
     end
 
-    def bake_solution(exercise:,
-                      number:,
-                      solution_stays_put:,
-                      with_title: true,
-                      divider: '. ',
-                      in_appendix: false)
+    def bake_solution(exercise:, number:, options: {})
+      options.reverse_merge!({
+        solution_stays_put: false,
+        with_title: true,
+        divider: '. ',
+        in_appendix: false
+      })
+      solution_stays_put = options[:solution_stays_put]
+      with_title = options[:with_title]
+      divider = options[:divider]
+      in_appendix = options[:in_appendix]
       solution = exercise.solution
       if solution_stays_put
         solution.wrap_children(class: 'os-solution-container')
