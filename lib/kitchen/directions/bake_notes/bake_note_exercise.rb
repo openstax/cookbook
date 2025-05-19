@@ -20,7 +20,7 @@ module Kitchen
           BakeNumberedExercise.bake_solution_v1(
             exercise: exercise,
             number: number,
-            options: { divider: divider}
+            divider: divider
           )
         end
       end
