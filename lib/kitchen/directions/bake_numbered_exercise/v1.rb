@@ -51,6 +51,7 @@ module Kitchen::Directions::BakeNumberedExercise
             exercise: exercise,
             number: number,
             solution_stays_put: options[:solution_stays_put],
+            with_title: !options[:suppress_solution_title],
             in_appendix: in_appendix
           )
         end
@@ -65,17 +66,25 @@ module Kitchen::Directions::BakeNumberedExercise
       )
     end
 
-    def bake_solution(exercise:, number:, solution_stays_put:, divider: '. ', in_appendix: false)
+    # rubocop:disable Metrics/ParameterLists
+    def bake_solution(exercise:,
+                      number:,
+                      solution_stays_put:,
+                      with_title: true,
+                      divider: '. ',
+                      in_appendix: false)
       solution = exercise.solution
       if solution_stays_put
         solution.wrap_children(class: 'os-solution-container')
-        solution.prepend(child:
-          <<~HTML
-            <h4 class="solution-title" data-type="title">
-              <span class="os-text">#{I18n.t(:solution)}</span>
-            </h4>
-          HTML
-        )
+        if with_title
+          solution.prepend(child:
+            <<~HTML
+              <h4 class="solution-title" data-type="title">
+                <span class="os-text">#{I18n.t(:solution)}</span>
+              </h4>
+            HTML
+          )
+        end
         return
       end
 
@@ -94,5 +103,6 @@ module Kitchen::Directions::BakeNumberedExercise
         HTML
       )
     end
+    # rubocop:enable Metrics/ParameterLists
   end
 end

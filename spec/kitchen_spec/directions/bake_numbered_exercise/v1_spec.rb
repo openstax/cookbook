@@ -122,4 +122,20 @@ RSpec.describe Kitchen::Directions::BakeNumberedExercise do
     end
   end
 
+  context 'when baking solutions' do
+    it 'does not include the solution title when it should be suppressed' do
+      options = { solution_stays_put: true, suppress_solution_title: true }
+      described_class.v1(exercise: exercise1, number: 1, options: options)
+
+      expect(exercise1.search('.solution-title').first.nil?).to eq(true)
+    end
+
+    it 'includes the solution title by default' do
+      options = { solution_stays_put: true }
+      described_class.v1(exercise: exercise1, number: 1, options: options)
+
+      expect(exercise1.search('.solution-title').first.nil?).to eq(false)
+    end
+  end
+
 end
