@@ -54,9 +54,6 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     classes: notes,
     options: { bake_subtitle: true })
 
-  # BakeChapterIntroductions.v2(book: book,
-  #                           chapters: book.units.chapters,
-  #                           options: { numbering_options: { mode: :unit_chapter_page } })
   BakeChapterTitle.v2(chapters: book.units.chapters,
                       numbering_options: { mode: :unit_chapter_page, unit_offset: -2 })
 
@@ -73,12 +70,8 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     }
   }
 
+  # Add key terms to end of chapter
   chapters_by_type[:numbered].call.each do |chapter|
-    # chapter_review = ChapterReviewContainer.v1(
-    #   chapter: chapter,
-    #   metadata_source: book_metadata
-    # )
-
     MoveCustomSectionToEocContainer.v1(
       chapter: chapter,
       metadata_source: book_metadata,
@@ -86,10 +79,6 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       uuid_key: '.key-terms',
       section_selector: 'section.key-terms'
     )
-
-    # BakeChapterGlossary.v1(
-    #   chapter: chapter, metadata_source: book_metadata, append_to: chapter_review
-    # )
   end
 
   chapters_by_type.each_key do |chapter_selection|
