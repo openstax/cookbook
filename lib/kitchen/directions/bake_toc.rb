@@ -18,7 +18,7 @@ module Kitchen
           if controller[:get_unit_toc_title].nil?
             lambda do |unit|
               number = unit.os_number(options[:numbering_options])
-              <<~HTML
+              <<~HTML.indent(4).rstrip
                 <span class="os-number"><span class="os-part-text">#{I18n.t(:unit)} </span>#{number}</span>
                 <span class="os-divider"> </span>
                 <span data-type="" itemprop="" class="os-text">#{unit.title_text}</span>
@@ -32,7 +32,7 @@ module Kitchen
           if controller[:get_chapter_toc_title].nil?
             lambda do |chapter|
               number = chapter.os_number(options[:numbering_options])
-              <<~HTML
+              <<~HTML.indent(4).rstrip
                 <span class="os-number"><span class="os-part-text">#{I18n.t("chapter#{'.nominative' \
                 if options[:cases]}")} </span>#{number}</span>
                 <span class="os-divider"> </span>
@@ -74,7 +74,7 @@ module Kitchen
         <<~HTML
           <li cnx-archive-uri="" cnx-archive-shortid="" class="os-toc-unit" data-toc-type="unit">
             <a href="#">
-              #{@toc_title_for_unit.call(unit)}
+          #{@toc_title_for_unit.call(unit)}
             </a>
             <ol class="os-unit">
               #{before_chapter.map { |page| li_for_page(page) }.join("\n")}
@@ -112,7 +112,7 @@ module Kitchen
         <<~HTML
           <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
             <a href="##{chapter.title.id}">
-              #{@toc_title_for_chapter.call(chapter)}
+          #{@toc_title_for_chapter.call(chapter)}
             </a>
             <ol class="os-chapter">
               #{chapter_children}

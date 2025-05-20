@@ -9,9 +9,8 @@
 <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
   <a href="#chapTitle1">
     <span class="os-number"><span class="os-part-text">Chapter </span>1</span>
-<span class="os-divider"> </span>
-<span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
-
+    <span class="os-divider"> </span>
+    <span class="os-text" data-type="" itemprop="">Chapter 1 Title</span>
   </a>
   <ol class="os-chapter">
     
@@ -45,9 +44,8 @@
 <li class="os-toc-chapter" cnx-archive-shortid="" cnx-archive-uri="" data-toc-type="chapter">
   <a href="#chapTitle2">
     <span class="os-number"><span class="os-part-text">Chapter </span>2</span>
-<span class="os-divider"> </span>
-<span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
-
+    <span class="os-divider"> </span>
+    <span class="os-text" data-type="" itemprop="">Chapter 2 Title</span>
   </a>
   <ol class="os-chapter">
     
