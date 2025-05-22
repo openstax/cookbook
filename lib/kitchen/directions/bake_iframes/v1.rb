@@ -10,8 +10,13 @@ module Kitchen::Directions::BakeIframes
       iframes.each do |iframe|
         next if iframe.has_class?('os-is-iframe') # don't double-bake
 
-        iframe_link = '/404-this-link-should-be-replaced'
-
+        iframe_link = \
+          begin
+            iframe.rex_link
+          rescue StandardError
+            warn "Unable to find rex link for iframe #{iframe}"
+            iframe[:src]
+          end
         iframe.wrap('<div class="os-has-iframe" data-type="switch">')
         iframe.add_class('os-is-iframe')
 
@@ -20,7 +25,7 @@ module Kitchen::Directions::BakeIframes
 
         iframe.prepend(child:
           <<~HTML
-            <a class="os-is-link" data-needs-rex-link="true" href="#{iframe_link}" target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)}</a>
+            <a class="os-is-link" href="#{iframe_link}" target="_blank" rel="noopener nofollow">#{I18n.t(:iframe_link_text)}</a>
           HTML
         )
 

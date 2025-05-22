@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.26.1] - 2025-05-22
+
+* Revert changes to `BakeIframes`
+
 ## [v2.26.0] - 2025-05-20
 
 * Add `suppress_solution_title` to `bake_numbered_exercise`
