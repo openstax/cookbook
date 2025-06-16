@@ -36,6 +36,14 @@ module Kitchen
       first!("./*[@data-type = 'document-title']")
     end
 
+    # Returns the title's text regardless of whether the title has been baked
+    #
+    # @return [String]
+    #
+    def title_text
+      title.children.one? ? title.text : title.first('.os-text').text
+    end
+
     # Returns the introduction page
     #
     # @return [Element, nil]

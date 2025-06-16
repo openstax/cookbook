@@ -18,6 +18,11 @@ RSpec.describe 'books' do
     expect('additive-manufacturing').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes algebra-1' do
+    cmd = form_bake_cmd(book: 'algebra-1')
+    expect('algebra-1').to match_expected_when_baked_with(cmd)
+  end
+
   it 'bakes american-government' do
     cmd = form_bake_cmd(book: 'american-government')
     expect('american-government').to match_expected_when_baked_with(cmd)

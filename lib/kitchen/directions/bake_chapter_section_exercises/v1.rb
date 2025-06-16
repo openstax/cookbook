@@ -15,7 +15,7 @@ module Kitchen::Directions::BakeChapterSectionExercises
 
           section_title = I18n.t(
             :section_exercises,
-            number: "#{chapter.count_in(:book)}.#{page.count_in(:chapter)}")
+            number: page.os_number(options[:numbering_options]))
 
           section.prepend(sibling:
             <<~HTML

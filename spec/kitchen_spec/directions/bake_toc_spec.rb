@@ -121,6 +121,20 @@ RSpec.describe Kitchen::Directions::BakeToc do
               </h2>
             </div>
           </div>
+          <div data-type="page" id="p-unit-closer" class="unit-closer">
+            <h2 data-type="document-title">
+              <span class="os-number">3</span>
+              <span class="os-divider"> </span>
+              <span data-type="" itemprop="" class="os-text">Unit Closer</span>
+            </h2>
+          </div>
+          <div data-type="page" id="p-unit-close-2r" class="unit-closer">
+            <h2 data-type="document-title">
+              <span class="os-number">3</span>
+              <span class="os-divider"> </span>
+              <span data-type="" itemprop="" class="os-text">Unit Closer 2</span>
+            </h2>
+          </div>
         </div>
         <div data-type="page" id="p8" class="appendix">
           <h1 data-type="document-title">
@@ -336,6 +350,15 @@ RSpec.describe Kitchen::Directions::BakeToc do
     expect(book_unit.search('nav').to_s).to match_snapshot_auto
   end
 
+  it 'supports unit numbering' do
+    described_class.v1(
+      book: book_unit,
+      options: { numbering_options: { mode: :unit_chapter_page } }
+    )
+
+    expect(book_unit.search('nav').to_s).to match_snapshot_auto
+  end
+
   it 'works without unit' do
     described_class.v1(book: book_no_unit)
 
@@ -351,7 +374,7 @@ RSpec.describe Kitchen::Directions::BakeToc do
     it 'Page element classes not found' do
       expect {
         described_class.li_for_page(no_pagetype_page)
-      }.to raise_error(RuntimeError, /could not detect which page type class[\s\S]+\(self\) M240:L8:C22/)
+      }.to raise_error(RuntimeError, /could not detect which page type class[\s\S]+\(self\) \/module\/m240\/filename.cnxml:8:22/)
     end
 
     it 'Composite page element classes not found' do
@@ -383,6 +406,24 @@ RSpec.describe Kitchen::Directions::BakeToc do
           expect(book_with_eoc_composite_chapter.search('nav').to_s).to match_snapshot_auto
         end
       end
+    end
+  end
+
+  describe 'controllers' do
+    it 'calls correct controller on each unit/chapter' do
+      options = {
+        controller: {
+          get_unit_toc_title: lambda do |unit|
+            "UNIT - #{unit.title_text}"
+          end,
+          get_chapter_toc_title: lambda do |chapter|
+            "CHAPTER - #{chapter.title_text}"
+          end
+        }
+      }
+
+      described_class.v1(book: book_unit, options: options)
+      expect(book_unit.search('nav').to_s).to match_snapshot_auto
     end
   end
 end

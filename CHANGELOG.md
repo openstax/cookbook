@@ -8,6 +8,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Create recipe for Polish Nursing book
 
+## [v2.26.1] - 2025-05-22
+
+* Revert changes to `BakeIframes`
+
+## [v2.26.0] - 2025-05-20
+
+* Add `suppress_solution_title` to `bake_numbered_exercise`
+* Add recipe for `algebra-1`
+* Add support for offsets in `ElementBase.os_number`
+* Support `unit-closer` pages in TOC
+* Fix iframes links for Polish books
+* Create `number_parts` method in `ElementBase`
+* Create `os_number` method in `ElementBase` for creating `os-number` text
+* Add backward-compatible support for unit numbering where possible
+* Create `v2` of `BakeEquations` that takes chapters as input instead of book
+* Create `v2` of `BakeChapterTitle` that takes chapters as input instead of book
+* Remove `ElementBase#rex_link` in favor of generating links elsewhere
+* Update `BakeIframes` to mark iframe links as needing rex linking
+
+## [v2.25.1] - 2025-02-25
+
+* Stop baking `answer key` in `additive-manufacturing`
+
+## [v2.25.0] - 2025-01-16
+
+* Bake `glossary` in `additive-manufacturing`
+* Do not bake `chapter solutions` in `additive-manufacturing`
+* Bake `answer key` in `additive-manufacturing`
+* Add section title links to `key terms` in `additive-manufacturing`
+* Remove empty `answer key` sections in `data-science`
+
 ## [v2.24.0] - 2024-10-24
 
 * Fix `index` to not generate empty module

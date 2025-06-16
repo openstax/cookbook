@@ -23,7 +23,12 @@ RSpec.describe Kitchen::Directions::BakeReferences do
 
   it 'calls v4' do
     expect_any_instance_of(Kitchen::Directions::BakeReferences::V4).to receive(:bake)
-      .with(book: 'book1', metadata_source: 'metadata_element', cases: false)
-    described_class.v4(book: 'book1', metadata_source: 'metadata_element', cases: false)
+      .with(
+        book: 'book1',
+        chapters: %w[1 2 3],
+        metadata_source: 'metadata_element',
+        cases: false,
+        numbering_options: { mode: :chapter_page, separator: '.' })
+    described_class.v4(book: 'book1', chapters: %w[1 2 3], metadata_source: 'metadata_element', cases: false)
   end
 end

@@ -16,7 +16,12 @@ class String
   #
   # @return [String]
   #
-  def kebab_case
-    strip.downcase.gsub(/®/, ' r').gsub(/[^(\w\s)\-]/, '').gsub(/\s/, '-')
+  def slugify
+    I18n.transliterate(
+      strip.downcase
+        .gsub(/'/, '')
+        .gsub(/®/, ' r')
+        .gsub(/\u2014+/, '-')
+    ).gsub(/[^(\w\s)-]/, '').gsub(/[\s-]+/, '-')
   end
 end

@@ -75,6 +75,14 @@ module Kitchen
       @is_introduction ||= has_class?('introduction')
     end
 
+    # Returns true if this page appears after all chapters in a unit
+    #
+    # @return [Boolean]
+    #
+    def is_unit_closer?
+      @is_unit_closer ||= has_class?('unit-closer')
+    end
+
     # Returns  replaces generic call to page.count_in(:chapter)
     #
     # @raise [StandardError] if called on an introduction page
