@@ -225,9 +225,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       }
     })
   BakeEquations.v1(book: book, number_decorator: :parentheses)
-  BakeFolio.v1(book: book,
-               chapters: book.units.chapters,
-               options: { numbering_options: { mode: :unit_chapter_page } })
+  BakeFolio.v2(book: book, chapters: book.units.chapters)
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kitchen
   module Directions
     module BakeFolio
@@ -9,6 +11,10 @@ module Kitchen
           book: book,
           chapters: chapters || book.chapters,
           options: options)
+      end
+
+      def self.v2(book:, chapters: nil)
+        V2.new.bake(book: book, chapters: chapters || book.chapters)
       end
     end
   end
