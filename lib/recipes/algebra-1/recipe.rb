@@ -54,8 +54,14 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     classes: notes,
     options: { bake_subtitle: true })
 
-  BakeChapterTitle.v2(chapters: book.units.chapters,
-                      numbering_options: { mode: :unit_chapter_page, unit_offset: -2 })
+  BakeChapterTitle.v2(
+    chapters: book.units.chapters,
+    numbering_options: {
+      mode: :unit_chapter_page,
+      unit_offset: -2,
+      chapter_offset: -1
+    }
+  )
 
   chapter_numbering_options = {
     unnumbered: { mode: :chapter_page, page_offset: -1 },
