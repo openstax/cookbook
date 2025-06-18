@@ -54,14 +54,14 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     classes: notes,
     options: { bake_subtitle: true })
 
-  BakeChapterTitle.v2(
-    chapters: book.units.chapters,
-    numbering_options: {
-      mode: :unit_chapter_page,
-      unit_offset: -2,
-      chapter_offset: -1
-    }
-  )
+  skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
+  book.units.each do |unit|
+    skipped_chapters = unit.search("$[#{unnumbered_chapter_marker}]").count - 1
+    numbering_options = { mode: :unit_chapter_page,
+                          unit_offset: -skipped_units,
+                          chapter_offset: -skipped_chapters }
+    BakeChapterTitle.v2(chapters: unit.chapters, numbering_options: numbering_options)
+  end
 
   chapter_numbering_options = {
     unnumbered: { mode: :chapter_page, page_offset: -1 },
@@ -186,7 +186,6 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     )
   end
 
-  skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
   BakeToc.v1(
     book: book,
     options: {
@@ -211,7 +210,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
             HTML
           else
             unit = chapter.ancestor(:unit)
-            skipped_chapters = unit.chapters("$[#{unnumbered_chapter_marker}]").count - 1
+            skipped_chapters = unit.search("$[#{unnumbered_chapter_marker}]").count - 1
             number = chapter.os_number({ mode: :unit_chapter_page,
                                          unit_offset: -skipped_units,
                                          chapter_offset: -skipped_chapters })
