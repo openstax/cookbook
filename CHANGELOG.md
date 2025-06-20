@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Reapply changes to `BakeIframes`
+* Create `v2` `BakeFolio` that uses existing titles/numbers
+* Make numbers optional in `v2` `BackFolio`
+* Fix `BakeChapterTitle` usage in `algebra-1`
 
 ## [v2.26.1] - 2025-05-22
 
