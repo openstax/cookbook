@@ -967,39 +967,6 @@ module Kitchen
       enumerator_class.new(search_query: search_query_that_found_me) { |block| block.yield(self) }
     end
 
-    def rex_link
-      self[:'data-is-for-rex-linking'] = 'true'
-
-      element_with_ancestors = document.book.chapters.search_with(
-        Kitchen::PageElementEnumerator, Kitchen::CompositePageElementEnumerator
-      ).search('[data-is-for-rex-linking="true"]').first
-
-      remove_attribute('data-is-for-rex-linking')
-
-      unless element_with_ancestors
-        raise("Cannot create rex link to element #{self} - needs ancestors of both types chapter & page/composite_page" \
-              "#{say_source_or_nil}"
-        )
-      end
-
-      book_slug = document.slug
-      chapter_count = element_with_ancestors.ancestor(:chapter).count_in(:book)
-      page_string = ''
-      page_title = ''
-      page = element_with_ancestors.ancestor(:page) if element_with_ancestors.has_ancestor?(:page)
-      if page&.is_introduction?
-        page_title = page.first('[data-type="document-title"]').text.slugify
-      elsif page
-        page_string = "#{page.count_in(:chapter) - 1}-"
-        page_title = page.title_text.slugify
-      else
-        page = element_with_ancestors.ancestor(:composite_page)
-        page_title = page.title.text.slugify
-      end
-
-      "https://openstax.org/books/#{book_slug}/pages/#{chapter_count}-#{page_string}#{page_title}"
-    end
-
     def add_platform_media(format)
       valid_formats = %w[screen print screenreader]
       raise "Media format invalid; valid formats are #{valid_formats}" unless valid_formats.include?(format)

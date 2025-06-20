@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Reapply changes to `BakeIframes`
+
 ## [v2.26.1] - 2025-05-22
 
 * Revert changes to `BakeIframes`
