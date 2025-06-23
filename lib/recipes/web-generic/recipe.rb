@@ -19,6 +19,7 @@ WEB_RECIPE = Kitchen::BookRecipe.new(book_short_name: :web) do |doc, resources|
       BakeExerciseWithTitle.v1(within: example)
     end
   end
+  BakeHiddenSolutionsWeb.v1(book_pages: book_pages)
 
   # Restore
   WebPostBakeRestore.v1(book_pages: book_pages)
