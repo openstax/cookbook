@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Create `v2` `BakeFolio` that uses existing titles/numbers
 * Make numbers optional in `v2` `BackFolio`
 * Fix `BakeChapterTitle` usage in `algebra-1`
+* Change Algebra 1 locale of `Link to Learning` to `Classroom Connection`
 
 ## [v2.26.1] - 2025-05-22
 
