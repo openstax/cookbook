@@ -124,13 +124,10 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
         end
       end
       chapter.pages.each do |page|
-        baked_exercises = Set.new
         page.search('section.numbered-exercises').to_a.reverse.each do |section|
-          section.exercises.each_with_index do |exercise, idx|
-            id = exercise[:id]
-            next if baked_exercises.include?(id)
+          section.exercises('$:not(.unnumbered)').each_with_index do |exercise, idx|
+            next if exercise.baked?
 
-            baked_exercises << id
             options = { solution_stays_put: true, suppress_solution_title: true }
             BakeNumberedExercise.v1(exercise: exercise,
                                     number: idx + 1,
