@@ -129,7 +129,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
           section.exercises.each_with_index do |exercise, idx|
             id = exercise[:id]
             next if baked_exercises.include?(id)
-            
+
             baked_exercises << id
             options = { solution_stays_put: true, suppress_solution_title: true }
             BakeNumberedExercise.v1(exercise: exercise,
