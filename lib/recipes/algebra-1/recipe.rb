@@ -53,6 +53,9 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     book: book,
     classes: notes,
     options: { bake_subtitle: true })
+  
+  custom_titled_notes = %w[document]
+  BakeCustomTitledNotes.v1(book: book, classes: custom_titled_notes)
 
   skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
   book.units.each do |unit|
