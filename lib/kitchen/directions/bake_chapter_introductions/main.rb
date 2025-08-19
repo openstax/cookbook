@@ -16,7 +16,8 @@ module Kitchen
           strategy: :default, bake_chapter_outline: false, introduction_order: :v1,
           block_target_label: false,
           cases: false,
-          numbering_options: { mode: :chapter_page, separator: '.' }
+          numbering_options: { mode: :chapter_page, separator: '.' },
+          authors: false
         }
       )
         options.reverse_merge!(
@@ -25,7 +26,8 @@ module Kitchen
           introduction_order: :v1,
           block_target_label: false,
           cases: false,
-          numbering_options: { mode: :chapter_page, separator: '.' }
+          numbering_options: { mode: :chapter_page, separator: '.' },
+          authors: false
         )
         V2.new.bake(
           book: book,

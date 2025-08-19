@@ -17,7 +17,11 @@ PL_NURSING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plnursing) do |doc
 
   BakeChapterIntroductions.v2(
     book: book, options: {
-      strategy: :add_objectives, bake_chapter_outline: true, introduction_order: :v3, cases: true
+      strategy: :add_objectives,
+      bake_chapter_outline: true,
+      introduction_order: :v3,
+      cases: true,
+      authors: true
     }
   )
   BakeChapterTitle.v1(book: book, cases: true)
