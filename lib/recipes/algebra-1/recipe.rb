@@ -54,8 +54,17 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     classes: notes,
     options: { bake_subtitle: true })
 
-  BakeChapterTitle.v2(chapters: book.units.chapters,
-                      numbering_options: { mode: :unit_chapter_page, unit_offset: -2 })
+  custom_titled_notes = %w[document]
+  BakeCustomTitledNotes.v1(book: book, classes: custom_titled_notes)
+
+  skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
+  book.units.each do |unit|
+    skipped_chapters = unit.search("$[#{unnumbered_chapter_marker}]").count - 1
+    numbering_options = { mode: :unit_chapter_page,
+                          unit_offset: -skipped_units,
+                          chapter_offset: -skipped_chapters }
+    BakeChapterTitle.v2(chapters: unit.chapters, numbering_options: numbering_options)
+  end
 
   chapter_numbering_options = {
     unnumbered: { mode: :chapter_page, page_offset: -1 },
@@ -117,12 +126,16 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
           end
         end
       end
-      chapter.pages.search('section.numbered-exercises').each do |section|
-        section.exercises.each_with_index do |exercise, idx|
-          options = { solution_stays_put: true, suppress_solution_title: true }
-          BakeNumberedExercise.v1(exercise: exercise,
-                                  number: idx + 1,
-                                  options: options)
+      chapter.pages.each do |page|
+        page.search('section.numbered-exercises').to_a.reverse.each do |section|
+          section.exercises('$:not(.unnumbered)').each_with_index do |exercise, idx|
+            next if exercise.baked?
+
+            options = { solution_stays_put: true, suppress_solution_title: true }
+            BakeNumberedExercise.v1(exercise: exercise,
+                                    number: idx + 1,
+                                    options: options)
+          end
         end
       end
       # Title added here
@@ -180,7 +193,6 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
     )
   end
 
-  skipped_units = book.units("$[#{unnumbered_unit_marker}]").count - 1
   BakeToc.v1(
     book: book,
     options: {
@@ -205,7 +217,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
             HTML
           else
             unit = chapter.ancestor(:unit)
-            skipped_chapters = unit.chapters("$[#{unnumbered_chapter_marker}]").count - 1
+            skipped_chapters = unit.search("$[#{unnumbered_chapter_marker}]").count - 1
             number = chapter.os_number({ mode: :unit_chapter_page,
                                          unit_offset: -skipped_units,
                                          chapter_offset: -skipped_chapters })
@@ -219,9 +231,7 @@ ALGEBRA_1_RECIPE = Kitchen::BookRecipe.new(book_short_name: :algebra1) do |doc, 
       }
     })
   BakeEquations.v1(book: book, number_decorator: :parentheses)
-  BakeFolio.v1(book: book,
-               chapters: book.units.chapters,
-               options: { numbering_options: { mode: :unit_chapter_page } })
+  BakeFolio.v2(book: book, chapters: book.units.chapters)
 
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter)

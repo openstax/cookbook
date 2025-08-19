@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * Create recipe for Polish Nursing book
+* Reapply changes to `BakeIframes`
+* Create `v2` `BakeFolio` that uses existing titles/numbers
+* Make numbers optional in `v2` `BackFolio`
+* Fix `BakeChapterTitle` usage in `algebra-1`
+* Change Algebra 1 locale of `Link to Learning` to `Classroom Connection`
+* Ensure numbered exercises are only baked once in `algebra-1`
+* Bake `document` notes in `algebra-1`
 
 ## [v2.26.1] - 2025-05-22
 
