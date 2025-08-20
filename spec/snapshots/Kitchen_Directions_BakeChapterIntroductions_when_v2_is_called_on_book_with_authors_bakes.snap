@@ -1,0 +1,30 @@
+<html xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <body>
+    <div data-type="chapter">
+  <h1 data-type="document-title">Chapter 1 Title</h1>
+  <div class="introduction" data-type="page" id="ipId">
+    
+    <p class="autor">Some author</p>
+<figure class="splash">can't touch this (stop! hammer time)</figure>
+    
+    
+    
+    
+    
+  <div class="intro-body">
+  <div class="os-chapter-outline">
+  <h3 class="os-title">Chapter Outline</h3>
+  
+</div>
+
+  <div class="intro-text">
+    <h2 data-type="document-title" id="ipId_titlecreatedbycookbook"><span data-type="" itemprop="" class="os-text">Introduction</span>
+</h2>
+    <figure>move this</figure><div>content</div><p>Some paragraph text.</p><p>Another paragraph text.</p>
+  </div>
+</div>
+</div>
+</div>
+
+  </body>
+</html>

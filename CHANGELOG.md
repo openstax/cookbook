@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Create recipe for Polish Nursing book
 * Reapply changes to `BakeIframes`
 * Create `v2` `BakeFolio` that uses existing titles/numbers
 * Make numbers optional in `v2` `BackFolio`
