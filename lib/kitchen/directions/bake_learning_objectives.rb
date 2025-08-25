@@ -25,7 +25,7 @@ module Kitchen
 
         learning_objectives.each do |abstract|
           if add_title and (
-              not skip_title_if_exists or abstract.search('[data-type="title"]').to_a.empty?
+              !skip_title_if_exists or abstract.search('[data-type="title"]').to_a.empty?
             )
             abstract.prepend(child: "<h3 data-type='title'>#{I18n.t(:learning_objectives)}</h3>")
           end

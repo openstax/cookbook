@@ -24,11 +24,11 @@ module Kitchen::Directions::AnswerKeyCleaner
                                            '[data-type="question-solution"]')
         end
       end
-      if options[:remove_empty_container]
-        book.search(chapters_query).each do |chapter|
-          chapter.trash unless chapter.search(
-            '$ > [data-type="composite-page"]').to_a.length > 0
-        end
+      return unless options[:remove_empty_container]
+
+      book.search(chapters_query).each do |chapter|
+        chapter.trash if chapter.search(
+          '$ > [data-type="composite-page"]').to_a.empty?
       end
     end
   end

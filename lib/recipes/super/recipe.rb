@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-SUPER_RECIPE = Kitchen::BookRecipe.new(book_short_name: :super) do |doc, resources|
+SUPER_RECIPE = Kitchen::BookRecipe.new(book_short_name: :super) do |doc, _resources|
   include Kitchen::Directions
 
-  
   # Setup
   book = doc.book
   book_metadata = book.metadata
@@ -107,7 +106,7 @@ SUPER_RECIPE = Kitchen::BookRecipe.new(book_short_name: :super) do |doc, resourc
 
   begin
     BakeMathInParagraph.v1(book: book)
-  rescue
+  rescue StandardError
     puts 'No math in collection'
   end
   AnswerKeyCleaner.v1(book: book, options: { remove_empty_container: true })
@@ -117,11 +116,11 @@ SUPER_RECIPE = Kitchen::BookRecipe.new(book_short_name: :super) do |doc, resourc
   BakeFootnotes.v1(book: book)
   BakeToc.v1(book: book)
   BakeEquations.v1(book: book, number_decorator: :parentheses)
-  
+
   book.chapters.each do |chapter|
     BakeLearningObjectives.v2(chapter: chapter, skip_title_if_exists: true)
   end
-  
+
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
   BakeRexWrappers.v1(book: book)
