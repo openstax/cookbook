@@ -24,7 +24,7 @@ end
 RSpec::Matchers.define(:match_expected_when_baked_with) do |cmd|
   match do |book|
     # run formatted command with logging silenced
-    system(cmd, %i[out err] => File::NULL)
+    system(cmd)
 
     # write output and run test
     actual_output = "#{__dir__}/../books/#{book}/actual_output.xhtml"
