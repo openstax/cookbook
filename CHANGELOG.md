@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [v2.27.0] - 2025-08-25
+
 * Reapply changes to `BakeIframes`
 * Create `v2` `BakeFolio` that uses existing titles/numbers
 * Make numbers optional in `v2` `BackFolio`
