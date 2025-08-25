@@ -70,6 +70,7 @@ book_recipes = \
   when 'algebra-1' then [ALGEBRA_1_RECIPE]
   when 'sociology' then [SOCIOLOGY_RECIPE]
   when 'statistics' then [STATISTICS_RECIPE]
+  when 'super' then [SUPER_RECIPE]
   when 'u-physics' then [U_PHYSICS_RECIPE]
   when 'web-generic' then [WEB_RECIPE]
   when 'world-history' then [WORLD_HISTORY_RECIPE]

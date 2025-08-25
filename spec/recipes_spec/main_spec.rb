@@ -298,6 +298,11 @@ RSpec.describe 'books' do
     expect('statistics').to match_expected_when_baked_with(cmd)
   end
 
+  it 'bakes super' do
+    cmd = form_bake_cmd(book: 'super')
+    expect('super').to match_expected_when_baked_with(cmd)
+  end
+
   it 'bakes trigonometry' do
     cmd = form_bake_cmd(book: 'trigonometry', recipe: 'precalculus')
     expect('trigonometry').to match_expected_when_baked_with(cmd)
