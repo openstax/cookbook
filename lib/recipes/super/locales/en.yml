@@ -1,1 +1,10 @@
-en: {}
+en:
+  notes:
+    link-to-learning: Link to Learning
+  eoc:
+    chapter-review: Chapter Review
+    section-summary: Summary
+    review-questions: Review Questions
+  exercises:
+    exercise: Exercise
+    solution: Answer
