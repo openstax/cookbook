@@ -12,7 +12,8 @@ module Kitchen
       def self.v2(chapter:,
                   add_title: true,
                   li_numbering: :in_chapter,
-                  numbering_mode: :chapter_page)
+                  numbering_mode: :chapter_page,
+                  skip_title_if_exists: false)
         learning_objectives =
           if %i[in_appendix count_only_li_in_appendix].include?(li_numbering)
             chapter.search('section.learning-objectives')
@@ -23,7 +24,9 @@ module Kitchen
           end
 
         learning_objectives.each do |abstract|
-          if add_title
+          if add_title and (
+              not skip_title_if_exists or abstract.search('[data-type="title"]').to_a.empty?
+            )
             abstract.prepend(child: "<h3 data-type='title'>#{I18n.t(:learning_objectives)}</h3>")
           end
 
