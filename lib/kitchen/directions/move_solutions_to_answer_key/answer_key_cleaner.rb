@@ -15,9 +15,6 @@ module Kitchen::Directions::AnswerKeyCleaner
         .os-eob.os-solution-container[data-type="composite-chapter"]
       ]
       chapters_query = answer_key_chapter_queries.join(', ')
-      pages_query = answer_key_chapter_queries.map do |base_query|
-        "#{base_query} > [data-type=\"composite-page\"]"
-      end.join(', ')
       book.search(chapters_query).each do |chapter|
         chapter.search('$ > [data-type="composite-page"]').each do |page|
           page.trash unless page.contains?('[data-type="solution"]',
