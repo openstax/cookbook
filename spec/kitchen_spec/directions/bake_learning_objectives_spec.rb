@@ -127,6 +127,11 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
     expect(chapter_with_more_data).to match_snapshot_auto
   end
 
+  it 'skips titles for v2' do
+    described_class.v2(chapter: appendix_page_with_lo, li_numbering: :in_appendix, skip_title_if_exists: true)
+    expect(appendix_page_with_lo).to match_snapshot_auto
+  end
+
   it 'bakes lo in appendices' do
     described_class.v2(chapter: appendix_page_with_lo, li_numbering: :in_appendix)
     expect(appendix_page_with_lo).to match_snapshot_auto

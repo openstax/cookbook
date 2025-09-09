@@ -1,0 +1,10 @@
+<div class="os-eob another-eob-type" data-type="composite-chapter">
+  <h1 data-type="document-title" id="composite-chapter-1">
+    <span class="os-text">Not an Answer Key</span>
+  </h1>
+  <div class="os-eob something-else" data-type="composite-page">
+    <h2 data-type="document-title">
+      <span class="os-text">Chapter 1</span>
+    </h2>
+  </div>
+</div>
