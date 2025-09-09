@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.28.0] - 2025-09-09
+
 * Add `super` recipe for baking super documents
 * Allow skipping title generation in `BakeLearningObjectives`
 * Add option to fully remove empty answer keys
