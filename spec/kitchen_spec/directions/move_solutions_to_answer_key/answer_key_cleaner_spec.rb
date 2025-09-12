@@ -46,8 +46,45 @@ RSpec.describe Kitchen::Directions::AnswerKeyCleaner do
     )
   end
 
+  let(:book2) do
+    book_containing(html:
+      <<~HTML
+        <div class="os-eob os-solution-container" data-type="composite-chapter">
+          <h1 data-type="document-title" id="composite-chapter-1">
+            <span class="os-text">Answer Key</span>
+          </h1>
+          <div class="os-eob os-solution-container" data-type="composite-page">
+            <h2 data-type="document-title">
+              <span class="os-text">Chapter 1</span>
+            </h2>
+          </div>
+          <div class="os-eob os-solution-container" data-type="composite-page">
+            <h2 data-type="document-title">
+              <span class="os-text">Chapter 2</span>
+            </h2>
+          </div>
+        </div>
+        <div class="os-eob another-eob-type" data-type="composite-chapter">
+          <h1 data-type="document-title" id="composite-chapter-1">
+            <span class="os-text">Not an Answer Key</span>
+          </h1>
+          <div class="os-eob something-else" data-type="composite-page">
+            <h2 data-type="document-title">
+              <span class="os-text">Chapter 1</span>
+            </h2>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   it 'removes container without solutions' do
     described_class.v1(book: book)
     expect(book.first('.os-eob[data-type="composite-chapter"]').to_s).to match_snapshot_auto
+  end
+
+  it 'removes parent container without solutions' do
+    described_class.v1(book: book2, options: { remove_empty_container: true })
+    expect(book2.first('.os-eob[data-type="composite-chapter"]').to_s).to match_snapshot_auto
   end
 end
