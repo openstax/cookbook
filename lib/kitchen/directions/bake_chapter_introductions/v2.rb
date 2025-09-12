@@ -163,7 +163,7 @@ module Kitchen::Directions::BakeChapterIntroductions
 
     def bake_authors(introduction_page:)
       splash = introduction_page.search('.splash').first
-      author = introduction_page.search('p.autor').cut
+      author = introduction_page.search('p.author').cut
 
       splash.prepend(sibling:
         <<~HTML

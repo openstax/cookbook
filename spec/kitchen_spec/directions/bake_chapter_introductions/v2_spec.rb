@@ -211,7 +211,7 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
             <div>content</div>
             <p>Some paragraph text.</p>
             <p>Another paragraph text.</p>
-            <p class="autor">Some author</p>
+            <p class="author">Some author</p>
           </div>
         </div>
       HTML
