@@ -55,6 +55,12 @@ PL_NURSING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plnursing) do |doc
       RemoveSectionTitle.v1(section: section)
     end
 
+    BakeSortableSection.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      klass: 'suggested-reading'
+    )
+
     BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, has_para: true)
 
     MoveCustomSectionToEocContainer.v1(
@@ -75,12 +81,6 @@ PL_NURSING_RECIPE = Kitchen::BookRecipe.new(book_short_name: :plnursing) do |doc
     BakeAllNumberedExerciseTypes.v1(
       within: chapter.pages.notes('$.unfolding-casestudy'),
       exercise_options: { cases: true }
-    )
-
-    BakeSortableSection.v1(
-      chapter: chapter,
-      metadata_source: metadata,
-      klass: 'suggested-reading'
     )
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
