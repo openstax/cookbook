@@ -33,6 +33,8 @@ module Kitchen::Directions::BakeChapterIntroductions
           chapter_intro_html: chapter_intro_html,
           title: title
         )
+
+        bake_authors(introduction_page: introduction_page) if options[:authors]
       end
 
       Kitchen::Directions::BakeChapterIntroductions.v1_update_selectors(book)
@@ -157,6 +159,17 @@ module Kitchen::Directions::BakeChapterIntroductions
       title.name = 'h2'
       title.id = "#{introduction_page.id}_titlecreatedbycookbook"
       Kitchen::Directions::MoveTitleChildrenIntoSpan.v1(title: title)
+    end
+
+    def bake_authors(introduction_page:)
+      splash = introduction_page.search('.splash').first
+      author = introduction_page.search('p.author').cut
+
+      splash.prepend(sibling:
+        <<~HTML
+          #{author.paste}
+        HTML
+      )
     end
   end
 end

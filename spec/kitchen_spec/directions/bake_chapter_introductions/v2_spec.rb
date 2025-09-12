@@ -199,6 +199,25 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
     )
   end
 
+  let(:book_with_authors) do
+    book_containing(html:
+      <<~HTML
+        <div data-type="chapter">
+          <h1 data-type="document-title">Chapter 1 Title</h1>
+          <div class="introduction" data-type="page" id="ipId">
+            <div data-type="document-title">Introduction</div>
+            <figure class="splash">can't touch this (stop! hammer time)</figure>
+            <figure>move this</figure>
+            <div>content</div>
+            <p>Some paragraph text.</p>
+            <p>Another paragraph text.</p>
+            <p class="author">Some author</p>
+          </div>
+        </div>
+      HTML
+    )
+  end
+
   context 'when v2 called on book with chapter objectives' do
     it 'with chapter outline' do
       described_class.v2(
@@ -282,6 +301,20 @@ RSpec.describe Kitchen::Directions::BakeChapterIntroductions do
         }
       )
       expect(book_with_non_intro_modules_title_children.body).to match_snapshot_auto
+    end
+  end
+
+  context 'when v2 is called on book with authors' do
+    it 'bakes' do
+      described_class.v2(
+        book: book_with_authors, options: {
+          strategy: :add_objectives,
+          bake_chapter_outline: true,
+          introduction_order: :v1,
+          authors: true
+        }
+      )
+      expect(book_with_authors).to match_snapshot_auto
     end
   end
 
