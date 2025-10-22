@@ -1,19 +1,13 @@
 <div data-type="page" id="testidOne">
-    <h3>The top title within the page</h3>
+    <h2>The top title within the page</h2>
 <div>Body of introduction
-  <h6>Subtitle</h6>
+  <h4>Subtitle</h4>
   <p>a paragraph</p>
 </div>
-<h3 data-type="document-title">wow another header</h3>
-<h5>subheader also</h5>
-<div><h6>subtitle subtitle</h6><p>paragraph</p>
-  <h6>here we see a subtitle</h6>
+<h2 data-type="document-title" data-rex-keep="true">wow another header</h2>
+<h3>subheader also</h3>
+<div><h4>subtitle subtitle</h4><p>paragraph</p>
+  <h4>here we see a subtitle</h4>
 </div>
-<h2>The SS Morro Castle was</h2>
-<h3>an inside job</h3>
-<h6>(probably)</h6>
-<h4>Like, there was a</h4>
-<h5>CIA agent on board...</h5>
-<h5>I'm just saying</h5>
 
   </div>
