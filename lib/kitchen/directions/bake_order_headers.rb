@@ -28,7 +28,6 @@ module Kitchen
         last = -1
         within.search('h1,h2,h3,h4,h5,h6').each do |header|
           depth = header.name[-1].to_i
-          original_depth = depth
           if last == -1
             depth = top_header_value
           elsif depth > last + 1
@@ -37,7 +36,7 @@ module Kitchen
           name = "h#{depth}"
           header.name = name
           # https://github.com/openstax/rex-web/blob/a3dd80667d6503d6b2eeea0d58c1b775c85b9500/src/app/content/components/Page/contentDOMTransformations.ts#L40
-          header['data-rex-keep'] = true if name == "h2" && header['data-type'] == 'document-title'
+          header['data-rex-keep'] = true if name == 'h2' && header['data-type'] == 'document-title'
           last = depth
         end
       end
