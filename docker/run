@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 extra_args=()
@@ -7,6 +9,8 @@ extra_args=()
 # Environment variables we want to send to the container
 env_names=(
     UPDATE_SNAPSHOTS # rspec will update snapshots if this is set
+    TRACE_ON
+    PROFILE
 )
 
 for env_name in "${env_names[@]}"; do

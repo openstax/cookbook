@@ -17,6 +17,12 @@ RSpec.describe Kitchen::Directions::BakeOrderHeaders do
           <div><h6>subtitle subtitle</h6><p>paragraph</p>
             <h6>here we see a subtitle</h6>
           </div>
+          <h1>The SS Morro Castle was</h1>
+          <h3>an inside job</h3>
+          <h6>(probably)</h6>
+          <h4>Like, there was a</h4>
+          <h5>CIA agent on board...</h5>
+          <h5>I'm just saying</h5>
         HTML
       )
     ).pages.first
@@ -24,6 +30,11 @@ RSpec.describe Kitchen::Directions::BakeOrderHeaders do
 
   it 'works' do
     described_class.v1(within: page_with_headers)
+    expect(page_with_headers).to match_snapshot_auto
+  end
+
+  it 'works (v2)' do
+    described_class.v2(within: page_with_headers)
     expect(page_with_headers).to match_snapshot_auto
   end
 end

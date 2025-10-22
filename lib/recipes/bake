@@ -81,6 +81,7 @@ book_recipes = \
 
 recipe_array = book_recipes
 recipe_array.push(WEB_RECIPE) if opts[:platform] == 'web'
+recipe_array.push(POST_BAKE)
 recipe_array.push(VALIDATE_OUTPUT)
 
 puts Kitchen::Oven.bake(
