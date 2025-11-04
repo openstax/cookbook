@@ -26,12 +26,13 @@ module Kitchen
 
       def self.v2(within:, top_header_value: 1)
         last = -1
-        within.search(':not([data-type="metadata"]) > h1,h2,h3,h4,h5,h6').each do |header|
+        within.search('h1,h2,h3,h4,h5,h6').each do |header|
+          next if header.parent[:'data-type'] == 'metadata'
           depth = header.name[-1].to_i
           if last == -1
             depth = top_header_value
-          elsif depth > last + 1
-            depth = last + 1
+          elsif (depth - last).abs > 1
+            depth = if depth > last then last + 1 else last - 1 end
           end
           name = "h#{depth}"
           header.name = name
