@@ -60,6 +60,10 @@ pl:
   eoc_solutions_title: Rozwiązania
   eob_index_symbols_group: Symbole
   references: Bibliografia
+  figure_link_desc: ! 'Patrz %{figure}'
+  table_link_desc: ! 'Patrz %{table}'
+  section_link_desc: ! 'Przejdź do Sekcji %{link_text}'
+  generic_link_desc: ! 'Przejdź do %{link_text}'
   eoc:
     glossary: Kluczowe pojęcia
     key-equations: Najważniejsze wzory

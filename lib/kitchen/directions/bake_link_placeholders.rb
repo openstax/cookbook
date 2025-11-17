@@ -5,6 +5,17 @@ module Kitchen
     # Bake directions for link placeholders
     #
     module BakeLinkPlaceholders
+      def self.get_link_caption(anchor)
+        text = anchor.text
+        if text.match?(/^#{I18n.translate(:figure)}\s/i)
+          return I18n.translate(:figure_link_desc, figure: text)
+        elsif text.match?(/^#{I18n.translate(:table)}\s/i)
+          return I18n.translate(:table_link_desc, table: text)
+        end
+
+        I18n.translate(:generic_link_desc, link_text: text)
+      end
+
       def self.v1(book:, cases: false, replace_section_link_text: false)
         # passing in relevant ids to overwrite
         ids_to_link_overwrite = replace_section_link_text ? book.chapters.pages.map(&:id) : []
@@ -45,6 +56,7 @@ module Kitchen
             # TODO: log a warning!
             warn "warning! could not find a replacement for '[link]' on an element with ID '#{id}'"
           end
+          anchor[:'aria-label'] = get_link_caption(anchor)
 
           link_class = book.pantry(name: :link_type).get(id)
           anchor.add_class(link_class) if link_class.present?

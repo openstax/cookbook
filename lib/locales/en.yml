@@ -32,6 +32,9 @@ en:
   handbook_outline_title: Outline
   context_lead_text: 'Refer to '
   lo_label_text: 'LO '
+  figure_link_desc: ! 'View %{figure}'
+  table_link_desc: ! 'View %{table}'
+  generic_link_desc: ! 'Go to %{link_text}'
   eoc:
     glossary: Key Terms
     key-equations: Key Equations

@@ -28,6 +28,10 @@ es:
   iframe_link_text: Accede a contenidos multimedia
   handbook_outline_title: Esquema
   context_lead_text: 'Referirse a '
+  figure_link_desc: ! 'Consulte la %{figure}'
+  table_link_desc: ! 'Consulte la %{table}'
+  section_link_desc: ! 'Vaya a la Sección %{link_text}'
+  generic_link_desc: ! 'Vaya a %{link_text}'
   eoc:
     glossary: Términos clave
     key-equations: Ecuaciones clave

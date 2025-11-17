@@ -1,7 +1,7 @@
 <body>
     <a>skip this link</a>
-<a href="?other_key">Przyk&#x142;ad x.y</a>
-<a xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" cmlnle:case="genitive" href="?other_key">Przyk&#x142;adu x.y</a>
-<a case="locative" href="?next_key">Przyk&#x142;adzie x.y</a>
+<a href="?other_key" aria-label="Go to Przyk&#x142;ad x.y">Przyk&#x142;ad x.y</a>
+<a xmlns:cmlnle="http://katalysteducation.org/cmlnle/1.0" cmlnle:case="genitive" href="?other_key" aria-label="Go to Przyk&#x142;adu x.y">Przyk&#x142;adu x.y</a>
+<a case="locative" href="?next_key" aria-label="Go to Przyk&#x142;adzie x.y">Przyk&#x142;adzie x.y</a>
 
   </body>
