@@ -32,12 +32,16 @@ module Kitchen::Directions::BakeChapterIntroductions
     end
 
     def add_chapter_objectives(chapter:, options: {})
-      options.reverse_merge!(numbering_options: { mode: :chapter_page, separator: '.' })
+      options.reverse_merge!(
+        numbering_options: { mode: :chapter_page, separator: '.' },
+        cases: false)
       chapter.non_introduction_pages.map do |page|
         number = page.os_number(options[:numbering_options])
+        title_text = page.title_children.map(&:text).join(' ')
+        label = I18n.t(:section_link_desc, link_text: "#{number} #{title_text}")
         <<~HTML
           <div class="os-chapter-objective">
-            <a class="os-chapter-objective" href="##{page.id}">
+            <a class="os-chapter-objective" href="##{page.id}" aria-label="#{label}">
               <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
               <span data-type="" itemprop="" class="os-text">#{page.title_children}</span>
