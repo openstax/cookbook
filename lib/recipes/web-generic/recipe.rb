@@ -13,8 +13,6 @@ WEB_RECIPE = Kitchen::BookRecipe.new(book_short_name: :web) do |doc, resources|
   # Web directions
   BakeImages.v1(book_pages: book_pages, resources: resources)
   book_pages.each do |page_or_composite|
-    BakeOrderHeaders.v1(within: page_or_composite)
-
     page_or_composite.search('[data-type="example"]').each do |example|
       BakeExerciseWithTitle.v1(within: example)
     end

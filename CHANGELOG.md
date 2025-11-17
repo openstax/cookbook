@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Add `v2` of `BakeOrderHeaders` that ensure header levels are not skipped
+* Add post bake recipe that runs after the selected recipe
+* Remove `BakeOrderHeaders` from web recipe
+* Add `BakeOrderHeaders` to post bake recipe that runs for all books
+
 ## [v2.29.0] - 2025-09-16
 
 * Create recipe for Polish Nursing book
