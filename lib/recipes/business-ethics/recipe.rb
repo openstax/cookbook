@@ -27,6 +27,11 @@ do |doc, _resources|
     }
   )
 
+  AddInjectedExerciseId.v1(book: book)
+  book.injected_exercises.each do |exercise|
+    BakeInjectedExercise.v1(exercise: exercise)
+  end
+
   answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
 
   book.chapters.each do |chapter|
@@ -77,8 +82,9 @@ do |doc, _resources|
       klass: 'references'
     )
 
+    # Does BakeInjectedExerciseQuestion
     BakeAllNumberedExerciseTypes.v1(
-      within: chapter.search('div[data-type="composite-page"]')
+      within: chapter.search('div[data-type="composite-page"], div[data-type="page"]')
     )
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
@@ -91,6 +97,17 @@ do |doc, _resources|
       chapter: chapter,
       append_to: answer_key_inner_container
     )
+
+    answer_key_inner_container = AnswerKeyInnerContainer.v1(
+      chapter: chapter, metadata_source: metadata, append_to: answer_key
+    )
+
+    classes = %w[assessment-questions]
+    classes.each do |klass|
+      MoveSolutionsFromExerciseSection.v1(
+        within: chapter, append_to: answer_key_inner_container, section_class: klass
+      )
+    end
   end
 
   notes = %w[link-to-learning ethics-across real-world what-would]
