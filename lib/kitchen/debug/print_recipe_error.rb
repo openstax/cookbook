@@ -45,7 +45,7 @@ module Kitchen
       return unless current_node
 
       puts "Encountered on line #{Rainbow(current_node.line).red} in the input document on element:"
-      puts current_node.dup.tap { |node| node.inner_html = '...' if node.inner_html != '' }.to_s
+      puts(current_node.dup.tap { |node| node.inner_html = '...' if node.inner_html != '' })
       puts "\n"
     end
 

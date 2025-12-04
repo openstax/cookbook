@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Add post bake recipe that runs after the selected recipe
 * Remove `BakeOrderHeaders` from web recipe
 * Add `BakeOrderHeaders` to post bake recipe that runs for all books
+* Add actionable phrases to links
 
 ## [v2.29.0] - 2025-09-16
 

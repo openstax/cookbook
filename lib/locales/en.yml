@@ -35,6 +35,7 @@ en:
   figure_link_desc: ! 'View %{figure}'
   table_link_desc: ! 'View %{table}'
   generic_link_desc: ! 'Go to %{link_text}'
+  reference_link_desc: ! 'Go to reference %{reference}'
   eoc:
     glossary: Key Terms
     key-equations: Key Equations
