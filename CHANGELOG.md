@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Bake injected exercises in `business-ethics`
 * Add `v2` of `BakeOrderHeaders` that ensure header levels are not skipped
 * Add post bake recipe that runs after the selected recipe
 * Remove `BakeOrderHeaders` from web recipe
