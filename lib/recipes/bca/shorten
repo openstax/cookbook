@@ -4,19 +4,39 @@
 
 require_relative '../recipes_helper'
 
+allow_unknown = !ENV['ALLOW_UNKNOWN_ARGS'].nil?
+
+# 1. Parse options first so variables are available inside the recipe block
+opts = Slop.parse suppress_errors: allow_unknown do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+  slop.string '--keep-chapters', 'Comma-separated list of chapter numbers to keep (e.g., "1,3,5")', default: '1'
+end
+
 recipe = Kitchen::BookRecipe.new(book_short_name: :bca_short) do |doc|
   include Kitchen::Directions
 
   book = doc.book
-  # trash all but first chapter
-  book.chapters.drop(1).each(&:trash)
+# 2. Process the input list
+  # Split the string "1,3,5" into an array of integers [1, 3, 5]
+  chapters_to_keep = opts[:keep_chapters].split(',').map(&:to_i)
+
+  # 3. Iterate through chapters and trash those not in the list
+  # Note: This assumes input '1' refers to the first chapter found in the DOM.
+  book.chapters.each_with_index do |chapter, index|
+    chapter_number = index + 1
+    
+    # If the list is empty, we keep everything (safety default). 
+    # Otherwise, trash if the current number isn't in the list.
+    unless chapters_to_keep.empty? || chapters_to_keep.include?(chapter_number)
+      chapter.trash
+    end
+  end
+
+  # Original Appendix logic (Trashes all but first appendix)
+  # You may want to update this similarly if you need to filter appendices.
   # trash all but first appendix
   book.search('div.appendix').drop(1).each(&:trash)
-end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
 end
 
 puts Kitchen::Oven.bake(
