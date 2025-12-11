@@ -4,6 +4,8 @@
 
 require_relative '../recipes_helper'
 
+allow_unknown = !ENV['ALLOW_UNKNOWN_ARGS'].nil?
+
 recipe = Kitchen::BookRecipe.new(book_short_name: :bca_short) do |doc|
   include Kitchen::Directions
 
@@ -14,7 +16,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :bca_short) do |doc|
   book.search('div.appendix').drop(1).each(&:trash)
 end
 
-opts = Slop.parse do |slop|
+opts = Slop.parse suppress_errors: allow_unknown do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
 end
