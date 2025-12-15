@@ -74,7 +74,7 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
         <<~HTML
           <body>
             <a>skip this link</a>
-            <a href='?key'>Example x.y</a>
+            <a aria-label="Go to Example x.y" href="?key">Example x.y</a>
           </body>
         HTML
       )
