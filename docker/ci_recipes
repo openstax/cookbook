@@ -9,5 +9,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 docker run -v $DIR/..:/code \
            -w /code \
+           --env TRACE_ON=1 \
            openstax/cookbook.ci:latest \
            /bin/bash -c "bundle config path vendor/bundle && bundle install && bundle exec rspec spec/recipes_spec/"
