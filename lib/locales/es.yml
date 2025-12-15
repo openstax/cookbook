@@ -30,8 +30,9 @@ es:
   context_lead_text: 'Referirse a '
   figure_link_desc: ! 'Consulte la %{figure}'
   table_link_desc: ! 'Consulte la %{table}'
-  section_link_desc: ! 'Vaya a la Sección %{link_text}'
-  generic_link_desc: ! 'Vaya a %{link_text}'
+  section_link_desc: ! 'Ir a la Sección %{link_text}'
+  generic_link_desc: ! 'Ir a la %{link_text}'
+  reference_link_desc: ! 'Ir a la referencia %{reference}'
   eoc:
     glossary: Términos clave
     key-equations: Ecuaciones clave

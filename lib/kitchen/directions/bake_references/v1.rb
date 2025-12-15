@@ -20,7 +20,7 @@ module Kitchen::Directions::BakeReferences
           next if link_sibling.nil?
 
           next unless link_sibling&.raw&.attr('data-type') == 'cite'
-          link_description = I18n.t(:generic_link_desc, reference: reference_number)
+          link_description = I18n.t(:reference_link_desc, reference: reference_number)
           link[:'aria-label'] = link_description
 
           link.prepend(sibling:

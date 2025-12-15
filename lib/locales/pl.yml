@@ -64,6 +64,7 @@ pl:
   table_link_desc: ! 'Patrz %{table}'
   section_link_desc: ! 'Przejdź do Sekcji %{link_text}'
   generic_link_desc: ! 'Przejdź do %{link_text}'
+  reference_link_desc: ! 'Przejdź do odnośnika %{reference}'
   eoc:
     glossary: Kluczowe pojęcia
     key-equations: Najważniejsze wzory
