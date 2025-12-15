@@ -82,6 +82,8 @@ module Kitchen
     end
 
     def load_my_i18n_backend(locales_dir)
+      @my_i18n_backend = I18n::Backend::Simple.new
+
       locales_dir ||= begin
         guessed_locales_dir = "#{File.dirname(@source_location)}/locales"
         File.directory?(guessed_locales_dir) ? guessed_locales_dir : nil
@@ -89,7 +91,6 @@ module Kitchen
 
       return unless locales_dir
 
-      @my_i18n_backend = I18n::Backend::Simple.new
       @my_i18n_backend.load_translations(Dir[File.expand_path("#{locales_dir}/*.yml")])
     end
 
