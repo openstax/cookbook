@@ -4,6 +4,15 @@
 
 require_relative '../recipes_helper'
 
+allow_unknown = !ENV['ALLOW_UNKNOWN_ARGS'].nil?
+
+# 1. Parse options first so variables are available inside the recipe block
+opts = Slop.parse suppress_errors: allow_unknown do |slop|
+  slop.string '--input', 'Assembled XHTML input file', required: true
+  slop.string '--output', 'Baked XHTML output file', required: true
+  slop.string '--keep-chapters', 'Comma-separated list of chapter numbers to keep (e.g., "1,3,5")', default: '1'
+end
+
 recipe = Kitchen::BookRecipe.new(book_short_name: :ap_biology_short) do |doc|
   include Kitchen::Directions
 
@@ -14,11 +23,6 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_biology_short) do |doc|
   book.chapters.drop(1).each(&:trash)
   # trash all but first appendix
   book.search('div.appendix').drop(1).each(&:trash)
-end
-
-opts = Slop.parse do |slop|
-  slop.string '--input', 'Assembled XHTML input file', required: true
-  slop.string '--output', 'Baked XHTML output file', required: true
 end
 
 puts Kitchen::Oven.bake(
