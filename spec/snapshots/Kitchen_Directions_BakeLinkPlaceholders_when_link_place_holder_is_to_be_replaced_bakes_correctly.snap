@@ -1,8 +1,14 @@
 <body>
     <div data-type="chapter">
   <div data-type="page" id="?key">1.21 Section About Decimals like 2.1 and 1.21</div>
+  <div data-type="page" id="?fjshjdf">
+    <table id="and_another_one"/>
+    <figure id="something_something"/>
+  </div>
   <a>skip this link</a>
   <a href="?key" aria-label="Go to Section 1.21">Section 1.21</a>
+  <a href="?and_another_one" aria-label="View Table 1.2">Table 1.2</a>
+  <a href="?something_something" aria-label="View Figure 1.1">Figure 1.1</a>
   <a href="?other_key" aria-label="Go to 2.1 This label remains">2.1 This label remains</a>
   <a href="?foo_key" aria-label="Go to Appendix A">Appendix A</a>
 </div>

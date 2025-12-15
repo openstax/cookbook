@@ -47,8 +47,14 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
       <<~HTML
         <div data-type="chapter">
           <div data-type="page" id='?key'>1.21 Section About Decimals like 2.1 and 1.21</div>
+          <div data-type="page" id='?fjshjdf'>
+            <table id="and_another_one"></table>
+            <figure id="something_something"></figure>
+          </div>
           <a>skip this link</a>
           <a href='?key'>[link]</a>
+          <a href='?and_another_one'>[link]</a>
+          <a href='?something_something'>[link]</a>
           <a href='?other_key'>[link]</a>
           <a href='?foo_key'>[link]</a>
         </div>
@@ -78,6 +84,8 @@ RSpec.describe Kitchen::Directions::BakeLinkPlaceholders do
   context 'when link place holder is to be replaced' do
     before do
       book_with_sections_overwrite.pantry(name: :link_text).store('1.21 Section About Decimals like 2.1 and 1.21', label: 'key')
+      book_with_sections_overwrite.pantry(name: :link_text).store('Table 1.2', label: 'and_another_one')
+      book_with_sections_overwrite.pantry(name: :link_text).store('Figure 1.1', label: 'something_something')
       book_with_sections_overwrite.pantry(name: :link_text).store('2.1 This label remains', label: 'other_key')
       book_with_sections_overwrite.pantry(name: :link_text).store('Appendix A', label: 'foo_key')
     end
