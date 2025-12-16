@@ -34,6 +34,7 @@ en:
   lo_label_text: 'LO '
   figure_link_desc: ! 'View %{figure}'
   table_link_desc: ! 'View %{table}'
+  section_link_desc: ! 'Go to Section %{link_text}'
   generic_link_desc: ! 'Go to %{link_text}'
   reference_link_desc: ! 'Go to reference %{reference}'
   eoc:
