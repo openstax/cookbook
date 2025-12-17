@@ -7,9 +7,10 @@ module Kitchen::Directions::BakeReferences
     def bake(book:, metadata_source:, numbered_title:)
       book.chapters.each do |chapter|
         chapter.search('[data-type="cite"]').each do |link|
+          reference_number = link.count_in(:chapter)
           link.prepend(child:
             <<~HTML.chomp
-              <sup class="os-citation-number">#{link.count_in(:chapter)}</sup>
+              <sup class="os-citation-number">#{reference_number}</sup>
             HTML
           )
 
@@ -19,6 +20,9 @@ module Kitchen::Directions::BakeReferences
           next if link_sibling.nil?
 
           next unless link_sibling&.raw&.attr('data-type') == 'cite'
+
+          link_description = I18n.t(:reference_link_desc, reference: reference_number)
+          link[:'aria-label'] = link_description
 
           link.prepend(sibling:
             <<~HTML.strip.chomp

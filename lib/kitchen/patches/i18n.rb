@@ -24,7 +24,7 @@ module I18n
     @string_sorter = nil
   end
 
-  class <<self
+  class << self
     alias_method :original_locale=, :locale=
   end
 

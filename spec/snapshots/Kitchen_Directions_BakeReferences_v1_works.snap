@@ -20,7 +20,7 @@
       <a href="#auto_12345" data-type="cite"><sup class="os-citation-number">1</sup>
         
       </a>
-      <span class="os-reference-link-separator"><sup>, </sup></span><a href="#auto_54321" data-type="cite"><sup class="os-citation-number">2</sup>
+      <span class="os-reference-link-separator"><sup>, </sup></span><a href="#auto_54321" data-type="cite" aria-label="Go to reference 2"><sup class="os-citation-number">2</sup>
         
       </a>
       " However, in the 2018 midterm elections, an estimated 31 percent of Americans under thirty turned out to vote, the highest level of young adult engagement in decades."

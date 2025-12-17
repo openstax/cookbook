@@ -10,7 +10,8 @@ allow_unknown = !ENV['ALLOW_UNKNOWN_ARGS'].nil?
 opts = Slop.parse suppress_errors: allow_unknown do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Shortened assembled XHTML output file', required: true
-  slop.string '--keep-chapters', 'Comma-separated list of chapter numbers to keep (e.g., "1,3,5")', default: '1,2'
+  slop.string '--keep-chapters', 'Comma-separated list of chapter numbers to keep (e.g., "1,3,5")',
+              default: '1,2'
 end
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :finance_short) do |doc|

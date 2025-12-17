@@ -10,7 +10,8 @@ allow_unknown = !ENV['ALLOW_UNKNOWN_ARGS'].nil?
 opts = Slop.parse suppress_errors: allow_unknown do |slop|
   slop.string '--input', 'Assembled XHTML input file', required: true
   slop.string '--output', 'Baked XHTML output file', required: true
-  slop.string '--keep-chapters', 'Comma-separated list of chapter numbers to keep (e.g., "1,3,5")', default: '1'
+  slop.string '--keep-chapters', 'Comma-separated list of chapter numbers to keep (e.g., "1,3,5")',
+              default: '1'
 end
 
 recipe = Kitchen::BookRecipe.new(book_short_name: :ap_history_short) do |doc|
@@ -29,9 +30,7 @@ recipe = Kitchen::BookRecipe.new(book_short_name: :ap_history_short) do |doc|
 
     # If the list is empty, we keep everything (safety default).
     # Otherwise, trash if the current number isn't in the list.
-    unless chapters_to_keep.empty? || chapters_to_keep.include?(chapter_number)
-      chapter.trash
-    end
+    chapter.trash unless chapters_to_keep.empty? || chapters_to_keep.include?(chapter_number)
   end
 
   # Original Appendix logic (Trashes all but first appendix)

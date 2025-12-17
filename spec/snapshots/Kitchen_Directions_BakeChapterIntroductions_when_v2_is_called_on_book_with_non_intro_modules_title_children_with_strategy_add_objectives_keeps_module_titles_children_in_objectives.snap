@@ -12,14 +12,14 @@
   <div class="os-chapter-outline">
   <h3 class="os-title">Chapter Outline</h3>
   <div class="os-chapter-objective">
-  <a class="os-chapter-objective" href="#">
+  <a class="os-chapter-objective" href="#" aria-label="Translation missing: test.section_link_desc">
     <span class="os-number">1.1</span>
     <span class="os-divider"> </span>
     <span data-type="" itemprop="" class="os-text"><em data-effect="italics">Italics</em>  not italics with <sub>subscript</sub> and <sup>superscript</sup> text should be objective 1.1</span>
   </a>
 </div>
 <div class="os-chapter-objective">
-  <a class="os-chapter-objective" href="#">
+  <a class="os-chapter-objective" href="#" aria-label="Translation missing: test.section_link_desc">
     <span class="os-number">1.2</span>
     <span class="os-divider"> </span>
     <span data-type="" itemprop="" class="os-text"><em data-effect="italics">Italics</em>  not italics with <sub>subscript</sub> and <sup>superscript</sup> text should be objective 1.2</span>
