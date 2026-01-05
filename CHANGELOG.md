@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [v2.30.0] - 2026-01-05
+
 * Add `--keep-chapters` option to all recipe shorten scripts for flexible chapter selection
 * Bake injected exercises in `business-ethics`
 * Add `v2` of `BakeOrderHeaders` that ensure header levels are not skipped
