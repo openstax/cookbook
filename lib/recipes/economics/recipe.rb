@@ -28,14 +28,24 @@ ECONOMICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :economics) do |doc,
     BakeChapterSummary.v1(chapter: chapter, metadata_source: metadata)
 
     exercise_section_classes = \
-      %w[summary self-check-questions review-questions critical-thinking problems]
+      %w[self-check-questions review-questions critical-thinking problems]
 
     chapter.search(exercise_section_classes.prefix('section.')).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))
     end
 
-    exercise_section_classes.each do |klass|
-      MoveExercisesToEOC.v1(chapter: chapter, metadata_source: metadata, klass: klass)
+    exercise_section_classes.each do |section_key|
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter,
+        metadata_source: metadata,
+        container_key: section_key,
+        uuid_key: ".#{section_key}",
+        section_selector: "section.#{section_key}"
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page))
+        section.prepend(child: title)
+      end
     end
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
