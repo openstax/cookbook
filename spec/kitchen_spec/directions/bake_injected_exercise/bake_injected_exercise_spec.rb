@@ -221,5 +221,13 @@ RSpec.describe Kitchen::Directions::BakeInjectedExercise do
       )
       expect(injected_exercise_full_with_multipart_questions_with_many_solutions).to match_snapshot_auto
     end
+
+    it 'bakes an alphabetical multipart question with suppressing detailed' do
+      described_class.v1(
+        exercise: injected_exercise_full_with_multipart_questions_with_many_solutions,
+        options: { alphabetical_multiparts: true, list_type: 'lower-alpha', add_brackets: true, suppress_detailed: true }
+      )
+      expect(injected_exercise_full_with_multipart_questions_with_many_solutions).to match_snapshot_auto
+    end
   end
 end

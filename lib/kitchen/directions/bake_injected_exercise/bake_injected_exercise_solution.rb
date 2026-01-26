@@ -9,7 +9,8 @@ module Kitchen::Directions::BakeInjectedExerciseSolution
     options.reverse_merge!(
       problem_with_prefix: false,
       solutions_clipboard: nil,
-      suppress_summary: false
+      suppress_summary: false,
+      suppress_detailed: false
     )
 
     V1.new.bake(question: question, id: id, number: number, options: options)
@@ -20,6 +21,9 @@ module Kitchen::Directions::BakeInjectedExerciseSolution
       # Suppress summary solution before counting solutions
       if options[:suppress_summary]
         question.solutions('$[data-solution-type="summary"]').each(&:trash)
+      end
+      if options[:suppress_detailed]
+        question.solutions('$[data-solution-type="detailed"]').each(&:trash)
       end
 
       # Count solutions

@@ -5,13 +5,17 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
     only_number_solution: false,
     add_dot: false,
     problem_with_prefix: false,
-    suppress_summary: false
+    suppress_summary: false,
+    suppress_detailed: false,
+    answer_letter_upper: false
   })
     options.reverse_merge!(
       only_number_solution: false,
       add_dot: false,
       problem_with_prefix: false,
-      suppress_summary: false
+      suppress_summary: false,
+      suppress_detailed: false,
+      answer_letter_upper: false
     )
 
     V1.new.bake(question: question, number: number, options: options)
@@ -39,7 +43,11 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       if question.answers
         case question.answers[:type]
         when 'a'
-          alphabet = *('a'..'z')
+          alphabet = if options[:answer_letter_upper]
+                       [*('A'..'Z')]
+                     else
+                       [*('a'..'z')]
+                     end
         else
           raise('Unsupported list type for multiple choice options')
         end
@@ -47,6 +55,9 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       end
       if options[:suppress_summary]
         question.solutions('$[data-solution-type="summary"]').each(&:trash)
+      end
+      if options[:suppress_detailed]
+        question.solutions('$[data-solution-type="detailed"]').each(&:trash)
       end
       if letter_answers.present?
         text_content = "#{letter_answers.join(', ')}#{'.' if options[:add_dot]}"
