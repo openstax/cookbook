@@ -29,7 +29,13 @@ do |doc, _resources|
 
   AddInjectedExerciseId.v1(book: book)
   book.injected_exercises.each do |exercise|
-    BakeInjectedExercise.v1(exercise: exercise)
+    BakeInjectedExercise.v1(
+      exercise: exercise,
+      options: {
+        suppress_summary: true,
+        suppress_detailed: true
+      }
+    )
   end
 
   answer_key = BookAnswerKeyContainer.v1(book: book, solutions_plural: false)
@@ -84,7 +90,12 @@ do |doc, _resources|
 
     # Does BakeInjectedExerciseQuestion
     BakeAllNumberedExerciseTypes.v1(
-      within: chapter.search('div[data-type="composite-page"], div[data-type="page"]')
+      within: chapter.search('div[data-type="composite-page"], div[data-type="page"]'),
+      question_options: {
+        suppress_summary: true,
+        suppress_detailed: true,
+        answer_letter_upper: true
+      }
     )
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
