@@ -23,8 +23,8 @@ module Kitchen::Directions::BakeInjectedExerciseSolution
     def bake(question:, id:, number:, options:)
       solutions_count = question.solutions.count
       prioritize_solution = options[:prioritize_solution]
-      raise "Unknown solution type: \"#{prioritize_solution}\"" unless [nil, :detailed,
-                                                                        :summary].include?(prioritize_solution)
+      prioritize_solution in nil | :detailed | :summary or
+        raise "Unknown solution type: \"#{prioritize_solution}\""
 
       # Suppress summary solution before counting solutions
       if options[:suppress_summary] || ((prioritize_solution == :detailed) && (solutions_count > 1))
