@@ -220,6 +220,27 @@ RSpec.describe Kitchen::Directions::BakeInjectedExerciseQuestion do
     expect(book_with_injected_section.search('section').first).to match_snapshot_auto
   end
 
+  it 'bakes with answer_letter_only' do
+    book_with_injected_section.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: question.count_in(:page), options: { answer_letter_only: true })
+    end
+    expect(book_with_injected_section.search('section').first).to match_snapshot_auto
+  end
+
+  it 'bakes with prioritize_solution set to detailed' do
+    book_with_exercise_with_two_solutions.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: question.count_in(:page), options: { prioritize_solution: :detailed })
+    end
+    expect(book_with_exercise_with_two_solutions.search('section').first).to match_snapshot_auto
+  end
+
+  it 'bakes with prioritize_solution set to summary' do
+    book_with_exercise_with_two_solutions.chapters.pages.injected_questions.each do |question|
+      described_class.v1(question: question, number: question.count_in(:page), options: { prioritize_solution: :summary })
+    end
+    expect(book_with_exercise_with_two_solutions.search('section').first).to match_snapshot_auto
+  end
+
   context 'when the question-answers list type is not lower alpha' do
     let(:question_with_all_correct) do
       book_containing(html:

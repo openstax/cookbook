@@ -7,7 +7,9 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
     problem_with_prefix: false,
     suppress_summary: false,
     suppress_detailed: false,
-    answer_letter_upper: false
+    answer_letter_upper: false,
+    answer_letter_only: false,
+    prioritize_solution: nil
   })
     options.reverse_merge!(
       only_number_solution: false,
@@ -15,7 +17,9 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
       problem_with_prefix: false,
       suppress_summary: false,
       suppress_detailed: false,
-      answer_letter_upper: false
+      answer_letter_upper: false,
+      answer_letter_only: false,
+      prioritize_solution: nil
     )
 
     V1.new.bake(question: question, number: number, options: options)
@@ -53,13 +57,15 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         end
         letter_answers = question.correct_answer_letters(alphabet)
       end
-      if options[:suppress_summary]
+      has_letter_answers = letter_answers.present?
+      answer_letter_only = options[:answer_letter_only]
+      if options[:suppress_summary] || (has_letter_answers && answer_letter_only)
         question.solutions('$[data-solution-type="summary"]').each(&:trash)
       end
-      if options[:suppress_detailed]
+      if options[:suppress_detailed] || (has_letter_answers && answer_letter_only)
         question.solutions('$[data-solution-type="detailed"]').each(&:trash)
       end
-      if letter_answers.present?
+      if has_letter_answers
         text_content = "#{letter_answers.join(', ')}#{'.' if options[:add_dot]}"
         answer_letters_span = "<span class=\"answer-letters\">#{text_content}</span>"
         if !question.solution
@@ -126,7 +132,9 @@ module Kitchen::Directions::BakeInjectedExerciseQuestion
         number: number,
         options: {
           problem_with_prefix: options[:problem_with_prefix],
-          suppress_summary: options[:suppress_summary]
+          suppress_summary: options[:suppress_summary],
+          suppress_detailed: options[:suppress_detailed],
+          prioritize_solution: options[:prioritize_solution]
         }
       )
 

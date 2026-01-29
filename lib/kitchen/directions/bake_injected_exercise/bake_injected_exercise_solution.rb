@@ -4,13 +4,16 @@ module Kitchen::Directions::BakeInjectedExerciseSolution
   def self.v1(question:, id:, number:, options: {
     problem_with_prefix: false,
     solutions_clipboard: nil,
-    suppress_summary: false
+    suppress_summary: false,
+    suppress_detailed: false,
+    prioritize_solution: nil
   })
     options.reverse_merge!(
       problem_with_prefix: false,
       solutions_clipboard: nil,
       suppress_summary: false,
-      suppress_detailed: false
+      suppress_detailed: false,
+      prioritize_solution: nil
     )
 
     V1.new.bake(question: question, id: id, number: number, options: options)
@@ -18,11 +21,16 @@ module Kitchen::Directions::BakeInjectedExerciseSolution
 
   class V1
     def bake(question:, id:, number:, options:)
+      solutions_count = question.solutions.count
+      prioritize_solution = options[:prioritize_solution]
+      raise "Unknown solution type: \"#{prioritize_solution}\"" unless [nil, :detailed,
+                                                                        :summary].include?(prioritize_solution)
+
       # Suppress summary solution before counting solutions
-      if options[:suppress_summary]
+      if options[:suppress_summary] || ((prioritize_solution == :detailed) && (solutions_count > 1))
         question.solutions('$[data-solution-type="summary"]').each(&:trash)
       end
-      if options[:suppress_detailed]
+      if options[:suppress_detailed] || ((prioritize_solution == :summary) && (solutions_count > 1))
         question.solutions('$[data-solution-type="detailed"]').each(&:trash)
       end
 
