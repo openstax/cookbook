@@ -5,13 +5,17 @@ module Kitchen::Directions::BakeInjectedExercise
     alphabetical_multiparts: false,
     list_type: nil,
     add_brackets: false,
-    suppress_summary: false
+    suppress_summary: false,
+    suppress_detailed: false,
+    prioritize_solution: nil
   })
     options.reverse_merge!(
       alphabetical_multiparts: false,
       list_type: nil,
       add_brackets: false,
-      suppress_summary: false
+      suppress_summary: false,
+      suppress_detailed: false,
+      prioritize_solution: nil
     )
     V1.new.bake(exercise: exercise, options: options)
   end
@@ -73,7 +77,9 @@ module Kitchen::Directions::BakeInjectedExercise
             number: problem_letter,
             options: {
               solutions_clipboard: solutions_clipboard,
-              suppress_summary: options[:suppress_summary]
+              suppress_summary: options[:suppress_summary],
+              suppress_detailed: options[:suppress_detailed],
+              prioritize_solution: options[:prioritize_solution]
             }
           )
         end

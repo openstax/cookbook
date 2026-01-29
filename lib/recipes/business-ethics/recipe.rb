@@ -84,7 +84,12 @@ do |doc, _resources|
 
     # Does BakeInjectedExerciseQuestion
     BakeAllNumberedExerciseTypes.v1(
-      within: chapter.search('div[data-type="composite-page"], div[data-type="page"]')
+      within: chapter.search('div[data-type="composite-page"], div[data-type="page"]'),
+      question_options: {
+        answer_letter_upper: true,
+        prioritize_solution: :detailed,
+        answer_letter_only: true
+      }
     )
 
     answer_key_inner_container = AnswerKeyInnerContainer.v1(
