@@ -6,13 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [v2.31.0] - 2026-02-04
+
 * Add `convert_textual_links` to `post_bake` recipe
 * Add `answer_letter_only` option to `BakeInjectedExerciseQuestion` for showing only answer letters without solutions
 * Add `prioritize_solution` option to `BakeInjectedExerciseQuestion` and `BakeInjectedExerciseSolution` for selecting preferred solution type
 * Add `suppress_detailed` and `answer_letter_upper` options to `BakeInjectedExerciseQuestion`
 * Add `suppress_detailed` option to `BakeInjectedExerciseSolution`
 * Update `business-ethics` recipe to use `answer_letter_only` and `prioritize_solution` options
-
 
 ## [v2.30.0] - 2026-01-05
 
