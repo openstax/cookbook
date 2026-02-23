@@ -60,13 +60,15 @@ RSpec.describe Kitchen::Directions::BakeLearningObjectives do
             <div class="intro-body">
               <div class="os-chapter-outline">
                 <h3 class="os-title">Chapter Outline</h3>
-                <div class="os-chapter-objective">
-                  <a class="os-chapter-objective">link to page 1.1</a>
-                </div>
-                <div class="os-chapter-objective">
-                </div>
-                <div class="os-chapter-objective">
-                </div>
+                <ul class="os-chapter-objectives">
+                  <li class="os-chapter-objective">
+                    <a class="os-chapter-objective">link to page 1.1</a>
+                  </li>
+                  <li class="os-chapter-objective">
+                  </li>
+                  <li class="os-chapter-objective">
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

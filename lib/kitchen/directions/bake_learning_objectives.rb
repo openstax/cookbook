@@ -65,7 +65,7 @@ module Kitchen
           abstract.parent
         end
 
-        chapter.introduction_page.search('div.os-chapter-objective') \
+        chapter.introduction_page.search('li.os-chapter-objective') \
                .each_with_index do |objective, index|
           objective.append(child: abstracts[index].cut.paste)
         end
