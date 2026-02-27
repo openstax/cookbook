@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Fix accessibility issue in `BakeChapterIntroductions` by baking learning objectives as lists (WCAG 1.3.1)
 
 ## [v2.31.0] - 2026-02-04
 

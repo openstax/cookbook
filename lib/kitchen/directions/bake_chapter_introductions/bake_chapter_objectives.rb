@@ -35,20 +35,21 @@ module Kitchen::Directions::BakeChapterIntroductions
       options.reverse_merge!(
         numbering_options: { mode: :chapter_page, separator: '.' },
         cases: false)
-      chapter.non_introduction_pages.map do |page|
+      list_items = chapter.non_introduction_pages.map do |page|
         number = page.os_number(options[:numbering_options])
         title_text = page.title_children.map(&:text).join(' ')
         label = I18n.t(:section_link_desc, link_text: "#{number} #{title_text}")
         <<~HTML
-          <div class="os-chapter-objective">
+          <li class="os-chapter-objective">
             <a class="os-chapter-objective" href="##{page.id}" aria-label="#{label}">
               <span class="os-number">#{number}</span>
               <span class="os-divider"> </span>
               <span data-type="" itemprop="" class="os-text">#{page.title_children}</span>
             </a>
-          </div>
+          </li>
         HTML
       end.join('')
+      %(<ul class="os-chapter-objectives">#{list_items}</ul>)
     end
   end
 end
