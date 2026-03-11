@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.31.1] - 2026-03-11
+
 * Fix accessibility issue in `BakeChapterIntroductions` by baking learning objectives as lists (WCAG 1.3.1)
 * Add `data-bare-link` attribute to anchors in `post_bake` where the link text matches the href
 * Fix sanitization issue in `BakeChapterIntroductions`
