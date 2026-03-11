@@ -52,13 +52,18 @@ POST_BAKE = Kitchen::BookRecipe.new(book_short_name: :post_bake) do |doc|
   BakeOrderHeaders.v2(within: book)
 
   convert_textual_links(doc.raw)
-  book.search('a:not([aria-label])').each do |anchor|
-    text_builder = anchor.search('.//text()').map { |t| t.text.strip }
-    text_builder = text_builder.filter { |t| !t.empty? }
-    text = text_builder.to_a.join(' ')
+  book.search('a').each do |anchor|
+    text = anchor.text.gsub(/\s+/, ' ').strip
     next if text.empty?
 
-    label = I18n.t(:generic_link_desc, link_text: text)
-    anchor[:'aria-label'] = label
+    anchor[:'aria-label'] ||= I18n.t(:generic_link_desc, link_text: text)
+
+    href = anchor[:href]
+    next unless href
+
+    clean_text = text.delete_prefix('https://').delete_prefix('http://').chomp('/')
+    clean_href = href.delete_prefix('https://').delete_prefix('http://').chomp('/')
+
+    anchor[:'data-bare-link'] = 'true' if clean_text == clean_href
   end
 end
