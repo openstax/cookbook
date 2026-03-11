@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'cgi'
+
 module Kitchen::Directions::BakeChapterIntroductions
   class BakeChapterObjectives
     def bake(chapter:, strategy:, options:)
@@ -39,6 +41,7 @@ module Kitchen::Directions::BakeChapterIntroductions
         number = page.os_number(options[:numbering_options])
         title_text = page.title_children.map(&:text).join(' ')
         label = I18n.t(:section_link_desc, link_text: "#{number} #{title_text}")
+        label = CGI.escapeHTML(label)
         <<~HTML
           <li class="os-chapter-objective">
             <a class="os-chapter-objective" href="##{page.id}" aria-label="#{label}">
