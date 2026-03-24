@@ -40,7 +40,7 @@ def linkify_text_node(node)
                                             'data-bare-link': 'true')
       fragment.add_child(anchor)
     elsif URL_PATTERN.match?(part)
-      href = part.downcase.start_with?('www.') ? "https://#{part}" : part
+      href = part.match?(/\Ahttps?:\/\//i) ? part : "https://#{part}"
       # Create <a> tag directly
       anchor = node.document.create_element('a', part, href: href)
       fragment.add_child(anchor)
