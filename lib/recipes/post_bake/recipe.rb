@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Pre-compile the regex once
-URL_PATTERN = /(https?:\/\/[^\s<>"]+[^\s<>".,;:!?)\]}]|www\.[^\s<>"]+[^\s<>".,;:!?)\]}])/i
+URL_PATTERN = /(?:https?:\/\/[^\s<>"]+[^\s<>".,;:!?)\]}]|www\.[^\s<>"]+[^\s<>".,;:!?)\]}])/i
 EMAIL_PATTERN = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
 LINK_PATTERN = /(#{EMAIL_PATTERN.source}|#{URL_PATTERN.source})/i
 QUICK_CHECK = /\.|:\/\/|www|@/ # Fast check before running heavy regex
