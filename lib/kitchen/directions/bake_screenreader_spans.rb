@@ -9,6 +9,8 @@ module Kitchen
         book.search('u[data-effect="underline"]').each do |element|
           begin_message = I18n.t(:'screenreader.underline')
           end_message = "#{I18n.t(:'screenreader.end')} #{I18n.t(:'screenreader.underline')}"
+          element[:'data-screenreader-begin'] = begin_message
+          element[:'data-screenreader-end'] = end_message
           add_screenreader_text(
             element: element,
             begin_message: begin_message,
