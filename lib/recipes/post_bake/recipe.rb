@@ -36,7 +36,7 @@ def linkify_text_node(node)
       anchor = node.document.create_element('a',
                                             part,
                                             href: "mailto:#{part}",
-                                            'aria-label': "Send email to #{part}",
+                                            'aria-label': I18n.t(:email_link_desc, email: part),
                                             'data-bare-link': 'true')
       fragment.add_child(anchor)
     elsif URL_PATTERN.match?(part)

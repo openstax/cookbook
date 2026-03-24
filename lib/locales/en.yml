@@ -36,6 +36,7 @@ en:
   table_link_desc: ! 'View %{table}'
   section_link_desc: ! 'Go to Section %{link_text}'
   generic_link_desc: ! 'Go to %{link_text}'
+  email_link_desc: ! 'Send email to %{email}'
   reference_link_desc: ! 'Go to reference %{reference}'
   eoc:
     glossary: Key Terms
