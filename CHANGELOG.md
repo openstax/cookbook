@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Linkify textual email addresses in postbake
+
 ## [v2.31.1] - 2026-03-11
 
 * Fix accessibility issue in `BakeChapterIntroductions` by baking learning objectives as lists (WCAG 1.3.1)

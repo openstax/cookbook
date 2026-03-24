@@ -2,7 +2,9 @@
 
 # Pre-compile the regex once
 URL_PATTERN = /(https?:\/\/[^\s<>"]+[^\s<>".,;:!?)\]}]|www\.[^\s<>"]+[^\s<>".,;:!?)\]}])/i
-QUICK_CHECK = /\.|:\/\/|www/ # Fast check before running heavy regex
+EMAIL_PATTERN = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
+LINK_PATTERN = /(#{EMAIL_PATTERN.source}|#{URL_PATTERN.source})/i
+QUICK_CHECK = /\.|:\/\/|www|@/ # Fast check before running heavy regex
 
 def convert_textual_links(element)
   # 1. Prune the search: If we are in an <a> tag, stop recursing.
@@ -24,14 +26,17 @@ end
 
 def linkify_text_node(node)
   content = node.content
-  matches = content.scan(URL_PATTERN)
-  return if matches.empty?
+  return unless content =~ LINK_PATTERN
 
   fragment = node.document.create_element('span')
-  parts = content.split(URL_PATTERN)
+  parts = content.split(LINK_PATTERN)
 
   parts.each do |part|
-    if part =~ URL_PATTERN
+    if part =~ /\A#{EMAIL_PATTERN.source}\z/i
+      anchor = node.document.create_element('a', part, href: "mailto:#{part}",
+                                                       'data-bare-link': 'true')
+      fragment.add_child(anchor)
+    elsif part =~ /\A#{URL_PATTERN.source}\z/i
       href = part.downcase.start_with?('www.') ? "https://#{part}" : part
       # Create <a> tag directly
       anchor = node.document.create_element('a', part, href: href)
