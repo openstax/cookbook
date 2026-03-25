@@ -5,10 +5,11 @@ URL_PATTERN = /(?:https?:\/\/[^\s<>"]+[^\s<>".,;:!?)\]}]|www\.[^\s<>"]+[^\s<>".,
 EMAIL_PATTERN = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
 LINK_PATTERN = /(#{Regexp.union(EMAIL_PATTERN, URL_PATTERN).source})/
 QUICK_CHECK = /:\/\/|www|@|[\p{L}\d]\.[\p{L}\d]/ # Fast check before running heavy regex
+LINK_IGNORE = %w[a dt dd code]
 
 def convert_textual_links(element)
-  # 1. Prune the search: If we are in an <a> tag, stop recursing.
-  return if element.name == 'a'
+  # 1. Prune the search: If we are in an ignored tag, stop recursing.
+  return if LINK_IGNORE.include?(element.name)
 
   # We use .children.to_a because we will be modifying the collection
   # while iterating, and we don't want to break the iterator.
