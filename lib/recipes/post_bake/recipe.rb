@@ -5,7 +5,7 @@ URL_PATTERN = /(?:https?:\/\/[^\s<>"]+[^\s<>".,;:!?)\]}]|www\.[^\s<>"]+[^\s<>".,
 EMAIL_PATTERN = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
 LINK_PATTERN = /(#{Regexp.union(EMAIL_PATTERN, URL_PATTERN).source})/
 QUICK_CHECK = /:\/\/|www|@|[\p{L}\d]\.[\p{L}\d]/ # Fast check before running heavy regex
-LINK_IGNORE = %w[a dt dd code]
+LINK_IGNORE = %w[a dt dd code].freeze
 
 def convert_textual_links(element)
   # 1. Prune the search: If we are in an ignored tag, stop recursing.
