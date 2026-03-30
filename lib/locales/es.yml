@@ -32,6 +32,7 @@ es:
   table_link_desc: ! 'Consulte la %{table}'
   section_link_desc: ! 'Ir a la Sección %{link_text}'
   generic_link_desc: ! 'Ir a la %{link_text}'
+  email_link_desc: ! 'Enviar correo electrónico a %{email}'
   reference_link_desc: ! 'Ir a la referencia %{reference}'
   eoc:
     glossary: Términos clave
