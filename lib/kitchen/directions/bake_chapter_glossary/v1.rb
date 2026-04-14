@@ -39,9 +39,15 @@ module Kitchen::Directions::BakeChapterGlossary
 
       chapter.glossaries.trash
 
-      content = @glossary.sort.map { |definition| definition.element.paste }.join
+      return if @glossary.empty?
 
-      return if content.empty?
+      content = "<div class=\"os-glossary-list\">#{
+        @glossary.sort.map do |d|
+          <<~HTML
+            <div class="os-glossary-list-item">#{d.element.paste}</div>
+          HTML
+        end.join
+      }</div>"
 
       Kitchen::Directions::CompositePageContainer.v1(
         container_key: 'glossary',

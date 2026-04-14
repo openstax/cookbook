@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Wrap `Key Terms` in dividers for better accessibility in PDF
+
 ## [v2.32.0] - 2026-04-07
 
 * Linkify textual email addresses in postbake

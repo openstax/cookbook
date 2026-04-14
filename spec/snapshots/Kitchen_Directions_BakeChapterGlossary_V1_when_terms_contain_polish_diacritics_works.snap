@@ -7,18 +7,22 @@
     <h1 data-type="document-title" itemprop="name">Kluczowe poj&#x119;cia</h1>
     <span data-type="revised">Revised</span><span data-type="slug">Slug</span><div class="authors">Authors</div><div class="publishers">Publishers</div><div class="print-style">Print Style</div><div class="permissions">Permissions</div><div data-type="subject">Subject</div>
   </div>
-  <dl>
+  <div class="os-glossary-list"><div class="os-glossary-list-item"><dl>
       <dt>ABD</dt>
       <dd>Test 2</dd>
-    </dl><dl>
+    </dl></div>
+<div class="os-glossary-list-item"><dl>
       <dt>&#x104;BD</dt>
       <dd>Hey</dd>
-    </dl><dl>
+    </dl></div>
+<div class="os-glossary-list-item"><dl>
       <dt>ZzZ</dt>
       <dd>Achoo</dd>
-    </dl><dl>
+    </dl></div>
+<div class="os-glossary-list-item"><dl>
       <dt>ZzZ</dt>
       <dd>Test 1</dd>
-    </dl>
+    </dl></div>
+</div>
 </div>
 </div>
