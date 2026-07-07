@@ -44,13 +44,13 @@ module Kitchen
             HTML
           )
         else
-          figure.append(sibling:
+          figure.append(child:
             <<~HTML.chomp
-              <div class="os-caption-container">
+              <figcaption class="os-caption-container">
                 #{caption_title_content}
                 #{"<span class=\'os-divider\'> </span>" if caption}
                 #{caption}
-              </div>
+              </figcaption>
             HTML
           )
         end
