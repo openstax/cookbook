@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Add support for `stats-lab` to `statistics`
+* Add support for `stats-labs` to `statistics`
 * Move `excel-labs` to eoc section
 
 ## [v2.32.1] - 2026-04-15
