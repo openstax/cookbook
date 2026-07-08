@@ -125,6 +125,15 @@ STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |do
       append_to: chapter
     )
 
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'excel-labs',
+      uuid_key: '.excel-labs',
+      section_selector: 'section.excel-labs',
+      append_to: chapter
+    )
+
     BakeNonIntroductionPages.v1(chapter: chapter)
 
     chapter.figures(only: :figure_to_number?).each do |figure|
