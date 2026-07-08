@@ -3,15 +3,16 @@
 module Kitchen::Directions
   module BakeNumberedNotes
     class V4
-      # @return [Array<String>] the ids of the notes that were baked, so callers can
+      # @return [Set<String>] the ids of the notes that were baked, so callers can
       #   exclude them from any other note-baking pass over the same class(es)
       #
       def bake(book:, classes:, within:, scope:)
-        baked_note_ids = []
+        baked_note_ids = Set.new
 
         classes.each do |klass|
           book.chapters.pages.search(within).notes("$.#{klass}").each do |note|
             raise "missing id on note#{note.say_source_or_nil}" if note.id.blank?
+            next if baked_note_ids.include?(note.id)
 
             note.wrap_children(class: 'os-note-body')
             note_count = note.count_in(scope)

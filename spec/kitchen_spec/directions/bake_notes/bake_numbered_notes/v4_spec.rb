@@ -81,6 +81,31 @@ RSpec.describe Kitchen::Directions::BakeNumberedNotes::V4 do
     expect(result).to contain_exactly('1', '2', '4', '5', '6', '7')
   end
 
+  context 'when a note matches more than one of the given classes' do
+    let(:book_with_notes) do
+      book_containing(html:
+        <<~HTML
+          <div data-type="chapter">
+            <div data-type="page" id="page_1">
+              <section class="wrapper">
+                <div data-type="note" id="1" class="foo bar">
+                  <p>matches both foo.bar and bar</p>
+                </div>
+              </section>
+            </div>
+          </div>
+        HTML
+      )
+    end
+
+    it 'bakes it once and returns its id once' do
+      result = described_class.new.bake(book: book_with_notes, classes: %w[foo.bar bar], within: 'section.wrapper',
+                                        scope: :chapter)
+      expect(result).to eq(Set['1'])
+      expect(book_with_notes.body).to match_snapshot_auto
+    end
+  end
+
   context 'when a matched note has no id' do
     let(:book_with_notes) do
       book_containing(html:

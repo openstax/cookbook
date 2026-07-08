@@ -1,0 +1,16 @@
+<body>
+    <div data-type="chapter">
+  <div data-type="page" id="page_1">
+    <section class="wrapper">
+      <div data-type="note" id="1" class="foo bar"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+        <p>matches both foo.bar and bar</p>
+      </div></div>
+    </section>
+  </div>
+</div>
+
+  </body>
