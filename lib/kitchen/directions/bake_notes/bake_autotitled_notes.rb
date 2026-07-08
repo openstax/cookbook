@@ -13,10 +13,11 @@ module Kitchen
           cases: false,
           bake_exercises: false
         )
+        except_id_set = Set.new(except_ids)
 
         book.notes.each do |note|
           next unless (note.classes & classes).any?
-          next if except_ids.include?(note.id)
+          next if except_id_set.include?(note.id)
 
           bake_note(
             note: note, options: options)
