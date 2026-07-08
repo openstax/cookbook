@@ -1,0 +1,50 @@
+<body>
+    <div data-type="chapter">
+  <div data-type="page" id="page_1">
+    <section class="wrapper">
+      <div data-type="note" id="1" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+        <p>wrapped content #1</p>
+      </div></div>
+      <div data-type="note" id="2" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#2</span>
+</h3>
+<div class="os-note-body">
+        <p>wrapped content #2</p>
+      </div></div>
+    </section>
+    <div data-type="note" id="3" class="foo">
+      <p>not wrapped, not baked</p>
+    </div>
+  </div>
+  <div data-type="page" id="page_2">
+    <section class="wrapper">
+      <div data-type="note" id="4" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#3</span>
+</h3>
+<div class="os-note-body">
+        <p>wrapped content #3</p>
+      </div></div>
+    </section>
+  </div>
+</div>
+<div data-type="chapter">
+  <div data-type="page" id="page_3">
+    <section class="wrapper">
+      <div data-type="note" id="5" class="foo"><h3 class="os-title">
+  <span class="os-title-label">Bar</span>
+  <span class="os-number">#1</span>
+</h3>
+<div class="os-note-body">
+        <p>wrapped content, chapter 2</p>
+      </div></div>
+    </section>
+  </div>
+</div>
+
+  </body>

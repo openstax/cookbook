@@ -7,7 +7,7 @@ module Kitchen
         bake_subtitle: true,
         cases: false,
         bake_exercises: false
-      })
+      }, except_ids: [])
         options.reverse_merge!(
           bake_subtitle: true,
           cases: false,
@@ -16,6 +16,7 @@ module Kitchen
 
         book.notes.each do |note|
           next unless (note.classes & classes).any?
+          next if except_ids.include?(note.id)
 
           bake_note(
             note: note, options: options)
