@@ -103,7 +103,10 @@ STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |do
   end
 
   BakeNumberedNotes.v3(book: book, classes: %w[try], options: { suppress_solution: true })
-  BakeAutotitledNotes.v1(book: book, classes: %w[lab calculator])
+  stats_lab_note_ids = BakeNumberedNotes.v4(
+    book: book, classes: %w[statistics.lab], within: 'section.stats-labs', scope: :chapter
+  )
+  BakeAutotitledNotes.v1(book: book, classes: %w[lab calculator], except_ids: stats_lab_note_ids)
   BakeAutotitledNotes.v1(book: book, classes: %w[collab], options: { bake_subtitle: false })
 
   book.chapters.each do |chapter|
@@ -112,6 +115,24 @@ STATISTICS_RECIPE = Kitchen::BookRecipe.new(book_short_name: :statistics) do |do
       BakeNumberedTable.v1(table: table,
                            number: "#{chapter.count_in(:book)}.#{table.count_in(:chapter)}")
     end
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'stats-labs',
+      uuid_key: '.stats-labs',
+      section_selector: 'section.stats-labs',
+      append_to: chapter
+    )
+
+    MoveCustomSectionToEocContainer.v1(
+      chapter: chapter,
+      metadata_source: metadata,
+      container_key: 'excel-labs',
+      uuid_key: '.excel-labs',
+      section_selector: 'section.excel-labs',
+      append_to: chapter
+    )
 
     BakeNonIntroductionPages.v1(chapter: chapter)
 

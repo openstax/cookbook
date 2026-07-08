@@ -25,6 +25,13 @@ module Kitchen
         options.reverse_merge!(suppress_solution: true)
         V3.new.bake(book: book, classes: classes, options: options)
       end
+
+      # V4 bakes notes scoped to descendants of a given container selector,
+      # numbered relative to the given scope (e.g. :chapter).
+      #
+      def self.v4(book:, classes:, within:, scope: :chapter)
+        V4.new.bake(book: book, classes: classes, within: within, scope: scope)
+      end
     end
   end
 end

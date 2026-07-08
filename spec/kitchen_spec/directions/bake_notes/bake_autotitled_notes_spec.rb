@@ -130,6 +130,14 @@ RSpec.describe Kitchen::Directions::BakeAutotitledNotes do
     end
   end
 
+  context 'when a matching note id is in except_ids' do
+    it 'skips that note but still bakes the others' do
+      described_class.v1(book: book_with_notes, classes: %w[foo baz project media-2 interactive],
+                         except_ids: %w[noteId])
+      expect(book_with_notes.body.pages.first).to match_snapshot_auto
+    end
+  end
+
   context 'when book does not use grammatical cases' do
     it 'stores link text' do
       pantry = book_with_notes.pantry(name: :link_text)
