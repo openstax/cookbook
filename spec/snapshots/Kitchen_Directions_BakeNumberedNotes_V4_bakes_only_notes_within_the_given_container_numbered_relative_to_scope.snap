@@ -4,14 +4,14 @@
     <section class="wrapper">
       <div data-type="note" id="1" class="foo"><h3 class="os-title">
   <span class="os-title-label">Bar</span>
-  <span class="os-number">#1</span>
+  <span class="os-number">1</span>
 </h3>
 <div class="os-note-body">
         <p>wrapped content #1</p>
       </div></div>
       <div data-type="note" id="2" class="foo"><h3 class="os-title">
   <span class="os-title-label">Bar</span>
-  <span class="os-number">#2</span>
+  <span class="os-number">2</span>
 </h3>
 <div class="os-note-body">
         <p>wrapped content #2</p>
@@ -25,7 +25,7 @@
     <section class="wrapper">
       <div data-type="note" id="4" class="foo"><h3 class="os-title">
   <span class="os-title-label">Bar</span>
-  <span class="os-number">#3</span>
+  <span class="os-number">3</span>
 </h3>
 <div class="os-note-body">
         <p>wrapped content #3</p>
@@ -36,7 +36,7 @@
     <section class="wrapper">
       <div data-type="note" id="6" class="foo"><h3 class="os-title">
   <span class="os-title-label">Bar</span>
-  <span class="os-number">#4</span>
+  <span class="os-number">4</span>
 </h3>
 <div class="os-note-body">
         <p>wrapped content with exercise</p>
@@ -46,7 +46,7 @@
       </div></div>
       <div data-type="note" id="7" class="foo"><h3 class="os-title">
   <span class="os-title-label">Bar</span>
-  <span class="os-number">#5</span>
+  <span class="os-number">5</span>
 </h3>
 <div class="os-note-body">
         <p>wrapped content with injected question</p>
@@ -76,7 +76,7 @@
     <section class="wrapper">
       <div data-type="note" id="5" class="foo"><h3 class="os-title">
   <span class="os-title-label">Bar</span>
-  <span class="os-number">#1</span>
+  <span class="os-number">1</span>
 </h3>
 <div class="os-note-body">
         <p>wrapped content, chapter 2</p>
