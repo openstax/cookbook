@@ -171,15 +171,15 @@ RSpec.describe Kitchen::Directions::BakeFigure do
               <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
                 <img src="blah.jpg" data-media-type="image/jpeg" alt="This figure shows ..." id="id3" />
               </span>
+              <figcaption class="os-caption-container">
+                <span class="os-title-label">Figure </span>
+                <span class="os-number">1.2</span>
+                <span class="os-divider"> </span>
+                <span class="os-title" data-type="title">This Is A Title</span>
+                <span class="os-divider"> </span>
+                <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
+              </figcaption>
             </figure>
-            <div class="os-caption-container">
-              <span class="os-title-label">Figure </span>
-              <span class="os-number">1.2</span>
-              <span class="os-divider"> </span>
-              <span class="os-title" data-type="title">This Is A Title</span>
-              <span class="os-divider"> </span>
-              <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
-            </div>
           </div>
         HTML
       )

@@ -11,13 +11,13 @@ module Kitchen
 
           title = figure.title&.cut
           caption = figure.caption&.cut
-          figure.append(sibling:
-            <<~HTML
-              <div class="os-caption-container">
+          figure.append(child:
+            <<~HTML.chomp
+              <figcaption class="os-caption-container">
                 #{"<span class=\"os-title\" data-type=\"title\">#{title.children}</span>" if title}
                 #{'<span class="os-divider"> </span>' if title && caption}
                 #{"<span class=\"os-caption\">#{caption.children}</span>" if caption}
-              </div>
+              </figcaption>
             HTML
           )
         end

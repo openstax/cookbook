@@ -4,11 +4,10 @@
   <span>
     <img src="img.jpg"/>
   </span>
-</figure><div class="os-caption-container">
+<figcaption class="os-caption-container">
   
   
   <span class="os-caption">figure caption</span>
-</div>
-</div>
+</figcaption></figure></div>
 
   </div>

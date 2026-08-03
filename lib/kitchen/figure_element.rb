@@ -32,7 +32,7 @@ module Kitchen
     end
 
     def baked_caption
-      parent.first('div.os-caption-container')
+      first('figcaption.os-caption-container')
     end
 
     # Returns the Figure Title

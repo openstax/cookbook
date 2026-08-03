@@ -21,7 +21,7 @@
     
     <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
     </span>
-  </figure><div class="os-caption-container">
+  <figcaption class="os-caption-container">
   <span class="os-title-label">Figure </span>
 <span class="os-number">1</span>
 <span class="os-divider"> </span>
@@ -29,7 +29,7 @@
 
   <span class="os-divider"> </span>
   <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
-</div></div>
+</figcaption></figure></div>
   
 </div>
 
@@ -46,7 +46,7 @@
     
     <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
     </span>
-  </figure><div class="os-caption-container">
+  <figcaption class="os-caption-container">
   <span class="os-title-label">Figure </span>
 <span class="os-number">1</span>
 <span class="os-divider"> </span>
@@ -54,13 +54,13 @@
 
   <span class="os-divider"> </span>
   <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
-</div></div>
+</figcaption></figure></div>
   <div class="os-figure"><figure id="someId2">
   
   
   <span data-type="media" id="otherId" data-alt="This figure shows pieces of a ...">
   </span>
-</figure><div class="os-caption-container">
+<figcaption class="os-caption-container">
   <span class="os-title-label">Figure </span>
 <span class="os-number">2</span>
 <span class="os-divider"> </span>
@@ -68,7 +68,7 @@
 
   <span class="os-divider"> </span>
   <span class="os-caption">Solid <em>carbon</em> dioxide sublimes ...</span>
-</div></div>
+</figcaption></figure></div>
   
 </div>
 

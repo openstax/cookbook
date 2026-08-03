@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Move figure captions into `figcaption` inside `figure`
 * Do not call `BakeLearningObjectives` in `super`
 * Add support for `stats-lab` to `statistics`
 * Add support for `stats-labs` to `statistics`
