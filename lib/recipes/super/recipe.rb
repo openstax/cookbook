@@ -117,10 +117,6 @@ SUPER_RECIPE = Kitchen::BookRecipe.new(book_short_name: :super) do |doc, _resour
   BakeToc.v1(book: book)
   BakeEquations.v1(book: book, number_decorator: :parentheses)
 
-  book.chapters.each do |chapter|
-    BakeLearningObjectives.v2(chapter: chapter, skip_title_if_exists: true)
-  end
-
   BakeLinkPlaceholders.v1(book: book)
   BakeFolio.v1(book: book)
   BakeRexWrappers.v1(book: book)
