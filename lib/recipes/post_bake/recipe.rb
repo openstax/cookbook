@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
 # Pre-compile the regex once
-URL_PATTERN = /(?:https?:\/\/[^\s<>"]+[^\s<>".,;:!?)\]}]|www\.[^\s<>"]+[^\s<>".,;:!?)\]}])/i
+URL_PATTERN = /(?:https?:\/\/[^\s<>"]+[^\s<>".,;:!?)\]'}]|www\.[^\s<>"]+[^\s<>".,;:!?)\]'}])/i
 EMAIL_PATTERN = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
 LINK_PATTERN = /(#{Regexp.union(EMAIL_PATTERN, URL_PATTERN).source})/
 QUICK_CHECK = /:\/\/|www|@|[\p{L}\d]\.[\p{L}\d]/ # Fast check before running heavy regex
 LINK_IGNORE = %w[a dt dd code].freeze
+# Keep URL delimiters intact; encode invalid percent signs and unsafe bytes.
+URL_UNSAFE_CHARACTERS = /%(?![0-9A-Fa-f]{2})|[^A-Za-z0-9\-._~:\/?#\[\]@!$&'()*+,;=%]/
+
+def percent_encode_url(url)
+  url.gsub(URL_UNSAFE_CHARACTERS) do |character|
+    character.bytes.map { |byte| format('%%%02X', byte) }.join
+  end
+end
 
 def convert_textual_links(element)
   # 1. Prune the search: If we are in an ignored tag, stop recursing.
@@ -56,6 +64,8 @@ def linkify_text_node(node)
 end
 
 POST_BAKE = Kitchen::BookRecipe.new(book_short_name: :post_bake) do |doc|
+  include Kitchen::Directions
+
   book = doc.book
 
   BakeOrderHeaders.v2(within: book)
@@ -63,11 +73,14 @@ POST_BAKE = Kitchen::BookRecipe.new(book_short_name: :post_bake) do |doc|
   convert_textual_links(doc.raw)
   book.search('a').each do |anchor|
     text = anchor.text.gsub(/\s+/, ' ').strip
+
+    href = anchor[:href]
+    anchor[:href] = percent_encode_url(href) if href&.match?(/\Ahttps?:\/\//i)
+
     next if text.empty?
 
     anchor[:'aria-label'] ||= I18n.t(:generic_link_desc, link_text: text)
 
-    href = anchor[:href]
     next unless href
 
     clean_text = text.delete_prefix('https://').delete_prefix('http://').chomp('/')

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Encode URLs before creating links in post_bake
+
 ## [v2.33.0] - 2026-08-03
 
 * Move figure captions into `figcaption` inside `figure`
