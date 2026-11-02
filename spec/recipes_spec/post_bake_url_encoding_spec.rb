@@ -10,7 +10,30 @@ RSpec.describe 'post-bake URL encoding' do
       <p id="generated">https://example.org/{café}?q=one%20two&amp;x=1.</p>
       <a id="empty" href="https://example.org/100%" />
       <p id="email">name@example.org</p>
+      <p id="email-in-url">https://name@example.org/path</p>
       <p id="quoted">See 'https://example.org/path' for more.</p>
+      <p id="uppercase">Http://example.org/path</p>
+      <p id="www">www.google.com</p>
+      <p id="invalid-www">www..google.com</p>
+      <p id="invalid-www-label">www.-google.com</p>
+      <p id="punycode-domain">www.xn--p1ai</p>
+      <p id="bare-domain">google.com</p>
+      <p id="bare-domain-path">example.org/search?q=one&amp;x=2</p>
+      <p id="ftp">ftp://google.com/path</p>
+      <p id="ftp-email">ftp://name@example.org/path</p>
+      <p id="domain-suffix">google.com123</p>
+      <p id="identifier-prefix">value_google.com</p>
+      <p id="identifier-suffix">google.com_extra</p>
+      <p id="unicode-domain">münich.de</p>
+      <p id="unicode-identifier">value_münich.de</p>
+      <p id="code-sample"><code>google.com</code></p>
+      <p id="empty-host">https:///www.bls.gov</p>
+      <p id="punctuation-host">https://.?x</p>
+      <p id="encoded-punctuation-host">https://%2E/?x=1</p>
+      <p id="bare-example">https://.?</p>
+      <p id="curly-quote">http://.”</p>
+      <p id="truncated-percent">https://example.org/#:~:text=In%</p>
+      <p id="javascript">javascript:alert(1)</p>
     HTML
   end
 
@@ -40,7 +63,56 @@ RSpec.describe 'post-bake URL encoding' do
 
   it 'preserves email links and excludes a trailing apostrophe from a plain-text URL' do
     expect(document.at_xpath('//*[@id="email"]/a')['href']).to eq('mailto:name@example.org')
+    expect(document.at_xpath('//*[@id="email-in-url"]/a')['href']).to eq('https://name@example.org/path')
     expect(document.at_xpath('//*[@id="quoted"]/a')['href']).to eq('https://example.org/path')
     expect(document.at_xpath('//*[@id="quoted"]').text).to eq("See 'https://example.org/path' for more.")
+  end
+
+  it 'accepts case-insensitive HTTP schemes' do
+    expect(document.at_xpath('//*[@id="uppercase"]/a')['href']).to eq('Http://example.org/path')
+  end
+
+  it 'adds HTTPS to valid www candidates' do
+    expect(document.at_xpath('//*[@id="www"]/a')['href']).to eq('https://www.google.com')
+    expect(document.at_xpath('//*[@id="punycode-domain"]/a')['href']).to eq('https://www.xn--p1ai')
+  end
+
+  it 'adds HTTPS to valid domains without www' do
+    expect(document.at_xpath('//*[@id="bare-domain"]/a')['href']).to eq('https://google.com')
+    expect(document.at_xpath('//*[@id="bare-domain-path"]/a')['href']).to eq(
+      'https://example.org/search?q=one&x=2'
+    )
+  end
+
+  it 'converts internationalized domains to IDNA ASCII hosts' do
+    expect(document.at_xpath('//*[@id="unicode-domain"]/a')['href']).to eq('https://xn--mnich-kva.de')
+  end
+
+  it 'leaves malformed candidates and unsupported schemes as plain text' do
+    expected_text = {
+      'invalid-www' => 'www..google.com',
+      'invalid-www-label' => 'www.-google.com',
+      'domain-suffix' => 'google.com123',
+      'ftp' => 'ftp://google.com/path',
+      'ftp-email' => 'ftp://name@example.org/path',
+      'empty-host' => 'https:///www.bls.gov',
+      'identifier-prefix' => 'value_google.com',
+      'identifier-suffix' => 'google.com_extra',
+      'unicode-identifier' => 'value_münich.de',
+      'punctuation-host' => 'https://.?x',
+      'encoded-punctuation-host' => 'https://%2E/?x=1',
+      'bare-example' => 'https://.?',
+      'curly-quote' => 'http://.”',
+      'truncated-percent' => 'https://example.org/#:~:text=In%',
+      'javascript' => 'javascript:alert(1)'
+    }
+
+    expected_text.each do |id, text|
+      expect(document.at_xpath("//*[@id='#{id}']/a")).to be_nil
+      expect(document.at_xpath("//*[@id='#{id}']").text).to eq(text)
+    end
+
+    expect(document.at_xpath('//*[@id="code-sample"]/code/a')).to be_nil
+    expect(document.at_xpath('//*[@id="code-sample"]/code').text).to eq('google.com')
   end
 end

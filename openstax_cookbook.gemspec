@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activesupport'
+  spec.add_dependency 'addressable', '~> 2.8'
   spec.add_dependency 'i18n'
   spec.add_dependency 'nokogiri'
   spec.add_dependency 'rainbow'
