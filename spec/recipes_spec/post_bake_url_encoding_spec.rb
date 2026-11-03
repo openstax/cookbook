@@ -90,33 +90,38 @@ RSpec.describe 'post-bake URL encoding' do
     expect(document.at_xpath('//*[@id="unicode-domain"]/a')['href']).to eq('https://xn--mnich-kva.de')
   end
 
-  it 'leaves malformed candidates and unsupported schemes as plain text' do
-    expected_text = {
-      'invalid-www' => 'www..google.com',
-      'invalid-www-label' => 'www.-google.com',
-      'domain-suffix' => 'google.com123',
-      'ftp' => 'ftp://google.com/path',
-      'ftp-email' => 'ftp://name@example.org/path',
-      'empty-host' => 'https:///www.bls.gov',
-      'identifier-prefix' => 'value_google.com',
-      'identifier-suffix' => 'google.com_extra',
-      'unicode-identifier' => 'value_münich.de',
-      'method-identifiers' => 'file.read h.update h.hexdigest m.in et.al',
-      'punctuation-host' => 'https://.?x',
-      'encoded-punctuation-host' => 'https://%2E/?x=1',
-      'bare-example' => 'https://.?',
-      'curly-quote' => 'http://.”',
-      'truncated-percent' => 'https://example.org/#:~:text=In%',
-      'javascript' => 'javascript:alert(1)'
-    }
+  plain_text_cases = {
+    'invalid-www' => 'www..google.com',
+    'invalid-www-label' => 'www.-google.com',
+    'domain-suffix' => 'google.com123',
+    'ftp' => 'ftp://google.com/path',
+    'ftp-email' => 'ftp://name@example.org/path',
+    'empty-host' => 'https:///www.bls.gov',
+    'identifier-prefix' => 'value_google.com',
+    'identifier-suffix' => 'google.com_extra',
+    'unicode-identifier' => 'value_münich.de',
+    'method-identifiers' => 'file.read h.update h.hexdigest m.in et.al',
+    'punctuation-host' => 'https://.?x',
+    'encoded-punctuation-host' => 'https://%2E/?x=1',
+    'bare-example' => 'https://.?',
+    'curly-quote' => 'http://.”',
+    'truncated-percent' => 'https://example.org/#:~:text=In%',
+    'javascript' => 'javascript:alert(1)'
+  }
 
-    expected_text.each do |id, text|
+  plain_text_cases.each do |id, text|
+    it "leaves #{id} as plain text" do
       expect(document.at_xpath("//*[@id='#{id}']/a")).to be_nil
       expect(document.at_xpath("//*[@id='#{id}']").text).to eq(text)
     end
+  end
 
+  it 'does not link inside inline code' do
     expect(document.at_xpath('//*[@id="code-sample"]/code/a')).to be_nil
     expect(document.at_xpath('//*[@id="code-sample"]/code').text).to eq('google.com')
+  end
+
+  it 'does not link inside code blocks' do
     expect(document.at_xpath('//*[@id="code-block"]/a')).to be_nil
     expect(document.at_xpath('//*[@id="code-block"]').text).to eq(
       'file.read(1024) h.update(chunk) h.hexdigest()'
