@@ -3,18 +3,22 @@
 require 'uri'
 require 'addressable/uri'
 
-# Pre-compile the regex once
-# Capture unsupported URI schemes as a whole so an email inside one is not linkified separately.
-SCHEME_URL_PATTERN = /[A-Za-z][A-Za-z0-9+.-]*:[^\s<>"]+[^\s<>".,;:!?)\]'}]/i
-# Match complete scheme-less hostnames, without matching a domain fragment inside another token.
-BARE_DOMAIN_PATTERN = /(?<!:\/\/)(?<!:)(?<![\p{L}\p{N}._+@\/-])(?:[\p{L}\p{N}](?:[\p{L}\p{M}\p{N}-]*[\p{L}\p{N}])?\.)+(?:[\p{L}]{2,}|xn--[A-Za-z0-9-]{2,})(?:[\/?#:][^\s<>"]*[^\s<>".,;:!?)\]'}])?(?![\p{L}\p{N}_+@-]|\.(?:[\p{L}\p{N}_+@-]|\.))/i
-BARE_DOMAIN_CANDIDATE_PATTERN = /\A#{BARE_DOMAIN_PATTERN.source}\z/i
-URL_PATTERN = Regexp.union(SCHEME_URL_PATTERN, BARE_DOMAIN_PATTERN)
-EMAIL_PATTERN = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/
-EMAIL_CANDIDATE_PATTERN = /\A#{EMAIL_PATTERN.source}\z/
-LINK_PATTERN = /(#{Regexp.union(EMAIL_PATTERN, URL_PATTERN).source})/
-QUICK_CHECK = /:\/\/|www|@|[\p{L}\d]\.[\p{L}\d]/ # Fast check before running heavy regex
-LINK_IGNORE = %w[a dt dd code].freeze
+# Link detection is a two-step process: a deliberately dumb tokenizer splits text on whitespace
+# and markup delimiters (linear time, no lookarounds), then each token is classified and validated
+# in plain Ruby (see link_href_for). Keep the regexes below simple; put the rules in code.
+TOKEN_PATTERN = /([^[:space:]<>"]+)/ # [[:space:]] also covers U+00A0
+LEADING_PUNCTUATION = /\A[(\[{'\u201C\u2018]+/
+TRAILING_PUNCTUATION = /[.,;:!?)\]'}\u201D\u2019]+\z/
+HTTP_URL_PREFIX = /\Ahttps?:\/\//i
+EMAIL_CANDIDATE_PATTERN = /\A[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,255}\.[A-Za-z]{2,63}\z/
+QUICK_CHECK = /:\/\/|www|@|[\p{L}\d]\.[\p{L}\d]/ # Fast check before tokenizing
+LINK_IGNORE = %w[a dt dd code pre].freeze
+# Keep bare-domain linking conservative to avoid treating dotted words as hostnames.
+COMMON_TLDS = %w[
+  ai app ar at au be br ca ch cn co com cloud cz de dev dk edu es eu fi gov gr hk hu
+  id ie il in int io it jp kr la ly me mil mx my name net nl no nz online org ph pl pro pt ru
+  se sg site tech th tr tv tw uk us vn xyz za xn--p1ai biz info
+].freeze
 # Keep URL delimiters intact; encode invalid percent signs and unsafe bytes.
 URL_UNSAFE_CHARACTERS = /%(?![0-9A-Fa-f]{2})|[^A-Za-z0-9\-._~:\/?#\[\]@!$&'()*+,;=%]/
 
@@ -59,6 +63,25 @@ def valid_domain_name?(host)
   end
 end
 
+def valid_bare_domain_candidate?(candidate)
+  # Everything before the first path/query/fragment/port delimiter must be a valid hostname.
+  return false unless valid_domain_name?(candidate[/\A[^\/?#:]+/].to_s)
+
+  uri = Addressable::URI.parse("https://#{candidate}")
+  host = uri.host.to_s
+  return false if host.empty?
+
+  host = URI::DEFAULT_PARSER.unescape(host).unicode_normalize(:nfc)
+  ascii_host = Addressable::IDNA.to_ascii(host)
+  labels = ascii_host.delete_suffix('.').split('.')
+  return false if labels.length < 2 || labels[-2].length < 2
+
+  COMMON_TLDS.include?(labels.last.downcase)
+rescue Addressable::URI::InvalidURIError, Addressable::IDNA::PunycodeBadInput,
+       Addressable::IDNA::PunycodeBigOutput, Addressable::IDNA::PunycodeOverflow, URI::Error
+  false
+end
+
 def http_uri_with_host?(uri)
   return false unless %w[http https].include?(uri.scheme&.downcase)
 
@@ -97,39 +120,76 @@ def convert_textual_links(element)
   end
 end
 
+# "(234).https://x.org" and "text,https://x.org": peel off whatever precedes an embedded http(s)
+# scheme. Letters glued to the scheme ("Publishinghttps://...") are deliberately left as text.
+def split_embedded_scheme(candidate)
+  index = candidate.index('://')
+  return ['', candidate] unless index
+
+  scheme = candidate[0...index][/[A-Za-z0-9+.-]*\z/].to_s.sub(/\A[^A-Za-z]+/, '')
+  return ['', candidate] unless scheme.match?(/\Ahttps?\z/i)
+
+  start = index - scheme.length
+  [candidate[0...start], candidate[start..]]
+end
+
+# For a bare domain, link the longest run of hostname characters; anything after it (a closing
+# paren, quote, zero-width space...) stays plain text unless it starts a port/path/query/fragment.
+HOST_RUN = /\A[\p{L}\p{M}\p{N}.-]+/
+def bare_domain_link_text(candidate)
+  host = candidate[HOST_RUN].to_s.sub(/\.+\z/, '')
+  return unless host.include?('.')
+
+  rest = candidate[host.length..].to_s
+  return if rest.sub(/\A\.+/, '').match?(/\A[_+@]/)
+
+  text = rest.match?(%r{\A[/?#:]}) ? candidate : host
+  text if valid_bare_domain_candidate?(text)
+end
+
+# Returns [href, extra_attributes, link_text] for a trimmed token, or nil to leave it as text.
+def link_href_for(candidate)
+  if EMAIL_CANDIDATE_PATTERN.match?(candidate)
+    ["mailto:#{candidate}",
+     { 'aria-label': I18n.t(:email_link_desc, email: candidate), 'data-bare-link': 'true' },
+     candidate]
+  elsif HTTP_URL_PREFIX.match?(candidate)
+    href = normalized_http_url(candidate)
+    [href, {}, candidate] if href
+  elsif (text = bare_domain_link_text(candidate)) # also rejects mailto:, ftp:, "Note:this"
+    href = normalized_http_url("https://#{text}")
+    [href, {}, text] if href
+  end
+end
+
 def linkify_text_node(node)
-  content = node.content
-  return unless content =~ LINK_PATTERN
+  document = node.document
+  linked = false
 
-  fragment = node.document.create_element('span')
-  parts = content.split(LINK_PATTERN)
+  # split with a capture group alternates [separator, token, separator, token, ...]
+  pieces = node.content.split(TOKEN_PATTERN).each_with_index.flat_map do |part, index|
+    next [part] if index.even? || !part.match?(/[.@:]/)
 
-  parts.each do |part|
-    if EMAIL_CANDIDATE_PATTERN.match?(part)
-      anchor = node.document.create_element('a',
-                                            part,
-                                            href: "mailto:#{part}",
-                                            'aria-label': I18n.t(:email_link_desc, email: part),
-                                            'data-bare-link': 'true')
-      fragment.add_child(anchor)
-    elsif URL_PATTERN.match?(part)
-      href = if part.match?(/\Ahttps?:\/\//i)
-               part
-             elsif BARE_DOMAIN_CANDIDATE_PATTERN.match?(part)
-               "https://#{part}"
-             end
-      href = normalized_http_url(href) if href
+    leading = part[LEADING_PUNCTUATION].to_s
+    rest = part.delete_prefix(leading)
+    trailing = rest[TRAILING_PUNCTUATION].to_s
+    embedded, candidate = split_embedded_scheme(rest.delete_suffix(trailing))
+    leading += embedded
 
-      if href
-        anchor = node.document.create_element('a', part, href: href)
-        fragment.add_child(anchor)
-      else
-        fragment.add_child(Nokogiri::XML::Text.new(part, node.document))
-      end
-    else
-      # Only add text nodes if they aren't empty
-      fragment.add_child(Nokogiri::XML::Text.new(part, node.document)) unless part.empty?
-    end
+    href, attributes, text = link_href_for(candidate)
+    next [part] unless href
+
+    linked = true
+    [leading, document.create_element('a', text, href: href, **attributes),
+     candidate.delete_prefix(text) + trailing]
+  end
+  return unless linked
+
+  fragment = document.create_element('span')
+  pieces.each do |piece|
+    next if piece.is_a?(String) && piece.empty?
+
+    fragment.add_child(piece.is_a?(String) ? Nokogiri::XML::Text.new(piece, document) : piece)
   end
 
   # Replace the single text node with all the new nodes at once

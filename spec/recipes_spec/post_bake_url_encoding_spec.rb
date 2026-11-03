@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'benchmark'
 require 'spec_helper'
 
 RSpec.describe 'post-bake URL encoding' do
@@ -26,7 +27,9 @@ RSpec.describe 'post-bake URL encoding' do
       <p id="identifier-suffix">google.com_extra</p>
       <p id="unicode-domain">münich.de</p>
       <p id="unicode-identifier">value_münich.de</p>
+      <p id="method-identifiers">file.read h.update h.hexdigest m.in et.al</p>
       <p id="code-sample"><code>google.com</code></p>
+      <pre id="code-block">file.read(1024) h.update(chunk) h.hexdigest()</pre>
       <p id="empty-host">https:///www.bls.gov</p>
       <p id="punctuation-host">https://.?x</p>
       <p id="encoded-punctuation-host">https://%2E/?x=1</p>
@@ -99,6 +102,7 @@ RSpec.describe 'post-bake URL encoding' do
       'identifier-prefix' => 'value_google.com',
       'identifier-suffix' => 'google.com_extra',
       'unicode-identifier' => 'value_münich.de',
+      'method-identifiers' => 'file.read h.update h.hexdigest m.in et.al',
       'punctuation-host' => 'https://.?x',
       'encoded-punctuation-host' => 'https://%2E/?x=1',
       'bare-example' => 'https://.?',
@@ -114,5 +118,34 @@ RSpec.describe 'post-bake URL encoding' do
 
     expect(document.at_xpath('//*[@id="code-sample"]/code/a')).to be_nil
     expect(document.at_xpath('//*[@id="code-sample"]/code').text).to eq('google.com')
+    expect(document.at_xpath('//*[@id="code-block"]/a')).to be_nil
+    expect(document.at_xpath('//*[@id="code-block"]').text).to eq(
+      'file.read(1024) h.update(chunk) h.hexdigest()'
+    )
+  end
+
+  describe 'pathological text' do
+    # Before the link patterns were bounded, each of these took several seconds (or far
+    # longer, at larger sizes) because the regex rescanned the whole run from every position.
+    {
+      'dotted run' => 'a.' * 20_000,
+      'hyphenated run' => 'a-' * 20_000,
+      'dotted run with trailing text' => "#{'a.' * 20_000}!",
+      'at-sign run' => 'a@' * 20_000,
+      'email-like run' => "x@#{'y.' * 20_000}",
+      'overlong label' => "#{'a' * 100}.com",
+      'overlong local part' => "#{'a' * 100}@example.org"
+    }.each do |name, text|
+      it "links nothing and finishes quickly for a #{name}" do
+        document = book_containing(html: "<p id=\"p\">#{text}</p>", short_name: :post_bake).document
+        POST_BAKE.document = document
+
+        elapsed = Benchmark.realtime { POST_BAKE.bake }
+
+        expect(elapsed).to be < 2
+        expect(POST_BAKE.document.raw.at_xpath('//*[@id="p"]/a')).to be_nil
+        expect(POST_BAKE.document.raw.at_xpath('//*[@id="p"]').text).to eq(text)
+      end
+    end
   end
 end
