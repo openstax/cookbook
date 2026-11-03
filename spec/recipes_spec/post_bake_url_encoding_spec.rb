@@ -39,14 +39,13 @@ RSpec.describe 'post-bake URL encoding' do
       <p id="javascript">javascript:alert(1)</p>
     HTML
   end
+  let(:document) { POST_BAKE.document.raw }
 
   before do
     document = book_containing(html: html, short_name: :post_bake).document
     POST_BAKE.document = document
     POST_BAKE.bake
   end
-
-  let(:document) { POST_BAKE.document.raw }
 
   it 'encodes unsafe characters while preserving query delimiters and existing escapes' do
     expect(document.at_xpath('//*[@id="existing"]')['href']).to eq(

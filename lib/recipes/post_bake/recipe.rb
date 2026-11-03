@@ -143,7 +143,7 @@ def bare_domain_link_text(candidate)
   rest = candidate[host.length..].to_s
   return if rest.sub(/\A\.+/, '').match?(/\A[_+@]/)
 
-  text = rest.match?(%r{\A[/?#:]}) ? candidate : host
+  text = rest.match?(/\A[\/?#:]/) ? candidate : host
   text if valid_bare_domain_candidate?(text)
 end
 
