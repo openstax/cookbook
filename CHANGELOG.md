@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Encode URLs before creating links in post_bake
 * Validate URLs before converting to links in post_bake
 * Improve handling for unicode URLs in post_bake
+* Use `div` instead of `span` for lab list wrappers in `computer-science`
 
 ## [v2.33.0] - 2026-08-03
 

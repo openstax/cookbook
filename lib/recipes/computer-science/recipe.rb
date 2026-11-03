@@ -66,13 +66,13 @@ do |doc, _resources|
 
       ordered_lists.each do |list|
         list.search('> li').each do |item|
-          item.name = 'span'
+          item.name = 'div'
           BakeEmbeddedExerciseQuestion.v1(
             question: item, number: lab_item_number, append_to: list
           )
           lab_item_number += 1
         end
-        list.name = 'span'
+        list.name = 'div'
       end
     end
 
