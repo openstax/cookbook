@@ -147,7 +147,7 @@ do |doc, _resources|
     BakeAppendix.v1(page: page, number: appendix_letter)
   end
 
-  AnswerKeyCleaner.v1(book: book)
+  AnswerKeyCleaner.v1(book: book, options: { remove_empty_container: true })
   BakeUnitTitle.v1(book: book)
   BakeTableColumns.v1(book: book)
   BakeIndex.v1(book: book)
