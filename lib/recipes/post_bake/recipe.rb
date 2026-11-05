@@ -6,19 +6,35 @@ require 'addressable/uri'
 # Link detection is a two-step process: a deliberately dumb tokenizer splits text on whitespace
 # and markup delimiters (linear time, no lookarounds), then each token is classified and validated
 # in plain Ruby (see link_href_for). Keep the regexes below simple; put the rules in code.
-TOKEN_PATTERN = /([^[:space:]<>"]+)/ # [[:space:]] also covers U+00A0
+TOKEN_PATTERN = /([^[:space:]<>"\u2013\u2014\u2026]+)/ # [[:space:]] also covers U+00A0; en/em dash and ellipsis end a token
 LEADING_PUNCTUATION = /\A[(\[{'\u201C\u2018]+/
 TRAILING_PUNCTUATION = /[.,;:!?)\]'}\u201D\u2019]+\z/
+CLOSING_PAIRS = { ')' => '(', ']' => '[', '}' => '{' }.freeze
+SOFT_HYPHEN = "\u00AD"
 HTTP_URL_PREFIX = /\Ahttps?:\/\//i
 EMAIL_CANDIDATE_PATTERN = /\A[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,255}\.[A-Za-z]{2,63}\z/
 QUICK_CHECK = /:\/\/|www|@|[\p{L}\d]\.[\p{L}\d]/ # Fast check before tokenizing
-LINK_IGNORE = %w[a dt dd code pre].freeze
+# Elements whose text must never be linkified (the whole subtree is skipped): existing links,
+# code-like text, non-HTML content (math, svg), non-rendered text, and interactive content
+# (an <a> inside these is invalid).
+LINK_IGNORE = %w[
+  a dt dd code pre kbd samp tt var
+  math svg script style textarea title head template noscript
+  button summary label option select
+].freeze
+IGNORED_NAMESPACES = %w[
+  http://www.w3.org/1998/Math/MathML
+  http://www.w3.org/2000/svg
+].freeze
 # Keep bare-domain linking conservative to avoid treating dotted words as hostnames.
 COMMON_TLDS = %w[
   ai app ar at au be br ca ch cn co com cloud cz de dev dk edu es eu fi gov gr hk hu
   id ie il in int io it jp kr la ly me mil mx my name net nl no nz online org ph pl pro pt ru
   se sg site tech th tr tv tw uk us vn xyz za xn--p1ai biz info
 ].freeze
+# TLDs that are also common English words or file extensions ("relevant.it"). A bare
+# domain with one of these needs a www. prefix or a path/query/fragment/port to be linked.
+WORD_LIKE_TLDS = %w[at be id in int it la me my no pro name online site us].freeze
 # Keep URL delimiters intact; encode invalid percent signs and unsafe bytes.
 URL_UNSAFE_CHARACTERS = /%(?![0-9A-Fa-f]{2})|[^A-Za-z0-9\-._~:\/?#\[\]@!$&'()*+,;=%]/
 
@@ -76,7 +92,16 @@ def valid_bare_domain_candidate?(candidate)
   labels = ascii_host.delete_suffix('.').split('.')
   return false if labels.length < 2 || labels[-2].length < 2
 
-  COMMON_TLDS.include?(labels.last.downcase)
+  tld = labels.last
+  return false unless COMMON_TLDS.include?(tld.downcase)
+  return true unless WORD_LIKE_TLDS.include?(tld.downcase)
+
+  # Word-like TLDs: "relevant.It" (capitalized, a missing space after a period) is never a link,
+  # ALL-CAPS ("ezAUTO.MY") is, and lowercase needs a www. prefix or a path/port ("relevant.it" is not).
+  return false if tld.match?(/\A\p{Lu}\p{Ll}+\z/)
+  return true if tld == tld.upcase
+
+  labels.first == 'www' || candidate.match?(/\A[^\/?#:]+(?:[\/?#].|:\d)/)
 rescue Addressable::URI::InvalidURIError, Addressable::IDNA::PunycodeBadInput,
        Addressable::IDNA::PunycodeBigOutput, Addressable::IDNA::PunycodeOverflow, URI::Error
   false
@@ -102,9 +127,17 @@ def http_uri_with_host?(uri)
   end
 end
 
+def link_ignored?(element)
+  return false unless element.element?
+
+  LINK_IGNORE.include?(element.name) ||
+    IGNORED_NAMESPACES.include?(element.namespace&.href) ||
+    element.key?('data-math')
+end
+
 def convert_textual_links(element)
-  # 1. Prune the search: If we are in an ignored tag, stop recursing.
-  return if LINK_IGNORE.include?(element.name)
+  # 1. Prune the search: If we are in an ignored element, stop recursing.
+  return if link_ignored?(element)
 
   # We use .children.to_a because we will be modifying the collection
   # while iterating, and we don't want to break the iterator.
@@ -154,12 +187,29 @@ def link_href_for(candidate)
      { 'aria-label': I18n.t(:email_link_desc, email: candidate), 'data-bare-link': 'true' },
      candidate]
   elsif HTTP_URL_PREFIX.match?(candidate)
-    href = normalized_http_url(candidate)
+    # A soft hyphen is a line-break hint: keep it in the visible text, not in the href.
+    href = normalized_http_url(candidate.delete(SOFT_HYPHEN))
     [href, {}, candidate] if href
   elsif (text = bare_domain_link_text(candidate)) # also rejects mailto:, ftp:, "Note:this"
     href = normalized_http_url("https://#{text}")
     [href, {}, text] if href
   end
+end
+
+# Splits trailing punctuation off a token, but keeps a closing ) ] } that balances an opener
+# inside the URL, e.g. "https://en.wikipedia.org/wiki/Foo_(bar)." -> [".../Foo_(bar)", "."].
+def split_trailing_punctuation(token)
+  trailing = token[TRAILING_PUNCTUATION].to_s
+  body = token.delete_suffix(trailing)
+  kept = 0
+  trailing.each_char do |char|
+    opener = CLOSING_PAIRS[char]
+    break unless opener && body.count(opener) > body.count(char)
+
+    body += char
+    kept += 1
+  end
+  [body, trailing[kept..]]
 end
 
 def linkify_text_node(node)
@@ -172,8 +222,8 @@ def linkify_text_node(node)
 
     leading = part[LEADING_PUNCTUATION].to_s
     rest = part.delete_prefix(leading)
-    trailing = rest[TRAILING_PUNCTUATION].to_s
-    embedded, candidate = split_embedded_scheme(rest.delete_suffix(trailing))
+    body, trailing = split_trailing_punctuation(rest)
+    embedded, candidate = split_embedded_scheme(body)
     leading += embedded
 
     href, attributes, text = link_href_for(candidate)
@@ -194,6 +244,22 @@ def linkify_text_node(node)
 
   # Replace the single text node with all the new nodes at once
   node.replace(fragment.children)
+end
+
+def bare_form(url)
+  url.to_s.delete_prefix('https://').delete_prefix('http://').chomp('/')
+end
+
+# True when the link text is just the URL (before or after normalization, e.g. IDN/punycode).
+def bare_link?(text, original_href, final_href)
+  return false unless original_href
+
+  text_url = text.match?(HTTP_URL_PREFIX) ? text : "https://#{text}"
+  normalized_text = normalized_http_url(text_url)
+  expected = [bare_form(text)]
+  expected << bare_form(percent_encode_url(normalized_text)) if normalized_text
+
+  [original_href, final_href].any? { |h| expected.include?(bare_form(h)) }
 end
 
 POST_BAKE = Kitchen::BookRecipe.new(book_short_name: :post_bake) do |doc|
@@ -218,9 +284,6 @@ POST_BAKE = Kitchen::BookRecipe.new(book_short_name: :post_bake) do |doc|
 
     next unless href
 
-    clean_text = text.delete_prefix('https://').delete_prefix('http://').chomp('/')
-    clean_href = href.delete_prefix('https://').delete_prefix('http://').chomp('/')
-
-    anchor[:'data-bare-link'] = 'true' if clean_text == clean_href
+    anchor[:'data-bare-link'] = 'true' if bare_link?(text, href, anchor[:href])
   end
 end
