@@ -6,7 +6,10 @@ require 'addressable/uri'
 # Link detection is a two-step process: a deliberately dumb tokenizer splits text on whitespace
 # and markup delimiters (linear time, no lookarounds), then each token is classified and validated
 # in plain Ruby (see link_href_for). Keep the regexes below simple; put the rules in code.
-TOKEN_PATTERN = /([^[:space:]<>"\u2013\u2014\u2026]+)/ # [[:space:]] also covers U+00A0; en/em dash and ellipsis end a token
+TOKEN_PATTERN = /([^[:space:]<>"]+)/ # [[:space:]] also covers U+00A0
+# En/em dash and ellipsis are prose punctuation, but an en dash can be a range inside a URL path
+# ("/2010\u20132019"), so they are not token separators; see split_on_prose_dashes.
+PROSE_DASH = /[\u2013\u2014\u2026]/
 LEADING_PUNCTUATION = /\A[(\[{'\u201C\u2018]+/
 TRAILING_PUNCTUATION = /[.,;:!?)\]'}\u201D\u2019]+\z/
 CLOSING_PAIRS = { ')' => '(', ']' => '[', '}' => '{' }.freeze
@@ -101,7 +104,7 @@ def valid_bare_domain_candidate?(candidate)
   return false if tld.match?(/\A\p{Lu}\p{Ll}+\z/)
   return true if tld == tld.upcase
 
-  labels.first == 'www' || candidate.match?(/\A[^\/?#:]+(?:[\/?#].|:\d)/)
+  labels.first == 'www' || candidate.match?(/\A[^\/?#:]+(?:[\/?#]|:\d)/)
 rescue Addressable::URI::InvalidURIError, Addressable::IDNA::PunycodeBadInput,
        Addressable::IDNA::PunycodeBigOutput, Addressable::IDNA::PunycodeOverflow, URI::Error
   false
@@ -201,15 +204,65 @@ end
 def split_trailing_punctuation(token)
   trailing = token[TRAILING_PUNCTUATION].to_s
   body = token.delete_suffix(trailing)
+  # Unmatched openers per closer, counted once so the whole thing stays linear.
+  unmatched = CLOSING_PAIRS.to_h do |closer, opener|
+    [closer, body.count(opener) - body.count(closer)]
+  end
   kept = 0
   trailing.each_char do |char|
-    opener = CLOSING_PAIRS[char]
-    break unless opener && body.count(opener) > body.count(char)
+    break unless unmatched.fetch(char, 0).positive?
 
-    body += char
+    unmatched[char] -= 1
     kept += 1
   end
-  [body, trailing[kept..]]
+  [body + trailing[0, kept], trailing[kept..]]
+end
+
+# Splits a token at prose dashes into [segment, dash, segment, ...]. An en dash between two
+# digits after a path/query/fragment delimiter is a range inside a URL ("/2010–2019") and stays;
+# every other dash or ellipsis ends the segment ("https://x.org/path—read", "See—x.org").
+#
+# Works on split chunks and byte checks only: character indexing into non-ASCII text is O(n)
+# per call, which made long dash-heavy tokens quadratic.
+def split_on_prose_dashes(token)
+  chunks = token.split(/(#{PROSE_DASH})/o, -1) # alternates [text, dash, text, dash, ..., text]
+  parts = [+'']
+  in_path = false
+  chunks.each_with_index do |chunk, index|
+    if index.even?
+      parts.last << chunk
+      # The slashes of a scheme ("https://") are not the start of a path.
+      in_path ||= chunk.sub('://', '').match?(/[\/?#]/)
+    elsif chunk == '–' && in_path && ascii_digit?(chunks[index - 1].getbyte(-1)) &&
+          ascii_digit?(chunks[index + 1].getbyte(0))
+      parts.last << chunk # an en dash range inside a URL path stays in the segment
+    else
+      parts.push(chunk, +'')
+      in_path = false
+    end
+  end
+  parts
+end
+
+def ascii_digit?(byte)
+  !byte.nil? && byte.between?(48, 57)
+end
+
+# Returns [leading, anchor, rest] if the token contains a link, otherwise nil.
+def linkify_token(token, document)
+  return unless token.match?(/[.@:]/)
+
+  leading = token[LEADING_PUNCTUATION].to_s
+  # Peel off the prefix before an embedded scheme first, so prose brackets such as
+  # "See(https://x.org/path)." aren't counted when balancing the URL's own brackets.
+  embedded, url = split_embedded_scheme(token.delete_prefix(leading))
+  candidate, trailing = split_trailing_punctuation(url)
+
+  href, attributes, text = link_href_for(candidate)
+  return unless href
+
+  [leading + embedded, document.create_element('a', text, href: href, **attributes),
+   candidate.delete_prefix(text) + trailing]
 end
 
 def linkify_text_node(node)
@@ -218,20 +271,14 @@ def linkify_text_node(node)
 
   # split with a capture group alternates [separator, token, separator, token, ...]
   pieces = node.content.split(TOKEN_PATTERN).each_with_index.flat_map do |part, index|
-    next [part] if index.even? || !part.match?(/[.@:]/)
+    next [part] if index.even?
 
-    leading = part[LEADING_PUNCTUATION].to_s
-    rest = part.delete_prefix(leading)
-    body, trailing = split_trailing_punctuation(rest)
-    embedded, candidate = split_embedded_scheme(body)
-    leading += embedded
-
-    href, attributes, text = link_href_for(candidate)
-    next [part] unless href
-
-    linked = true
-    [leading, document.create_element('a', text, href: href, **attributes),
-     candidate.delete_prefix(text) + trailing]
+    split_on_prose_dashes(part).each_with_index.flat_map do |segment, segment_index|
+      # odd segments are the dashes themselves
+      linkified = linkify_token(segment, document) if segment_index.even?
+      linked ||= !linkified.nil?
+      linkified || [segment]
+    end
   end
   return unless linked
 
