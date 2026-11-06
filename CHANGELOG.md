@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Use `div` instead of `span` for lab list wrappers in `computer-science`
 * Remove empty answer keys in nursing-internal
 * Warn when removing answer keys
+* Add `TEACHER_CONTENT_DELETE_RECIPE` to remove `os-teacher` content, and use it in `algebra-1`
+* Add `algebra-1-teacher-guide` recipe keyword, which keeps `os-teacher` content
 
 ## [v2.33.0] - 2026-08-03
 
