@@ -47,10 +47,15 @@ RSpec.describe 'post-bake URL encoding' do
       <p id="dash-non-range-in-path">https://example.org/a–b</p>
       <p id="root-path">example.it/</p>
       <p id="word-like-www">www.example.it</p>
+      <p id="word-like-www-uppercase">WWW.example.it</p>
       <p id="word-like-path">example.it/page</p>
       <p id="word-like-caps">ezAUTO.MY</p>
       <p id="word-like-lowercase">relevant.it</p>
       <p id="word-like-capitalized">relevant.It</p>
+      <p id="known-word-like-domain-be">youtu.be</p>
+      <p id="known-word-like-domain-me">about.me</p>
+      <p id="known-word-like-domain-us">del.icio.us</p>
+      <p id="unknown-word-like-domain-be">foo.be</p>
       <p id="balanced-parens">(https://en.wikipedia.org/wiki/Foo_(bar)).</p>
       <p id="embedded-paren">See(https://example.org/path).</p>
       <p id="embedded-paren-host">See(https://example.org).</p>
@@ -127,7 +132,8 @@ RSpec.describe 'post-bake URL encoding' do
     'truncated-percent' => 'https://example.org/#:~:text=In%',
     'javascript' => 'javascript:alert(1)',
     'word-like-lowercase' => 'relevant.it',
-    'word-like-capitalized' => 'relevant.It'
+    'word-like-capitalized' => 'relevant.It',
+    'unknown-word-like-domain-be' => 'foo.be'
   }
 
   plain_text_cases.each do |id, text|
@@ -185,11 +191,21 @@ RSpec.describe 'post-bake URL encoding' do
     )
   end
 
-  it 'links word-like TLDs only with www, a path (including a bare "/"), or all caps' do
+  it 'links word-like TLDs with www, a path (including a bare "/"), or all caps' do
     expect(document.at_xpath('//*[@id="root-path"]/a')['href']).to eq('https://example.it/')
     expect(document.at_xpath('//*[@id="word-like-www"]/a')['href']).to eq('https://www.example.it')
     expect(document.at_xpath('//*[@id="word-like-path"]/a')['href']).to eq('https://example.it/page')
     expect(document.at_xpath('//*[@id="word-like-caps"]/a')['href']).to eq('https://ezAUTO.MY')
+  end
+
+  it 'matches www prefixes case-insensitively for word-like TLDs' do
+    expect(document.at_xpath('//*[@id="word-like-www-uppercase"]/a')['href']).to eq('https://WWW.example.it')
+  end
+
+  it 'links known bare domains with word-like TLDs' do
+    expect(document.at_xpath('//*[@id="known-word-like-domain-be"]/a')['href']).to eq('https://youtu.be')
+    expect(document.at_xpath('//*[@id="known-word-like-domain-me"]/a')['href']).to eq('https://about.me')
+    expect(document.at_xpath('//*[@id="known-word-like-domain-us"]/a')['href']).to eq('https://del.icio.us')
   end
 
   it 'keeps closing brackets that balance an opener inside the URL' do

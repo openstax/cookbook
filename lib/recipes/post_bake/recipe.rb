@@ -38,6 +38,8 @@ COMMON_TLDS = %w[
 # TLDs that are also common English words or file extensions ("relevant.it"). A bare
 # domain with one of these needs a www. prefix or a path/query/fragment/port to be linked.
 WORD_LIKE_TLDS = %w[at be id in int it la me my no pro name online site us].freeze
+# Known bare hostnames whose word-like TLDs would otherwise be ambiguous.
+BARE_DOMAIN_EXCEPTIONS = %w[youtu.be about.me del.icio.us].freeze
 # Keep URL delimiters intact; encode invalid percent signs and unsafe bytes.
 URL_UNSAFE_CHARACTERS = /%(?![0-9A-Fa-f]{2})|[^A-Za-z0-9\-._~:\/?#\[\]@!$&'()*+,;=%]/
 
@@ -97,6 +99,7 @@ def valid_bare_domain_candidate?(candidate)
 
   tld = labels.last
   return false unless COMMON_TLDS.include?(tld.downcase)
+  return true if BARE_DOMAIN_EXCEPTIONS.include?(labels.join('.').downcase)
   return true unless WORD_LIKE_TLDS.include?(tld.downcase)
 
   # Word-like TLDs: "relevant.It" (capitalized, a missing space after a period) is never a link,
@@ -104,7 +107,7 @@ def valid_bare_domain_candidate?(candidate)
   return false if tld.match?(/\A\p{Lu}\p{Ll}+\z/)
   return true if tld == tld.upcase
 
-  labels.first == 'www' || candidate.match?(/\A[^\/?#:]+(?:[\/?#]|:\d)/)
+  labels.first.casecmp?('www') || candidate.match?(/\A[^\/?#:]+(?:[\/?#]|:\d)/)
 rescue Addressable::URI::InvalidURIError, Addressable::IDNA::PunycodeBadInput,
        Addressable::IDNA::PunycodeBigOutput, Addressable::IDNA::PunycodeOverflow, URI::Error
   false
@@ -299,8 +302,6 @@ end
 
 # True when the link text is just the URL (before or after normalization, e.g. IDN/punycode).
 def bare_link?(text, original_href, final_href)
-  return false unless original_href
-
   text_url = text.match?(HTTP_URL_PREFIX) ? text : "https://#{text}"
   normalized_text = normalized_http_url(text_url)
   expected = [bare_form(text)]
