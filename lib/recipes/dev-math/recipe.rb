@@ -26,36 +26,47 @@ DEV_MATH_RECIPE = Kitchen::BookRecipe.new(book_short_name: :dev_math) do |doc, _
     BakeLearningObjectives.v1(chapter: chapter)
     BakeNonIntroductionPages.v1(chapter: chapter)
 
-    chapter_review = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
-    exercises_composite_chapter = ChapterReviewContainer.v1(
-      chapter: chapter, metadata_source: metadata, klass: 'exercises'
-    )
-    BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: chapter_review)
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter, metadata_source: metadata,
-      container_key: 'key-concepts', uuid_key: '.key-concepts',
-      section_selector: 'section.key-concepts',
-      append_to: chapter_review,
-      wrap_section: true, wrap_content: true
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-      title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page), title_tag: 'h4')
-      section.prepend(child: title)
+    # Only create a container when the chapter has content for it. An empty container
+    # becomes an empty TOC item, which the TOC parser can't handle.
+    has_chapter_review_content = chapter.glossaries.search('dl').to_a.any? ||
+                                 chapter.pages.search('section.key-concepts').to_a.any?
+    if has_chapter_review_content
+      chapter_review = ChapterReviewContainer.v1(chapter: chapter, metadata_source: metadata)
+      BakeChapterGlossary.v1(chapter: chapter, metadata_source: metadata, append_to: chapter_review)
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter, metadata_source: metadata,
+        container_key: 'key-concepts', uuid_key: '.key-concepts',
+        section_selector: 'section.key-concepts',
+        append_to: chapter_review,
+        wrap_section: true, wrap_content: true
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+        title = EocSectionTitleLinkSnippet.v1(page: section.ancestor(:page), title_tag: 'h4')
+        section.prepend(child: title)
+      end
     end
 
-    MoveCustomSectionToEocContainer.v1(
-      chapter: chapter, metadata_source: metadata,
-      container_key: 'review-exercises', uuid_key: '.review-exercises',
-      section_selector: 'section.review-exercises',
-      append_to: exercises_composite_chapter
-    ) do |section|
-      RemoveSectionTitle.v1(section: section)
-      ChangeSubsectionTitleTag.v1(section: section)
+    has_exercises_content = chapter.pages.search(
+      'section.review-exercises, section.practice-test'
+    ).to_a.any?
+    if has_exercises_content
+      exercises_composite_chapter = ChapterReviewContainer.v1(
+        chapter: chapter, metadata_source: metadata, klass: 'exercises'
+      )
+      MoveCustomSectionToEocContainer.v1(
+        chapter: chapter, metadata_source: metadata,
+        container_key: 'review-exercises', uuid_key: '.review-exercises',
+        section_selector: 'section.review-exercises',
+        append_to: exercises_composite_chapter
+      ) do |section|
+        RemoveSectionTitle.v1(section: section)
+        ChangeSubsectionTitleTag.v1(section: section)
+      end
+      MoveExercisesToEOC.v1(
+        chapter: chapter, metadata_source: metadata, klass: 'practice-test',
+        append_to: exercises_composite_chapter
+      )
     end
-    MoveExercisesToEOC.v1(
-      chapter: chapter, metadata_source: metadata, klass: 'practice-test',
-      append_to: exercises_composite_chapter
-    )
     exercise_sections = 'section.section-exercises, section.review-exercises, section.practice-test'
     chapter.search(exercise_sections).exercises.each do |exercise|
       BakeNumberedExercise.v1(exercise: exercise, number: exercise.count_in(:chapter))

@@ -9,9 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Encode URLs before creating links in post_bake
 * Validate URLs before converting to links in post_bake
 * Improve handling for unicode URLs in post_bake
+* Preserve URL punctuation and dash ranges while trimming surrounding prose punctuation during linkification
+* Avoid linking dotted words with ambiguous TLDs; recognize selected bare domains and case-insensitive `www` prefixes
+* Skip linkification in math, SVG, non-rendered, and interactive content
+* Mark normalized bare URLs with `data-bare-link`, including internationalized URLs and URLs containing soft hyphens
 * Use `div` instead of `span` for lab list wrappers in `computer-science`
 * Remove empty answer keys in nursing-internal
 * Warn when removing answer keys
+* Skip the chapter review container in `dev-math` when a chapter has no glossary or key concepts, avoiding an empty TOC item
+* Skip the exercises container in `dev-math` when a chapter has no review exercises or practice tests
 * Add `TEACHER_CONTENT_DELETE_RECIPE` to remove `os-teacher` content, and use it in `algebra-1`
 * Add `algebra-1-teacher-guide` recipe keyword, which keeps `os-teacher` content
 
